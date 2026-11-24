@@ -232,9 +232,12 @@ main{min-width:0}
   .cn-row>div:nth-child(1){background:none}
 }
 
-/* 강의 끝 핵심 정리 제목 바 */
-.ct p.sh.sum{background:var(--note-soft);color:var(--note);border-left:4px solid var(--note);margin-top:28px}
-.ct p.sh.sum strong{color:var(--note)}
+/* 강의 끝 핵심 정리 제목 바: 녹색 바탕 + 흰 글씨 */
+:root{--sum-bg:#2f7a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sum-bg:#2d6a4f}}
+:root[data-theme="dark"]{--sum-bg:#2d6a4f}
+.ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
+.ct p.sh.sum strong{color:#fff}
 </style>
 </head>
 <body id="top">
