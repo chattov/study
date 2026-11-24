@@ -176,6 +176,29 @@ main{min-width:0}
 .ct table.long td:nth-child(3){background:var(--colt)!important}
 .ct table.long td:first-child{color:var(--thd-ink)}
 @media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
+
+/* 최종 표 디자인: 제목줄은 진회색 바탕+흰 글씨(B안), 비교 열은 하나 건너 옅게(C안), 나머지는 흰 바탕+가는 가로줄 */
+:root{--tb-head:#4a5568;--tb-head-ink:#ffffff;--tb-bg:#fffdf8;--tb-line:#e4dccb;--tb-col:#f3efe6;--tb-ink:#2f2a23}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}}
+:root[data-theme="dark"]{--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}
+.ct .tw{border:0!important;border-radius:6px;overflow:hidden;background:var(--tb-bg)!important}
+.ct .tw:has(table.long){background:none!important;border-radius:0;overflow:visible}
+.ct th,.ct td{border-right:0!important;border-bottom:1px solid var(--tb-line)!important;background:none!important;color:var(--tb-ink)}
+.ct thead th{background:var(--tb-head)!important;color:var(--tb-head-ink)!important;text-align:left!important;border-bottom:0!important}
+.ct tbody td:first-child{background:none!important;color:var(--tb-ink)!important;font-weight:700}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--tb-col)!important}
+.ct table.long tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+.ct table.long td{border-bottom:0!important;border-right:0!important}
+.ct table.long td:first-child{background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+.ct table.long td:nth-child(3){background:var(--tb-col)!important}
+@media (max-width:640px){
+  .ct .tw{background:none!important;border-radius:0;overflow:visible}
+  .ct .tw tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+  .ct .tw td{border-bottom:0!important;border-top:1px solid var(--tb-line)!important;background:none!important}
+  .ct .tw td:first-child{border-top:0!important;background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+  .ct .tw table tbody td{width:auto!important;white-space:normal!important}
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+}
 </style>
 </head>
 <body id="top">
