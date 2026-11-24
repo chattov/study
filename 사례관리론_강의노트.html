@@ -219,6 +219,18 @@ main{min-width:0}
   .cn-row>div::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
   .cn-end>div{border-top:0}
 }
+
+/* 세로 구분 순서: 첫 번째 내용 열부터 옅은 색(2·4·6번째 열) */
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:none!important}
+.ct table.c3 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(4),.ct table.c5 tbody td:nth-child(2),.ct table.c5 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(2),.ct table.c6 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(6){background:var(--tb-col)!important}
+.ct table.long td:nth-child(3){background:none!important}
+.ct table.long.c3 td:nth-child(2),.ct table.long.c4 td:nth-child(2),.ct table.long.c4 td:nth-child(4){background:var(--tb-col)!important}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:none}
+.cn-h:nth-child(1),.cn-row>div:nth-child(1){background:var(--tb-col)}
+@media (max-width:640px){
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+  .cn-row>div:nth-child(1){background:none}
+}
 </style>
 </head>
 <body id="top">
