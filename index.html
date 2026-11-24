@@ -79,6 +79,8 @@ footer b{color:var(--ink)}
       <p class="lead">과목별 강의노트와 문제를 한 곳에 모았습니다. 링크는 새 탭에서 열립니다.</p>
     </div>
     <div class="tools">
+      <a class="btn primary" href="https://drive.google.com/drive/folders/1qzLI6rcch5Cji5fq7qGszupHu-ZfcKry" target="_blank" rel="noopener">기말고사 폴더 열기</a>
+      <a class="btn" href="https://drive.google.com/drive/folders/1spz2y9_Q7RL7sbBbQwYhcez-fTcAveqm" target="_blank" rel="noopener">!2026KNOU 폴더</a>
       <button class="btn" id="themeBtn" type="button">다크</button>
     </div>
   </header>
@@ -87,19 +89,19 @@ footer b{color:var(--ink)}
   <div class="grid" id="grid"></div>
 
   <footer>
-    <b>표시 안내</b> — <b>웹</b>은 로그인 없이 바로 열리는 페이지, <b>문서</b>는 구글 문서입니다. 파란 글씨가 최신 통합본입니다.
+    <b>표시 안내</b> — <b>웹</b>은 로그인 없이 바로 열리는 페이지, <b>문서</b>는 구글 문서, <b>폴더</b>는 구글드라이브 폴더입니다. 파란 글씨가 최신 통합본입니다.
   </footer>
 </div>
 
 <script>
 const SUBJ = [
-  {id:"practice",name:"사회복지실천론",st:"노트 1~14강",notes:[{t:"강의노트 요약판 (1~14강, 표 정리·출제 표시)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EA%B0%95%EC%9D%98%EB%85%B8%ED%8A%B8.html",web:1,main:1},{t:"사회복지실천론 강의노트 (1~14강)",k:"문서",u:"https://docs.google.com/document/d/1LQ1GR-gW8YdLF-ZmIgNR2-XU0kyNnaEkhtORd0pB0C0/edit"}],quiz:[{t:"모의시험지 (125문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EB%AA%A8%EC%9D%98%EC%8B%9C%ED%97%98%EC%A7%80.html",web:1,main:1},{t:"연습문제 (문항별 즉시 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1}],memo:"강의노트의 6️⃣ 표시는 기말고사 준비자료에 출제된 부분입니다."},
-  {id:"case",name:"사례관리론",st:"노트 1~15강",notes:[{t:"강의노트 (1~15강, 표 정리·출제 표시)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EB%A1%A0_%EA%B0%95%EC%9D%98%EB%85%B8%ED%8A%B8.html",web:1,main:1},{t:"사례관리론 01-15강 강의노트",k:"문서",u:"https://docs.google.com/document/d/1sMdIIhySWS8N1cVvVVoE7K6cb8ZgQfXMObS_ifqjmbM/edit"},{t:"사례관리론 강의노트 (이전 본)",k:"문서",u:"https://docs.google.com/document/d/1K_fuFjNC6OHB4tE7aLX6jP96zzxPUBlspSuRUGzkbPE/edit"}],quiz:[{t:"연습문제 (2025 기말 연습문제 수정 91문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1,main:1}],memo:"강의노트의 6️⃣ 표시는 2025 기말 연습문제 (수정)에 출제된 부분입니다."},
-  {id:"policy",name:"사회복지정책론",st:"노트 1~15강",notes:[{t:"사회복지정책론 강의노트 (1~15강)",k:"문서",u:"https://docs.google.com/document/d/1isALNlGBAUlsx2UUieF-R_KfiLJ90k1MWfIphwfd-io/edit",main:1}],quiz:[]},
-  {id:"elder",name:"노인복지론",st:"노트 1~15강",notes:[{t:"노인복지론 강의노트 (1~15강)",k:"문서",u:"https://docs.google.com/document/d/1uq5FYqF5dcKM1rijwAJI2ZMzScSlZSS_8xm2jIdKZ3s/edit",main:1}],quiz:[{t:"워크북 문제(2026) (79문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EB%85%B8%EC%9D%B8%EB%B3%B5%EC%A7%80%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1,main:1},{t:"강의 연습문제(형성평가) (60문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EB%85%B8%EC%9D%B8%EB%B3%B5%EC%A7%80%EB%A1%A0_%ED%98%95%EC%84%B1%ED%8F%89%EA%B0%80.html",web:1}]},
-  {id:"community",name:"지역사회복지론",st:"노트 1~10강 + 11~15강 따로",notes:[{t:"지역사회복지론 강의노트",k:"문서",u:"https://docs.google.com/document/d/1INfefj9xdx6XRZH0ychx05oadKu-SPst_4al6etiFdI/edit",main:1}],quiz:[]},
-  {id:"research",name:"사회복지조사론",st:"노트 1~6강",notes:[{t:"사회복지조사론 강의노트",k:"문서",u:"https://docs.google.com/document/d/1jqXwUqNwnWUWiAqW3LoEpPzaDRjXL0uzA6yPBCyU06Q/edit",main:1}],quiz:[]},
-  {id:"hbse",name:"인간행동과 사회환경",st:"노트 1~6강 + 7~12강 따로",notes:[{t:"인간행동과 인간발달 강의노트",k:"문서",u:"https://docs.google.com/document/d/1FsOd_kd1c9eVoSCuHR5teR7o_Zh1wheVropjGg6RWEw/edit",main:1}],quiz:[]}
+  {id:"practice",name:"사회복지실천론",st:"노트 1~14강",notes:[{t:"강의노트 요약판 (1~14강, 표 정리·출제 표시)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EA%B0%95%EC%9D%98%EB%85%B8%ED%8A%B8.html",web:1,main:1},{t:"사회복지실천론 강의노트 (1~14강)",k:"문서",u:"https://docs.google.com/document/d/1LQ1GR-gW8YdLF-ZmIgNR2-XU0kyNnaEkhtORd0pB0C0/edit"}],quiz:[{t:"모의시험지 (125문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EB%AA%A8%EC%9D%98%EC%8B%9C%ED%97%98%EC%A7%80.html",web:1,main:1},{t:"연습문제 (문항별 즉시 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%8B%A4%EC%B2%9C%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1}],folder:"https://drive.google.com/drive/folders/1pBoQ_QzsO1e0BJAkwP5i7JzPQwa0E0qa",memo:"강의노트의 6️⃣ 표시는 기말고사 준비자료에 출제된 부분입니다."},
+  {id:"case",name:"사례관리론",st:"노트 1~15강",notes:[{t:"강의노트 (1~15강, 표 정리·출제 표시)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EB%A1%A0_%EA%B0%95%EC%9D%98%EB%85%B8%ED%8A%B8.html",web:1,main:1},{t:"사례관리론 01-15강 강의노트",k:"문서",u:"https://docs.google.com/document/d/1sMdIIhySWS8N1cVvVVoE7K6cb8ZgQfXMObS_ifqjmbM/edit"}],quiz:[{t:"연습문제 (2025 기말 연습문제 수정 91문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1,main:1}],folder:"https://drive.google.com/drive/folders/1EhlbPdauflvlhl82ktjQKaLrDXp64UIe",memo:"강의노트의 6️⃣ 표시는 2025 기말 연습문제 (수정)에 출제된 부분입니다."},
+  {id:"policy",name:"사회복지정책론",st:"노트 1~15강",notes:[{t:"사회복지정책론 강의노트 (1~15강)",k:"문서",u:"https://docs.google.com/document/d/1isALNlGBAUlsx2UUieF-R_KfiLJ90k1MWfIphwfd-io/edit",main:1}],quiz:[],folder:"https://drive.google.com/drive/folders/1lKkF5lYlXcBBdAx1H_jYiMDBB2XwfETc"},
+  {id:"elder",name:"노인복지론",st:"노트 1~15강",notes:[{t:"노인복지론 강의노트 (1~15강)",k:"문서",u:"https://docs.google.com/document/d/1uq5FYqF5dcKM1rijwAJI2ZMzScSlZSS_8xm2jIdKZ3s/edit",main:1}],quiz:[{t:"워크북 문제(2026) (79문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EB%85%B8%EC%9D%B8%EB%B3%B5%EC%A7%80%EB%A1%A0_%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C.html",web:1,main:1},{t:"강의 연습문제(형성평가) (60문항, 한꺼번에 채점)",k:"웹",u:"https://chattov.github.io/study/%EB%85%B8%EC%9D%B8%EB%B3%B5%EC%A7%80%EB%A1%A0_%ED%98%95%EC%84%B1%ED%8F%89%EA%B0%80.html",web:1}],folder:"https://drive.google.com/drive/folders/1cw9I2qiAuSMXM9XkqLr7lFJsxVdgKMVv"},
+  {id:"community",name:"지역사회복지론",st:"노트 1~10강 + 11~15강 따로",notes:[{t:"지역사회복지론 강의노트",k:"문서",u:"https://docs.google.com/document/d/1INfefj9xdx6XRZH0ychx05oadKu-SPst_4al6etiFdI/edit",main:1},{t:"11~15강 강의노트 (강별 파일)",k:"폴더",u:"https://drive.google.com/drive/folders/15mnyCOmBEbmTXm_9_C87Peokzkhby5y2"}],quiz:[],folder:"https://drive.google.com/drive/folders/1vPAnTjvkWBkHlLO2mytxbfv3oND-z6jN"},
+  {id:"research",name:"사회복지조사론",st:"노트 1~6강",notes:[{t:"사회복지조사론 강의노트",k:"문서",u:"https://docs.google.com/document/d/1jqXwUqNwnWUWiAqW3LoEpPzaDRjXL0uzA6yPBCyU06Q/edit",main:1},{t:"강의노트 폴더",k:"폴더",u:"https://drive.google.com/drive/folders/1ssSgkGgK-XmZVKWT7n2Qorq2z5o30Jig"}],quiz:[],folder:"https://drive.google.com/drive/folders/1qxEZ1frTDUlOYHcCYrygyjlxrfrnq_lB"},
+  {id:"hbse",name:"인간행동과 사회환경",st:"노트 1~6강 + 7~12강 따로",notes:[{t:"인간행동과 인간발달 강의노트",k:"문서",u:"https://docs.google.com/document/d/1FsOd_kd1c9eVoSCuHR5teR7o_Zh1wheVropjGg6RWEw/edit",main:1},{t:"1~12강 강의노트 (강별 파일)",k:"폴더",u:"https://drive.google.com/drive/folders/1YncVQfNFw0ji3_5vuEx7iPWmY3-wR_cq"}],quiz:[],folder:"https://drive.google.com/drive/folders/1XUj0UNZMBzHAeBPQnf6KLd8Au8gV5lvM"}
 ];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const lk = x => `<a class="lk${x.main?' main':''}${x.web?' web':''}" href="${x.u}" target="_blank" rel="noopener"><span class="k">${x.k}</span><span class="t">${esc(x.t)}</span></a>`;
@@ -109,6 +111,7 @@ document.getElementById('grid').innerHTML = SUBJ.map(s => `
     <div class="subj-h"><h2>${esc(s.name)}</h2>${s.st ? `<span class="st">${esc(s.st)}</span>` : ''}</div>
     <div class="row"><span class="tag n">강의노트</span><div class="links">${s.notes.length ? s.notes.map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
     <div class="row"><span class="tag q">문제·정리</span><div class="links">${s.quiz.length ? s.quiz.map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
+    <div class="row"><span class="tag f">폴더</span><div class="links">${lk({t:'과목 폴더 열기', k:'폴더', u:s.folder})}</div></div>
     ${s.memo ? `<p class="memo">${esc(s.memo)}</p>` : ''}
   </section>`).join('');
 document.querySelectorAll('.jump a').forEach(a => a.addEventListener('click', e => {
