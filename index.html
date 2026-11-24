@@ -76,11 +76,11 @@ footer b{color:var(--ink)}
     <div>
       <div class="eyebrow">방송통신대 사회복지학과 · 2026학년도 2학기</div>
       <h1>기말고사 공부방</h1>
-      <p class="lead">과목별 강의노트와 문제를 한 곳에 모았습니다. 링크는 새 탭에서 열립니다.</p>
+      <p class="lead">과목별 강의노트와 문제를 한 곳에 모았습니다.</p>
     </div>
     <div class="tools">
-      <a class="btn primary" href="https://drive.google.com/drive/folders/1qzLI6rcch5Cji5fq7qGszupHu-ZfcKry" target="_blank" rel="noopener">기말고사 폴더 열기</a>
-      <a class="btn" href="https://drive.google.com/drive/folders/1spz2y9_Q7RL7sbBbQwYhcez-fTcAveqm" target="_blank" rel="noopener">!2026KNOU 폴더</a>
+      <a class="btn primary" href="https://drive.google.com/drive/folders/1qzLI6rcch5Cji5fq7qGszupHu-ZfcKry">기말고사 폴더 열기</a>
+      <a class="btn" href="https://drive.google.com/drive/folders/1spz2y9_Q7RL7sbBbQwYhcez-fTcAveqm">!2026KNOU 폴더</a>
       <button class="btn" id="themeBtn" type="button">다크</button>
     </div>
   </header>
@@ -104,7 +104,7 @@ const SUBJ = [
   {id:"hbse",name:"인간행동과 사회환경",st:"노트 1~6강 + 7~12강 따로",notes:[{t:"인간행동과 인간발달 강의노트",k:"문서",u:"https://docs.google.com/document/d/1FsOd_kd1c9eVoSCuHR5teR7o_Zh1wheVropjGg6RWEw/edit",main:1},{t:"1~12강 강의노트 (강별 파일)",k:"폴더",u:"https://drive.google.com/drive/folders/1YncVQfNFw0ji3_5vuEx7iPWmY3-wR_cq"}],quiz:[],folder:"https://drive.google.com/drive/folders/1XUj0UNZMBzHAeBPQnf6KLd8Au8gV5lvM"}
 ];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const lk = x => `<a class="lk${x.main?' main':''}${x.web?' web':''}" href="${x.u}" target="_blank" rel="noopener"><span class="k">${x.k}</span><span class="t">${esc(x.t)}</span></a>`;
+const lk = x => `<a class="lk${x.main?' main':''}${x.web?' web':''}" href="${x.u}"><span class="k">${x.k}</span><span class="t">${esc(x.t)}</span></a>`;
 document.getElementById('jump').innerHTML = SUBJ.map(s => `<li><a href="#${s.id}">${esc(s.name)}</a></li>`).join('');
 document.getElementById('grid').innerHTML = SUBJ.map(s => `
   <section class="subj" id="${s.id}">
