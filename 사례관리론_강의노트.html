@@ -162,6 +162,20 @@ main{min-width:0}
   .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
   .ct .tw table.c2 td:not(:first-child)::before{content:none}
 }
+
+/* 색 정리: 머리행은 옅은 청회색, 첫 열은 더 옅은 청회색, 본문은 흰색. 비교표는 열(세로) 단위로 구분 */
+:root{--thd2:#cfd9e8;--tbd:#c9d3e1;--thd:#dbe3ef;--thd-ink:#1f3864;--c1:#eef2f8;--cell:#fffefb;--colt:#f3f6fa;--zebra:transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}}
+:root[data-theme="dark"]{--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}
+.ct .tw{border-color:var(--tbd)}
+.ct tbody tr:nth-child(even) td{background:none}
+.ct tbody td:first-child{background:var(--c1);color:var(--thd-ink)}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--colt)}
+.ct table.c3 thead th:nth-child(3),.ct table.c4 thead th:nth-child(3),.ct table.c5 thead th:nth-child(3),.ct table.c5 thead th:nth-child(5),.ct table.c6 thead th:nth-child(3),.ct table.c6 thead th:nth-child(5){background:var(--thd2)}
+.ct table.long tr{border-color:var(--tbd)}
+.ct table.long td:nth-child(3){background:var(--colt)!important}
+.ct table.long td:first-child{color:var(--thd-ink)}
+@media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
 </style>
 </head>
 <body id="top">
