@@ -224,6 +224,7 @@ main{min-width:0}
       <p>구글 문서 「사례관리론_01-15강_강의노트」를 웹에서 보기 좋게 옮긴 페이지입니다. 비교할 내용은 표로 묶었습니다.</p>
       <div class="legend">
         <span><span class="mk">6️⃣</span>2025 기말 연습문제 (수정)에 출제된 부분</span>
+        <span><mark class="hl hl-y" style="cursor:default;white-space:nowrap;flex:none;align-self:flex-start">형광펜</mark> 글을 드래그(휴대폰은 길게 눌러 선택)하면 색을 고를 수 있습니다. 칠한 곳을 누르면 색 변경·지우기. 이 기기 브라우저에만 저장됩니다.</span>
       </div>
     </section>
     <section class="lec" id="l1"><header class="lh"><span class="no">1강</span><h2>사례관리의 관점</h2></header><div class="ct">
@@ -2972,5 +2973,124 @@ const paint = () => { $('#themeBtn').textContent = cur()==='dark' ? '라이트' 
 (() => { const t = sget(TK); if(t) document.documentElement.setAttribute('data-theme', t); paint(); })();
 $('#themeBtn').onclick = () => { const n = cur()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme', n); sset(TK, n); paint(); };
 </script>
+<!-- 형광펜: 글을 드래그(휴대폰은 길게 눌러 선택)하면 색 버튼이 뜸. 이 기기 브라우저에 저장 -->
+<style>
+mark.hl{color:inherit;border-radius:2px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-y{background:#fde68a}
+mark.hl-g{background:#bbf7d0}
+mark.hl-p{background:#fbcfe8}
+mark.hl-b{background:#bfdbfe}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}}
+:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}
+.hlbar{position:fixed;z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.hlbar[hidden]{display:none}
+.hlbar button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.12);padding:0;cursor:pointer}
+.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}
+.hlbar button.x{width:auto;height:30px;border-radius:8px;padding:0 10px;background:var(--soft);color:var(--ink);font:inherit;font-size:13px;border:1px solid var(--line)}
+@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:36px;height:36px}.hlbar button.x{height:36px}}
+</style>
+<div class="hlbar" id="hlbar" hidden role="toolbar" aria-label="형광펜">
+  <button class="y" data-c="y" title="노랑" aria-label="노랑 형광펜"></button>
+  <button class="g" data-c="g" title="연두" aria-label="연두 형광펜"></button>
+  <button class="p" data-c="p" title="분홍" aria-label="분홍 형광펜"></button>
+  <button class="b" data-c="b" title="하늘" aria-label="하늘 형광펜"></button>
+  <button class="x" id="hlDel" hidden>지우기</button>
+</div>
+<script>
+(function(){
+const KEY='cm-note-hl-v1';
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')||[]}catch(e){return []}};
+const save=a=>{try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}};
+let H=load();
+const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
+let curRange=null, curId=null;
+const box=sec=>sec.querySelector('.ct');
+function texts(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=w.nextNode())a.push(n);return a;}
+function offsetOf(root,node,off){let s=0;for(const t of texts(root)){if(t===node)return s+off;s+=t.length;}
+  // node가 요소인 경우
+  const r=document.createRange();r.setStart(root,0);r.setEnd(node,off);return r.toString().length;}
+function wrap(root,start,end,c,id){
+  let pos=0;
+  for(const t of texts(root)){
+    const a=pos,b=pos+t.length;pos=b;
+    if(b<=start||a>=end)continue;
+    let node=t;const s=Math.max(start,a)-a,e=Math.min(end,b)-a;
+    if(!node.data.slice(s,e).trim())continue;
+    if(e<node.length)node.splitText(e);
+    if(s>0)node=node.splitText(s);
+    const m=document.createElement('mark');m.className='hl hl-'+c;m.dataset.id=id;
+    node.parentNode.insertBefore(m,node);m.appendChild(node);
+  }
+}
+function unwrap(id){document.querySelectorAll('mark.hl[data-id="'+id+'"]').forEach(m=>{const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize();});}
+function restore(){
+  H=H.filter(h=>{const sec=document.getElementById(h.lec);if(!sec)return false;const root=box(sec);
+    const txt=texts(root).map(t=>t.data).join('');
+    if(txt.slice(h.s,h.e)!==h.t)return false; wrap(root,h.s,h.e,h.c,h.id);return true;});
+}
+restore();
+function hide(){bar.hidden=true;curRange=null;curId=null;del.hidden=true;}
+function place(rect){
+  bar.hidden=false;
+  const w=bar.offsetWidth,h=bar.offsetHeight;
+  let x=rect.left+rect.width/2-w/2, y=rect.top-h-8;
+  if(y<70)y=rect.bottom+8;
+  x=Math.max(8,Math.min(x,innerWidth-w-8));
+  y=Math.max(64,Math.min(y,innerHeight-h-8));
+  bar.style.left=x+'px';bar.style.top=y+'px';
+}
+function check(){
+  const sel=getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount){ return; }
+  const r=sel.getRangeAt(0);
+  const sec=r.commonAncestorContainer.nodeType===1?r.commonAncestorContainer.closest('section.lec'):r.commonAncestorContainer.parentElement.closest('section.lec');
+  if(!sec||!box(sec).contains(r.startContainer)||!box(sec).contains(r.endContainer)){hide();return;}
+  if(!r.toString().trim()){hide();return;}
+  curRange=r;curId=null;del.hidden=true;place(r.getBoundingClientRect());
+}
+let tm;
+document.addEventListener('selectionchange',()=>{clearTimeout(tm);tm=setTimeout(check,250);});
+document.addEventListener('mouseup',()=>setTimeout(check,10));
+document.addEventListener('click',e=>{
+  if(bar.contains(e.target))return;
+  const m=e.target.closest('mark.hl');
+  const sel=getSelection();
+  if(m&&(!sel||sel.isCollapsed)){curId=m.dataset.id;curRange=null;del.hidden=false;place(m.getClientRects()[0]||m.getBoundingClientRect());return;}
+  if(!sel||sel.isCollapsed)hide();
+});
+bar.addEventListener('mousedown',e=>e.preventDefault());
+bar.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b===del){if(curId){unwrap(curId);H=H.filter(h=>h.id!==curId);save(H);}hide();return;}
+  const c=b.dataset.c;
+  if(curId){ // 색 바꾸기
+    document.querySelectorAll('mark.hl[data-id="'+curId+'"]').forEach(m=>m.className='hl hl-'+c);
+    const h=H.find(h=>h.id===curId);if(h)h.c=c;save(H);hide();return;}
+  if(!curRange)return;
+  const r=curRange;const sec=(r.startContainer.nodeType===1?r.startContainer:r.startContainer.parentElement).closest('section.lec');const root=box(sec);
+  let s=offsetOf(root,r.startContainer,r.startOffset), e2=offsetOf(root,r.endContainer,r.endOffset);
+  if(e2<=s){hide();return;}
+  const txt=texts(root).map(t=>t.data).join('');
+  // 겹치는 기존 형광펜은 지움
+  H.filter(h=>h.lec===sec.id&&h.s<e2&&h.e>s).forEach(h=>unwrap(h.id));
+  H=H.filter(h=>!(h.lec===sec.id&&h.s<e2&&h.e>s));
+  const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  wrap(root,s,e2,c,id);
+  H.push({id,lec:sec.id,s,e:e2,c,t:txt.slice(s,e2)});save(H);
+  getSelection().removeAllRanges();hide();
+});
+addEventListener('scroll',()=>{if(!bar.hidden&&innerWidth>640)hide();},{passive:true});
+// 모두 지우기 버튼(도구 막대)
+const sp=document.querySelector('section.intro');
+if(sp){const cb=document.createElement('button');cb.className='btn';cb.id='hlClear';cb.title='이 기기에 저장된 형광펜을 모두 지움';
+  let armed=false;const paint=()=>{if(armed)return;cb.textContent='형광펜 '+H.length+'개 지우기';cb.style.display=H.length?'':'none';};
+  cb.onclick=()=>{if(!armed){armed=true;cb.textContent='한 번 더 누르면 모두 지움';setTimeout(()=>{armed=false;paint();},3000);return;}
+    H.forEach(h=>unwrap(h.id));H=[];save(H);armed=false;paint();};
+  cb.style.marginTop='10px';sp.appendChild(cb);paint();
+  const _save=save;window.__hlpaint=paint;
+  const obs=()=>paint();document.addEventListener('click',()=>setTimeout(obs,0));}
+})();
+</script>
+
 </body>
 </html>
