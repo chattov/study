@@ -199,6 +199,26 @@ main{min-width:0}
   .ct .tw table tbody td{width:auto!important;white-space:normal!important}
   .ct .tw table tbody td:not(:first-child){background:none!important}
 }
+
+/* 카드 뉴스: 사정·목표를 별도 카드로 */
+.cn{display:grid;gap:14px;margin:10px 0 14px}
+.cn-card{background:var(--tb-bg);border:1px solid var(--tb-line);border-radius:10px;overflow:hidden}
+.cn-top{background:var(--tb-head);color:var(--tb-head-ink);padding:10px 16px}
+.cn-tag{font-size:18px;font-weight:800;letter-spacing:.08em}
+.cn-cols,.cn-row{display:grid;grid-template-columns:1fr 1fr}
+.cn-h{padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--tb-line)}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:var(--tb-col)}
+.cn-row>div{padding:9px 16px;line-height:1.65;font-size:14.5px;border-bottom:1px solid var(--tb-line);word-break:keep-all;overflow-wrap:anywhere}
+.cn-row:last-child>div{border-bottom:0}
+.cn-lead>div{font-weight:700;font-size:15.5px}
+.cn-end>div{font-weight:700;color:var(--accent);border-top:2px solid var(--tb-line)}
+@media (max-width:640px){
+  .cn-cols{display:none}
+  .cn-row{grid-template-columns:1fr}
+  .cn-row>div:nth-child(2){border-bottom:2px solid var(--tb-line)}
+  .cn-row>div::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .cn-end>div{border-top:0}
+}
 </style>
 </head>
 <body id="top">
@@ -1420,23 +1440,28 @@ main{min-width:0}
 </ul>
 <h3>3. 잔여적 사례관리와 제도적 사례관리의 비교</h3>
 <p class="tt"><strong>잔여적 관점과 제도적 관점의 사정과 목표</strong></p>
-<div class="tw"><table class="c3">
-<thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">환경에 대처하지 못하는 개인</td><td data-label="제도적 관점">부적절한 사회경제구조</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">부적절하고 비효과적인 상호작용</td><td data-label="제도적 관점">권력의 결여</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할기대</td><td data-label="제도적 관점">이데올로기로 인한 역할제한, 지배적인 사회풍습과 신념에 따른 제한</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">집단 혹은 가족규범 간의 갈등</td><td data-label="제도적 관점">집단규범이 수행하는 은폐된 사회적 기능</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">과거 경험을 통한 부정적 학습</td><td data-label="제도적 관점">변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">대인관계문제, 사회적 지지부족, 사회적 고립</td><td data-label="제도적 관점">사회적 낙인과정의 영향</td></tr>
-<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">물질적 자원의 결여</td><td data-label="제도적 관점">사회·경제 구조적 제한</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">사회상황에 적응하고 대처할 수 있도록 원조</td><td data-label="제도적 관점">사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">개인 간의 상호작용 개선</td><td data-label="제도적 관점">피착취자의 권력증진</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">스트레스 경감, 기대의 수정</td><td data-label="제도적 관점">이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">개인 간 갈등해소</td><td data-label="제도적 관점">지배 이익집단의 착취경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">부정적인 연합의 수정, 현재와 과거의 경험분리</td><td data-label="제도적 관점">삶에 대한 변화와 통제능력 향상, 보다 넓은 역사적·사회적 변화의 영향인식</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">대인관계 개선, 사회적 지지증가</td><td data-label="제도적 관점">사회적 낙인으로 인한 영향의 거부</td></tr>
-<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">물질적 자원제공</td><td data-label="제도적 관점">구조적 제한을 변화시켜 물질적 자원제공</td></tr>
-</tbody></table></div>
+<div class="cn">
+<article class="cn-card"><div class="cn-top"><span class="cn-tag">사정</span></div>
+<div class="cn-cols"><div class="cn-h">잔여적 관점</div><div class="cn-h">제도적 관점</div></div>
+<div class="cn-row cn-lead"><div data-label="잔여적 관점">환경에 대처하지 못하는 개인</div><div data-label="제도적 관점">부적절한 사회경제구조</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">부적절하고 비효과적인 상호작용</div><div data-label="제도적 관점">권력의 결여</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할기대</div><div data-label="제도적 관점">이데올로기로 인한 역할제한, 지배적인 사회풍습과 신념에 따른 제한</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">집단 혹은 가족규범 간의 갈등</div><div data-label="제도적 관점">집단규범이 수행하는 은폐된 사회적 기능</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">과거 경험을 통한 부정적 학습</div><div data-label="제도적 관점">변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">대인관계문제, 사회적 지지부족, 사회적 고립</div><div data-label="제도적 관점">사회적 낙인과정의 영향</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">물질적 자원의 결여</div><div data-label="제도적 관점">사회·경제 구조적 제한</div></div>
+<div class="cn-row cn-end"><div data-label="잔여적 관점">→ 사회상황에 적응하고 대처할 수 있도록 원조</div><div data-label="제도적 관점">→ 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</div></div>
+</article>
+<article class="cn-card"><div class="cn-top"><span class="cn-tag">목표</span></div>
+<div class="cn-cols"><div class="cn-h">잔여적 관점</div><div class="cn-h">제도적 관점</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">개인 간의 상호작용 개선</div><div data-label="제도적 관점">피착취자의 권력증진</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">스트레스 경감, 기대의 수정</div><div data-label="제도적 관점">이데올로기의 제약(행동과 신념 모두) 완화</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">개인 간 갈등해소</div><div data-label="제도적 관점">지배 이익집단의 착취경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">부정적인 연합의 수정, 현재와 과거의 경험분리</div><div data-label="제도적 관점">삶에 대한 변화와 통제능력 향상, 보다 넓은 역사적·사회적 변화의 영향인식</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">대인관계 개선, 사회적 지지증가</div><div data-label="제도적 관점">사회적 낙인으로 인한 영향의 거부</div></div>
+<div class="cn-row"><div data-label="잔여적 관점">물질적 자원제공</div><div data-label="제도적 관점">구조적 제한을 변화시켜 물질적 자원제공</div></div>
+</article>
+</div>
 <p class="tt"><strong>잔여적 관점과 제도적 관점의 실천방법</strong></p>
 <div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
