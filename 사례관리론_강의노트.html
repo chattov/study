@@ -145,6 +145,23 @@ main{min-width:0}
   .ct table.long td{border-right:0;border-top:1px solid var(--line);min-width:0}
   .ct table.long td:first-child{border-top:0}
 }
+
+/* 가로 스크롤 없음 */
+.ct .tw{overflow:visible}
+.ct th,.ct td{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{min-width:6.5em}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{white-space:normal;width:auto}
+.ct table.c5,.ct table.c6{font-size:13px}
+@media (max-width:640px){
+  .ct .tw{border:0;background:none;border-radius:0}
+  .ct .tw table, .ct .tw tbody{display:block;width:100%}
+  .ct .tw thead{display:none}
+  .ct .tw tr{display:block;margin:0 0 10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+  .ct .tw td{display:block;border:0;border-top:1px solid var(--line);padding:8px 12px;background:none!important;min-width:0;width:auto;white-space:normal}
+  .ct .tw td:first-child{border-top:0;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 12px}
+  .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .ct .tw table.c2 td:not(:first-child)::before{content:none}
+}
 </style>
 </head>
 <body id="top">
@@ -194,12 +211,12 @@ main{min-width:0}
 <li><strong>변화의 계기</strong> — 1960년대 정신장애인의 탈시설화로 이들이 지역사회에서 적응하도록 돕는 사례관리가 확산되면서 사회복지실천 패러다임이 바뀜.</li>
 </ul>
 <p class="tt"><strong>Social casework와 Case management 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>Social casework</th><th>Case management</th></tr></thead><tbody>
-<tr><td>초점</td><td>클라이언트의 내면적 변화, 직접적 관계를 통한 문제 해결</td><td>다양한 욕구 해결을 위한 자원의 연결·관리·조정</td></tr>
-<tr><td>목표</td><td>인성 개발과 환경에 대한 적응</td><td>문제 해결, 효율적인 서비스 전달</td></tr>
-<tr><td>주요 활동</td><td>직접적인 치료, 상담, 생활관리</td><td>자원 연결, 서비스 조정과 통합</td></tr>
-<tr><td>클라이언트와의 관계</td><td>상대적으로 권위주의적</td><td>상대적으로 평등한 관계</td></tr>
+<tr><td data-label="구분">초점</td><td data-label="Social casework">클라이언트의 내면적 변화, 직접적 관계를 통한 문제 해결</td><td data-label="Case management">다양한 욕구 해결을 위한 자원의 연결·관리·조정</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="Social casework">인성 개발과 환경에 대한 적응</td><td data-label="Case management">문제 해결, 효율적인 서비스 전달</td></tr>
+<tr><td data-label="구분">주요 활동</td><td data-label="Social casework">직접적인 치료, 상담, 생활관리</td><td data-label="Case management">자원 연결, 서비스 조정과 통합</td></tr>
+<tr><td data-label="구분">클라이언트와의 관계</td><td data-label="Social casework">상대적으로 권위주의적</td><td data-label="Case management">상대적으로 평등한 관계</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>잔여적 사례관리에 대한 비판: 희생자 비난</strong></p>
 <ul>
@@ -214,11 +231,11 @@ main{min-width:0}
 <li><strong>잔여적 사례관리와의 차이</strong> — 자원을 원조하고 효율적으로 전달하는 데 그치지 않고, 구조를 변화시키기 위한 정치적 실천까지 포함함.</li>
 </ul>
 <p class="tt"><strong>케이스 발생 원인에 따른 두 관점</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>바라보는 대상</td><td>개인, 인접환경</td><td>사회구조</td></tr>
-<tr><td>케이스의 원인</td><td>적응하지 못하는 개인, 기능하지 못하는 인접환경</td><td>사회적 위험에 빠진 시민, 부조리한 사회구조</td></tr>
-<tr><td>해결 방향</td><td>개인의 적응 지원, 역기능적 인접환경을 순기능으로 전환</td><td>사회구조를 변화시키지 않는 한 문제는 지속되므로 구조 변화 추구</td></tr>
+<tr><td data-label="구분">바라보는 대상</td><td data-label="잔여적 사례관리">개인, 인접환경</td><td data-label="제도적 사례관리">사회구조</td></tr>
+<tr><td data-label="구분">케이스의 원인</td><td data-label="잔여적 사례관리">적응하지 못하는 개인, 기능하지 못하는 인접환경</td><td data-label="제도적 사례관리">사회적 위험에 빠진 시민, 부조리한 사회구조</td></tr>
+<tr><td data-label="구분">해결 방향</td><td data-label="잔여적 사례관리">개인의 적응 지원, 역기능적 인접환경을 순기능으로 전환</td><td data-label="제도적 사례관리">사회구조를 변화시키지 않는 한 문제는 지속되므로 구조 변화 추구</td></tr>
 </tbody></table></div>
 <h3>2. 상이한 사회복지실천과 사례관리</h3>
 <p class="sh"><strong>어항 속 금붕어의 비유</strong></p>
@@ -245,14 +262,14 @@ main{min-width:0}
 <li><strong>실천기술론</strong> — 사회관리, 급진적 사회복지실천.</li>
 </ul>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>잔여주의와 제도주의 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여주의</th><th>제도주의</th></tr></thead><tbody>
-<tr><td>기반 철학</td><td>자유주의</td><td>사회민주주의</td></tr>
-<tr><td>태도</td><td>자립의지, 자선, 선별주의</td><td>권력/구조, 연대, 보편주의</td></tr>
-<tr><td>정책</td><td>선별된 잉여 인간에 대한 최소한의 급여정책</td><td>보편적인 시민에 대한 기본적인 급여제공의 정책</td></tr>
-<tr><td>실천론</td><td>정신역동모델, 강점이론, 생태체계론 등</td><td>푸코의 권력론, 프레이리의 교육론, 알린스키의 조직론 등</td></tr>
-<tr><td>실천</td><td>잔여적 사례관리</td><td>제도적 사례관리</td></tr>
-<tr><td>기술론</td><td>개인관리, 전통사회복지실천</td><td>사회관리, 급진적 사회복지실천</td></tr>
+<tr><td data-label="구분">기반 철학</td><td data-label="잔여주의">자유주의</td><td data-label="제도주의">사회민주주의</td></tr>
+<tr><td data-label="구분">태도</td><td data-label="잔여주의">자립의지, 자선, 선별주의</td><td data-label="제도주의">권력/구조, 연대, 보편주의</td></tr>
+<tr><td data-label="구분">정책</td><td data-label="잔여주의">선별된 잉여 인간에 대한 최소한의 급여정책</td><td data-label="제도주의">보편적인 시민에 대한 기본적인 급여제공의 정책</td></tr>
+<tr><td data-label="구분">실천론</td><td data-label="잔여주의">정신역동모델, 강점이론, 생태체계론 등</td><td data-label="제도주의">푸코의 권력론, 프레이리의 교육론, 알린스키의 조직론 등</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="잔여주의">잔여적 사례관리</td><td data-label="제도주의">제도적 사례관리</td></tr>
+<tr><td data-label="구분">기술론</td><td data-label="잔여주의">개인관리, 전통사회복지실천</td><td data-label="제도주의">사회관리, 급진적 사회복지실천</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>자선조직협회(COS, Charity Organization Society)</strong></p>
 <ul>
@@ -278,14 +295,14 @@ main{min-width:0}
 <li><strong>인보관</strong> — 큰 거실에서 주민들이 함께 토론·학습하며 지역사회 문제를 어떻게 바꿀지 논의하는 커뮤니티센터 역할을 함.</li>
 </ul>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>자선조직협회와 인보관 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>자선조직협회</th><th>인보관</th></tr></thead><tbody>
-<tr><td>문제의 원인</td><td>개인</td><td>지역, 환경과 구조</td></tr>
-<tr><td>참여자</td><td>주로 상류층의 우애방문원</td><td>교육받은 중류층과 지역주민</td></tr>
-<tr><td>목표</td><td>자선을 통한 빈민구제, 빈곤자 조사, 빈민개조</td><td>기존 제도와 질서 비판, 사회개혁, 협동과 연대를 통한 문제해결</td></tr>
-<tr><td>실천</td><td>기존 기관들의 서비스 조정</td><td>주민교육, 주민의 문제대처 능력 향상, 주민 상호관계 향상 노력</td></tr>
-<tr><td>영향</td><td>사회복지협의회, 공동모금으로 발전</td><td>사회개혁, 사회운동으로 발전</td></tr>
-<tr><td>출현시기</td><td>영국: 1869 런던 COS / 미국: 1877 버팔로 COS</td><td>영국: 1884 런던 토인비홀 / 미국: 1886 뉴욕, 1888 시카고 헐 하우스</td></tr>
+<tr><td data-label="구분">문제의 원인</td><td data-label="자선조직협회">개인</td><td data-label="인보관">지역, 환경과 구조</td></tr>
+<tr><td data-label="구분">참여자</td><td data-label="자선조직협회">주로 상류층의 우애방문원</td><td data-label="인보관">교육받은 중류층과 지역주민</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="자선조직협회">자선을 통한 빈민구제, 빈곤자 조사, 빈민개조</td><td data-label="인보관">기존 제도와 질서 비판, 사회개혁, 협동과 연대를 통한 문제해결</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="자선조직협회">기존 기관들의 서비스 조정</td><td data-label="인보관">주민교육, 주민의 문제대처 능력 향상, 주민 상호관계 향상 노력</td></tr>
+<tr><td data-label="구분">영향</td><td data-label="자선조직협회">사회복지협의회, 공동모금으로 발전</td><td data-label="인보관">사회개혁, 사회운동으로 발전</td></tr>
+<tr><td data-label="구분">출현시기</td><td data-label="자선조직협회">영국: 1869 런던 COS / 미국: 1877 버팔로 COS</td><td data-label="인보관">영국: 1884 런던 토인비홀 / 미국: 1886 뉴욕, 1888 시카고 헐 하우스</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>이 교과목에서의 호명</strong></p>
 <ul>
@@ -307,15 +324,15 @@ main{min-width:0}
 <li><strong>유의점</strong> — 제도적 사례관리가 인접환경을 무시하는 것이 아니라 이를 넘어선 실천이며, 계속 구조와 사회체계에 연결시키려 함.</li>
 </ul>
 <p class="tt"><strong>잔여적-환경 강조와 제도적-구조 강조의 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>요소</th><th>잔여적-환경 강조</th><th>제도적-구조 강조</th></tr></thead><tbody>
-<tr><td>사회적 요인</td><td>사회환경은 배경정보로서 관계가 있으며, 분석을 위해 사용</td><td>사회구조는 문제를 설명하는 주된 요인이며 분석과 실천에 사용</td></tr>
-<tr><td>개인과 환경</td><td>개인은 환경에 적응하며 순응</td><td>개인과 환경 사이에 변화를 추구</td></tr>
-<tr><td>심리적 요인과 사회적 요인</td><td>실천할 때 사용되고 탐색됨</td><td>양자 간을 연결시키고자 함</td></tr>
-<tr><td>개인</td><td>개인을 비난하거나 희생시킴</td><td>개인 원조에 초점, 개인을 존중하고 사회구조를 비난</td></tr>
-<tr><td>사회복지실천의 사회통제 기능</td><td>이를 수용</td><td>비판적 분석으로, 이러한 기능수행을 경계</td></tr>
-<tr><td>사회에 대한 시각</td><td>있는 그대로 또는 약간의 개량 수용</td><td>사회에 대해 비판적 분석</td></tr>
-<tr><td>자율성과 권리</td><td>체계 내에서 보호</td><td>체계에 대항해서 방어</td></tr>
+<tr><td data-label="요소">사회적 요인</td><td data-label="잔여적-환경 강조">사회환경은 배경정보로서 관계가 있으며, 분석을 위해 사용</td><td data-label="제도적-구조 강조">사회구조는 문제를 설명하는 주된 요인이며 분석과 실천에 사용</td></tr>
+<tr><td data-label="요소">개인과 환경</td><td data-label="잔여적-환경 강조">개인은 환경에 적응하며 순응</td><td data-label="제도적-구조 강조">개인과 환경 사이에 변화를 추구</td></tr>
+<tr><td data-label="요소">심리적 요인과 사회적 요인</td><td data-label="잔여적-환경 강조">실천할 때 사용되고 탐색됨</td><td data-label="제도적-구조 강조">양자 간을 연결시키고자 함</td></tr>
+<tr><td data-label="요소">개인</td><td data-label="잔여적-환경 강조">개인을 비난하거나 희생시킴</td><td data-label="제도적-구조 강조">개인 원조에 초점, 개인을 존중하고 사회구조를 비난</td></tr>
+<tr><td data-label="요소">사회복지실천의 사회통제 기능</td><td data-label="잔여적-환경 강조">이를 수용</td><td data-label="제도적-구조 강조">비판적 분석으로, 이러한 기능수행을 경계</td></tr>
+<tr><td data-label="요소">사회에 대한 시각</td><td data-label="잔여적-환경 강조">있는 그대로 또는 약간의 개량 수용</td><td data-label="제도적-구조 강조">사회에 대해 비판적 분석</td></tr>
+<tr><td data-label="요소">자율성과 권리</td><td data-label="잔여적-환경 강조">체계 내에서 보호</td><td data-label="제도적-구조 강조">체계에 대항해서 방어</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>비교 항목의 보충 설명</strong></p>
 <ul>
@@ -325,11 +342,11 @@ main{min-width:0}
 <li><strong>급진적 사회복지실천과의 연결</strong> — 체계에 대항해서 방어한다는 점에서 제도적 사례관리는 급진적 사회복지실천과 맞닿아 있음.</li>
 </ul>
 <p class="tt"><strong>두 사례관리 관점의 요약</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>관점</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>문제의 원인</td><td>환경에 대처하지 못하는 개인</td><td>부적절한 사회경제구조</td></tr>
-<tr><td>사회적 요인</td><td>인접환경 강조</td><td>사회경제구조 강조</td></tr>
-<tr><td>해결방법</td><td>인접환경에 적응하는 개인</td><td>부적절하게 설계된 사회구조 변화</td></tr>
+<tr><td data-label="관점">문제의 원인</td><td data-label="잔여적 사례관리">환경에 대처하지 못하는 개인</td><td data-label="제도적 사례관리">부적절한 사회경제구조</td></tr>
+<tr><td data-label="관점">사회적 요인</td><td data-label="잔여적 사례관리">인접환경 강조</td><td data-label="제도적 사례관리">사회경제구조 강조</td></tr>
+<tr><td data-label="관점">해결방법</td><td data-label="잔여적 사례관리">인접환경에 적응하는 개인</td><td data-label="제도적 사례관리">부적절하게 설계된 사회구조 변화</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>송파 세 모녀 사건 개요</strong></p>
 <ul>
@@ -350,12 +367,12 @@ main{min-width:0}
 <li><strong>제도적 사례관리의 해결방법</strong> — 복지가 시민의 권리임을 인식하는 시민교육, 시민의 조직화, 복지제도의 차별적 기준 폐지(예: 부양의무자 기준 철폐), 정책 감시, 부적절한 제도개혁, 당사자 조직화 등 구조적 변화를 유도하는 장기적·정치적 전략을 수행함. 현장에서 즉시 필요한 개입도 하면서 근본 해결을 위해 제도까지 연결함.</li>
 </ul>
 <p class="tt"><strong>송파 세 모녀 사건의 관점별 사례관리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>문제의 원인</td><td>어머니의 부상과 실직, 큰딸의 만성질환, 작은딸의 신용불량 등 개별 가족 구성원의 문제 누적</td><td>근로빈곤, 복지제도의 문턱, 부양의무자 기준, 의료·주거 접근성 제한 등 사회구조와 정책 실패</td></tr>
-<tr><td>사례관리 이해</td><td>위기에 신속히 개입하고 서비스로 연계하는 기술적·행정적 실천</td><td>사회적 억압과 배제를 해체하고 권리와 정의 실현을 위한 구조 개입, 클라이언트는 변화의 주체</td></tr>
-<tr><td>사회적 요인</td><td>친척, 이웃, 직장, 마을, 지역사회 등 인접환경의 역기능</td><td>사회복지제도와 사회구조의 부적절한 설계</td></tr>
-<tr><td>해결방법</td><td>경제적 지원, 긴급지원제도 안내, 기초생활보장 신청 등 단기적 개입, 자기개발을 통한 적응과 자립</td><td>시민교육, 시민 조직화, 부양의무자 기준 철폐, 정책 감시, 제도개혁, 당사자 조직화 등 장기적·정치적 전략</td></tr>
+<tr><td data-label="구분">문제의 원인</td><td data-label="잔여적 사례관리">어머니의 부상과 실직, 큰딸의 만성질환, 작은딸의 신용불량 등 개별 가족 구성원의 문제 누적</td><td data-label="제도적 사례관리">근로빈곤, 복지제도의 문턱, 부양의무자 기준, 의료·주거 접근성 제한 등 사회구조와 정책 실패</td></tr>
+<tr><td data-label="구분">사례관리 이해</td><td data-label="잔여적 사례관리">위기에 신속히 개입하고 서비스로 연계하는 기술적·행정적 실천</td><td data-label="제도적 사례관리">사회적 억압과 배제를 해체하고 권리와 정의 실현을 위한 구조 개입, 클라이언트는 변화의 주체</td></tr>
+<tr><td data-label="구분">사회적 요인</td><td data-label="잔여적 사례관리">친척, 이웃, 직장, 마을, 지역사회 등 인접환경의 역기능</td><td data-label="제도적 사례관리">사회복지제도와 사회구조의 부적절한 설계</td></tr>
+<tr><td data-label="구분">해결방법</td><td data-label="잔여적 사례관리">경제적 지원, 긴급지원제도 안내, 기초생활보장 신청 등 단기적 개입, 자기개발을 통한 적응과 자립</td><td data-label="제도적 사례관리">시민교육, 시민 조직화, 부양의무자 기준 철폐, 정책 감시, 제도개혁, 당사자 조직화 등 장기적·정치적 전략</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사건 이후의 대응과 평가</strong></p>
 <ul>
@@ -390,16 +407,16 @@ main{min-width:0}
 <li><strong>정의들의 공통점</strong> — 클라이언트는 복합적 욕구를 가진 존재이며, 그 욕구에 자원을 효과적·효율적으로 연결하는 실천전략을 사례관리로 봄.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리 정의의 강조점</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>정의</th><th>핵심 내용</th><th>강조점</th></tr></thead><tbody>
-<tr><td>목슬레이(1989)</td><td>공식적·비공식적 지원 네트워크의 조직·조정·유지</td><td>생활기술 증진, 서비스 제공자 능력 발전, 효율성·효과성</td></tr>
-<tr><td>무어(1990)</td><td>비공식·공식 보호체계 활동의 통합</td><td>잠재력 발휘, 사회환경 내 효과적 상호작용</td></tr>
-<tr><td>베이커와 인타글리아타(1992)</td><td>옹호, 서비스 조정, 자원 통제, 서비스 구입</td><td>기관이 클라이언트를 책임지는 활동</td></tr>
-<tr><td>블러키스(1992)</td><td>서비스 연계망 안에서의 상호작용 과정</td><td>지지적·효과적·효율적·비용효과적 제공</td></tr>
-<tr><td>우드사이드와 맥클램(2006)</td><td>다양한 서비스를 효과적으로 전달</td><td>실천전략</td></tr>
-<tr><td>미국사회복지사협회(2013)</td><td>서비스의 계획·실행·모니터링</td><td>전문가팀 활동을 통한 서비스 제공과 조정</td></tr>
-<tr><td>영국사례관리자협회(2025)</td><td>사정·계획·실행·조정·점검·평가하는 협력적 과정</td><td>비용 효과적인 성과의 질</td></tr>
-<tr><td>한국사례관리학회(2016)</td><td>클라이언트와 가족의 사회적 기능 회복을 돕는 통합적 실천방법</td><td>운영체계 확립, 강점관점 사정, 내적·지역사회 자원 활용</td></tr>
+<tr><td data-label="정의">목슬레이(1989)</td><td data-label="핵심 내용">공식적·비공식적 지원 네트워크의 조직·조정·유지</td><td data-label="강조점">생활기술 증진, 서비스 제공자 능력 발전, 효율성·효과성</td></tr>
+<tr><td data-label="정의">무어(1990)</td><td data-label="핵심 내용">비공식·공식 보호체계 활동의 통합</td><td data-label="강조점">잠재력 발휘, 사회환경 내 효과적 상호작용</td></tr>
+<tr><td data-label="정의">베이커와 인타글리아타(1992)</td><td data-label="핵심 내용">옹호, 서비스 조정, 자원 통제, 서비스 구입</td><td data-label="강조점">기관이 클라이언트를 책임지는 활동</td></tr>
+<tr><td data-label="정의">블러키스(1992)</td><td data-label="핵심 내용">서비스 연계망 안에서의 상호작용 과정</td><td data-label="강조점">지지적·효과적·효율적·비용효과적 제공</td></tr>
+<tr><td data-label="정의">우드사이드와 맥클램(2006)</td><td data-label="핵심 내용">다양한 서비스를 효과적으로 전달</td><td data-label="강조점">실천전략</td></tr>
+<tr><td data-label="정의">미국사회복지사협회(2013)</td><td data-label="핵심 내용">서비스의 계획·실행·모니터링</td><td data-label="강조점">전문가팀 활동을 통한 서비스 제공과 조정</td></tr>
+<tr><td data-label="정의">영국사례관리자협회(2025)</td><td data-label="핵심 내용">사정·계획·실행·조정·점검·평가하는 협력적 과정</td><td data-label="강조점">비용 효과적인 성과의 질</td></tr>
+<tr><td data-label="정의">한국사례관리학회(2016)</td><td data-label="핵심 내용">클라이언트와 가족의 사회적 기능 회복을 돕는 통합적 실천방법</td><td data-label="강조점">운영체계 확립, 강점관점 사정, 내적·지역사회 자원 활용</td></tr>
 </tbody></table></div>
 <h3>2. 잔여적 사례관리의 관점</h3>
 <p class="sh"><strong>개별사회사업과 사례관리의 구분</strong></p>
@@ -413,14 +430,14 @@ main{min-width:0}
 <li><strong>주요 배경</strong> — 개별사회사업은 자선조직협회 운동과 정신분석학 등의 영향을 받아 개인 심리적 측면을 강조했고, 사례관리는 탈시설화 운동, 서비스 전달체계의 파편화, 복합 욕구 증가를 배경으로 사회환경적 측면을 강조함.</li>
 </ul>
 <p class="tt"><strong>개별사회사업과 사례관리 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>개별사회사업(Social Casework)</th><th>사례관리(Case Management)</th></tr></thead><tbody>
-<tr><td>초점</td><td>개인의 심리내적 변화, 인격 발달, 환경 적응</td><td>개인의 기능 향상 및 삶의 질 증진, 자원 연계 및 서비스 조정</td></tr>
-<tr><td>주요 개입</td><td>직접적 개입: 상담, 치료, 교육 등, 사회복지사와 클라이언트 간의 일대일 관계 기반</td><td>간접적 개입 강조: 지역사회 자원 발굴, 연계, 조정, 옹호, 필요시 직접 서비스도 제공</td></tr>
-<tr><td>관계 강조</td><td>사회복지사와 클라이언트 간의 치료적 관계</td><td>클라이언트와 자원 체계(서비스 네트워크) 전반의 관계 관리 및 조정</td></tr>
-<tr><td>서비스 범위</td><td>특정 기관 내에서 제공되는 개별적 서비스 경향</td><td>지역사회 내 다양한 공식/비공식 자원과 서비스를 활용하는 포괄적이고 통합적인 접근</td></tr>
-<tr><td>목표</td><td>개인의 문제 해결 능력 향상 및 자아실현</td><td>복합적 욕구 해결, 보호의 연속성 보장, 서비스의 효과성과 효율성 증진</td></tr>
-<tr><td>주요 배경</td><td>자선조직협회 운동, 정신분석학 등의 영향(개인 심리적 측면 강조)</td><td>탈시설화 운동, 서비스 전달 체계의 파편화, 복합 욕구 증가(사회 환경적 측면 강조)</td></tr>
+<tr><td data-label="구분">초점</td><td data-label="개별사회사업(Social Casework)">개인의 심리내적 변화, 인격 발달, 환경 적응</td><td data-label="사례관리(Case Management)">개인의 기능 향상 및 삶의 질 증진, 자원 연계 및 서비스 조정</td></tr>
+<tr><td data-label="구분">주요 개입</td><td data-label="개별사회사업(Social Casework)">직접적 개입: 상담, 치료, 교육 등, 사회복지사와 클라이언트 간의 일대일 관계 기반</td><td data-label="사례관리(Case Management)">간접적 개입 강조: 지역사회 자원 발굴, 연계, 조정, 옹호, 필요시 직접 서비스도 제공</td></tr>
+<tr><td data-label="구분">관계 강조</td><td data-label="개별사회사업(Social Casework)">사회복지사와 클라이언트 간의 치료적 관계</td><td data-label="사례관리(Case Management)">클라이언트와 자원 체계(서비스 네트워크) 전반의 관계 관리 및 조정</td></tr>
+<tr><td data-label="구분">서비스 범위</td><td data-label="개별사회사업(Social Casework)">특정 기관 내에서 제공되는 개별적 서비스 경향</td><td data-label="사례관리(Case Management)">지역사회 내 다양한 공식/비공식 자원과 서비스를 활용하는 포괄적이고 통합적인 접근</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="개별사회사업(Social Casework)">개인의 문제 해결 능력 향상 및 자아실현</td><td data-label="사례관리(Case Management)">복합적 욕구 해결, 보호의 연속성 보장, 서비스의 효과성과 효율성 증진</td></tr>
+<tr><td data-label="구분">주요 배경</td><td data-label="개별사회사업(Social Casework)">자선조직협회 운동, 정신분석학 등의 영향(개인 심리적 측면 강조)</td><td data-label="사례관리(Case Management)">탈시설화 운동, 서비스 전달 체계의 파편화, 복합 욕구 증가(사회 환경적 측면 강조)</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>영화 『나, 다니엘 블레이크』 개요</strong></p>
 <ul>
@@ -454,18 +471,18 @@ main{min-width:0}
 <li><strong>관료주의 → 기술적 관료주의</strong> — 문서와 원칙 중심에서 매뉴얼화, 인터넷 환경, 비대면 처리가 많은 기술적 관료주의 체제로 바뀜.</li>
 </ul>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>전통적인 사회복지실천 관점과 신자유주의 이후 사례관리 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>전통적인 사회복지실천 관점</th><th>신자유주의 이후 사례관리</th></tr></thead><tbody>
-<tr><td>대상의 초점</td><td>문제를 가진 개인(Individual With a Problem)</td><td>개인이 가진 문제(Problems of Individuals)</td></tr>
-<tr><td>대상의 명칭</td><td>클라이언트(Client)</td><td>소비자/고객(Consumer/Customer)</td></tr>
-<tr><td>인간관</td><td>환경 속 인간(Person-in-Environment)</td><td>돌봄 환경 속 인간(Person-in-care-Environment)</td></tr>
-<tr><td>돌봄체계</td><td>분절된 돌봄체계(Care System)</td><td>지역중심의 통합적 돌봄의 체계(System of Care)</td></tr>
-<tr><td>개입의 방향</td><td>인간을 변화시키기(People Changing)</td><td>서비스 대상 유형화(People Processing)와 생활 유지(People Sustaining)</td></tr>
-<tr><td>의사결정</td><td>프로그램화된 의사결정(Programmed Decision Making)</td><td>의사결정의 공유(Shared Decision Making)</td></tr>
-<tr><td>지향</td><td>산출 지향(Output Driven)</td><td>시간 제약, 산출, 성과 지향(Time-Framed, Output, Outcome Driven)</td></tr>
-<tr><td>역할</td><td>역할 구분(Role Delineation)</td><td>중복적 역할(Role Blurring)</td></tr>
-<tr><td>실천</td><td>일반주의 실천(Generalist Practice)</td><td>심화된 일반주의자 실천(Advanced Generalist Practice)</td></tr>
-<tr><td>체계</td><td>관료주의(Bureaucracy)</td><td>기술적 관료주의(Technological Bureaucracy)</td></tr>
+<tr><td data-label="구분">대상의 초점</td><td data-label="전통적인 사회복지실천 관점">문제를 가진 개인(Individual With a Problem)</td><td data-label="신자유주의 이후 사례관리">개인이 가진 문제(Problems of Individuals)</td></tr>
+<tr><td data-label="구분">대상의 명칭</td><td data-label="전통적인 사회복지실천 관점">클라이언트(Client)</td><td data-label="신자유주의 이후 사례관리">소비자/고객(Consumer/Customer)</td></tr>
+<tr><td data-label="구분">인간관</td><td data-label="전통적인 사회복지실천 관점">환경 속 인간(Person-in-Environment)</td><td data-label="신자유주의 이후 사례관리">돌봄 환경 속 인간(Person-in-care-Environment)</td></tr>
+<tr><td data-label="구분">돌봄체계</td><td data-label="전통적인 사회복지실천 관점">분절된 돌봄체계(Care System)</td><td data-label="신자유주의 이후 사례관리">지역중심의 통합적 돌봄의 체계(System of Care)</td></tr>
+<tr><td data-label="구분">개입의 방향</td><td data-label="전통적인 사회복지실천 관점">인간을 변화시키기(People Changing)</td><td data-label="신자유주의 이후 사례관리">서비스 대상 유형화(People Processing)와 생활 유지(People Sustaining)</td></tr>
+<tr><td data-label="구분">의사결정</td><td data-label="전통적인 사회복지실천 관점">프로그램화된 의사결정(Programmed Decision Making)</td><td data-label="신자유주의 이후 사례관리">의사결정의 공유(Shared Decision Making)</td></tr>
+<tr><td data-label="구분">지향</td><td data-label="전통적인 사회복지실천 관점">산출 지향(Output Driven)</td><td data-label="신자유주의 이후 사례관리">시간 제약, 산출, 성과 지향(Time-Framed, Output, Outcome Driven)</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="전통적인 사회복지실천 관점">역할 구분(Role Delineation)</td><td data-label="신자유주의 이후 사례관리">중복적 역할(Role Blurring)</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="전통적인 사회복지실천 관점">일반주의 실천(Generalist Practice)</td><td data-label="신자유주의 이후 사례관리">심화된 일반주의자 실천(Advanced Generalist Practice)</td></tr>
+<tr><td data-label="구분">체계</td><td data-label="전통적인 사회복지실천 관점">관료주의(Bureaucracy)</td><td data-label="신자유주의 이후 사례관리">기술적 관료주의(Technological Bureaucracy)</td></tr>
 </tbody></table></div>
 <h3>3. 잔여적 사례관리의 목적</h3>
 <p class="sh"><strong>궁극적 목적</strong></p>
@@ -497,23 +514,23 @@ main{min-width:0}
 <li><strong>기본 입장</strong> — 잔여적 사례관리는 개인에 초점을 두며, 사회적 요인을 인접환경으로 한정하고 배경으로만 사용함.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리의 사회적 요인과 『나, 다니엘 블레이크』 적용 (1)</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>『나, 다니엘 블레이크』 사례</th></tr></thead><tbody>
-<tr><td>사회적 요인의 개념</td><td>사회적 요인에 관한 개념이 사회적 인접환경으로 제한</td><td>다니엘의 질병, 실직, 복지제도 탈락 등의 구조적 요인이 무시됨</td></tr>
-<tr><td>사회적 요인의 역할</td><td>사회적 요인이 배경으로만 강조되고 문제의 원인을 설명하는 데 사용되지 않음</td><td>복지 시스템은 다니엘의 사회경제적 조건을 고려하지 않음 (질병 수당 심사에서 심장병과 무관한 질문을 받음)</td></tr>
-<tr><td>사회적 요인의 활용</td><td>사회적 요인은 분석에만 활용되고 실천에서는 활용되지 않음</td><td>클라이언트의 상황을 진단하지만 제도의 구조적 요인을 바꾸려는 실천에서는 활용되지 않음</td></tr>
-<tr><td>개인-환경 관계</td><td>환경에 대한 개인의 순응과 조정을 강조</td><td>다니엘은 복지 시스템의 규정에 맞추기 위해 무리하게 노력함</td></tr>
+<tr><td data-label="구분">사회적 요인의 개념</td><td data-label="잔여적 사례관리">사회적 요인에 관한 개념이 사회적 인접환경으로 제한</td><td data-label="『나, 다니엘 블레이크』 사례">다니엘의 질병, 실직, 복지제도 탈락 등의 구조적 요인이 무시됨</td></tr>
+<tr><td data-label="구분">사회적 요인의 역할</td><td data-label="잔여적 사례관리">사회적 요인이 배경으로만 강조되고 문제의 원인을 설명하는 데 사용되지 않음</td><td data-label="『나, 다니엘 블레이크』 사례">복지 시스템은 다니엘의 사회경제적 조건을 고려하지 않음 (질병 수당 심사에서 심장병과 무관한 질문을 받음)</td></tr>
+<tr><td data-label="구분">사회적 요인의 활용</td><td data-label="잔여적 사례관리">사회적 요인은 분석에만 활용되고 실천에서는 활용되지 않음</td><td data-label="『나, 다니엘 블레이크』 사례">클라이언트의 상황을 진단하지만 제도의 구조적 요인을 바꾸려는 실천에서는 활용되지 않음</td></tr>
+<tr><td data-label="구분">개인-환경 관계</td><td data-label="잔여적 사례관리">환경에 대한 개인의 순응과 조정을 강조</td><td data-label="『나, 다니엘 블레이크』 사례">다니엘은 복지 시스템의 규정에 맞추기 위해 무리하게 노력함</td></tr>
 </tbody></table></div>
 <p class="tt"><strong>잔여적 사례관리의 사회적 요인과 『나, 다니엘 블레이크』 적용 (2)</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>『나, 다니엘 블레이크』 사례</th></tr></thead><tbody>
-<tr><td>심리·사회요인의 연결</td><td>심리적 혹은 사회적 요인에 관심을 두되, 이들을 연결하지 않음</td><td>다니엘의 심리적 고통과 사회적 고립을 통합적으로 고려하지 않음</td></tr>
-<tr><td>문제의 원인 인식</td><td>문제에 대한 유일한 원인으로 개인을 비난함</td><td>일하지 못하는 상황임에도 '일할 수 없음'을 입증하라고 강요함</td></tr>
-<tr><td>사회복지실천의 사회적 기능 인식</td><td>사회복지실천의 사회적 통제기능을 무비판적으로 순진하게 수용</td><td>시스템은 복지 제공보다 자격 기준에 의한 선별과 통제를 우선시함</td></tr>
-<tr><td>현상 유지에 대한 입장</td><td>현상유지에 대한 무비판적 수용</td><td>제도는 기존 규칙을 고수하며 다니엘의 상황에 맞게 유연하게 대응하지 않음</td></tr>
-<tr><td>개인의 권리와 자율성</td><td>제도 내에서 개인의 권리와 자율성을 보장</td><td>다니엘은 자기결정권을 주장하지만 시스템은 이를 제한함</td></tr>
-<tr><td>사회적 변화에 대한 태도</td><td>사회적 변화를 금지</td><td>클라이언트의 목소리는 반영되지 않고 제도는 변화되지 않음 (권리를 주장하자 보안요원과 경찰이 개입함)</td></tr>
-<tr><td>실천 형식</td><td>사회복지실천은 유일한 혹은 고립된 형태로 실천됨</td><td>형식적 절차에 따라 기계적으로 심사하고 서비스 제공을 거부함 (칸막이식 행정)</td></tr>
+<tr><td data-label="구분">심리·사회요인의 연결</td><td data-label="잔여적 사례관리">심리적 혹은 사회적 요인에 관심을 두되, 이들을 연결하지 않음</td><td data-label="『나, 다니엘 블레이크』 사례">다니엘의 심리적 고통과 사회적 고립을 통합적으로 고려하지 않음</td></tr>
+<tr><td data-label="구분">문제의 원인 인식</td><td data-label="잔여적 사례관리">문제에 대한 유일한 원인으로 개인을 비난함</td><td data-label="『나, 다니엘 블레이크』 사례">일하지 못하는 상황임에도 '일할 수 없음'을 입증하라고 강요함</td></tr>
+<tr><td data-label="구분">사회복지실천의 사회적 기능 인식</td><td data-label="잔여적 사례관리">사회복지실천의 사회적 통제기능을 무비판적으로 순진하게 수용</td><td data-label="『나, 다니엘 블레이크』 사례">시스템은 복지 제공보다 자격 기준에 의한 선별과 통제를 우선시함</td></tr>
+<tr><td data-label="구분">현상 유지에 대한 입장</td><td data-label="잔여적 사례관리">현상유지에 대한 무비판적 수용</td><td data-label="『나, 다니엘 블레이크』 사례">제도는 기존 규칙을 고수하며 다니엘의 상황에 맞게 유연하게 대응하지 않음</td></tr>
+<tr><td data-label="구분">개인의 권리와 자율성</td><td data-label="잔여적 사례관리">제도 내에서 개인의 권리와 자율성을 보장</td><td data-label="『나, 다니엘 블레이크』 사례">다니엘은 자기결정권을 주장하지만 시스템은 이를 제한함</td></tr>
+<tr><td data-label="구분">사회적 변화에 대한 태도</td><td data-label="잔여적 사례관리">사회적 변화를 금지</td><td data-label="『나, 다니엘 블레이크』 사례">클라이언트의 목소리는 반영되지 않고 제도는 변화되지 않음 (권리를 주장하자 보안요원과 경찰이 개입함)</td></tr>
+<tr><td data-label="구분">실천 형식</td><td data-label="잔여적 사례관리">사회복지실천은 유일한 혹은 고립된 형태로 실천됨</td><td data-label="『나, 다니엘 블레이크』 사례">형식적 절차에 따라 기계적으로 심사하고 서비스 제공을 거부함 (칸막이식 행정)</td></tr>
 </tbody></table></div>
 <h3>5. 잔여적 사례관리의 실제</h3>
 <p class="sh"><strong>개념과 사회적 요인, 사정, 목표</strong></p>
@@ -530,16 +547,16 @@ main{min-width:0}
 <li><strong>관점</strong> — 인접환경의 의사소통 패턴, 역할기대, 집단 및 가족 규범이 역기능적이므로 이를 순기능화해야 한다고 봄.</li>
 </ul>
 <p class="tt"><strong>환경에 대처하지 못하는 개인의 사정과 목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>사정: 환경에 대처하지 못하는 개인</th><th>목표: 사회상황에 적응하고 대처할 수 있도록 원조</th></tr></thead><tbody>
-<tr><td>부적절하고 비효과적인 상호작용</td><td>개인 간 상호작용 개선</td></tr>
-<tr><td>역할기대로 인한 스트레스</td><td>스트레스 경감</td></tr>
-<tr><td>역할수행능력 부족, 비현실적 역할기대</td><td>기대의 수정</td></tr>
-<tr><td>집단 혹은 가족 규범 간의 갈등</td><td>개인 간 갈등 해소</td></tr>
-<tr><td>과거 경험을 통한 부정적 학습</td><td>부정적인 학습에 대한 수정, 현재와 과거의 경험 분리</td></tr>
-<tr><td>대인관계 문제</td><td>대인관계 개선</td></tr>
-<tr><td>사회적 지지 부족, 사회적 고립</td><td>사회적 지지 증진</td></tr>
-<tr><td>물리적 자원의 결여</td><td>물리적 자원 제공</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">부적절하고 비효과적인 상호작용</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">개인 간 상호작용 개선</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">역할기대로 인한 스트레스</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">스트레스 경감</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">역할수행능력 부족, 비현실적 역할기대</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">기대의 수정</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">집단 혹은 가족 규범 간의 갈등</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">개인 간 갈등 해소</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">과거 경험을 통한 부정적 학습</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">부정적인 학습에 대한 수정, 현재와 과거의 경험 분리</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">대인관계 문제</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">대인관계 개선</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">사회적 지지 부족, 사회적 고립</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">사회적 지지 증진</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">물리적 자원의 결여</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">물리적 자원 제공</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사정과 목표의 관계</strong></p>
 <ul>
@@ -616,12 +633,12 @@ main{min-width:0}
 <li><strong>운영체계 도식</strong> — 사례관리 운영체계 안에서 사회적 위험에 노출된 사회구성원이 사회관리 과정을 거쳐 부조리하고 부적절한 사회구조를 변혁하고, 개인의 해방과 사회변화를 이룸.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 운영 흐름</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>대상</td><td>복합적 욕구·문제를 가진 클라이언트</td><td>사회적 위험에 노출된 사회구성원</td></tr>
-<tr><td>과정</td><td>사례관리 과정</td><td>사회관리 과정</td></tr>
-<tr><td>결과</td><td>욕구·문제 해결된 클라이언트</td><td>부조리하고 부적절한 사회구조 변혁</td></tr>
-<tr><td>궁극적 목표</td><td>클라이언트의 기능과 복지 향상</td><td>개인의 해방과 사회변화</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">복합적 욕구·문제를 가진 클라이언트</td><td data-label="제도적 사례관리">사회적 위험에 노출된 사회구성원</td></tr>
+<tr><td data-label="구분">과정</td><td data-label="잔여적 사례관리">사례관리 과정</td><td data-label="제도적 사례관리">사회관리 과정</td></tr>
+<tr><td data-label="구분">결과</td><td data-label="잔여적 사례관리">욕구·문제 해결된 클라이언트</td><td data-label="제도적 사례관리">부조리하고 부적절한 사회구조 변혁</td></tr>
+<tr><td data-label="구분">궁극적 목표</td><td data-label="잔여적 사례관리">클라이언트의 기능과 복지 향상</td><td data-label="제도적 사례관리">개인의 해방과 사회변화</td></tr>
 </tbody></table></div>
 <h3>2. 제도적 사례관리의 관점</h3>
 <p class="sh"><strong>잔여적 사례관리에서 말하는 환경</strong></p>
@@ -643,11 +660,11 @@ main{min-width:0}
 <li><strong>2. 확대된 초점을 실천에 활용하는 능력 획득하기</strong> — 확대된 초점이 개인의 일상에 어떻게 영향을 미치는지 실천에 활용함.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 관점 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>대상</td><td>문제가 있는 개인, 개인의 문제</td><td>사회적 위험에 노출된 사회구성원</td></tr>
-<tr><td>문제 원인</td><td>개인, 가족, 인접환경</td><td>계급, 권력이해, 이데올로기 신념과 같은 사회구조</td></tr>
-<tr><td>사례관리의 목표</td><td>대인관계 원조</td><td>사회구조 변화</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">문제가 있는 개인, 개인의 문제</td><td data-label="제도적 사례관리">사회적 위험에 노출된 사회구성원</td></tr>
+<tr><td data-label="구분">문제 원인</td><td data-label="잔여적 사례관리">개인, 가족, 인접환경</td><td data-label="제도적 사례관리">계급, 권력이해, 이데올로기 신념과 같은 사회구조</td></tr>
+<tr><td data-label="구분">사례관리의 목표</td><td data-label="잔여적 사례관리">대인관계 원조</td><td data-label="제도적 사례관리">사회구조 변화</td></tr>
 </tbody></table></div>
 <h3>3. 제도적 사례관리의 목적</h3>
 <p class="sh"><strong>목적의 구조</strong></p>
@@ -671,27 +688,27 @@ main{min-width:0}
 <li><strong>낙인의 원리</strong> — 잔여주의 복지는 복지에 의존하지 않도록 불유쾌한 감정을 느끼게 하여 다시 복지로 돌아오지 않게 하는 원리가 숨어 있으며, 이것이 심리사회적 요인과 연결됨.</li>
 </ul>
 <p class="tt"><strong>제도적 사례관리의 사회적 요인과 『나, 다니엘 블레이크』 적용</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>개념</th><th>영화 적용 사례</th></tr></thead><tbody>
-<tr><td>사회적 요인의 개념</td><td>사회구조와 제도가 개인 삶과 문제 형성에 미치는 영향 설명</td><td>'큰 사회론' 기조 하 복지 예산 삭감 → 복지가 보호 기능을 상실하고 오히려 통제·억압 수단으로 변질</td></tr>
-<tr><td><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> 사회적 요인의 역할</td><td>문제 원인을 사회적·구조적 요인에서 찾고, 실천에 활용</td><td>다니엘의 곤경은 개인 능력 부족이 아니라 복지 축소·조건 강화라는 구조적 정책의 결과 (온라인 신청을 어렵게 만든 접근성 구조)</td></tr>
-<tr><td>사회적 요인의 활용</td><td>분석·실천에 모두 적용</td><td>분석 단계에서 구조적 원인을 규명 → 실천 단계에서 제도 개선 운동, 권리옹호, 캠페인 등으로 연결하는 정책 옹호형 실천(advocacy practice)으로 확장 가능</td></tr>
-<tr><td>개인-환경 관계</td><td>개인과 환경의 상호작용 강조</td><td>다니엘·케이티의 고통은 '개인적 실패'가 아니라 신자유주의적 복지 축소라는 환경과의 부정적 상호작용의 산물임을 이해하고, 개인 문제를 사회, 경제, 정책 환경과 연계하여 통합적으로 이해</td></tr>
-<tr><td>심리-사회 요인의 연결</td><td>심리적 요인을 사회구조와 연결</td><td>비인간적 행정·기계적 절차 → 다니엘의 절망, 케이티의 수치심과 존엄 상실. 선별적 복지는 경제적 결핍만이 아니라 심리사회적 손상을 유발함</td></tr>
-<tr><td>문제의 원인 인식</td><td>문제를 사회구조 산물로 이해</td><td>다니엘의 죽음은 카메론 정부의 복지 축소로 인한 제도적 모순 (벽에 글을 쓰는 장면에서 행인이 복지 축소를 비판함)</td></tr>
-<tr><td>사회복지실천의 사회적 기능 인식</td><td>복지제도의 통제 기능 성찰</td><td>'큰 사회론' 하 복지는 엄격한 자격 심사와 기술관료주의로 운영되어 기존 복지제도에 순응하도록 사회통제 역할을 함. 사회복지사도 그 안에서 억압하는 존재로 남게 됨</td></tr>
-<tr><td>현상 유지에 대한 입장</td><td>문제를 비판하며 변화 모색</td><td>신자유주의 복지 현실 비판 → 변화를 요구. 현상유지=불평등의 재생산이라는 인식을 전제로 사회복지실천 목표를 '구조변혁적 개입'에 둠</td></tr>
-<tr><td>개인의 권리와 자율성</td><td>권리·자율성 보장 강조</td><td>다니엘은 정당한 급여·자율적 삶을 보장받지 못함. 복지는 시혜가 아니라 사회권이며 이를 보장하는 것이 국가의 법적, 윤리적 의무임을 인식</td></tr>
-<tr><td>사회적 변화에 대한 태도</td><td>변화를 지향</td><td>복지 축소와 차별적 인식 개선 촉구</td></tr>
-<tr><td>실천 형식</td><td>구조변화 연계 통합적 실천</td><td>개인 사례 → 정책 비판·개혁 운동으로 확장</td></tr>
+<tr><td data-label="구분">사회적 요인의 개념</td><td data-label="개념">사회구조와 제도가 개인 삶과 문제 형성에 미치는 영향 설명</td><td data-label="영화 적용 사례">'큰 사회론' 기조 하 복지 예산 삭감 → 복지가 보호 기능을 상실하고 오히려 통제·억압 수단으로 변질</td></tr>
+<tr><td data-label="구분"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> 사회적 요인의 역할</td><td data-label="개념">문제 원인을 사회적·구조적 요인에서 찾고, 실천에 활용</td><td data-label="영화 적용 사례">다니엘의 곤경은 개인 능력 부족이 아니라 복지 축소·조건 강화라는 구조적 정책의 결과 (온라인 신청을 어렵게 만든 접근성 구조)</td></tr>
+<tr><td data-label="구분">사회적 요인의 활용</td><td data-label="개념">분석·실천에 모두 적용</td><td data-label="영화 적용 사례">분석 단계에서 구조적 원인을 규명 → 실천 단계에서 제도 개선 운동, 권리옹호, 캠페인 등으로 연결하는 정책 옹호형 실천(advocacy practice)으로 확장 가능</td></tr>
+<tr><td data-label="구분">개인-환경 관계</td><td data-label="개념">개인과 환경의 상호작용 강조</td><td data-label="영화 적용 사례">다니엘·케이티의 고통은 '개인적 실패'가 아니라 신자유주의적 복지 축소라는 환경과의 부정적 상호작용의 산물임을 이해하고, 개인 문제를 사회, 경제, 정책 환경과 연계하여 통합적으로 이해</td></tr>
+<tr><td data-label="구분">심리-사회 요인의 연결</td><td data-label="개념">심리적 요인을 사회구조와 연결</td><td data-label="영화 적용 사례">비인간적 행정·기계적 절차 → 다니엘의 절망, 케이티의 수치심과 존엄 상실. 선별적 복지는 경제적 결핍만이 아니라 심리사회적 손상을 유발함</td></tr>
+<tr><td data-label="구분">문제의 원인 인식</td><td data-label="개념">문제를 사회구조 산물로 이해</td><td data-label="영화 적용 사례">다니엘의 죽음은 카메론 정부의 복지 축소로 인한 제도적 모순 (벽에 글을 쓰는 장면에서 행인이 복지 축소를 비판함)</td></tr>
+<tr><td data-label="구분">사회복지실천의 사회적 기능 인식</td><td data-label="개념">복지제도의 통제 기능 성찰</td><td data-label="영화 적용 사례">'큰 사회론' 하 복지는 엄격한 자격 심사와 기술관료주의로 운영되어 기존 복지제도에 순응하도록 사회통제 역할을 함. 사회복지사도 그 안에서 억압하는 존재로 남게 됨</td></tr>
+<tr><td data-label="구분">현상 유지에 대한 입장</td><td data-label="개념">문제를 비판하며 변화 모색</td><td data-label="영화 적용 사례">신자유주의 복지 현실 비판 → 변화를 요구. 현상유지=불평등의 재생산이라는 인식을 전제로 사회복지실천 목표를 '구조변혁적 개입'에 둠</td></tr>
+<tr><td data-label="구분">개인의 권리와 자율성</td><td data-label="개념">권리·자율성 보장 강조</td><td data-label="영화 적용 사례">다니엘은 정당한 급여·자율적 삶을 보장받지 못함. 복지는 시혜가 아니라 사회권이며 이를 보장하는 것이 국가의 법적, 윤리적 의무임을 인식</td></tr>
+<tr><td data-label="구분">사회적 변화에 대한 태도</td><td data-label="개념">변화를 지향</td><td data-label="영화 적용 사례">복지 축소와 차별적 인식 개선 촉구</td></tr>
+<tr><td data-label="구분">실천 형식</td><td data-label="개념">구조변화 연계 통합적 실천</td><td data-label="영화 적용 사례">개인 사례 → 정책 비판·개혁 운동으로 확장</td></tr>
 </tbody></table></div>
 <h3>5. 제도적 사례관리의 실제</h3>
 <p class="tt"><strong>제도적 사례관리의 개념, 사정, 목표와 『나, 다니엘 블레이크』 적용</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>제도적 사례관리</th><th>다니엘 블레이크</th></tr></thead><tbody>
-<tr><td>개념과 사회적 요인</td><td>사회경제구조 강조, 지배 이데올로기의 신념 등</td><td>큰 사회론의 복지축소 정치의 구조적 영향으로 인한 사회적 권력의 불균형, 지배 이데올로기의 억압, 시민권의 침해</td></tr>
-<tr><td>사정</td><td>사회경제 구조 안에서 발생하는 부적합성에 의해 문제 발생</td><td>큰 사회론의 잔여적 복지제도로 인한 권리 보장이 이루어지지 않아 문제 발생</td></tr>
-<tr><td>목표</td><td>사회경제구조의 영향에 대한 통제력을 증진시켜 사회적 상황을 변화시키는 것</td><td>다니엘이 공동체에 자기 목소리를 낼 수 있도록 권력의 증진, 시민권력을 기반으로 사회복지제도 및 신자유주의 사회구조의 변화</td></tr>
+<tr><td data-label="구분">개념과 사회적 요인</td><td data-label="제도적 사례관리">사회경제구조 강조, 지배 이데올로기의 신념 등</td><td data-label="다니엘 블레이크">큰 사회론의 복지축소 정치의 구조적 영향으로 인한 사회적 권력의 불균형, 지배 이데올로기의 억압, 시민권의 침해</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="제도적 사례관리">사회경제 구조 안에서 발생하는 부적합성에 의해 문제 발생</td><td data-label="다니엘 블레이크">큰 사회론의 잔여적 복지제도로 인한 권리 보장이 이루어지지 않아 문제 발생</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="제도적 사례관리">사회경제구조의 영향에 대한 통제력을 증진시켜 사회적 상황을 변화시키는 것</td><td data-label="다니엘 블레이크">다니엘이 공동체에 자기 목소리를 낼 수 있도록 권력의 증진, 시민권력을 기반으로 사회복지제도 및 신자유주의 사회구조의 변화</td></tr>
 </tbody></table></div>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>사회요인 ① 사회적 권력의 불균형, 불평등</strong></p>
 <ul>
@@ -712,14 +729,14 @@ main{min-width:0}
 <li><strong>다니엘의 상황</strong> — 심장질환 등 명백한 건강 문제로 일을 할 수 없음에도 '구직 활동'을 증명해야 하고, 복지 행정은 그를 '잠재적 부정수급자'로 취급해 지속적인 증거 제출을 강요함.</li>
 </ul>
 <p class="tt"><strong>부적절한 사회경제구조의 사정과 목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>사정: 부적절한 사회경제구조</th><th>목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</th></tr></thead><tbody>
-<tr><td>권력의 결여</td><td>피착취자의 권력 증진</td></tr>
-<tr><td>이데올로기로 인한 역할 제한: 지배적인 사회 풍습과 신념에 따른 제한</td><td>이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
-<tr><td>이익집단 간의 갈등: 집단 규범이 수행하는 은폐된 사회적 기능</td><td>지배이익집단의 착취 경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
-<tr><td>변화능력의 부재 혹은 사회 변화에 대한 대처 능력의 부재</td><td>삶에 대한 변화와 통제 능력 향상, 보다 넓은 역사적/사회적 변화의 영향 인식</td></tr>
-<tr><td>사회적 낙인 과정의 영향</td><td>사회적 낙인으로 인한 영향의 거부</td></tr>
-<tr><td>사회경제구조적 제한</td><td>구조적 제한을 변화시켜 물질적 자원 제공</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">권력의 결여</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">피착취자의 권력 증진</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">이데올로기로 인한 역할 제한: 지배적인 사회 풍습과 신념에 따른 제한</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">이익집단 간의 갈등: 집단 규범이 수행하는 은폐된 사회적 기능</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">지배이익집단의 착취 경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">변화능력의 부재 혹은 사회 변화에 대한 대처 능력의 부재</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">삶에 대한 변화와 통제 능력 향상, 보다 넓은 역사적/사회적 변화의 영향 인식</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">사회적 낙인 과정의 영향</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">사회적 낙인으로 인한 영향의 거부</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">사회경제구조적 제한</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">구조적 제한을 변화시켜 물질적 자원 제공</td></tr>
 </tbody></table></div>
 <p class="tt"><strong>『나, 다니엘 블레이크』의 사정과 목표 적용</strong></p>
 <div class="tw"><table class="long c3">
@@ -746,15 +763,15 @@ main{min-width:0}
 <li><strong>넷째, 개인과 사회복지사 간의 의견 불일치</strong> — 클라이언트가 상황 변화를 원치 않거나 급진적 정치 해석에 동의하지 않을 수 있음. 이러한 경우 전통적 접근과 급진적 접근을 병행하는 유연성이 필요하며, 클라이언트의 인간적 권리에 초점을 맞추면 변화 수용성이 높아질 수 있음.</li>
 </ul>
 <p class="tt"><strong>제도적 사례관리의 비판과 한계</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>구분</th><th>내용</th></tr></thead><tbody>
-<tr><td>비판 ① 구체성 결여</td><td>새로운 영역의 적용과 실천이 모호하여 현장 반영에 혼란, 확장성과 실효성 제약</td></tr>
-<tr><td>비판 ② 지나친 포괄성</td><td>이론과 지침이 너무 포괄적이어서 실천에 옮기기 어려움</td></tr>
-<tr><td>비판 ③ 개인적 욕구 소홀</td><td>집합적 행동 의식 제고에 치중해 즉각적인 개인적 욕구와 정서적 문제 소홀</td></tr>
-<tr><td>한계 ① 권력관계</td><td>평등 관계를 전제하나 사회복지사의 영향력이 크고 완전한 자기결정권 보장이 어려움</td></tr>
-<tr><td>한계 ② 자기 주도성</td><td>법적, 경제적, 정치적 제약으로 완전한 자기주도성 발휘가 어려움</td></tr>
-<tr><td>한계 ③ 자기 결정</td><td>욕구 인식이나 의사결정 경험·기술 부족, 자기결정권 행사 거부 시의 문제</td></tr>
-<tr><td>한계 ④ 의견 불일치</td><td>변화를 원치 않거나 급진적 해석에 동의하지 않을 수 있어 전통적·급진적 접근의 병행 필요</td></tr>
+<tr><td data-label="구분">비판 ① 구체성 결여</td><td data-label="내용">새로운 영역의 적용과 실천이 모호하여 현장 반영에 혼란, 확장성과 실효성 제약</td></tr>
+<tr><td data-label="구분">비판 ② 지나친 포괄성</td><td data-label="내용">이론과 지침이 너무 포괄적이어서 실천에 옮기기 어려움</td></tr>
+<tr><td data-label="구분">비판 ③ 개인적 욕구 소홀</td><td data-label="내용">집합적 행동 의식 제고에 치중해 즉각적인 개인적 욕구와 정서적 문제 소홀</td></tr>
+<tr><td data-label="구분">한계 ① 권력관계</td><td data-label="내용">평등 관계를 전제하나 사회복지사의 영향력이 크고 완전한 자기결정권 보장이 어려움</td></tr>
+<tr><td data-label="구분">한계 ② 자기 주도성</td><td data-label="내용">법적, 경제적, 정치적 제약으로 완전한 자기주도성 발휘가 어려움</td></tr>
+<tr><td data-label="구분">한계 ③ 자기 결정</td><td data-label="내용">욕구 인식이나 의사결정 경험·기술 부족, 자기결정권 행사 거부 시의 문제</td></tr>
+<tr><td data-label="구분">한계 ④ 의견 불일치</td><td data-label="내용">변화를 원치 않거나 급진적 해석에 동의하지 않을 수 있어 전통적·급진적 접근의 병행 필요</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>대안 ① 클라이언트가 처한 바로 현재의 상황에서 시작해라</strong></p>
 <ul>
@@ -929,12 +946,12 @@ main{min-width:0}
 <li><strong>본질의 재정의</strong> — 사회복지 본질을 개인 지원 + 사회 구조 변혁으로 재정의함.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 역사 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>역사적 뿌리</td><td>자선조직협회, 메리 리치몬드의 개별사회사업</td><td>인보관 운동, 여성참정권 운동 등 사회운동</td></tr>
-<tr><td>발전 계기</td><td>탈시설화와 지역사회보호, 복지재정 축소 속 효율적 관리 요구(신자유주의)</td><td>1930년대 대공황으로 빈곤을 구조적 문제로 인식, 1960년대 사회운동</td></tr>
-<tr><td>핵심 관심</td><td>서비스의 통합, 연계, 조정과 효율성</td><td>구조적 억압 인식, 역량 강화, 사회변화</td></tr>
-<tr><td>대표 인물·문헌</td><td>메리 리치몬드, NASW 사례관리 기준, 그리피스 보고서</td><td>제인 애덤스, 버사 레이놀즈, 피터 레너드, 『Radical Social Work』</td></tr>
+<tr><td data-label="구분">역사적 뿌리</td><td data-label="잔여적 사례관리">자선조직협회, 메리 리치몬드의 개별사회사업</td><td data-label="제도적 사례관리">인보관 운동, 여성참정권 운동 등 사회운동</td></tr>
+<tr><td data-label="구분">발전 계기</td><td data-label="잔여적 사례관리">탈시설화와 지역사회보호, 복지재정 축소 속 효율적 관리 요구(신자유주의)</td><td data-label="제도적 사례관리">1930년대 대공황으로 빈곤을 구조적 문제로 인식, 1960년대 사회운동</td></tr>
+<tr><td data-label="구분">핵심 관심</td><td data-label="잔여적 사례관리">서비스의 통합, 연계, 조정과 효율성</td><td data-label="제도적 사례관리">구조적 억압 인식, 역량 강화, 사회변화</td></tr>
+<tr><td data-label="구분">대표 인물·문헌</td><td data-label="잔여적 사례관리">메리 리치몬드, NASW 사례관리 기준, 그리피스 보고서</td><td data-label="제도적 사례관리">제인 애덤스, 버사 레이놀즈, 피터 레너드, 『Radical Social Work』</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>4강 핵심 정리</strong></p>
 <ul>
@@ -1011,13 +1028,13 @@ main{min-width:0}
 <li><strong>버텨온 것의 의미</strong> — 삶의 역경을 버텨왔다는 것 자체가 강점일 수 있으며, 이를 이야기하며 개인과 환경의 강점을 발견함.</li>
 </ul>
 <p class="tt"><strong>강점의 영역</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
-<tr><td>개인적 특성</td><td>자아개념, 동기, 용모, 대처능력, 호기심, 인내심, 생활력, 영성 또는 믿음, 창의력, 유머, 신뢰, 관용 등</td></tr>
-<tr><td>재능</td><td>잘하는 것, 좋아하는 것, 만들기, 그리기, 노래부르기 등</td></tr>
-<tr><td>능력</td><td>이전 삶의 성공요소, 현재 삶의 성공, 교육적 성공, 직장에서의 성공, 재정적/정서적 지능, 레질리언스 등</td></tr>
-<tr><td>사회적 관계</td><td>유의미한 타인과의 관계, 친밀함, 지지체계, 사회활동, 커뮤니티 등</td></tr>
-<tr><td>기술</td><td>대인관계기술, 문제해결기술, 대화기술, 의사결정기술 등</td></tr>
+<tr><td data-label="영역">개인적 특성</td><td data-label="내용">자아개념, 동기, 용모, 대처능력, 호기심, 인내심, 생활력, 영성 또는 믿음, 창의력, 유머, 신뢰, 관용 등</td></tr>
+<tr><td data-label="영역">재능</td><td data-label="내용">잘하는 것, 좋아하는 것, 만들기, 그리기, 노래부르기 등</td></tr>
+<tr><td data-label="영역">능력</td><td data-label="내용">이전 삶의 성공요소, 현재 삶의 성공, 교육적 성공, 직장에서의 성공, 재정적/정서적 지능, 레질리언스 등</td></tr>
+<tr><td data-label="영역">사회적 관계</td><td data-label="내용">유의미한 타인과의 관계, 친밀함, 지지체계, 사회활동, 커뮤니티 등</td></tr>
+<tr><td data-label="영역">기술</td><td data-label="내용">대인관계기술, 문제해결기술, 대화기술, 의사결정기술 등</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>강점관점의 한계</strong></p>
 <ul>
@@ -1083,11 +1100,11 @@ main{min-width:0}
 <li><strong>규모의 경제와 비용절감을 위한 필요성</strong> — 이를 가능하게 하는 네트워크의 특징은 조직 및 구성원 간 의미 있는 상호관계 존재, 교환·공동 목표 달성을 위한 지속적 상호작용, 신뢰에 바탕을 둔 상호작용, 합의된 규칙에 의한 통제, 자율성과 상호 의존성의 균형 유지이며, 네트워크는 행위자들의 구성·공동목적·연계자원·상호작용으로 설명됨.</li>
 </ul>
 <p class="tt"><strong>사례관리 단계별 네트워크 적용</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>단계</th><th>적용 내용</th></tr></thead><tbody>
-<tr><td>사정 단계</td><td>공식·비공식 자원체계 구축 및 연계에 활용</td></tr>
-<tr><td>계획·실행 단계</td><td>클라이언트 욕구 충족을 위해 공식/비공식 자원을 조직적으로 협력</td></tr>
-<tr><td>평가 단계</td><td>서비스 제공 기관 간 참여·협력 수준을 점검하고 자원의 활용도를 평가</td></tr>
+<tr><td data-label="단계">사정 단계</td><td data-label="적용 내용">공식·비공식 자원체계 구축 및 연계에 활용</td></tr>
+<tr><td data-label="단계">계획·실행 단계</td><td data-label="적용 내용">클라이언트 욕구 충족을 위해 공식/비공식 자원을 조직적으로 협력</td></tr>
+<tr><td data-label="단계">평가 단계</td><td data-label="적용 내용">서비스 제공 기관 간 참여·협력 수준을 점검하고 자원의 활용도를 평가</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>네트워크 이론의 성공 조건</strong></p>
 <ul>
@@ -1165,13 +1182,13 @@ main{min-width:0}
 <li><strong>사례</strong> — 월세를 받으면서 관리를 하지 않고 월세를 올리려는 집주인에게, 눈치만 보던 세입자들이 연대·조직화하여 관리 개선을 요구함.</li>
 </ul>
 <p class="tt"><strong>사례관리 이론의 비교와 한계</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>이론</th><th>핵심 내용</th><th>한계</th></tr></thead><tbody>
-<tr><td>생태체계이론</td><td>환경 속 인간, 체계 간 균형, 적합성과 적응, 다차원적 사정과 체계적 개입</td><td>구조적 불평등과 권력관계 분석 부족, 근본적 사회 변화에 부응하기 어려움</td></tr>
-<tr><td>강점관점 이론</td><td>결점보다 강점에 초점, 클라이언트는 실천과정의 지도자, 지역사회는 자원의 오아시스</td><td>구조적 문제 간과, 책임 전가, 체제 순응적 성격, 권력 관계 무시, 개인 변화에 국한</td></tr>
-<tr><td>임파워먼트 이론</td><td>자기 임파워먼트(내적 역량)와 사회적 임파워먼트(집단적 권력 형성)</td><td>한국은 개인적 관점에 치중되어 사회구조적 변혁 요구에 한계</td></tr>
-<tr><td>네트워크 이론</td><td>공식·비공식 자원의 동원·연계·조정, 다기관 협력, 신뢰와 안정성</td><td>자원 불균형, 관계 유지·성과 측정의 어려움, 책임소재 불분명, 행정적 부담, 구조적 문제 간과</td></tr>
-<tr><td>급진적 사회복지실천이론</td><td>마르크스주의, 페미니즘, 비판이론, 구조적 사회복지, 반억압, 포스트모더니즘, 프레이리, 그람시, 푸코, 알린스키</td><td>개인적 지원을 넘어 권리 옹호와 사회정의 실현을 지향하며, 사례관리를 사회관리로 연결함</td></tr>
+<tr><td data-label="이론">생태체계이론</td><td data-label="핵심 내용">환경 속 인간, 체계 간 균형, 적합성과 적응, 다차원적 사정과 체계적 개입</td><td data-label="한계">구조적 불평등과 권력관계 분석 부족, 근본적 사회 변화에 부응하기 어려움</td></tr>
+<tr><td data-label="이론">강점관점 이론</td><td data-label="핵심 내용">결점보다 강점에 초점, 클라이언트는 실천과정의 지도자, 지역사회는 자원의 오아시스</td><td data-label="한계">구조적 문제 간과, 책임 전가, 체제 순응적 성격, 권력 관계 무시, 개인 변화에 국한</td></tr>
+<tr><td data-label="이론">임파워먼트 이론</td><td data-label="핵심 내용">자기 임파워먼트(내적 역량)와 사회적 임파워먼트(집단적 권력 형성)</td><td data-label="한계">한국은 개인적 관점에 치중되어 사회구조적 변혁 요구에 한계</td></tr>
+<tr><td data-label="이론">네트워크 이론</td><td data-label="핵심 내용">공식·비공식 자원의 동원·연계·조정, 다기관 협력, 신뢰와 안정성</td><td data-label="한계">자원 불균형, 관계 유지·성과 측정의 어려움, 책임소재 불분명, 행정적 부담, 구조적 문제 간과</td></tr>
+<tr><td data-label="이론">급진적 사회복지실천이론</td><td data-label="핵심 내용">마르크스주의, 페미니즘, 비판이론, 구조적 사회복지, 반억압, 포스트모더니즘, 프레이리, 그람시, 푸코, 알린스키</td><td data-label="한계">개인적 지원을 넘어 권리 옹호와 사회정의 실현을 지향하며, 사례관리를 사회관리로 연결함</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>5강 핵심 정리</strong></p>
 <ul>
@@ -1199,59 +1216,59 @@ main{min-width:0}
 <li><strong>(6) 문화 활동가(매개자)-사례관리자 모델</strong> — 사례관리자가 문화 활동가로서 시민이 '세상 읽기'를 통해 자신을 둘러싼 현실을 성찰하도록 돕고, 동시에 '세상 만들기'를 통해 사회구조 변화를 이끌 수 있도록 매개하는 모델임 (문화 활동가, 교육 조직 전문가, 매개자라고도 함).</li>
 </ul>
 <p class="tt"><strong>서비스 수준에 따른 모델 (1) 단순형·기본형·종합형</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead><tr><th>구분</th><th>단순형</th><th>기본형</th><th>종합형</th></tr></thead><tbody>
-<tr><td>목적</td><td>간접서비스</td><td>간접서비스, 기초상담, 조언</td><td>간접서비스, 심층상담·치료</td></tr>
-<tr><td>기능</td><td>욕구인식·사정, 사례계획과 서비스 연계·점검</td><td>사례발굴, 사정, 사례계획 및 서비스 연계, 상담, 서비스 점검</td><td>Rothman의 15가지 기능 수행</td></tr>
-<tr><td>사례관리자 역할</td><td>자원과 서비스 중개자</td><td>중개자, 상담자, 교육자, 지지자, 서비스점검자</td><td>자원·서비스중개자, 상담가, 치료자, 교육자, 옹호자</td></tr>
-<tr><td>교육 및 전문성</td><td>준전문가·비전문가, 훈련된 자원봉사자</td><td>준전문가, 전문가</td><td>전문가</td></tr>
-<tr><td>위치와 수퍼비전</td><td>기존 조직과 업무수행부서에서 수행, 전문가에 의한 엄격한 수퍼비전</td><td>기존의 조직 내에서 수행, 전문 수퍼비전이 필요</td><td>독립된 사례관리부서, 최소한의 수퍼비전</td></tr>
-<tr><td>사례량</td><td>비교적 많음(100사례 정도)</td><td>적절한 사례(30사례 내외)</td><td>비교적 적은 사례(10~20사례)</td></tr>
-<tr><td>개별/팀접근</td><td>팀 접근 가능, 주로 개별적 접근</td><td>개별적 접근</td><td>개별적 접근</td></tr>
-<tr><td>업무 자율성 및 권위정도</td><td>자율적 결정권 없음, 전문가와 협의 요망</td><td>어느 정도 자율성이 보장</td><td>자율적인 의사결정이 보장</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="단순형">간접서비스</td><td data-label="기본형">간접서비스, 기초상담, 조언</td><td data-label="종합형">간접서비스, 심층상담·치료</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="단순형">욕구인식·사정, 사례계획과 서비스 연계·점검</td><td data-label="기본형">사례발굴, 사정, 사례계획 및 서비스 연계, 상담, 서비스 점검</td><td data-label="종합형">Rothman의 15가지 기능 수행</td></tr>
+<tr><td data-label="구분">사례관리자 역할</td><td data-label="단순형">자원과 서비스 중개자</td><td data-label="기본형">중개자, 상담자, 교육자, 지지자, 서비스점검자</td><td data-label="종합형">자원·서비스중개자, 상담가, 치료자, 교육자, 옹호자</td></tr>
+<tr><td data-label="구분">교육 및 전문성</td><td data-label="단순형">준전문가·비전문가, 훈련된 자원봉사자</td><td data-label="기본형">준전문가, 전문가</td><td data-label="종합형">전문가</td></tr>
+<tr><td data-label="구분">위치와 수퍼비전</td><td data-label="단순형">기존 조직과 업무수행부서에서 수행, 전문가에 의한 엄격한 수퍼비전</td><td data-label="기본형">기존의 조직 내에서 수행, 전문 수퍼비전이 필요</td><td data-label="종합형">독립된 사례관리부서, 최소한의 수퍼비전</td></tr>
+<tr><td data-label="구분">사례량</td><td data-label="단순형">비교적 많음(100사례 정도)</td><td data-label="기본형">적절한 사례(30사례 내외)</td><td data-label="종합형">비교적 적은 사례(10~20사례)</td></tr>
+<tr><td data-label="구분">개별/팀접근</td><td data-label="단순형">팀 접근 가능, 주로 개별적 접근</td><td data-label="기본형">개별적 접근</td><td data-label="종합형">개별적 접근</td></tr>
+<tr><td data-label="구분">업무 자율성 및 권위정도</td><td data-label="단순형">자율적 결정권 없음, 전문가와 협의 요망</td><td data-label="기본형">어느 정도 자율성이 보장</td><td data-label="종합형">자율적인 의사결정이 보장</td></tr>
 </tbody></table></div>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>서비스 수준에 따른 모델 (2) 전문관리형·사회관리형</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>전문관리형</th><th>사회관리형</th></tr></thead><tbody>
-<tr><td>목적</td><td>직접·간접서비스 제공, 관리자 역할</td><td>직접·간접서비스 제공, 사회구조개선, 권리옹호, 정책변화</td></tr>
-<tr><td>기능</td><td>기본적인 사례관리기능과 자원배분, 통솔, 의사결정기능 포함</td><td>기본적 사례관리기능 수행, 사회적 위험을 구조적 문제로 재규정, 제도개선·정책제안·권리옹호활동 포함</td></tr>
-<tr><td>사례관리자 역할</td><td>연계자, 상담자, 치료자, 교육자, 관리자</td><td>매개자, 문화활동가, 권리옹호자, 조직가, 사회변화 촉진자</td></tr>
-<tr><td>교육 및 전문성</td><td>특수 분야별 전문가</td><td>사회복지의 관점과 실천에 관한 교육 필요, 전문가주의를 넘어 함께 활동하는 동등한 시민으로서의 역할</td></tr>
-<tr><td>위치와 수퍼비전</td><td>독립된 팀 형성, 수퍼비전이 필요 없음</td><td>커뮤니티 센터로 기능하는 조직 안에서, 세상읽기를 기반으로 한 문제제기식 수퍼비전 실시</td></tr>
-<tr><td>사례량</td><td>최소한의 사례(10사례 미만)</td><td>사례 수보다는 깊이 있는 개입과 구조적 대응 인식</td></tr>
-<tr><td>개별/팀접근</td><td>팀 접근</td><td>팀 접근 중심, 사회복지사·시민·지역사회·시민단체 등이 함께 협력</td></tr>
-<tr><td>업무 자율성 및 권위정도</td><td>자율성 보장, 공동결정 요망</td><td>높은 자율성 보장, 집단적 의사결정과 공동책임의 원칙</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="전문관리형">직접·간접서비스 제공, 관리자 역할</td><td data-label="사회관리형">직접·간접서비스 제공, 사회구조개선, 권리옹호, 정책변화</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="전문관리형">기본적인 사례관리기능과 자원배분, 통솔, 의사결정기능 포함</td><td data-label="사회관리형">기본적 사례관리기능 수행, 사회적 위험을 구조적 문제로 재규정, 제도개선·정책제안·권리옹호활동 포함</td></tr>
+<tr><td data-label="구분">사례관리자 역할</td><td data-label="전문관리형">연계자, 상담자, 치료자, 교육자, 관리자</td><td data-label="사회관리형">매개자, 문화활동가, 권리옹호자, 조직가, 사회변화 촉진자</td></tr>
+<tr><td data-label="구분">교육 및 전문성</td><td data-label="전문관리형">특수 분야별 전문가</td><td data-label="사회관리형">사회복지의 관점과 실천에 관한 교육 필요, 전문가주의를 넘어 함께 활동하는 동등한 시민으로서의 역할</td></tr>
+<tr><td data-label="구분">위치와 수퍼비전</td><td data-label="전문관리형">독립된 팀 형성, 수퍼비전이 필요 없음</td><td data-label="사회관리형">커뮤니티 센터로 기능하는 조직 안에서, 세상읽기를 기반으로 한 문제제기식 수퍼비전 실시</td></tr>
+<tr><td data-label="구분">사례량</td><td data-label="전문관리형">최소한의 사례(10사례 미만)</td><td data-label="사회관리형">사례 수보다는 깊이 있는 개입과 구조적 대응 인식</td></tr>
+<tr><td data-label="구분">개별/팀접근</td><td data-label="전문관리형">팀 접근</td><td data-label="사회관리형">팀 접근 중심, 사회복지사·시민·지역사회·시민단체 등이 함께 협력</td></tr>
+<tr><td data-label="구분">업무 자율성 및 권위정도</td><td data-label="전문관리형">자율성 보장, 공동결정 요망</td><td data-label="사회관리형">높은 자율성 보장, 집단적 의사결정과 공동책임의 원칙</td></tr>
 </tbody></table></div>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>서비스 전달 기반에 따른 사례관리: Woodside와 McClam(2003)</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead><tr><th>구분</th><th>역할 기반 사례관리</th><th>조직 기반 사례관리</th><th>책임성 기반 사례관리</th></tr></thead><tbody>
-<tr><td>목적</td><td>서비스 연결, 치료적 케어 제공, 서비스 효과성·질 모니터링</td><td>단일 장소에서 클라이언트의 복합적 욕구 충족을 위한 통합적 서비스 제공</td><td>사례관리자의 단기·장기 참여, 서비스의 조정, 자원봉사자의 도움, 클라이언트의 임파워먼트 강조</td></tr>
-<tr><td>책임성</td><td>사례관리의 전 과정</td><td>통합사례관리로서 전 과정 및 전문가팀 운영 책임</td><td>주로 서비스 조정, 연계에 책임</td></tr>
-<tr><td>주요역할</td><td>중개자, 조정자, 상담자, 평가자, 계획자, 문제해결자, 기록보관자</td><td>옹호자, 중개자, 조정자, 계획가, 문제해결자, 기록보관자</td><td>중개자, 조정자, 계획가, 문제해결자, 기록보관자</td></tr>
-<tr><td>개입기간</td><td>클라이언트 욕구의 복잡성, 서비스 전달 장소 제한에 따라 다양</td><td>다양하며 단기, 장기 모두 가능</td><td>단기: 위기상황, 문제가 확정 시 / 장기: 질병 및 장애, 노화문제</td></tr>
-<tr><td>장점</td><td>사례관리자로서 다양한 역할 수행, 서비스의 제공자와 조정자로서 클라이언트와 강력한 관계 형성</td><td>입원, 외래 또는 시설에서 제공, 사정은 통합적 접근이며 서비스 계획은 개별화되어 점검 쉬움, 팀 체제 사례관리자</td><td>일반인에 의해 사례관리 수행, 서비스 접근이 어려운 클라이언트에게 용이, 비용 효과적이며 지역사회가 관여, 클라이언트의 자립 강조</td></tr>
-<tr><td>단점</td><td>사례관리자의 과중한 사례량과 기관의 서비스 제공 제한에 따른 불충분한 서비스 제공</td><td>필요서비스가 센터에 없을 때 서비스 제공에 문제, 서비스가 조직구조와 위계질서에 의존하며 클라이언트 가족 참여 적음</td><td>클라이언트 이해 및 지식과 기술 부족, 교육·훈련·수퍼비전 비용이 고비용, 적절한 서비스 접근의 어려움</td></tr>
-<tr><td>세부모델</td><td>일반주의 사례관리자 모델, 일차적 치료자 모델, 중개자 모델</td><td>포괄적 서비스센터 모델, 심리사회재활센터 모델, 다학제팀 모델</td><td>가족 모델, 지지적 보호 모델, 사례관리자로 기능하는 클라이언트 모델, 자원봉사자 모델</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="역할 기반 사례관리">서비스 연결, 치료적 케어 제공, 서비스 효과성·질 모니터링</td><td data-label="조직 기반 사례관리">단일 장소에서 클라이언트의 복합적 욕구 충족을 위한 통합적 서비스 제공</td><td data-label="책임성 기반 사례관리">사례관리자의 단기·장기 참여, 서비스의 조정, 자원봉사자의 도움, 클라이언트의 임파워먼트 강조</td></tr>
+<tr><td data-label="구분">책임성</td><td data-label="역할 기반 사례관리">사례관리의 전 과정</td><td data-label="조직 기반 사례관리">통합사례관리로서 전 과정 및 전문가팀 운영 책임</td><td data-label="책임성 기반 사례관리">주로 서비스 조정, 연계에 책임</td></tr>
+<tr><td data-label="구분">주요역할</td><td data-label="역할 기반 사례관리">중개자, 조정자, 상담자, 평가자, 계획자, 문제해결자, 기록보관자</td><td data-label="조직 기반 사례관리">옹호자, 중개자, 조정자, 계획가, 문제해결자, 기록보관자</td><td data-label="책임성 기반 사례관리">중개자, 조정자, 계획가, 문제해결자, 기록보관자</td></tr>
+<tr><td data-label="구분">개입기간</td><td data-label="역할 기반 사례관리">클라이언트 욕구의 복잡성, 서비스 전달 장소 제한에 따라 다양</td><td data-label="조직 기반 사례관리">다양하며 단기, 장기 모두 가능</td><td data-label="책임성 기반 사례관리">단기: 위기상황, 문제가 확정 시 / 장기: 질병 및 장애, 노화문제</td></tr>
+<tr><td data-label="구분">장점</td><td data-label="역할 기반 사례관리">사례관리자로서 다양한 역할 수행, 서비스의 제공자와 조정자로서 클라이언트와 강력한 관계 형성</td><td data-label="조직 기반 사례관리">입원, 외래 또는 시설에서 제공, 사정은 통합적 접근이며 서비스 계획은 개별화되어 점검 쉬움, 팀 체제 사례관리자</td><td data-label="책임성 기반 사례관리">일반인에 의해 사례관리 수행, 서비스 접근이 어려운 클라이언트에게 용이, 비용 효과적이며 지역사회가 관여, 클라이언트의 자립 강조</td></tr>
+<tr><td data-label="구분">단점</td><td data-label="역할 기반 사례관리">사례관리자의 과중한 사례량과 기관의 서비스 제공 제한에 따른 불충분한 서비스 제공</td><td data-label="조직 기반 사례관리">필요서비스가 센터에 없을 때 서비스 제공에 문제, 서비스가 조직구조와 위계질서에 의존하며 클라이언트 가족 참여 적음</td><td data-label="책임성 기반 사례관리">클라이언트 이해 및 지식과 기술 부족, 교육·훈련·수퍼비전 비용이 고비용, 적절한 서비스 접근의 어려움</td></tr>
+<tr><td data-label="구분">세부모델</td><td data-label="역할 기반 사례관리">일반주의 사례관리자 모델, 일차적 치료자 모델, 중개자 모델</td><td data-label="조직 기반 사례관리">포괄적 서비스센터 모델, 심리사회재활센터 모델, 다학제팀 모델</td><td data-label="책임성 기반 사례관리">가족 모델, 지지적 보호 모델, 사례관리자로 기능하는 클라이언트 모델, 자원봉사자 모델</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사례관리 특성에 따른 모델</strong></p>
 <ul>
 <li><strong>비교의 취지</strong> — 아이오와 강점중심 사례관리 모델(ICM)을 개발한 연구자들은 사례관리가 특정 모델로만 적용되는 것이 아니라 복잡하고 다양하므로, 사례의 특성에 따라 다른 모델을 사용할 수 있다고 보고 12가지 차원으로 비교함.</li>
 </ul>
 <p class="tt"><strong>아이오와 강점중심 사례관리 모델(ICM)과 타 모델 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c6">
 <thead><tr><th>차원</th><th>Pole A(클라이언트중심)</th><th>Pole B(전문가중심)</th><th>PACT(적극적 지역사회치료)</th><th>MC(관리보호)</th><th>ICM(집중사례관리)</th></tr></thead><tbody>
-<tr><td>서비스 기간</td><td>무제한</td><td>시간 제한적</td><td>무제한</td><td>필요시(최소한)</td><td>1년까지</td></tr>
-<tr><td>접촉강도, 빈도</td><td>빈번함/매일</td><td>분기별 접촉</td><td>자주</td><td>필요시(최소한)</td><td>주나 월 단위의 혼합</td></tr>
-<tr><td>사례량</td><td>적음(1:10)</td><td>많음(1:75)</td><td>적음(1:5~1:15)</td><td>매우 많음</td><td>중간(집중서비스 1:15 / 최소서비스 1:30)</td></tr>
-<tr><td>서비스 초점</td><td>넓음(포괄적)</td><td>좁음(배타적)</td><td>넓음</td><td>좁음(단일학문)</td><td>넓음</td></tr>
-<tr><td>서비스 유형</td><td>모든 서비스</td><td>간접서비스 관리</td><td>치료팀에서 대부분의 서비스 제공</td><td>간접서비스 관리와 통제</td><td>간접서비스 관리</td></tr>
-<tr><td>서비스 가용성</td><td>24시간</td><td>근무시간 내</td><td>24시간</td><td>24시간</td><td>근무시간 내/저녁시간</td></tr>
-<tr><td>사례관리 장소</td><td>클라이언트 생활환경</td><td>사무실</td><td>클라이언트 생활환경/사무실</td><td>전화</td><td>혼합(사무실과 지역사회)</td></tr>
-<tr><td>클라이언트 주도성</td><td>소비자 주도</td><td>전문가 주도</td><td>전문가 주도</td><td>전문가 주도</td><td>클라이언트 주도 목표설정, 계획 및 달성</td></tr>
-<tr><td>옹호자/초기접촉자</td><td>클라이언트를 위한 옹호자</td><td>사례관리기관 초기접촉자</td><td>혼합</td><td>사례관리기관 초기접촉자</td><td>클라이언트를 위한 옹호자</td></tr>
-<tr><td>사례관리자 자격</td><td>심화자격증 이상</td><td>기초훈련</td><td>전공분야 학사</td><td>전공분야 학사</td><td>사회복지 또는 휴먼서비스분야 석사학위</td></tr>
-<tr><td>사례관리자 권한</td><td>넓음, 행정적 통제</td><td>권한 없이 설득만 가능</td><td>팀 내에서 넓음</td><td>재정에서 모든 권한</td><td>권한 없이 설득만 가능</td></tr>
-<tr><td>사례관리 팀구조</td><td>전체 팀의 클라이언트 공유</td><td>개별 사례관리, 초기사례관리자</td><td>다학제간 치료팀 체제</td><td>개별적 사례관리</td><td>개별적 사례관리 &amp; 팀 수퍼비전</td></tr>
+<tr><td data-label="차원">서비스 기간</td><td data-label="Pole A(클라이언트중심)">무제한</td><td data-label="Pole B(전문가중심)">시간 제한적</td><td data-label="PACT(적극적 지역사회치료)">무제한</td><td data-label="MC(관리보호)">필요시(최소한)</td><td data-label="ICM(집중사례관리)">1년까지</td></tr>
+<tr><td data-label="차원">접촉강도, 빈도</td><td data-label="Pole A(클라이언트중심)">빈번함/매일</td><td data-label="Pole B(전문가중심)">분기별 접촉</td><td data-label="PACT(적극적 지역사회치료)">자주</td><td data-label="MC(관리보호)">필요시(최소한)</td><td data-label="ICM(집중사례관리)">주나 월 단위의 혼합</td></tr>
+<tr><td data-label="차원">사례량</td><td data-label="Pole A(클라이언트중심)">적음(1:10)</td><td data-label="Pole B(전문가중심)">많음(1:75)</td><td data-label="PACT(적극적 지역사회치료)">적음(1:5~1:15)</td><td data-label="MC(관리보호)">매우 많음</td><td data-label="ICM(집중사례관리)">중간(집중서비스 1:15 / 최소서비스 1:30)</td></tr>
+<tr><td data-label="차원">서비스 초점</td><td data-label="Pole A(클라이언트중심)">넓음(포괄적)</td><td data-label="Pole B(전문가중심)">좁음(배타적)</td><td data-label="PACT(적극적 지역사회치료)">넓음</td><td data-label="MC(관리보호)">좁음(단일학문)</td><td data-label="ICM(집중사례관리)">넓음</td></tr>
+<tr><td data-label="차원">서비스 유형</td><td data-label="Pole A(클라이언트중심)">모든 서비스</td><td data-label="Pole B(전문가중심)">간접서비스 관리</td><td data-label="PACT(적극적 지역사회치료)">치료팀에서 대부분의 서비스 제공</td><td data-label="MC(관리보호)">간접서비스 관리와 통제</td><td data-label="ICM(집중사례관리)">간접서비스 관리</td></tr>
+<tr><td data-label="차원">서비스 가용성</td><td data-label="Pole A(클라이언트중심)">24시간</td><td data-label="Pole B(전문가중심)">근무시간 내</td><td data-label="PACT(적극적 지역사회치료)">24시간</td><td data-label="MC(관리보호)">24시간</td><td data-label="ICM(집중사례관리)">근무시간 내/저녁시간</td></tr>
+<tr><td data-label="차원">사례관리 장소</td><td data-label="Pole A(클라이언트중심)">클라이언트 생활환경</td><td data-label="Pole B(전문가중심)">사무실</td><td data-label="PACT(적극적 지역사회치료)">클라이언트 생활환경/사무실</td><td data-label="MC(관리보호)">전화</td><td data-label="ICM(집중사례관리)">혼합(사무실과 지역사회)</td></tr>
+<tr><td data-label="차원">클라이언트 주도성</td><td data-label="Pole A(클라이언트중심)">소비자 주도</td><td data-label="Pole B(전문가중심)">전문가 주도</td><td data-label="PACT(적극적 지역사회치료)">전문가 주도</td><td data-label="MC(관리보호)">전문가 주도</td><td data-label="ICM(집중사례관리)">클라이언트 주도 목표설정, 계획 및 달성</td></tr>
+<tr><td data-label="차원">옹호자/초기접촉자</td><td data-label="Pole A(클라이언트중심)">클라이언트를 위한 옹호자</td><td data-label="Pole B(전문가중심)">사례관리기관 초기접촉자</td><td data-label="PACT(적극적 지역사회치료)">혼합</td><td data-label="MC(관리보호)">사례관리기관 초기접촉자</td><td data-label="ICM(집중사례관리)">클라이언트를 위한 옹호자</td></tr>
+<tr><td data-label="차원">사례관리자 자격</td><td data-label="Pole A(클라이언트중심)">심화자격증 이상</td><td data-label="Pole B(전문가중심)">기초훈련</td><td data-label="PACT(적극적 지역사회치료)">전공분야 학사</td><td data-label="MC(관리보호)">전공분야 학사</td><td data-label="ICM(집중사례관리)">사회복지 또는 휴먼서비스분야 석사학위</td></tr>
+<tr><td data-label="차원">사례관리자 권한</td><td data-label="Pole A(클라이언트중심)">넓음, 행정적 통제</td><td data-label="Pole B(전문가중심)">권한 없이 설득만 가능</td><td data-label="PACT(적극적 지역사회치료)">팀 내에서 넓음</td><td data-label="MC(관리보호)">재정에서 모든 권한</td><td data-label="ICM(집중사례관리)">권한 없이 설득만 가능</td></tr>
+<tr><td data-label="차원">사례관리 팀구조</td><td data-label="Pole A(클라이언트중심)">전체 팀의 클라이언트 공유</td><td data-label="Pole B(전문가중심)">개별 사례관리, 초기사례관리자</td><td data-label="PACT(적극적 지역사회치료)">다학제간 치료팀 체제</td><td data-label="MC(관리보호)">개별적 사례관리</td><td data-label="ICM(집중사례관리)">개별적 사례관리 &amp; 팀 수퍼비전</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>제도적 사례관리 모델</strong></p>
 <ul>
@@ -1269,12 +1286,12 @@ main{min-width:0}
 <li><strong>사회복지의 역할</strong> — 사회적 위험에 처한 사람들에게 다가가 그들의 위험에 대해 함께 맞서 싸우는 것이며, 더 나아가 위험의 근본원인을 제거하려고 노력함으로써 근본적인 문제해결을 모색해야 함. 자신의 문제가 자신만의 문제가 아니라 구조, 공동체, 환경의 근본 원인에 있다는 것을 인식하고 있는가?</li>
 </ul>
 <p class="tt"><strong>사회복지사의 정체성 변화</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>기존</th><th>변화</th></tr></thead><tbody>
-<tr><td>역할</td><td>서비스를 전달하는</td><td>새로운 의미를 묻는</td></tr>
-<tr><td>가치</td><td>원조 기술을 사용하는</td><td>대화와 토론을 바탕으로</td></tr>
-<tr><td>시민</td><td>클라이언트를 위해서</td><td>시민과 함께하는</td></tr>
-<tr><td>교육 변화</td><td>통(사회)에 적응하는</td><td>통(사회)을 변화시키는</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="기존">서비스를 전달하는</td><td data-label="변화">새로운 의미를 묻는</td></tr>
+<tr><td data-label="구분">가치</td><td data-label="기존">원조 기술을 사용하는</td><td data-label="변화">대화와 토론을 바탕으로</td></tr>
+<tr><td data-label="구분">시민</td><td data-label="기존">클라이언트를 위해서</td><td data-label="변화">시민과 함께하는</td></tr>
+<tr><td data-label="구분">교육 변화</td><td data-label="기존">통(사회)에 적응하는</td><td data-label="변화">통(사회)을 변화시키는</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>시민과 사회관리</strong></p>
 <ul>
@@ -1303,11 +1320,11 @@ main{min-width:0}
 <li><strong>사회복지관의 변화</strong> — 케어센터(care center) → 커뮤니티센터(community center), 잔여주의 → 제도주의, big society → strong society, 복지국가의 거점으로.</li>
 </ul>
 <p class="tt"><strong>케어센터와 커뮤니티센터 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>케어센터(Care center)</th><th>커뮤니티센터(Community center)</th></tr></thead><tbody>
-<tr><td>대상</td><td>취약계층</td><td>시민</td></tr>
-<tr><td>기능</td><td>돌봄</td><td>자각과 실천</td></tr>
-<tr><td>사회복지사</td><td>돌봄 제공자(Carer)</td><td>매개자(Mediator)</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="케어센터(Care center)">취약계층</td><td data-label="커뮤니티센터(Community center)">시민</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="케어센터(Care center)">돌봄</td><td data-label="커뮤니티센터(Community center)">자각과 실천</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="케어센터(Care center)">돌봄 제공자(Carer)</td><td data-label="커뮤니티센터(Community center)">매개자(Mediator)</td></tr>
 </tbody></table></div>
 <h3>2. 사례관리의 구성요소 및 운영체계</h3>
 <p class="sh"><strong>사례관리의 구성요소</strong></p>
@@ -1348,13 +1365,13 @@ main{min-width:0}
 <li><strong>순환적 과정</strong> — 1. 접수(사례발견/심사/접수) → 2. 사정(문제·욕구/자원/장애물) → 3. 서비스 계획 수립 → 4. 실행 → 5. 점검(Monitoring) → 6. 평가·종결 → 재사정으로 이어지는 순환적 과정임.</li>
 </ul>
 <p class="tt"><strong>사례관리 단계별 서식</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>단계</th><th>서식</th></tr></thead><tbody>
-<tr><td>초기단계</td><td>사례관리 초기면접지, 개인정보 수집·활용 동의서</td></tr>
-<tr><td>사정단계</td><td>욕구영역별 위기도 양식, 사례관리 사정표</td></tr>
-<tr><td>서비스계획 단계</td><td>사례관리 서비스 계획표</td></tr>
-<tr><td>서비스실행 및 점검단계</td><td>사례관리 과정 기록지, 사례관리 점검표</td></tr>
-<tr><td>평가 및 종결단계</td><td>사례관리 서비스 평가표, 사례관리 종결보고서, 사례관리 사후관리보고서</td></tr>
+<tr><td data-label="단계">초기단계</td><td data-label="서식">사례관리 초기면접지, 개인정보 수집·활용 동의서</td></tr>
+<tr><td data-label="단계">사정단계</td><td data-label="서식">욕구영역별 위기도 양식, 사례관리 사정표</td></tr>
+<tr><td data-label="단계">서비스계획 단계</td><td data-label="서식">사례관리 서비스 계획표</td></tr>
+<tr><td data-label="단계">서비스실행 및 점검단계</td><td data-label="서식">사례관리 과정 기록지, 사례관리 점검표</td></tr>
+<tr><td data-label="단계">평가 및 종결단계</td><td data-label="서식">사례관리 서비스 평가표, 사례관리 종결보고서, 사례관리 사후관리보고서</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>5) 사례관리 운영체계</strong></p>
 <ul>
@@ -1365,47 +1382,47 @@ main{min-width:0}
 </ul>
 <h3>3. 잔여적 사례관리와 제도적 사례관리의 비교</h3>
 <p class="tt"><strong>잔여적 관점과 제도적 관점의 사정과 목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
-<tr><td>사정</td><td>환경에 대처하지 못하는 개인</td><td>부적절한 사회경제구조</td></tr>
-<tr><td>사정</td><td>부적절하고 비효과적인 상호작용</td><td>권력의 결여</td></tr>
-<tr><td>사정</td><td>역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할기대</td><td>이데올로기로 인한 역할제한, 지배적인 사회풍습과 신념에 따른 제한</td></tr>
-<tr><td>사정</td><td>집단 혹은 가족규범 간의 갈등</td><td>집단규범이 수행하는 은폐된 사회적 기능</td></tr>
-<tr><td>사정</td><td>과거 경험을 통한 부정적 학습</td><td>변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
-<tr><td>사정</td><td>대인관계문제, 사회적 지지부족, 사회적 고립</td><td>사회적 낙인과정의 영향</td></tr>
-<tr><td>사정</td><td>물질적 자원의 결여</td><td>사회·경제 구조적 제한</td></tr>
-<tr><td>목표</td><td>사회상황에 적응하고 대처할 수 있도록 원조</td><td>사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
-<tr><td>목표</td><td>개인 간의 상호작용 개선</td><td>피착취자의 권력증진</td></tr>
-<tr><td>목표</td><td>스트레스 경감, 기대의 수정</td><td>이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
-<tr><td>목표</td><td>개인 간 갈등해소</td><td>지배 이익집단의 착취경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
-<tr><td>목표</td><td>부정적인 연합의 수정, 현재와 과거의 경험분리</td><td>삶에 대한 변화와 통제능력 향상, 보다 넓은 역사적·사회적 변화의 영향인식</td></tr>
-<tr><td>목표</td><td>대인관계 개선, 사회적 지지증가</td><td>사회적 낙인으로 인한 영향의 거부</td></tr>
-<tr><td>목표</td><td>물질적 자원제공</td><td>구조적 제한을 변화시켜 물질적 자원제공</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">환경에 대처하지 못하는 개인</td><td data-label="제도적 관점">부적절한 사회경제구조</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">부적절하고 비효과적인 상호작용</td><td data-label="제도적 관점">권력의 결여</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할기대</td><td data-label="제도적 관점">이데올로기로 인한 역할제한, 지배적인 사회풍습과 신념에 따른 제한</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">집단 혹은 가족규범 간의 갈등</td><td data-label="제도적 관점">집단규범이 수행하는 은폐된 사회적 기능</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">과거 경험을 통한 부정적 학습</td><td data-label="제도적 관점">변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">대인관계문제, 사회적 지지부족, 사회적 고립</td><td data-label="제도적 관점">사회적 낙인과정의 영향</td></tr>
+<tr><td data-label="구분">사정</td><td data-label="잔여적 관점">물질적 자원의 결여</td><td data-label="제도적 관점">사회·경제 구조적 제한</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">사회상황에 적응하고 대처할 수 있도록 원조</td><td data-label="제도적 관점">사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">개인 간의 상호작용 개선</td><td data-label="제도적 관점">피착취자의 권력증진</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">스트레스 경감, 기대의 수정</td><td data-label="제도적 관점">이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">개인 간 갈등해소</td><td data-label="제도적 관점">지배 이익집단의 착취경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">부정적인 연합의 수정, 현재와 과거의 경험분리</td><td data-label="제도적 관점">삶에 대한 변화와 통제능력 향상, 보다 넓은 역사적·사회적 변화의 영향인식</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">대인관계 개선, 사회적 지지증가</td><td data-label="제도적 관점">사회적 낙인으로 인한 영향의 거부</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여적 관점">물질적 자원제공</td><td data-label="제도적 관점">구조적 제한을 변화시켜 물질적 자원제공</td></tr>
 </tbody></table></div>
 <p class="tt"><strong>잔여적 관점과 제도적 관점의 실천방법</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
-<tr><td>전략</td><td>개인의 적응과 대처를 가능하게 하는 전략</td><td>변화와 통제를 가능하게 하는 전략</td></tr>
-<tr><td>교육·원조</td><td>기술, 훈련, 직접적 원조</td><td>사회교육</td></tr>
-<tr><td>자원 활용</td><td>수동적 자원 활용</td><td>적극적 자원 활용</td></tr>
-<tr><td>공감</td><td>정서적 공감</td><td>사회적 공감(개인의 불행이 아닌 사회적 문제임에 공감)</td></tr>
-<tr><td>지지</td><td>정서적 지지</td><td>사회적 지지</td></tr>
-<tr><td>자각</td><td>자기자각 상담</td><td>비판적 자각, 역량강화</td></tr>
-<tr><td>개입</td><td>가족치료, 관계작업</td><td>옹호</td></tr>
+<tr><td data-label="구분">전략</td><td data-label="잔여적 관점">개인의 적응과 대처를 가능하게 하는 전략</td><td data-label="제도적 관점">변화와 통제를 가능하게 하는 전략</td></tr>
+<tr><td data-label="구분">교육·원조</td><td data-label="잔여적 관점">기술, 훈련, 직접적 원조</td><td data-label="제도적 관점">사회교육</td></tr>
+<tr><td data-label="구분">자원 활용</td><td data-label="잔여적 관점">수동적 자원 활용</td><td data-label="제도적 관점">적극적 자원 활용</td></tr>
+<tr><td data-label="구분">공감</td><td data-label="잔여적 관점">정서적 공감</td><td data-label="제도적 관점">사회적 공감(개인의 불행이 아닌 사회적 문제임에 공감)</td></tr>
+<tr><td data-label="구분">지지</td><td data-label="잔여적 관점">정서적 지지</td><td data-label="제도적 관점">사회적 지지</td></tr>
+<tr><td data-label="구분">자각</td><td data-label="잔여적 관점">자기자각 상담</td><td data-label="제도적 관점">비판적 자각, 역량강화</td></tr>
+<tr><td data-label="구분">개입</td><td data-label="잔여적 관점">가족치료, 관계작업</td><td data-label="제도적 관점">옹호</td></tr>
 </tbody></table></div>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>사례관리와 사회관리의 요약 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여주의(사례관리)</th><th>제도주의(사회관리)</th></tr></thead><tbody>
-<tr><td>문제 사정</td><td>적응 못하는 개인</td><td>부당한 관계와 구조</td></tr>
-<tr><td>목표</td><td>개인의 적응능력 향상</td><td>구조변화와 시민력 향상</td></tr>
-<tr><td>실천 개입 기술</td><td>정서적 지지, 상담, 가족치료</td><td>사회적 지지, 시민교육, 주민조직화</td></tr>
-<tr><td>사례관리</td><td>불쌍한 사람 도움주기</td><td>불쌍한 사람이 생기지 않는 공동체</td></tr>
-<tr><td>태도</td><td>동정과 시혜</td><td>권리와 연대</td></tr>
-<tr><td>문제설정</td><td>어떻게 상처를 치료하고 자신의 환경에 적응할 것인가?</td><td>어떻게 권리를 알고 권력을 갖게 할 것인가?</td></tr>
-<tr><td>명칭</td><td>잔여적 사례관리</td><td>제도적 사례관리</td></tr>
-<tr><td>대상</td><td>불쌍한 사람</td><td>시민</td></tr>
-<tr><td>변화</td><td>노력하는 의지적 개인</td><td>배고프지 않는 연대의 공동체</td></tr>
-<tr><td>실천</td><td>사례관리</td><td>사회관리</td></tr>
+<tr><td data-label="구분">문제 사정</td><td data-label="잔여주의(사례관리)">적응 못하는 개인</td><td data-label="제도주의(사회관리)">부당한 관계와 구조</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여주의(사례관리)">개인의 적응능력 향상</td><td data-label="제도주의(사회관리)">구조변화와 시민력 향상</td></tr>
+<tr><td data-label="구분">실천 개입 기술</td><td data-label="잔여주의(사례관리)">정서적 지지, 상담, 가족치료</td><td data-label="제도주의(사회관리)">사회적 지지, 시민교육, 주민조직화</td></tr>
+<tr><td data-label="구분">사례관리</td><td data-label="잔여주의(사례관리)">불쌍한 사람 도움주기</td><td data-label="제도주의(사회관리)">불쌍한 사람이 생기지 않는 공동체</td></tr>
+<tr><td data-label="구분">태도</td><td data-label="잔여주의(사례관리)">동정과 시혜</td><td data-label="제도주의(사회관리)">권리와 연대</td></tr>
+<tr><td data-label="구분">문제설정</td><td data-label="잔여주의(사례관리)">어떻게 상처를 치료하고 자신의 환경에 적응할 것인가?</td><td data-label="제도주의(사회관리)">어떻게 권리를 알고 권력을 갖게 할 것인가?</td></tr>
+<tr><td data-label="구분">명칭</td><td data-label="잔여주의(사례관리)">잔여적 사례관리</td><td data-label="제도주의(사회관리)">제도적 사례관리</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여주의(사례관리)">불쌍한 사람</td><td data-label="제도주의(사회관리)">시민</td></tr>
+<tr><td data-label="구분">변화</td><td data-label="잔여주의(사례관리)">노력하는 의지적 개인</td><td data-label="제도주의(사회관리)">배고프지 않는 연대의 공동체</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="잔여주의(사례관리)">사례관리</td><td data-label="제도주의(사회관리)">사회관리</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>노숙인 사례로 본 두 관점</strong></p>
 <ul>
@@ -1503,11 +1520,11 @@ main{min-width:0}
 <li><strong>정보 수집 및 기록</strong> — 기본 정보, 욕구, 위기 상황을 문서화하여 이후 사정 단계의 기초 자료를 확보함.</li>
 </ul>
 <p class="tt"><strong>사례접수 경로 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead><tr><th>구분</th><th>클라이언트 직접요청</th><th>의뢰받기(추천받기)</th><th>아웃리치</th></tr></thead><tbody>
-<tr><td>접촉 방식</td><td>기관 방문, 전화, 이메일로 자발적 요청</td><td>기관 내부, 시군구, 읍면동, 보건소, 타 기관이 의뢰</td><td>사회복지사가 지역사회로 나가 직접 접근</td></tr>
-<tr><td>특징</td><td>서비스 욕구가 강해 개입이 용이함</td><td>초기 사례발굴에서 가장 빈번함</td><td>정보가 부족하고 서비스 활용 욕구가 낮은 대상자가 대부분</td></tr>
-<tr><td>유의점</td><td>필요한 서비스를 스스로 잘 모를 수 있음</td><td>의뢰자 목적과 클라이언트 욕구의 차이 파악, 의뢰서 수령과 동의 필수</td><td>정보 노출에 대한 방어·두려움, 정기적 아웃리치 필요</td></tr>
+<tr><td data-label="구분">접촉 방식</td><td data-label="클라이언트 직접요청">기관 방문, 전화, 이메일로 자발적 요청</td><td data-label="의뢰받기(추천받기)">기관 내부, 시군구, 읍면동, 보건소, 타 기관이 의뢰</td><td data-label="아웃리치">사회복지사가 지역사회로 나가 직접 접근</td></tr>
+<tr><td data-label="구분">특징</td><td data-label="클라이언트 직접요청">서비스 욕구가 강해 개입이 용이함</td><td data-label="의뢰받기(추천받기)">초기 사례발굴에서 가장 빈번함</td><td data-label="아웃리치">정보가 부족하고 서비스 활용 욕구가 낮은 대상자가 대부분</td></tr>
+<tr><td data-label="구분">유의점</td><td data-label="클라이언트 직접요청">필요한 서비스를 스스로 잘 모를 수 있음</td><td data-label="의뢰받기(추천받기)">의뢰자 목적과 클라이언트 욕구의 차이 파악, 의뢰서 수령과 동의 필수</td><td data-label="아웃리치">정보 노출에 대한 방어·두려움, 정기적 아웃리치 필요</td></tr>
 </tbody></table></div>
 <h3>2. 초기상담(인테이크)</h3>
 <p class="sh"><strong>초기상담의 개념과 목적</strong></p>
@@ -1552,13 +1569,13 @@ main{min-width:0}
 <li><strong>비밀보장</strong> — 오랫동안 혼자 간직한 내밀한 비밀이 다른 사람에게 알려지지 않기를 바라는 욕구.</li>
 </ul>
 <p class="tt"><strong>면접 기술 정리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>기술</th><th>핵심 내용</th><th>활용 예</th></tr></thead><tbody>
-<tr><td>소개·분위기 조성</td><td>기관·역할 소개, 공감·진심·온화함으로 편안한 분위기 형성</td><td>날씨·교통 대화 후 "어떻게 오셨습니까?"</td></tr>
-<tr><td>관찰</td><td>표정·몸짓, 언어와 비언어의 일치, 침묵 시점 파악</td><td>말은 긍정적인데 표정이 어두운 경우 주목</td></tr>
-<tr><td>피드백·요약</td><td>들은 내용을 확인하고 문제를 항목별로 명료화</td><td>"제가 들은 이야기가 이것을 의미하나요?"</td></tr>
-<tr><td>초점·경청</td><td>중심 문제로 되돌리고 주의 깊게 들으며 인정</td><td>학업 부진 상담 중 유해환경 이야기를 학교생활로 전환</td></tr>
-<tr><td>부정적 감정 다루기</td><td>저항과 의심을 그대로 인정하고 격려</td><td>"그런 감정이 드실 수 있을 것 같아요."</td></tr>
+<tr><td data-label="기술">소개·분위기 조성</td><td data-label="핵심 내용">기관·역할 소개, 공감·진심·온화함으로 편안한 분위기 형성</td><td data-label="활용 예">날씨·교통 대화 후 "어떻게 오셨습니까?"</td></tr>
+<tr><td data-label="기술">관찰</td><td data-label="핵심 내용">표정·몸짓, 언어와 비언어의 일치, 침묵 시점 파악</td><td data-label="활용 예">말은 긍정적인데 표정이 어두운 경우 주목</td></tr>
+<tr><td data-label="기술">피드백·요약</td><td data-label="핵심 내용">들은 내용을 확인하고 문제를 항목별로 명료화</td><td data-label="활용 예">"제가 들은 이야기가 이것을 의미하나요?"</td></tr>
+<tr><td data-label="기술">초점·경청</td><td data-label="핵심 내용">중심 문제로 되돌리고 주의 깊게 들으며 인정</td><td data-label="활용 예">학업 부진 상담 중 유해환경 이야기를 학교생활로 전환</td></tr>
+<tr><td data-label="기술">부정적 감정 다루기</td><td data-label="핵심 내용">저항과 의심을 그대로 인정하고 격려</td><td data-label="활용 예">"그런 감정이 드실 수 있을 것 같아요."</td></tr>
 </tbody></table></div>
 <h3>3. 클라이언트의 선정</h3>
 <p class="sh"><strong>선정의 원칙과 스크리닝</strong></p>
@@ -1591,13 +1608,13 @@ main{min-width:0}
 <li><strong>비자발적 클라이언트 대응</strong> — 도움이 필요하지만 동기가 부족해 계약·동의가 이루어지지 않으면 사례관리를 진행하지 않는 것이 정당화되나, 관계 형성과 지속적 모니터링 노력은 계속 필요함.</li>
 </ul>
 <p class="tt"><strong>클라이언트 유형별 특성 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>유형</th><th>대상 특성</th><th>주요 개입 방법</th></tr></thead><tbody>
-<tr><td>정보 이용자</td><td>정보 부족으로 문제 해결에 어려움</td><td>일회성 상담, 정형화된 정보 제공</td></tr>
-<tr><td>서비스 이용자</td><td>특정 영역 기능 향상을 위해 단위 서비스 필요</td><td>서비스별 이용 기준에 따른 정형화된 서비스</td></tr>
-<tr><td>잠재적 사례관리 클라이언트</td><td>포괄적·만성적 욕구 미충족</td><td>지속적 모니터링, 욕구평가에 따른 서비스 조합</td></tr>
-<tr><td>사례관리 클라이언트</td><td>선정 기준 부합, 절차에 동의하고 계약</td><td>사례관리 유형에 따른 개입, 동의와 계약 필수</td></tr>
-<tr><td>위기지원 클라이언트</td><td>긴급 지원 없이는 안전 확보가 어려움</td><td>3일 이내 직접 서비스, 개입기간 1개월 이내</td></tr>
+<tr><td data-label="유형">정보 이용자</td><td data-label="대상 특성">정보 부족으로 문제 해결에 어려움</td><td data-label="주요 개입 방법">일회성 상담, 정형화된 정보 제공</td></tr>
+<tr><td data-label="유형">서비스 이용자</td><td data-label="대상 특성">특정 영역 기능 향상을 위해 단위 서비스 필요</td><td data-label="주요 개입 방법">서비스별 이용 기준에 따른 정형화된 서비스</td></tr>
+<tr><td data-label="유형">잠재적 사례관리 클라이언트</td><td data-label="대상 특성">포괄적·만성적 욕구 미충족</td><td data-label="주요 개입 방법">지속적 모니터링, 욕구평가에 따른 서비스 조합</td></tr>
+<tr><td data-label="유형">사례관리 클라이언트</td><td data-label="대상 특성">선정 기준 부합, 절차에 동의하고 계약</td><td data-label="주요 개입 방법">사례관리 유형에 따른 개입, 동의와 계약 필수</td></tr>
+<tr><td data-label="유형">위기지원 클라이언트</td><td data-label="대상 특성">긴급 지원 없이는 안전 확보가 어려움</td><td data-label="주요 개입 방법">3일 이내 직접 서비스, 개입기간 1개월 이내</td></tr>
 </tbody></table></div>
 <h3>4. 동의 및 계약</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>동의 및 계약의 의미</strong></p>
@@ -1646,11 +1663,11 @@ main{min-width:0}
 <li><strong>초기면접지 구성</strong> — 접수번호, 일시, 면접자, 장소, 의뢰 경로, 클라이언트 인적사항, 장애 유무, 건강상태, 보호·주거·가구 유형, 가족 상태, 도움 요청 내용(클라이언트·가족·의뢰인), 면접 종합의견, 대상자 판정.</li>
 </ul>
 <p class="tt"><strong>초기단계 주요 문서</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>문서</th><th>작성 시점</th><th>주요 내용</th></tr></thead><tbody>
-<tr><td>초기면접지</td><td>인테이크 단계</td><td>인적사항, 의뢰 경로, 주거·가구 유형, 도움 요청 내용, 종합의견과 대상자 판정</td></tr>
-<tr><td>사례관리 이용동의서</td><td>대상자 선정 후</td><td>서비스 안내와 동의 서명, 2부 작성하여 각각 보관</td></tr>
-<tr><td>개인정보 활용 동의서</td><td>이용동의서와 함께</td><td>개인정보 수집·활용에 대한 별도 동의</td></tr>
+<tr><td data-label="문서">초기면접지</td><td data-label="작성 시점">인테이크 단계</td><td data-label="주요 내용">인적사항, 의뢰 경로, 주거·가구 유형, 도움 요청 내용, 종합의견과 대상자 판정</td></tr>
+<tr><td data-label="문서">사례관리 이용동의서</td><td data-label="작성 시점">대상자 선정 후</td><td data-label="주요 내용">서비스 안내와 동의 서명, 2부 작성하여 각각 보관</td></tr>
+<tr><td data-label="문서">개인정보 활용 동의서</td><td data-label="작성 시점">이용동의서와 함께</td><td data-label="주요 내용">개인정보 수집·활용에 대한 별도 동의</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l8"><header class="lh"><span class="no">8강</span><h2>사례관리 실천과정과 기록 (2) 사정단계</h2></header><div class="ct">
 <h3>1. 잔여적 사례관리의 사정</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>진단과 사정의 차이</strong></p>
@@ -1698,11 +1715,11 @@ main{min-width:0}
 <li><strong>외부 장애요인</strong> — 클라이언트가 처한 삶의 상황이나 환경적 특성으로, 부적절한 자원(자원이 실제로 활용되지 못함), 자원 이용에 대한 무능력(자원이 있어도 활용하지 못함), 고갈된 자원(자원 자체가 없음), 이차적으로 필요한 자원(욕구 해결을 위해 추가로 필요한 자원)이 있음.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리의 사정 영역</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>사정 영역</th><th>핵심 질문</th><th>세부 내용</th></tr></thead><tbody>
-<tr><td>욕구</td><td>무엇이 결핍되어 있고 어떤 변화가 필요한가?</td><td>문제·욕구·요구 구분, 기관별 욕구조사표 활용</td></tr>
-<tr><td>자원 및 강점</td><td>무엇을 투입할 수 있는가?</td><td>내적 자원(성격, 신체, 취미·기술), 외부 자원(공식·비공식, 공공·민간·지역발굴)</td></tr>
-<tr><td>장애요인</td><td>무엇이 목표 달성을 가로막는가?</td><td>내부(비관·냉소·운명주의 등), 외부(부적절·고갈된 자원, 이용 무능력, 이차적 자원)</td></tr>
+<tr><td data-label="사정 영역">욕구</td><td data-label="핵심 질문">무엇이 결핍되어 있고 어떤 변화가 필요한가?</td><td data-label="세부 내용">문제·욕구·요구 구분, 기관별 욕구조사표 활용</td></tr>
+<tr><td data-label="사정 영역">자원 및 강점</td><td data-label="핵심 질문">무엇을 투입할 수 있는가?</td><td data-label="세부 내용">내적 자원(성격, 신체, 취미·기술), 외부 자원(공식·비공식, 공공·민간·지역발굴)</td></tr>
+<tr><td data-label="사정 영역">장애요인</td><td data-label="핵심 질문">무엇이 목표 달성을 가로막는가?</td><td data-label="세부 내용">내부(비관·냉소·운명주의 등), 외부(부적절·고갈된 자원, 이용 무능력, 이차적 자원)</td></tr>
 </tbody></table></div>
 <h3>2. 제도적 사례관리의 사정</h3>
 <p class="sh"><strong>제도적 사례관리 사정의 관점</strong></p>
@@ -1758,16 +1775,16 @@ main{min-width:0}
 <li><strong>활용 예</strong> — 사회복지사 보수교육에서 여성 사회복지사들은 결혼 이후의 경력 단절을 많이 이야기했고, 종교나 페미니즘 이데올로기가 직업 선택에 영향을 미쳤다는 논의가 나옴. 개인적 선택이라 여긴 것이 구조적 요인의 영향이었음을 확인하게 됨.</li>
 </ul>
 <p class="tt"><strong>잔여적 관점 vs 제도적 관점의 사정</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
-<tr><td>문제의 소재</td><td>환경에 대처하지 못하는 개인</td><td>부적절한 사회경제구조</td></tr>
-<tr><td>상호작용·권력</td><td>부적절하고 비효과적인 상호작용</td><td>권력의 결여</td></tr>
-<tr><td>역할</td><td>역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td>이데올로기로 인한 역할 제한, 지배적 사회풍습과 신념에 따른 제한</td></tr>
-<tr><td>규범</td><td>집단 혹은 가족규범 간의 갈등</td><td>집단규범이 수행하는 은폐된 사회적 기능</td></tr>
-<tr><td>학습·대처</td><td>과거 경험을 통한 부정적 학습</td><td>변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
-<tr><td>관계</td><td>대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td>사회적 낙인과정의 영향</td></tr>
-<tr><td>자원</td><td>물질적 자원의 결여</td><td>사회·경제 구조적 제한</td></tr>
-<tr><td>원조 방향</td><td>사회상황에 적응하고 대처할 수 있도록 원조</td><td>사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
+<tr><td data-label="구분">문제의 소재</td><td data-label="잔여적 관점">환경에 대처하지 못하는 개인</td><td data-label="제도적 관점">부적절한 사회경제구조</td></tr>
+<tr><td data-label="구분">상호작용·권력</td><td data-label="잔여적 관점">부적절하고 비효과적인 상호작용</td><td data-label="제도적 관점">권력의 결여</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="잔여적 관점">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td data-label="제도적 관점">이데올로기로 인한 역할 제한, 지배적 사회풍습과 신념에 따른 제한</td></tr>
+<tr><td data-label="구분">규범</td><td data-label="잔여적 관점">집단 혹은 가족규범 간의 갈등</td><td data-label="제도적 관점">집단규범이 수행하는 은폐된 사회적 기능</td></tr>
+<tr><td data-label="구분">학습·대처</td><td data-label="잔여적 관점">과거 경험을 통한 부정적 학습</td><td data-label="제도적 관점">변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
+<tr><td data-label="구분">관계</td><td data-label="잔여적 관점">대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td data-label="제도적 관점">사회적 낙인과정의 영향</td></tr>
+<tr><td data-label="구분">자원</td><td data-label="잔여적 관점">물질적 자원의 결여</td><td data-label="제도적 관점">사회·경제 구조적 제한</td></tr>
+<tr><td data-label="구분">원조 방향</td><td data-label="잔여적 관점">사회상황에 적응하고 대처할 수 있도록 원조</td><td data-label="제도적 관점">사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>제도적 사례관리 사정의 방향</strong></p>
 <ul>
@@ -1801,15 +1818,15 @@ main{min-width:0}
 <li><strong>가계도와 생태도</strong> — 가계도로 가족 안의 역동성을, 생태도로 자원과 강점을 발견할 수 있어 사정 단계에서 그려 보아야 함.</li>
 </ul>
 <p class="tt"><strong>사례관리 사정결과표 항목 정리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>항목</th><th>기록 내용</th><th>유의점</th></tr></thead><tbody>
-<tr><td>제시된 요구</td><td>클라이언트·가족·의미 있는 타인의 진술</td><td>원형 그대로, 누가 제시한 요구인지 명시</td></tr>
-<tr><td>문제 상황</td><td>요구를 뒷받침하는 다방면의 정보</td><td>진술과 실제 문제가 다를 수 있음을 확인</td></tr>
-<tr><td>욕구</td><td>기대 기준과 현재 상태의 차이로 나타난 결핍</td><td>클라이언트와 함께 다차원적으로 분석</td></tr>
-<tr><td>강점 및 자원</td><td>내적 강점, 공식·비공식 자원, 향후 이용 가능 자원</td><td>기관명 외에 자원의 속성과 내용을 구체적으로</td></tr>
-<tr><td>장애요인</td><td>내부·외부 장애요인</td><td>신체·정신 문제는 객관적 근거 명시</td></tr>
-<tr><td>척도</td><td>생태도, 가계도, 표준화된 척도 결과</td><td>소견 요약, 검사지는 별도 첨부</td></tr>
-<tr><td>종합의견</td><td>사정 결과 요약, 전문적 설명, 사례관리 필요 여부</td><td>실행 방법이나 자원은 기록하지 않음</td></tr>
+<tr><td data-label="항목">제시된 요구</td><td data-label="기록 내용">클라이언트·가족·의미 있는 타인의 진술</td><td data-label="유의점">원형 그대로, 누가 제시한 요구인지 명시</td></tr>
+<tr><td data-label="항목">문제 상황</td><td data-label="기록 내용">요구를 뒷받침하는 다방면의 정보</td><td data-label="유의점">진술과 실제 문제가 다를 수 있음을 확인</td></tr>
+<tr><td data-label="항목">욕구</td><td data-label="기록 내용">기대 기준과 현재 상태의 차이로 나타난 결핍</td><td data-label="유의점">클라이언트와 함께 다차원적으로 분석</td></tr>
+<tr><td data-label="항목">강점 및 자원</td><td data-label="기록 내용">내적 강점, 공식·비공식 자원, 향후 이용 가능 자원</td><td data-label="유의점">기관명 외에 자원의 속성과 내용을 구체적으로</td></tr>
+<tr><td data-label="항목">장애요인</td><td data-label="기록 내용">내부·외부 장애요인</td><td data-label="유의점">신체·정신 문제는 객관적 근거 명시</td></tr>
+<tr><td data-label="항목">척도</td><td data-label="기록 내용">생태도, 가계도, 표준화된 척도 결과</td><td data-label="유의점">소견 요약, 검사지는 별도 첨부</td></tr>
+<tr><td data-label="항목">종합의견</td><td data-label="기록 내용">사정 결과 요약, 전문적 설명, 사례관리 필요 여부</td><td data-label="유의점">실행 방법이나 자원은 기록하지 않음</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l9"><header class="lh"><span class="no">9강</span><h2>사례관리 실천과정과 기록 (3) 목표 및 계획 수립 단계</h2></header><div class="ct">
 <h3>1. 목표 설정</h3>
 <p class="sh"><strong>목적과 목표의 구분</strong></p>
@@ -1825,24 +1842,24 @@ main{min-width:0}
 <li><strong>제도적 사례관리의 방향</strong> — 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조하는 데 목표를 둠.</li>
 </ul>
 <p class="tt"><strong>잔여적 사례관리의 사정과 목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>사정</th><th>목표</th></tr></thead><tbody>
-<tr><td>부적절하고 비효과적인 상호작용</td><td>개인 간 상호작용 개선</td></tr>
-<tr><td>역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td>스트레스 경감과 기대 수정</td></tr>
-<tr><td>집단 혹은 가족규범 간의 갈등</td><td>개인 간 갈등 해소</td></tr>
-<tr><td>과거 경험을 통한 부정적 학습</td><td>부정적 학습의 수정, 현재와 과거 경험의 분리</td></tr>
-<tr><td>대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td>대인관계 개선, 사회적 지지 증가</td></tr>
-<tr><td>물질적 자원의 결여</td><td>물질적 자원 제공</td></tr>
+<tr><td data-label="사정">부적절하고 비효과적인 상호작용</td><td data-label="목표">개인 간 상호작용 개선</td></tr>
+<tr><td data-label="사정">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td data-label="목표">스트레스 경감과 기대 수정</td></tr>
+<tr><td data-label="사정">집단 혹은 가족규범 간의 갈등</td><td data-label="목표">개인 간 갈등 해소</td></tr>
+<tr><td data-label="사정">과거 경험을 통한 부정적 학습</td><td data-label="목표">부정적 학습의 수정, 현재와 과거 경험의 분리</td></tr>
+<tr><td data-label="사정">대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td data-label="목표">대인관계 개선, 사회적 지지 증가</td></tr>
+<tr><td data-label="사정">물질적 자원의 결여</td><td data-label="목표">물질적 자원 제공</td></tr>
 </tbody></table></div>
 <p class="tt"><strong>제도적 사례관리의 사정과 목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>사정</th><th>목표</th></tr></thead><tbody>
-<tr><td>권력의 결여</td><td>피착취자의 권력 증진</td></tr>
-<tr><td>이데올로기로 인한 역할 제한</td><td>이데올로기적 역할 제한의 완화</td></tr>
-<tr><td>이익집단 간의 갈등</td><td>지배집단의 착취 경감과 그 기능의 폭로, 권력 불균형 제거</td></tr>
-<tr><td>변화능력의 부재</td><td>삶에 대한 변화와 통제능력 향상, 더 넓은 사회적 영향에 대한 자각</td></tr>
-<tr><td>사회적 낙인과정의 영향</td><td>사회적 낙인을 거부하여 낙인으로부터 자유로워짐</td></tr>
-<tr><td>사회·경제 구조적 제한</td><td>물질적 자원 제공과 구조적 제한의 변화</td></tr>
+<tr><td data-label="사정">권력의 결여</td><td data-label="목표">피착취자의 권력 증진</td></tr>
+<tr><td data-label="사정">이데올로기로 인한 역할 제한</td><td data-label="목표">이데올로기적 역할 제한의 완화</td></tr>
+<tr><td data-label="사정">이익집단 간의 갈등</td><td data-label="목표">지배집단의 착취 경감과 그 기능의 폭로, 권력 불균형 제거</td></tr>
+<tr><td data-label="사정">변화능력의 부재</td><td data-label="목표">삶에 대한 변화와 통제능력 향상, 더 넓은 사회적 영향에 대한 자각</td></tr>
+<tr><td data-label="사정">사회적 낙인과정의 영향</td><td data-label="목표">사회적 낙인을 거부하여 낙인으로부터 자유로워짐</td></tr>
+<tr><td data-label="사정">사회·경제 구조적 제한</td><td data-label="목표">물질적 자원 제공과 구조적 제한의 변화</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사례 적용: 카프카의 『변신』</strong></p>
 <ul>
@@ -1985,11 +2002,11 @@ main{min-width:0}
 <li><strong>대상자 중심</strong> — 대상자가 해결하기 희망하는 욕구에 우선순위를 두었는가, 강점·장애물·사회적 자원을 반영했는가, 서비스 제공 주체와 담당자에 대상자의 역할이 포함되었는가?</li>
 </ul>
 <p class="tt"><strong>장기목표 vs 단기목표</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>장기목표</th><th>단기목표</th></tr></thead><tbody>
-<tr><td>의미</td><td>종결 시점에 클라이언트와 가족의 삶에 이루어질 현실적인 변화 상태</td><td>장기목표를 단계적으로 수행해 나가는 세부적인 목표</td></tr>
-<tr><td>기간</td><td>6개월~1년 이내 달성 가능</td><td>1~3개월 이내 달성 가능</td></tr>
-<tr><td>기술 방식</td><td>제공자의 업무가 아닌 클라이언트·가족의 기대되는 변화</td><td>목적-장기목표-단기목표의 연관성을 고려하여 구체적으로</td></tr>
+<tr><td data-label="구분">의미</td><td data-label="장기목표">종결 시점에 클라이언트와 가족의 삶에 이루어질 현실적인 변화 상태</td><td data-label="단기목표">장기목표를 단계적으로 수행해 나가는 세부적인 목표</td></tr>
+<tr><td data-label="구분">기간</td><td data-label="장기목표">6개월~1년 이내 달성 가능</td><td data-label="단기목표">1~3개월 이내 달성 가능</td></tr>
+<tr><td data-label="구분">기술 방식</td><td data-label="장기목표">제공자의 업무가 아닌 클라이언트·가족의 기대되는 변화</td><td data-label="단기목표">목적-장기목표-단기목표의 연관성을 고려하여 구체적으로</td></tr>
 </tbody></table></div>
 <h3>4. 목표와 계획 설정 시 사회복지사의 태도</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>합의를 통한 목표 수립</strong></p>
@@ -2012,15 +2029,15 @@ main{min-width:0}
 <li><strong>클라이언트 측면</strong> — 욕구가 충족되기 시작하고, 삶의 질이 개선되며 임파워먼트를 위한 기제가 작동하는 단계임.</li>
 </ul>
 <p class="tt"><strong>잔여적·제도적 사례관리의 실행 전략</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>전략의 성격</td><td>개인의 적응과 대처를 가능하게 하는 전략</td><td>변화와 통제를 가능하게 하는 전략</td></tr>
-<tr><td>교육</td><td>기술, 훈련 등 직접적 원조</td><td>사회교육</td></tr>
-<tr><td>자원 활용</td><td>수동적 자원 활용</td><td>적극적 자원 활용</td></tr>
-<tr><td>공감</td><td>정서적 공감</td><td>사회적 공감</td></tr>
-<tr><td>지지</td><td>정서적 지지</td><td>사회적 지지</td></tr>
-<tr><td>상담</td><td>자기자각 상담</td><td>비판적 자각역량 강화</td></tr>
-<tr><td>관계</td><td>가족치료, 관계작업</td><td>사회적 옹호</td></tr>
+<tr><td data-label="구분">전략의 성격</td><td data-label="잔여적 사례관리">개인의 적응과 대처를 가능하게 하는 전략</td><td data-label="제도적 사례관리">변화와 통제를 가능하게 하는 전략</td></tr>
+<tr><td data-label="구분">교육</td><td data-label="잔여적 사례관리">기술, 훈련 등 직접적 원조</td><td data-label="제도적 사례관리">사회교육</td></tr>
+<tr><td data-label="구분">자원 활용</td><td data-label="잔여적 사례관리">수동적 자원 활용</td><td data-label="제도적 사례관리">적극적 자원 활용</td></tr>
+<tr><td data-label="구분">공감</td><td data-label="잔여적 사례관리">정서적 공감</td><td data-label="제도적 사례관리">사회적 공감</td></tr>
+<tr><td data-label="구분">지지</td><td data-label="잔여적 사례관리">정서적 지지</td><td data-label="제도적 사례관리">사회적 지지</td></tr>
+<tr><td data-label="구분">상담</td><td data-label="잔여적 사례관리">자기자각 상담</td><td data-label="제도적 사례관리">비판적 자각역량 강화</td></tr>
+<tr><td data-label="구분">관계</td><td data-label="잔여적 사례관리">가족치료, 관계작업</td><td data-label="제도적 사례관리">사회적 옹호</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>직접 서비스 ① 상담: 자기자각 상담</strong></p>
 <ul>
@@ -2055,12 +2072,12 @@ main{min-width:0}
 <li><strong>저항에 대한 원조</strong> — 사회적·대인적 저항이 발생했을 때 원조하는 것으로, "여성이, 이주민이, 장애인이 뭘 할 수 있겠어"처럼 새로운 시도를 가치 절하하는 시각에 대항하는 활동도 포함됨.</li>
 </ul>
 <p class="tt"><strong>직접 서비스의 잔여적·제도적 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>영역</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>상담</td><td>자기자각 상담: 동기 강화, 강점 활용, 실행 점검</td><td>비판적 자기자각 상담: 내적·외적 측면 분리, 통념에 대한 도전, 대안 창출</td></tr>
-<tr><td>교육</td><td>기술과 훈련: 일상생활·독립적 삶의 기술, 모델링·코칭·강화물</td><td>사회교육: 비판적 성찰, 자각과 행동이 함께하는 프락시스</td></tr>
-<tr><td>공감</td><td>정서적 공감: 감정을 그대로 받아들이고 신뢰 구축</td><td>사회적 공감: 개인적 근심과 사회적 신념의 연결 파악</td></tr>
-<tr><td>지지</td><td>정서적 지지: 심리적 안정</td><td>사회적 지지: 사회적 환경 속 행동 지지, 대안적 지지망, 사회적 역할 가치화</td></tr>
+<tr><td data-label="영역">상담</td><td data-label="잔여적 사례관리">자기자각 상담: 동기 강화, 강점 활용, 실행 점검</td><td data-label="제도적 사례관리">비판적 자기자각 상담: 내적·외적 측면 분리, 통념에 대한 도전, 대안 창출</td></tr>
+<tr><td data-label="영역">교육</td><td data-label="잔여적 사례관리">기술과 훈련: 일상생활·독립적 삶의 기술, 모델링·코칭·강화물</td><td data-label="제도적 사례관리">사회교육: 비판적 성찰, 자각과 행동이 함께하는 프락시스</td></tr>
+<tr><td data-label="영역">공감</td><td data-label="잔여적 사례관리">정서적 공감: 감정을 그대로 받아들이고 신뢰 구축</td><td data-label="제도적 사례관리">사회적 공감: 개인적 근심과 사회적 신념의 연결 파악</td></tr>
+<tr><td data-label="영역">지지</td><td data-label="잔여적 사례관리">정서적 지지: 심리적 안정</td><td data-label="제도적 사례관리">사회적 지지: 사회적 환경 속 행동 지지, 대안적 지지망, 사회적 역할 가치화</td></tr>
 </tbody></table></div>
 <h3>2. 간접 서비스 제공</h3>
 <p class="sh"><strong>연계(linkage)</strong></p>
@@ -2086,11 +2103,11 @@ main{min-width:0}
 <li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>제도적 옹호의 방법</strong> — 자격 조건과 이를 어디서 어떻게 얻는지 충분한 정보를 제공하고, 관료주의 원칙의 허점을 발견하여 원칙이나 상황을 클라이언트에게 맞게 유연하게 활용함. 기관의 공식·비공식 규칙과 절차를 숙지해 그 불일치의 허점을 파악하며, 노동청이나 근로감독관과의 관계 형성 등 대인관계 기술을 구사함.</li>
 </ul>
 <p class="tt"><strong>간접 서비스 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead><tr><th>구분</th><th>연계</th><th>조정</th><th>옹호</th></tr></thead><tbody>
-<tr><td>의미</td><td>최선의 기관·자원을 선택하도록 자원망을 조직하고 지원</td><td>서비스 중복이나 자원 간 갈등 시 적절한 역할분담에 관여</td><td>힘이 약한 클라이언트의 입장을 대신 말하여 접근성과 활용성을 증진</td></tr>
-<tr><td>사례</td><td>가정폭력 피해자 C씨의 쉼터 연계</td><td>결혼이민여성 K씨 아들의 미술치료 중복 수혜</td><td>고등학생 D군의 아르바이트 임금체불</td></tr>
-<tr><td>제도적 관점</td><td>연계 과정 자체를 권리 요구 방법을 배우는 사회교육으로 활용</td><td>기관 편의가 아닌 클라이언트 욕구 기반의 조정</td><td>문제를 권리 보호의 문제로 인식시키고 희생자를 비난하지 않음</td></tr>
+<tr><td data-label="구분">의미</td><td data-label="연계">최선의 기관·자원을 선택하도록 자원망을 조직하고 지원</td><td data-label="조정">서비스 중복이나 자원 간 갈등 시 적절한 역할분담에 관여</td><td data-label="옹호">힘이 약한 클라이언트의 입장을 대신 말하여 접근성과 활용성을 증진</td></tr>
+<tr><td data-label="구분">사례</td><td data-label="연계">가정폭력 피해자 C씨의 쉼터 연계</td><td data-label="조정">결혼이민여성 K씨 아들의 미술치료 중복 수혜</td><td data-label="옹호">고등학생 D군의 아르바이트 임금체불</td></tr>
+<tr><td data-label="구분">제도적 관점</td><td data-label="연계">연계 과정 자체를 권리 요구 방법을 배우는 사회교육으로 활용</td><td data-label="조정">기관 편의가 아닌 클라이언트 욕구 기반의 조정</td><td data-label="옹호">문제를 권리 보호의 문제로 인식시키고 희생자를 비난하지 않음</td></tr>
 </tbody></table></div>
 <h3>3. 사례관리 과정기록지</h3>
 <p class="sh"><strong>과정기록지의 구성</strong></p>
@@ -2138,12 +2155,12 @@ main{min-width:0}
 <li><strong>향후 계획</strong> — 여성봉사회의 매주 가사 서비스에 한계가 있어 노인돌봄 바우처를 요청하고, 집주인의 강제퇴거가 예상되어 주거 이전 대책을 마련하며, 마을 내 빈집 이사가 어려우면 알코올 치료가 가능한 양로시설 입소를 검토함. 3개월 정도 입원이 예상되면 안부 살피기와 밑반찬 서비스를 잠정 중지하고 퇴원 후 재개하도록 제공자에게 양해를 구함. 자의 입원이라 언제든 퇴원할 수 있으므로 가족과 연락해 치료를 지속하게 하고, 형수를 설득해 병문안을 유도하여 갈등 해소와 치료 효과를 높이고자 함.</li>
 </ul>
 <p class="tt"><strong>점검의 영역과 방법</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>주요 점검 내용</th><th>방법·자료</th></tr></thead><tbody>
-<tr><td>대상자 점검</td><td>스스로의 노력, 강점 활용, 목표 달성 노력, 담당자와의 상호작용, 비판적 자기자각</td><td>관찰, 가정방문, 대면·전화 접촉</td></tr>
-<tr><td>서비스 점검</td><td>외부 서비스의 계획 이행, 담당자의 노력, 서비스의 질, 대상자와의 상호작용</td><td>기관 방문, 대면·전화 접촉, 담당자 기록지</td></tr>
-<tr><td>질적 점검</td><td>노력과 이행도를 심층적으로 파악</td><td>심층 인터뷰 방식의 접촉</td></tr>
-<tr><td>양적 점검</td><td>이행 정도와 변화 정도를 수치로 파악</td><td>척도, 결과지, 양적 자료</td></tr>
+<tr><td data-label="구분">대상자 점검</td><td data-label="주요 점검 내용">스스로의 노력, 강점 활용, 목표 달성 노력, 담당자와의 상호작용, 비판적 자기자각</td><td data-label="방법·자료">관찰, 가정방문, 대면·전화 접촉</td></tr>
+<tr><td data-label="구분">서비스 점검</td><td data-label="주요 점검 내용">외부 서비스의 계획 이행, 담당자의 노력, 서비스의 질, 대상자와의 상호작용</td><td data-label="방법·자료">기관 방문, 대면·전화 접촉, 담당자 기록지</td></tr>
+<tr><td data-label="구분">질적 점검</td><td data-label="주요 점검 내용">노력과 이행도를 심층적으로 파악</td><td data-label="방법·자료">심층 인터뷰 방식의 접촉</td></tr>
+<tr><td data-label="구분">양적 점검</td><td data-label="주요 점검 내용">이행 정도와 변화 정도를 수치로 파악</td><td data-label="방법·자료">척도, 결과지, 양적 자료</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l11"><header class="lh"><span class="no">11강</span><h2>사례관리 실천과정과 기록 (5) 평가 및 종결 단계</h2></header><div class="ct">
 <h3>1. 평가</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>평가의 개념</strong></p>
@@ -2185,12 +2202,12 @@ main{min-width:0}
 <li><strong>자각평가</strong> — 급진 사회복지실천과 제도적 사례관리에서 중요하게 여기는 평가로, 변화를 수용하고 대처하는 능력이 있는가, 차후 욕구 충족에 필요한 지역사회 자원을 충분히 파악하고 있는가, 그 자원을 활용하는 방법을 아는가, 잠재적 지지체계를 보유하고 있는가를 평가함.</li>
 </ul>
 <p class="tt"><strong>평가의 기본 유형 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>유형</th><th>평가 대상</th><th>핵심 질문</th></tr></thead><tbody>
-<tr><td>결과평가(총괄·성과)</td><td>종결 시점의 클라이언트 변화와 성과</td><td>서비스가 효과적이었고 어떤 성과를 냈는가?</td></tr>
-<tr><td>과정평가(형성)</td><td>사례관리 진행 과정의 적절성</td><td>표준화된 과정에 따라 서비스를 적절히 받고 있는가?</td></tr>
-<tr><td>구조평가</td><td>기관의 신뢰도·역량, 사례 수, 행정 지원</td><td>사례관리를 위한 구조가 적절하게 갖추어져 있는가?</td></tr>
-<tr><td>자각평가</td><td>클라이언트의 변화 대처와 자원 활용 역량</td><td>스스로 자원을 파악·활용하고 지지체계를 갖추었는가?</td></tr>
+<tr><td data-label="유형">결과평가(총괄·성과)</td><td data-label="평가 대상">종결 시점의 클라이언트 변화와 성과</td><td data-label="핵심 질문">서비스가 효과적이었고 어떤 성과를 냈는가?</td></tr>
+<tr><td data-label="유형">과정평가(형성)</td><td data-label="평가 대상">사례관리 진행 과정의 적절성</td><td data-label="핵심 질문">표준화된 과정에 따라 서비스를 적절히 받고 있는가?</td></tr>
+<tr><td data-label="유형">구조평가</td><td data-label="평가 대상">기관의 신뢰도·역량, 사례 수, 행정 지원</td><td data-label="핵심 질문">사례관리를 위한 구조가 적절하게 갖추어져 있는가?</td></tr>
+<tr><td data-label="유형">자각평가</td><td data-label="평가 대상">클라이언트의 변화 대처와 자원 활용 역량</td><td data-label="핵심 질문">스스로 자원을 파악·활용하고 지지체계를 갖추었는가?</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>성과평가의 예시와 성과지표</strong></p>
 <ul>
@@ -2295,11 +2312,11 @@ main{min-width:0}
 <li><strong>구성</strong> — 종결 사유, 클라이언트의 변화, 사후관리 계획(기간, 방법 등), 사례관리자 의견(실무자의 전문적 판단과 의견의 종합 기술), 사례회의를 통한 종결 심사의견과 종합 심사의견을 기록하여 보고함.</li>
 </ul>
 <p class="tt"><strong>종결의 범주</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>범주</th><th>해당 사유</th><th>사례관리자의 대응</th></tr></thead><tbody>
-<tr><td>긍정적 종결</td><td>목표 달성, 자발적 요청, 욕구 충족으로 스스로 서비스 조정 가능</td><td>역량 향상을 인식시키고 긍정적 정서 강화, 변화 유지 지원</td></tr>
-<tr><td>비자발적 종결</td><td>비협조, 기관의 정책적 사유, 이주·시설입소 등 외부 요인</td><td>성취하지 못한 요인을 함께 토의하고 감정 정리, 필요시 타 기관 의뢰</td></tr>
-<tr><td>강제 종결</td><td>안전 및 윤리적 판단(다른 클라이언트의 안전·복지 등)</td><td>사례회의를 통한 결정, 대안적 지원 연계</td></tr>
+<tr><td data-label="범주">긍정적 종결</td><td data-label="해당 사유">목표 달성, 자발적 요청, 욕구 충족으로 스스로 서비스 조정 가능</td><td data-label="사례관리자의 대응">역량 향상을 인식시키고 긍정적 정서 강화, 변화 유지 지원</td></tr>
+<tr><td data-label="범주">비자발적 종결</td><td data-label="해당 사유">비협조, 기관의 정책적 사유, 이주·시설입소 등 외부 요인</td><td data-label="사례관리자의 대응">성취하지 못한 요인을 함께 토의하고 감정 정리, 필요시 타 기관 의뢰</td></tr>
+<tr><td data-label="범주">강제 종결</td><td data-label="해당 사유">안전 및 윤리적 판단(다른 클라이언트의 안전·복지 등)</td><td data-label="사례관리자의 대응">사례회의를 통한 결정, 대안적 지원 연계</td></tr>
 </tbody></table></div>
 <h3>3. 사후관리</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>사후관리의 개념과 중요성</strong></p>
@@ -2321,11 +2338,11 @@ main{min-width:0}
 <li><strong>정서적 종결</strong> — 이론뿐 아니라 사람과의 관계, 지역사회 자원, 네트워크를 클라이언트가 잘 유지하도록 지지하는 정서적 종결이 중요함.</li>
 </ul>
 <p class="tt"><strong>평가 → 종결 → 사후관리 흐름 정리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>단계</th><th>핵심 내용</th><th>주요 기록</th></tr></thead><tbody>
-<tr><td>평가</td><td>만족도, 목표 달성도, 부가적 성과, 욕구 충족 지속 가능성 확인</td><td>사례관리 계획 및 평가표, 만족도 조사지, 척도</td></tr>
-<tr><td>종결</td><td>사례회의를 통한 결정, 정서적 반응 다루기, 사후관리 계획 수립</td><td>종결 보고서</td></tr>
-<tr><td>사후관리</td><td>종결 후 6개월 원칙으로 안정성 모니터링, 재개입 필요성 판단</td><td>사후관리 보고서, 과정기록지</td></tr>
+<tr><td data-label="단계">평가</td><td data-label="핵심 내용">만족도, 목표 달성도, 부가적 성과, 욕구 충족 지속 가능성 확인</td><td data-label="주요 기록">사례관리 계획 및 평가표, 만족도 조사지, 척도</td></tr>
+<tr><td data-label="단계">종결</td><td data-label="핵심 내용">사례회의를 통한 결정, 정서적 반응 다루기, 사후관리 계획 수립</td><td data-label="주요 기록">종결 보고서</td></tr>
+<tr><td data-label="단계">사후관리</td><td data-label="핵심 내용">종결 후 6개월 원칙으로 안정성 모니터링, 재개입 필요성 판단</td><td data-label="주요 기록">사후관리 보고서, 과정기록지</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l12"><header class="lh"><span class="no">12강</span><h2>민간 사례관리: 종합사회복지관</h2></header><div class="ct">
 <h3>1. 사례관리 실천현장으로서 사회복지관의 이해</h3>
 <p class="sh"><strong>사회복지관 사례관리실천의 추진배경</strong></p>
@@ -2377,12 +2394,12 @@ main{min-width:0}
 <li><strong>사각지대</strong> — 지역사회 내 사각지대에 놓여 있으며 사례관리 접근방법으로 도움이 필요한 대상자.</li>
 </ul>
 <p class="tt"><strong>사회복지관 사례관리의 제도화 과정</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>시기</th><th>주요 내용</th><th>의미</th></tr></thead><tbody>
-<tr><td>1980년대 후반</td><td>저소득층 노인·장애인 가정봉사원 파견사업</td><td>사례관리의 출발점</td></tr>
-<tr><td>1992년</td><td>사회복지관 부설 재가복지봉사센터 설치</td><td>사례관리 서비스 본격화</td></tr>
-<tr><td>2006·2009년</td><td>서울시·전국 사회복지관 평가에 사례관리 항목 포함</td><td>핵심 서비스로 자리 잡음</td></tr>
-<tr><td>2012년</td><td>사회복지사업법 시행규칙 개정, 희망복지지원단·맞춤형 복지전담팀 신설</td><td>3대 기능으로 법적 명시, 제도적·정책적 변화</td></tr>
+<tr><td data-label="시기">1980년대 후반</td><td data-label="주요 내용">저소득층 노인·장애인 가정봉사원 파견사업</td><td data-label="의미">사례관리의 출발점</td></tr>
+<tr><td data-label="시기">1992년</td><td data-label="주요 내용">사회복지관 부설 재가복지봉사센터 설치</td><td data-label="의미">사례관리 서비스 본격화</td></tr>
+<tr><td data-label="시기">2006·2009년</td><td data-label="주요 내용">서울시·전국 사회복지관 평가에 사례관리 항목 포함</td><td data-label="의미">핵심 서비스로 자리 잡음</td></tr>
+<tr><td data-label="시기">2012년</td><td data-label="주요 내용">사회복지사업법 시행규칙 개정, 희망복지지원단·맞춤형 복지전담팀 신설</td><td data-label="의미">3대 기능으로 법적 명시, 제도적·정책적 변화</td></tr>
 </tbody></table></div>
 <h3>2. 종합사회복지관의 사례관리 과정</h3>
 <p class="sh"><strong>사례관리 흐름도</strong></p>
@@ -2391,14 +2408,14 @@ main{min-width:0}
 <li><strong>재사정</strong> — 평가 과정에서 욕구나 환경이 변화하거나 추가 욕구가 있으면 재사정을 통해 다시 계획을 수립하고 실행함.</li>
 </ul>
 <p class="tt"><strong>과정별 핵심과업과 필요서류</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>단계</th><th>핵심과업</th><th>필요서류 및 양식</th></tr></thead><tbody>
-<tr><td>접수와 선정</td><td>발굴과 의뢰 등으로 접수, 초기 면접 진행, 선정회의를 통한 선정</td><td>접수대장, 개인정보 동의서, 인테이크 기록지</td></tr>
-<tr><td>실천관계 수립·사정</td><td>전문적 관계 수립, 강점·지원·장애물 등 사정, 클라이언트와 욕구 합의</td><td>사정 기록지</td></tr>
-<tr><td>계획수립과 계약</td><td>합의한 욕구에 따른 실행계획 수립, 실행계획에 따른 계약</td><td>실행계획표, 계약서</td></tr>
-<tr><td>실행과 모니터링</td><td>계획에 따른 실천, 자원과 서비스 모니터링</td><td>과정기록지, 슈퍼비전기록지, 사례회의록</td></tr>
-<tr><td>평가</td><td>변화 목표에 따른 서비스 제공·성과 확인, 긍정적 변화 확인으로 성공 경험 인식</td><td>사례관리 평가서, 사례관리 만족도조사지</td></tr>
-<tr><td>종결과 사후모니터링</td><td>목표달성·거주지 이전 등 계약 시 제시한 종결 사유에 맞게 종결, 사후모니터링 계획 수립과 진행</td><td>종결기록지, 사후모니터링기록지</td></tr>
+<tr><td data-label="단계">접수와 선정</td><td data-label="핵심과업">발굴과 의뢰 등으로 접수, 초기 면접 진행, 선정회의를 통한 선정</td><td data-label="필요서류 및 양식">접수대장, 개인정보 동의서, 인테이크 기록지</td></tr>
+<tr><td data-label="단계">실천관계 수립·사정</td><td data-label="핵심과업">전문적 관계 수립, 강점·지원·장애물 등 사정, 클라이언트와 욕구 합의</td><td data-label="필요서류 및 양식">사정 기록지</td></tr>
+<tr><td data-label="단계">계획수립과 계약</td><td data-label="핵심과업">합의한 욕구에 따른 실행계획 수립, 실행계획에 따른 계약</td><td data-label="필요서류 및 양식">실행계획표, 계약서</td></tr>
+<tr><td data-label="단계">실행과 모니터링</td><td data-label="핵심과업">계획에 따른 실천, 자원과 서비스 모니터링</td><td data-label="필요서류 및 양식">과정기록지, 슈퍼비전기록지, 사례회의록</td></tr>
+<tr><td data-label="단계">평가</td><td data-label="핵심과업">변화 목표에 따른 서비스 제공·성과 확인, 긍정적 변화 확인으로 성공 경험 인식</td><td data-label="필요서류 및 양식">사례관리 평가서, 사례관리 만족도조사지</td></tr>
+<tr><td data-label="단계">종결과 사후모니터링</td><td data-label="핵심과업">목표달성·거주지 이전 등 계약 시 제시한 종결 사유에 맞게 종결, 사후모니터링 계획 수립과 진행</td><td data-label="필요서류 및 양식">종결기록지, 사후모니터링기록지</td></tr>
 </tbody></table></div>
 <h3>3. 사례: 방화6종합사회복지관</h3>
 <p class="sh"><strong>기관 소개</strong></p>
@@ -2427,14 +2444,14 @@ main{min-width:0}
 <li><strong>2차 개입 성과</strong> — 신경과 진단 이후 스스로 변화하려는 의지가 높아져 금주를 진행했고, 지팡이·보행기에 의지해 외출할 정도로 일상생활이 회복되었으며, 공인중개사 시험 준비 등 경제활동 재개를 위해 노력함. 어머니는 건강식당 이용으로 이웃 관계를 형성하며 지역사회에서 생활할 기반을 마련함.</li>
 </ul>
 <p class="tt"><strong>사례관리 전후 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>영역</th><th>사례관리 전</th><th>사례관리 후</th></tr></thead><tbody>
-<tr><td>신체</td><td>신체기능 저하로 실질적인 이동 불가</td><td>보행기를 이용해 거동 가능</td></tr>
-<tr><td>복지서비스</td><td>접근 의지가 낮음</td><td>복지관 등 복지서비스 접근 의지가 높아짐</td></tr>
-<tr><td>정신건강</td><td>음주 의존 등 정신건강 고위험군 특성</td><td>금주 등으로 정신과적 어려움 극복</td></tr>
-<tr><td>의료</td><td>의료기관 방문에 대한 심리적 저항이 높음</td><td>정기 진료와 약물처방, 병원 직접 예약 등 자기결정과 주도성 회복</td></tr>
-<tr><td>장애등록</td><td>절차 이해 부족, 접근 어려움</td><td>장애등록 절차 진행을 시도함</td></tr>
-<tr><td>가족·영양</td><td>가족관계 단절·갈등, 체중 저하와 영양불균형</td><td>가족갈등 해소, 자발적 식사 조절로 신체 회복 기반 마련, 모친의 영양균형과 사회적 지지체계 마련</td></tr>
+<tr><td data-label="영역">신체</td><td data-label="사례관리 전">신체기능 저하로 실질적인 이동 불가</td><td data-label="사례관리 후">보행기를 이용해 거동 가능</td></tr>
+<tr><td data-label="영역">복지서비스</td><td data-label="사례관리 전">접근 의지가 낮음</td><td data-label="사례관리 후">복지관 등 복지서비스 접근 의지가 높아짐</td></tr>
+<tr><td data-label="영역">정신건강</td><td data-label="사례관리 전">음주 의존 등 정신건강 고위험군 특성</td><td data-label="사례관리 후">금주 등으로 정신과적 어려움 극복</td></tr>
+<tr><td data-label="영역">의료</td><td data-label="사례관리 전">의료기관 방문에 대한 심리적 저항이 높음</td><td data-label="사례관리 후">정기 진료와 약물처방, 병원 직접 예약 등 자기결정과 주도성 회복</td></tr>
+<tr><td data-label="영역">장애등록</td><td data-label="사례관리 전">절차 이해 부족, 접근 어려움</td><td data-label="사례관리 후">장애등록 절차 진행을 시도함</td></tr>
+<tr><td data-label="영역">가족·영양</td><td data-label="사례관리 전">가족관계 단절·갈등, 체중 저하와 영양불균형</td><td data-label="사례관리 후">가족갈등 해소, 자발적 식사 조절로 신체 회복 기반 마련, 모친의 영양균형과 사회적 지지체계 마련</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사회복지사의 태도와 당사자의 변화</strong></p>
 <ul>
@@ -2455,12 +2472,12 @@ main{min-width:0}
 <li><strong>인권옹호자로서의 사회복지사</strong> — 개인과 인접 환경에 대한 개입은 당사자의 변화를 이끌 수 있지만 구조적 원인의 변화는 이끌지 못하므로, 사회복지사가 인권옹호자로서 동료와 함께 학습하며 주민과 함께 인권옹호 활동을 확대해야 함 ("사례관리를 넘어 사회관리로 가기 위해서는 사회복지사는 인권옹호자가 되어야 합니다").</li>
 </ul>
 <p class="tt"><strong>사례관리 vs 사회관리 관점의 접근</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>사례관리(개인·인접환경)</th><th>사회관리(구조)</th></tr></thead><tbody>
-<tr><td>경제</td><td>기초생활수급 신청, 후원품 지원</td><td>부양의무자 기준 폐지 운동</td></tr>
-<tr><td>교육·생계</td><td>식생활·일상생활 지원</td><td>빈곤을 사회 문제로 인식, 무상교육·기본소득 등 제도 요구</td></tr>
-<tr><td>장애</td><td>장애등록 절차 지원, 병원 동행</td><td>행정연계형·자동등록제 정책 제안</td></tr>
-<tr><td>사회복지사</td><td>당사자의 자기결정과 회복 지원</td><td>인권옹호자로서 동료·주민과 함께 학습하고 활동</td></tr>
+<tr><td data-label="구분">경제</td><td data-label="사례관리(개인·인접환경)">기초생활수급 신청, 후원품 지원</td><td data-label="사회관리(구조)">부양의무자 기준 폐지 운동</td></tr>
+<tr><td data-label="구분">교육·생계</td><td data-label="사례관리(개인·인접환경)">식생활·일상생활 지원</td><td data-label="사회관리(구조)">빈곤을 사회 문제로 인식, 무상교육·기본소득 등 제도 요구</td></tr>
+<tr><td data-label="구분">장애</td><td data-label="사례관리(개인·인접환경)">장애등록 절차 지원, 병원 동행</td><td data-label="사회관리(구조)">행정연계형·자동등록제 정책 제안</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="사례관리(개인·인접환경)">당사자의 자기결정과 회복 지원</td><td data-label="사회관리(구조)">인권옹호자로서 동료·주민과 함께 학습하고 활동</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l13"><header class="lh"><span class="no">13강</span><h2>공공 사례관리</h2></header><div class="ct">
 <h3>1. 공공 사례관리</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>공공 사례관리의 의미와 근거</strong></p>
@@ -2495,11 +2512,11 @@ main{min-width:0}
 <li><strong>운영 추진체계</strong> — 보건복지부가 사업 운영을 총괄하고 사회보장정보원이 사례관리 정책을 지원하며, 시·도는 운영지원과 지도감독을, 시·군·구와 읍·면·동은 발굴·협력체계 구축·사례관리를 직접 수행함.</li>
 </ul>
 <p class="tt"><strong>복지담당공무원 vs 통합사례관리사</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>복지담당공무원</th><th>통합사례관리사</th></tr></thead><tbody>
-<tr><td>자격·배치</td><td>7~8급, 5년 이상 경력의 사회복지직 공무원</td><td>전문인력, 시·군·구마다 최소 1인 이상(공문 절차로 배치)</td></tr>
-<tr><td>주요 역할</td><td>단장 보좌, 통합사례관리 업무 전담, 자원 총괄 관리, 민관협의체 운영 총괄</td><td>고난도 사례관리, 읍·면·동 교육·슈퍼비전, 자원 발굴과 불균형 조정, 모니터링·컨설팅</td></tr>
-<tr><td>유의점</td><td>자원 총괄 관리 담당자를 별도 지정</td><td>기타 행정보조업무 금지</td></tr>
+<tr><td data-label="구분">자격·배치</td><td data-label="복지담당공무원">7~8급, 5년 이상 경력의 사회복지직 공무원</td><td data-label="통합사례관리사">전문인력, 시·군·구마다 최소 1인 이상(공문 절차로 배치)</td></tr>
+<tr><td data-label="구분">주요 역할</td><td data-label="복지담당공무원">단장 보좌, 통합사례관리 업무 전담, 자원 총괄 관리, 민관협의체 운영 총괄</td><td data-label="통합사례관리사">고난도 사례관리, 읍·면·동 교육·슈퍼비전, 자원 발굴과 불균형 조정, 모니터링·컨설팅</td></tr>
+<tr><td data-label="구분">유의점</td><td data-label="복지담당공무원">자원 총괄 관리 담당자를 별도 지정</td><td data-label="통합사례관리사">기타 행정보조업무 금지</td></tr>
 </tbody></table></div>
 <h3>2. 통합사례관리</h3>
 <p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>통합사례관리의 개념과 목적</strong></p>
@@ -2544,11 +2561,11 @@ main{min-width:0}
 <li><strong>운영</strong> — 맞춤형복지팀장이 주재하고, 대상자 선정의 경우 욕구조사 결과 등록 완료일로부터 5일 내외에 개최하며 수시로도 개최할 수 있음. 정보공유의 범위와 내용에 각별한 주의가 필요함.</li>
 </ul>
 <p class="tt"><strong>사례회의의 종류</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead><tr><th>구분</th><th>내부사례회의</th><th>통합사례회의</th><th>솔루션회의(시·군·구)</th></tr></thead><tbody>
-<tr><td>목적</td><td>사례관리가구 선정, 서비스제공계획 수립, 점검, 종결 등 협의</td><td>주요 서비스기관과 서비스 내용을 협의하여 연계방식 등 조정</td><td>통합사례회의를 1회 이상 했으나 더 큰 범위의 자원과 전문가 개입이 필요한 경우</td></tr>
-<tr><td>시기</td><td>수시</td><td>사례별 개최, 정기적 실시 권고</td><td>읍·면·동 의뢰 시 사례별·이슈별 개최(솔루션위원회 사전 구성)</td></tr>
-<tr><td>참석자</td><td>맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 필요시 대상자와 보호자</td><td>서비스 연계기관 담당자, 맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 해당 분야 전문가</td><td>맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 희망복지지원단, 솔루션위원</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="내부사례회의">사례관리가구 선정, 서비스제공계획 수립, 점검, 종결 등 협의</td><td data-label="통합사례회의">주요 서비스기관과 서비스 내용을 협의하여 연계방식 등 조정</td><td data-label="솔루션회의(시·군·구)">통합사례회의를 1회 이상 했으나 더 큰 범위의 자원과 전문가 개입이 필요한 경우</td></tr>
+<tr><td data-label="구분">시기</td><td data-label="내부사례회의">수시</td><td data-label="통합사례회의">사례별 개최, 정기적 실시 권고</td><td data-label="솔루션회의(시·군·구)">읍·면·동 의뢰 시 사례별·이슈별 개최(솔루션위원회 사전 구성)</td></tr>
+<tr><td data-label="구분">참석자</td><td data-label="내부사례회의">맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 필요시 대상자와 보호자</td><td data-label="통합사례회의">서비스 연계기관 담당자, 맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 해당 분야 전문가</td><td data-label="솔루션회의(시·군·구)">맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 희망복지지원단, 솔루션위원</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사례회의 진행요령</strong></p>
 <ul>
@@ -2571,12 +2588,12 @@ main{min-width:0}
 <li><strong>사후관리</strong> — 사례관리 가구와 서비스 연계 가구 모두 개입 종결 후 가구 특성을 고려해 일정 기간을 설정하고 변화를 지속적으로 모니터링함.</li>
 </ul>
 <p class="tt"><strong>사례관리 가구 vs 서비스 연계 가구</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>사례관리 가구</th><th>서비스 연계 가구</th></tr></thead><tbody>
-<tr><td>개입 기간</td><td>1개월 이상 중장기</td><td>단기(1개월 미만) 또는 단순 연계</td></tr>
-<tr><td>서비스 성격</td><td>복합적 문제에 다양한 서비스를 집중 제공</td><td>단순 서비스 연계로 해결 가능(예: 도시락배달)</td></tr>
-<tr><td>사례회의</td><td>일반 절차를 모두 적용</td><td>절차를 간소화하여 적용</td></tr>
-<tr><td>진행 경로</td><td>서비스 제공계획 수립 → 제공·점검 → 종결 → 사후관리</td><td>서비스 연계 실시 → 점검 → 사후관리</td></tr>
+<tr><td data-label="구분">개입 기간</td><td data-label="사례관리 가구">1개월 이상 중장기</td><td data-label="서비스 연계 가구">단기(1개월 미만) 또는 단순 연계</td></tr>
+<tr><td data-label="구분">서비스 성격</td><td data-label="사례관리 가구">복합적 문제에 다양한 서비스를 집중 제공</td><td data-label="서비스 연계 가구">단순 서비스 연계로 해결 가능(예: 도시락배달)</td></tr>
+<tr><td data-label="구분">사례회의</td><td data-label="사례관리 가구">일반 절차를 모두 적용</td><td data-label="서비스 연계 가구">절차를 간소화하여 적용</td></tr>
+<tr><td data-label="구분">진행 경로</td><td data-label="사례관리 가구">서비스 제공계획 수립 → 제공·점검 → 종결 → 사후관리</td><td data-label="서비스 연계 가구">서비스 연계 실시 → 점검 → 사후관리</td></tr>
 </tbody></table></div>
 <h3>3. 공공 사례관리의 실제: 인천광역시 남동구</h3>
 <p class="sh"><strong>기관 소개</strong></p>
@@ -2666,13 +2683,13 @@ main{min-width:0}
 <li><strong>여섯째</strong> — 사례관리자는 노인학대·노인자살 같은 위기 상황의 초기 발견, 조치, 예방의 모든 영역에서 주요 역할을 함.</li>
 </ul>
 <p class="tt"><strong>노인의 특성과 사례관리의 필요성 연결</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>영역</th><th>노인의 특성</th><th>사례관리가 필요한 이유</th></tr></thead><tbody>
-<tr><td>신체</td><td>신체 기능 저하, 질병률 증가</td><td>만성질환 관리</td></tr>
-<tr><td>정신</td><td>정신기능 저하, 높은 치매 발병률</td><td>치매노인과 부양가족 지원</td></tr>
-<tr><td>심리·사회</td><td>삶의 수용과 죽음 준비, 역할 상실과 관계망 축소</td><td>심리적 안정과 정신건강 증진, 가족 보호를 받지 못하는 노인 지원</td></tr>
-<tr><td>경제</td><td>소득원 상실로 빈곤 가능성</td><td>빈곤 노인은 주요 서비스 대상</td></tr>
-<tr><td>위기</td><td>노인학대, 노인자살</td><td>초기 발견·조치·예방의 모든 영역에서 역할</td></tr>
+<tr><td data-label="영역">신체</td><td data-label="노인의 특성">신체 기능 저하, 질병률 증가</td><td data-label="사례관리가 필요한 이유">만성질환 관리</td></tr>
+<tr><td data-label="영역">정신</td><td data-label="노인의 특성">정신기능 저하, 높은 치매 발병률</td><td data-label="사례관리가 필요한 이유">치매노인과 부양가족 지원</td></tr>
+<tr><td data-label="영역">심리·사회</td><td data-label="노인의 특성">삶의 수용과 죽음 준비, 역할 상실과 관계망 축소</td><td data-label="사례관리가 필요한 이유">심리적 안정과 정신건강 증진, 가족 보호를 받지 못하는 노인 지원</td></tr>
+<tr><td data-label="영역">경제</td><td data-label="노인의 특성">소득원 상실로 빈곤 가능성</td><td data-label="사례관리가 필요한 이유">빈곤 노인은 주요 서비스 대상</td></tr>
+<tr><td data-label="영역">위기</td><td data-label="노인의 특성">노인학대, 노인자살</td><td data-label="사례관리가 필요한 이유">초기 발견·조치·예방의 모든 영역에서 역할</td></tr>
 </tbody></table></div>
 <h3>3. 노인종합복지관: 중원노인종합복지관</h3>
 <p class="sh"><strong>기관 소개</strong></p>
@@ -2691,14 +2708,14 @@ main{min-width:0}
 <li><strong>현장의 특징</strong> — 점검 후 종결보다 재사정으로 다시 과정을 밟는 경우가 대부분이며, 종결은 주로 타 지역 이주나 사망의 경우에 이루어짐.</li>
 </ul>
 <p class="tt"><strong>단계별 작성서류</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead><tr><th>단계</th><th>작성서류</th></tr></thead><tbody>
-<tr><td>발굴 및 접수</td><td>초기 상담지, 개인정보 수집·이용 동의서</td></tr>
-<tr><td>사정</td><td>(사정 단계 전) 당사자 선정 사례회의, 사정 기록지, 사정 분석지, 서비스 이용계약서</td></tr>
-<tr><td>사례회의</td><td>사례회의자료, [사례판정] 사례회의록</td></tr>
-<tr><td>실행계획 수립·실행</td><td>실행 계획서(서비스 제공 동의서 포함), 상담일지 등 관련 자료(서비스의뢰서, 공문 등), [서비스 조정] 사례회의록</td></tr>
-<tr><td>점검</td><td>사례관리 점검 기록지, 사례관리 재사정 기록지</td></tr>
-<tr><td>평가 및 종결</td><td>종결평가서, 의뢰서, 상담일지, [종결] 사례회의록</td></tr>
+<tr><td data-label="단계">발굴 및 접수</td><td data-label="작성서류">초기 상담지, 개인정보 수집·이용 동의서</td></tr>
+<tr><td data-label="단계">사정</td><td data-label="작성서류">(사정 단계 전) 당사자 선정 사례회의, 사정 기록지, 사정 분석지, 서비스 이용계약서</td></tr>
+<tr><td data-label="단계">사례회의</td><td data-label="작성서류">사례회의자료, [사례판정] 사례회의록</td></tr>
+<tr><td data-label="단계">실행계획 수립·실행</td><td data-label="작성서류">실행 계획서(서비스 제공 동의서 포함), 상담일지 등 관련 자료(서비스의뢰서, 공문 등), [서비스 조정] 사례회의록</td></tr>
+<tr><td data-label="단계">점검</td><td data-label="작성서류">사례관리 점검 기록지, 사례관리 재사정 기록지</td></tr>
+<tr><td data-label="단계">평가 및 종결</td><td data-label="작성서류">종결평가서, 의뢰서, 상담일지, [종결] 사례회의록</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사례: "선배시민은 나를 좋은 사람으로 살게 해요" (윤○○ 선배시민)</strong></p>
 <ul>
@@ -2740,12 +2757,12 @@ main{min-width:0}
 <li><strong>마을에서의 실천</strong> — 어르신이 살아가는 곳은 마을이므로, 사례관리가 복지관 사무실이나 좁은 방을 넘어 마을로 갈 때 의미를 발견하고 만들어 갈 수 있음 ("노인 사례관리는 노인이 지역사회에서 나이 든 보통사람으로 살 수 있도록 함께하는 것입니다").</li>
 </ul>
 <p class="tt"><strong>노인을 바라보는 관점의 비교</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>기존 관점</th><th>중원노인종합복지관의 관점</th></tr></thead><tbody>
-<tr><td>노인에 대한 인식</td><td>돌봄이 필요한 대상, 서비스 수혜자</td><td>나이 든 보통사람, 동등한 시민</td></tr>
-<tr><td>개별성</td><td>'노인들'이라는 하나의 집단</td><td>수만큼 다양한 존재</td></tr>
-<tr><td>역할</td><td>돌봄을 받는 대상</td><td>상호 돌보는 주체, 나눔의 주체</td></tr>
-<tr><td>개입 방식</td><td>서비스 프로그램 중심, 개인의 문제로 이해</td><td>총체성의 관점, 자조모임 조직화, 마을에서의 실천</td></tr>
+<tr><td data-label="구분">노인에 대한 인식</td><td data-label="기존 관점">돌봄이 필요한 대상, 서비스 수혜자</td><td data-label="중원노인종합복지관의 관점">나이 든 보통사람, 동등한 시민</td></tr>
+<tr><td data-label="구분">개별성</td><td data-label="기존 관점">'노인들'이라는 하나의 집단</td><td data-label="중원노인종합복지관의 관점">수만큼 다양한 존재</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="기존 관점">돌봄을 받는 대상</td><td data-label="중원노인종합복지관의 관점">상호 돌보는 주체, 나눔의 주체</td></tr>
+<tr><td data-label="구분">개입 방식</td><td data-label="기존 관점">서비스 프로그램 중심, 개인의 문제로 이해</td><td data-label="중원노인종합복지관의 관점">총체성의 관점, 자조모임 조직화, 마을에서의 실천</td></tr>
 </tbody></table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l15"><header class="lh"><span class="no">15강</span><h2>사회관리로서 사례관리</h2></header><div class="ct">
 <h3>1. 사회적 위험과 사회관리</h3>
 <p class="sh"><strong>메두사호의 뗏목: 뗏목과 구명정</strong></p>
@@ -2783,12 +2800,12 @@ main{min-width:0}
 <li><strong>의미</strong> — 잔여적 사회복지 안에서는 최약자임을 증빙할 때만 복지를 제공함. 본래 사회복지는 모든 시민이 권리로서 당당하고 풍요롭게 살도록 지원하는 것이며, 어떻게 설계되었느냐에 따라 모습이 달라짐.</li>
 </ul>
 <p class="tt"><strong>위험사회의 구조 정리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>내용</th><th>예시</th></tr></thead><tbody>
-<tr><td>원인</td><td>외눈박이 거인의 질주(생산성 향상만 보는 돌진적 근대화), 호모 이코노미쿠스의 도구적 이성</td><td>산업재해 예방 비용 무시, GMO 식품 개발</td></tr>
-<tr><td>결과</td><td>잠재적 부수효과로서의 위험사회</td><td>미세먼지, 기후위기와 국지성 폭우</td></tr>
-<tr><td>특징</td><td>위험은 민주적이고 계급적, 가해자와 피해자의 불일치, 인지불가능성, 입증되지 않는 연관성, 조직화된 무책임성</td><td>반지하 침수 사망, 최대 9년의 건강수명 격차</td></tr>
-<tr><td>사회복지의 한계</td><td>최약자 선별과 취약함 증명 요구</td><td>수급권자가 되기 위해 투쟁하는 약자들과 맞서 싸우는 사회복지</td></tr>
+<tr><td data-label="구분">원인</td><td data-label="내용">외눈박이 거인의 질주(생산성 향상만 보는 돌진적 근대화), 호모 이코노미쿠스의 도구적 이성</td><td data-label="예시">산업재해 예방 비용 무시, GMO 식품 개발</td></tr>
+<tr><td data-label="구분">결과</td><td data-label="내용">잠재적 부수효과로서의 위험사회</td><td data-label="예시">미세먼지, 기후위기와 국지성 폭우</td></tr>
+<tr><td data-label="구분">특징</td><td data-label="내용">위험은 민주적이고 계급적, 가해자와 피해자의 불일치, 인지불가능성, 입증되지 않는 연관성, 조직화된 무책임성</td><td data-label="예시">반지하 침수 사망, 최대 9년의 건강수명 격차</td></tr>
+<tr><td data-label="구분">사회복지의 한계</td><td data-label="내용">최약자 선별과 취약함 증명 요구</td><td data-label="예시">수급권자가 되기 위해 투쟁하는 약자들과 맞서 싸우는 사회복지</td></tr>
 </tbody></table></div>
 <h3>2. 사회적 위험과 맞서 싸우는 용사들</h3>
 <p class="sh"><strong>원인의 원인을 생각하다</strong></p>
@@ -2807,12 +2824,12 @@ main{min-width:0}
 <li><strong>시의 의미</strong> — 구조를 보지 않으면 자선을 베푸는 사람은 미담의 주인공이 되고 받는 사람은 게으르다는 비난을 받는 희생양이 됨. 사회관리로서 사회복지사는 불쌍한 사람이 생기지 않는 공동체를 만드는 사람임.</li>
 </ul>
 <p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">6️⃣</span> <strong>잔여적 사례관리 vs 제도적 사례관리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
-<tr><td>태도</td><td>자선</td><td>연대</td></tr>
-<tr><td>대상</td><td>불쌍한 사람</td><td>시민</td></tr>
-<tr><td>변화</td><td>노력하는 의지적 개인</td><td>배고프지 않은 연대의 공동체</td></tr>
-<tr><td>명칭</td><td>사례관리</td><td>사회관리</td></tr>
+<tr><td data-label="구분">태도</td><td data-label="잔여적 사례관리">자선</td><td data-label="제도적 사례관리">연대</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">불쌍한 사람</td><td data-label="제도적 사례관리">시민</td></tr>
+<tr><td data-label="구분">변화</td><td data-label="잔여적 사례관리">노력하는 의지적 개인</td><td data-label="제도적 사례관리">배고프지 않은 연대의 공동체</td></tr>
+<tr><td data-label="구분">명칭</td><td data-label="잔여적 사례관리">사례관리</td><td data-label="제도적 사례관리">사회관리</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사회관리: 제도적 사례관리 모델</strong></p>
 <ul>
@@ -2828,11 +2845,11 @@ main{min-width:0}
 <li><strong>사회복지사</strong> — 잔여적 복지의 사례관리자에서 사회관리자로, 클라이언트의 기능과 복지를 최대화하는 전문사회복지사에서 시민과 함께 세상읽기와 세상만들기를 하는 문화활동가로, '보듬이'에서 사회적 위험에 맞서는 용사로 바뀌어야 함.</li>
 </ul>
 <p class="tt"><strong>사회관리로의 역할 전환</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>기존</th><th>사회관리</th></tr></thead><tbody>
-<tr><td>사회복지관</td><td>케어센터(care center), 잔여주의</td><td>커뮤니티센터(community center), 제도주의, 복지국가의 거점</td></tr>
-<tr><td>사회</td><td>big society</td><td>strong society</td></tr>
-<tr><td>사회복지사</td><td>사례관리자, 전문사회복지사, 보듬이</td><td>사회관리자, 세상읽기와 세상만들기를 하는 문화활동가, 사회적 위험에 맞서는 용사</td></tr>
+<tr><td data-label="구분">사회복지관</td><td data-label="기존">케어센터(care center), 잔여주의</td><td data-label="사회관리">커뮤니티센터(community center), 제도주의, 복지국가의 거점</td></tr>
+<tr><td data-label="구분">사회</td><td data-label="기존">big society</td><td data-label="사회관리">strong society</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="기존">사례관리자, 전문사회복지사, 보듬이</td><td data-label="사회관리">사회관리자, 세상읽기와 세상만들기를 하는 문화활동가, 사회적 위험에 맞서는 용사</td></tr>
 </tbody></table></div>
 <h3>3. 사회복지와 시민정치</h3>
 <p class="sh"><strong>이상의 인간과 이상의 공동체</strong></p>
@@ -2863,13 +2880,13 @@ main{min-width:0}
 <li><strong>결론</strong> — 재난불평등은 시민문해교육을 통해 조직된 시민력으로 해결의 실마리가 만들어지며, 이제 사회복지는 시민정치의 일선에 서야 함.</li>
 </ul>
 <p class="tt"><strong>사례관리에서 사회관리로: 15강 전체 정리</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead><tr><th>구분</th><th>사례관리</th><th>사회관리로서 사례관리</th></tr></thead><tbody>
-<tr><td>문제의 원인</td><td>개인과 인접환경</td><td>사회, 국가, 지구촌의 구조(원인의 원인)</td></tr>
-<tr><td>당사자</td><td>문제를 가진 개인, 불쌍한 사람</td><td>권리를 가진 시민, 일상의 전문가</td></tr>
-<tr><td>사회복지사</td><td>자원을 연결하는 사례관리자</td><td>인권옹호자, 문화활동가, 사회적 위험에 맞서는 용사</td></tr>
-<tr><td>방법</td><td>문제 사정, 자원 연결, 서비스 계획</td><td>시민교육, 세상읽기와 세상만들기, 학습 동아리, 프락시스</td></tr>
-<tr><td>지향</td><td>개인의 적응과 문제 해결</td><td>불쌍한 사람이 생기지 않는 연대의 공동체, 시민정치</td></tr>
+<tr><td data-label="구분">문제의 원인</td><td data-label="사례관리">개인과 인접환경</td><td data-label="사회관리로서 사례관리">사회, 국가, 지구촌의 구조(원인의 원인)</td></tr>
+<tr><td data-label="구분">당사자</td><td data-label="사례관리">문제를 가진 개인, 불쌍한 사람</td><td data-label="사회관리로서 사례관리">권리를 가진 시민, 일상의 전문가</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="사례관리">자원을 연결하는 사례관리자</td><td data-label="사회관리로서 사례관리">인권옹호자, 문화활동가, 사회적 위험에 맞서는 용사</td></tr>
+<tr><td data-label="구분">방법</td><td data-label="사례관리">문제 사정, 자원 연결, 서비스 계획</td><td data-label="사회관리로서 사례관리">시민교육, 세상읽기와 세상만들기, 학습 동아리, 프락시스</td></tr>
+<tr><td data-label="구분">지향</td><td data-label="사례관리">개인의 적응과 문제 해결</td><td data-label="사회관리로서 사례관리">불쌍한 사람이 생기지 않는 연대의 공동체, 시민정치</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>마지막 당부</strong></p>
 <ul>
