@@ -3262,12 +3262,18 @@ if(h2)h2.appendChild(all);paintAll();
 // 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
 let last=null;
 function mark(){
-  let cur=null;for(const [a,h] of subLinks){if(h.getBoundingClientRect().top<140)cur=a;else break;}
-  if(cur===last)return;last=cur;
+  // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
+  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<140)sec=s;});
+  let cur=null;
+  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<140)cur=a;else break;}
+  const key=(sec?sec.id:'')+'|'+(cur?cur.getAttribute('href'):'');
+  if(key===last)return;last=key;
   subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
-  if(cur){const li=cur.closest('li.tl');if(li&&!li.classList.contains('open')){li._set(true);paintAll();}
-    const r=cur.getBoundingClientRect(),nr=nav.getBoundingClientRect();
-    if(r.top<nr.top||r.bottom>nr.bottom)cur.scrollIntoView({block:'nearest'});}
+  const li=sec?nav.querySelector('li.tl > a[href="#'+sec.id+'"]')?.parentElement:null;
+  if(li&&!li.classList.contains('open')){li._set(true);paintAll();}
+  const tgt=cur||(li&&li.querySelector('a'));
+  if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top||r.bottom>nr.bottom)tgt.scrollIntoView({block:'nearest'});}
 }
 let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
 setTimeout(mark,300);
