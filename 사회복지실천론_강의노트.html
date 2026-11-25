@@ -3406,7 +3406,7 @@ nav.querySelectorAll(':scope > ol > li').forEach(li=>{
   li.insertBefore(b,a);
   const set=(on)=>{li.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));};
   set(open.has(id));
-  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);put([...open]);paintAll();};
+  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);if(autoLi===li)autoLi=null;put([...open]);paintAll();};
   li._set=set;li._id=id;
 });
 const h2=nav.querySelector('h2');
@@ -3416,7 +3416,7 @@ function paintAll(){all.textContent=tls.every(li=>li.classList.contains('open'))
 all.onclick=()=>{const on=!tls.every(li=>li.classList.contains('open'));tls.forEach(li=>{li._set(on);on?open.add(li._id):open.delete(li._id);});put([...open]);paintAll();};
 if(h2)h2.appendChild(all);paintAll();
 // 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
-let last=null;
+let last=null,autoLi=null;
 function mark(){
   // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
   let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<140)sec=s;});
@@ -3426,7 +3426,9 @@ function mark(){
   if(key===last)return;last=key;
   subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
   const li=sec?nav.querySelector('li.tl > a[href="#'+sec.id+'"]')?.parentElement:null;
-  if(li&&!li.classList.contains('open')){li._set(true);paintAll();}
+  // 스크롤로 자동으로 펼친 강의는 지나가면 다시 접음(직접 펼친 강의는 그대로 둠)
+  if(autoLi&&autoLi!==li&&!open.has(autoLi._id)){autoLi._set(false);autoLi=null;paintAll();}
+  if(li&&!li.classList.contains('open')){li._set(true);autoLi=li;paintAll();}
   const tgt=cur||(li&&li.querySelector('a'));
   if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
     if(r.top<nr.top||r.bottom>nr.bottom)tgt.scrollIntoView({block:'nearest'});}
