@@ -1,0 +1,2664 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<script>document.documentElement.setAttribute("data-theme","light")</script>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="keep-scroll.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>사회복지조사론 강의노트</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+/* 레이아웃: 공부방과 같은 색·글꼴. 위에 얇은 도구 막대, 넓은 화면에선 왼쪽에 강의 목차, 오른쪽에 강의별 카드 */
+:root{
+  --bg:#e6dfcf; --card:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --line:#dcd2bd; --soft:#f0e9d8;
+  --accent:#2a5bd7; --accent-soft:#e8e0ca; --note:#1f7a55; --note-soft:#e4f4ec;
+  --m6:#b4471c; --m6-soft:#fcebe3; --m5:#7a4fc2; --m5-soft:#efe8fb; --th:#efe6d1;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --f-head:"Noto Serif KR","Batang",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 도구 막대 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--card)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--card);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar .home{font-size:13px;font-weight:700;text-decoration:none;color:var(--accent);white-space:nowrap}
+.bar .ttl{font-family:var(--f-head);font-weight:900;font-size:16px;white-space:nowrap}
+.bar select{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 8px;max-width:min(260px,60vw)}
+.sp{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--m6-soft);border-color:var(--m6);color:var(--m6)}
+
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;padding-block:22px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto}
+nav.toc h2{font-size:12px;letter-spacing:.12em;color:var(--sub);margin:0 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.toc a{display:flex;gap:8px;align-items:baseline;text-decoration:none;padding:5px 8px;border-radius:8px;font-size:13.5px;line-height:1.4}
+nav.toc a b{flex:none;min-width:1.6em;color:var(--accent);font-variant-numeric:tabular-nums}
+nav.toc a:hover,nav.toc a.on{background:var(--accent-soft)}
+
+.intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.intro h1{font-family:var(--f-head);font-weight:900;font-size:28px;margin:0 0 4px;text-wrap:balance}
+.intro p{margin:4px 0;color:var(--sub);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.lec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px 18px;margin-bottom:18px;scroll-margin-top:70px;min-width:0}
+.lh{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding:14px 0 8px;margin-bottom:6px}
+.lh .no{font-weight:900;color:var(--accent);font-size:15px;white-space:nowrap}
+.lh h2{margin:0;font-family:var(--f-head);font-weight:900;font-size:22px;text-wrap:balance}
+.ct > blockquote{margin:4px 0 12px;padding:0;color:var(--sub);font-size:13.5px;border:0}
+.ct > blockquote p{margin:0}
+.ct h3{font-size:17px;margin:22px 0 8px;padding-left:10px;border-left:4px solid var(--accent);line-height:1.4}
+.ct p{margin:8px 0}
+.ct ul,.ct ol{margin:6px 0;padding-left:1.3em}
+.ct li{margin:3px 0}
+.ct strong{font-weight:700}
+.ct em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.tw{overflow-x:auto;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.mk{display:inline-block;font-size:14px;line-height:1;margin-right:3px;vertical-align:-1px;cursor:help}
+.totop{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--sub);text-decoration:none}
+.totop:hover{color:var(--accent)}
+footer{font-size:12.5px;color:var(--sub);margin-top:8px}
+
+/* 출제 표시만 강조 */
+body.focus .ct p:not(:has(.mk)), body.focus .ct li:not(:has(.mk)),
+body.focus .ct .tw:not(:has(.mk)), body.focus .ct tr:not(:has(.mk)), body.focus .ct > blockquote{opacity:.28}
+body.focus .ct h3:has(.mk) ~ .tw, body.focus .ct h3:has(.mk) + p, body.focus .ct h3:has(.mk) + ul, body.focus .ct h3:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw, body.focus .ct p:has(.mk) + ul, body.focus .ct p:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focus .ct p:has(.mk) + ol li{opacity:1}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav.toc{display:none}
+  .lec{padding:4px 14px 14px}
+  .intro{padding:16px}
+  .intro h1{font-size:23px}
+  .lh h2{font-size:19px}
+  table{font-size:13.5px}
+  th{white-space:normal}
+}
+
+.ct p.sh{font-size:15.5px;margin:22px 0 6px;padding:4px 10px;background:var(--accent-soft);border-radius:6px;line-height:1.5}
+.ct h3 + p.sh{margin-top:10px}
+.ct h3{font-size:18px;margin-top:30px}
+.ct p.tt{margin:16px 0 6px;color:var(--accent)}
+.ct li.sub{list-style:circle;margin-left:18px}
+main{min-width:0}
+.ct{overflow-wrap:anywhere}
+
+/* 표: 남색 머리행, 첫 열 강조, 세로 구분선, 줄무늬 */
+:root{--thd:#e2d4b2;--thd-ink:#2f2a23;--c1:#efe6d1;--zebra:rgba(120,100,60,.06);--cell:#fffdf7}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}}
+:root[data-theme="dark"]{--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}
+.ct .tw{border:1px solid var(--line);border-radius:8px;background:var(--cell);-webkit-overflow-scrolling:touch}
+.ct table{font-size:14px;line-height:1.55}
+.ct th,.ct td{padding:8px 11px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.ct th:last-child,.ct td:last-child{border-right:0}
+.ct thead th{background:var(--thd);color:var(--thd-ink);text-align:center;font-weight:700;border-bottom:1px solid var(--line)}
+.ct tbody tr:nth-child(even) td{background:var(--zebra)}
+.ct tbody td:first-child{background:var(--c1);font-weight:700;white-space:nowrap;width:1%}
+.ct p.tt{margin:20px 0 6px}
+@media (max-width:640px){
+  .ct table{font-size:13.5px}
+  .ct th,.ct td{padding:7px 9px;min-width:7.5em}
+  .ct tbody td:first-child{white-space:normal;min-width:5.5em}
+}
+
+/* 글 많은 표: 행마다 카드 — 첫 칸은 머리띠, 나머지는 열 이름을 붙여 나란히(좁은 화면은 위아래) */
+.ct .tw:has(table.long){overflow:visible;border:0;background:none;border-radius:0}
+.ct table.long, .ct table.long tbody{display:block;width:100%}
+.ct table.long thead{display:none}
+.ct table.long tr{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));margin:0 0 12px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+.ct table.long.c2{--cols:1}.ct table.long.c3{--cols:2}.ct table.long.c4{--cols:3}
+.ct table.long td{display:block;border:0;border-right:1px solid var(--line);padding:10px 14px;line-height:1.75;font-size:14.5px;background:none!important;white-space:normal;width:auto}
+.ct table.long td:last-child{border-right:0}
+.ct table.long td:first-child{grid-column:1/-1;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 14px;border-right:0;line-height:1.5}
+.ct table.long td:first-child .mk{filter:none}
+.ct table.long:not(.c2) td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;letter-spacing:.01em}
+@media (max-width:640px){
+  .ct table.long tr{grid-template-columns:1fr}
+  .ct table.long td{border-right:0;border-top:1px solid var(--line);min-width:0}
+  .ct table.long td:first-child{border-top:0}
+}
+
+/* 가로 스크롤 없음 */
+.ct .tw{overflow:visible}
+.ct th,.ct td{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{min-width:6.5em}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{white-space:normal;width:auto}
+.ct table.c5,.ct table.c6{font-size:13px}
+@media (max-width:640px){
+  .ct .tw{border:0;background:none;border-radius:0}
+  .ct .tw table, .ct .tw tbody{display:block;width:100%}
+  .ct .tw thead{display:none}
+  .ct .tw tr{display:block;margin:0 0 10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+  .ct .tw td{display:block;border:0;border-top:1px solid var(--line);padding:8px 12px;background:none!important;min-width:0;width:auto;white-space:normal}
+  .ct .tw td:first-child{border-top:0;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 12px}
+  .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .ct .tw table.c2 td:not(:first-child)::before{content:none}
+}
+
+/* 색 정리: 머리행은 옅은 청회색, 첫 열은 더 옅은 청회색, 본문은 흰색. 비교표는 열(세로) 단위로 구분 */
+:root{--thd2:#cfd9e8;--tbd:#c9d3e1;--thd:#dbe3ef;--thd-ink:#1f3864;--c1:#eef2f8;--cell:#fffefb;--colt:#f3f6fa;--zebra:transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}}
+:root[data-theme="dark"]{--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}
+.ct .tw{border-color:var(--tbd)}
+.ct tbody tr:nth-child(even) td{background:none}
+.ct tbody td:first-child{background:var(--c1);color:var(--thd-ink)}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--colt)}
+.ct table.c3 thead th:nth-child(3),.ct table.c4 thead th:nth-child(3),.ct table.c5 thead th:nth-child(3),.ct table.c5 thead th:nth-child(5),.ct table.c6 thead th:nth-child(3),.ct table.c6 thead th:nth-child(5){background:var(--thd2)}
+.ct table.long tr{border-color:var(--tbd)}
+.ct table.long td:nth-child(3){background:var(--colt)!important}
+.ct table.long td:first-child{color:var(--thd-ink)}
+@media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
+
+/* 최종 표 디자인: 제목줄은 진회색 바탕+흰 글씨(B안), 비교 열은 하나 건너 옅게(C안), 나머지는 흰 바탕+가는 가로줄 */
+:root{--tb-head:#4a5568;--tb-head-ink:#ffffff;--tb-bg:#fffdf8;--tb-line:#e4dccb;--tb-col:#f3efe6;--tb-ink:#2f2a23}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}}
+:root[data-theme="dark"]{--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}
+.ct .tw{border:0!important;border-radius:6px;overflow:hidden;background:var(--tb-bg)!important}
+.ct .tw:has(table.long){background:none!important;border-radius:0;overflow:visible}
+.ct th,.ct td{border-right:0!important;border-bottom:1px solid var(--tb-line)!important;background:none!important;color:var(--tb-ink)}
+.ct thead th{background:var(--tb-head)!important;color:var(--tb-head-ink)!important;text-align:left!important;border-bottom:0!important}
+.ct tbody td:first-child{background:none!important;color:var(--tb-ink)!important;font-weight:700}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--tb-col)!important}
+.ct table.long tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+.ct table.long td{border-bottom:0!important;border-right:0!important}
+.ct table.long td:first-child{background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+.ct table.long td:nth-child(3){background:var(--tb-col)!important}
+@media (max-width:640px){
+  .ct .tw{background:none!important;border-radius:0;overflow:visible}
+  .ct .tw tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+  .ct .tw td{border-bottom:0!important;border-top:1px solid var(--tb-line)!important;background:none!important}
+  .ct .tw td:first-child{border-top:0!important;background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+  .ct .tw table tbody td{width:auto!important;white-space:normal!important}
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+}
+
+/* 카드 뉴스: 사정·목표를 별도 카드로 */
+.cn{display:grid;gap:14px;margin:10px 0 14px}
+.cn-card{background:var(--tb-bg);border:1px solid var(--tb-line);border-radius:10px;overflow:hidden}
+.cn-top{background:var(--tb-head);color:var(--tb-head-ink);padding:10px 16px}
+.cn-tag{font-size:18px;font-weight:800;letter-spacing:.08em}
+.cn-cols,.cn-row{display:grid;grid-template-columns:1fr 1fr}
+.cn-h{padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--tb-line)}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:var(--tb-col)}
+.cn-row>div{padding:9px 16px;line-height:1.65;font-size:14.5px;border-bottom:1px solid var(--tb-line);word-break:keep-all;overflow-wrap:anywhere}
+.cn-row:last-child>div{border-bottom:0}
+.cn-lead>div{font-weight:700;font-size:15.5px}
+.cn-end>div{font-weight:700;color:var(--accent);border-top:2px solid var(--tb-line)}
+@media (max-width:640px){
+  .cn-cols{display:none}
+  .cn-row{grid-template-columns:1fr}
+  .cn-row>div:nth-child(2){border-bottom:2px solid var(--tb-line)}
+  .cn-row>div::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .cn-end>div{border-top:0}
+}
+
+/* 세로 구분 순서: 첫 번째 내용 열부터 옅은 색(2·4·6번째 열) */
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:none!important}
+.ct table.c3 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(4),.ct table.c5 tbody td:nth-child(2),.ct table.c5 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(2),.ct table.c6 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(6){background:var(--tb-col)!important}
+.ct table.long td:nth-child(3){background:none!important}
+.ct table.long.c3 td:nth-child(2),.ct table.long.c4 td:nth-child(2),.ct table.long.c4 td:nth-child(4){background:var(--tb-col)!important}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:none}
+.cn-h:nth-child(1),.cn-row>div:nth-child(1){background:var(--tb-col)}
+@media (max-width:640px){
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+  .cn-row>div:nth-child(1){background:none}
+}
+
+/* 강의 끝 핵심 정리 제목 바: 녹색 바탕 + 흰 글씨 */
+:root{--sum-bg:#2f7a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sum-bg:#2d6a4f}}
+:root[data-theme="dark"]{--sum-bg:#2d6a4f}
+.ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
+.ct p.sh.sum strong{color:#fff}
+
+/* 현재 위치 줄·진행 막대 (모든 화면) */
+.where{display:none;max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px));font-size:13px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.where b{color:var(--accent);font-weight:800}
+.prog{height:3px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s linear}
+.tocbtn{display:none}
+.scrim{display:none}
+/* 세로 태블릿·휴대폰: 본문은 넓게, 목차는 꺼내 보기 */
+@media (max-width:860px){
+  .where{display:block}
+  .tocbtn{display:inline-flex}
+  nav.toc{display:block;position:fixed;top:0;bottom:0;left:0;z-index:40;width:min(320px,82vw);max-height:none;
+    background:var(--card);border-right:1px solid var(--line);padding:calc(16px + env(safe-area-inset-top,0px)) 12px 24px;
+    transform:translateX(-105%);transition:transform .2s ease;box-shadow:0 0 30px rgba(0,0,0,.18)}
+  body.tocopen nav.toc{transform:none}
+  html body nav.toc{top:0;bottom:auto;height:100vh;height:100dvh;max-height:none;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .scrim{position:fixed;inset:0;z-index:39;background:rgba(0,0,0,.28)}
+  body.tocopen .scrim{display:block}
+  nav.toc a{font-size:15px;padding:8px 10px}
+  }
+@media (prefers-reduced-motion:reduce){nav.toc{transition:none}.prog i{transition:none}}
+</style>
+</head>
+<body id="top">
+<div class="bar">
+  <div class="bar-in">
+    <a class="home" href="./">← 공부방</a>
+    <button class="btn tocbtn" id="tocBtn" aria-controls="toc" aria-expanded="false">목차</button>
+    <span class="ttl">사회복지조사론 강의노트</span>
+    <label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
+    <select id="jump"><option value="">강의 바로가기</option><option value="l1">1강 · 사회복지와 조사의 만남</option><option value="l2">2강 · 조사론의 기초지식</option><option value="l3">3강 · 증거기반실천</option><option value="l4">4강 · 사회복지조사의 윤리성과 정치성</option><option value="l5">5강 · 사회복지조사의 과정과 연구문제</option><option value="l6">6강 · 조사설계</option><option value="l7">7강 · 개념화와 측정</option><option value="l8">8강 · 척도와 측정도구 개발</option><option value="l9">9강 · 표본추출</option><option value="l10">10강 · 자료수집</option><option value="l11">11강 · 자료분석</option><option value="l12">12강 · 욕구조사</option><option value="l13">13강 · 질적 연구방법</option><option value="l14">14강 · 질적 연구방법의 실제</option></select>
+    <div class="sp">
+      <button class="btn" id="focusBtn" style="display:none" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
+      <button class="btn" id="fsDown" title="글자 작게" aria-label="글자 작게">가−</button>
+      <button class="btn" id="fsUp" title="글자 크게" aria-label="글자 크게">가+</button>
+      <button class="btn" id="themeBtn">다크</button>
+    </div>
+  </div>
+  <div class="where" aria-live="polite"><span id="whereTxt"></span></div>
+  <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+  <nav class="toc" id="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l1"><b>1</b><span>사회복지와 조사의 만남</span></a></li><li><a href="#l2"><b>2</b><span>조사론의 기초지식</span></a></li><li><a href="#l3"><b>3</b><span>증거기반실천</span></a></li><li><a href="#l4"><b>4</b><span>사회복지조사의 윤리성과 정치성</span></a></li><li><a href="#l5"><b>5</b><span>사회복지조사의 과정과 연구문제</span></a></li><li><a href="#l6"><b>6</b><span>조사설계</span></a></li><li><a href="#l7"><b>7</b><span>개념화와 측정</span></a></li><li><a href="#l8"><b>8</b><span>척도와 측정도구 개발</span></a></li><li><a href="#l9"><b>9</b><span>표본추출</span></a></li><li><a href="#l10"><b>10</b><span>자료수집</span></a></li><li><a href="#l11"><b>11</b><span>자료분석</span></a></li><li><a href="#l12"><b>12</b><span>욕구조사</span></a></li><li><a href="#l13"><b>13</b><span>질적 연구방법</span></a></li><li><a href="#l14"><b>14</b><span>질적 연구방법의 실제</span></a></li></ol></nav>
+  <main>
+    <section class="intro">
+      <h1>사회복지조사론 강의노트 1~14강</h1>
+      <p>구글 문서 「사회복지조사론 강의노트 (1~14강)」를 웹에서 보기 좋게 옮긴 페이지입니다. 비교할 내용은 표로 묶었습니다.</p>
+      <div class="legend">
+        <span><mark class="hl hl-y" style="cursor:default;white-space:nowrap;flex:none;align-self:flex-start">형광펜</mark> 글을 드래그(휴대폰은 길게 눌러 선택)하면 색을 고를 수 있습니다. 칠한 곳을 누르면 색 변경·지우기. 아래 「PC·휴대폰 연동」을 켜면 기기끼리 맞춰집니다.</span>
+      </div>
+    </section>
+    <section class="lec" id="l1"><header class="lh"><span class="no">1강</span><h2>사회복지와 조사의 만남</h2></header><div class="ct">
+<h3>1. 오리엔테이션: 사회복지에서 왜 조사를 배우는가</h3>
+<p class="sh"><strong>과목에 대한 일반적인 걱정</strong></p>
+<ul>
+<li><strong>떠올리는 이미지</strong> — 어려움, 통계·확률, 연역법·귀납법 등 지식 중심의 내용을 배운다고 생각하기 쉬움.</li>
+<li><strong>근본 질문</strong> — '사회복지에서 왜 조사를 학습해야 하는가'가 이 과목에서 가장 중요한 질문이며, 1강의 의미를 이후 과목 내내 기억하고 적용해야 함.</li>
+<li><strong>학습 태도</strong> — 이해를 바탕으로 한 암기가 필요한 부분(강의에서 강조하는 내용)은 외워야 하되, 조사의 의미를 잊지 않는 것이 더 중요함.</li>
+</ul>
+<p class="tt"><strong>강의 구성(15주)</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>주차</th><th>주제</th></tr></thead><tbody>
+<tr><td data-label="구분">개요(1~4주)</td><td data-label="주차">1주</td><td data-label="주제">사회복지와 조사의 만남</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">2주</td><td data-label="주제">조사론의 기초지식</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">3주</td><td data-label="주제">증거기반 실천</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">4주</td><td data-label="주제">사회복지조사의 윤리성과 정치성</td></tr>
+<tr><td data-label="구분">조사 과정(5주~)</td><td data-label="주차">5주</td><td data-label="주제">사회복지조사의 과정과 연구문제</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">6주</td><td data-label="주제">조사설계 및 조사계획서 작성(교재에서는 15강이나 강의에서는 조사의 첫 단계에서 먼저 다룸)</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">7주</td><td data-label="주제">개념화와 측정</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">8주</td><td data-label="주제">척도개발</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">9주</td><td data-label="주제">표본추출</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">10주</td><td data-label="주제">자료수집</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">11주</td><td data-label="주제">자료분석</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">12주</td><td data-label="주제">욕구조사</td></tr>
+<tr><td data-label="구분"></td><td data-label="주차">13~14주</td><td data-label="주제">질적 연구방법, 질적 연구방법의 실제</td></tr>
+<tr><td data-label="구분">마무리</td><td data-label="주차">15주</td><td data-label="주제">조사보고서 작성, 조사의 활용</td></tr>
+</tbody></table></div>
+<h3>2. 사회복지조사와 실천지혜</h3>
+<p class="sh"><strong>사회적 위험과 사회복지</strong></p>
+<ul>
+<li><strong>사회복지의 정의</strong> — 사회적 위험에 대한 공적인 대응이자 전문적인 개입이며, 사회복지조사도 사회적 위험에서 출발함.</li>
+<li><strong>전통적 사회적 위험</strong> — 베버리지가 제시한 5대 사회악(결핍, 질병, 무지, 불결, 나태)이며, 지금도 빈곤·결핍 등이 이어지고 있음.</li>
+<li><strong>새로이 등장한 사회적 위험</strong> — 돌봄 공백, 1인 가구 고립, 기후재난, 디지털 소외(AI 등장), 불안정 노동자 증가 등이 더해짐.</li>
+</ul>
+<p class="tt"><strong>사회적 위험의 구분</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>내용</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="구분">전통적사회적 위험</td><td data-label="내용">베버리지의 5대 사회악</td><td data-label="예시">결핍, 질병, 무지, 불결, 나태</td></tr>
+<tr><td data-label="구분">새로이 등장한사회적 위험</td><td data-label="내용">변화한 사회에서 새롭게 나타난 위험</td><td data-label="예시">돌봄 공백, 1인 가구 고립, 기후재난, 디지털 소외, 불안정 노동자 등</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사회복지는 과학이자 예술임</strong></p>
+<ul>
+<li><strong>과학성</strong> — 사회적 위험에 대응하고 개입의 효과를 측정하며 전문적으로 개입하는 과정은 체계적이고 과학적이어야 함(사회복지는 사회과학의 한 분야임).</li>
+<li><strong>예술성</strong> — 모든 사람의 안녕, 누구도 소외·차별받지 않고 시민의 권리를 누리는 공동체를 목표로 하므로, 과학만으로는 부족하고 예술적 직관과 감성이 필요함.</li>
+</ul>
+<p class="sh"><strong>사회복지조사의 역할</strong></p>
+<ul>
+<li><strong>핵심 기능</strong> — 사회복지사가 실천현장을 탐색하고 문제를 분석하여 그 결과를 체계적으로 드러내고 설명하는 기초자료를 제공함.</li>
+<li><strong>일상성</strong> — 사회복지의 역할을 고민하고 실천하는 모든 과정이 사회복지조사의 과정이라 해도 될 만큼 가까운 것이며, 현장에서 실천지혜를 얻는 기초가 됨.</li>
+</ul>
+<h3>3. 사회복지조사와 새로운 상상</h3>
+<p class="sh"><strong>조사는 사회복지의 시작이자 끝임</strong></p>
+<ul>
+<li><strong>시작</strong> — 사회적 위험이 닥쳤을 때 정책 수립의 첫 단계는 학자·연구기관에 조사를 의뢰하는 것임(예: 노인 고독사 증가 → 규모, 지역별 차이, 계층, 1인 가구 여부, 원인, 정책방안, 해외사례 등을 조사).</li>
+<li><strong>종결</strong> — 정책·서비스가 끝난 직후에도 효과, 의미, 교훈, 새로운 통찰을 확인하기 위해 조사가 필요함(만족도 조사, 정책평가 등).</li>
+<li><strong>결론</strong> — 시작과 종결뿐 아니라 중간 과정에서도 필요하므로 사회복지조사는 일상적으로 실천해야 함.</li>
+</ul>
+<p class="tt"><strong>정책 수립 단계에서 조사를 거치는 이유</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>이유</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="이유">문제 원인과 쟁점 파악</td><td data-label="내용">현장의 문제에 과학적·체계적으로 접근하여 원인을 정확히 파악하고 쟁점을 확인함</td></tr>
+<tr><td data-label="이유">정책지혜 습득</td><td data-label="내용">기존 연구와 해외사례 등을 통해 정책적 지혜를 얻음(예: 고령화는 전 지구적 추세이므로 다른 나라의 사례도 참고함)</td></tr>
+<tr><td data-label="이유">정책의 정당성 확보</td><td data-label="내용">정책에 대한 반론(우리나라에 맞는지, 소외되는 사람은 없는지 등)이 나올 때 조사 보고서를 근거로 방어하고 정당성을 확보함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>부스와 라운트리의 사회조사</strong></p>
+<ul>
+<li><strong>역사적 배경</strong> — 19세기 말 영국에서 대공황으로 대량실업과 광범위한 빈곤이 발생하자, 개인의 문제로 보던 빈곤관(엘리자베스 빈민법 등)에 의문이 제기되고 국가개입론(복지국가적 빈곤관)이 대두함.</li>
+<li><strong>핵심 질문</strong> — '빈곤의 책임은 개인인가, 국가(사회)인가'에 대해 막연한 주장이 아니라 광범위하고 체계적인 빈곤조사와 객관적 증거라는 과학적인 답을 제시함.</li>
+<li>찰스 부스(Charles Booth, 1840~1916): 귀족 계급(중산층 이상) 출신으로 런던 시민의 생활에 대한 호기심과 학자로서의 탐구심이 있었으며, 사회주의 연맹이 '영국 시민의 25%가 빈곤하다'고 발표하자 의구심을 갖고 이를 반박하기 위해 조사를 시작함.</li>
+<li>시봄 라운트리(B. Seebohm Rowntree, 1871~1954): 부스의 조사를 이어받아 더 구체적이고 체계적으로 요크시를 조사하였고, 『빈곤: 도시생활의 연구』로 결과를 제시함.</li>
+</ul>
+<p class="tt"><strong>부스의 런던 지역 조사 결과(빈곤지도)</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>계급</th><th>유형</th><th>비율</th></tr></thead><tbody>
+<tr><td data-label="계급">A</td><td data-label="유형">부랑자, 술주정뱅이, 준범죄자</td><td data-label="비율">0.9%</td></tr>
+<tr><td data-label="계급">B</td><td data-label="유형">겨우 입에 풀칠하는 사람</td><td data-label="비율">7.5%</td></tr>
+<tr><td data-label="계급">C, D</td><td data-label="유형">부정기적·계절적 노동자, 저임금 정규직 소득자</td><td data-label="비율">22.3%</td></tr>
+<tr><td data-label="계급">E, F</td><td data-label="유형">정규 표준 소득자(빈곤선 이상), 상층 노동자</td><td data-label="비율">51.5%</td></tr>
+<tr><td data-label="계급">G, H</td><td data-label="유형">낮은 등급의 중상층, 상류 중산층</td><td data-label="비율">17.8%</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>해석</strong> — 계급 A~D를 합해 런던 인구의 30.7%가 빈곤층임. 가난의 이유는 개인의 도덕적 타락이 아니라 저임금과 부정기적 소득이라는 구조적·사회적 문제임.</li>
+</ul>
+<p class="tt"><strong>부스와 라운트리 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>찰스 부스</th><th>시봄 라운트리</th></tr></thead><tbody>
+<tr><td data-label="구분">조사 지역</td><td data-label="찰스 부스">런던</td><td data-label="시봄 라운트리">요크시</td></tr>
+<tr><td data-label="구분">빈곤 비율</td><td data-label="찰스 부스">런던 인구의 30.7%</td><td data-label="시봄 라운트리">요크시 주민의 27.84%</td></tr>
+<tr><td data-label="구분">빈곤의 원인</td><td data-label="찰스 부스">저임금과 부정기적 소득(구조적 문제)</td><td data-label="시봄 라운트리">실업에 따른 소득 중단(개인의 무능이 아닌 구조적 문제)</td></tr>
+<tr><td data-label="구분">기여</td><td data-label="찰스 부스">빈곤지도와 계급 구분으로 빈곤이 개인의 문제만이 아님을 객관적으로 증명함</td><td data-label="시봄 라운트리">'빈곤선' 개념을 제시하여 빈곤조사의 지평을 확장함(우리나라 기초생활수급자 선정 기준 등에 영향)</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>의의</strong> — 두 조사는 이후 사회사상과 사회정책에 큰 영향을 미쳤고, 빈곤관을 바꾸는 역사적 계기가 되었음. 이를 가능하게 한 것이 사회복지조사임.</li>
+</ul>
+<p class="sh"><strong>상이한 견해와 상이한 상상: 다수파 보고서와 소수파 보고서</strong></p>
+<ul>
+<li><strong>배경</strong> — 1900년대 초 영국이 (신)빈민법을 개정하면서 내용을 어떻게 담을지 조사했으나, 동일한 문제(빈곤)에 대해 조사 결과가 서로 달랐음.</li>
+<li><strong>시사점</strong> — 같은 문제를 조사해도 문제를 보는 관점에 따라 해결책과 상상이 달라지며, 부스의 조사 이후에도 관점은 쉽게 바뀌지 않았음.</li>
+</ul>
+<p class="tt"><strong>다수파 보고서 vs 소수파 보고서</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>다수파 보고서</th><th>소수파 보고서</th></tr></thead><tbody>
+<tr><td data-label="구분">주장 집단</td><td data-label="다수파 보고서">당시 다수의 사람들(영국의 전통적 빈곤관 유지)</td><td data-label="소수파 보고서">페이비언주의자(페이비언 소사이어티)</td></tr>
+<tr><td data-label="구분">빈곤의 원인</td><td data-label="다수파 보고서">빈민의 나태와 무책임(개인의 책임)</td><td data-label="소수파 보고서">불합리하고 불건전한 사회질서(사회구조)의 결과</td></tr>
+<tr><td data-label="구분">해결 방향</td><td data-label="다수파 보고서">개인에게 책임을 묻는 방향으로 신빈민법을 수정함</td><td data-label="소수파 보고서">개인이 해결할 수 없으므로 공공지출이 불가피함(국가의 책임)</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>시드니 웹·비어트리스 웹 부부와 베버리지</strong></p>
+<ul>
+<li><strong>소수파 보고서의 주역</strong> — 시드니 웹과 비어트리스 웹 부부이며, 비어트리스 웹은 부스와 친척 관계로 부스의 조사를 도우면서 빈곤이 사회구조적 문제임을 깨달음.</li>
+<li><strong>베버리지와의 관계</strong> — 베버리지는 비어트리스 웹의 비서였고 페이비언 소사이어티에서 함께 활동하였으며, 이후 영국의 보편복지를 주창하는 중심 역할을 함.</li>
+<li><strong>저서 『나의 도제시절』</strong> — 런던 주민 약 400만 명의 생활과 노동조건을 조사한 부스의 방대한 조사를 사회정책과 경제과학의 획기적인 사건으로 평가함.</li>
+<li><strong>웹의 사회조사관(교수님이 의미를 정리한 내용)</strong> — 사회조사는 가난한 사람을 바라보는 일이 아니라 사람을 가난하게 만드는 사회의 조건을 밝혀내는 일임. 숫자만으로는 삶을 알 수 없고 개별 사례만으로는 사회 전체를 말할 수 없으므로, 삶의 구체성과 통계의 전체성을 연결하는 작업임(양적 조사와 질적 조사가 모두 필요함).</li>
+</ul>
+<p class="sh"><strong>새로운 상상과 조사</strong></p>
+<ul>
+<li><strong>학과의 모토</strong> — '이상의 일상이 되도록 상상하라'를 실현하는 데 반드시 필요한 작업이 사회복지조사이며, 조사 없이는 더 나은 공동체를 위한 새로운 상상을 구체화할 수 없음.</li>
+</ul>
+<h3>4. 사회복지조사의 필요성과 전제</h3>
+<p class="sh"><strong>사회복지조사의 필요성</strong></p>
+<ul>
+<li><strong>사회과학의 목적</strong> — 현상의 원인을 분석하고 본질을 설명하는 것(설명)과 앞으로의 상황을 내다보는 것(예측)이며, 사회복지조사는 이 목적을 달성하는 데 필요한 기초적이고 중요한 도구임.</li>
+<li><strong>조사(research)의 의미</strong> — 사물에 대한 신중한 탐구 또는 검토이며, 어떤 주제나 쟁점에 대한 이해를 증진시키기 위해 관련 정보를 수집하고 분석하는 단계나 과정임.</li>
+<li><strong>사회복지조사의 의미</strong> — 사회현상을 탐색하고 설명하는 과정에서 새로운 비전과 방법에 개입하는 과정임.</li>
+<li><strong>위험 파악</strong> — 위험으로 가득 찬 세상에서 누가, 얼마나, 왜 위험 속에 있는지를 파악하고, 위험에 대응하는 복지국가·정치구조·사회복지제도의 문제점도 드러냄.</li>
+<li><strong>이해력과 설명력 제공</strong> — 막연한 현상(예: 노인 고독사 증가)을 규모·이유·지역 등으로 체계적·과학적으로 이해하도록 도움.</li>
+<li><strong>이해의 지평 확장</strong> — 기존 연구결과물(통계분석, 연구방법, 연구대상 등)을 해독하고 해석하는 능력이 높아짐.</li>
+<li><strong>결론</strong> — 사회적 위험에 처한 시민을 위해 객관적·과학적 실천방안을 마련하여 위험을 제거하는 데 반드시 필요함.</li>
+</ul>
+<p class="sh"><strong>사회복지조사의 전제</strong></p>
+<p class="tt"><strong>사회복지조사의 세 가지 전제</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>전제</th><th>핵심 내용</th><th>강조점</th></tr></thead><tbody>
+<tr><td data-label="전제">관점과 조사</td><td data-label="핵심 내용">사회복지조사는 개인 또는 그 시대의 사회적 관점과 깊이 연관됨. 조사자의 이념과 패러다임에 따라 결과가 달라질 수 있음(다수파·소수파 보고서가 대표 사례)</td><td data-label="강조점">①관점을 명확히 가져야 함(선별적/보편적 복지 등)②사회과학 탐구에 대한 개방성이 필요함(빈곤관도 시대에 따라 변화함)</td></tr>
+<tr><td data-label="전제">이론과 조사</td><td data-label="핵심 내용">이념과 패러다임은 '이론'을 통해 정당화되고 객관적으로 설명됨. 이론은 일관된 체계이나 이론마다 사회현상에 대한 설명과 예측이 다름</td><td data-label="강조점">어떤 관점으로 조사할지 정하고, 그 관점에 맞는 이론을 공부하여 선택해야 함(중립적인 조사는 없음)</td></tr>
+<tr><td data-label="전제">질문과 조사</td><td data-label="핵심 내용">의미 있는 조사는 '좋은 질문'과 '비판적 태도'에서 시작함. 어떤 질문을 하느냐에 따라 답이 달라짐</td><td data-label="강조점">좋은 질문을 던지는 연습이 학습의 핵심임(비판적 태도는 비난이 아니라 '왜 효과가 없는가'를 묻는 것)</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>질문에 따라 답이 달라지는 사례</strong></p>
+<ul>
+<li><strong>마이클 올리버와 영국 인구조사국(장애 조사)</strong> — 질문을 바꾸면 장애를 개인의 문제로 보는지 사회구조(환경)의 문제로 보는지가 달라짐.</li>
+</ul>
+<p class="tt"><strong>질문 비교 예시</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>질문</th><th>드러나는 답/관점</th></tr></thead><tbody>
+<tr><td data-label="구분">장애 조사(질문 A)</td><td data-label="질문">다리가 불편해서 버스를 이용하는 데 불편함이 있습니까?</td><td data-label="드러나는 답/관점">'휠체어를 타니 불편하다'는 답이 나오며 개인의 문제로 분류됨</td></tr>
+<tr><td data-label="구분">장애 조사(질문 B)</td><td data-label="질문">부적절하게 설계된 버스가 이용에 어려움을 줍니까?</td><td data-label="드러나는 답/관점">버스를 저상버스로 바꾸면 이용에 어려움이 없다는 답이 나오며 사회구조의 문제로 드러남</td></tr>
+<tr><td data-label="구분">연구문제 예시(약한 질문)</td><td data-label="질문">과음이 다음 날 업무에 미치는 영향은 무엇인가?</td><td data-label="드러나는 답/관점">당연한 답이 예상되어 공동체를 변화시키는 함의가 약함</td></tr>
+<tr><td data-label="구분">연구문제 예시(좋은 질문)</td><td data-label="질문">국가의 경제규모는 커졌는데 왜 많은 시민은 자신의 삶이 더 나아졌다고 느끼지 못하는가?</td><td data-label="드러나는 답/관점">사회적 문제의식에서 출발하여 의미 있는 대안을 제시할 수 있음</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>1강 정리</strong></p>
+<ul>
+<li>사회복지조사는 단순히 확률·통계로 객관적 수치를 드러내는 것을 넘어, 모든 시민이 시민권을 가진 좋은 공동체를 상상하기 위해 필요한 도구임.</li>
+<li>다음 시간(2강)에는 조사론의 기초지식을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l2"><header class="lh"><span class="no">2강</span><h2>조사론의 기초지식</h2></header><div class="ct">
+<h3>1. 인식론과 지식</h3>
+<p class="sh"><strong>도입: 알고 있다고 생각하는 것과 근거 있는 지식의 구분</strong></p>
+<ul>
+<li><strong>사례</strong> — '청년은 복지에 지나치게 의존한다', '장애인은 취업 의지가 낮다', '노숙인은 일을 하지 않으려 한다' 같은 이야기를 사실로 알고 있다고 생각하기 쉬움.</li>
+<li><strong>핵심 질문</strong> — 이런 믿음이 정말 일반화할 수 있는 근거가 있는지, 근거 있는 지식이 되는지는 별개의 문제임.</li>
+<li><strong>조사의 의미</strong> — 모르는 것을 알아가는 과정이자, 안다고 믿어 온 것이 정말 맞는지 확인하는 과정임.</li>
+</ul>
+<p class="sh"><strong>인식론(지식이론)</strong></p>
+<ul>
+<li><strong>정의</strong> — 지식의 본질, 가능성, 근거와 정당성을 탐구하는 철학의 한 분야임.</li>
+<li><strong>답을 찾는 질문</strong> — ①지식이란 무엇인가 ②우리는 무엇을 알 수 있는가 ③우리가 알고 있다는 것을 어떻게 알 수 있는가</li>
+</ul>
+<p class="sh"><strong>지식</strong></p>
+<ul>
+<li><strong>의미</strong> — 무엇인가에 대해 아는 상태이며, 어떤 현상이나 설명을 사실이라고 '믿는' 것으로 나타남. 다만 모든 믿음이 지식은 아님.</li>
+</ul>
+<p class="tt"><strong>지식의 두 가지 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>구분</th><th>내용</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="구분">합의적 지식</td><td data-label="내용">사회·문화적으로 합의된 사실을 믿고 받아들이는 것</td><td data-label="예시">흡연은 건강에 해롭다, 우리나라는 국민기초생활보장제도를 운영한다(언론, 교사, 부모 등을 통해 알게 됨)</td></tr>
+<tr><td data-label="구분">경험적 지식</td><td data-label="내용">외부의 강요 없이 스스로 경험한 것에 근거하여 무엇을 사실로 믿는 것</td><td data-label="예시">복지관 실습에서 노인들이 스마트폰을 많이 쓰는 것을 보고 '노인의 스마트폰 이용률이 높다'고 아는 것(모든 노인에게 일반화할 근거는 부족함)</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>인식론의 구성요소와 패러다임</strong></p>
+<ul>
+<li><strong>인식 주체</strong> — 알고 있는 사람(나)임.</li>
+<li><strong>인식 대상</strong> — 알게 되는 대상으로, 상대방, 사회·문화, 제도 등이 해당함.</li>
+<li><strong>인식 내용</strong> — 구체적으로 인식하는 내용임(예: 흡연이 건강에 해롭다는 연구 결과).</li>
+<li><strong>패러다임</strong> — 인식 주체·대상·내용이 서로 관계를 맺으며 유기적으로 정리된 것을 가리킴(예: 빈곤을 바라보는 패러다임의 변화).</li>
+</ul>
+<p class="sh"><strong>인식론적 접근방법</strong></p>
+<ul>
+<li><strong>세 가지 접근</strong> — 실증주의, 해석주의, 비판주의가 있으며 핵심 질문과 연구의 초점이 서로 다름.</li>
+</ul>
+<p class="tt"><strong>인식론적 접근방법 비교</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>실증주의</th><th>해석주의</th><th>비판주의</th></tr></thead><tbody>
+<tr><td data-label="구분">핵심 질문</td><td data-label="실증주의">원인과 결과는 무엇인가?</td><td data-label="해석주의">당사자는 어떻게 경험하고 해석하는가?</td><td data-label="비판주의">어떤 권력과 구조가 작동하는가?</td></tr>
+<tr><td data-label="구분">연구의 초점</td><td data-label="실증주의">측정, 설명, 예측</td><td data-label="해석주의">의미, 경험, 맥락</td><td data-label="비판주의">불평등, 억압, 변화</td></tr>
+<tr><td data-label="구분">예시(1인 가구 노인 증가)</td><td data-label="실증주의">1인 가구 노인이 얼마나 되는지, 지역별·성별·소득별 차이는 어떠한지 측정하고 설명함</td><td data-label="해석주의">혼자 사는 노인을 인터뷰하여 경험과 의미를 해석함(외롭다는 사람도, 자유롭다는 사람도 있음)</td><td data-label="비판주의">왜 1인 노인 가구가 늘어나는지 사회구조·권력·계급 문제(노인을 생산성 낮은 존재로 보는 시각 등)를 비판적으로 드러냄</td></tr>
+</tbody></table></div>
+<h3>2. 과학적 지식</h3>
+<p class="sh"><strong>과학적 방법과 과학적 지식</strong></p>
+<ul>
+<li><strong>과학적 방법</strong> — 인간이 가진 믿음을 참된 지식으로 정당화할 수 있는 방법임(예: 조사 데이터로 근거를 제시함).</li>
+<li><strong>과학적 지식</strong> — 현재까지 확보된 근거로 볼 때 가장 타당한 설명이며, 언제든 반증될 수 있음(예: 천동설에서 지동설로의 전환).</li>
+<li><strong>인식 패러다임의 상대주의(쿤)</strong> — 과학적 사실의 발견과 해석은 당시 과학자들이 공유하는 패러다임의 영향을 받고, 과학적 지식도 역사적·사회적 맥락에서 형성되고 변화할 수 있음. 따라서 고정불변의 절대적 지식은 존재하지 않음.</li>
+</ul>
+<p class="tt"><strong>과학적 방법의 특징</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>특징</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="특징">논리성</td><td data-label="내용">논리와 근거로 설명되어야 함</td></tr>
+<tr><td data-label="특징">객관성</td><td data-label="내용">주관적 판단이 아니라 객관적으로 드러나야 함</td></tr>
+<tr><td data-label="특징">재현 가능성</td><td data-label="내용">같은 방법으로 다시 해도 같은 결과가 나와야 함</td></tr>
+<tr><td data-label="특징">경험적 검증 가능성</td><td data-label="내용">데이터로 검증할 수 있어야 함</td></tr>
+<tr><td data-label="특징">상호주관성</td><td data-label="내용">다른 연구자도 같은 방법으로 유사한 결과를 얻거나, 그 방법이 근거 있고 납득할 만하다고 서로 인정할 수 있어야 함</td></tr>
+<tr><td data-label="특징">수정 가능성</td><td data-label="내용">잘못이 발견되면 수정할 수 있어야 함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>일상적 지식 습득의 오류</strong></p>
+<ul>
+<li><strong>의의</strong> — 이 오류들을 알고 저지르지 않으면 과학적 방법에 가까워지며, 나의 생각과 판단의 근거를 성찰하는 계기가 됨.</li>
+</ul>
+<p class="tt"><strong>일상적 지식 습득의 8가지 오류</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>번호</th><th>오류</th><th>의미</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="번호">1</td><td data-label="오류">부정확한 관찰</td><td data-label="의미">인간의 감각기관만으로는 정확한 관찰이 어려움</td><td data-label="예시">'딱 보니 저 사람은 취업이 안 될 것 같다'는 식의 직관적 결론</td></tr>
+<tr><td data-label="번호">2</td><td data-label="오류">과도한 일반화</td><td data-label="의미">소수 대상의 관찰 결과를 다수에 확대 적용함</td><td data-label="예시">기초수급자 일부를 조사한 결과로 모든 수급자가 노동 의지가 없다고 결론 내림</td></tr>
+<tr><td data-label="번호">3</td><td data-label="오류">선별적 관찰</td><td data-label="의미">특수한 사례나 상황만을 부각하여 관찰함</td><td data-label="예시">외국인 노동자의 복지 남용에 관심 있는 연구자가 그런 사례만 계속 찾음</td></tr>
+<tr><td data-label="번호">4</td><td data-label="오류">사후 가설화(종결 후 가설화)</td><td data-label="의미">사례를 종결할 당시의 관찰을 결론으로 받아들이고 끝냄</td><td data-label="예시">자활 프로그램 효과가 낮게 나오자 사전·사후 조사 없이 '참여자의 노동 의지가 낮아서'라고 단정함</td></tr>
+<tr><td data-label="번호">5</td><td data-label="오류">비논리적 추론</td><td data-label="의미">논리적이지 않은 추론을 함(아래 세부 유형 참고)</td><td data-label="예시">도박사의 오류, 대인 논증, 허수아비 논증, 시류 편승</td></tr>
+<tr><td data-label="번호">6</td><td data-label="오류">이해 과정의 자아 개입</td><td data-label="의미">관찰자의 자아 특성(편견, 선입견)이 현상 이해에 영향을 미침</td><td data-label="예시">'저 사람은 원래 게으르다'는 선입견 때문에 그 부분만 보게 됨</td></tr>
+<tr><td data-label="번호">7</td><td data-label="오류">성급한 종결</td><td data-label="의미">현상에 대한 답을 이미 갖고 있어서 관찰을 섣불리 종결함</td><td data-label="예시">성적이 낮은 이유를 알아보지 않고 '공부를 안 해서'로 끝냄(부모의 병환, 아르바이트 등 다른 이유 가능)</td></tr>
+<tr><td data-label="번호">8</td><td data-label="오류">사이비과학</td><td data-label="의미">과학적 근거와 타당성 없는 내용을 믿음</td><td data-label="예시">기적의 치료제 등</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>비논리적 추론의 세부 유형</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>유형</th><th>의미</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="유형">도박사의 오류</td><td data-label="의미">앞의 결과가 다음 결과를 결정한다고 잘못 추론함</td><td data-label="예시">동전 앞면이 5번 나왔으니 6번째는 뒷면일 것이라고 생각함</td></tr>
+<tr><td data-label="유형">대인 논증</td><td data-label="의미">연구 내용이 아니라 연구자의 속성을 공격함</td><td data-label="예시">'장애인 복지 현장 경험이 없는 사람의 연구를 믿을 수 있겠는가'</td></tr>
+<tr><td data-label="유형">허수아비 논증</td><td data-label="의미">상대방의 주장을 왜곡해서 반박함</td><td data-label="예시">'시설 거주자에게 지역사회 생활 선택권을 주자'는 주장을 '당장 모든 시설을 없애자는 것'으로 왜곡함</td></tr>
+<tr><td data-label="유형">시류 편승</td><td data-label="의미">언론이나 유행을 따라 믿음</td><td data-label="예시">'언론에서 좋다고 하니 맞다'며 따라감</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>비과학적 지식 습득 방법</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>방법</th><th>내용</th><th>유의점</th></tr></thead><tbody>
+<tr><td data-label="방법">전통</td><td data-label="내용">전해 내려오는 지식에 의존함</td><td data-label="유의점">'옛날부터 가난한 사람은 게을러서 그렇다'는 식의 믿음</td></tr>
+<tr><td data-label="방법">신비</td><td data-label="내용">예언자, 점술가, 종교 경전 등의 견해나 주장</td><td data-label="유의점">1999년 지구 종말설 같은 사례</td></tr>
+<tr><td data-label="방법">상식</td><td data-label="내용">누구나 공통적으로 알고 있는 것</td><td data-label="유의점">내가 아는 상식이 근거 있는 참된 지식인지 계속 성찰해야 함</td></tr>
+<tr><td data-label="방법">권위</td><td data-label="내용">권위 있는 사람을 통해 지식을 얻음</td><td data-label="유의점">유명한 전문가나 교수, 의사의 말이라고 100% 정답은 아님(비난이 아니라 비판적 관점이 필요함)</td></tr>
+<tr><td data-label="방법">직관</td><td data-label="내용">감각을 활용하여 바로 판단함</td><td data-label="유의점">'눈빛에 이미 의지가 없다'는 식의 결론은 위험함</td></tr>
+<tr><td data-label="방법">대중매체</td><td data-label="내용">인터넷, TV, 유튜브 등을 통해 지식을 얻음</td><td data-label="유의점">AI가 주는 지식도 도움은 되지만 맹신해서는 안 되며 확인이 필요함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사회과학과 자연과학</strong></p>
+<ul>
+<li><strong>사회과학</strong> — 인간행위와 사회현상을 분석·탐구하므로 동일한 현상도 '관점'에 따라 다르게 보임(예: 빈곤을 보는 다수파·소수파 보고서).</li>
+<li><strong>자연과학</strong> — 자연현상과 물리적 세계를 탐구하므로 관점에 따라 달라지지 않음(예: 현재까지의 근거로는 물이 100도에서 끓음).</li>
+<li><strong>사회복지에서의 의미</strong> — 노숙인이 일을 싫어한다는 말도 비판주의적으로 보면 왜 그렇게 되었는지 사회구조적 원인을 질문할 수 있으며, 이런 질문이 조사론을 배우는 큰 이유임.</li>
+</ul>
+<h3>3. 연역적 방법과 귀납적 방법</h3>
+<p class="sh"><strong>연역적 방법</strong></p>
+<ul>
+<li><strong>정의</strong> — 대전제에서 결론을 이끌어내는 방법(논리학)이며, 이론에서 출발해 검증을 위한 가설을 도출하고 구체적 측정을 통해 관찰이 가설을 지지하는지 살펴봄.</li>
+<li><strong>예시</strong> — 모든 사람은 죽는다 → 소크라테스는 사람이다 → 그러므로 소크라테스는 죽는다.</li>
+<li><strong>과정</strong> — 이론 → 가설 → 개념 측정 → 자료 수집 → 가설 검증</li>
+<li><strong>단점</strong> — 가장 많은 지지를 얻고 있는 기존 이론을 활용하므로 더 좋은 새 이론이 활용되지 못할 수 있음. 관찰 과정에서 가설에 반하는 자료를 쉽게 채택하기 어려움.</li>
+</ul>
+<p class="sh"><strong>귀납적 방법</strong></p>
+<ul>
+<li><strong>정의</strong> — 구체적 현상에서 출발하여 보편적인 결론으로 귀결하는 방법임.</li>
+<li><strong>예시</strong> — 소크라테스도, 플라톤도, 아리스토텔레스도 죽었다 → 이들은 모두 사람이다 → 그러므로 모든 사람은 죽는다.</li>
+<li><strong>과정</strong> — 구체적 사례 관찰 → 공통 유형 발견 → 개념 및 잠정적 이론 형성</li>
+<li><strong>한계</strong> — 잠정적 이론을 형성하려면 어느 정도의 구체적 사례가 필요한지 불명확함. 관찰 사례에서 발견된 특정 유형에 대한 다른 견해가 존재할 수 있음(소수 사례의 공통점을 일반화하기 어려움).</li>
+</ul>
+<p class="tt"><strong>연역적 방법 vs 귀납적 방법</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>연역적 방법(경험주의)</th><th>귀납적 방법(해석주의)</th></tr></thead><tbody>
+<tr><td data-label="구분">조사방법</td><td data-label="연역적 방법(경험주의)">양적 조사(대규모 설문, 통계분석 등)</td><td data-label="귀납적 방법(해석주의)">질적 조사(심층면접, 사례조사 등)</td></tr>
+<tr><td data-label="구분">특성</td><td data-label="연역적 방법(경험주의)">설명적 성격</td><td data-label="귀납적 방법(해석주의)">탐색적 성격</td></tr>
+<tr><td data-label="구분">이론적 배경</td><td data-label="연역적 방법(경험주의)">구체적 이론적 배경을 바탕으로 실시함</td><td data-label="귀납적 방법(해석주의)">이론적 배경이 없어도 실시할 수 있음</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="연역적 방법(경험주의)">연구결과를 일반화하는 데 목적이 있음</td><td data-label="귀납적 방법(해석주의)">특정 집단이나 주제에 대해 구체적이고 상세한 내용을 밝히는 데 목적이 있음</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>연역과 귀납의 관계</strong></p>
+<ul>
+<li><strong>순환 관계</strong> — 연역은 이론을 검증하고, 귀납은 새로운 이론을 발견함. 과학은 이 두 과정이 반복되는 순환운동임(이론 → 가설 → 관찰/조사 → 경험적 일반화 → 이론).</li>
+<li><strong>연구의 한계</strong> — 두 방법 모두 한계가 있으므로 연구의 끝에는 연구의 한계를 밝히게 됨.</li>
+<li><strong>학습 방향</strong> — 2강의 개념(과학적 방법, 연역·귀납, 인식론)은 앞으로 배울 조사 방법 전반에 계속 적용됨. 양적·질적 조사는 뒤에서 자세히 다룸.</li>
+<li>다음 시간(3강)에는 증거기반 실천을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l3"><header class="lh"><span class="no">3강</span><h2>증거기반실천</h2></header><div class="ct">
+<h3>1. 증거기반실천의 개요</h3>
+<p class="sh"><strong>학습 목적과 위치</strong></p>
+<ul>
+<li><strong>궁극적 목적</strong> — 우리가 선택한 개입방법과 실천전략이 정말로 도움이 되는지를 살펴보는 것임.</li>
+<li><strong>프락시스와의 관계</strong> — 프락시스는 의미를 물으면서 실천하는 것인데, 의미를 묻는 철학과 실천 사이에서 구체적인 방법의 측면으로 '증거에 기반한 실천'이 필요함.</li>
+</ul>
+<p class="sh"><strong>증거기반실천(EBP, evidence-based practice)</strong></p>
+<ul>
+<li><strong>정의</strong> — 실천가가 이용 가능한 최선의 연구 증거에 비추어 실천에 관한 결정을 내리는 과정이며, 과학적 근거를 기반으로 최선의 결정을 내리고 상황을 개선하기 위해 실천하는 것임.</li>
+<li><strong>쉬운 이해</strong> — 감이나 관습에 따라 실천하지 않고, 문제 해결에 도움이 되는 객관적·체계적 연구 결과를 찾아 공부하여 실천전략을 세우는 것임.</li>
+<li><strong>사회복지와의 관계</strong> — 사회복지는 과학과 예술이 융합된 분야이므로(1강), 예술에만 그치지도 과학만 하지도 않도록 과학적 근거를 활용하는 과정이 중요함.</li>
+</ul>
+<p class="sh"><strong>증거기반실천의 역사적 배경</strong></p>
+<ul>
+<li><strong>출발</strong> — 사람의 생명을 다루어 과학적·객관적·체계적 증거가 특히 필요한 의학(증거기반의학)에서 시작되었음.</li>
+<li><strong>확산</strong> — 교육, 심리, 사회복지 등 다른 학문 분야로 확산되었으며, 사회복지의 임상과 정책 영역 모두에서 사용됨.</li>
+<li><strong>우리나라</strong> — 2006년 발표된 「증거기반 사회복지실천에 대한 이해와 한국에서의 적용가능성」 논문이 논의의 계기가 되었다고 평가됨(논문에서 '증거기반실천'이라는 용어를 직접 쓰지 않아도 체계적인 이론·자료에 기반한 양적 연구들은 증거기반 실천 과정의 연구로 볼 수 있음).</li>
+</ul>
+<h3>2. 사회복지와 증거기반실천</h3>
+<p class="sh"><strong>증거기반실천과 사회복지 실천지혜</strong></p>
+<ul>
+<li>증거에 기반한 사회복지실천(evidence-based social work practice): 사회복지실천은 끊임없는 실천지혜를 바탕으로 문제상황 등에 체계적으로 개입하는 과정임.</li>
+<li><strong>실천지혜의 풍부화</strong> — 사회복지사는 개입 결과를 평가하고 개선하는 과정에서 실천지혜가 더욱 풍부해짐(예: 부스의 사회조사는 조사를 거치며 큰 통찰을 얻은 사례임).</li>
+</ul>
+<p class="sh"><strong>증거기반실천 모델에 대한 고민과 현장에서의 적용 사례</strong></p>
+<ul>
+<li>메리 리치몬드 『Social Diagnosis(사회진단)』(1917): 증거기반실천 모델에 대한 고민이 담긴 책으로, 교재에는 1971년으로 잘못 기재되어 있으며 1917년이 맞음.</li>
+<li><strong>헐 하우스(Hull House)</strong> — 미국 인보관운동의 대표 사례로, 사회문제의 배경과 과학적 해결방법을 논의하는 토론그룹 운영, 조사연구 결과 교육, 적용방법 강구, 정책입안 활동을 함.</li>
+</ul>
+<p class="sh"><strong>증거기반실천의 세 요소(Rubin &amp; Babbie, 2011)</strong></p>
+<ul>
+<li><strong>핵심</strong> — 세 요소가 겹치는 곳에서 더 나은 실천 결정(EBP)이 이루어짐.</li>
+</ul>
+<p class="tt"><strong>증거기반실천의 세 요소</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>요소</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="요소">실천가의 전문성</td><td data-label="내용">사회복지사의 전문성</td></tr>
+<tr><td data-label="요소">최선의 연구 증거</td><td data-label="내용">이전 연구에서 나타난 결과 등 최선의 연구 증거</td></tr>
+<tr><td data-label="요소">클라이언트의 특성</td><td data-label="내용">도움을 받는 사람(클라이언트)의 특성(교수님은 '도움을 필요로 하는 시민'으로 표현하고 싶으나 일반적으로 클라이언트라고 부른다고 함)</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>사회복지 개입의 두 가지 사례 비교</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>구분</th><th>A 사례(가상)</th><th>B 사례</th></tr></thead><tbody>
+<tr><td data-label="구분">상황</td><td data-label="A 사례(가상)">사회복지사가 예술치료 워크숍에서 문제행동 아동에게 그림치료·놀이치료가 효과적이라는 말을 들음</td><td data-label="B 사례">호스피스 병동 의료사회복지사가 프로그램을 계획하는데 개별상담과 집단상담 중 무엇이 좋을지 확신이 없음</td></tr>
+<tr><td data-label="구분">결정 과정</td><td data-label="A 사례(가상)">슈퍼바이저가 긍정적으로 허락하고 자신의 경험도 고려하여 예술치료 프로그램을 진행하기로 결정함</td><td data-label="B 사례">집단상담 전문가에게 의뢰하고 관련 학술논문을 검색한 뒤 집단상담이 효율적이라고 판단함</td></tr>
+<tr><td data-label="구분">특징</td><td data-label="A 사례(가상)">권위·경험·관습에 의존한 결정</td><td data-label="B 사례">전문가 자문과 연구 증거를 찾아 근거를 확인한 결정(증거기반실천에 가까움)</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>유의</strong> — 두 사례를 비교하는 것은 한쪽이 잘못되었다는 뜻이 아니라, 가능하면 더 근거가 있고 객관적·전문적인 증거기반실천을 하자는 취지임.</li>
+</ul>
+<h3>3. 증거기반실천의 과정(Rubin &amp; Babbie, 2008)</h3>
+<p class="sh"><strong>전체 과정</strong></p>
+<ul>
+<li><strong>6단계</strong> — 실천 질문 만들기 → 증거 찾기 → 증거와 관련 연구를 비판적으로 검토하기 → 가장 적절한 개입 결정하기 → 증거기반실천 적용하기 → 평가 및 피드백</li>
+<li><strong>예시 주제</strong> — 지역사회에 거주하는 65세 이상 1인 가구 노인(고독사 위험, 외로움 등)에 대한 개입</li>
+</ul>
+<p class="tt"><strong>증거기반실천의 6단계</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>단계</th><th>내용</th><th>1인 가구 노인 예시</th></tr></thead><tbody>
+<tr><td data-label="단계">1단계실천 질문 만들기(CIAO 고려)</td><td data-label="내용">실천 질문을 CIAO를 고려하여 만듦. 좋은 질문은 더 좋은 공동체를 위한 질문이어야 함</td><td data-label="1인 가구 노인 예시">C: 지역사회 거주 65세 이상 1인 가구 노인I: 모든 1인 가구 노인 대상 정기적 안부 확인, 사회관계망 형성, 방문형 돌봄서비스A: 소득·질병 위험점수 기준 고위험 노인만 선별하여 집중 관리O: 사회적 고립 감소, 서비스 사각지대 해소, 위기 조기 발견, 지역사회 관계망 강화</td></tr>
+<tr><td data-label="단계">2단계증거 찾기</td><td data-label="내용">질문과 관련된 증거를 찾음. 전문가 논의, 기존 연구 검토 등이 해당함</td><td data-label="1인 가구 노인 예시">학술연구정보서비스(RISS), 구글 스칼라, DBpia, AI, 방송대 도서관 등으로 주제어를 검색함</td></tr>
+<tr><td data-label="단계">3단계비판적 검토</td><td data-label="내용">발견한 증거와 관련 연구를 그대로 쓰지 않고 비판적으로 검토함</td><td data-label="1인 가구 노인 예시">연구가 고립을 개인의 심리 문제로만 측정했는지, 서비스에 접근하지 못한 노인도 대상에 포함되었는지, 효과의 기준이 무엇인지, 단기간 효과만 확인한 것은 아닌지 점검함</td></tr>
+<tr><td data-label="단계">4단계가장 적절한 개입 결정</td><td data-label="내용">어떤 실천개입이 최선의 증거를 갖는지 판단하여 결정함</td><td data-label="1인 가구 노인 예시">고위험군 집중 관리는 비용 효율적일 수 있으나 나머지 노인 방치, 위험군 기준 문제, 구조를 바꾸지 않는 문제 등이 있으므로 모두에게 기본 서비스를 제공하되 필요가 큰 사람에게 더 많이 제공(보편주의와 욕구에 따른 차등지원 결합)</td></tr>
+<tr><td data-label="단계">5단계적용하기</td><td data-label="내용">실천개입 결정 후 적용에 앞서 개입에 대한 훈련이 필요함</td><td data-label="1인 가구 노인 예시">관련 교과목 이수, 개입방법 실천 관련 문헌자료 확보, 자문과 슈퍼비전, 지지집단 모색 등</td></tr>
+<tr><td data-label="단계">6단계평가 및 피드백</td><td data-label="내용">목표 달성 정도를 측정하고 평가함</td><td data-label="1인 가구 노인 예시">개인·기관·지역사회·제도 수준에서 평가함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>2단계 증거 찾기의 접근방식(뮬렌)</strong></p>
+<ul>
+<li><strong>상향식 전략</strong> — 질문과 관련된 증거를 제공하는 거의 모든 출처를 찾는 방법으로 시간이 많이 걸림.</li>
+<li><strong>하향식 전략</strong> — 다른 사람이 이미 수행한 증거기반 조사연구 결과에 의존하는 방법임(예: 메타분석 연구를 활용함). 메타분석은 특정 주제의 기존 연구들을 모아 연구방법, 결과, 문제점, 보완점을 분석하는 연구방법이며, 관심 주제의 메타분석이 없다면 직접 해보는 것도 연구과제가 됨.</li>
+<li><strong>태도</strong> — 현장의 사회복지사도 최선의 연구 증거가 있는지 계속 찾아보는 것이 필요한 시대임.</li>
+</ul>
+<p class="sh"><strong>5단계 적용에 대한 보충</strong></p>
+<ul>
+<li><strong>초인적인 요구에 대하여</strong> — 예술도 과학도 알아야 하고, 증거 찾기, 공부, 자문, 슈퍼비전, 지지집단 모색까지 요구하는 것처럼 보이지만, 모두 실현하지 못하더라도 노력하는 태도가 필요하며 그것이 성장과 학습에 도움이 됨.</li>
+</ul>
+<p class="sh"><strong>6단계 평가의 수준(1인 가구 노인 예시)</strong></p>
+<ul>
+<li><strong>개인 수준</strong> — 혼자 사는 노인의 고립감이 줄었는지 확인함.</li>
+<li><strong>기관 수준</strong> — 복지관 프로그램에 더 많은 노인이 참여했는지 확인함.</li>
+<li><strong>지역사회 수준</strong> — 기관 간 연계가 강화되었는지, 대도시와 소도시 등 지역 간 편차는 없는지 확인함.</li>
+<li><strong>제도 수준</strong> — 노인이 혼자 살게 되는 구조를 개선하는 데 도움이 되었는지, 배제·소외된 노인은 없는지 확인함.</li>
+<li><strong>의의</strong> — 개인이나 한 집단에 그치지 않고 다양한 층위, 더 나아가 제도 수준에서도 평가가 이루어지는 것이 바람직함.</li>
+</ul>
+<h3>4. 증거기반실천의 쟁점과 논의</h3>
+<p class="sh"><strong>증거기반실천에 대한 비판</strong></p>
+<ul>
+<li><strong>적용 가능성</strong> — 조사한 곳 이외의 현장에서도 적용할 수 있는가?</li>
+<li><strong>증거의 충분성</strong> — 그 정도의 증거로 효율적인 개입전략이라고 확신할 수 있는가?</li>
+<li><strong>전문성 훼손</strong> — 간략하고 추상적인 매뉴얼이 현장 전문가의 전문성(직관과 감성, 주관적 판단 포함)을 훼손할 수 있는가?</li>
+</ul>
+<p class="sh"><strong>비판에 대한 논의</strong></p>
+<ul>
+<li><strong>단순한 입장</strong> — 증거기반실천은 '실천이 증거를 기반으로 해야 한다'는 단순한 입장에 근거하며, 모든 문제의 정답이라는 주장이 아님.</li>
+<li><strong>더 큰 문제</strong> — 문제는 증거기반실천 자체가 아니라 증거가 없는 현실임.</li>
+<li><strong>실천가의 태도와 역할</strong> — 증거기반보다 증거기반을 실천하는 실천가, 즉 사회복지사의 태도와 역할이 더 중요하며 이것이 핵심임. 과학적 증거, 자신의 전문성, 클라이언트의 현 상황, 더 나아가 구조적 문제를 모두 중재하고 연결하는 실천지혜가 필요함.</li>
+<li><strong>비판적 사고와 용기</strong> — 전통과 권위(슈퍼바이저의 지시, '우리 기관은 늘 이렇게 해왔다')에 대한 맹목적 따름이 아니라, 어떤 개입방법을 선택할지 결정할 때 최선의 과학적 증거를 고려하는 비판적 사고와 용기가 필요함.</li>
+</ul>
+<p class="sh"><strong>관련 연구 사례와 정리</strong></p>
+<ul>
+<li><strong>연구 사례 예시</strong> — 「이용자 중심적 접근에 기반한 정서적 자활 프로그램의 증거기반 실천과 효과성」, 「청소년 사이버 폭력 예방 및 중재를 위한 국내외 근거기반 실천 프로그램 사례 분석」(증거기반과 근거기반이 유사한 의미로 쓰임).</li>
+<li><strong>학습 방향</strong> — 용어가 낯설더라도 현장에서는 이미 증거기반에 입각한 연구가 많이 이루어지고 있으며, 최선의 연구 증거에 기반해 실천하려는 태도를 갖추고 훈련하는 것이 중요함.</li>
+<li>다음 시간(4강)에는 사회복지조사의 윤리성과 정치성을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l4"><header class="lh"><span class="no">4강</span><h2>사회복지조사의 윤리성과 정치성</h2></header><div class="ct">
+<h3>1. 사회복지조사의 윤리적 쟁점</h3>
+<p class="sh"><strong>왜 윤리가 문제가 되는가</strong></p>
+<ul>
+<li><strong>결과의 유혹</strong> — 오랜 시간을 들여 조사를 설계하고 수행했는데 기대한 결과가 나오지 않으면, 변수 조정, 자료 조작, 원하는 방향으로의 결과 변경 같은 유혹이 생김.</li>
+<li><strong>참여자 보호</strong> — 사회복지조사는 주로 사람과 사회를 대상으로 하므로 사생활 침해, 심리적 고통(과거의 고통을 다시 끄집어내는 질문), 낙인, 개인정보 유출 등 피해가 생기지 않아야 함.</li>
+</ul>
+<p class="tt"><strong>윤리적 쟁점이 된 4가지 사례</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>사례</th><th>내용</th><th>윤리적 질문</th></tr></thead><tbody>
+<tr><td data-label="사례">사례 1고객을 가장한 평가조사</td><td data-label="내용">공공기관이 지사 직원의 친절도, 업무 숙지 등을 평가하기 위해 고객인 척 방문하거나 전화함(암행 조사). 미리 알리면 직원은 평소와 달리 친절해지므로 숨기고 진행함</td><td data-label="윤리적 질문">고객을 가장하여 평가·조사하는 방법은 윤리적인가?</td></tr>
+<tr><td data-label="사례">사례 2연구자의 불법체류자 도움</td><td data-label="내용">추방될 외국인 근로자의 경험을 연구하려던 연구자가 그들과 함께 생활하며 도움을 주다가 경찰에 체포됨</td><td data-label="윤리적 질문">불법체류자를 도운 것은 위법일 수 있으나 비윤리적인가? 이렇게 하지 않으면 연구가 가능한가?</td></tr>
+<tr><td data-label="사례">사례 3복지연구가 800명 텍사스 주민의 복지 수혜를 보류하다</td><td data-label="내용">텍사스 복지국이 기초수급 제외자에게 4개월간 주던 의료·육아 지원을 1년으로 늘리는 정책을 평가하려고 수급자의 90%는 실험집단, 10%는 통제집단에 배정함. 통제집단 800명은 2년간 혜택을 받지 못함</td><td data-label="윤리적 질문">누군가는 이득을 보고 누군가는 피해를 보는 연구가 윤리적인가?</td></tr>
+<tr><td data-label="사례">사례 4기초생활보장 수급자 조사</td><td data-label="내용">담당 사회복지사가 수급자에게 '우리 기관에서 하는 조사이니 참여해 주세요'라고 권유하고, 연구자는 '참여 여부는 자유'라고 설명함</td><td data-label="윤리적 질문">수급자 입장에서 이 조사는 '자발적 참여'라고 할 수 있는가?</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>유의</strong> — 정답이 있다기보다 이런 쟁점이 조사 과정에서 일어날 수밖에 없음을 알고 미리 방지하거나 최소화할 방법을 고민하는 것이 핵심임.</li>
+</ul>
+<p class="sh"><strong>연구윤리의 발생배경</strong></p>
+<ul>
+<li><strong>뉘른베르크 강령</strong> — 2차 세계대전 후 전범재판(뉘른베르크 재판)에서 동의 없는 인체실험 등 비인간적인 일이 드러나면서 만들어졌으며, 1~10항으로 구성됨. 제1항은 '실험대상이 되는 사람의 자발적 동의는 절대 필수적'이라는 내용이며, '연구보다 사람이 먼저다'라는 의미를 가짐.</li>
+<li><strong>벨몬트 보고서</strong> — 1970년대 후반 미국에서 가난한 지역의 흑인 남성들에게 조사 사실을 알리지 않은 채 약 30년간 매독 관련 조사를 한 사건이 알려진 것을 계기로 만들어짐.</li>
+</ul>
+<p class="tt"><strong>벨몬트 보고서의 3가지 원칙</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>원칙</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="원칙">인간 존중의 원칙(principles of respect for persons)</td><td data-label="내용">사람을 자율적인 존재로 여겨야 함</td></tr>
+<tr><td data-label="원칙">선행의 원칙(principles of beneficence)</td><td data-label="내용">위험을 최소화하고 이득을 극대화해야 함</td></tr>
+<tr><td data-label="원칙">정의의 원칙(principles of justice)</td><td data-label="내용">연구의 이득과 피해를 고르게 분배해야 함(텍사스 사례처럼 누군가만 이득이나 피해를 봐서는 안 됨)</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>윤리적 쟁점 7가지</strong></p>
+<p class="tt"><strong>사회복지조사의 윤리적 쟁점</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>번호</th><th>쟁점</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="번호">1</td><td data-label="쟁점">연구참여자의 시간과 에너지</td><td data-label="내용">자료수집은 참여자의 시간과 에너지를 빼앗는 것이며 '참여자 및 사회 이익 위함'이라는 명분이 있어도 마찬가지임. 조사자는 참여자의 시간과 에너지, 개인정보 보호 등 원칙을 준수해야 하고 보상(답례)을 하는 것이 일반적임</td></tr>
+<tr><td data-label="번호">2</td><td data-label="쟁점">자발적 참여</td><td data-label="내용">참여자의 자발적 동의가 필요하나, 자발적 신청만 받으면 참여율이 낮아지고 참여자가 특정 성향에 치우쳐 모집단 대표성이 부족해져 연구의 일반화 가능성이 낮아질 우려가 있음(상충하는 쟁점)</td></tr>
+<tr><td data-label="번호">3</td><td data-label="쟁점">연구문제 은폐(연구목적을 숨기는 것이 허용될까)</td><td data-label="내용">연구목적을 알리면 참여자가 이를 의식해 응답하는 '반응성'이 생기므로(예: 장애인 편견 조사임을 알면 편견이 없는 것처럼 응답함) 숨기고 진행하는 연구가 있으나, 목적을 숨기는 것이 윤리적인지가 쟁점임</td></tr>
+<tr><td data-label="번호">4</td><td data-label="쟁점">연구참여자에 대한 위해 방지</td><td data-label="내용">자료수집은 참여자의 기억에 의존하는 경우가 많아(특히 질적 연구) 과거의 고통을 끄집어내면서 불가피하게 고통이 발생할 수 있음. 이때 연구자가 어떻게 대응할지가 쟁점임</td></tr>
+<tr><td data-label="번호">5</td><td data-label="쟁점">익명성과 비밀보장</td><td data-label="내용">익명성: 참여자의 신원을 밝히지 않고 응답하도록 하는 것(예: 설문에 이름을 쓰지 않음)비밀보장: 연구자가 참여자 정보를 알고 있지만 공개하지 않고 지키는 것(예: 사례조사에서 이름 대신 A, C 등으로 표기함)</td></tr>
+<tr><td data-label="번호">6</td><td data-label="쟁점">연구자의 신분 숨기기</td><td data-label="내용">연구자임을 숨기는 것이 자연스러운 관찰에 도움이 되는 상황이 있으나(반응성 때문), 일종의 속임수이므로 윤리적 문제가 됨</td></tr>
+<tr><td data-label="번호">7</td><td data-label="쟁점">분석과 보고</td><td data-label="내용">조사연구는 사회적 의미와 결과를 가진 공적 행위이므로 결과의 분석·발표 과정에서도 윤리 문제가 생김. 계획대로 되지 않거나 의도치 않은 결과가 나왔을 때 변수를 조작하고 싶은 유혹이 대표적임</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>디지털 연구윤리(AI)</strong></p>
+<ul>
+<li><strong>핵심 관점</strong> — AI를 사용하지 않는 것이 윤리적인 연구가 아니라, AI를 어디까지 사용할 것인지 판단하고 그 결과에 책임지는 것이 윤리적인 연구임.</li>
+<li><strong>유의점</strong> — 정보 검색 등은 활용할 수 있으나 보고서 작성 자체를 AI에게 맡기는 것은 윤리적이지 않음.</li>
+<li><strong>비판적 질문</strong> — AI가 산출한 결과물이 누구의 데이터로 만들어졌는지, 누구에게 유리하고 불리한지 질문해야 함(권력자·특권층 중심의 데이터라면 AI가 차별을 답습할 수 있음).</li>
+<li><strong>학습자의 자세</strong> — 학습자 입장에서도 연구윤리·학습윤리를 스스로 점검하고 고민해야 함.</li>
+</ul>
+<h3>2. 윤리적 쟁점 해결방안</h3>
+<p class="sh"><strong>윤리적 딜레마 해결을 위한 노력</strong></p>
+<ul>
+<li><strong>대표 모델</strong> — 리머의 윤리적 의사결정 과정, 메티슨의 윤리적 의사결정 모델이 있음(교재에 자세히 나오나 단계를 외우는 것은 큰 의미가 없으며, 이런 모델이 만들어져 있음을 이해하면 됨).</li>
+</ul>
+<p class="tt"><strong>예시: 아동학대 경험이 있는 청소년 대상 심층면접</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>단계</th><th>내용</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="단계">1) 문제 확인</td><td data-label="내용">연구의 필요성을 명확히 함</td><td data-label="예시">청소년에게 심리적 피해가 생길 수 있어도 아동학대 예방 정책 마련을 위해 연구가 필요한지 확인함(단순한 호기심은 안 됨)</td></tr>
+<tr><td data-label="단계">2) 관련 가치 확인</td><td data-label="내용">연구의 공익성, 자기결정권, 위해 최소화를 확인함</td><td data-label="예시">연구에 진짜 공익성이 있는지, 참여자의 자기결정권을 지키는지, 심리적 피해를 최소화하는지 끊임없이 점검함</td></tr>
+<tr><td data-label="단계">3) 가능한 대안 찾기</td><td data-label="내용">피해를 줄일 수 있는 방안을 미리 마련함</td><td data-label="예시">질문 수 줄이기, 상담 지원 연계, 언제든 면접 중단 가능, 전문상담자 참여 등</td></tr>
+<tr><td data-label="단계">4) 가장 피해가 적고 권리를 보호하는 방법 선택</td><td data-label="내용">대안 중 참여자의 피해가 가장 적고 권리를 보호하는 방법을 선택함</td><td data-label="예시">위 대안들을 갖추고 조사를 시작함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>연구윤리 지침의 마련과 적용</strong></p>
+<ul>
+<li><strong>사회복지사 윤리강령</strong> — '전문성 개발을 위한 노력'에서 클라이언트를 대상으로 연구하는 사회복지사는 권리 보장을 위해 자발적이고 고지된 동의를 얻어야 하고, 연구 과정에서 얻은 정보는 비밀보장의 원칙에 따라 다루어야 하며, 클라이언트를 신체적·정신적 불편이나 위험·위해로부터 보호해야 한다고 명시함.</li>
+<li><strong>미국 사회복지사 윤리강령</strong> — 지식의 발전을 위해 평가와 조사를 증진하고 촉진해야 한다(b항), 새로운 지식을 비판적으로 검토하고 조사연구에서 얻은 증거를 실천에 활용해야 한다(c항), 참여자와 자료의 익명성·비밀을 보장하고 비밀보장의 한계, 수단, 자료 폐기 시기를 참여자에게 알려야 한다(l항)고 명시함.</li>
+</ul>
+<p class="sh"><strong>윤리적 해결의 제도적 방법: IRB</strong></p>
+<ul>
+<li><strong>정의</strong> — IRB(Institutional Review Board)는 우리나라에서 기관생명윤리위원회, 조사연구윤리심의위원회 등으로 불리며, 인간을 대상으로 하는 연구의 제안서를 심사·평가하여 연구 전체 과정에서 윤리적으로 문제가 없는지 판단하는 독립적이고 전문적인 심사기관임.</li>
+<li><strong>적용 범위</strong> — 인간을 대상으로 하는 연구(예: 아동학대 경험 청소년 면접)는 IRB 승인을 받아야 연구를 진행할 수 있으며, 한 번에 승인되지 않으면 보완하여 재심의를 받기도 함. 방송대에도 IRB가 있음.</li>
+<li><strong>최근 추세</strong> — 학술지 투고 시 IRB 승인 결과 첨부가 요구되는 등 연구윤리가 강화되고 있으며, 표절률 사전 검사와 AI 활용 정도를 자가 체크하게 하는 등 점점 엄격해짐.</li>
+</ul>
+<p class="tt"><strong>IRB 제출 서류(개인정보를 이용하는 연구의 연구계획서 양식)</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>구분</th><th>주요 항목</th></tr></thead><tbody>
+<tr><td data-label="구분">연구 개요</td><td data-label="주요 항목">연구배경, 연구목적, 연구책임자·공동연구자·담당자 성명과 직명, 연구 실시 기관명과 주소, 연구 지원기관</td></tr>
+<tr><td data-label="구분">자료와 방법</td><td data-label="주요 항목">연구기간, 수집하려는 개인정보, 선정 및 산출 근거, 연구방법, 관찰항목, 정보 보관 및 폐기, 자료분석 및 통계적 방법</td></tr>
+<tr><td data-label="구분">참여자 관련</td><td data-label="주요 항목">연구대상자의 위험과 이익, 연구참여에 따른 보상</td></tr>
+<tr><td data-label="구분">기타</td><td data-label="주요 항목">참고문헌</td></tr>
+</tbody></table></div>
+<h3>3. 조사연구의 정치성</h3>
+<p class="sh"><strong>조사연구의 정치적 성격</strong></p>
+<ul>
+<li><strong>질문에 따라 달라지는 연구</strong> — 같은 빈곤 연구도 '왜 가난한 사람들은 일을 하지 않는가'라는 질문과 '왜 일을 하는데도 빈곤에서 벗어나기 어려운가'라는 질문은 서로 다른 결과로 이어짐. 무엇을 문제로 규정하는 순간 이미 하나의 관점을 선택한 것임(다수파 보고서와 소수파 보고서와 같은 맥락).</li>
+<li><strong>가치지향성</strong> — 조사연구는 객관적·과학적이라 하지만 연구질문에서부터 중립적일 수 없으며, 가치지향적이고 정치적 이념의 문제와 관련됨. 사회가 정치적이므로 이를 연구하는 방법론도 정치적일 수밖에 없음.</li>
+<li><strong>특정 집단의 이해와 이념 반영</strong> — 정책과 조사연구는 특정 철학을 가진 세력이 만든 것이므로(정치의 삼각형: 철학·세력·정책) 특정 집단의 이해나 이념이 반영됨.</li>
+<li><strong>정치성의 모호함</strong> — 윤리성보다 정치성은 무엇이 정치적으로 정당하지 못한 것인지 분명하지 않을 수 있음(예: 빈곤을 개인의 문제로 보는 관점도 존재하며 100% 틀렸다고 말하기는 어려움).</li>
+<li><strong>학과의 관점</strong> — 방송대 사회복지학과는 빈곤을 개인이 아닌 사회구조의 문제로 보고, 사회적 위험에 대한 공적 대응을 사회복지로 봄.</li>
+</ul>
+<p class="sh"><strong>정치적 민감성</strong></p>
+<ul>
+<li><strong>의미</strong> — 조사연구 결과를 객관적이라고 그대로 받아들이지 않고, 특정 인종·성별·장애인 등을 배제하거나 차별하는 결과는 아닌지, 특정 집단의 이익을 위해 수행·시행되는 것은 아닌지 살피는 태도임.</li>
+<li><strong>연구자의 자세</strong> — 연구자 자신의 관점과 철학을 분명히 하고, 기존 조사연구가 어떤 관점으로 진행되었는지, 누구에게 이익이 되고 누구를 배제하는지 보는 민감성이 필요함.</li>
+</ul>
+<p class="tt"><strong>윤리성과 정치성 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>윤리성</th><th>정치성</th></tr></thead><tbody>
+<tr><td data-label="구분">핵심 질문</td><td data-label="윤리성">연구를 어떻게 해야 옳은가?</td><td data-label="정치성">누구의 관점에서 문제를 보고 있는가?</td></tr>
+<tr><td data-label="구분">의미</td><td data-label="윤리성">연구 과정이 옳은지 그른지를 묻는 것</td><td data-label="정치성">연구가 어떤 관점과 이해관계를 반영하고 있는지를 묻는 것</td></tr>
+<tr><td data-label="구분">사례</td><td data-label="윤리성">개인정보를 보호했는가?</td><td data-label="정치성">빈곤을 개인문제로 보는가, 구조문제로 보는가?</td></tr>
+<tr><td data-label="구분">명확성</td><td data-label="윤리성">상대적으로 명확함(답이 명확하지 않아도 쟁점임은 분명함)</td><td data-label="정치성">윤리성만큼 명확하게 답을 정할 수 없음</td></tr>
+</tbody></table></div>
+<ul>
+<li>다음 시간(5강)에는 사회복지조사의 과정과 연구문제를 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l5"><header class="lh"><span class="no">5강</span><h2>사회복지조사의 과정과 연구문제</h2></header><div class="ct">
+<h3>1. 사회복지조사의 과정</h3>
+<p class="sh"><strong>전체 흐름</strong></p>
+<ul>
+<li><strong>5단계</strong> — 연구문제 설정(문제 제기, 질문) → 조사설계 → 자료수집 → 자료분석 → 보고서 작성</li>
+<li><strong>학습 방향</strong> — 6강 이후 단계별로 세부 내용을 다루므로, 지금 배우는 내용이 전체 과정의 어디에 있는지 흐름을 이해하는 것이 중요함.</li>
+</ul>
+<p class="tt"><strong>조사 과정에 따른 핵심 질문</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>핵심 질문</th><th>해당 요소</th><th>단계</th></tr></thead><tbody>
+<tr><td data-label="핵심 질문">왜 궁금한가?</td><td data-label="해당 요소">연구문제</td><td data-label="단계">연구문제 설정</td></tr>
+<tr><td data-label="핵심 질문">무엇을 물어볼 것인가?</td><td data-label="해당 요소">연구질문</td><td data-label="단계">연구문제 설정</td></tr>
+<tr><td data-label="핵심 질문">어떤 결과가 나올 것이라고 예상하는가?</td><td data-label="해당 요소">가설</td><td data-label="단계">연구문제 설정</td></tr>
+<tr><td data-label="핵심 질문">어떻게 알아볼 것인가?</td><td data-label="해당 요소">조사설계, 자료수집</td><td data-label="단계">조사설계·자료수집</td></tr>
+<tr><td data-label="핵심 질문">실제 자료는 그 예상을 지지하는가?</td><td data-label="해당 요소">자료분석, 결론</td><td data-label="단계">자료분석·보고서 작성</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>1단계. 연구문제 설정(문제 제기, 질문)</strong></p>
+<ul>
+<li><strong>의미</strong> — 조사연구 과정의 시작은 문제 제기이며 해결되기를 바라는 문제에 질문을 던지는 것임(예: 왜 일을 하는데도 계속 빈곤한가?).</li>
+<li><strong>연구의 필요성</strong> — 사회문제에 대한 명확한 인식과 해결책을 찾는 것으로, 연구주제를 결정하고 왜 이 연구가 필요한지 밝힘.</li>
+<li><strong>연구질문</strong> — 연구질문을 구체화하는 과정이 무엇보다 중요함.</li>
+<li><strong>가설</strong> — 연구문제를 검증 가능한 형태로 변환하는 과정임. 연구질문은 묻는 것이고, 가설은 그 질문에 대해 연구자가 미리 예상해 보는 답임. 가설은 주로 양적 연구에서 많이 사용함.</li>
+<li><strong>보고서 표기</strong> — 가설이 맞으면 '가설을 지지한다', 맞지 않으면 '가설을 기각한다'고 표현함.</li>
+</ul>
+<p class="tt"><strong>연구목적의 유형</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>연구목적</th><th>의미</th><th>사례</th></tr></thead><tbody>
+<tr><td data-label="연구목적">기술</td><td data-label="의미">어떤 상태인가(정보 제공)</td><td data-label="사례">우리 지역 독거노인의 사회적 고립은 어느 정도인가?</td></tr>
+<tr><td data-label="연구목적">탐색</td><td data-label="의미">무슨 일이 일어나고 있을까</td><td data-label="사례">독거노인은 어떤 상황에서 외로움을 경험하는가?</td></tr>
+<tr><td data-label="연구목적">설명</td><td data-label="의미">왜 그런가</td><td data-label="사례">사회활동 참여가 적으면 사회적 고립이 증가하는가?</td></tr>
+<tr><td data-label="연구목적">평가</td><td data-label="의미">효과가 있었나</td><td data-label="사례">노인복지관 친구만들기 프로그램은 고립감을 감소시켰는가?</td></tr>
+<tr><td data-label="연구목적">척도개발</td><td data-label="의미">어떻게 측정할까</td><td data-label="사례">노인의 사회적 고립을 측정하는 척도를 개발할 수 있는가?</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>2단계. 조사설계</strong></p>
+<ul>
+<li><strong>의미</strong> — 연구문제를 해결하기 위한 조사과정의 계획을 수립하는 것임.</li>
+</ul>
+<p class="tt"><strong>조사설계의 분류</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>분류 기준</th><th>유형</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="분류 기준">연구 시점과 기간</td><td data-label="유형">횡단적 연구</td><td data-label="내용">한 시점에 자료를 수집함(예: 현재 독거노인의 고립감 수준)</td></tr>
+<tr><td data-label="분류 기준"></td><td data-label="유형">종단적 연구</td><td data-label="내용">시간에 따라 반복해 조사함(시계열 분석, 패널조사 등)</td></tr>
+<tr><td data-label="분류 기준">연구자료의 특성</td><td data-label="유형">양적연구</td><td data-label="내용">모집단이 큰 경우 많은 인원을 대상으로 설문조사 등을 하여 비율 등으로 결과를 제시함</td></tr>
+<tr><td data-label="분류 기준"></td><td data-label="유형">질적연구</td><td data-label="내용">보통 5~6명 정도를 심층면접하여 경험과 이유를 깊이 파악함</td></tr>
+<tr><td data-label="분류 기준"></td><td data-label="유형">복합연구</td><td data-label="내용">양적연구와 질적연구를 함께 수행함(양적연구는 개별 경험을 알기 어렵고, 질적연구는 일반화가 어려운 한계를 보완)</td></tr>
+<tr><td data-label="분류 기준">연구방법</td><td data-label="유형">실험설계</td><td data-label="내용">실험집단과 통제집단을 두어 효과를 비교함</td></tr>
+<tr><td data-label="분류 기준"></td><td data-label="유형">비실험설계</td><td data-label="내용">실험집단과 통제집단을 나눌 수 없는 경우 사용함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>3단계. 자료수집</strong></p>
+<ul>
+<li><strong>1차적 자료수집</strong> — 연구자가 설문지, 관찰, 면접 등으로 직접 자료를 수집하여 새로 생성하는 것임. 내가 원하는 문항을 직접 만들 수 있음.</li>
+<li><strong>2차적 자료수집</strong> — 기존 데이터를 활용하는 것임(정부기관 통계자료, 선행연구 자료 등). 보건복지패널, 장애인고용패널 등 공개된 패널 자료로 종단연구를 할 수 있으나, 이미 만들어진 문항의 결과만 활용할 수 있음.</li>
+</ul>
+<p class="sh"><strong>4단계. 자료분석</strong></p>
+<ul>
+<li><strong>양적 자료분석</strong> — 수집된 자료를 SPSS 등 통계프로그램을 활용하여 분석함(빈도분석, 회귀분석 등). 연구자마다 자주 쓰는 분석방법이 있음.</li>
+<li><strong>질적 자료분석</strong> — 인터뷰 녹음을 동의를 얻어 녹취(전사)한 뒤, 참여자가 한 말을 중심으로 의미를 분석함.</li>
+</ul>
+<p class="sh"><strong>5단계. 보고서 작성</strong></p>
+<ul>
+<li><strong>일반적인 조사연구보고서 형식</strong> — Ⅰ. 서론(문제 제기, 연구목적, 연구의 필요성) → Ⅱ. 이론적 배경 → Ⅲ. 연구방법 → Ⅳ. 연구결과 → Ⅴ. 결론 및 논의</li>
+<li><strong>결론 및 논의</strong> — 연구 결과를 바탕으로 정책적 제언과 실천적 제언을 제시하는 부분임.</li>
+<li><strong>연구의 한계와 후속연구</strong> — 완벽한 연구는 없으므로 연구의 한계를 반드시 쓰고, 후속연구를 제언하며 마무리함.</li>
+</ul>
+<h3>2. 연구문제 형성</h3>
+<p class="sh"><strong>연구문제의 의미</strong></p>
+<ul>
+<li><strong>연구문제</strong> — 의문과 질문이며 '독창성'이 필요함. 이미 많이 이루어진 연구를 똑같이 반복할 필요는 없고, 기존 연구에서 빠진 부분이나 한계를 질문으로 삼아야 함.</li>
+<li><strong>핵심 원칙</strong> — 좋은 연구는 좋은 질문에서 시작하며, 좋은 질문이 좋은 연구를 만들고 좋은 연구가 좋은 정책과 의미 있는 실천 방향을 만듦. 사회복지 연구의 질문은 더 나은 사회를 만들기 위한 질문이어야 함.</li>
+</ul>
+<p class="tt"><strong>연구질문의 구체화 예시(독거노인)</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>단계</th><th>질문</th><th>평가</th></tr></thead><tbody>
+<tr><td data-label="단계">①</td><td data-label="질문">노인 문제는 심각한가?</td><td data-label="평가">범위가 너무 넓어 어떤 문제인지 알 수 없어 좋은 질문이 아님</td></tr>
+<tr><td data-label="단계">②</td><td data-label="질문">독거노인은 외로운가?</td><td data-label="평가">①보다 낫지만 외로움의 측정 문제가 있어 아주 좋은 질문은 아님</td></tr>
+<tr><td data-label="단계">③</td><td data-label="질문">독거노인의 사회적 관계망은 사회적 고립에 어떤 영향을 미치는가?</td><td data-label="평가">변수 간 관계가 드러나는 좋은 연구문제임</td></tr>
+<tr><td data-label="단계">④</td><td data-label="질문">독거노인의 사회적 고립은 개인적 특성보다 지역사회의 사회적 관계망과 복지서비스 접근성에 의해 더 크게 설명되는가?</td><td data-label="평가">구조적 문제를 보고자 하는 아주 좋은 질문임</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>연구문제 형성 과정의 고려사항</strong></p>
+<ul>
+<li>(1) 사회복지조사의 연구문제: 질문은 실천현장(누가? 왜? 어떤 문제?)에서 출발함.</li>
+</ul>
+<p class="tt"><strong>기초 사회과학 연구문제 vs 응용 사회과학 연구문제</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>기초 사회과학</th><th>응용 사회과학(사회복지)</th></tr></thead><tbody>
+<tr><td data-label="구분">성격</td><td data-label="기초 사회과학">현상의 본질을 물음</td><td data-label="응용 사회과학(사회복지)">구체적인 실천방안과 정책, 문제 해결을 지향함</td></tr>
+<tr><td data-label="구분">예시</td><td data-label="기초 사회과학">노년기의 사회적 고립은 어떻게 형성되는가?노인이 경험하는 '좋은 돌봄'이란 무엇인가?</td><td data-label="응용 사회과학(사회복지)">노인맞춤돌봄서비스가 사회적 고립 감소에 효과가 있는가?노인복지관의 어떤 프로그램이 사회적 관계망 확대에 가장 효과적인가?</td></tr>
+</tbody></table></div>
+<ul>
+<li>(2) 질문이나 착상: 막연한 '의문'이 구체적인 '질문'이 되어야 하며, 질문은 ①기존 지식의 한계, ②추가 지식 축적의 필요성·후속연구, ③사회복지실천 현장의 경험, ④개인적 경험에서 생김(개인적 경험은 깊은 이해가 장점이나 객관성을 잃을 우려가 있음).</li>
+<li>(3) 질문에서 조사연구문제로의 전환: 질문이 생기면 문헌연구, 전문가 의견, 동료 토론으로 기존 지식을 바탕으로 질문을 검토하며, 해결되면 종료되고 새로운 질문이 생김. 해결되지 않으면 조사연구에 착수하여 조사연구문제, 이론 전개, 가설 설정 후 경험적으로 검증함.</li>
+<li>(4) 문헌고찰: 연구주제에 대해 미리 알려진 것을 확인하는 필수 과정이며, 질문에 대한 '해답'보다 해결의 '단서'를 제공함. 문헌고찰의 목적은 ①기존 지식 확인, ②새로운 아이디어 발견, ③실행 가능성 평가, ④새로운 연구의 학문적 위치 파악임(예: 양적 연구는 많은데 질적 연구는 없음을 확인함).</li>
+<li><strong>문헌 검색처</strong> — 방송대 중앙도서관 통합검색, 구글 학술검색(구글 스칼라), 국회도서관, RISS, KISS, DBpia 등</li>
+</ul>
+<p class="tt"><strong>(5) 연구문제의 적절성 4가지</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>기준</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="기준">연구 범위의 적절성</td><td data-label="내용">전국 독거노인 전체 조사가 가능한지 등 범위가 적절해야 함</td></tr>
+<tr><td data-label="기준">조사연구의 현실적 여건</td><td data-label="내용">인원, 답례품, 시간, 분석에 드는 시간 등 현실적으로 수행할 수 있어야 함</td></tr>
+<tr><td data-label="기준">검증 가능성</td><td data-label="내용">경험적으로 검증할 수 있어야 함</td></tr>
+<tr><td data-label="기준">효용성</td><td data-label="내용">결과가 의미 있는 시사점을 줄 수 있어야 함</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>예시</strong> — '우리나라 노인은 행복한가?'는 전수조사가 어렵고 행복의 의미도 모호하여 적절하지 않으나, '서울 지역 65세 이상 노인의 사회활동 참여 정도는 생활만족도와 관계가 있는가?'는 연구해 볼 만한 적절한 문제임.</li>
+</ul>
+<p class="tt"><strong>조사연구문제의 서술 4가지 기준</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>기준</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="기준">의문문 형태</td><td data-label="내용">연구문제는 의문문의 형태로 서술함</td></tr>
+<tr><td data-label="기준">변수와 관계의 명확성</td><td data-label="내용">변수들의 특성, 변수들 간 관계에 대해 서술함(예: 사회적 관계망과 삶의 만족도)</td></tr>
+<tr><td data-label="기준">단순 명료성</td><td data-label="내용">한 줄로 단순하고 명료하게 문제를 제시함</td></tr>
+<tr><td data-label="기준">경험적 검증 가능성</td><td data-label="내용">경험적으로 검증할 수 있어야 함</td></tr>
+</tbody></table></div>
+<h3>3. 가설 설정</h3>
+<p class="sh"><strong>가설(hypothesis)의 정의</strong></p>
+<ul>
+<li><strong>정의</strong> — 두 개 이상의 변수 간의 관계를 예측하는 것이며, 연구자가 검증 가능한 형태로 서술한 것임. 즉 경험적인 변수들 간의 관계가 어떻게 나타날 것이라고 연구자가 생각하는 가정임.</li>
+<li><strong>예시</strong> — '사회활동 참여가 많을수록 노인의 우울수준은 낮을 것이다.'</li>
+</ul>
+<p class="sh"><strong>가설 서술 기준</strong></p>
+<ul>
+<li><strong>변수들 간의 관계를 명확하게 서술</strong> — '노인의 사회활동과 행복은 관계가 있을 것이다'는 방향이 없어 좋지 않고, '노인의 사회활동 참여가 많을수록 생활만족도가 높을 것이다'처럼 방향을 서술해야 함.</li>
+<li><strong>변수는 측정 가능하도록 서술</strong> — 사회활동 참여(예: 일주일에 외출 횟수)나 생활만족도처럼 측정할 수 있어야 하며, 생활만족도는 이미 이론적으로 검증된 척도들이 개발되어 있어 선택하여 사용하면 됨.</li>
+</ul>
+<p class="sh"><strong>이론적 명제(큰 주장)와 가설</strong></p>
+<ul>
+<li><strong>관계</strong> — 가설은 명제와 관련성이 있어야 하며, 다수의 가설(사실관계)로 명제를 검증해 나감.</li>
+<li><strong>예시(명제</strong> — 사회적 관계가 많은 노인이 더 행복하다): 가설 1 친구와 만나는 횟수가 많을수록 생활만족도가 높을 것이다. 가설 2 사회단체 참여횟수가 많을수록 생활만족도가 높을 것이다. 가설 3 가족과의 접촉빈도가 높을수록 생활만족도가 높을 것이다.</li>
+<li><strong>가설을 세우는 이유</strong> — 연구를 구체화하고 연구문제를 명확하게 하며 결과를 예측해 볼 수 있어 연구가 체계적이고 뚜렷해짐(예: 친구 만나는 횟수와 생활만족도를 조사하면 됨).</li>
+</ul>
+<p class="tt"><strong>가설의 종류</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>대립가설(연구가설)</th><th>영가설(귀무가설)</th></tr></thead><tbody>
+<tr><td data-label="구분">영문</td><td data-label="대립가설(연구가설)">alternative hypothesis</td><td data-label="영가설(귀무가설)">null hypothesis</td></tr>
+<tr><td data-label="구분">의미</td><td data-label="대립가설(연구가설)">연구자의 주장이 담긴, 이론으로부터 도출된 가설</td><td data-label="영가설(귀무가설)">대립가설 기각을 위해 설정하는 가설</td></tr>
+<tr><td data-label="구분">예시</td><td data-label="대립가설(연구가설)">사회활동 참여가 많을수록 우울수준이 낮을 것이다.</td><td data-label="영가설(귀무가설)">사회활동 참여와 우울수준에는 관계가 없다.</td></tr>
+<tr><td data-label="구분">핵심</td><td data-label="대립가설(연구가설)">연구자가 입증하고자 하는 가설</td><td data-label="영가설(귀무가설)">통계분석을 통해 '관계가 없다'는 주장을 기각할 수 있는지 확인함. 귀무가설을 기각하면 연구가설을 지지하는 근거를 확보함</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>귀무가설을 쓰는 이유</strong> — 연구가설만 세워 맞다고 하면 근거가 다소 약해 보일 수 있으므로, '관계가 없다'는 가설을 기각하여 연구 결과를 더 탄탄하게 지지받기 위함임(귀무가설은 외워야 하는 용어임).</li>
+<li>다음 시간(6강)에는 조사설계를 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l6"><header class="lh"><span class="no">6강</span><h2>조사설계</h2></header><div class="ct">
+<h3>1. 인과관계와 내적타당도</h3>
+<p class="sh"><strong>도입 사례와 조사설계의 의미</strong></p>
+<ul>
+<li><strong>사례</strong> — 지자체가 65세 이상 노인의 대중교통 이용 지원을 확대했더니 정책 시행 후 노인의 외출 횟수와 사회활동 참여율이 증가함. 이 변화가 정말 교통지원 정책 때문인지가 질문임('정책 이후 변화가 나타났다'와 '정책 때문에 변화가 나타났다'는 다름).</li>
+<li><strong>조사설계의 의미</strong> — 정말로 X 때문에 Y가 변했다고 말할 수 있는지를 확인하기 위한 계획임. 변화가 있었다는 데 그치지 않고 그 변화가 정말 개입 때문에 일어났는지 확인함.</li>
+</ul>
+<p class="sh"><strong>인과관계</strong></p>
+<ul>
+<li><strong>정의</strong> — 원인과 결과의 관계로, 원인이라고 생각하는 변수를 독립변수(X), 그 결과로 변한다고 생각하는 변수를 종속변수(Y)라고 함(예: 교통지원 정책 → 노인의 외출 횟수 증가).</li>
+</ul>
+<p class="tt"><strong>인과관계의 성립 요건 3가지</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>요건</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="요건">공변성</td><td data-label="내용">X와 Y가 함께 변해야 함(예: X는 2년 전에 일어나고 Y는 2년 후에 나타나면 그 사이에 다른 변수가 많아 인과관계로 볼 수 없음)</td></tr>
+<tr><td data-label="요건">시간적 우선성</td><td data-label="내용">원인(X)이 결과(Y)보다 먼저 일어나야 함</td></tr>
+<tr><td data-label="요건">외부 설명의 통제</td><td data-label="내용">다른 설명(날씨 등 외부 변수)을 제거하여 X의 효과임을 분명히 해야 함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>내적타당도</strong></p>
+<ul>
+<li><strong>정의</strong> — 종속변수의 변화가 독립변수 때문에 일어났다고 얼마나 확신하는가를 뜻함. 인과관계가 명확할수록 내적타당도가 높은 조사임.</li>
+<li><strong>학습 포인트</strong> — 저해요인은 외워야 하며 저해요인이 아닌 것을 골라낼 수 있어야 함.</li>
+</ul>
+<p class="tt"><strong>내적타당도 저해요인 7가지</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>저해요인</th><th>의미</th><th>확인 질문(설명)</th></tr></thead><tbody>
+<tr><td data-label="저해요인">우연한 사건</td><td data-label="의미">의도치 않게 일어나 종속변수에 영향을 미침</td><td data-label="확인 질문(설명)">밖에서 무슨 일이 생겼나?</td></tr>
+<tr><td data-label="저해요인">성숙</td><td data-label="의미">시간이 흐르면서 자연스럽게 나타나는 변화</td><td data-label="확인 질문(설명)">시간 때문에 변했나?</td></tr>
+<tr><td data-label="저해요인">상실</td><td data-label="의미">조사대상자가 중간에 탈락함</td><td data-label="확인 질문(설명)">누가 빠졌나?</td></tr>
+<tr><td data-label="저해요인">선정편향</td><td data-label="의미">연구 시작 전 존재하는 두 집단의 차이</td><td data-label="확인 질문(설명)">처음부터 집단이 달랐나?</td></tr>
+<tr><td data-label="저해요인">검사효과</td><td data-label="의미">사전검사가 사후검사에 영향을 미침(사전검사로 조사 목적을 눈치채 응답이 달라짐)</td><td data-label="확인 질문(설명)">먼저 검사한 영향인가?</td></tr>
+<tr><td data-label="저해요인">도구화</td><td data-label="의미">사전·사후 검사자나 도구(측정방법)가 달라짐</td><td data-label="확인 질문(설명)">측정방법이 달라졌나?</td></tr>
+<tr><td data-label="저해요인">통계적 회귀</td><td data-label="의미">사전조사의 극단적인 값이 사후조사에서 평균값 쪽으로 이동함</td><td data-label="확인 질문(설명)">처음 점수가 너무 극단적이었나?</td></tr>
+</tbody></table></div>
+<h3>2. 집단수준 조사설계: 실험설계</h3>
+<p class="sh"><strong>실험설계의 개념</strong></p>
+<ul>
+<li><strong>정의</strong> — 조사 대상에 대한 변수 사이의 인과관계를 인위적으로 조작하여 조작된 변수의 효과를 파악하는 방법임. 쉽게 말해 프로그램이나 개입을 하고 그 이후의 변화가 개입 때문인지 확인함.</li>
+<li><strong>용어</strong> — 집단수준 조사설계와 실험설계는 같은 의미로 쓰임.</li>
+</ul>
+<p class="sh"><strong>실험설계의 분류 기준</strong></p>
+<ul>
+<li><strong>1단계 기준</strong> — 무작위 할당이 사용되었는가? 사용했으면 순수실험설계임. 무작위 할당은 조사 대상을 우연에 따라 집단에 배치하는 것임(예: 특정 학과 학생만 묶는 것은 무작위 할당이 아님).</li>
+<li><strong>2단계 기준</strong> — 무작위 할당을 사용하지 않았다면 통제집단 또는 다중측정이 있는가? 있으면 유사실험설계, 없으면 전실험설계(비실험설계)임.</li>
+</ul>
+<p class="tt"><strong>실험설계의 유형</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>무작위 할당</th><th>통제집단 또는 다중측정</th><th>세부 유형</th></tr></thead><tbody>
+<tr><td data-label="구분">순수실험설계</td><td data-label="무작위 할당">사용</td><td data-label="통제집단 또는 다중측정">있음</td><td data-label="세부 유형">통제집단 사전-사후검사 설계, 통제집단 사후검사 설계, 솔로몬 4집단 설계</td></tr>
+<tr><td data-label="구분">유사실험설계</td><td data-label="무작위 할당">미사용</td><td data-label="통제집단 또는 다중측정">있음</td><td data-label="세부 유형">비동일 통제집단 설계, 시계열 설계</td></tr>
+<tr><td data-label="구분">전실험설계(비실험설계)</td><td data-label="무작위 할당">미사용</td><td data-label="통제집단 또는 다중측정">없음</td><td data-label="세부 유형">단일집단 사전-사후검사 설계, 단일집단 사후검사 설계</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>실험설계에서 사용되는 기호</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>기호</th><th>의미</th></tr></thead><tbody>
+<tr><td data-label="기호">X</td><td data-label="의미">실험집단에 대한 실험적 처리(프로그램 개입)</td></tr>
+<tr><td data-label="기호">R</td><td data-label="의미">대상자를 실험집단과 통제집단에 배치할 때 무작위 할당을 실시했음을 의미함</td></tr>
+<tr><td data-label="기호">Q</td><td data-label="의미">조사 또는 측정</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>통제집단</strong> — 실험집단에는 개입(X)을 하고 통제집단에는 개입하지 않아 프로그램의 효과를 비교하기 위한 집단임.</li>
+</ul>
+<p class="sh"><strong>1. 순수실험설계: 인과관계를 확인할 수 있는 가장 이상적인 방법(통제집단 有, 무작위 할당 有)</strong></p>
+<p class="tt"><strong>순수실험설계의 세부 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>구성</th><th>특징</th></tr></thead><tbody>
+<tr><td data-label="유형">1) 통제집단 사전-사후검사 설계</td><td data-label="구성">R Q1 X Q2 (실험집단)R Q3     Q4 (통제집단)</td><td data-label="특징">가장 대표적이고 전형적인 실험설계 유형임. 두 집단의 사전·사후 차이를 비교하여 개입 효과를 확인함</td></tr>
+<tr><td data-label="유형">2) 통제집단 사후검사 설계</td><td data-label="구성">R X Q1 (실험집단)R   Q2 (통제집단)</td><td data-label="특징">사전검사를 하지 않아 사전검사 실시로 인한 '검사효과'를 방지함</td></tr>
+<tr><td data-label="유형">3) 솔로몬 4집단 설계</td><td data-label="구성">R Q1 X Q2R Q3   Q4R   X Q5R     Q6</td><td data-label="특징">앞의 두 설계를 섞은 것으로 4개 집단을 사용함. 개입 효과인지 사전검사 효과인지까지 구별할 수 있으나 비용과 시간이 많이 들어 현실적으로 어려움</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>유의</strong> — 어떤 설계가 정답이라는 것은 없으며 연구자가 연구문제에 맞게 선택하고 한계는 연구 결과에 밝히면 됨.</li>
+</ul>
+<p class="sh"><strong>2. 유사실험설계: 실험설계와 유사하나 무작위 할당을 사용하지 않음(통제집단 有, 무작위 할당 無)</strong></p>
+<p class="tt"><strong>유사실험설계의 세부 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>구성</th><th>특징</th></tr></thead><tbody>
+<tr><td data-label="유형">1) 비동일 통제집단 설계(비동일 통제집단 사전사후 조사)</td><td data-label="구성">Q1 X Q2Q3   Q4</td><td data-label="특징">사회복지실천현장에서 가장 많이 활용하는 조사설계임. 예: A복지관과 B복지관 이용자는 무작위로 나눌 수 없으므로 A복지관에만 프로그램(X)을 개입하고 차이를 비교함</td></tr>
+<tr><td data-label="유형">2) 시계열 설계</td><td data-label="구성">Q1 Q2 Q3 Q4 X Q5 Q6 Q7 Q8</td><td data-label="특징">하나의 집단을 개입 전후 여러 번 반복 측정함. 예: 저상버스 확대 전후 장애인의 월별 외출 빈도를 측정하여(3, 4, 3, 5회 → 7, 8, 7, 9회) 확대가 이동을 증가시켰는지 확인함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>3. 전실험설계(비실험설계): 무작위 할당과 통제집단을 모두 사용하지 않음</strong></p>
+<ul>
+<li><strong>특징</strong> — 효과가 나타나는지는 볼 수 있으나 인과관계를 강하게 주장하기에는 부족한 설계이며, 현실적 제약으로 어쩔 수 없이 쓰기도 함.</li>
+</ul>
+<p class="tt"><strong>전실험설계의 세부 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>구성</th><th>특징</th></tr></thead><tbody>
+<tr><td data-label="유형">1) 단일집단 사전-사후검사 설계</td><td data-label="구성">Q1 X Q2 (한 집단)</td><td data-label="특징">통제집단이 없는 단일집단이며 개입 전후를 비교함. 예: 선배시민 교육 프로그램 참여자를 3개월 교육 전후로 동일한 설문지로 조사함(연구 기간이 짧고 현실적 제약이 있어 선택하고 한계를 함께 제시함)</td></tr>
+<tr><td data-label="유형">2) 단일집단 사후검사 설계</td><td data-label="구성">X Q (한 집단)</td><td data-label="특징">사전검사도 없이 개입 후 조사만 함. 예: 조사론을 수강한 학생의 조사에 대한 인식·태도를 10점 만점에 8점으로 측정해도 높고 낮음을 판단할 기준이 없어 수강이 태도를 변화시켰다고 말하기 어려움</td></tr>
+</tbody></table></div>
+<h3>3. 단일사례 조사설계</h3>
+<p class="sh"><strong>단일사례 조사설계와 실험조사설계 비교</strong></p>
+<p class="tt"><strong>단일사례조사설계 vs 실험조사설계</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>단일사례조사설계</th><th>실험조사설계</th></tr></thead><tbody>
+<tr><td data-label="구분">분석단위</td><td data-label="단일사례조사설계">단일사례(N=1)</td><td data-label="실험조사설계">집단(N=다수)</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="단일사례조사설계">개입효과, 성공 여부 확인</td><td data-label="실험조사설계">인과관계 규명</td></tr>
+<tr><td data-label="구분">적용</td><td data-label="단일사례조사설계">클라이언트 개입에 대한 평가</td><td data-label="실험조사설계">기관의 프로그램 평가</td></tr>
+<tr><td data-label="구분">측정</td><td data-label="단일사례조사설계">반복측정</td><td data-label="실험조사설계">사전·사후 각 1회</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>단일사례 조사설계 과정</strong></p>
+<ul>
+<li><strong>진행 순서</strong> — 개인 클라이언트의 문제 확인·규명 → 실험에 사용할 변수 선정 → 측정 대상인 표적행동 결정(예: 자해 행동의 주당 횟수) → 개인 목표를 구체화하고 설계 유형 결정 → 조사 실시 → 개입 효과 평가</li>
+</ul>
+<p class="sh"><strong>단일사례 조사설계 유형(휠체어 이용 장애인 노동자 김 씨의 월 지각 횟수 예시)</strong></p>
+<p class="tt"><strong>단일사례 조사설계의 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>구성</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="유형">1) AB 설계</td><td data-label="구성">A(기초선 단계) → B(개입 단계)</td><td data-label="내용">가장 기본적인 유형임. A는 개입이 없는 원래 상태, B는 개입 단계임. 예: 출퇴근 유연근무제 적용 후 지각 횟수가 확실히 줄어듦</td></tr>
+<tr><td data-label="유형">2) ABAB 설계</td><td data-label="구성">A → B → A → B</td><td data-label="내용">개입 효과를 더 명확히 확인함. 개입을 중단(유연근무제 폐지)하면 지각이 다시 늘고 재개하면 다시 줄어드는지 봄. 개입을 중단하는 과정에서 참여자에게 고통이 가해질 수 있어 윤리성 문제가 있음</td></tr>
+<tr><td data-label="유형">3) ABCD 설계</td><td data-label="구성">A(기초선) → B → C → D(서로 다른 개입)</td><td data-label="내용">개입의 종류를 바꿔가며 효과를 비교함. 예: B 유연근무제, C 보조공학기기(높낮이 조절 테이블) 지원, D 직무 재설계·재배치</td></tr>
+<tr><td data-label="유형">4) 다중기초선 설계</td><td data-label="구성">여러 사례(김 씨, 박 씨, 강 씨)에 개입 시작 시점을 달리 적용</td><td data-label="내용">개입 시점이 달라도 개입 후 모두 지각 횟수가 줄면 개입 효과를 더 명확히 확인할 수 있음</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>유의</strong> — 다중기초선이나 ABAB, ABCD는 현실적으로 하기 쉽지 않으나, 시간·예산·기간이 충분하고 효과를 엄격히 봐야 할 때 쓰면 뚜렷한 효과를 확인할 수 있음.</li>
+</ul>
+<p class="sh"><strong>단일사례 조사설계 결과분석</strong></p>
+<p class="tt"><strong>결과분석의 방법</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>방법</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="방법">시각적 분석</td><td data-label="내용">기초선과 개입 단계의 그래프를 바탕으로 변화를 시각적으로 판단함(가장 보편적인 방법)</td></tr>
+<tr><td data-label="방법">통계적 분석</td><td data-label="내용">평균 비교(기초선과 개입 단계 자료의 평균을 비교)와 경향선 접근(기초선의 경향선을 연장하여 개입 단계 값이 경향선 상단 또는 하단에 위치하면 효과적인 개입으로 평가)이 있음. 통계프로그램으로 처리하므로 직접 할 일은 거의 없음</td></tr>
+<tr><td data-label="방법">실용적 분석</td><td data-label="내용">변화의 크기를 임상적인 기준으로 판단해 보는 것</td></tr>
+</tbody></table></div>
+<h3>4. 외적타당도</h3>
+<p class="sh"><strong>외적타당도의 의미</strong></p>
+<ul>
+<li><strong>정의</strong> — 실험조사 결과를 어느 정도 일반화할 수 있는가, 즉 다른 대상자 및 다른 상황에서도 동일한 결과가 가능한가를 뜻함(예: 이 회사 외 다른 회사의 장애인 노동자에게도 유연근무제가 효과가 있는가).</li>
+<li><strong>내적타당도와의 구분</strong> — 내적타당도는 '정말 개입 때문에 좋아졌나?'(인과관계), 외적타당도는 '다른 사람에게도 효과가 있을까?'(일반화)임.</li>
+</ul>
+<p class="tt"><strong>외적타당도 영향 요인</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>영향요인</th><th>의미</th><th>설명</th></tr></thead><tbody>
+<tr><td data-label="영향요인">대표성 없는 표본</td><td data-label="의미">전체 노인에게 일반화할 수 있는가</td><td data-label="설명">서울 노인복지관 이용자 30명만 연구한 경우 전체 노인에게 일반화하기 어려움</td></tr>
+<tr><td data-label="영향요인">반응적 세팅</td><td data-label="의미">평상시에도 같은 행동을 하는가</td><td data-label="설명">연구자들이 옆에서 계속 관찰하는 특수한 상황에서 실험이 이루어짐</td></tr>
+<tr><td data-label="영향요인">검사반응성</td><td data-label="의미">실제 생활에서도 같은 효과인가</td><td data-label="설명">사전검사를 받아 연구목적을 눈치챔</td></tr>
+<tr><td data-label="영향요인">다중개입 간섭</td><td data-label="의미">어떤 개입 때문인지, 다른 상황에서도 같은 결과일지 판단하기 어려움</td><td data-label="설명">상담, 운동, 약물, 교육을 모두 받음</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>외적타당도를 높이는 방법: 반복</strong></p>
+<ul>
+<li><strong>방법</strong> — A복지관에서 효과가 있었다면 B복지관, 농촌, 다른 연령대에서도 해보고, 다른 연구자도 같은 결과를 얻는지 확인함. 반복해서 같은 결과가 나오면 일반화할 수 있어 외적타당도가 높다고 봄.</li>
+</ul>
+<p class="sh"><strong>6강 정리</strong></p>
+<ul>
+<li><strong>조사설계란</strong> — '변화가 있었다'에 멈추지 않고 '그 변화가 정말 개입 때문에 일어났는가'를 확인하기 위한 계획임.</li>
+<li><strong>설계 선택의 자세</strong> — 이론적·이상적인 설계를 모두 하기는 어려우나, 각 설계의 장단점과 윤리성·정치성을 파악하여 연구문제를 푸는 데 가장 좋은 설계를 고민해야 함. 내적타당도와 외적타당도를 함께 확보하려는 태도가 필요함.</li>
+<li><strong>학습 방법</strong> — 무작위 할당 유무, 통제집단 유무에 따른 설계 구분과 세부 유형, 단일사례의 AB·ABAB·ABCD 설계 등을 스스로 표로 정리해 보는 것이 좋음.</li>
+<li>다음 시간(7강)에는 개념화와 측정을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l7"><header class="lh"><span class="no">7강</span><h2>개념화와 측정</h2></header><div class="ct">
+<h3>1. 개념화와 조작화</h3>
+<p class="sh"><strong>7~9강의 위치와 도입 질문</strong></p>
+<ul>
+<li><strong>위치</strong> — 5강(연구문제) → 6강(조사설계) 다음 단계는 자료수집(10강)이지만, 그 전에 7·8·9강에서 측정, 척도와 측정도구 개발, 표본추출을 먼저 다룸. 자료수집을 하려면 무엇을 어떻게 재고 누구에게 물을지가 정해져야 하기 때문임.</li>
+<li><strong>도입 질문</strong> — 눈에 보이지 않는 것을 어떻게 연구할 수 있을까? 사과나 의자는 눈에 보이지만 사회복지조사의 대상은 고립, 외로움, 우울, 복지태도처럼 대부분 추상적인 것임(예: '고립과 외로움'을 어떻게 조사할까?).</li>
+<li><strong>6강 복습</strong> — 교수님은 6강 내용(무작위 할당 여부에 따른 구분, 실험설계 세부 유형 등)을 표로 직접 정리해 보라고 안내함. 직접 쓰면서 정리해야 더 잘 기억되기 때문임.</li>
+</ul>
+<p class="sh"><strong>개념, 개념화, 조작화, 변수</strong></p>
+<p class="tt"><strong>개념화·조작화 관련 용어</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>용어</th><th>의미</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="용어">개념(concept)</td><td data-label="의미">연구하고자 하는 현상을 추상적으로 나타낸 것</td><td data-label="예시">삶의 질, 우울, 사회적 지지</td></tr>
+<tr><td data-label="용어">개념화(conceptualization)</td><td data-label="의미">추상적 개념을 명확하게 정의하는 과정. '이 개념이 무엇을 의미하는가?'를 정하는 것</td><td data-label="예시">우울: 지속적인 무기력감과 흥미 상실을 특징으로 하는 정서 상태</td></tr>
+<tr><td data-label="용어">조작화(operationalization)</td><td data-label="의미">개념화된 정의를 실제로 측정 가능한 형태로 바꾸는 과정. '그 개념을 실제로 어떻게 측정할 것인가?'를 정하는 것</td><td data-label="예시">CES-D 우울척도 점수로 측정한다</td></tr>
+<tr><td data-label="용어">변수(variable)</td><td data-label="의미">개념을 실제 연구에서 관찰하거나 측정할 수 있도록 나타낸 것. '실제로 재고 비교하는 대상'</td><td data-label="예시">연령, 소득, 우울 점수, 삶의 만족도 점수</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>개념화의 방법</strong></p>
+<ul>
+<li><strong>정답은 하나가 아님</strong> — 학자마다 우울을 '무기력감'에 초점을 두고 정의하기도 하고 '흥미 상실'에 초점을 두기도 함. 연구자는 문헌고찰로 기존 학자들의 정의를 살펴본 뒤 '이 연구에서는 우울을 이렇게 정의하고자 한다'고 보고서에 서술함(교수님은 이를 조작적 정의라고도 부름).</li>
+<li><strong>조작화</strong> — 정의만으로는 조사할 수 없으므로('무기력한 상태'를 어떻게 조사할까?) 이미 개발되어 있는 척도(예: CES-D 우울척도)의 점수로 재도록 정함. 척도는 8강에서 다룸.</li>
+<li><strong>학습 포인트</strong> — 개념 → 개념화 → 조작화의 순서와 각 단계의 의미가 어떻게 다른지를 구분할 수 있어야 함.</li>
+</ul>
+<p class="sh"><strong>사례: 사회적 고립 조사하기</strong></p>
+<p class="tt"><strong>사회적 고립의 개념화와 조작화</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>단계</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="단계">개념</td><td data-label="내용">사회적 고립 (나의 연구문제이자 관심 주제)</td></tr>
+<tr><td data-label="단계">개념화</td><td data-label="내용">사회적 고립을 가족과의 관계, 친구·이웃과의 관계, 사회활동 참여, 외로움의 경험 등으로 구체적으로 정의함</td></tr>
+<tr><td data-label="단계">조작화</td><td data-label="내용">지난 일주일 동안 가족과 몇 번 연락했습니까? / 한 달 동안 친구나 이웃을 몇 번 만났습니까? / 지난 한 달 동안 모임에 몇 번 참여했습니까? / '나는 혼자라고 느낀다'에 어느 정도 동의합니까?</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>결과 산출</strong> — 횟수나 점수처럼 숫자로 나타나야 측정하기 쉬우므로 보통 숫자로 바꿈. 예를 들어 가족과 연락이 한 달에 한 번이면 고립도가 높은 것으로, 세 번이면 낮은 것으로 봄. 동의 정도는 '매우 동의 5점, 보통 3점, 전혀 동의하지 않음 1점'처럼 점수화해 문항 점수를 더한 총점으로 외로움을 경험하는지 판단함.</li>
+</ul>
+<p class="sh"><strong>영상 사례: 상대적 빈곤율</strong></p>
+<ul>
+<li>빈곤도 추상적인 개념이므로 개념화와 조작화를 거쳐 조사함. 상대적 빈곤율은 전체 인구 중 상대적 빈곤선 이하의 소득을 가진 인구의 비율임.</li>
+<li><strong>조작화 방식</strong> — 균등화 처분가능소득을 기준으로 중위소득의 50%를 상대적 빈곤선으로 정함. 중위소득은 전체 인구를 소득 순서대로 세웠을 때 가장 가운데 있는 사람의 소득임.</li>
+<li><strong>영상 수치(2020년)</strong> — 중위소득 2,998만 원, 상대적 빈곤선 1,499만 원, 상대적 빈곤율 15.3%(전체 인구의 15.3%가 소득 빈곤 상태).</li>
+<li><strong>특정 계층에도 적용</strong> — 노인 빈곤율도 전체 인구 기준 빈곤선(중위소득의 50%)을 그대로 쓰고, 그 선 이하의 소득을 가진 노인의 비율을 구함.</li>
+</ul>
+<h3>2. 측정과 측정오류</h3>
+<p class="sh"><strong>측정의 개념</strong></p>
+<ul>
+<li><strong>정의</strong> — 어떤 상태, 특성, 태도, 행동 등 이론적 개념을 계량화하는 과정임. 사람의 특성을 일정한 규칙에 따라 숫자나 범주로 표현하는 것임.</li>
+<li><strong>예</strong> — 연령을 23세, 45세처럼 그대로 쓰면 결과를 내기 어려우므로 20대=1, 30대=2, 40대=3, 50대 이상=4처럼 숫자를 부여함. 이때 1, 2, 3, 4는 크고 작음을 뜻하지 않는 단순한 구분 기호임(성별 남=1, 여=2도 마찬가지).</li>
+</ul>
+<p class="sh"><strong>측정오류(측정오차)</strong></p>
+<ul>
+<li><strong>정의</strong> — 변수를 측정하는 과정에서 발생하는 오류로, 측정하려는 개념을 정확하게 측정하지 못하는 경우를 뜻함. 주로 자료를 확보하는 과정에서 발생함.</li>
+<li><strong>종류</strong> — 체계적 오류와 무작위 오류가 있음. 과녁에 화살을 쏘는 그림으로 이해하면 쉬움.</li>
+</ul>
+<p class="tt"><strong>체계적 오류와 무작위 오류</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>체계적 오류</th><th>무작위 오류</th></tr></thead><tbody>
+<tr><td data-label="구분">의미</td><td data-label="체계적 오류">자료 수집 방법이나 과정을 통해 개입되는 유형화된 오류. 패턴이 있음</td><td data-label="무작위 오류">오류가 발생하지만 일정한 유형이 존재하지 않는 오류. 통제하기 어려움</td></tr>
+<tr><td data-label="구분">측정값의 모습</td><td data-label="체계적 오류">한쪽으로 치우치거나 관계가 지나치게 높거나 낮음(과녁의 한쪽에 몰림)</td><td data-label="무작위 오류">측정값이 일정치 않고 흩어져 있음(과녁에 제각각 흩어짐)</td></tr>
+<tr><td data-label="구분">주요 원인</td><td data-label="체계적 오류">① 유도성 질문 ② 사회적 바람직성 ③ 순응적 반응양식. 주로 잘못된 도구를 사용했을 때 발생</td><td data-label="무작위 오류">① 복잡하고 지루한 측정절차 ② 어려운 질문 내용 ③ 응답자의 물리적 환경 및 기분 상태</td></tr>
+<tr><td data-label="구분">영향 받는 것</td><td data-label="체계적 오류">타당도</td><td data-label="무작위 오류">신뢰도</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>유도성 질문</strong> — 연구자가 기대하는 결과가 있어 문항을 그 방향으로 쓰면 응답이 한쪽으로 몰림.</li>
+<li><strong>사회적 바람직성</strong> — 장애인 차별 조사에서 '당신은 장애인을 차별한다고 생각하십니까?'라고 물으면 조사 의도를 알아채고 모두 '차별하지 않는다'에 체크해 한쪽으로 몰림. 실제 생각과 상관없이 바람직한 쪽으로 답하게 됨.</li>
+<li><strong>순응적 반응양식</strong> — 질문 내용과 상관없이 계속 같은 번호로 일괄 체크하는 것(예: 다 '좋은 편이다', 계속 1번).</li>
+<li><strong>무작위 오류의 예</strong> — 100문항처럼 너무 길어서 대충 찍는 경우, 무슨 말인지 몰라 아무 번호나 체크하는 경우, 피곤하거나 기분이 안 좋아 3번, 4번, 2번 식으로 되는 대로 체크하는 경우. 이러면 결과를 해석할 패턴이 나타나지 않음.</li>
+</ul>
+<p class="sh"><strong>측정오류의 확인</strong></p>
+<ul>
+<li>측정결과가 측정 대상을 얼마나 정확하게 반영하는지를 나타내는 것이 신뢰도와 타당도임. 무작위 오류(측정값이 일정치 않음)는 주로 신뢰도에, 체계적 오류(계속 한쪽으로 치우침)는 타당도에 영향을 줌.</li>
+</ul>
+<h3>3. 신뢰도와 타당도</h3>
+<p class="sh"><strong>신뢰도(reliability)</strong></p>
+<ul>
+<li><strong>정의</strong> — 측정도구가 일관된 결과를 산출하는 정도(예측가능성)를 뜻함. 동일한 대상에게 동일한 척도를 적용해 반복 측정했을 때 결과가 얼마나 일관되게 나오는가임. 우울 측정도구로 오늘 잰 점수가 내일도, 다른 사람이 재도 비슷하게 나와야 함.</li>
+<li>일상에서 쓰는 '믿음'의 뜻과는 조금 다른 조사론 용어임.</li>
+</ul>
+<p class="tt"><strong>신뢰도의 종류 4가지</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>종류</th><th>방법</th><th>특징</th></tr></thead><tbody>
+<tr><td data-label="종류">검사-재검사 신뢰도</td><td data-label="방법">동일한 측정도구로 동일한 대상을 시점을 달리해 두 번 측정한 뒤 결과를 비교함</td><td data-label="특징">시간적 일관성을 측정함. 측정 시점 간격을 고려하며 보통 2주 정도</td></tr>
+<tr><td data-label="종류">유사양식 신뢰도</td><td data-label="방법">유사한 측정도구 두 개를 사용해 측정함</td><td data-label="특징">유사한 측정도구를 따로 개발하기가 쉽지 않아 현실에서는 많이 쓰이지 않음</td></tr>
+<tr><td data-label="종류">관찰자간 신뢰도</td><td data-label="방법">두 명 이상의 관찰자가 동일한 내용을 측정해 그 결과가 동일하거나 유사하면 신뢰도가 확보되었다고 판단함</td><td data-label="특징">조사자가 달라도 같은 패턴이 나오는지 봄</td></tr>
+<tr><td data-label="종류">내적 일관성 신뢰도</td><td data-label="방법">척도 내 문항들의 상관관계를 분석함</td><td data-label="특징">가장 일반적으로 사용됨. SPSS 등 통계 프로그램이 분석해 주며 크론바흐 알파(α)로 나타냄</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>크론바흐 알파 해석</strong> — 0.9 정도면 신뢰도가 상당히 높고 0.7 이상은 되어야 신뢰도가 있다고 봄. 열심히 만든 도구라도 알파가 0.3이면 쓸 수 없음. 계산은 직접 하지 않고 통계 프로그램이 해 주며, 10강 이후 통계 프로그램 시연에서 다시 살펴볼 예정임.</li>
+</ul>
+<p class="tt"><strong>신뢰도를 높이는 방법</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>방법</th><th>설명</th></tr></thead><tbody>
+<tr><td data-label="방법">측정도구의 모호성 제거</td><td data-label="설명">모호한 문항이 없도록 함</td></tr>
+<tr><td data-label="방법">측정항목 수 늘림</td><td data-label="설명">10문항보다 50문항 정도로 늘리면 일반적으로 신뢰도가 올라감(문항이 잘 만들어졌다면 10문항도 가능)</td></tr>
+<tr><td data-label="방법">측정자의 측정 방식과 태도의 일관성</td><td data-label="설명">측정하는 사람이 일관된 방식과 태도로 진행함</td></tr>
+<tr><td data-label="방법">모르거나 관심 없는 내용 측정 피하기</td><td data-label="설명">응답자가 모르거나 관심 없는 내용은 대충 응답하게 되므로 피함</td></tr>
+<tr><td data-label="방법">동일하거나 유사한 질문 2회 이상 실시</td><td data-label="설명">10문항 안에 유사한 성격의 문항을 두세 개 배치함</td></tr>
+<tr><td data-label="방법">표준화된 측정도구 사용</td><td data-label="설명">이미 신뢰성이 있다고 인정된 도구를 사용함. 연구자들이 가장 많이 쓰는 방법임</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>표준화된 도구 예</strong> — 혼자 사는 노인의 사회적 고립감을 연구할 때 새 척도를 50문항 개발하는 것은 매우 힘들고 조사와 분석도 해야 하므로, 선행 연구에서 많이 쓰였고 신뢰도가 높은 척도 중 내 연구내용을 담고 있는 것을 골라 쓰면 신뢰도 걱정을 덜 수 있음.</li>
+</ul>
+<p class="sh"><strong>타당도(validity)</strong></p>
+<ul>
+<li><strong>정의</strong> — 측정하고자 하는 바를 정확히 측정해 내는 정도임.</li>
+<li><strong>한 줄 정리</strong> — 신뢰도는 측정의 일관성, 타당도는 측정의 정확성임.</li>
+</ul>
+<p class="tt"><strong>타당도의 종류 4가지</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>종류</th><th>내용</th><th>특징</th></tr></thead><tbody>
+<tr><td data-label="종류">액면타당도</td><td data-label="내용">개념 측정 지표가 표면적으로 그 개념을 측정하고 있는가에 중점을 둠</td><td data-label="특징">쉬운 방법이지만 가장 낮은 수준의 검증방법. 예: 50문항을 쭉 보고 '다 복지태도 같다'고 확인함</td></tr>
+<tr><td data-label="종류">내용타당도</td><td data-label="내용">측정도구가 측정하고자 하는 내용을 충실히 담고 있는지 파악함</td><td data-label="특징">개발 중인 척도 문항에 대해 전문가의 판단을 구하는 것이 일반적인 방법. 전문가 몇 분이 타당하다고 하면 타당한 것으로 봄</td></tr>
+<tr><td data-label="종류">기준타당도</td><td data-label="내용">경험적으로 타당도를 검증함(이미 믿을 만한 기준과 비교)</td><td data-label="특징">동시타당도와 예측타당도로 나뉨</td></tr>
+<tr><td data-label="종류">구성타당도</td><td data-label="내용">측정되는 개념이 전반적인 이론적 틀 속에서 다른 개념과 실제적·논리적으로 관련성을 가지는 정도를 검증함</td><td data-label="특징">통계학적으로 '요인분석'을 통해 검증함. 통계 프로그램이 결과를 산출함</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>기준타당도의 두 가지</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>구분</th><th>설명</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="구분">동시타당도</td><td data-label="설명">평가 대상인 척도와 기준이 되는 측정도구를 동일 대상자에게 동시에 적용한 다음 둘 사이의 상관관계를 분석함</td><td data-label="예시">새로 만든 복지태도 척도와 이미 널리 쓰이는 복지태도 척도를 같은 사람에게 모두 하게 했더니 결과가 유사함 → 새 척도도 타당함</td></tr>
+<tr><td data-label="구분">예측타당도</td><td data-label="설명">현재 상태로부터 미래 상태의 변화를 예측해 내는 측정도구의 능력이 어느 정도인가를 진단함</td><td data-label="예시">수능을 잘 봐서 대학에 간 사람이 대학 성적도 우수함 → 수능은 예측타당도가 있는 도구</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>학습 포인트</strong> — 액면, 내용, 기준, 구성의 네 가지 종류를 알고 각각의 핵심(표면 확인 / 전문가 판단 / 기준과 비교 / 요인분석)을 구분하면 됨. 구성타당도는 이름은 어려워도 통계로 검증한다는 정도로 이해하면 충분함.</li>
+</ul>
+<p class="sh"><strong>신뢰도와 타당도의 관계</strong></p>
+<p class="tt"><strong>과녁으로 보는 신뢰도와 타당도</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>과녁 모양</th><th>신뢰도</th><th>타당도</th><th>설명</th></tr></thead><tbody>
+<tr><td data-label="과녁 모양">과녁 곳곳에 흩어짐</td><td data-label="신뢰도">낮음</td><td data-label="타당도">낮음</td><td data-label="설명">측정값이 일정하지 않고 과녁도 못 맞힘</td></tr>
+<tr><td data-label="과녁 모양">한곳에 몰려 있지만 중심이 아님</td><td data-label="신뢰도">높음</td><td data-label="타당도">낮음</td><td data-label="설명">일관되지만 재려는 것을 정확히 재지 못함. 예: 항상 5kg이 더 나오는 고장 난 체중계</td></tr>
+<tr><td data-label="과녁 모양">중심에 몰려 있음</td><td data-label="신뢰도">높음</td><td data-label="타당도">높음</td><td data-label="설명">일관되고 정확함. 우리가 만들고 싶은 측정도구</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>체중계 예</strong> — 계속 5kg이 더 나오는 체중계는 어제도 일주일 전에도 다음 주에도 똑같이 +5kg이므로 신뢰도는 있지만 실제 몸무게를 정확히 재지 못하므로 타당도는 없음.</li>
+<li><strong>관계 정리</strong> — ① 신뢰도와 타당도가 항상 정적 관계(positive relationship)를 갖는 것은 아님. ② 신뢰도가 있어도 타당도는 결여될 수 있음. 즉 타당도 없이 신뢰도를 확보할 수 있음. ③ 타당도가 있다면 어느 정도 신뢰도가 있다고 볼 수 있음(중심에 몰려 있다는 것은 일관되다는 뜻).</li>
+<li><strong>사례</strong> — 사회복지정책론 시험을 영어로 본다고 가정하면 학생들이 영어를 열심히 공부해 점수가 해마다 평균 80점 이상으로 일관되게 나올 수 있음. 신뢰도는 있지만, 시험의 목적인 정책 이해(정치의 삼각형 등에 입각한 정책 해석)를 측정하지 못하므로 타당도는 낮다고 봄.</li>
+</ul>
+<p class="sh"><strong>7강 정리</strong></p>
+<ul>
+<li>7강은 6강의 조사설계 다음, 10강의 자료수집 이전에 필요한 준비 단계로 개념화와 측정을 다룸. 측정을 위해서는 개념화와 조작화가 필요하고, 측정결과는 신뢰도와 타당도로 점검해야 함.</li>
+<li>다음 시간(8강)에는 척도와 측정도구를 어떻게 개발하는지를 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l8"><header class="lh"><span class="no">8강</span><h2>척도와 측정도구 개발</h2></header><div class="ct">
+<h3>1. 측정수준 이해</h3>
+<p class="sh"><strong>7강과의 연결과 도입 질문</strong></p>
+<ul>
+<li><strong>흐름</strong> — 7강에서 개념화·조작화, 측정과 측정오류, 신뢰도와 타당도를 배운 데 이어, 8강은 측정을 더 구체적으로 들어가 값의 수준(측정수준)과 그 값을 얻는 도구(척도)를 다룸. 9강(표본추출)과 함께 10강 자료수집 전의 준비 단계임.</li>
+<li><strong>도입 질문</strong> — 보이지 않는 것을 어떻게 숫자로 바꿀까? 키 170cm나 월소득 300만 원은 바로 측정되지만, 행복, 복지의식, 사회적 고립은 어떻게 숫자로 바꿀지 고민이 필요함. 이때 값의 수준이 서로 다르다는 점을 이해해야 함.</li>
+</ul>
+<p class="sh"><strong>지수와 척도</strong></p>
+<p class="tt"><strong>지수(index)와 척도(scale)</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>용어</th><th>의미</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="용어">지수(index)</td><td data-label="의미">여러 지표를 일정한 방식으로 결합해 하나의 값을 만든 것</td><td data-label="예시">소비자물가지수, 성불평등지수(쌀값, 우윳값 등 여러 가격을 합쳐 하나의 값으로 만듦)</td></tr>
+<tr><td data-label="용어">척도(scale)</td><td data-label="의미">하나의 추상적인 개념이나 태도를 여러 문항으로 측정하는 도구</td><td data-label="예시">우울척도, 삶의 만족도 척도, 복지태도 척도</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>단일차원성</strong> — 척도를 구성할 때 모든 문항이 하나의 개념(예: 삶의 만족도)만을 가리켜야 함. 당연해 보이지만 조사에서는 '단일차원성 개념이 중요하다'고 표현함.</li>
+</ul>
+<p class="sh"><strong>측정수준 4가지</strong></p>
+<ul>
+<li>측정수준은 측정한 값의 성격을 뜻하며, 명목 → 서열 → 등간 → 비율 순으로 갈수록 이전 수준의 성격에 새로운 성격이 하나씩 더해짐.</li>
+</ul>
+<p class="tt"><strong>측정수준의 구분</strong></p>
+<div class="tw"><table class="c5">
+<thead><tr><th>수준</th><th>핵심 질문</th><th>성격</th><th>가능한 연산</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="수준">명목수준</td><td data-label="핵심 질문">다른가?</td><td data-label="성격">측정 대상을 단순히 분류하는 수준. 숫자나 기호로 명목적으로 구분하며 부여된 값은 수적 의미가 없음</td><td data-label="가능한 연산">=</td><td data-label="예시">성별(남, 여), 계절(봄, 여름, 가을, 겨울), 결혼유무</td></tr>
+<tr><td data-label="수준">서열수준</td><td data-label="핵심 질문">누가 더 높은가?</td><td data-label="성격">명목수준 + 서열성. 속성 사이 간격(1과 2, 2와 3의 차이 등)은 의미를 갖지 않음</td><td data-label="가능한 연산">=, &lt;, &gt;</td><td data-label="예시">학력(초&lt;중&lt;고&lt;대), 사회복지사 자격증(2급&lt;1급)</td></tr>
+<tr><td data-label="수준">등간수준</td><td data-label="핵심 질문">얼마나 차이가 나는가?</td><td data-label="성격">서열수준 + 간격 차이(거리). 구분된 등급 간 간격이 같다는 성격이 추가됨</td><td data-label="가능한 연산">=, &lt;, &gt;, +, -</td><td data-label="예시">온도, 지능지수</td></tr>
+<tr><td data-label="수준">비율수준</td><td data-label="핵심 질문">몇 배인가?</td><td data-label="성격">등간수준 + 절대영점. 가장 높은 수준의 측정</td><td data-label="가능한 연산">=, &lt;, &gt;, +, -, ×, ÷</td><td data-label="예시">소득, 자녀 수, 경력</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>명목수준</strong> — 남자=1, 여자=2로 코딩해 두면 설문 후 1이 몇 개인지가 곧 남성이 몇 명인지가 됨. 여자가 남자의 2배라는 뜻이 아님. 봄·여름·가을·겨울도 서로 다를 뿐 한 계절이 다른 계절보다 두 배 좋다는 뜻이 아님.</li>
+<li><strong>서열수준</strong> — 사회복지사 1급이 2급보다 높다는 순서는 있지만 1급이 2급의 두 배라는 의미는 없음.</li>
+<li><strong>등간수준</strong> — 3도는 2도보다 1도 높고 5도는 3도보다 2도 높다는 식으로 간격 자체에 의미가 있어 더하기와 빼기가 가능함. 그러나 4도가 1도보다 4배 덥다는 뜻은 아님. '몇 배'는 비율수준에서만 가능함.</li>
+<li><strong>비율수준</strong> — 0이 아무 의미 없는 0이 아니라 '없음'을 뜻하는 절대영점임(자녀가 0명이면 자녀가 없다는 뜻). 자녀 4명은 2명의 2배이므로 곱하기와 나누기가 가능함.</li>
+</ul>
+<p class="tt"><strong>측정수준별 속성 비교</strong></p>
+<div class="tw"><table class="c6">
+<thead><tr><th>수준</th><th>예</th><th>속성의 분류(=)</th><th>속성의 순위(&lt;, &gt;)</th><th>속성의 동일한 간격(+, -)</th><th>절대영점(×, ÷)</th></tr></thead><tbody>
+<tr><td data-label="수준">명목수준</td><td data-label="예">성별, 계절</td><td data-label="속성의 분류(=)">○</td><td data-label="속성의 순위(&lt;, &gt;)"></td><td data-label="속성의 동일한 간격(+, -)"></td><td data-label="절대영점(×, ÷)"></td></tr>
+<tr><td data-label="수준">서열수준</td><td data-label="예">학력</td><td data-label="속성의 분류(=)">○</td><td data-label="속성의 순위(&lt;, &gt;)">○</td><td data-label="속성의 동일한 간격(+, -)"></td><td data-label="절대영점(×, ÷)"></td></tr>
+<tr><td data-label="수준">등간수준</td><td data-label="예">온도, 지능지수</td><td data-label="속성의 분류(=)">○</td><td data-label="속성의 순위(&lt;, &gt;)">○</td><td data-label="속성의 동일한 간격(+, -)">○</td><td data-label="절대영점(×, ÷)"></td></tr>
+<tr><td data-label="수준">비율수준</td><td data-label="예">소득, 자녀 수</td><td data-label="속성의 분류(=)">○</td><td data-label="속성의 순위(&lt;, &gt;)">○</td><td data-label="속성의 동일한 간격(+, -)">○</td><td data-label="절대영점(×, ÷)">○</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>학습 포인트</strong> — 각 수준의 예(계절, 학력, 자격증 급수, 온도, 소득 등)를 떠올리며 어떤 연산까지 가능한지를 스스로 표로 정리해 보는 것이 좋음.</li>
+</ul>
+<p class="sh"><strong>측정수준과 척도의 구분</strong></p>
+<ul>
+<li>측정수준은 측정한 값의 성격이고, 척도는 그 값을 얻기 위한 도구임. 이 둘을 구분해서 이해해야 함.</li>
+</ul>
+<h3>2. 척도 유형</h3>
+<p class="sh"><strong>1. 명목척도</strong></p>
+<ul>
+<li><strong>정의</strong> — 대상을 서로 다른 범주로 구분하기 위한 가장 기본적인 측정 방식이며 '포괄성'과 '상호배타성'을 바탕으로 함.</li>
+<li><strong>예</strong> — 귀하의 주거형태는 어떻게 되십니까? ① 자가 ② 월세 ③ 전세 ④ 자취 및 하숙 ⑤ 기타</li>
+<li><strong>포괄성</strong> — 응답자가 체크할 항목이 반드시 있어야 함. '기타'가 없으면 시설에 거주하거나 무상으로 거주하는 사람은 체크할 곳이 없으므로 기타 항목을 둠.</li>
+<li><strong>상호배타성</strong> — 두 항목에 동시에 체크되지 않아야 함. 연령 문항을 '① 20세 이하 ② 20세~30세'로 만들면 20세는 두 곳에 체크할 수 있어 잘못 만든 것임. '② 21세~30세'로 해야 함.</li>
+</ul>
+<p class="sh"><strong>2. 서열척도: 리커트 척도와 거트만 척도</strong></p>
+<p class="tt"><strong>리커트 척도와 거트만 척도</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>구분</th><th>리커트 척도</th><th>거트만 척도</th></tr></thead><tbody>
+<tr><td data-label="구분">의미</td><td data-label="리커트 척도">여러 문항의 응답점수를 합산해 응답자의 태도나 인식 수준을 하나의 점수로 나타내는 척도. 일반적으로 '매우 그렇다'에서 '전혀 그렇지 않다'까지 4~5개의 서열화된 범주로 구성</td><td data-label="거트만 척도">질문을 약한 수준에서 강한 수준으로 순서대로 배열해 응답자가 어느 수준까지 동의하는지 측정하는 척도</td></tr>
+<tr><td data-label="구분">특징</td><td data-label="리커트 척도">사회조사에서 가장 많이 사용하는 척도</td><td data-label="거트만 척도">더 강한 수준에 동의한 사람은 그보다 약한 수준에도 동의할 것이라고 예상함. 응답의 일관성이 가장 중요함. 많이 쓰이지는 않음</td></tr>
+<tr><td data-label="구분">예시</td><td data-label="리커트 척도">'복지의식' 측정: 국가는 모든 국민에게 최소한의 생활을 보장해야 한다 / 실업은 개인의 책임보다 사회구조의 영향을 받는다 / 복지를 위한 조세부담 증가는 필요하다 (① 전혀 그렇지 않다 ~ ⑤ 매우 그렇다)</td><td data-label="거트만 척도">외국인 노동자에 대한 인식: ① 우리나라에 사는 것 ② 우리 지역에 사는 것 ③ 우리 옆집에 사는 것 ④ 같은 집에 사는 것 ⑤ 결혼을 전제로 사귀는 것에 대해 '예/아니요'로 응답(뒤로 갈수록 가까워져 수용 수준이 높아짐)</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>리커트 척도 점수 해석</strong> — 5점 척도로 10문항이면 점수는 최소 10점에서 최대 50점까지 나옴. 50점이면 국가가 책임져야 한다는 쪽에 가장 가깝게 응답한 것이고, 40점이면 국가가 더 많이 책임져야 한다고 생각하는 편으로 해석할 수 있음. 10점이면 국가가 국민에게 해야 할 일이 없다고 생각한다는 뜻임.</li>
+<li><strong>거트만 척도 해석</strong> — 예를 들어 '우리 옆집'까지 '예'로 체크했다면 그보다 가까운 '결혼을 전제로 사귀는 것'은 '아니요'일 가능성이 높다고 미리 예측하고 만든 척도임. 응답이 어느 단계에서 '예'에서 '아니요'로 바뀌는지 보면 수용 수준을 알 수 있음.</li>
+</ul>
+<p class="sh"><strong>3. 의미분화척도</strong></p>
+<ul>
+<li><strong>정의</strong> — 사물이나 개념의 의미를 측정하기 위한 척도로, 양극단에 서로 상반되는 형용사를 배치해 그 속성에 대한 평가를 하게 함.</li>
+<li><strong>예</strong> — 당신은 '알코올 중독자'에 대해 어떤 느낌을 가지고 있습니까? 비도덕적 ~ 도덕적, 아픈 ~ 건강한, 위험한 ~ 안전한, 의존적인 ~ 독립적인 사이에서 1~7 중 가까운 곳에 체크함. 어떤 쪽이든 상관없다고 생각하면 가운데에 체크함.</li>
+<li><strong>학습 포인트</strong> — 척도에는 정답이 정해져 있지 않고 연구 목적에 맞게 선택하므로 각 척도의 이름과 의미, 예시를 알아 두어야 함. 가장 많이 쓰는 것은 리커트 척도임.</li>
+</ul>
+<h3>3. 척도 개발 과정</h3>
+<p class="sh"><strong>척도 개발 단계</strong></p>
+<p class="tt"><strong>척도 개발의 6단계</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>단계</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="단계">1</td><td data-label="내용">무엇을 측정할 것인가: 개념 정의</td></tr>
+<tr><td data-label="단계">2</td><td data-label="내용">어떤 내용을 포함할 것인가: 하위영역 구성(문헌고찰, 선행 연구와 논문을 참고해 정리)</td></tr>
+<tr><td data-label="단계">3</td><td data-label="내용">질문을 만듦: 문항 개발</td></tr>
+<tr><td data-label="단계">4</td><td data-label="내용">제대로 된 질문인지 확인: 전문가 검토, 예비조사, 최종 척도 구성</td></tr>
+<tr><td data-label="단계">5</td><td data-label="내용">실제로 조사</td></tr>
+<tr><td data-label="단계">6</td><td data-label="내용">좋은 척도인지 검증: 신뢰도(크론바흐 알파)와 타당도(요인분석)를 통계 프로그램으로 확인</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>문항 개발 기준</strong></p>
+<p class="tt"><strong>문항 개발의 기준</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>기준</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="기준">상호배타성·포괄성</td><td data-label="내용">두 항목에 동시에 체크되지 않아야 하고(상호배타성), 모든 응답자가 체크할 항목이 있어야 함(포괄성)</td></tr>
+<tr><td data-label="기준">간결성</td><td data-label="내용">설문 문항이 세네 줄이면 읽기 싫어지므로 한 줄 정도로 간단히 씀</td></tr>
+<tr><td data-label="기준">객관성</td><td data-label="내용">설문자의 의도가 들어간 유도성 질문을 피함</td></tr>
+<tr><td data-label="기준">응답의 용이성</td><td data-label="내용">명쾌하고 쉬워야 하며 어디에 답해야 할지 모르는 문항이 없어야 함</td></tr>
+<tr><td data-label="기준">문항의 구체성</td><td data-label="내용">추상적인 표현을 피하고 이중질문을 피함</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>잘못된 문항의 예</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>문항</th><th>문제점</th><th>고치는 방향</th></tr></thead><tbody>
+<tr><td data-label="문항">우리 기관의 사회복지사는 친절하고 전문적이라고 생각하십니까?</td><td data-label="문제점">이중질문: 친절은 하지만 전문적이지 않다고 생각하면 응답할 수 없음</td><td data-label="고치는 방향">친절한지와 전문적인지를 각각 따로 물음</td></tr>
+<tr><td data-label="문항">최근 사회적으로 문제가 되는 과도한 복지지출을 줄여야 한다고 생각하십니까?</td><td data-label="문제점">'과도한', '사회적으로 문제가 되는'이 주관적이며 유도성 질문임</td><td data-label="고치는 방향">복지지출에 대해 어떻게 생각하는지를 중립적으로 물음</td></tr>
+<tr><td data-label="문항">평소 복지관을 자주 이용하십니까?</td><td data-label="문제점">'자주'의 기준이 모호함(한 달에 한 번이면 자주인지 매일이어야 자주인지 알 수 없음)</td><td data-label="고치는 방향">평소 복지관을 몇 번 정도 이용하는지 주 1회, 월 1회처럼 구체적으로 물음</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>이중질문의 또 다른 예</strong> — '당신은 행복하고 또 타인에게 존경받을 만하다고 생각하십니까?'는 행복을 묻는지 존경을 묻는지 알 수 없음.</li>
+</ul>
+<p class="sh"><strong>문항 유형, 배치, 수</strong></p>
+<ul>
+<li><strong>문항 유형</strong> — 개방형 문항은 응답자가 자신의 대답을 자유롭게 기술하는 형태(주관식)이며 응답이 복잡해 잘 쓰지 않는 편임. 폐쇄형 문항은 응답을 선택지로 제시해 주어진 항목 중에서 선택하게 하는 형태로 양자택일형(예/아니요), 선다형(1, 2, 3, 4), 평정형(의미분화척도처럼 1~5 중 가까운 곳 체크)이 있음.</li>
+<li><strong>시작문항</strong> — 시작부터 길고 어려우면 설문을 끝까지 하기 싫어지므로 쉽고 간결하며 흥미를 유도할 수 있는 문항으로 시작함.</li>
+<li><strong>정보의 종류와 순서</strong> — 기본정보(연구내용과 직접 관련 있는 정보) → 분류정보(인구사회학적 정보: 성별, 나이 등) → 신원정보(이름, 주소 등) 순으로 배치함. 처음부터 이름을 물으면 거부감이 생기므로 신원정보는 맨 마지막에 둠.</li>
+<li><strong>어려운 문항</strong> — 가능하면 뒤쪽에 배치해 앞에서 익숙해진 뒤 구체적이고 난해한 것을 묻도록 함.</li>
+<li><strong>순서효과(깔때기 접근방식)</strong> — 처음에는 일반적인 것을 느슨하게 묻고 점점 구체적인 것을 묻는 방식. 깔때기가 점점 좁아지는 모양에 비유함.</li>
+<li><strong>문항 수</strong> — 필요한 문항 중심으로 구성함. 의욕이 앞서 100문항을 만들면 응답자가 힘들므로, 정답은 없지만 복지태도나 삶의 만족도 같은 척도는 보통 20문항 이내로 하는 편임.</li>
+</ul>
+<p class="sh"><strong>예비조사(사전조사)</strong></p>
+<ul>
+<li><strong>목적</strong> — 만든 문항을 소수의 사람에게 먼저 응답하게 해 조사 목적이 이해되는지, 응답하기 어려운 문항은 없는지, 항목이 적절한지(체크할 항목이 없다는 의견 등), 설문 시간은 얼마나 걸리는지를 확인함('1시간 걸려요'가 나오면 안 됨).</li>
+<li>이 과정을 거쳐야 문항 개발을 했다고 볼 수 있음.</li>
+</ul>
+<p class="sh"><strong>척도 개발 실제 사례: 나눔 척도(교수님이 직접 개발, 2022년경)</strong></p>
+<ul>
+<li><strong>목적</strong> — 시혜·동정의 나눔(나눔 1.0)이 아니라 권리의 나눔(나눔 2.0)이라는 확장된 개념을 바탕으로 사업을 추진한 뒤, 참여자의 나눔에 대한 인식이 달라졌는지 사업 성과를 측정할 새로운 척도가 필요했음.</li>
+<li><strong>특징</strong> — 사전·사후 측정용으로 개발함(프로그램 전에 같은 설문지로 사전 조사를 하고 프로그램 후에 사후 측정을 해 비교함). 4개 하위영역은 자기 인식, 공동체 의식, 사회문제 인식, 나눔 인식 및 활동임. 총 39문항이며 개방형 질문 1문항('나눔이란 무엇이라고 생각하십니까?')을 포함함.</li>
+</ul>
+<p class="tt"><strong>나눔 척도의 개발 과정</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>개발 절차</th><th>내용</th><th>방법</th></tr></thead><tbody>
+<tr><td data-label="개발 절차">측정개념 구체화</td><td data-label="내용">나눔 1.0 및 2.0 개념 정립</td><td data-label="방법">문헌고찰(선행연구 및 기존 척도 분석 등)</td></tr>
+<tr><td data-label="개발 절차">1차 예비문항 구성</td><td data-label="내용">선행연구 분석결과 반영</td><td data-label="방법">구성요인 도출, 조작적 정의, 예비문항 구성</td></tr>
+<tr><td data-label="개발 절차">자문회의 및 2차 예비문항 구성</td><td data-label="내용">학계 전문가, 현직 중학교 및 고등학교 교사 대상 예비문항에 대한 자문회의 실시</td><td data-label="방법">전문가 4인 대상 자문회의</td></tr>
+<tr><td data-label="개발 절차">내용타당도 검증 및 3차 예비문항 구성</td><td data-label="내용">나눔 성과 측정을 위한 예비문항의 내용타당도 검증</td><td data-label="방법">전문가 검증(사회복지학과 교수 1인, 사회복지연구소 연구원 1인)</td></tr>
+<tr><td data-label="개발 절차">예비조사 실시</td><td data-label="내용">예비문항 신뢰도 및 내용 검증</td><td data-label="방법">중학교 및 고등학교 청소년 32명 대상</td></tr>
+<tr><td data-label="개발 절차">초등학생용 문항 구성을 위한 전문가 자문</td><td data-label="내용">중고생 대상으로 구성된 문항을 초등학생용으로 수정</td><td data-label="방법">청소년용 척도 개발 전문가 검증(사회복지학과 교수 1인)</td></tr>
+<tr><td data-label="개발 절차">최종 문항 구성</td><td data-label="내용">나눔 성과 측정을 위한 최종 척도 구성(중학생용, 초등학생용)</td><td data-label="방법">전문가 논의 및 확정</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>내용타당도</strong> — 7강에서 배운 대로 요인분석 같은 통계 방법이 아니라 전문가에게 문항을 보내 검토받는 방법을 사용함.</li>
+<li><strong>예비조사의 효과</strong> — 32명의 응답을 분석하고 의견도 들어 '답변하기 어렵다'는 문항을 빼거나 조정했음. 예비조사가 매우 중요하다는 것을 확인했음.</li>
+<li><strong>소요 기간과 검증</strong> — 약 1년 정도의 연구 기간이 걸렸고, 원칙을 알고 있어도 실제로 문항을 만들면 쉽지 않았음. 조사를 마친 뒤에는 크론바흐 알파로 신뢰도도 측정했음.</li>
+</ul>
+<p class="sh"><strong>8강 정리</strong></p>
+<ul>
+<li>8강은 측정수준(명목·서열·등간·비율), 척도의 유형(명목척도, 서열척도(리커트·거트만), 의미분화척도), 척도 개발 과정과 문항 개발의 원칙, 실제 사례를 다룸.</li>
+<li>다음 시간(9강)에는 표본추출을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l9"><header class="lh"><span class="no">9강</span><h2>표본추출</h2></header><div class="ct">
+<h3>1. 표본조사 개요</h3>
+<p class="sh"><strong>9강의 위치와 도입 질문</strong></p>
+<ul>
+<li><strong>위치</strong> — 7강(개념화·측정), 8강(척도 개발)이 '무엇을 어떻게 잴 것인가'였다면 9강은 '누구를 조사할 것인가', 즉 조사 대상을 어떻게 선정할지를 다룸. 척도를 만든 뒤에는 그 척도로 조사할 대상이 필요하기 때문임.</li>
+<li><strong>전수조사와 표본조사</strong> — 전수조사는 모든 대상을 조사하는 것인데 우리나라 국민 5천만 명을 모두 조사할 수는 없으므로 표본조사를 함.</li>
+<li><strong>표본조사의 정의</strong> — 연구대상 전체 집단을 대표하는 사람이나 집단을 선별해 연구대상 전체의 특성을 예측하는 조사임. 표본의 대표성과 적절성을 확보하는 것이 매우 중요함.</li>
+</ul>
+<p class="sh"><strong>도입 예시: 방송대 학생들의 대학생활 만족도를 알고 싶을 때 누구에게 물어야 할까?</strong></p>
+<ul>
+<li>조사론 강의를 듣는 학생 100명 → 방송대 학생 전체를 대표한다고 보기 어려움.</li>
+<li>서울지역 학생 100명 → 이것도 아님. 무작위로 선정한 전국 학생 100명 → 남학생이나 특정 연령대만 뽑힐 수도 있음.</li>
+<li>연령, 학년, 지역을 고려해 선정한 학생 100명 → 전체 집단을 대표할 확률이 가장 높음.</li>
+<li><strong>핵심</strong> — 100명을 조사하는 것보다 중요한 것은 '어떤 100명'을 조사하느냐임.</li>
+</ul>
+<p class="sh"><strong>표본과 표본추출(표집)</strong></p>
+<ul>
+<li><strong>표본(sample)</strong> — 전체를 대표하기 위해 선택된 일부임. 표본추출(표집, sampling): 전체 조사대상에서 표본을 추출하는 과정임. 교수님은 '표본추출'과 '표집'을 같은 의미로 섞어서 사용함.</li>
+<li><strong>예</strong> — 모집단이 방송대 학생 50,000명이면 이 중 가장 잘 대표할 수 있는 500명을 뽑아 표본으로 삼음.</li>
+</ul>
+<p class="sh"><strong>표본조사 과정과 표집오차</strong></p>
+<ul>
+<li><strong>과정</strong> — 모집단에서 표집을 해 표본을 얻고, 표본을 조사해 통계치를 구한 뒤, 이를 통해 모집단의 모수를 추정함(모집단 → 표집 → 표본 → 통계치 → 추정 → 모수). 500명의 조사 결과를 보고 5만 명 전체는 이 정도일 것이라고 추정하는 것임.</li>
+<li><strong>표집오차</strong> — 모수와 통계치 사이의 차이임. 예: 모집단 전체를 조사하면 평균 78점인데 표본을 조사했더니 86점이 나왔다면 그 차이 8점이 표집오차임. 표집오차가 줄어야 표본이 잘 선택되었다고 볼 수 있음.</li>
+<li><strong>표집오차를 줄이는 조건</strong> — 표본크기가 클수록, 확률표집을 할수록, 모집단이 동질적일수록 표집오차는 감소함.</li>
+</ul>
+<p class="tt"><strong>핵심 용어 정리</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>용어</th><th>의미</th></tr></thead><tbody>
+<tr><td data-label="용어">모집단(population)</td><td data-label="의미">연구자가 관심을 가지고 조사하려는 대상 전체</td></tr>
+<tr><td data-label="용어">표본(sample)</td><td data-label="의미">실제 조사를 위해 모집단으로부터 선택된 일부의 대상</td></tr>
+<tr><td data-label="용어">표집/표본추출(sampling)</td><td data-label="의미">모집단으로부터 표본을 추출하는 과정</td></tr>
+<tr><td data-label="용어">표집틀(sampling frame)</td><td data-label="의미">표본으로 추출될 요소들의 집합인 모집단에서 표본을 선정할 때 사용하는 요소의 목록. 즉 모집단 전체의 목록(예: 서울시민을 조사할 때 주민등록 명부)</td></tr>
+<tr><td data-label="용어">통계치(statistics)</td><td data-label="의미">표본 자료를 분석하여 도출한 표본의 특성(표본의 값)</td></tr>
+<tr><td data-label="용어">모수(parameters)</td><td data-label="의미">통계치를 통해 궁극적으로 추정하고자 하는 모집단의 특성에 해당하는 수치</td></tr>
+<tr><td data-label="용어">표집오차(sampling error)</td><td data-label="의미">표본만 조사하기 때문에 생기는 차이</td></tr>
+<tr><td data-label="용어">비표집오차(non-sampling error)</td><td data-label="의미">조사과정 자체에서 생기는 오류</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>학습 포인트</strong> — 용어를 하나하나 외우기보다 뜻을 이해해 두어야 이후 표집 방법 설명을 따라갈 수 있음.</li>
+</ul>
+<p class="sh"><strong>표본추출 과정</strong></p>
+<ul>
+<li><strong>순서</strong> — 모집단 확정 → 표집틀 선정 → 표집방법 결정(확률/비확률) → 표본크기 결정 → 표본추출.</li>
+<li><strong>표본크기</strong> — 크면 시간과 비용이 많이 들지만 신뢰도가 높아지고, 작으면 시간과 비용은 줄지만 신뢰도가 떨어짐. 장단점이 있어 적정한 크기를 정해야 하며 조사 경험이 쌓일수록 감이 생김.</li>
+<li><strong>예시(00초등학교 4학년 학생들의 학업역량)</strong> — 모집단은 00초등학교 4학년 학생 총 400명 → 표집틀은 4학년 학생 명단(출석부) 확보 → 확률 표본추출로 결정 → 표본크기와 방법에 따라 → 확률 표본추출을 통해 50명 선정.</li>
+<li><strong>표본추출의 유형</strong> — 확률 표본추출 4가지(단순무작위, 체계적, 층화, 집락)와 비확률 표본추출 4가지(편의, 의도적, 할당, 눈덩이)가 있음. 교수님은 6강처럼 종류가 많으니 강의를 들으며 이해한 뒤 스스로 표로 정리해 보라고 함.</li>
+</ul>
+<h3>2. 확률 표본추출</h3>
+<p class="sh"><strong>확률 표본추출의 의미</strong></p>
+<ul>
+<li><strong>정의</strong> — 모집단의 각 구성원이 표본으로 선택될 확률을 알 수 있도록 확률적 방법을 사용하는 표본추출임. '누가 선택될지 연구자가 임의로 결정하지 않는다'는 뜻으로 이해하면 쉬움(확률표집과 같은 말).</li>
+</ul>
+<p class="tt"><strong>확률 표본추출의 4가지 방법</strong></p>
+<div class="tw"><table class="c4 long">
+<thead><tr><th>방법</th><th>정의</th><th>장점</th><th>단점</th></tr></thead><tbody>
+<tr><td data-label="방법">단순무작위 표본추출</td><td data-label="정의">표집틀을 구성하는 각 요소에 일련번호를 부여한 후 무작위로 번호를 뽑아 뽑힌 번호에 해당하는 요소를 표본으로 삼음(주사위 던지기, 제비뽑기, 로또 등)</td><td data-label="장점">가장 손쉽게 표집할 수 있음. 모집단에 대한 사전 정보가 필요 없어 표집이 간편함</td><td data-label="단점">모집단의 수가 클 경우 각 요소마다 일련번호를 부여하기 어려움(예: 전국 초등학교 학생 조사)</td></tr>
+<tr><td data-label="방법">체계적 표본추출</td><td data-label="정의">일정한 순서에 따라 전체 목록에서 매 k번째 사례를 표본으로 추출함. 첫 사례는 무작위로 추출하고 이후 사례는 표집간격(k)만큼 더하면서 추출함(예: 3번으로 시작해 간격 5이면 3, 8, 13, 18번)</td><td data-label="장점">표집이 용이함</td><td data-label="단점">모집단의 배열이 주기성이나 순환성을 가지면 일정한 번호에 해당하는 표본만 뽑힐 가능성이 있음(예: 남자 4명, 여자 1명이 반복되는 목록에서 5번째마다 뽑으면 여성만 뽑힘)</td></tr>
+<tr><td data-label="방법">층화 표본추출</td><td data-label="정의">모집단을 공통된 특성을 가진 하위집단(층)으로 나눈 뒤 각 층별로 무작위로 표본을 추출함. 층 간에는 이질적이고 층 내부는 동질적임. 각 집단에서 모두 뽑음</td><td data-label="장점">각 층에서 골고루 추출하므로 단순무작위보다 대표성이 높음. 중요한 집단이 제외되는 것을 방지해 정확성을 높일 수 있음</td><td data-label="단점">모집단에 대한 사전지식이 필요함. 무엇에 초점을 두고 층화하는가에 대한 문제가 제기될 수 있음</td></tr>
+<tr><td data-label="방법">집락 표본추출(군집표집)</td><td data-label="정의">모집단을 다수의 집락으로 나누고 집락들 가운데서 대상 집락을 무작위로 추출한 뒤 그 안에서 개별 요소를 무작위로 추출함. 집락 간에는 동질적이고 집락 내에는 이질적이어야 함</td><td data-label="장점">전체 명부가 아닌 선정된 집락의 명부만 작성하면 되어 시간과 비용을 절약할 수 있음. 전국 규모처럼 표집틀을 확보하기 어려운 경우 유용함</td><td data-label="단점">단순무작위보다 특정 집단의 특성을 과대 또는 과소평가할 가능성이 높음. 집락 간 동질, 집락 내 이질의 성격을 잘 갖추기 어려움</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>단순무작위의 예</strong> — 100명에게 번호를 붙이고 5번, 7번, 9번처럼 추첨해 10명을 뽑는 것. 내가 의도해서 특정 번호를 고르지 않는다는 점에서 로또와 같음. 가장 기본적인 확률 표집 방법임.</li>
+<li>모든 표본추출 방법에는 장단점이 있으므로 연구목적과 현실 여건을 고려해 가장 적정한 방법을 선택함.</li>
+</ul>
+<p class="sh"><strong>층화 표본추출의 두 가지: 비례층화와 비비례층화</strong></p>
+<p class="tt"><strong>비례층화와 비비례층화 표본추출</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>구분</th><th>의미</th><th>예시(초등학교 1~5학년)</th></tr></thead><tbody>
+<tr><td data-label="구분">비례층화 표본추출</td><td data-label="의미">각 소집단의 크기가 모집단에서 차지하는 비율을 정확하게 반영해 표본을 추출함</td><td data-label="예시(초등학교 1~5학년)">인원이 300, 200, 350, 100, 50명일 때 모든 학년에서 10%씩 뽑으면 표본은 30, 20, 35, 10, 5명이 됨</td></tr>
+<tr><td data-label="구분">비(非)비례층화 표본추출</td><td data-label="의미">각 소집단의 특성에 맞추어 차등비율로 표본을 추출함. 모집단에 있는 소규모 하위집단이 표본에 적절한 크기로 포함되도록 하는 데 유리함</td><td data-label="예시(초등학교 1~5학년)">같은 인원일 때 각 학년에서 15~18명 정도는 나오게 하려고 학년별로 5%, 6%, 5%, 15%, 30%를 뽑아 표본을 15, 18, 18, 15, 15명으로 맞춤</td></tr>
+</tbody></table></div>
+<ul>
+<li>어느 쪽을 쓸지는 연구목적과 의도에 따라 달라짐(비율대로 뽑는 것이 맞는지, 인원수가 달라도 각 집단을 비슷하게 확보하고 싶은지).</li>
+</ul>
+<p class="sh"><strong>집락 표본추출의 예: 서울시 고등학생의 정신건강실태 조사</strong></p>
+<ul>
+<li>서울시 고등학교가 너무 많아 전수조사가 어려우므로 먼저 고등학교 몇 곳(A, B, C, D, E 고등학교)을 무작위로 선정하고, 선정된 학교마다 1학년 10명, 2학년 10명, 3학년 10명을 무작위로 추출함.</li>
+<li><strong>단점의 예</strong> — 우연히 뽑힌 학교가 모두 특목고라면 서울시 전체 고등학생을 대표한다고 보기 어려움. 집락 간에는 동질적이어야 하므로 A는 고등학교, B는 중학교처럼 섞이면 안 됨.</li>
+</ul>
+<p class="tt"><strong>층화 표본추출과 집락 표본추출 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>층화 표집</th><th>집락 표집</th></tr></thead><tbody>
+<tr><td data-label="구분">공통점</td><td data-label="층화 표집">모집단에서 직접 표본을 추출하지 않고 몇 개의 소집단으로 모집단을 구분해 표본을 추출함</td><td data-label="집락 표집">(층화 표집과 같음)</td></tr>
+<tr><td data-label="구분">차이점</td><td data-label="층화 표집">모든 층으로부터 표본이 추출되고, 표본은 각 층의 일정한 사례를 통해 모두 대표됨</td><td data-label="집락 표집">추출된 집락의 사례만 표본으로 도출되므로 각 집락이 모두 대표되지는 않음</td></tr>
+<tr><td data-label="구분">특성</td><td data-label="층화 표집">집단 내 동질, 집단 간 이질</td><td data-label="집락 표집">집단 간 동질, 집단 내 이질</td></tr>
+<tr><td data-label="구분">목적</td><td data-label="층화 표집">모집단에 대한 표본의 대표성 향상</td><td data-label="집락 표집">표집 과정상의 편의</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>예</strong> — 학년별 학생을 조사할 때 1, 2, 3, 4학년 각 학년에서 학생을 선정하면 층화표집, 여러 학교 중 학교 몇 곳을 먼저 선정하면 집락표집임.</li>
+</ul>
+<h3>3. 비확률 표본추출</h3>
+<p class="sh"><strong>비확률 표본추출의 의미</strong></p>
+<ul>
+<li><strong>사용하는 경우</strong> — 표본 명부를 확보할 수 없거나 모집단의 소재가 불분명한 경우에 많이 씀. 예: 성폭력 피해자 조사, 성소수자 연구처럼 명부가 없고 신상을 공개하기 어려운 경우.</li>
+<li><strong>단점</strong> — 표집틀을 만들기 어려워 표본의 대표성을 담보하기 어렵고, 표본 선정 과정에서 연구자의 편견이 개입될 수 있어 조사결과 일반화가 어려움.</li>
+<li><strong>그래도 쓰는 이유</strong> — 신속하게 조사해야 하는 경우, 조사 목적이 개인·집단의 사회적 과정과 의미의 구조를 이해하는 경우에는 비확률 표본추출을 활용함. 한계를 연구의 한계에 밝히면 됨.</li>
+</ul>
+<p class="tt"><strong>비확률 표본추출의 4가지 방법</strong></p>
+<div class="tw"><table class="c4 long">
+<thead><tr><th>방법</th><th>정의와 예시</th><th>장점</th><th>단점</th></tr></thead><tbody>
+<tr><td data-label="방법">편의 표본추출(우발적·임의 표집)</td><td data-label="정의와 예시">연구자가 쉽게 접근할 수 있고 이용 가능한 대상들을 표본으로 선정함. 예: 지역 내 장애인 시설이 들어오는 것에 대한 의견을 묻기 위해 혜화역에서 18:00~19:00에 20명을 만나 인터뷰함</td><td data-label="장점">시간과 비용을 절약하는 가장 편리한 방법. 연구대상을 쉽게 모집할 수 있음</td><td data-label="단점">표본의 대표성이 없고 조사결과를 일반화하기 무리가 있음</td></tr>
+<tr><td data-label="방법">의도적 표본추출(유의표집)</td><td data-label="정의와 예시">조사자가 모집단에 대한 사전지식을 바탕으로 주관적으로 조사 의도에 맞는 대상을 구성함. 예: 지역 장애인 시설 문제를 가장 잘 알 것이라고 판단되는 지역 관계자나 사회복지전담공무원을 인터뷰함</td><td data-label="장점">표본추출 과정에서 연구자의 지식을 활용할 수 있음. 표집이 편리하고 시간과 비용이 적게 듦</td><td data-label="단점">연구자의 의도에 따라 진행되어 대표성이 낮음. 정확성이 연구자의 주관적 판단의 타당성에 따라 달라짐. 모집단 추정이 어렵고 일반화 가능성이 낮음</td></tr>
+<tr><td data-label="방법">할당 표본추출</td><td data-label="정의와 예시">모집단의 특성을 고려해 집단별 조사 인원을 미리 정하고 그 숫자에 맞춰 사람을 선정함(무작위는 아님). 예: 복지관 이용자 100명 표본에서 남녀 이용 비율이 6:4이면 남자 60명, 여자 40명으로 비례적으로 할당함</td><td data-label="장점">특정 특성을 가진 모집단 구성비를 반영할 수 있음</td><td data-label="단점">모집단에 대한 구체적 사전지식이 필요하고, 할당 비율을 모집단과 유사하게 예측하기 까다로움. 할당에 맞춰 선정하는 과정에서 편의가 생길 수 있음(예: 평일 오전 방문자만 조사)</td></tr>
+<tr><td data-label="방법">눈덩이 표본추출</td><td data-label="정의와 예시">최초의 소수 표본에서 시작해 조사를 실시한 다음 이를 통해 그다음 표본을 제공받음. 예: 우연히 알게 된 노숙인 한 명을 인터뷰하고 그분에게 다른 노숙인을 소개받는 식으로 6~7명을 확보함. 현장연구와 질적 연구에서 주로 사용함</td><td data-label="장점">모집단에 대한 사전정보가 거의 없어 구성원을 찾기 어렵거나 표본을 구하기 어려운 경우 유용함(예: 노숙인, 불법도박자)</td><td data-label="단점">모집단의 정확한 규모를 파악할 수 없음. 표본추출 과정에서 편견이 개입될 가능성이 높음. 표본이 모집단을 대표한다고 보기 어려움</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>연구의 한계 명시</strong> — 편의 표본추출을 사용했다면 연구의 한계에서 '이 연구는 일반화하기에 다소 무리가 있다'고 밝혀야 함.</li>
+<li>눈덩이 표본추출은 양적 연구에서는 사용하기 어렵고 소수의 대상을 인터뷰하는 질적 연구에서 주로 쓰임.</li>
+<li><strong>학습 포인트</strong> — 어떤 상황에서 어떤 방법을 쓰는지는 조사 경험이 쌓이면서 판단이 빨라지므로, 지금은 각 방법의 정의와 장단점의 기본 내용을 이해하면 충분함. 장단점이 중복되거나 모호한 부분은 교재를 참고하라고 함.</li>
+</ul>
+<p class="sh"><strong>9강 퀴즈(정답은 다음 시간 시작 때 공개)</strong></p>
+<p class="tt"><strong>어떤 표본추출 방법을 설명하고 있을까?</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>번호</th><th>사례</th></tr></thead><tbody>
+<tr><td data-label="번호">1</td><td data-label="사례">전국 사회복지사 명단에서 추첨으로 500명을 선정했다.</td></tr>
+<tr><td data-label="번호">2</td><td data-label="사례">장애 유형별 차이를 비교하기 위해 각 장애 유형에서 무작위로 100명씩 뽑았다.</td></tr>
+<tr><td data-label="번호">3</td><td data-label="사례">복지관 이용자 중에서 남성 60명, 여성 40명을 방문 순서대로 모집했다.</td></tr>
+<tr><td data-label="번호">4</td><td data-label="사례">거리 홈리스 한 명이 다른 홈리스 당사자를 소개하고, 그 사람이 또 다른 참여자를 소개했다.</td></tr>
+<tr><td data-label="번호">5</td><td data-label="사례">전국 복지관 중 20곳을 무작위로 뽑고 해당 기관의 사회복지사를 조사했다.</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>정답 확인</strong> — 10강 노트의 '9강 퀴즈 정답' 부분에 정리함.</li>
+</ul>
+<p class="sh"><strong>9강 정리</strong></p>
+<ul>
+<li>7·8·9강은 6강의 조사설계와 10강의 자료수집 사이에서 측정도구, 척도, 조사대상(표본추출)을 준비하는 과정이었음.</li>
+<li>다음 시간(10강)에는 조사 과정의 세 번째 큰 단계인 자료수집을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l10"><header class="lh"><span class="no">10강</span><h2>자료수집</h2></header><div class="ct">
+<h3>1. 9강 퀴즈 정답 확인</h3>
+<p class="tt"><strong>9강 퀴즈 정답</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>번호</th><th>사례</th><th>정답</th><th>근거</th></tr></thead><tbody>
+<tr><td data-label="번호">1</td><td data-label="사례">전국 사회복지사 명단에서 추첨으로 500명을 선정</td><td data-label="정답">단순무작위 표집</td><td data-label="근거">제비뽑기처럼 추첨으로 뽑음</td></tr>
+<tr><td data-label="번호">2</td><td data-label="사례">장애 유형별로 각 100명씩 무작위 추출</td><td data-label="정답">층화 표집</td><td data-label="근거">장애 유형별로 집단을 먼저 구분한 뒤 무작위로 뽑음</td></tr>
+<tr><td data-label="번호">3</td><td data-label="사례">복지관 이용자 중 남성 60명, 여성 40명을 방문 순서대로 모집</td><td data-label="정답">비확률 - 할당 표집</td><td data-label="근거">처음부터 인원수를 정해 놓고 그 수만큼 채움(의도적)</td></tr>
+<tr><td data-label="번호">4</td><td data-label="사례">홈리스 한 명이 다른 홈리스를 소개하고 또 다른 참여자를 소개</td><td data-label="정답">눈덩이 표집</td><td data-label="근거">소개를 받아 눈덩이처럼 표본이 커짐</td></tr>
+<tr><td data-label="번호">5</td><td data-label="사례">전국 복지관 중 20곳을 무작위로 뽑고 해당 기관의 사회복지사를 조사</td><td data-label="정답">집락 표집</td><td data-label="근거">먼저 집단(복지관)을 뽑고 그 안의 사람을 조사</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>학습 포인트</strong> — 눈덩이 표집과 집락 표집이 무엇인지 이해한 뒤 사례와 매칭할 수 있도록 어느 정도 외우는 것도 필요하다고 함.</li>
+</ul>
+<h3>2. 10강의 위치와 자료수집의 의미</h3>
+<p class="sh"><strong>전체 맥락</strong></p>
+<ul>
+<li>5강부터 연구문제 제기 → 조사설계 → (표집, 척도, 측정도구 개발) → 자료수집으로 이어짐. 7·8·9강은 자료수집 전 단계를 준비하는 과정이었고, 10강에서 드디어 자료수집 단계에 들어옴.</li>
+</ul>
+<p class="sh"><strong>자료수집이란</strong></p>
+<ul>
+<li>사회복지 현상을 연구할 때 직접 물어볼 것인가, 관찰할 것인가, 이미 존재하는 자료를 활용할 것인가를 결정하고 자료를 모으는 과정임.</li>
+<li>연구목적에 따라 방법을 선택하므로 각 방법의 특징과 장단점을 알아야 함. 이번 강의는 비교적 아는 내용이 많아 쉽게 이해할 수 있음.</li>
+</ul>
+<p class="tt"><strong>예시: '노인의 사회적 고립'을 어떻게 조사할 것인가</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>방법</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="방법">설문조사</td><td data-label="예시">지난 일주일 동안 가족이나 친구를 몇 번 만나셨습니까? (1번 / 2번 / 3번 이상)</td></tr>
+<tr><td data-label="방법">면접조사</td><td data-label="예시">혼자 생활하시면서 가장 외롭다고 느끼는 순간은 언제입니까? (주관식, 심층적 응답)</td></tr>
+<tr><td data-label="방법">관찰조사</td><td data-label="예시">동네 경로당에 가서 노인들이 서로 어떻게 관계를 형성하는지 관찰함</td></tr>
+<tr><td data-label="방법">2차 자료 수집</td><td data-label="예시">기존 노인실태조사 자료에서 가구형태와 사회관계 관련 문항을 분석함</td></tr>
+</tbody></table></div>
+<h3>3. 설문조사</h3>
+<p class="sh"><strong>개념</strong></p>
+<ul>
+<li>조사할 내용을 체계적으로 정리한 설문지를 이용해 자료를 수집하는 방법임. 사회과학이 개발한 가장 중요한 정보수집 도구이며, 사회조사에서 가장 많이 사용하는 자료수집 방법임(설문지 작성은 8강 참고).</li>
+</ul>
+<p class="tt"><strong>설문조사의 4가지 유형</strong></p>
+<div class="tw"><table class="c4 long">
+<thead><tr><th>유형</th><th>특징</th><th>장점</th><th>단점</th></tr></thead><tbody>
+<tr><td data-label="유형">우편 설문조사</td><td data-label="특징">자기응답식 설문의 대표적 형태. 비대면으로 혼자 설문지를 체크함. 안내문이 중요하고 회신용 봉투와 우표를 동봉해야 함. 요즘은 거의 쓰지 않음</td><td data-label="장점">응답률만 높다면 실시가 용이함. 응답자의 익명성이 보호되어 솔직한 응답을 기대할 수 있음</td><td data-label="단점">응답자의 환경(피곤, 바쁨)에 영향을 받음. 낮은 응답률</td></tr>
+<tr><td data-label="유형">전화 설문조사</td><td data-label="특징">비대면이며 여론조사에서 많이 사용함</td><td data-label="장점">우편보다 높은 응답률. 설문 내용을 직접 설명할 수 있음. 신속한 조사</td><td data-label="단점">응답 시간의 제약(바쁘면 끊음). 전화를 받지 않으면 조사가 불가능함. 스팸전화로 인식하는 경우가 많아 활용도가 낮음</td></tr>
+<tr><td data-label="유형">대면 설문조사</td><td data-label="특징">조사자가 응답자를 직접 만나 조사함(예: 학교를 찾아가 학생들에게 설명하고 그 자리에서 조사)</td><td data-label="장점">응답률이 높음. 조사 과정에 유연성이 있음. 추가 정보를 얻을 수 있음</td><td data-label="단점">많은 비용과 시간이 듦. 조사자가 앞에 있어 솔직한 응답이 어려울 수 있음. 가구 방문 시 안전 확보 고려가 필요함</td></tr>
+<tr><td data-label="유형">전자(온라인) 설문조사</td><td data-label="특징">이메일, 웹사이트, 문자, QR코드 등 인터넷을 활용함(구글 폼 등). 현재 가장 많이 활용됨</td><td data-label="장점">빠른 응답. 경제적 부담이 적음. 자료 입력과 분석이 용이함. 국제적 연구에도 활용 가능</td><td data-label="단점">이메일 주소나 전화번호를 확보한 대상만 조사할 수 있음. 응답하지 않으면 그만이라 회수율 보장이 어려움. 스팸메일 처리 가능성</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>회수율의 현실</strong> — 개인 연구자가 설문을 보냈을 때 100명 중 15명 정도(15%) 회수되어도 높다고 하며, 30%가 나오면 아주 잘 나온 것임. 50%는 기대하지 않음. 국가 단위 가구조사 등은 어떤 수단을 써서든 자료를 확보함(예: 카카오톡 문자로 링크를 보내고 완료 시 커피쿠폰 제공).</li>
+<li><strong>설문지 작성 절차(8강 복습)</strong> — 필요한 정보 확인 → 설문조사 유형 결정 → 질문 문항 작성 → 질문 순서 결정 → 사전조사 → 설문지 수정·보완 → 완성(인쇄).</li>
+</ul>
+<p class="sh"><strong>설문조사 준비 체크리스트</strong></p>
+<ul>
+<li>연구목적에 필요한 질문만 포함했는가.</li>
+<li>조사대상자가 질문을 이해할 수 있는가(쉽게 구성되었는가).</li>
+<li>적절한 조사방식(대면, 전화, 온라인 등)을 선택했는가.</li>
+<li>응답 시간이 지나치게 길지 않은가(10분도 길게 느껴질 수 있음).</li>
+<li>조사목적, 자발적 참여, 개인정보 보호를 잘 안내하고 있는가.</li>
+<li>사전조사를 통해 문제점을 확인했는가.</li>
+</ul>
+<p class="sh"><strong>설문지 안내문 예시(교수님이 직접 수행한 '나눔샘 시민아카데미' 교육 성과 조사)</strong></p>
+<ul>
+<li>조사목적(교육의 성과를 알아보기 위함), 응답 내용의 활용 방법(나눔 교육·프로그램 개발의 중요한 자료), 맞고 틀린 답이 없다는 안내, 본 조사 외 다른 목적으로 사용하지 않고 비밀이 보장된다는 약속, 감사 인사, 연구책임자와 연락처 기재.</li>
+<li>나눔 1.0(시혜와 자선)과 나눔 2.0(권리)에 대한 인식이 교육 전후로 바뀌었는지를 사전·사후 조사로 확인한 연구였음.</li>
+</ul>
+<h3>4. 면접조사</h3>
+<p class="sh"><strong>개념과 특징</strong></p>
+<ul>
+<li>면접자와 응답자가 직접 대면하여 사회적 상호작용을 바탕으로 질문하고 응답함으로써 자료를 수집하는 방법임.</li>
+<li>표정, 행동 같은 비언어적 표현을 통해 추가 정보를 파악할 수 있고, 면접자가 상황에 탄력적으로 대처하여 응답자 내면의 개인적이고 심층적인 자료를 얻는 데 효과적임.</li>
+</ul>
+<p class="tt"><strong>면접조사의 장단점</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>구분</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="구분">장점</td><td data-label="내용">복합적이고 심층적으로 응답자의 내면을 파악할 수 있음(설문은 정해진 문항에만 체크). 응답이 미흡하면 보완할 수 있음. 면접자가 면접 환경을 통제하고 융통성 있게 진행할 수 있음(예: 소음이 생기면 장소 이동, 피곤해 보이면 10분 휴식)</td></tr>
+<tr><td data-label="구분">단점</td><td data-label="내용">시간과 비용이 많이 듦(시간, 장소 확보, 사례). 익명성이 보장되지 않음(얼굴을 보고 하므로 꺼내고 싶지 않은 이야기가 있을 수 있음). 면접자와 응답자의 상호작용이 응답에 영향을 미침(면접자가 편안하게 잘 이끌어내면 더 많은 이야기를 얻음)</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>면접조사의 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>설명</th><th>예시(장애인의 자립생활 경험)</th></tr></thead><tbody>
+<tr><td data-label="유형">표준화 면접</td><td data-label="설명">질문 내용과 순서가 사전에 정해져 있음(구조화)</td><td data-label="예시(장애인의 자립생활 경험)">현재의 주거생활에 만족하십니까? 활동지원서비스를 이용하고 계십니까?</td></tr>
+<tr><td data-label="유형">반(半)표준화 면접</td><td data-label="설명">핵심 질문은 표준화하고 그 외 질문은 면접자가 추가함. 면접자가 내용을 잘 알고 경험이 있어야 함</td><td data-label="예시(장애인의 자립생활 경험)">시설에서 나와 지역사회에 정착하는 과정이 어떠셨습니까? (응답에 따라 추가 질문: 친구의 도움을 받으셨다면 그분은 장애인이신가요, 비장애인이신가요?)</td></tr>
+<tr><td data-label="유형">비표준화 면접</td><td data-label="설명">미리 정한 질문 없이 상황에 따라 융통성 있게 질문을 만들어 감. 전문적이고 숙련된 면접자가 가능</td><td data-label="예시(장애인의 자립생활 경험)">시설에서 나온 이후의 삶에 대해 자유롭게 이야기해 주시겠습니까?</td></tr>
+</tbody></table></div>
+<ul>
+<li>처음에는 표준화 면접부터 하고, 숙련도와 면접의 성격에 따라 활용하게 됨.</li>
+</ul>
+<p class="sh"><strong>잘못된 면접 질문의 예</strong></p>
+<ul>
+<li>'시설에서 생활할 때 많이 힘드셨죠?' → 면접자의 주관과 전제(시설생활은 힘들다)가 들어간 유도질문임. '시설에서 생활할 때 어떠셨나요?'처럼 중립적으로 물어야 함.</li>
+</ul>
+<p class="sh"><strong>면접조사 과정과 기술</strong></p>
+<ul>
+<li><strong>과정</strong> — 면접원 선정 및 훈련(조사자 혼자 하기 어려운 경우) → 기관·학교 등에 면접조사 협력 요청 → 면접 시행 → 기록 → 종결.</li>
+<li><strong>프로빙(probing)</strong> — 응답이 충분하지 않을 때 추가 응답을 이끌어내는 면접 기술임. 눈짓이나 표정으로 더 말해 달라고 표현하거나, '조금 더 구체적으로 설명해 주시겠어요?'라고 묻는 것 등.</li>
+</ul>
+<h3>5. 관찰조사</h3>
+<p class="sh"><strong>개념</strong></p>
+<ul>
+<li>관찰자가 구체적인 목적을 가지고 시각, 청각 등 감각을 이용하여 조사대상을 관찰하는 자료수집 방법임.</li>
+<li>모든 자료수집 방법에는 장단점이 있으며, 단점은 보고서의 '한계'에 밝히면 됨.</li>
+</ul>
+<p class="tt"><strong>관찰조사의 장단점</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>구분</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="구분">장점</td><td data-label="내용">비언어적이고 자연스러운 행동에 대한 자료를 수집할 수 있음. 언어표현이 어려운 아동이나 의사소통이 어려운 대상(소수민족 등)도 조사할 수 있음. 자료를 실시간으로 수집하므로 정확성이 높음</td></tr>
+<tr><td data-label="구분">단점</td><td data-label="내용">시간과 비용이 많이 듦(특히 시간). 응답자의 익명성이 결여됨. 관찰자의 편견이 개입될 수 있음. 외생변수(외적 상황)를 통제하기 어려움</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>관찰조사의 유형</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>유형</th><th>설명</th><th>장점·단점</th></tr></thead><tbody>
+<tr><td data-label="구분">관찰 항목</td><td data-label="유형">구조화 관찰</td><td data-label="설명">관찰할 항목을 미리 정해 놓음</td><td data-label="장점·단점">관찰 결과를 비교하기 쉬움 / 정해진 항목 이외의 행동은 놓칠 수 있음</td></tr>
+<tr><td data-label="구분">관찰 항목</td><td data-label="유형">비구조화 관찰</td><td data-label="설명">항목 없이 관찰하며 특이한 점을 그때그때 정리함</td><td data-label="장점·단점">예상하지 못한 현상을 발견할 수 있음(독창적 연구 가능) / 관찰자의 해석에 영향을 받아 객관적 타당성이 문제될 수 있음</td></tr>
+<tr><td data-label="구분">참여 여부</td><td data-label="유형">참여 관찰</td><td data-label="설명">관찰자가 일시적으로 집단의 구성원이 되어 행동에 함께 참여하며 관찰함</td><td data-label="장점·단점">조사자임을 밝힐지 말지 같은 윤리적 문제가 생길 수 있음</td></tr>
+<tr><td data-label="구분">참여 여부</td><td data-label="유형">비참여 관찰</td><td data-label="설명">관찰자가 제3자의 입장에서 집단 밖에서 관찰함</td><td data-label="장점·단점">집단에 참여할 수 없는 경우에는 비참여 관찰을 할 수밖에 없음</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>사례(장애인 접근성 관찰)</strong> — 복지관에 가서 출입구 경사로·엘리베이터가 있는지, 안내 표지판이 이해하기 쉬운지, 접수 과정에서 의사소통 지원(청각장애인 수어 등)이 제공되는지를 직접 봄.</li>
+</ul>
+<h3>6. 2차적 자료 수집</h3>
+<p class="sh"><strong>의미와 등장 배경</strong></p>
+<ul>
+<li>조사자가 직접 새로운 자료를 수집하는 대신 이미 존재하는 자료를 대상으로 자료를 수집하는 방법임. 조사자가 직접 관여하지 않으므로 비관여적 조사라고도 함.</li>
+<li><strong>조사자의 반응성 문제(호손효과)</strong> — 1920년대 미국 호손공장에서 노동자의 생산성을 실험하다가, 조건과 상관없이 '누군가 나를 관찰하고 있다'는 사실만으로 생산성이 높아지는 것을 발견함. 조사를 하는 것 자체가 결과에 영향을 미칠 수 있어 비관여적인 2차 자료 수집을 활용함.</li>
+</ul>
+<p class="tt"><strong>2차적 자료 수집의 유형</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>유형</th><th>설명</th><th>예시</th></tr></thead><tbody>
+<tr><td data-label="유형">문헌 연구</td><td data-label="설명">과거 사건이나 현상을 조사할 때 주로 사용. 책, 논문, 조사자료 등을 분석해 의미를 찾아냄</td><td data-label="예시">-</td></tr>
+<tr><td data-label="유형">내용 분석</td><td data-label="설명">신문기사 등 이미 생성된 자료(1차 자료)를 2차적으로 분석함. 양적 내용 분석은 특정 표현의 빈도를, 질적 내용 분석은 묘사 방식을 분석함</td><td data-label="예시">언론은 홈리스를 어떻게 묘사하는가: 기사 100편 분석 → 양적(범죄, 일자리, 주거권 언급 횟수) / 질적(보호대상, 사회문제, 권리의 주체 중 어떻게 묘사하는지)</td></tr>
+<tr><td data-label="유형">2차 자료 분석</td><td data-label="설명">정부, 연구기관, 학술단체 등이 이미 조사해 놓은 통계자료와 연구자료를 연구주제에 맞게 재분석함</td><td data-label="예시">한국복지패널, 장애인고용패널 등 패널데이터(매년 동일 대상을 반복 조사하여 종단분석이 가능)</td></tr>
+</tbody></table></div>
+<ul>
+<li>교수님 박사논문은 약 5천 명의 동일 장애인을 오랜 기간 조사한 장애인고용패널을 활용한 2차 자료 분석이었음. 취업자였다가 실직한 사람 등의 변화를 종단적으로 볼 수 있음.</li>
+</ul>
+<h3>7. 자료수집 방법의 선택과 연구윤리</h3>
+<p class="sh"><strong>방법의 선택</strong></p>
+<ul>
+<li>연구목적과 조사의 현실적 여건(시간, 비용 등)을 함께 고려함. 예: 관찰조사에 몇 달 이상이 필요하지만 현실적으로 어렵다면 2차 자료 수집을 선택할 수밖에 없음.</li>
+</ul>
+<p class="sh"><strong>자료수집에서 지켜야 할 연구윤리</strong></p>
+<ul>
+<li>자발적 참여와 동의(가장 기본).</li>
+<li>개인정보와 비밀보장을 철저히 지킴.</li>
+<li>조사 과정에서 참여자의 존엄과 권리를 반드시 존중함. 이것이 전제되지 않으면 조사도 연구결과 발표도 해서는 안 됨.</li>
+<li><strong>조사 접근성 보장</strong> — 전문용어 대신 쉬운 설명, 큰 글씨(8포인트 설문지는 응답하기 어려움), 필요한 의사소통 지원(수어통역, 점자자료, 독서확대기 등)을 제공함.</li>
+</ul>
+<p class="sh"><strong>10강 정리</strong></p>
+<ul>
+<li>설문조사, 면접조사, 관찰조사, 2차적 자료 수집 네 가지를 각각 정리해 보라고 함. 각 방법의 특징과 장단점, 유형을 비교하며 정리하면 좋음.</li>
+<li>다음 시간에는 수집한 자료를 분석하는 내용을 다룸. (강의 중에는 '12강'이라고 언급함)</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l11"><header class="lh"><span class="no">11강</span><h2>자료분석</h2></header><div class="ct">
+<h3>1. 11강의 위치와 자료분석의 개요</h3>
+<p class="sh"><strong>11강의 위치</strong></p>
+<ul>
+<li><strong>위치</strong> — 사회복지조사의 과정을 순서대로 강의하고 있으며, 10강에서 자료수집을 다뤘고 11강에서는 수집한 자료를 분석하는 단계를 다룸.</li>
+<li><strong>구성</strong> — 자료분석 개요 → 자료분석 과정 → 자료분석 실제(대담) 순서로 진행함. 세 번째 시간에는 박영민 박사(민주노동연구원 연구위원)가 대담자로 나와 실제 자료분석 이야기를 함.</li>
+</ul>
+<p class="sh"><strong>자료분석이란</strong></p>
+<ul>
+<li><strong>자료분석</strong> — 수집된 자료를 체계적으로 정리하고 분석하여 연구 질문에 대한 답을 찾아가는 과정임.</li>
+<li><strong>이해 포인트</strong> — 수없이 많이 모은 자료가 연구자가 처음 던진 연구 질문에 대한 답으로서의 정보로 바뀌어 가는 과정임.</li>
+</ul>
+<p class="sh"><strong>통계의 정의</strong></p>
+<ul>
+<li><strong>통계</strong> — 어떤 현상을 종합적으로 한눈에 알아보기 쉽게 일정한 체계에 따라 숫자로 나타낸 것임. 예: 출생률, 인구 증감률, 결혼율, 소득.</li>
+<li><strong>설문 결과도 숫자로 나타나야 해석할 수 있음. 예</strong> — 장애인 자립생활 경험자 중 성별로 몇 명, 몇 %인지 숫자가 나와야 현황을 해석하고 필요한 제도를 말할 수 있음.</li>
+</ul>
+<p class="sh"><strong>자료분석의 준비 과정</strong></p>
+<ul>
+<li><strong>흐름</strong> — 수집된 자료를 정리·편집함 → 데이터로 변환해 컴퓨터에 입력함(보통 숫자로 표현) → 통계 패키지로 통계분석을 함 → 결과를 해석함.</li>
+<li><strong>통계 패키지</strong> — 손으로 계산하지 않고, 데이터를 입력해 분석 방법을 선택하면 프로그램이 분석해 주는 도구임. SPSS가 가장 많이 쓰이며 SAS, 스타타(Stata)도 있음.</li>
+<li><strong>교수님 경험</strong> — 박사논문에서 장애인고용패널 5년 치 종단자료를 스타타로 분석함. 종단 패널데이터는 SPSS로도 가능하지만 스타타가 조금 더 쉽게 처리한다고 알게 되어 선택함.</li>
+<li><strong>학습 방법</strong> — 어떤 통계 패키지를 쓸지는 따로 공부가 필요함. 대학 부설 통계연구소 등에서 SPSS 특강(예: 8주 과정)을 하기도 함.</li>
+</ul>
+<h3>2. 자료분석의 과정</h3>
+<p class="sh"><strong>자료분석 과정의 순서</strong></p>
+<ul>
+<li><strong>순서</strong> — 수집된 자료의 정리·편집 → 부호화(코딩) → 컴퓨터 입력 → 통계기법 실행 → 통계 산출물 해석 및 필요한 정보 구성임.</li>
+<li><strong>자료의 처리 과정</strong> — 자료 정리·편집, 코딩, 컴퓨터 입력까지를 말함. 이 부분에 시간이 가장 많이 걸림. 설문지 100부면 100명의 성별, 문항별 응답을 모두 입력해야 함.</li>
+<li><strong>결과 해석의 중요성</strong> — 통계 결과가 나온 뒤 이를 잘 해석하는 것이 중요함. 연구자의 경험과 숙련도에 따라 해석이 달라질 수 있고, 해석이 잘못되면 연구 결과가 다르게 보일 수 있음.</li>
+</ul>
+<p class="tt"><strong>자료분석 과정 정리</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>단계</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="단계">자료 정리·편집</td><td data-label="내용">누락과 오류를 확인하고 처리 방법을 정함</td></tr>
+<tr><td data-label="단계">코딩</td><td data-label="내용">일정한 규칙에 따라 숫자나 기호를 부여함</td></tr>
+<tr><td data-label="단계">컴퓨터 입력</td><td data-label="내용">코딩한 값을 SPSS 등 프로그램에 입력함. 정리·편집·코딩·입력까지가 자료의 처리 과정임</td></tr>
+<tr><td data-label="단계">데이터 클리닝</td><td data-label="내용">빈도분석 결과를 보고 입력 오류를 확인하여 수정함</td></tr>
+<tr><td data-label="단계">통계기법 실행</td><td data-label="내용">분석 목적에 맞는 통계기법을 선택해 실행함</td></tr>
+<tr><td data-label="단계">결과 해석</td><td data-label="내용">통계 산출물을 해석하고 필요한 정보를 구성함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사례: 복지서비스 이용 만족도 조사</strong></p>
+<ul>
+<li><strong>조사 내용</strong> — 복지서비스를 이용한 사람의 만족도를 조사하는 사례임.</li>
+</ul>
+<p class="sh"><strong>(1) 자료 정리 - 누락과 오류의 처리</strong></p>
+<ul>
+<li><strong>오류 예시</strong> — 만족도는 1~5점인데 7점이라고 쓴 경우, 만족도 문항을 비워 둔 경우가 있음. 7이나 공란은 그대로 입력할 수 없음.</li>
+<li><strong>원인 추정</strong> — 글씨가 너무 작았거나 문항이 100문항이 넘거나 만족도를 맨 끝에서 물어보면 응답자가 대충 쓰게 될 수 있음.</li>
+<li><strong>처리 판단</strong> — 해당 문항만 뺄 것인지, 그 응답자의 설문지 전체를 뺄 것인지는 조사 연구자의 중요한 결정이며 연구자마다 다를 수 있음. 슈퍼바이저와 의논하기도 함.</li>
+<li><strong>설문지 전체 제외</strong> — 관련 문항이 모두 공란이라면 그 설문지는 뺌. 100부를 회수했어도 한 부가 빠지는 것임.</li>
+<li><strong>결측치</strong> — 30문항 중 29문항에 응답하고 한 문항만 비운 경우는 설문지 전체를 빼기 아까우므로, 그 문항만 결측치로 표시함. 그 문항 분석에서는 100명이 아니라 99명이 응답한 것이 됨.</li>
+<li><strong>주의</strong> — 7을 5라고 쓰려다 잘못 쓴 것으로 추측해 고치는 것은 위험하므로, 그 응답은 뺄지 고민해야 함.</li>
+</ul>
+<p class="sh"><strong>(2) 코딩</strong></p>
+<ul>
+<li><strong>코딩</strong> — 일정한 규칙에 따라 숫자나 기호를 부여하는 것임. 통계 패키지는 보통 숫자를 인식하므로 '매우 불만족', '불만족' 같은 응답을 숫자로 바꿔야 함.</li>
+<li><strong>예</strong> — 매우 불만족=1, 불만족=2, 보통=3, 만족=4, 매우 만족=5로 약속함. 반대로 매우 불만족=5부터 코딩해도 상관없음.</li>
+<li><strong>코딩 숫자의 의미</strong> — 명목척도에서 여성=1, 남성=2라고 해도 여성이 남성의 두 배라는 뜻이 아닌 것처럼, 숫자는 의미 없이 연구자가 약속한 규칙일 뿐임.</li>
+<li><strong>주의</strong> — 해석할 때 코딩 규칙을 정확히 알고 있어야 함. 5가 매우 불만족인데 매우 만족으로 해석하면 안 됨.</li>
+<li><strong>입력 화면</strong> — SPSS 화면은 엑셀처럼 되어 있으며, 응답자별로 문항의 값을 쭉 입력함. 그래야 불만족(2)이라고 답한 사람이 몇 %인지, 평균이 3.3인지 등을 분석할 수 있음.</li>
+</ul>
+<p class="sh"><strong>(3) 데이터 클리닝</strong></p>
+<ul>
+<li><strong>데이터 클리닝</strong> — 자료의 오류를 확인하고 수정하는 과정임. 보통 빈도분석을 실시한 뒤 결과를 점검하는 방식을 이용함.</li>
+<li><strong>이유</strong> — 응답자가 100명, 1,000명이면 입력한 값을 일일이 확인할 수 없으므로 빈도분석으로 값별 개수를 한꺼번에 확인함.</li>
+<li><strong>예 1</strong> — 연령 빈도분석에서 32세 1명, 33세 1명, 34세 2명 등이 나오다가 230이 1명 나옴. 230세는 있을 수 없으므로 입력 오류임. 23인지 30인지 알 수 없으므로 해당 응답자의 설문지 원본을 확인해 수정함.</li>
+<li><strong>예 2</strong> — 만족도를 1~5로 코딩했는데 빈도분석에서 9가 1명 나옴. 설문지 원본을 확인해 5를 9로 잘못 입력한 것이면 5로 고침.</li>
+<li><strong>결측치</strong> — 처음부터 입력할 수 없었던 칸은 빈칸으로 둠.</li>
+</ul>
+<p class="sh"><strong>(4) 통계기법 실행</strong></p>
+<ul>
+<li>분석 목적에 따라 통계기법을 선택함. 통계 패키지에서 메뉴를 선택하면 한 번에 결과가 나옴.</li>
+</ul>
+<p class="tt"><strong>분석 목적별 통계기법</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>분석 목적</th><th>통계기법</th><th>복지서비스 이용 만족도 조사 예시</th></tr></thead><tbody>
+<tr><td data-label="분석 목적">현황 파악</td><td data-label="통계기법">기술통계, 빈도분석</td><td data-label="복지서비스 이용 만족도 조사 예시">기술통계: 전체 만족도 평균이 4.3임. 빈도분석: 남성 60명, 여성 40명 / 100명 중 매우 만족 50명, 불만족 20명</td></tr>
+<tr><td data-label="분석 목적">집단 간 차이를 봄(차이분석)</td><td data-label="통계기법">교차분석, 카이제곱 검증, t검정, 분산분석</td><td data-label="복지서비스 이용 만족도 조사 예시">장애 유형이나 성별에 따라 서비스 이용 여부가 다른가. 남성과 여성의 만족도 평균에 차이가 있는가</td></tr>
+<tr><td data-label="분석 목적">변수 간 관계를 봄(관계분석)</td><td data-label="통계기법">상관분석, 회귀분석</td><td data-label="복지서비스 이용 만족도 조사 예시">상관분석: 서비스 이용 횟수와 만족도가 관계가 있는가. 회귀분석: 소득, 연령 등이 서비스 이용 경험이나 만족도에 영향을 미치는가</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>차이분석</strong> — 분산분석은 세 집단 이상을 볼 때 쓴다고 설명함. 교수님은 너무 복잡하므로 '집단 간 차이를 볼 때는 차이분석이며 교차분석, 카이제곱 검증, t검정, 분산분석이 있다' 정도만 알고 넘어가도 된다고 함.</li>
+<li><strong>관계분석</strong> — 두 변수(연속변수) 간의 관계를 보는 것이 상관분석, 무엇이 무엇에 영향을 미치는지(영향 요인)를 보는 것이 회귀분석임. 관계분석에는 상관분석과 회귀분석이 있다는 정도로 이해하면 됨.</li>
+<li><strong>회귀분석</strong> — 양적 분석에 기초한 학술논문이나 석사논문에서 많이 쓰며, 교수님도 학술논문 발표 때 많이 사용함. 빈도분석 등으로 빈도와 평균을 말한 뒤 영향 요인을 볼 때 회귀분석을 사용함.</li>
+</ul>
+<h3>3. 자료분석의 실제 - 대담(박영민 박사)</h3>
+<p class="sh"><strong>Q1. 자료를 수집한 뒤 예상하지 못한 문제를 발견한 경험</strong></p>
+<ul>
+<li><strong>설문문항 설계 오류</strong> — 월 소득 보기를 '150만 원 미만, 150~300만 원, 300~450만 원'으로 주어 300만 원이 겹침. 소득이 300만 원인 응답자는 어디를 골라야 할지 알 수 없게 됨. 교수님은 앞선 강의에서 다룬 문항 오류 사례라고 짚음.</li>
+<li><strong>해결</strong> — 파일럿 테스트(본 조사 전 예비조사)에서 응답자들이 오류를 알려 주어 본 조사 전에 고친 경험도 있음. 예비조사가 중요함.</li>
+<li><strong>2차 자료 활용 시 실수</strong> — 사회복지사 이직 의향 모형에 조직몰입, 직무만족 변수가 필요했는데, 몇 달 연구를 진행한 뒤에야 상사의 태도, 조직문화 같은 필요한 변수가 자료에 없다는 것을 알게 됨.</li>
+</ul>
+<p class="sh"><strong>Q2. 자료수집과 통계분석을 어떻게 결정하는가</strong></p>
+<ul>
+<li><strong>원칙</strong> — 연구목적과 주제에 맞는 방법이 가장 중요함. 연구목적에 따라 연구방법을 정한 뒤 통계분석 기법을 선택함.</li>
+</ul>
+<p class="tt"><strong>연구목적별 방법</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>연구 유형</th><th>사용하는 방법</th></tr></thead><tbody>
+<tr><td data-label="연구 유형">기술하는 연구(사실과 현상을 기술)</td><td data-label="사용하는 방법">기술통계, 빈도분석</td></tr>
+<tr><td data-label="연구 유형">설명하는 연구(인과관계, 원인을 찾음)</td><td data-label="사용하는 방법">집단 간 평균 비교, 회귀분석</td></tr>
+<tr><td data-label="연구 유형">탐색적 연구(밝혀지지 않은 주제)</td><td data-label="사용하는 방법">질적 연구방법</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>자료 선택</strong> — 연구방법을 정한 뒤 활용 가능한 데이터(2차 자료)가 있는지 먼저 파악하고, 마땅한 2차 자료가 없으면 직접 설문지를 만들어 1차 자료를 수집함.</li>
+<li><strong>2차 자료</strong> — 국가나 민간단체, 연구기관이 공개한 자료가 많으며 일정한 절차를 거치면 활용할 수 있음. 교수님도 패널데이터를 국가기관에서 받아 박사논문에 사용함. 직접 조사 시 나타나는 조사 반응성을 피하려는 목적으로도 2차 자료를 활용함.</li>
+<li><strong>숙련도</strong> — 자료와 분석방법의 판단은 연구 경험과 전문성에 따라 차이가 있으며, 연구를 많이 할수록 노하우가 쌓임.</li>
+</ul>
+<p class="sh"><strong>Q3. 실제 연구의 자료처리와 분석 사례</strong></p>
+<ul>
+<li><strong>사례 1(설문조사 분석)</strong> — 2026 유급병가 실태조사임. 한국은 유급병가가 법제화되어 있지 않고 취업규칙이나 단체협약으로 존재하여, 기업 규모, 고용형태, 노조 유무에 따라 아파도 쉴 수 있는 정도가 다름. 이를 개선하려는 목적으로 전국 노동자 908명의 응답을 받아 SPSS에 직접 코딩해 분석함.</li>
+<li><strong>SPSS 데이터 창</strong> — 응답자별 ID가 있고, 고용형태는 1=정규직, 2=비정규직, 노조 가입 여부도 1과 2로 코딩함. 위쪽에 보이는 것이 문항, 즉 변수임.</li>
+<li><strong>분석 방법</strong> — 평균분석에서 종속변수에 '상병(부상·질병)으로 일하지 못한 날', 독립변수에 고용형태와 노조 가입 여부를 넣고 확인을 누르면 결과가 나옴.</li>
+</ul>
+<p class="tt"><strong>사례 1 결과(지난 1년, 단위: 일)</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>상병으로 일하지 못한(쉰) 날</th><th>상병임에도 출근한 날</th></tr></thead><tbody>
+<tr><td data-label="구분">정규직</td><td data-label="상병으로 일하지 못한(쉰) 날">8.1</td><td data-label="상병임에도 출근한 날">6</td></tr>
+<tr><td data-label="구분">비정규직</td><td data-label="상병으로 일하지 못한(쉰) 날">6.6</td><td data-label="상병임에도 출근한 날">10</td></tr>
+<tr><td data-label="구분">노조 가입</td><td data-label="상병으로 일하지 못한(쉰) 날">12</td><td data-label="상병임에도 출근한 날">약 7</td></tr>
+<tr><td data-label="구분">노조 미가입(비조합원)</td><td data-label="상병으로 일하지 못한(쉰) 날">2.9</td><td data-label="상병임에도 출근한 날">10</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>해석</strong> — 정규직과 노조 가입자는 아파도 쉴 수 있는 날이 많고, 비정규직과 비조합원은 아파도 출근한 날이 많음. 간단한 통계분석으로 고용형태와 노조 유무에 따라 아프면 쉴 권리가 달라진다는 것을 알 수 있었음.</li>
+<li><strong>그래프와 표</strong> — 종사상 지위, 종사자 규모, 수도권 여부 등의 집단별 결과를 그래프로 나타냄(쉰 날에서 일한 날을 뺀 값을 다이아몬드로 표시함). 그 결과 특수고용·프리랜서 등이 상병 시 일하는 비율이 가장 높음. 연령대, 성별, 산업별 차이는 표로 정리해 보고서에 실음.</li>
+<li><strong>교수님 정리</strong> — SPSS는 클릭 한 번으로 결과가 나오지만, 더 중요한 것은 데이터를 잘 코딩하고 어떤 변수와 통계기법을 쓸지 잘 선정하는 것임. 통계치를 표로 만들어 연구보고서나 논문에 싣고 문장으로 서술해 해석함.</li>
+<li><strong>사례 2(2차 자료 분석)</strong> — 2020 외국인 근로자 실태조사 원자료 분석임. 이주 돌봄 노동자 연구에서 가사노동자와 간병인은 비공식 영역이라 자료와 조사 대상자를 찾기 어려웠음. 한국보건사회연구원 보건복지 데이터 포털에서 원자료를 내려받아 사용함(학생도 같은 자료를 받을 수 있음).</li>
+<li><strong>분석 방법</strong> — 직업 변수(제조업, 건설업, 간병·가사 관련 노동자, 판매업, 음식점 등 코드)에서 간병·가사를 선택하고, 코로나 발생 전 월평균 임금 변수로 평균분석을 함.</li>
+<li><strong>결과</strong> — 이주 간병인은 월 약 180만 원, 가사 관련 노동자는 약 178만 원으로 다른 직업에 비해 낮았음. 결과를 연구보고서에 발췌해 실음.</li>
+<li><strong>사례 구분</strong> — 사례 1은 직접 설문조사로 수집한 1차 자료, 사례 2는 2차 자료 활용임.</li>
+</ul>
+<p class="sh"><strong>Q4. 예상했던 결과와 실제 결과가 달랐을 때</strong></p>
+<ul>
+<li><strong>사례</strong> — 청년 복지태도 유형화 연구에서 진보적인 청년일수록 복지 확대와 증세에 찬성할 것이라고 예상했으나, 진보적인 청년 안에서도 복지 확대에는 찬성하지만 증세에는 반대하는 유형이 있어 복지태도가 둘로 갈림.</li>
+<li><strong>대응 1</strong> — 선행연구를 더 읽고 이론 공부를 많이 해서 최대한 정확하게 가설을 세우는 것이 중요함.</li>
+<li><strong>대응 2</strong> — 사회과학은 이론대로만 움직이지 않으며 그만큼 역동적임. 가설이 기각되어도 이유가 있으므로 왜 예상이 틀렸는지 탐구하는 과정이 사회과학 연구를 풍부하게 함.</li>
+</ul>
+<p class="sh"><strong>Q5. 통계적으로 유의한 결과와 현장에서 중요한 결과는 항상 일치하는가</strong></p>
+<ul>
+<li><strong>일치한다고 보기 어려움</strong> — 전수조사가 아니라 표본을 뽑아 모집단의 특성을 추론하는 확률적 분석이므로 오차는 항상 존재함. 표본이 모집단을 대표하는지가 중요함.</li>
+<li><strong>주의</strong> — 통계를 객관적 사실로 전적으로 신뢰하는 태도는 경계해야 함. 예를 들어 표본 수가 커지면 통계적으로 유의할 가능성이 높아지므로 이를 염두에 두어야 함.</li>
+<li><strong>의의</strong> — 통계적으로 유의하다는 것은 오차가 발생할 위험이 낮아진다는 뜻이므로 실천을 보다 전문적으로 하는 데 시사점과 함의가 큼.</li>
+<li><strong>현장 활용</strong> — 이용자 만족도 조사나 욕구조사로 실천 방향을 정할 수 있음. 박사님이 장애인복지관 근무 시 '이용자가 원한다'는 구두 설명보다 객관적이고 과학적인 통계에 기초해 설계했을 때 사업 계획이 더 설득력 있었음.</li>
+<li><strong>교수님 연결</strong> — 1강에서 본 찰스 부스의 사회조사처럼 조사와 통계는 빈곤에 대한 관점과 실천 현장을 바꿀 수 있는 의미가 있음.</li>
+</ul>
+<p class="sh"><strong>Q6. 조사론을 공부하는 학생들에게</strong></p>
+<ul>
+<li>조사론과 자료분석은 어려운 과목으로 여겨지지만, 사회복지 현장을 더 깊이 이해하는 방법임. 양적 자료분석과 기초 분석을 할 수 있으면 사회문제를 더 깊이 고찰할 수 있음.</li>
+<li>과학적 신뢰성과 전문성은 사회복지 전문가가 갖추어야 할 덕목임. 갖추지 못하면 전문가의 권위, 이데올로기, 관습에 의존하게 됨.</li>
+<li><strong>조언</strong> — 어렵게 생각하지 말고 관심 있는 분야의 통계를 인터넷에서 찾아보는 것부터 시작하면 좋음.</li>
+</ul>
+<p class="sh"><strong>11강 정리</strong></p>
+<ul>
+<li><strong>자료분석</strong> — 수집된 자료를 정리하고 분석해 연구 질문에 대한 답을 찾는 과정임. 통계는 현상을 일정한 체계에 따라 숫자로 나타낸 것임.</li>
+<li><strong>자료분석 과정</strong> — 자료 정리·편집 → 코딩 → 컴퓨터 입력(자료의 처리 과정) → 통계기법 실행 → 결과 해석 순서임. 정리·편집 단계에서 누락과 오류를 처리하고 결측치를 판단함.</li>
+<li><strong>코딩과 데이터 클리닝</strong> — 코딩은 규칙에 따라 숫자를 부여하는 것이며 숫자 자체에는 의미가 없음. 데이터 클리닝은 빈도분석으로 입력 오류를 찾아 원본과 대조해 수정하는 것임.</li>
+<li><strong>통계기법 구분</strong> — 현황은 기술통계·빈도분석, 집단 간 차이는 차이분석(교차분석, 카이제곱 검증, t검정, 분산분석), 변수 간 관계는 관계분석(상관분석, 회귀분석)임.</li>
+<li><strong>통계 패키지</strong> — SPSS, SAS, 스타타가 있으며 SPSS를 가장 많이 사용함. 기법 선택과 결과 해석은 연구자의 몫임.</li>
+<li><strong>대담 핵심</strong> — 연구목적에 맞는 방법 선택, 예비조사의 중요성, 예상과 다른 결과도 의미가 있음, 통계를 전적으로 신뢰하지 않되 현장 실천에 유용함.</li>
+<li><strong>다음 시간</strong> — 12강에서는 욕구조사를 다룸. 사회복지조사가 실천 현장에서 의미를 가지려면 욕구조사나 만족도 조사가 함께 이루어져야 함. (강의 중에는 '다음 11강'이라고 언급함)</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l12"><header class="lh"><span class="no">12강</span><h2>욕구조사</h2></header><div class="ct">
+<h3>1. 12강의 위치와 구성</h3>
+<p class="sh"><strong>12강의 위치</strong></p>
+<ul>
+<li>앞 시간까지 사회복지조사의 과정별 내용(자료수집, 자료분석 등)을 살펴봄. 12강은 사회복지현장에서 가장 많이 이루어지는 사회복지조사의 형태가 욕구조사이기 때문에 별도의 장으로 준비한 것임.</li>
+<li><strong>구성</strong> — 욕구조사 개요 → 욕구조사 과정과 내용 → 욕구조사 자료수집 방법 → 대담(울산 중부노인복지관 김민희 관장).</li>
+<li><strong>특징</strong> — 앞부분에서 이론을 설명한 뒤, 현장에서 욕구조사가 어떻게 이루어지는지, 어떤 이슈와 변화가 있는지를 직접 들어 보는 대담이 포함됨.</li>
+</ul>
+<h3>2. 욕구조사 개요</h3>
+<p class="sh"><strong>욕구조사의 개념</strong></p>
+<ul>
+<li><strong>욕구조사(needs assessment)</strong> — 지역주민과 당사자의 생활문제와 필요한 지원이 무엇인지 파악하여 정책, 서비스, 프로그램의 우선순위를 결정하기 위한 조사임.</li>
+<li>현재 상태와 바람직한 상태 사이에 어떤 차이가 있는지를 파악하는 조사라고도 설명함. 부족한 부분을 메우고 더 나은 상태를 추구하려는 목적으로 진행하기 때문임.</li>
+<li>필요(needs)와 원하는 것(want)은 다른 개념임. 내가 원하는 것과 나에게 진짜 필요한 것은 같을 수도 있고 차이가 날 수도 있으므로 계속 생각해 봐야 하는 문제라고 함.</li>
+</ul>
+<p class="sh"><strong>욕구조사의 필요성</strong></p>
+<ul>
+<li><strong>다음 내용을 결정하기 위해 욕구조사를 함</strong> — 무슨 문제가 있는가, 누가 더 필요로 하는가, 무엇부터 해야 하는가(우선순위).</li>
+</ul>
+<p class="sh"><strong>욕구의 유형</strong></p>
+<p class="tt"><strong>욕구의 4가지 유형</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>유형</th><th>의미</th><th>비고</th></tr></thead><tbody>
+<tr><td data-label="유형">규범적 욕구</td><td data-label="의미">전문가에 의해 필요하다고 인정된 욕구</td><td data-label="비고">전문가가 판단함</td></tr>
+<tr><td data-label="유형">인식된 욕구</td><td data-label="의미">당사자가 스스로 느끼는 욕구('나는 이런 게 필요한 것 같다')</td><td data-label="비고">스스로 인식함</td></tr>
+<tr><td data-label="유형">표출적 욕구</td><td data-label="의미">인식된 욕구가 구체적인 행위로 전환되어 나타난 욕구</td><td data-label="비고">기관은 서비스 신청자 수나 대기자 명단을 보고 지역사회의 욕구가 가장 큰 부분을 알 수 있음</td></tr>
+<tr><td data-label="유형">비교욕구</td><td data-label="의미">다른 지역이나 다른 인구 집단과 비교되어 발생하는 욕구</td><td data-label="비고">'저 복지관에는 있는 프로그램이 우리 복지관에는 없네'라고 느끼는 경우</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사례: 혼자 사는 80세 노인</strong></p>
+<p class="tt"><strong>혼자 사는 80세 노인의 욕구 유형별 사례</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>유형</th><th>사례</th></tr></thead><tbody>
+<tr><td data-label="유형">규범적 욕구</td><td data-label="사례">전문가는 건강 상태와 낙상 위험을 고려해 방문건강관리가 필요하다고 판단함</td></tr>
+<tr><td data-label="유형">인식된 욕구</td><td data-label="사례">당사자가 '사람 만날 일이 없어서 너무 외롭다'고 느낌</td></tr>
+<tr><td data-label="유형">표출적 욕구</td><td data-label="사례">외로워서 복지관 프로그램을 신청하거나, 삼시 세끼 해결이 힘들어 도시락 서비스를 신청함</td></tr>
+<tr><td data-label="유형">비교욕구</td><td data-label="사례">옆 동네에는 이동 지원 서비스가 있는데 우리 지역에는 없어 있었으면 좋겠다고 느낌</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>욕구 유형 간 불일치 문제</strong></p>
+<ul>
+<li><strong>예</strong> — 고독사 위험이 매우 높은 노인이 서비스를 신청하지 않는 경우, 표출적 욕구는 없는 상태임.</li>
+<li>서비스를 신청하지 않았다고 해서 욕구가 없다는 뜻은 아님. 표출된 욕구가 없어도 그 사람에게 욕구가 있을 수 있으므로 이를 파악하는 것이 실무자와 사회복지사가 함께 고민할 영역임.</li>
+<li>이는 사회복지사만의 고민이 아니라 국가가 함께 고민해야 하는 문제임. 그래야 고독사 같은 위험이 줄어들 수 있음.</li>
+</ul>
+<h3>3. 욕구조사 과정과 내용</h3>
+<p class="sh"><strong>욕구조사 과정</strong></p>
+<ul>
+<li><strong>일반적으로 말하는 과정</strong> — 욕구조사 목적 수립 → 사전 정보 탐색(예: 작년 욕구조사는 어땠는지) → 실행 계획 수립 → 자료수집과 분석(설문조사, 대면조사 등 자료수집 방법을 바탕으로 결정) → 욕구의 우선순위 결정 → 정책·프로그램에 반영 → 평가.</li>
+<li><strong>평가</strong> — 프로그램이 실시된 뒤 정말 욕구가 충족되었는지 사후조사 등으로 확인할 수 있음. 이 피드백을 바탕으로 다시 욕구조사를 수립하는 순환 과정임.</li>
+</ul>
+<p class="sh"><strong>욕구조사 내용(5가지)</strong></p>
+<p class="tt"><strong>욕구조사의 내용</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>내용</th><th>조사하는 것</th></tr></thead><tbody>
+<tr><td data-label="내용">인구학적 특성(어떤 사람들이 살고 있는가)</td><td data-label="조사하는 것">인구, 성별, 연령대별 구성, 가구 구성, 소득 등 일반적인 특성. 욕구조사에서 기본적으로 조사함</td></tr>
+<tr><td data-label="내용">문제(어떤 문제가 있는가)</td><td data-label="조사하는 것">고용, 건강, 주거, 돌봄, 교육 등 모든 영역의 문제(예: 돌봄이 필요함, 건강상 방문건강관리사가 왔으면 좋겠음)</td></tr>
+<tr><td data-label="내용">서비스(현재 어떤 서비스를 이용할 수 있는가)</td><td data-label="조사하는 것">기존 서비스의 종류, 접근성, 이용률, 만족도. 만족도가 높으면 계속하고, 높지 않으면 바꾸거나 다른 서비스를 해야 함</td></tr>
+<tr><td data-label="내용">결핍(무엇이 부족한가)</td><td data-label="조사하는 것">미충족 욕구, 서비스의 사각지대, 새롭게 필요한 지원</td></tr>
+<tr><td data-label="내용">지역사회 자원(어떤 자원이 있는가)</td><td data-label="조사하는 것">기관, 인력, 예산, 주민 조직, 네트워크 등 앞으로 프로그램이나 서비스를 만드는 데 필요한 자원의 분포</td></tr>
+</tbody></table></div>
+<h3>4. 욕구조사 자료수집 방법</h3>
+<p class="sh"><strong>자료수집 방법의 개요</strong></p>
+<ul>
+<li>10강에서 본 자료수집의 내용과 겹치는 부분이 많으므로 다시 한번 이해하는 시간으로 삼으라고 함.</li>
+<li><strong>큰 틀</strong> — 이미 있는 자료에서 찾기 / 사람들의 이야기를 듣기 / 집단의 판단과 우선순위를 구조화하기 / 설문조사 / 수렴적 분석 및 다중접근방법.</li>
+</ul>
+<p class="sh"><strong>이미 있는 자료에서 찾기</strong></p>
+<ul>
+<li>기본적으로 나와 있는 인구 데이터, 정부의 통계자료와 보고서, 복지기관이 발행한 보고서와 파일 등에서 욕구조사 전에 미리 알아야 할 내용을 찾아보는 방법임. 2차 자료 분석과 비슷함.</li>
+</ul>
+<p class="sh"><strong>사람들의 이야기를 듣기</strong></p>
+<p class="tt"><strong>사람들의 이야기를 듣는 4가지 방법</strong></p>
+<div class="tw"><table class="c3 long">
+<thead><tr><th>방법</th><th>내용</th><th>한계</th></tr></thead><tbody>
+<tr><td data-label="방법">주요정보제공자</td><td data-label="내용">서비스 제공자, 지역사회 여론 주도층, 주요 정보를 가진 사람들에게 의견을 듣고 자문을 구함. 주민들로부터 들은 이야기가 많을 것이라는 점을 활용함</td><td data-label="한계">주관적 요소가 있고 모집단 대표의 어려움이 있음(여론주도층이 지역사회 주민 전체를 대표한다고 볼 수 없음)</td></tr>
+<tr><td data-label="방법">당사자와 당사자 조직</td><td data-label="내용">장애인 사업이라면 장애인이 모여 있는 곳이나 당사자 조직(단체, 협회)을 직접 찾아가 이야기를 들음. 매우 중요한 방법이라고 강조함</td><td data-label="한계">-</td></tr>
+<tr><td data-label="방법">공청회와 지역사회 포럼</td><td data-label="내용">일일이 찾아가기 어려우므로 지역사회 구성원의 다양한 의견을 자연스럽게 청취하는 방법</td><td data-label="한계">참석하는 사람이 정해져 있어 일부 소수 시민의 여론이 주도적으로 반영될 수 있고 주관적 정보 획득의 가능성이 있음</td></tr>
+<tr><td data-label="방법">초점집단 면접(FGI)</td><td data-label="내용">소수 참여자(보통 6명, 8명 정도)가 대화와 토론을 통해 욕구를 발견하게 하는 방법. 합의점과 공통된 내용을 이끌어내는 전문적인 방법임. 질문 문항 개발 → 대상자 선정 → 인터뷰 진행 → 분석과 결과 순으로 진행함</td><td data-label="한계">8명 이내 소수의 의견이라 전체를 대표하기 어려움. 진행자의 역할이 매우 중요함(질문과 답변을 이끌어내는 정도에 따라 욕구 파악이 달라짐)</td></tr>
+</tbody></table></div>
+<ul>
+<li>모든 조사와 자료수집 방법에는 장점과 단점이 함께 있다고 강조함.</li>
+</ul>
+<p class="sh"><strong>집단의 판단과 우선순위를 구조화하기</strong></p>
+<ul>
+<li>앞의 방법이 시민들의 이야기를 듣는 일반적인 과정이었다면, 이 방법들은 더 전문적인 방법임.</li>
+<li><strong>델파이 기법</strong> — 전문가로 패널을 구성해 주제에 대한 설문지를 배포하고, 조사팀이 결과를 1차로 분석함. 정리된 내용을 다시 전문가들에게 보내 의견을 묻는 과정을 만족스러운 결과를 얻을 때까지 반복하는 방법임. 보통 두세 번 이상은 잘 하지 않는데, 응답하는 사람들이 너무 힘들어지기 때문임. 교수님은 직접 실행한 적은 없고 지역사회 보건·의료 관련 델파이에 참여해 본 적이 있으며 2회로 끝났다고 함. 이런 기법이 있다는 정도로 이해하면 된다고 함.</li>
+<li><strong>명목집단기법</strong> — 소수의 집단이 모여 공동의 문제나 질문에 대해 각자 개별적으로 제안하고, 이후 제안을 공유하여 우선순위를 정하는 기법임. 토론만 하면 목소리가 큰 사람의 의견을 따라가기 쉬운 점을 보완함.</li>
+</ul>
+<p class="tt"><strong>명목집단기법 예시(5명이 모여 지역사회 문제의 우선순위를 정하는 경우)</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>단계</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="단계">1단계</td><td data-label="내용">5명이 각자 가장 문제라고 생각하는 것을 적음(예: 쓰레기 불법 투기, 빈곤 가구 증가, 미세먼지 증가, 주택 부족, 노숙자 증가)</td></tr>
+<tr><td data-label="단계">2단계</td><td data-label="내용">제안이 모두 나온 뒤, 각자 본인이 낸 것이 아니더라도 모든 문제에 대해 우선순위를 매김</td></tr>
+<tr><td data-label="단계">3단계</td><td data-label="내용">순위의 평균 점수를 내어 최종 순위를 구함. 예에서는 빈곤 가구 증가가 1순위로 나타나 이 문제부터 해결해 나가기로 함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>설문조사</strong></p>
+<ul>
+<li>조금 더 과학적이고 정확한 정보를 얻기에 적절한 방법임. 지역사회 주민 모두에게 실시할 수 있으며, 응답률이 낮을 수 있다는 단점은 있지만 가장 많은 사람에게 가장 객관적이고 과학적인 정보를 얻는 방법임.</li>
+<li>준비와 지원이 필요하지만 욕구를 가장 객관적으로 파악할 수 있는 방법이라고 함.</li>
+</ul>
+<p class="sh"><strong>수렴적 분석 및 다중접근방법</strong></p>
+<ul>
+<li>모든 방법에는 장단점이 있으므로 상황과 현실적 여건에 맞게 선택해야 함. 다만 한 가지만 쓰지 말고 여러 방법을 함께 써야 한다고 함.</li>
+<li><strong>수렴적 분석</strong> — 다양한 정보원을 활용하여 다양한 분석 전략과 관점으로 욕구를 확인하는 것임.</li>
+<li><strong>다중접근방법</strong> — 다양한 욕구조사 방법을 함께 사용하는 구체적인 방법임. 예: 지역사회 복지욕구조사에서 설문조사를 전체적으로 실시하고, FGI와 공청회를 하고, 인구센서스 데이터 같은 기존 자료를 살펴보고, 전문가에게 명목집단기법을 쓰는 것.</li>
+<li><strong>현실</strong> — 지자체처럼 큰 단위에서 예산을 투입하면 가능하지만 개인이 하기에는 쉽지 않을 수 있음. 그래도 가능하면 다중접근방법을 쓰는 것이 가장 정확하게 욕구를 파악하고 적절한 서비스와 정책을 만드는 데 효과적임.</li>
+</ul>
+<p class="sh"><strong>욕구조사의 방향(교수님의 당부)</strong></p>
+<ul>
+<li>욕구조사는 보통 개인에게 무엇이 부족한지를 찾는 것으로 설명하며 이것도 매우 중요함.</li>
+<li>그러나 환경과 제도에 무엇이 부족한지도 함께 찾는 과정으로 욕구조사가 이루어졌으면 좋겠다고 함. 개인에게 지원하면 해결된다는 관점이 아니라 환경, 구조, 사회제도의 부족을 함께 찾아야 하며, 앞으로 욕구조사에서 이 부분이 더 많은 비중을 차지해야 한다는 바람임.</li>
+</ul>
+<h3>5. 대담: 울산 중부노인복지관 김민희 관장</h3>
+<p class="sh"><strong>대담자 소개</strong></p>
+<ul>
+<li>김민희 관장은 울산 울주군 중부노인복지관 관장임. 장애인 단기보호센터 사회복지사로 시작해 종합사회복지관, 장애인복지관, 다문화가족지원센터를 거쳐 노인복지관에서 근무하며 현장 경력이 약 25년임.</li>
+</ul>
+<p class="sh"><strong>Q1. 지역 노인들의 욕구를 주로 어떤 방식으로 파악하는가</strong></p>
+<ul>
+<li><strong>설문조사</strong> — 구조화된 설문지를 사용함. 복지관 이용자 대상 욕구조사와 만족도 조사는 반기 또는 연 1회, 지역사회 어르신 대상 설문조사는 격년으로 함.</li>
+<li><strong>현장 대화</strong> — 설문지에 담지 못하는 욕구가 많아 어르신과 직접 대화하여 실질적인 욕구를 확인함.</li>
+<li><strong>운영위원회 이용자 대표</strong> — 사회복지사업법에 따라 구성하는 운영위원회에 이용자 대표가 참여함. 공식적인 경로로 의견을 수렴하여 공식적인 욕구를 확인함.</li>
+<li><strong>지역사회 네트워크</strong> — 어르신의 욕구와 별개로 정책적, 지역사회적으로 꼭 필요한 욕구는 네트워크 연계를 통해 거시적 흐름으로 파악함.</li>
+</ul>
+<p class="sh"><strong>Q2. 이용자가 원하는 것과 복지관이 판단한 필요가 다른 경우</strong></p>
+<ul>
+<li><strong>현장의 딜레마</strong> — 어르신은 표면적으로 드러나는 서비스를 원하는데, 기관은 예산 범위, 공간 확보, 모두 충족 가능한지 같은 현실적 기준을 확인해야 해서 갈등이 생김.</li>
+<li><strong>사회복지조사의 역할</strong> — 욕구조사 결과는 모든 서비스를 해 줄 수 없는 상황에서 우선순위를 판단하는 객관적 기준이 됨.</li>
+<li><strong>대안적 서비스 기획</strong> — 어르신이 원하는 서비스를 직접 해 줄 수 없을 때 외부 자원을 활용해 다른 쪽에서 예산을 확보하는 등 다른 서비스를 기획할 수 있음.</li>
+</ul>
+<p class="sh"><strong>Q3. 최근 지역 노인들에게 가장 많이 나타나는 욕구나 문제</strong></p>
+<ul>
+<li><strong>조사 맥락</strong> — 26년도 사업계획과 중장기 계획을 위해 복지관 이용자가 아닌 지역 어르신을 대상으로 욕구조사를 하여, 복지관이 생각하지 못한 욕구를 확인함.</li>
+<li><strong>건강·돌봄과 통합돌봄</strong> — 활동적인 시니어(Active Senior)가 늘어 건강 욕구가 많고, 올해 3월에 시작된 통합돌봄에 대한 욕구도 있음. 의료기관 확충은 복지관이 할 수 없는 부분이라 건강 관련 프로그램으로 대체함.</li>
+<li><strong>신노년층 유입에 따른 능동적 참여와 디지털 전환</strong> — 노인일자리 중 공익형보다 자신의 역량을 활용하는 사회서비스형을 원하는 욕구가 많음. 디지털은 스마트폰 배우기에서 AI 활용으로 욕구가 옮겨 가고 있음.</li>
+<li><strong>도농복합지역의 인프라 한계와 맞춤형 프로그램</strong> — 지역이 울산 전체 면적의 70%로 넓어 버스 등 교통이 불편함. 복지관은 셔틀버스 운행으로 반영하려 함. 젊은 노인이 많아 연령대에 맞는 프로그램 욕구도 많음.</li>
+<li><strong>교수님 언급</strong> — 지역사회 통합돌봄이 2026년부터 시작되어 돌봄에 대한 욕구는 점점 증가할 것 같으며, 복지관이 모든 욕구를 해결할 수 없는 안타까움이 있음.</li>
+</ul>
+<p class="sh"><strong>Q4. 지원 우선순위를 정하는 기준</strong></p>
+<ul>
+<li><strong>생명 및 안전망 확보 최우선(긴급성, 심각성)</strong> — 어르신 안전과 관련된 서비스를 가장 긴급하게 봄. 예: 노래교실 인원 증원 욕구가 가장 많아도 안전 관련 서비스가 필요하면 욕구가 적더라도 그쪽에 먼저 배분함.</li>
+<li><strong>파급 효과에 기반한 전략적 예산 배분(효과성 기준)</strong> — 사업계획서에서 정량(인원 수)과 정성(전후 비교로 본 변화) 중 고민하며, 적은 인원이라도 얼마나 변화했는지에 초점을 맞춤.</li>
+<li><strong>데이터 기반 외부 자원의 적극 확보</strong> — 우선순위에서 제외되었으나 꼭 필요한 욕구는 외부 자원을 확보해 장기적으로 충족하려 함.</li>
+<li><strong>결과 공유를 통한 민주적 합의 도출</strong> — 왜 내가 원하는 것이 아닌 것이 우선되느냐는 어르신의 의문에 대해 SNS, 게시판, 홈페이지로 우선순위에서 제외된 이유를 공개함.</li>
+<li><strong>교수님 평가</strong> — 필요와 욕구의 간극이 현장에서 그대로 드러나므로 이유를 공유하고 소통하며 합의해 나가는 과정이 매우 중요함.</li>
+</ul>
+<p class="sh"><strong>Q5. 욕구조사가 실제 사업 변화로 이어진 사례</strong></p>
+<ul>
+<li><strong>사례</strong> — 복지관이 작년에 개관했는데 준비 기간이 짧아 다른 기관을 벤치마킹하여 규칙을 정함. 어르신의 욕구조사 결과가 아니어서 문제가 생김. 예: 자율이용실을 하루 1회, 50분으로 제한했더니 너무 짧다는 의견이 나옴.</li>
+<li><strong>과정</strong> — 민원이 강하다고 무조건 받아들이지 않고, 많은 어르신이 원하는지 확인하기 위해 욕구조사를 하겠다고 안내하고 공론화함. 처음으로 QR코드 설문을 도입해 많은 어르신이 참여함.</li>
+<li><strong>결과</strong> — 어르신들이 원하는 규칙을 새로 만들었고 다수결로 확정함. 이후 변경 여부를 다시 묻자 어르신들이 인정함. 모두가 100% 만족하는 결과는 아니어서 분기 또는 반기마다 욕구조사를 해 달라는 요청이 있었고, 그 기준을 정해 실시하려 함.</li>
+<li><strong>의미</strong> — 어르신들이 의견이 반영되어 실제로 변화한다는 인식을 가지게 된 것이 가장 기억에 남는다고 함. 자율이용실은 평생교육 프로그램을 듣지 못하는 이용자가 탁구, 당구, 스크린파크골프, 바둑·장기실을 조건 없이 이용하는 공간임(등록 회원은 약 4,300명).</li>
+</ul>
+<p class="sh"><strong>Q6. 노인이 조사대상이 아니라 의사결정에 참여하도록 하기 위한 노력</strong></p>
+<ul>
+<li><strong>문제의식</strong> — 기관이 원하는 대로 설문을 만들면 질문 의도에 따라 답이 나올 수 있음.</li>
+<li><strong>이용자 대표 참여와 QR코드 조사 도입</strong> — 운영위원회 이용자 대표나 라포가 형성된 분들에게 설문 문항에 대한 의견을 듣고, 종이 설문의 가독성 문제로 QR코드 방식을 적용함. 범서 지역은 젊은 도시라 QR코드 참여율이 종이보다 높음.</li>
+<li><strong>본 조사 이전 테스트를 통한 타당성 확보</strong> — 한 페이지에 보이는 문항 수 등을 몇몇 어르신에게 미리 시험해 봄.</li>
+<li><strong>데이터의 투명한 환류를 통한 의사결정 공감대 형성</strong> — 결과를 투명하게 공개하여 신뢰를 형성함.</li>
+</ul>
+<p class="sh"><strong>Q7. 좋은 욕구조사란</strong></p>
+<ul>
+<li><strong>표면적 욕구 이면의 진짜 속마음(needs) 발견</strong> — 예를 들어 노래교실 정원을 늘려 달라는 요구가 사실은 어딘가에 소속되고 싶은 마음일 수 있음. 이 경우 비슷한 다른 프로그램으로 대체할 수 있음.</li>
+<li><strong>합리적 거절과 설득을 위한 객관적 데이터</strong> — 강성 민원에 무조건 안 된다고 할 수 없으므로 거절의 근거가 되는 데이터를 만들기 위해 욕구조사가 필요함.</li>
+<li><strong>조사과정 자체가 대화와 신뢰</strong> — 요구를 바로 반영하지 못해도 이 과정이 서로 신뢰를 쌓아 가는 조사가 좋은 욕구조사라고 함.</li>
+<li><strong>교수님 정리</strong> — 표면적 욕구 이면의 진짜 필요를 발견해야 복지관이 그에 맞는 프로그램을 만들 수 있음.</li>
+</ul>
+<p class="sh"><strong>Q8. 수업을 듣는 학생들에게 하고 싶은 이야기</strong></p>
+<ul>
+<li><strong>해결사가 아닌 든든한 짝꿍(동반자)</strong> — 신입 때는 열정으로 문제를 당장 해결하려 했으나, 사회복지사는 문제를 해결하는 해결사가 아니라 옆에서 함께 있어 주는 동반자의 역할을 해야 함.</li>
+<li><strong>행정편의주의 사회복지사가 되지 않도록</strong> — 오래 일하다 보면 서류에 파묻혀 행정을 먼저 생각하게 되는데, 지금의 배움이 이를 막아 줄 것임. 행정이 아니라 대상자 중심, 당사자 입장에서 생각하는 사회복지사가 되길 바람.</li>
+<li>관행에 타협하지 말고 당사자의 입장에서 씩씩하게 질문하라는 당부로 마무리함.</li>
+</ul>
+<p class="sh"><strong>12강 정리</strong></p>
+<ul>
+<li><strong>욕구조사</strong> — 지역주민과 당사자의 생활문제와 필요한 지원을 파악해 정책, 서비스, 프로그램의 우선순위를 결정하기 위한 조사임. 현재 상태와 바람직한 상태의 차이를 파악하는 조사이기도 함.</li>
+<li><strong>욕구의 4가지 유형</strong> — 규범적 욕구(전문가), 인식된 욕구(당사자가 느낌), 표출적 욕구(행동으로 나타남), 비교욕구(다른 지역·집단과 비교). 표출적 욕구가 없다고 욕구가 없는 것은 아님.</li>
+<li><strong>욕구조사 내용 5가지</strong> — 인구학적 특성, 문제, 서비스, 결핍, 지역사회 자원.</li>
+<li><strong>자료수집 방법</strong> — 이미 있는 자료, 사람들의 이야기 듣기(주요정보제공자, 당사자 및 당사자 조직, 공청회·지역사회 포럼, FGI), 집단의 판단 구조화(델파이 기법, 명목집단기법), 설문조사. 장단점이 있으므로 수렴적 분석과 다중접근방법을 사용함.</li>
+<li><strong>현장 시사점</strong> — 표면적 욕구 이면의 진짜 필요를 찾고, 결과를 투명하게 공유하며 신뢰를 쌓는 것이 중요함. 욕구조사는 환경과 제도의 부족도 함께 찾아야 함.</li>
+<li><strong>다음 시간(13강)</strong> — 질적 연구방법을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l13"><header class="lh"><span class="no">13강</span><h2>질적 연구방법</h2></header><div class="ct">
+<h3>1. 13강의 위치와 질적 연구의 의미</h3>
+<p class="sh"><strong>13강의 구성과 위치</strong></p>
+<ul>
+<li><strong>위치</strong> — 지금까지 다룬 표본추출, 자료분석, 욕구조사 등은 대부분 양적 연구방법에서 많이 쓰이는 내용이었음. 13강과 14강은 질적 연구방법을 다룸.</li>
+<li><strong>구성</strong> — 질적 연구방법의 개요, 질적 연구의 주요 유형 두 부분으로 나누어 살펴봄.</li>
+</ul>
+<p class="sh"><strong>양적 연구와 질적 연구는 연구 질문이 다름(사례: 독거노인의 사회적 고립)</strong></p>
+<ul>
+<li><strong>양적 연구의 질문</strong> — 독거노인의 사회적 고립 수준은 어느 정도인가, 사회적 고립과 우울은 관계가 있는가, 고립에 영향을 미치는 요인은 무엇인가 등임. 점수, 빈도, 관계, 측정 등 결과값이 나오는 질문임.</li>
+<li><strong>질적 연구의 질문</strong> — 독거노인이 경험하는 '혼자 산다는 것'은 어떤 의미인가, 사회적으로 고립되어 가는 과정에서 어떤 경험을 하는가 등임. 의미와 경험을 묻는 질문임.</li>
+<li>설문조사로도 일부는 알 수 있으나 의미와 경험을 구체적으로 알기는 어려우므로 이런 질문은 양적 연구로 다루기 어려움.</li>
+<li><strong>정리</strong> — 양적 연구는 '얼마나 되는가, 서로 얼마나 다른가, 어떤 관계가 있는가'를 묻고, 질적 연구는 '어떻게 경험하는가, 왜 그렇게 되는가, 어떤 의미인가'를 물음. 연구 질문에 따라 연구방법이 달라짐.</li>
+</ul>
+<h3>2. 질적 연구방법의 개요</h3>
+<p class="sh"><strong>질적 연구방법의 발전 과정</strong></p>
+<ul>
+<li><strong>문화인류학(민속지학)</strong> — 가장 먼저 시작한 학문임. 서양인과 비서양인의 문명 차이와 경험의 차이를 조사하면서 발전하기 시작함.</li>
+<li><strong>사회학</strong> — 근거이론 등 질적 연구방법에 관심을 가졌고, 전문가가 스스로를 성찰하는 자기반영적·비판적 패러다임으로 발전함.</li>
+<li><strong>1980년대</strong> — 질적 연구가 인문과학의 접근방법(회고록, 수필, 관념적 논문 등)을 수용함.</li>
+<li><strong>이후</strong> — 교육학, 간호학, 심리학, 사회복지학 등 여러 학문 분야가 질적 연구방법을 탐구 과정으로 받아들이면서 체계화되고 확대됨.</li>
+<li>방송대 사회복지학과에서는 석사논문을 쓰는 학생 대부분이 질적 연구방법을 사용하고 있음. 반드시 그래야 하는 것은 아니나 학과의 지향과 가치를 볼 때 질적 연구를 축적하는 것이 필요하다고 판단함.</li>
+</ul>
+<p class="sh"><strong>질적 연구방법의 특성(세 가지)</strong></p>
+<ul>
+<li><strong>연구자 자신이 중요한 연구도구임</strong> — 설문지가 아니라 연구자가 직접 인터뷰함. 따라서 자신의 관점이 연구에 미치는 영향을 계속 성찰해야 함.</li>
+<li>통계적 대표성보다 연구주제에 적합하고 풍부한 경험을 가진 참여자를 표본으로 선정함: 보통 6~7명 정도로 인원이 많지 않아도 됨.</li>
+<li>자료에서 의미와 패턴을 발견하는 귀납적·해석적 접근을 주로 사용함: 인터뷰를 녹음해 전사한 뒤, 말한 단어나 반복되는 문장의 의미를 연구자가 해석함.</li>
+<li>연구자가 도구이므로 주관적일 수 있고, 6명 정도의 이야기라서 모든 사람에게 적용되는지(일반화)는 한계가 됨.</li>
+</ul>
+<p class="sh"><strong>질적 연구와 양적 연구의 비교</strong></p>
+<p class="tt"><strong>질적 연구와 양적 연구의 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>질적 연구</th><th>양적 연구</th></tr></thead><tbody>
+<tr><td data-label="구분">인과관계</td><td data-label="질적 연구">분석할 수는 있으나 변수 간 인과효과를 추정하는 것이 목적은 아님</td><td data-label="양적 연구">원인이 결과에 시간적으로 선행하거나 동시에 일어나는 인과관계를 분명히 봄(영향요인, 변수 간 관계)</td></tr>
+<tr><td data-label="구분">연구 목적</td><td data-label="질적 연구">특정 현상에 대한 이해</td><td data-label="양적 연구">일반적인 원리나 법칙을 발견하고 인과관계·상관관계를 파악함</td></tr>
+<tr><td data-label="구분">연구 대상</td><td data-label="질적 연구">적은 수의 표본(대개 10명 이하)</td><td data-label="양적 연구">대표성 있는 많은 수의 표본일수록 좋음</td></tr>
+<tr><td data-label="구분">연구자와 대상자의 관계</td><td data-label="질적 연구">연구자의 위치와 해석을 명시적으로 성찰함</td><td data-label="양적 연구">표준화된 절차로 연구자의 영향을 줄이려 함</td></tr>
+<tr><td data-label="구분">자료 수집</td><td data-label="질적 연구">비구조화된 자료 수집(열린 질문)</td><td data-label="양적 연구">구조화된 설문 문항</td></tr>
+<tr><td data-label="구분">자료 분석</td><td data-label="질적 연구">질적 분석 기법 또는 기술통계</td><td data-label="양적 연구">기술통계, 추리통계 등 통계적 분석(11강 내용)</td></tr>
+<tr><td data-label="구분">일반화</td><td data-label="질적 연구">어려움(맥락적 이해가 더 중요함)</td><td data-label="양적 연구">제한적으로 가능함(표집을 하지만 질적 연구보다 가능성이 큼)</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>일반화</strong> — 양적 연구도 전체 인구를 조사하는 것은 아니므로 '제한적으로 가능하다'고 표현함. 일반화가 안 된다는 뜻은 아님.</li>
+</ul>
+<h3>3. 질적 연구방법이 필요한 경우</h3>
+<p class="sh"><strong>질적 연구가 필요한 경우</strong></p>
+<ul>
+<li><strong>잘 알려지지 않은 주제를 탐색할 때</strong> — 예로 남동생이 발달장애인이고 누나가 주 양육자인 경우의 경험을 밝힌 박사논문이 있음. 양적 연구로는 이들의 심층적 경험을 알아내기 어려움.</li>
+<li><strong>민감하거나 정서적 깊이가 있는 주제일 때</strong> — 홈리스, 범죄집단, 마약 중독 등은 많은 표본이 필요한 양적 분석을 하기 어려움.</li>
+<li>살아 있는 경험을 이해하고 삶의 의미를 도출하려 할 때: 설문지로는 알 수 없는 생생한 경험을 다룸.</li>
+<li>프로그램, 정책, 기관의 내면을 탐구·평가하려 할 때: 만족도 같은 수치가 아니라 프로그램의 이면을 살핌.</li>
+<li>양적 조사로는 잘 보이지 않는 것을 발견하려 할 때(양적 연구 보완): 아래 사례 참고.</li>
+</ul>
+<p class="sh"><strong>사례: 장애인활동지원서비스 만족도 조사</strong></p>
+<ul>
+<li>5점 척도 설문 결과 평균 만족도가 4.1로 나왔다고 해도 그 4.1이 어떤 의미인지, 어떤 부분이 만족스럽고 불만족스럽고 힘들었는지는 알 수 없음. 이때 질적 연구가 필요해짐.</li>
+</ul>
+<p class="sh"><strong>혼합연구방법과 연구방법 선택</strong></p>
+<ul>
+<li>양적 연구와 질적 연구를 함께 하는 혼합연구방법이 있음. 기관 단위 연구에서는 많이 쓰이나 개인 연구자가 하기는 쉽지 않음. 둘을 함께 하면 결과를 풍부하게 도출할 수 있는 장점이 있음.</li>
+<li>어떤 방법이 더 좋거나 나쁜 것은 없음. 연구 질문에 따라 선택하며, 양적 연구와 질적 연구 모두 필요함.</li>
+</ul>
+<h3>4. 질적 연구의 주요 유형(다섯 가지)</h3>
+<p class="sh"><strong>다섯 가지 유형과 핵심 질문</strong></p>
+<p class="tt"><strong>질적 연구의 5가지 유형 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>유형</th><th>핵심 질문</th><th>선택하는 경우</th></tr></thead><tbody>
+<tr><td data-label="유형">사례연구(case study)</td><td data-label="핵심 질문">이 사례에서는 무슨 일이 일어나고 있는가, 그 일의 의미는 무엇인가</td><td data-label="선택하는 경우">단일 사례나 여러 사례에 대해 깊은 이해를 제공하려 할 때</td></tr>
+<tr><td data-label="유형">근거이론연구(grounded theory study)</td><td data-label="핵심 질문">이 현상은 어떤 과정을 거쳐 일어나는가</td><td data-label="선택하는 경우">연구 참여자의 관점에서 현장 자료를 근거로 이론을 개발하려 할 때</td></tr>
+<tr><td data-label="유형">현상학적 연구(phenomenology study)</td><td data-label="핵심 질문">이 경험의 본질과 의미는 무엇인가</td><td data-label="선택하는 경우">체험한 현상의 본질을 기술하려 할 때</td></tr>
+<tr><td data-label="유형">내러티브 연구(narrative study)</td><td data-label="핵심 질문">한 사람의 삶은 어떤 이야기로 구성되어 있는가</td><td data-label="선택하는 경우">개인적 경험에 대한 이야기, 개인의 인생을 탐색할 때</td></tr>
+<tr><td data-label="유형">문화기술지 연구(민속지학 연구, ethnography study)</td><td data-label="핵심 질문">이 집단은 어떤 문화와 규칙을 공유하고 있는가</td><td data-label="선택하는 경우">공유된 문화의 패턴을 기술하고 해석하려 할 때</td></tr>
+</tbody></table></div>
+<ul>
+<li>질적 연구도 연구 질문에 따라 유형을 선택함. 세부적으로는 더 나뉘지만 일반적으로 다섯 가지로 구분함.</li>
+</ul>
+<p class="sh"><strong>사례연구(case study)</strong></p>
+<ul>
+<li><strong>정의</strong> — 개인, 집단, 조직 등 소수 사례를 깊이 있게 조사하는 방법임. 사회복지조사에서 가장 많이 활용되는 방법임.</li>
+<li><strong>사례의 경계</strong> — 연구하려는 사례의 경계가 비교적 명확해야 함. 예: 방송대 사회복지조사론 수강생 중 몇 명을 조사한다면, 조사론 수강생이라는 경계가 분명해야 하며 다른 과목 수강생이 섞이면 안 됨.</li>
+<li>무엇을 하나의 사례로 볼 것인가가 중요함. '방송대 학생'은 사례로 보기에 너무 넓을 수 있어 사례를 좁혀 보는 논의가 필요함.</li>
+<li><strong>절차</strong> — 특정 개인·집단을 대상으로 조사 문제 선정 → 여러 형태의 자료 수집 → 사례 서술과 조사 문제 분석 → 상황·조직의 맥락을 고려한 사례 분석.</li>
+</ul>
+<p class="sh"><strong>근거이론연구(grounded theory study)</strong></p>
+<ul>
+<li><strong>정의</strong> — 자료를 바탕으로, 어떤 일이 어떻게 진행되는지를 설명하는 이론을 만들어 가는 연구임. 양적 연구는 이론을 바탕으로 설문을 만들어 현장에서 확인하지만, 근거이론은 이론 없이 조사·분석하면서 새로운 이론을 만들어 냄.</li>
+<li><strong>예</strong> — 장애인이 시설에서 나와 지역사회에 정착하는 과정. 일반 사례연구가 '탈시설 경험이 어땠는가'를 묻는다면, 근거이론은 결심, 준비, 초기 정착, 어려움, 새로운 관계 형성, 정착으로 이어지는 과정을 보고 이를 설명하는 이론을 정리함.</li>
+<li>석사논문에서는 많이 쓰지 않고 박사논문에서 많이 활용하는 편임.</li>
+<li><strong>절차</strong> — 새로운 설명이 필요한 조사 문제 선정 → 경험자 표본 선정 → 면접으로 자료 수집 → 코딩 → 이론 제시.</li>
+<li><strong>표본 선정의 특징</strong> — 앞서 수집한 자료의 분석에서 새로운 사실이 더 이상 나오지 않을 때까지 표본을 선정함. 처음부터 인원을 정하지 않는다는 점이 사례연구와 다름(예: 8명까지 하다 보니 내용이 반복되면 중단함).</li>
+<li><strong>코딩</strong> — 수집된 데이터(인터뷰 자료) 속에서 의미 있는 정보를 발견해 범주로 묶고, 범주 사이의 유사점과 차이점을 확인해 주제로 통합하는 과정임. 데이터 → 범주 1, 2, 3 … → 주제 1, 2 순으로 정리함.</li>
+<li>같은 연구를 해도 연구자마다 범주를 묶는 방식과 주제가 달라질 수 있음. 지도와 피드백을 받고 선행 논문을 살피며 반복해 경험을 쌓아야 함.</li>
+</ul>
+<p class="sh"><strong>현상학적 연구(phenomenology study)</strong></p>
+<ul>
+<li><strong>정의</strong> — 여러 사람이 같은 현상을 경험하면서 공통적으로 느끼고 의미화하는 것이 무엇인지 찾는 연구임. 경험의 의미를 밝힘.</li>
+<li><strong>판단중지(에포케)와 괄호치기</strong> — 연구자가 가진 편견과 선입견을 두지 않고, 경험한 사람의 이야기만으로 의미를 분석·해석하는 것임. 괄호치기는 판단중지의 실행 방법으로, 연구자의 주관적 개입이 분석 과정에 들어가지 않게 하는 것임. 모든 질적 연구에 필요하지만 현상학에서 특히 중요함.</li>
+<li><strong>사례 1</strong> — 발달장애 남동생을 돌보는 누나들의 경험 연구. '힘들 것'이라는 선입견으로 '힘드시죠?'라고 묻지 않고 어떤 경험을 했는지를 물음. 결과적으로 모든 누나가 좌절과 고통 속에 사는 것은 아니었음(일반화할 수는 없음).</li>
+<li><strong>사례 2</strong> — 방송대 사회복지학과 석사논문으로, 선배시민협회 활동가 5명 정도를 인터뷰해 활동 경험의 의미와 본질을 밝힘.</li>
+<li><strong>연구 질문 예</strong> — 중도장애인이 처음 휠체어를 사용하게 되는 경험은 어떤 것인가. 몸을 경험하는 방식, 공간을 경험하는 방식, 타인의 시선을 경험하는 방식, 독립과 의존을 다시 생각하는 방식 등을 볼 수 있음.</li>
+<li><strong>절차</strong> — 현상의 의미에 대한 조사 문제 선정 → 면접으로 자료 수집 → 절차에 따라 면접 내용 분석 → 중요한 서술을 의미 단위로 축약 → 참여자 경험의 핵심 의미를 정리·서술.</li>
+<li>분석 기법은 따로 배워야 하며, 인터뷰 내용에서 의미 있는 단어와 문장을 잘라 묶고 배치하며 의미 단위로 축약하는 방식이 소개됨.</li>
+</ul>
+<p class="sh"><strong>내러티브 연구(narrative study)</strong></p>
+<ul>
+<li><strong>정의</strong> — 한 사람의 경험이 시간의 흐름 속에서 어떤 이야기로 구성되는지를 탐구하는 연구임. 생애사, 구술사 연구가 이에 해당함.</li>
+<li><strong>예</strong> — 중도장애를 입은 사람의 삶을 순서대로 따라감(장애 이전 → 사고 → 재활 → 가족관계 변화 → 직업복귀 → 장애인운동 참여).</li>
+<li><strong>절차</strong> — 연구 대상과 문제 선정 → 현장에 들어가 현장 텍스트 수집 → 현장 텍스트를 연구 텍스트로 전환 → 연구 텍스트로 구성.</li>
+<li><strong>현상학과 내러티브의 차이</strong> — 현상학은 여러 사람에게 공통된 경험의 의미를 몇 가지로 도출하고, 내러티브는 보통 한 사람의 삶이 이어져 온 이야기의 흐름을 서술함.</li>
+</ul>
+<p class="sh"><strong>문화기술지 연구(민속지학 연구, ethnography study)</strong></p>
+<ul>
+<li><strong>정의</strong> — 집단 안으로 들어가 함께 지내면서 그들만의 규칙과 문화를 이해하는 연구임.</li>
+<li><strong>예</strong> — 홈리스 당사자가 있는 곳에 들어가 관찰하고 이야기를 나누며 그들의 문화와 규칙을 살핌.</li>
+<li><strong>절차</strong> — 연구 대상 집단 선정 → 집단으로 진입 → 참여관찰, 심층면접조사, 촬영 등으로 자료 수집 → 패턴 찾기, 내용분석, 통계 등으로 자료 분석 → 결과보고서 작성. 문화적 사건과 장면에 대한 상세한 기술이 들어가는 것이 특징임.</li>
+<li>14강에 나올 석사 논문(홈리스 활동의 의미 재구성)은 문화기술지를 고민했으나, 집단에 들어가 함께 생활해야 하므로 사례연구로 진행했음.</li>
+<li>모든 질적 연구의 절차는 전체적으로 유사한 방향으로 진행되나 유형마다 분석 기법에 차이가 있음.</li>
+</ul>
+<h3>5. 연구 질문에 따른 유형 선택(사례: 홈리스)</h3>
+<p class="sh"><strong>같은 주제도 질문에 따라 연구방법이 달라짐</strong></p>
+<p class="tt"><strong>'홈리스' 주제의 연구 질문과 연구방법</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>연구 질문</th><th>연구방법</th></tr></thead><tbody>
+<tr><td data-label="연구 질문">A지역 홈리스 야학은 어떻게 운영되고 어떤 의미를 갖는가?</td><td data-label="연구방법">사례연구</td></tr>
+<tr><td data-label="연구 질문">홈리스 당사자가 활동가가 되어 가는 과정은 어떻게 이루어지는가?</td><td data-label="연구방법">근거이론연구(코딩)</td></tr>
+<tr><td data-label="연구 질문">거리에서 살아간다는 경험은 당사자에게 어떤 의미인가?</td><td data-label="연구방법">현상학적 연구</td></tr>
+<tr><td data-label="연구 질문">한 홈리스 당사자의 거리생활과 시민활동의 삶은 어떻게 이어져 왔는가?</td><td data-label="연구방법">내러티브 연구</td></tr>
+<tr><td data-label="연구 질문">거리 홈리스 공동체에는 어떤 관계·규칙·문화가 형성되어 있는가?</td><td data-label="연구방법">문화기술지 연구</td></tr>
+</tbody></table></div>
+<ul>
+<li>연구 방법은 연구 질문과 관심에 따라 선택하되, 내가 수행할 수 있는 방법이어야 함(전혀 모르는 방법은 공부 없이 시작하기 어려움).</li>
+</ul>
+<h3>6. 13강 정리</h3>
+<p class="sh"><strong>13강 정리</strong></p>
+<ul>
+<li>질적 연구는 경험, 과정, 의미를 이해하는 연구이며, 연구자가 연구도구이고 소수의 풍부한 경험 참여자를 선정하며 귀납적·해석적으로 접근함.</li>
+<li>양적 연구와 질적 연구는 연구 질문의 차이이며 우열이 없음. 탐색적 주제, 민감한 주제, 생생한 경험, 양적 조사 보완이 필요할 때 질적 연구를 함.</li>
+<li>질적 연구의 유형은 사례연구, 근거이론연구, 현상학적 연구, 내러티브 연구, 문화기술지 연구 다섯 가지이며 연구 질문에 따라 선택함.</li>
+<li><strong>다음 시간(14강)</strong> — 질적 연구방법의 실제를 다룸. 구체적인 수행 방법과 고려할 점을 살펴보고, 실제 석사논문을 쓴 분을 모시고 어려웠던 점과 논문 작성 조언을 듣는 대담을 함.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l14"><header class="lh"><span class="no">14강</span><h2>질적 연구방법의 실제</h2></header><div class="ct">
+<h3>1. 14강의 위치와 구성</h3>
+<p class="sh"><strong>14강의 위치</strong></p>
+<ul>
+<li>13강에서 질적 연구를 시작했으므로 14강에서는 질적 연구가 실제로 어떻게 진행되는지 구체적인 과정과 사례를 살펴봄.</li>
+<li><strong>질적 연구와 양적 연구의 차이</strong> — 13강에서 비교한 내용을 염두에 두고 사례를 따라가며 과정을 이해하도록 함.</li>
+</ul>
+<p class="sh"><strong>14강의 구성</strong></p>
+<ul>
+<li>질적 연구의 과정, 질적 연구의 고려사항, 질적 연구 사례(대담) 순서로 진행함.</li>
+<li>대담은 질적 연구를 직접 수행한 박내현 홈리스행동 인권지킴이 활동가와 함께 진행함.</li>
+</ul>
+<p class="sh"><strong>도입 예시: 사회적으로 고립된 청년을 우리는 얼마나 알고 있을까?</strong></p>
+<ul>
+<li><strong>양적 연구</strong> — 우리 사회에서 몇 명 정도가 고립되었는지, 고립된 청년은 주로 무엇을 하는지처럼 많은 대상을 조사해 전체 규모와 경향을 파악함.</li>
+<li><strong>질적 연구</strong> — 개인이 느끼는 고립의 상황과 고립의 과정을 구체적으로 알고 싶다는 궁금증에서 시작함. 양적 연구로 풀리지 않는 부분을 해소하기 위해 질적 연구를 함.</li>
+</ul>
+<h3>2. 질적 연구의 과정</h3>
+<p class="sh"><strong>전체 흐름</strong></p>
+<ul>
+<li>질적 연구도 양적 연구와 흐름은 유사함. 연구문제 → 자료수집 → 분석으로 이어지되 각 단계의 구체적인 내용이 다름.</li>
+</ul>
+<p class="tt"><strong>질적 연구의 6단계와 핵심 질문</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>단계</th><th>핵심 질문</th><th>고립 청년 연구 예시</th></tr></thead><tbody>
+<tr><td data-label="단계">01 연구문제 형성</td><td data-label="핵심 질문">무엇을 알고 싶은가</td><td data-label="고립 청년 연구 예시">고립 청년의 경험과 의미</td></tr>
+<tr><td data-label="단계">02 연구설계</td><td data-label="핵심 질문">어떻게 연구할 것인가</td><td data-label="고립 청년 연구 예시">연구 목적에 적합한 질적 방법을 선택함</td></tr>
+<tr><td data-label="단계">03 표집: 연구참여자 선정</td><td data-label="핵심 질문">누구를 연구할 것인가</td><td data-label="고립 청년 연구 예시">다양한 고립 경험을 가진 청년을 선정함</td></tr>
+<tr><td data-label="단계">04 자료수집</td><td data-label="핵심 질문">경험을 어떻게 수집할 것인가</td><td data-label="고립 청년 연구 예시">심층면접, 기록 등을 통해 수집함</td></tr>
+<tr><td data-label="단계">05 자료분류 및 코드화</td><td data-label="핵심 질문">자료에서 어떤 의미가 드러나는가</td><td data-label="고립 청년 연구 예시">고립 경험과 관련된 코드와 주제를 구성함</td></tr>
+<tr><td data-label="단계">06 분석과 설명</td><td data-label="핵심 질문">무엇을 새롭게 이해했는가</td><td data-label="고립 청년 연구 예시">고립 경험의 의미와 사회적 맥락을 해석하고, 필요한 정책과 제도까지 제시함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>1단계 연구문제 형성</strong></p>
+<ul>
+<li>무엇을 알고 싶은가에서 연구문제가 결정되고 연구가 시작됨.</li>
+<li><strong>예</strong> — 사회적으로 고립된 청년은 어떤 과정을 거쳐 고립을 경험하며, 그 경험에 어떤 의미를 부여할 수 있는가.</li>
+</ul>
+<p class="sh"><strong>2단계 연구설계</strong></p>
+<ul>
+<li>연구문제를 어떤 방법으로 연구하고 어떻게 자료를 수집할지 정하는 단계임. 연구 목적에 적합한 질적 연구방법을 선택함.</li>
+<li><strong>방법 선택</strong> — 지난 시간에 배운 사례연구, 현상학, 근거이론, 문화기술지 중 연구 질문에 맞는 것을 고름. 처음 연구할 때는 방법 선택이 쉽지 않음.</li>
+<li><strong>선택의 도움</strong> — 이론 공부, 슈퍼비전, 논문 지도교수, 선배의 조언, 비슷한 궁금증을 다룬 다른 연구가 어떤 방법을 썼는지 살펴봄.</li>
+<li><strong>이 단계에서 정하는 것</strong> — 연구참여자 선정 방식(눈덩이 표집처럼 할지, 관련 전문기관에 추천을 부탁할지), 자료수집 방법, 자료분석 방법, 연구윤리 계획임.</li>
+<li>자료분석 방법은 선택한 방법에 따라 달라짐. 현상학이면 현상학에 맞는 방법, 근거이론이면 근거이론에 맞는 방법이 나옴.</li>
+<li><strong>연구윤리 계획</strong> — 연구윤리 교육 이수(예: 2시간 정도의 강의)를 해야 논문을 제출할 수 있는 학술지도 많아짐.</li>
+</ul>
+<p class="sh"><strong>3단계 표집(연구참여자 선정)</strong></p>
+<ul>
+<li>구체적으로 누구의 경험을 들을지 정하는 단계임.</li>
+<li><strong>인원</strong> — 정해진 답은 없으나 보통 10명 이내이고, 6~7명 정도를 선정하는 경우가 많음. 반드시 5명이 넘어야 한다는 기준도 없음.</li>
+<li>인원수만큼 중요한 것은 누구를 왜 연구참여자로 선정했는가임. 연구 목적과 연구문제를 해결하는 데 적정한 사람인지 봄.</li>
+<li><strong>다양성 고려</strong> — 모두 남성이 되는 것처럼 한쪽으로 치우치지 않도록 성별, 나이 등을 고려함.</li>
+</ul>
+<p class="sh"><strong>4단계 자료수집</strong></p>
+<ul>
+<li>참여자의 경험을 이해하는 과정으로, 시간이 많이 듦. 참여자의 언어와 행동(인터뷰), 현장의 상황과 맥락, 관련 기록을 연구 목적에 따라 체계적으로 수집하고 기록함.</li>
+<li><strong>녹취</strong> — 보통 인터뷰를 녹취하고, 분석 단계에서 녹취 내용을 계속 다시 듣고 해석함.</li>
+<li><strong>열린 질문</strong> — 양적 조사는 설문지가 미리 정해져 있으나 질적 연구는 열려 있음. 기준이 되는 핵심 질문만 미리 정하고, 참여자의 응답에 따라 추가 질문을 이어 감. 이는 연구자의 역량이 필요한 부분임.</li>
+<li><strong>질문 예</strong> — '하루를 보통 어떻게 보내십니까?' → '대부분 집에서 지냅니다.' → '언제부터 집에서 보내는 시간이 많아졌나요?', '그때 어떤 일이 있었나요?', '사람들을 만나지 않는 생활은 본인에게 어떤 의미인가요?'</li>
+</ul>
+<p class="sh"><strong>5단계 자료분류 및 코드화</strong></p>
+<ul>
+<li>수집한 이야기에서 어떤 의미를 발견할 것인가를 다루는 단계로 질적 연구에서 매우 중요함. 참여자의 말을 연구문제에 답할 수 있도록 의미화하여 구조화하는 과정이며 쉽지 않음.</li>
+<li><strong>순서</strong> — 원자료 → 코드 부여 → 범주 또는 잠정적 주제 구성임.</li>
+</ul>
+<p class="tt"><strong>원자료에서 주제까지의 예시</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>단계</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="단계">원자료</td><td data-label="내용">'취업에서 몇 번 실패하고 나니 친구들을 만나기 싫어졌어요. 다들 취직해서 잘 지내는 것 같은데 저만 뒤처진 것 같았어요. 그래서 집에서 지내게 됐고 점점 자신감도 희망도 없어졌어요.'</td></tr>
+<tr><td data-label="단계">코드 부여</td><td data-label="내용">반복된 취업실패 / 타인과의 비교 / 관계의 회피</td></tr>
+<tr><td data-label="단계">범주 또는 잠정적 주제</td><td data-label="내용">취업 실패 이후에 심화되는 사회적 위축</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>코드 부여</strong> — 원자료의 말을 의미 있는 단어나 문장으로 정리하는 것임.</li>
+<li><strong>범주</strong> — 하위 범주, 중간 범주, 큰 범주로 구분하기도 함. 한 사람의 이야기지만 8명 정도를 인터뷰했을 때 비슷하게 말하는 사람이 많으면 연구 결과의 큰 주제로 제시할 수 있음.</li>
+<li><strong>연구자마다 다름</strong> — 같은 문장에서 코드를 3개 부여할 수도, 2개나 4개를 부여할 수도 있음. 이런 점이 질적 연구가 더 어려운 부분임.</li>
+</ul>
+<p class="sh"><strong>6단계 분석과 설명</strong></p>
+<ul>
+<li>연구를 통해 무엇을 새롭게 이해하게 되었는지 기술하는 단계임.</li>
+<li>참여자들의 경험에서 드러나는 주요 의미는 무엇인가.</li>
+<li>참여자들의 경험은 어떻게 유사하고 어떻게 다른가. 같은 취업 실패를 겪어도 관계를 회피하는 사람이 있고 더 적극적으로 하려는 사람도 있음.</li>
+<li>그 경험을 기존 연구나 이론과 어떻게 연결해 이해할 수 있는가. 이론이 참여자의 말을 뒷받침해 주면 탄탄하게 수행된 연구로 평가할 수 있음.</li>
+<li>연구 결과가 사회복지 실천이나 정책에 어떤 시사점을 주는가. 예: 청년의 노동시장 참여 문제를 구조적으로 해결하는 정책 제안까지 제시하면 연구의 의미가 커짐.</li>
+</ul>
+<h3>3. 질적 연구의 고려사항</h3>
+<p class="sh"><strong>개요</strong></p>
+<ul>
+<li>조사윤리 등 앞에서 배운 기본 사항은 당연히 지켜야 하고, 질적 연구에서 특히 신경 쓸 세 가지로 연구의 엄격성, 윤리적 고려, 연구자의 자기 성찰을 다룸.</li>
+</ul>
+<p class="sh"><strong>1) 연구의 엄격성</strong></p>
+<ul>
+<li><strong>엄격성</strong> — 연구 결과를 얼마나 믿을 수 있는가를 뜻함. 연구자의 주장을 뒷받침하는 자료와 분석 과정이 얼마나 충실하고 설득력 있게 제시되는가임.</li>
+<li><strong>필요한 이유</strong> — 양적 연구는 설문 자료를 SPSS 같은 통계 프로그램으로 분석해 결과값이 딱 나오므로 객관적임. 질적 연구는 연구자가 코드를 부여하고 주제를 구성하므로 연구자마다 달라질 수 있어 신뢰성이 양적 연구보다 약한 편임. 그래도 이를 확보하려는 노력이 필요함.</li>
+</ul>
+<p class="tt"><strong>엄격성을 확보하는 방법</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>방법</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="방법">다원화</td><td data-label="내용">하나의 이론으로만 해석하지 않고 다양한 이론을 접목함. 질적 연구에 양적 연구를 추가하는 것처럼 다양한 방법을 쓰면 신뢰도가 높아질 수 있음</td></tr>
+<tr><td data-label="방법">전문가 점검</td><td data-label="내용">질적 연구 경험이 많은 전문가에게 해석, 코드 부여, 주제 선정이 타당한지 점검받음</td></tr>
+<tr><td data-label="방법">연구참여자 재확인</td><td data-label="내용">코드 부여와 분석 후 참여자에게 다시 연락하여 분석한 의미와 주제에 동의하는지, 그런 의미로 말한 것이 맞는지 확인함. 연구에 따라 실시함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>2) 윤리적 고려</strong></p>
+<ul>
+<li>질적 연구는 두세 시간 정도 대면하여 이야기하므로 연구참여자를 어떻게 보호할 것인가가 매우 중요함. 강조해도 지나치지 않음.</li>
+<li><strong>충분한 사전 설명</strong> — 연구가 왜 수행되고 어떤 목적인지 알림.</li>
+<li><strong>자발적 참여와 철회</strong> — 자발적으로 참여하는지 확인하고, 원치 않으면 언제든 그만둘 수 있음을 미리 알림.</li>
+<li><strong>개인정보와 비밀 보장</strong> — 철저히 지켜야 함.</li>
+<li><strong>참여자의 안전</strong> — 물리적 안전과 심리적 안전을 모두 포함함.</li>
+<li><strong>참여자에 대한 존중</strong> — 기본 사항임.</li>
+<li><strong>사례(교수님 질문)</strong> — 인터뷰 중 참여자가 아픈 과거를 이야기하다 울며 말을 잇지 못하면 연구자는 어떻게 해야 할까? 인터뷰를 잠시 중단하고, 너무 힘들면 더 이상 하지 않아도 괜찮다고 말해야 함. 이것이 참여자에 대한 윤리적 고려임.</li>
+</ul>
+<p class="sh"><strong>3) 연구자의 자기 성찰</strong></p>
+<ul>
+<li>연구자는 반드시 중립적이어야 한다고만 할 수 없음. 더 중요한 것은 자신의 관점이 연구에 어떤 영향을 미치는지 끊임없이 성찰하는 것임.</li>
+<li><strong>예</strong> — 사회복지에서는 개인이 아니라 구조의 문제라고 자주 말하지만, 연구자가 '모든 것이 구조의 문제'라는 관점을 강하게 갖고 참여자의 이야기를 대하는 것도 바람직한 태도가 아님.</li>
+<li>참여자의 이야기를 그대로 받아들여야 함. 연구자의 관점으로 유도질문을 하면 참여자가 그 방향으로만 이야기하게 되어 연구에 영향을 미침.</li>
+</ul>
+<h3>4. 질적 연구 사례: 박내현 활동가 대담</h3>
+<p class="sh"><strong>사례 소개</strong></p>
+<ul>
+<li>박내현 활동가는 홈리스행동에서 인권지킴이 활동을 하고 있음. 방송대 석사학위 논문 '홈리스 활동의 의미에 관한 재구성'(아랫마을 홈리스 사례 중심)을 쓴 경험을 나눔.</li>
+</ul>
+<p class="tt"><strong>대담 내용 정리(Q1~Q6)</strong></p>
+<div class="tw"><table class="c2 long">
+<thead><tr><th>질문</th><th>답변 요지</th></tr></thead><tbody>
+<tr><td data-label="질문">Q1. 왜 이 주제로 연구하게 되었나요?</td><td data-label="답변 요지">청소년 노동인권 교육 활동을 하며 '노동'의 의미를 고민함. 노동하는 사람의 권리는 이야기되지만 노동할 수 없는 사람의 권리는 상대적으로 이야기되지 않음. 홈리스행동에서 돈이 안 되는 일을 하는 사람들의 의미 있는 활동에 주목하게 됨. 노동의 정의를 다시 만드는 것은 어렵다는 말을 듣고, 임금노동 바깥의 의미 있는 일의 정의를 바꿔 보자는 방향으로 정함</td></tr>
+<tr><td data-label="질문">Q2. 연구참여자는 어떻게 선정했나요?</td><td data-label="답변 요지">홈리스 당사자이면서 활동가인 사람들이 참여함. 활동 기간이 더 긴 활동가들의 조언과 추천, '홈리스행동'의 자문을 받아 선정함. 나이, 성별, 장애 여부, 홈리스가 된 계기, 질병 등을 고려함</td></tr>
+<tr><td data-label="질문">Q3. 어떤 내용을 주로 질문했나요?</td><td data-label="답변 요지">홈리스가 된 과정과 자활근로 등의 영향(구조적 질문)을 물음. 더 중요하게 본 것은 홈리스행동에서 활동하며 바뀐 점과 활동의 의미, 활동을 통한 삶의 변화임</td></tr>
+<tr><td data-label="질문">Q4. 가장 어려웠던 점은?</td><td data-label="답변 요지">선행연구 부족: 노숙인 정책이나 자활 연구는 많지만 다른 측면에서 보는 연구는 찾기 어려웠음. 참여자가 자신의 활동을 일로 생각하지 않거나 의미를 설명하지 못해 면접이 어려웠음. 연구참여자를 대상화하고 있지 않은가를 계속 질문함</td></tr>
+<tr><td data-label="질문">Q5. 연구자의 생각이 바뀐 순간은?</td><td data-label="답변 요지">인터뷰 중 '조금 더 노력하시지'라는 마음속 질문을 하는 자신을 보고, 자신도 능력주의에 길들여져 있음을 깨달음. 참여자들과 지속적으로 대화하며 나름의 답을 찾음</td></tr>
+<tr><td data-label="질문">Q6. 학생들에게 하고 싶은 이야기는?</td><td data-label="답변 요지">질적 연구의 즐거움은 탐색의 과정임. 완전한 답을 찾기는 불가능하지만 작은 답과 새로운 질문을 만나게 됨. 조사와 연구 활동을 꼭 한 번은 해 보기를 권함</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>연구참여자 선정과 인터뷰 진행</strong></p>
+<ul>
+<li><strong>참여자 수</strong> — 처음에는 10명 정도를 계획했고 8명까지 인터뷰했으나 홈리스는 갑자기 사라지거나 연락이 끊기는 경우가 있어 논문에는 6명이 수록됨.</li>
+<li><strong>인터뷰 횟수</strong> — 6명 모두 최소 2회 인터뷰했고, 한 번에 2~3시간 걸리기도 함. 발달장애가 있는 참여자는 설명과 시각 자료가 더 필요해 4회 정도 진행함. 교수님은 녹취도 했다고 확인하며 앞에서 설명한 자료수집 과정과 같다고 짚음.</li>
+<li><strong>연구 기간</strong> — 선행연구 공부와 인터뷰까지 1년에서 1년 반, 인터뷰를 마친 뒤 자료를 구조화하고 집중적으로 쓰는 데 4개월 정도 걸림.</li>
+<li><strong>활용한 이론</strong> — 대학원에서 공부한 프레이리, 푸코, 한나 아렌트 등의 이론과 관련 논문, 책을 참고함.</li>
+</ul>
+<p class="sh"><strong>연구의 어려움과 자기 성찰</strong></p>
+<ul>
+<li><strong>관계의 변화</strong> — 같이 활동하던 사람이 연구자와 연구참여자로 만나면서 관계 위치가 달라짐. 이분들을 대상화하지 않으려 했고, 단체에서도 연구 결과만 가지고 떠날 수 있다는 우려를 했음. 연구 결과가 연구자만의 것이 되지 않을 방법을 고민함.</li>
+<li><strong>자기 성찰</strong> — 교수님은 연구참여자를 대상화하고 있지 않은가라는 고민이 앞서 배운 질적 연구에서 중요한 연구자의 자기 성찰에 해당한다고 설명함.</li>
+<li><strong>해소 과정</strong> — 해당 참여자와 인터뷰를 더 길게 하고 질문을 새로 만들었음. 녹취를 풀면서(전사) 질문할 때의 자신의 감정과 태도를 돌아보고, 질문이 참여자를 위축시키거나 불편하게 하지 않았는지 살핀 뒤 필요하면 재인터뷰함. 생애 전체를 듣고 참여자들이 만난 닫힌 문을 발견하며, 노력하지 않은 것이 아니라 노력하고 싶은 마음조차 꺾는 것이 사회 구조임을 이해하게 됨.</li>
+<li><strong>교수님의 의견</strong> — 연구는 연구자 자신이 성장하고 자각하는 계기가 되며, 이런 연구가 쌓이면 홈리스 활동의 의미를 임금노동의 가치로만 교환할 수 없다는 점을 드러낼 수 있음. 이것이 조사와 연구의 큰 의미임.</li>
+</ul>
+<p class="sh"><strong>학우들에게 전한 말</strong></p>
+<ul>
+<li>논문 과정에서 어려움도 있었으나 활동하면서 가졌던 질문의 답을 찾고 앞으로의 방향을 정할 수 있어 즐거웠다고 함.</li>
+<li>방송대 사회복지학과에서만 쓸 수 있는 이야기가 있고, 함께 이야기할 사람들과 현장의 응원이 있어 끝까지 쓸 수 있었다고 함. 작은 주제에서 시작해 더 큰 질문으로 나아갈 수 있으므로 조사와 연구를 한 번은 해 보라고 권함.</li>
+<li><strong>교수님 덧붙임</strong> — 연구 기회가 모두에게 오지는 않더라도, 기관에서 욕구조사 등을 통해 조사의 의미를 확인할 수 있으니 사회복지조사를 배우는 의미를 계속 되새기라고 함.</li>
+</ul>
+<h3>5. 14강 정리와 다음 시간 안내</h3>
+<p class="sh"><strong>14강 정리</strong></p>
+<ul>
+<li><strong>질적 연구의 과정</strong> — 연구문제 형성 → 연구설계 → 표집(연구참여자 선정) → 자료수집 → 자료분류 및 코드화(원자료 → 코드 부여 → 범주 또는 잠정적 주제) → 분석과 설명 순서임.</li>
+<li><strong>질적 연구의 고려사항</strong> — 연구의 엄격성(다원화, 전문가 점검, 연구참여자 재확인), 윤리적 고려, 연구자의 자기 성찰임.</li>
+<li><strong>질적 연구 사례</strong> — 홈리스 활동의 의미를 연구한 사례를 통해 연구 과정의 어려움, 연구자의 성장, 연구의 의미를 확인함.</li>
+<li><strong>다음 시간</strong> — 15강(마지막 강)에서 조사보고서 작성과 조사의 활용을 다룸.</li>
+</ul>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section>
+    <footer>원본: 사회복지조사론 강의노트 구글 문서 · 녹취록과 강의록 기준</footer>
+  </main>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const sget = k => { try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const sset = (k,v) => { try{ localStorage.setItem(k,v); }catch(e){} };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 8;
+  window.scrollTo({top: Math.max(0,y), behavior:'instant'});
+}
+$('#jump').onchange = e => { if(e.target.value) go(e.target.value); e.target.value=''; };
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1);
+  if(id === 'top'){ e.preventDefault(); window.scrollTo({top:0}); return; }
+  if(document.getElementById(id)){ e.preventDefault(); go(id); }
+});
+/* 목차 현재 위치 */
+const links = [...document.querySelectorAll('nav.toc a')];
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if(en.isIntersecting){ links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#'+en.target.id)); }
+}), {rootMargin:'-80px 0px -70% 0px'});
+/* 강 강조는 아래 '현재 위치' 코드가 맡음 */
+
+/* ── 현재 위치 줄 · 진행 막대 · 목차 서랍 ── */
+{
+const lecs=[...document.querySelectorAll('section.lec')];
+const bar=document.querySelector('.bar'), wt=document.getElementById('whereTxt'), pi=document.getElementById('progI');
+window.__barY=()=>bar.getBoundingClientRect().bottom+32;
+let last='';
+function where(){
+  const y=window.__barY();
+  let sec=null; for(const s of lecs){ if(s.getBoundingClientRect().top<=y) sec=s; else break; }
+  let h=null; if(sec){ for(const x of sec.querySelectorAll('.ct h3')){ if(x.getBoundingClientRect().top<=y) h=x; else break; } }
+  const max=document.documentElement.scrollHeight-innerHeight;
+  pi.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%';
+  const key=(sec?sec.id:'')+'|'+(h?h.id:''); if(key===last) return; last=key;
+  wt.textContent='';
+  if(sec){
+    const b=document.createElement('b'); b.textContent=sec.querySelector('.lh .no').textContent; wt.appendChild(b);
+    const t=h?h.textContent:sec.querySelector('.lh h2').textContent;
+    wt.appendChild(document.createTextNode(' '+t.replace(/[0-9]\uFE0F?\u20E3/g,'').replace(/\s+/g,' ').trim()));
+  } else wt.textContent='처음 · 목차 버튼으로 강을 고르세요';
+  document.querySelectorAll('nav.toc > ol > li > a').forEach(x=>x.classList.toggle('on',!!sec && x.getAttribute('href')==='#'+sec.id));
+}
+let tk=false; addEventListener('scroll',()=>{ if(!tk){ tk=true; requestAnimationFrame(()=>{ tk=false; where(); }); } },{passive:true});
+addEventListener('resize',where); where(); setTimeout(where,600);
+const nav=document.getElementById('toc'), tb=document.getElementById('tocBtn');
+function openToc(on){
+  document.body.classList.toggle('tocopen',on); tb.setAttribute('aria-expanded',String(on));
+  if(on){ const c=nav.querySelector('ul.sub a.on')||nav.querySelector(':scope > ol > li > a.on');
+    if(c){ const r=c.getBoundingClientRect(), nr=nav.getBoundingClientRect(); nav.scrollTop+=r.top-nr.top-nr.height/3; } }
+}
+tb.onclick=()=>openToc(!document.body.classList.contains('tocopen'));
+document.getElementById('scrim').onclick=()=>openToc(false);
+nav.addEventListener('click',e=>{ if(e.target.closest('a')) openToc(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') openToc(false); });
+}
+/* 출제 부분만 */
+const FK='cm-note-focus';
+function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
+$('#focusBtn').onclick = () => setFocus(!document.body.classList.contains('focus'));
+setFocus(sget(FK) === '1');
+/* 글자 크기 */
+const ZK='cm-note-fs', ZL=[13,14,15,16.5,18,20]; let zi = ZL.indexOf(parseFloat(sget(ZK))); if(zi<0) zi=2;
+function setFs(){ document.body.style.fontSize = ZL[zi]+'px'; $('#fsDown').disabled = zi===0; $('#fsUp').disabled = zi===ZL.length-1; sset(ZK, String(ZL[zi])); }
+$('#fsDown').onclick = () => { if(zi>0){ zi--; setFs(); } };
+$('#fsUp').onclick = () => { if(zi<ZL.length-1){ zi++; setFs(); } };
+setFs();
+/* 테마 */
+const TK='cm-note-theme';
+const cur = () => document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const paint = () => { $('#themeBtn').textContent = cur()==='dark' ? '라이트' : '다크'; };
+(() => { const t = sget(TK); if(t) document.documentElement.setAttribute('data-theme', t); paint(); })();
+$('#themeBtn').onclick = () => { const n = cur()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme', n); sset(TK, n); paint(); };
+</script>
+<!-- 형광펜: 글을 드래그(휴대폰은 길게 눌러 선택)하면 색 버튼이 뜸. 이 기기 브라우저에 저장 + (선택) 깃허브 Gist로 기기 간 연동 -->
+<style>
+mark.hl{color:inherit;border-radius:2px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-y{background:#fde68a}
+mark.hl-g{background:#bbf7d0}
+mark.hl-p{background:#fbcfe8}
+mark.hl-b{background:#bfdbfe}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}}
+:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}
+.hlbar{position:fixed;z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.hlbar[hidden]{display:none}
+.hlbar button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.12);padding:0;cursor:pointer}
+.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}
+.hlbar button.x{width:auto;height:30px;border-radius:8px;padding:0 10px;background:var(--soft);color:var(--ink);font:inherit;font-size:13px;border:1px solid var(--line)}
+@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:36px;height:36px}.hlbar button.x{height:36px}}
+.hlsync{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;line-height:1.6}
+.hlsync summary{cursor:pointer;font-weight:700}
+.hlsync .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hlsync input{flex:1 1 220px;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.hlsync .st{color:var(--sub);margin-top:6px}
+.hlsync .st.ok{color:var(--note)}.hlsync .st.err{color:var(--m6)}
+.hlsync [hidden]{display:none!important}
+.hltools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+</style>
+<div class="hlbar" id="hlbar" hidden role="toolbar" aria-label="형광펜">
+  <button class="y" data-c="y" title="노랑" aria-label="노랑 형광펜"></button>
+  <button class="g" data-c="g" title="연두" aria-label="연두 형광펜"></button>
+  <button class="p" data-c="p" title="분홍" aria-label="분홍 형광펜"></button>
+  <button class="b" data-c="b" title="하늘" aria-label="하늘 형광펜"></button>
+  <button class="x" id="hlDel" hidden>지우기</button>
+</div>
+<script>
+(function(){
+const PAGE='사회복지조사론_강의노트';
+const KEY='rm-note-hl-v1', TOK='study-gist-token', GID='study-gist-id', GDESC='study 공부방 형광펜 (자동 저장)';
+const FILE=PAGE+'.json';
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+// H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
+let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
+H.forEach(h=>{if(!h.u)h.u=1;});
+const live=()=>H.filter(h=>!h.d);
+const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
+let curRange=null, curId=null;
+const box=sec=>sec.querySelector('.ct');
+function texts(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=w.nextNode())a.push(n);return a;}
+function offsetOf(root,node,off){let s=0;for(const t of texts(root)){if(t===node)return s+off;s+=t.length;}const r=document.createRange();r.setStart(root,0);r.setEnd(node,off);return r.toString().length;}
+function wrap(root,start,end,c,id){
+  let pos=0;
+  for(const t of texts(root)){
+    const a=pos,b=pos+t.length;pos=b;
+    if(b<=start||a>=end)continue;
+    let node=t;const s=Math.max(start,a)-a,e=Math.min(end,b)-a;
+    if(!node.data.slice(s,e).trim())continue;
+    if(e<node.length)node.splitText(e);
+    if(s>0)node=node.splitText(s);
+    const m=document.createElement('mark');m.className='hl hl-'+c;m.dataset.id=id;
+    node.parentNode.insertBefore(m,node);m.appendChild(node);
+  }
+}
+function unwrap(id){document.querySelectorAll('mark.hl[data-id="'+id+'"]').forEach(m=>{const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize();});}
+function render(){
+  document.querySelectorAll('.ct mark.hl').forEach(m=>unwrap(m.dataset.id));
+  live().forEach(h=>{const sec=document.getElementById(h.lec);if(!sec)return;const root=box(sec);
+    const txt=texts(root).map(t=>t.data).join('');
+    if(txt.slice(h.s,h.e)!==h.t)return; wrap(root,h.s,h.e,h.c,h.id);});
+  paint();
+}
+function commit(){ls.set(KEY,JSON.stringify(H));paint();queuePush();}
+function hide(){bar.hidden=true;curRange=null;curId=null;del.hidden=true;}
+function place(rect){
+  bar.hidden=false;
+  const w=bar.offsetWidth,h=bar.offsetHeight;
+  let x=rect.left+rect.width/2-w/2, y=rect.top-h-8;
+  if(y<70)y=rect.bottom+8;
+  x=Math.max(8,Math.min(x,innerWidth-w-8));
+  y=Math.max(64,Math.min(y,innerHeight-h-8));
+  bar.style.left=x+'px';bar.style.top=y+'px';
+}
+function check(){
+  const sel=getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount){ return; }
+  const r=sel.getRangeAt(0);
+  const el=r.commonAncestorContainer.nodeType===1?r.commonAncestorContainer:r.commonAncestorContainer.parentElement;
+  const sec=el.closest('section.lec');
+  if(!sec||!box(sec).contains(r.startContainer)||!box(sec).contains(r.endContainer)){hide();return;}
+  if(!r.toString().trim()){hide();return;}
+  curRange=r;curId=null;del.hidden=true;place(r.getBoundingClientRect());
+}
+let tm;
+document.addEventListener('selectionchange',()=>{clearTimeout(tm);tm=setTimeout(check,250);});
+document.addEventListener('mouseup',()=>setTimeout(check,10));
+document.addEventListener('click',e=>{
+  if(bar.contains(e.target))return;
+  const m=e.target.closest('mark.hl');
+  const sel=getSelection();
+  if(m&&(!sel||sel.isCollapsed)){curId=m.dataset.id;curRange=null;del.hidden=false;place(m.getClientRects()[0]||m.getBoundingClientRect());return;}
+  if(!sel||sel.isCollapsed)hide();
+});
+bar.addEventListener('mousedown',e=>e.preventDefault());
+bar.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const now=Date.now();
+  if(b===del){if(curId){unwrap(curId);const h=H.find(h=>h.id===curId);if(h){h.d=1;h.u=now;}commit();}hide();return;}
+  const c=b.dataset.c;
+  if(curId){
+    document.querySelectorAll('mark.hl[data-id="'+curId+'"]').forEach(m=>m.className='hl hl-'+c);
+    const h=H.find(h=>h.id===curId);if(h){h.c=c;h.u=now;}commit();hide();return;}
+  if(!curRange)return;
+  const r=curRange;const sec=(r.startContainer.nodeType===1?r.startContainer:r.startContainer.parentElement).closest('section.lec');const root=box(sec);
+  let s=offsetOf(root,r.startContainer,r.startOffset), e2=offsetOf(root,r.endContainer,r.endOffset);
+  if(e2<=s){hide();return;}
+  const txt=texts(root).map(t=>t.data).join('');
+  live().filter(h=>h.lec===sec.id&&h.s<e2&&h.e>s).forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});
+  const id=now.toString(36)+Math.random().toString(36).slice(2,6);
+  wrap(root,s,e2,c,id);
+  H.push({id,lec:sec.id,s,e:e2,c,t:txt.slice(s,e2),u:now});commit();
+  getSelection().removeAllRanges();hide();
+});
+addEventListener('scroll',()=>{if(!bar.hidden&&innerWidth>640)hide();},{passive:true});
+
+/* ---- 소개 칸: 모두 지우기 + 기기 간 연동 ---- */
+const intro=document.querySelector('section.intro');
+const tools=document.createElement('div');tools.className='hltools';
+const cb=document.createElement('button');cb.className='btn';cb.title='형광펜을 모두 지움(연동 중이면 다른 기기에서도 지워짐)';
+tools.appendChild(cb);
+const sync=document.createElement('details');sync.className='hlsync';
+sync.innerHTML='<summary>형광펜 PC·휴대폰 연동</summary>'+
+ '<div class="st" id="hlSt"></div>'+
+ '<div id="hlSetup"><div>깃허브에서 만든 <b>Gist 전용 토큰</b>을 붙여넣고 연결을 누르세요. 토큰은 이 기기 브라우저에만 보관됩니다.</div>'+
+ '<div class="row"><input id="hlTok" type="password" autocomplete="off" placeholder="ghp_ 로 시작하는 토큰"><button class="btn" id="hlConn">연결</button></div></div>'+
+ '<div class="row" id="hlOn" hidden><button class="btn" id="hlNow">지금 맞추기</button><button class="btn" id="hlOff">이 기기 연결 끊기</button></div>';
+intro.appendChild(tools);intro.appendChild(sync);
+const $=s=>sync.querySelector(s);
+let armed=false;
+function paint(){if(armed)return;const n=live().length;cb.textContent='형광펜 '+n+'개 지우기';cb.style.display=n?'':'none';}
+cb.onclick=()=>{if(!armed){armed=true;cb.textContent='한 번 더 누르면 모두 지움';setTimeout(()=>{armed=false;paint();},3000);return;}
+  const now=Date.now();live().forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});armed=false;commit();};
+
+function status(msg,cls){const st=$('#hlSt');st.textContent=msg;st.className='st'+(cls?' '+cls:'');}
+function ui(){const on=!!ls.get(TOK);$('#hlSetup').hidden=on;$('#hlOn').hidden=!on;if(!on)status('연결 안 됨 — 형광펜은 이 기기에만 저장됩니다.');}
+const API='https://api.github.com';
+async function gh(path,opt={}){
+  const r=await fetch(API+path,{...opt,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+ls.get(TOK),'X-GitHub-Api-Version':'2022-11-28',...(opt.body?{'Content-Type':'application/json'}:{})}});
+  if(!r.ok){const e=new Error('HTTP '+r.status);e.status=r.status;throw e;}
+  return r.status===204?null:r.json();
+}
+function merge(remote){
+  const m=new Map();[...remote,...H].forEach(h=>{const o=m.get(h.id);if(!o||(h.u||0)>=(o.u||0))m.set(h.id,h);});
+  const month=30*864e5, now=Date.now();
+  H=[...m.values()].filter(h=>!(h.d&&now-h.u>month)); // 지운 표시는 30일 뒤 정리
+}
+async function findGist(){
+  let id=ls.get(GID);
+  if(id){try{return await gh('/gists/'+id);}catch(e){if(e.status!==404)throw e;}}
+  for(let page=1;page<=10;page++){
+    const list=await gh('/gists?per_page=100&page='+page);
+    const g=list.find(g=>g.description===GDESC);
+    if(g){ls.set(GID,g.id);return await gh('/gists/'+g.id);}
+    if(list.length<100)break;
+  }
+  const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:GDESC,public:false,files:{[FILE]:{content:'[]'}}})});
+  ls.set(GID,g.id);return g;
+}
+async function readRemote(g){
+  const f=g.files&&g.files[FILE];if(!f)return [];
+  let txt=f.content;
+  if(f.truncated){txt=await (await fetch(f.raw_url)).text();}
+  try{return JSON.parse(txt)||[]}catch(e){return []}
+}
+let busy=false, again=false;
+async function syncNow(){
+  if(!ls.get(TOK))return;
+  if(busy){again=true;return;}busy=true;
+  try{
+    status('맞추는 중…');
+    const g=await findGist();
+    merge(await readRemote(g));
+    ls.set(KEY,JSON.stringify(H));render();
+    await gh('/gists/'+g.id,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(H)}}})});
+    const d=new Date();status('연동됨 · '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' 저장','ok');
+  }catch(e){
+    if(e.status===401||e.status===403)status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');
+    else status('연동하지 못했습니다(인터넷 연결 확인). 형광펜은 이 기기에는 저장되어 있습니다.','err');
+  }finally{busy=false;if(again){again=false;syncNow();}}
+}
+let pt;function queuePush(){if(!ls.get(TOK))return;clearTimeout(pt);pt=setTimeout(syncNow,1500);}
+$('#hlConn').onclick=async()=>{const v=$('#hlTok').value.trim();if(!v){status('토큰을 붙여넣어 주세요.','err');return;}
+  ls.set(TOK,v);$('#hlTok').value='';ls.del(GID);ui();await syncNow();if(/토큰이 맞지/.test($('#hlSt').textContent)){ls.del(TOK);ui();status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');}};
+$('#hlNow').onclick=()=>syncNow();
+$('#hlOff').onclick=()=>{ls.del(TOK);ls.del(GID);ui();};
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncNow();});
+render();ui();syncNow();
+})();
+</script>
+
+<!-- 목차 하위: 강의명 아래 소제목(h3)까지 보이고, 강의별로 접고 펼 수 있음 -->
+<style>
+nav.toc li.tl{position:relative}
+nav.toc li.tl>.tg{position:absolute;left:-4px;top:4px;width:20px;height:22px;border:0;background:none;color:var(--sub);cursor:pointer;font-size:11px;line-height:22px;padding:0;border-radius:4px;transition:transform .15s}
+nav.toc li.tl>.tg:hover{background:var(--accent-soft);color:var(--accent)}
+nav.toc li.tl.open>.tg{transform:rotate(90deg)}
+nav.toc li.tl>a{margin-left:14px}
+nav.toc ul.sub{list-style:none;margin:2px 0 6px 36px;padding:0 0 0 8px;border-left:1px solid var(--line);display:none}
+nav.toc li.tl.open>ul.sub{display:block}
+nav.toc ul.sub a{display:block;padding:3px 8px;font-size:12.5px;line-height:1.4;color:var(--sub);margin:0}
+nav.toc ul.sub a:hover{color:var(--ink)}
+nav.toc ul.sub a.on{color:var(--accent);background:var(--accent-soft);font-weight:700}
+nav.toc .tocall{float:right;border:0;background:none;color:var(--accent);font:inherit;font-size:11.5px;letter-spacing:0;cursor:pointer;padding:0 2px}
+</style>
+<script>
+(function(){
+const nav=document.querySelector('nav.toc');if(!nav)return;
+const SK='toc-open-'+location.pathname.split('/').pop();
+const get=()=>{try{return JSON.parse(localStorage.getItem(SK)||'null')}catch(e){return null}};
+const put=v=>{try{localStorage.setItem(SK,JSON.stringify(v))}catch(e){}};
+let open=new Set(get()||[]);
+const subLinks=[];
+nav.querySelectorAll(':scope > ol > li').forEach(li=>{
+  const a=li.querySelector('a');if(!a)return;const id=a.getAttribute('href').slice(1);
+  const sec=document.getElementById(id);if(!sec)return;
+  const hs=[...sec.querySelectorAll('.ct h3')];if(!hs.length)return;
+  li.classList.add('tl');
+  const ul=document.createElement('ul');ul.className='sub';
+  hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
+    const t=h.textContent.replace(/[0-9]️?⃣/g,'').replace(/\s+/g,' ').trim();
+    const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
+    const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
+  li.appendChild(ul);
+  const b=document.createElement('button');b.className='tg';b.type='button';b.textContent='▶';b.setAttribute('aria-label',a.textContent.trim()+' 소제목 펼치기/접기');
+  li.insertBefore(b,a);
+  const set=(on)=>{li.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));};
+  set(open.has(id));
+  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);if(autoLi===li)autoLi=null;put([...open]);paintAll();};
+  li._set=set;li._id=id;
+});
+const h2=nav.querySelector('h2');
+const all=document.createElement('button');all.className='tocall';all.type='button';
+const tls=[...nav.querySelectorAll('li.tl')];
+function paintAll(){all.textContent=tls.every(li=>li.classList.contains('open'))?'모두 접기':'모두 펼치기';}
+all.onclick=()=>{const on=!tls.every(li=>li.classList.contains('open'));tls.forEach(li=>{li._set(on);on?open.add(li._id):open.delete(li._id);});put([...open]);paintAll();};
+if(h2)h2.appendChild(all);paintAll();
+// 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
+let last=null,autoLi=null;
+function mark(){
+  // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
+  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<(window.__barY?window.__barY():140))sec=s;});
+  let cur=null;
+  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<(window.__barY?window.__barY():140))cur=a;else break;}
+  const key=(sec?sec.id:'')+'|'+(cur?cur.getAttribute('href'):'');
+  if(key===last)return;last=key;
+  subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
+  const li=sec?nav.querySelector('li.tl > a[href="#'+sec.id+'"]')?.parentElement:null;
+  // 스크롤로 자동으로 펼친 강의는 지나가면 다시 접음(직접 펼친 강의는 그대로 둠)
+  if(autoLi&&autoLi!==li&&!open.has(autoLi._id)){autoLi._set(false);autoLi=null;paintAll();}
+  if(li&&!li.classList.contains('open')){li._set(true);autoLi=li;paintAll();}
+  const tgt=cur||(li&&li.querySelector('a'));
+  if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top||r.bottom>nr.bottom)nav.scrollTop+=r.top-nr.top-nr.height/3;}
+}
+let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
+setTimeout(mark,300);
+})();
+</script>
+
+<!-- 문제지 → 강의노트 바로가기: 주소 끝 #n=강id~출제표시~글조각 을 찾아 이동하고 잠깐 강조 -->
+<style>
+.dl-flash{animation:dlflash 2.6s ease-out 1;border-radius:6px}
+@keyframes dlflash{0%,35%{background:#ffe58a;box-shadow:0 0 0 4px #ffe58a}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+:root[data-theme="dark"] .dl-flash{animation-name:dlflashd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dl-flash{animation-name:dlflashd}}
+@keyframes dlflashd{0%,35%{background:#5c4d12;box-shadow:0 0 0 4px #5c4d12}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+</style>
+<script>
+(function(){
+const norm=s=>s.replace(/[0-9]️?⃣/g,'').replace(/[\s​]+/g,'');
+function find(){
+  const h=decodeURIComponent(location.hash||'');
+  const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
+  const sec=document.getElementById(m[1]);if(!sec)return;
+  const want=norm(m[3]);
+  const els=[...sec.querySelectorAll('.ct h3, .ct p, .ct li, .ct tr, .ct .cn-row')];
+  let hit=els.filter(e=>norm(e.textContent).includes(want));
+  if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
+  const el=hit[0]||sec;
+  const bar=document.querySelector('.bar');const off=(bar?bar.getBoundingClientRect().bottom:60)+24;
+  const go=()=>scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-off),behavior:'instant'});
+  go();setTimeout(go,350);setTimeout(go,900);
+  if(el!==sec){el.classList.remove('dl-flash');void el.offsetWidth;el.classList.add('dl-flash');}
+}
+addEventListener('hashchange',find);
+if(document.readyState==='complete')find();else addEventListener('load',find);
+})();
+</script>
+
+</body>
+</html>
