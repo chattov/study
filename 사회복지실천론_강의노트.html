@@ -104,6 +104,121 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
   th{white-space:normal}
 }
 
+.ct p.sh{font-size:15.5px;margin:22px 0 6px;padding:4px 10px;background:var(--accent-soft);border-radius:6px;line-height:1.5}
+.ct h3 + p.sh{margin-top:10px}
+.ct h3{font-size:18px;margin-top:30px}
+.ct p.tt{margin:16px 0 6px;color:var(--accent)}
+.ct li.sub{list-style:circle;margin-left:18px}
+main{min-width:0}
+.ct{overflow-wrap:anywhere}
+
+/* 표: 남색 머리행, 첫 열 강조, 세로 구분선, 줄무늬 */
+:root{--thd:#e2d4b2;--thd-ink:#2f2a23;--c1:#efe6d1;--zebra:rgba(120,100,60,.06);--cell:#fffdf7}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}}
+:root[data-theme="dark"]{--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}
+.ct .tw{border:1px solid var(--line);border-radius:8px;background:var(--cell);-webkit-overflow-scrolling:touch}
+.ct table{font-size:14px;line-height:1.55}
+.ct th,.ct td{padding:8px 11px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.ct th:last-child,.ct td:last-child{border-right:0}
+.ct thead th{background:var(--thd);color:var(--thd-ink);text-align:center;font-weight:700;border-bottom:1px solid var(--line)}
+.ct tbody tr:nth-child(even) td{background:var(--zebra)}
+.ct tbody td:first-child{background:var(--c1);font-weight:700;white-space:nowrap;width:1%}
+.ct p.tt{margin:20px 0 6px}
+@media (max-width:640px){
+  .ct table{font-size:13.5px}
+  .ct th,.ct td{padding:7px 9px;min-width:7.5em}
+  .ct tbody td:first-child{white-space:normal;min-width:5.5em}
+}
+
+/* 글 많은 표: 행마다 카드 — 첫 칸은 머리띠, 나머지는 열 이름을 붙여 나란히(좁은 화면은 위아래) */
+.ct .tw:has(table.long){overflow:visible;border:0;background:none;border-radius:0}
+.ct table.long, .ct table.long tbody{display:block;width:100%}
+.ct table.long thead{display:none}
+.ct table.long tr{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));margin:0 0 12px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+.ct table.long.c2{--cols:1}.ct table.long.c3{--cols:2}.ct table.long.c4{--cols:3}
+.ct table.long td{display:block;border:0;border-right:1px solid var(--line);padding:10px 14px;line-height:1.75;font-size:14.5px;background:none!important;white-space:normal;width:auto}
+.ct table.long td:last-child{border-right:0}
+.ct table.long td:first-child{grid-column:1/-1;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 14px;border-right:0;line-height:1.5}
+.ct table.long td:first-child .mk{filter:none}
+.ct table.long:not(.c2) td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;letter-spacing:.01em}
+@media (max-width:640px){
+  .ct table.long tr{grid-template-columns:1fr}
+  .ct table.long td{border-right:0;border-top:1px solid var(--line);min-width:0}
+  .ct table.long td:first-child{border-top:0}
+}
+
+/* 가로 스크롤 없음 */
+.ct .tw{overflow:visible}
+.ct th,.ct td{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{min-width:6.5em}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{white-space:normal;width:auto}
+.ct table.c5,.ct table.c6{font-size:13px}
+@media (max-width:640px){
+  .ct .tw{border:0;background:none;border-radius:0}
+  .ct .tw table, .ct .tw tbody{display:block;width:100%}
+  .ct .tw thead{display:none}
+  .ct .tw tr{display:block;margin:0 0 10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+  .ct .tw td{display:block;border:0;border-top:1px solid var(--line);padding:8px 12px;background:none!important;min-width:0;width:auto;white-space:normal}
+  .ct .tw td:first-child{border-top:0;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 12px}
+  .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .ct .tw table.c2 td:not(:first-child)::before{content:none}
+}
+
+/* 색 정리: 머리행은 옅은 청회색, 첫 열은 더 옅은 청회색, 본문은 흰색. 비교표는 열(세로) 단위로 구분 */
+:root{--thd2:#cfd9e8;--tbd:#c9d3e1;--thd:#dbe3ef;--thd-ink:#1f3864;--c1:#eef2f8;--cell:#fffefb;--colt:#f3f6fa;--zebra:transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}}
+:root[data-theme="dark"]{--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}
+.ct .tw{border-color:var(--tbd)}
+.ct tbody tr:nth-child(even) td{background:none}
+.ct tbody td:first-child{background:var(--c1);color:var(--thd-ink)}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--colt)}
+.ct table.c3 thead th:nth-child(3),.ct table.c4 thead th:nth-child(3),.ct table.c5 thead th:nth-child(3),.ct table.c5 thead th:nth-child(5),.ct table.c6 thead th:nth-child(3),.ct table.c6 thead th:nth-child(5){background:var(--thd2)}
+.ct table.long tr{border-color:var(--tbd)}
+.ct table.long td:nth-child(3){background:var(--colt)!important}
+.ct table.long td:first-child{color:var(--thd-ink)}
+@media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
+
+/* 최종 표 디자인: 제목줄은 진회색 바탕+흰 글씨(B안), 비교 열은 하나 건너 옅게(C안), 나머지는 흰 바탕+가는 가로줄 */
+:root{--tb-head:#4a5568;--tb-head-ink:#ffffff;--tb-bg:#fffdf8;--tb-line:#e4dccb;--tb-col:#f3efe6;--tb-ink:#2f2a23}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}}
+:root[data-theme="dark"]{--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}
+.ct .tw{border:0!important;border-radius:6px;overflow:hidden;background:var(--tb-bg)!important}
+.ct .tw:has(table.long){background:none!important;border-radius:0;overflow:visible}
+.ct th,.ct td{border-right:0!important;border-bottom:1px solid var(--tb-line)!important;background:none!important;color:var(--tb-ink)}
+.ct thead th{background:var(--tb-head)!important;color:var(--tb-head-ink)!important;text-align:left!important;border-bottom:0!important}
+.ct tbody td:first-child{background:none!important;color:var(--tb-ink)!important;font-weight:700}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--tb-col)!important}
+.ct table.long tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+.ct table.long td{border-bottom:0!important;border-right:0!important}
+.ct table.long td:first-child{background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+.ct table.long td:nth-child(3){background:var(--tb-col)!important}
+@media (max-width:640px){
+  .ct .tw{background:none!important;border-radius:0;overflow:visible}
+  .ct .tw tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+  .ct .tw td{border-bottom:0!important;border-top:1px solid var(--tb-line)!important;background:none!important}
+  .ct .tw td:first-child{border-top:0!important;background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+  .ct .tw table tbody td{width:auto!important;white-space:normal!important}
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+}
+
+/* 세로 구분 순서: 첫 번째 내용 열부터 옅은 색(2·4·6번째 열) */
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:none!important}
+.ct table.c3 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(4),.ct table.c5 tbody td:nth-child(2),.ct table.c5 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(2),.ct table.c6 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(6){background:var(--tb-col)!important}
+.ct table.long td:nth-child(3){background:none!important}
+.ct table.long.c3 td:nth-child(2),.ct table.long.c4 td:nth-child(2),.ct table.long.c4 td:nth-child(4){background:var(--tb-col)!important}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:none}
+.cn-h:nth-child(1),.cn-row>div:nth-child(1){background:var(--tb-col)}
+@media (max-width:640px){
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+  .cn-row>div:nth-child(1){background:none}
+}
+
+/* 강의 끝 핵심 정리 제목 바: 녹색 바탕 + 흰 글씨 */
+:root{--sum-bg:#2f7a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sum-bg:#2d6a4f}}
+:root[data-theme="dark"]{--sum-bg:#2d6a4f}
+.ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
+.ct p.sh.sum strong{color:#fff}
 </style>
 </head>
 <body id="top">
@@ -138,8 +253,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </blockquote>
 <h3>1. 기본 개념</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>Social Welfare</strong> — Welfare(잘 지내는 상태) + Social(사회 구성원이 함께). 누가 구성원이고 무엇이 좋은 상태인지는 시대마다 달라짐.</p>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>사회복지 vs 사회복지실천</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>사회복지 vs 사회복지실천</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -148,22 +263,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>영역</td>
-<td>가치·제도·정책(법, 예산, 전달체계)</td>
-<td>상담·연계·조직화·옹호 같은 실제 활동</td>
-</tr>
-<tr>
-<td>역할</td>
-<td>사회적 권리의 구조</td>
-<td>제도를 삶으로 옮기고, 현장 문제를 다시 정책 과제로 되돌림(양방향의 다리)</td>
-</tr>
+<tr><td data-label="구분">영역</td><td data-label="사회복지">가치·제도·정책(법, 예산, 전달체계)</td><td data-label="사회복지실천">상담·연계·조직화·옹호 같은 실제 활동</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="사회복지">사회적 권리의 구조</td><td data-label="사회복지실천">제도를 삶으로 옮기고, 현장 문제를 다시 정책 과제로 되돌림(양방향의 다리)</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>용어의 변천</strong> — 사회사업(1960~70년대, 자선·구호의 흔적) → 사회복지(1980년대 이후, 제도 확대) → 사회복지실천(현재, 전문적 활동). 즉 <em>자선 → 제도 → 전문적 실천</em>.</p>
 <h3><span class="mk mt" title="실천기술론 출제: 자선조직협회 참여자(상류층·우애방문원)">🔧</span> 2. 역사적 뿌리 — 두 흐름</h3>
 <p>19세기 말 영국·미국 대도시의 산업화·도시 빈곤 앞에서 교회 자선으로는 감당이 안 되자 두 가지 답이 나옴.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -172,31 +279,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>핵심 질문</td>
-<td>이 사람에게 지금 필요한 도움은?</td>
-<td>무엇이 이 문제를 반복되게 만드는가?</td>
-</tr>
-<tr>
-<td>빈곤의 원인</td>
-<td>개인의 도덕성·생활습관</td>
-<td>주거·노동·교육·위생 등 구조</td>
-</tr>
-<tr>
-<td>방법</td>
-<td>가정 조사, 우애방문, 기록, 기관 간 조정</td>
-<td>빈민 지역 거주, 교육·문화 활동, 주민 조직화, 정책 개선</td>
-</tr>
-<tr>
-<td>유산</td>
-<td>개별사회사업·사례관리·사정·기록, 전문직화</td>
-<td>지역사회조직·옹호·정책개입·공동체 실천</td>
-</tr>
-<tr>
-<td>한계</td>
-<td>구조 분석 약함, 권력 비대칭</td>
-<td>활동가(중산층)와 주민의 권력 차이 → 신화화 경계(비판적 존중)</td>
-</tr>
+<tr><td data-label="구분">핵심 질문</td><td data-label="자선조직협회(COS)">이 사람에게 지금 필요한 도움은?</td><td data-label="인보관운동">무엇이 이 문제를 반복되게 만드는가?</td></tr>
+<tr><td data-label="구분">빈곤의 원인</td><td data-label="자선조직협회(COS)">개인의 도덕성·생활습관</td><td data-label="인보관운동">주거·노동·교육·위생 등 구조</td></tr>
+<tr><td data-label="구분">방법</td><td data-label="자선조직협회(COS)">가정 조사, 우애방문, 기록, 기관 간 조정</td><td data-label="인보관운동">빈민 지역 거주, 교육·문화 활동, 주민 조직화, 정책 개선</td></tr>
+<tr><td data-label="구분">유산</td><td data-label="자선조직협회(COS)">개별사회사업·사례관리·사정·기록, 전문직화</td><td data-label="인보관운동">지역사회조직·옹호·정책개입·공동체 실천</td></tr>
+<tr><td data-label="구분">한계</td><td data-label="자선조직협회(COS)">구조 분석 약함, 권력 비대칭</td><td data-label="인보관운동">활동가(중산층)와 주민의 권력 차이 → 신화화 경계(비판적 존중)</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -204,8 +291,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>두 흐름의 계보는 단순화된 도식임. 결론: <em>한 사람을 돕되 조건을 함께 보고, 조건을 바꾸되 눈앞의 한 사람을 놓치지 않는 활동</em>.</li>
 </ul>
 <h3>3. 정의·목적·기능</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>정의의 변화</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>정의의 변화</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>주체</th>
@@ -214,41 +301,21 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>리치몬드</td>
-<td>개인과 사회환경의 관계를 의식적으로 조정해 개인 발달을 도움</td>
-<td>전문직화의 출발점, 개인 중심</td>
-</tr>
-<tr>
-<td>NASW</td>
-<td>개인·집단·지역사회의 사회적 기능 증진 + 사회적 조건 형성</td>
-<td>대상·목표 확장</td>
-</tr>
-<tr>
-<td>IFSW</td>
-<td>사회 변화·임파워먼트·해방을 촉진하는 실천 기반 전문직·학문</td>
-<td>인권·사회 변화</td>
-</tr>
-<tr>
-<td>한국 윤리강령</td>
-<td>인간 존엄성, 자기결정, 권익옹호, 사회정의, 전문성</td>
-<td>인간 존엄성 강조</td>
-</tr>
-<tr>
-<td>본 강의</td>
-<td>개인의 삶과 사회 구조를 함께 보는 통합적 전문 활동</td>
-<td>미시·중시·거시 연결</td>
-</tr>
+<tr><td data-label="주체">리치몬드</td><td data-label="핵심 내용">개인과 사회환경의 관계를 의식적으로 조정해 개인 발달을 도움</td><td data-label="특징">전문직화의 출발점, 개인 중심</td></tr>
+<tr><td data-label="주체">NASW</td><td data-label="핵심 내용">개인·집단·지역사회의 사회적 기능 증진 + 사회적 조건 형성</td><td data-label="특징">대상·목표 확장</td></tr>
+<tr><td data-label="주체">IFSW</td><td data-label="핵심 내용">사회 변화·임파워먼트·해방을 촉진하는 실천 기반 전문직·학문</td><td data-label="특징">인권·사회 변화</td></tr>
+<tr><td data-label="주체">한국 윤리강령</td><td data-label="핵심 내용">인간 존엄성, 자기결정, 권익옹호, 사회정의, 전문성</td><td data-label="특징">인간 존엄성 강조</td></tr>
+<tr><td data-label="주체">본 강의</td><td data-label="핵심 내용">개인의 삶과 사회 구조를 함께 보는 통합적 전문 활동</td><td data-label="특징">미시·중시·거시 연결</td></tr>
 </tbody>
 </table></div>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>목적과 기능</strong></p>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>목적과 기능</strong></p>
 <ul>
 <li>목적: 문제 해결·욕구 충족, 사회적 기능 증진, 권리와 정의 실현</li>
 <li>기능: 사정, 개입, 연계·조정, 옹호, 조직화 — 좋은 의도에 전문적 판단과 책임이 더해져야 함</li>
 </ul>
 <h3><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 4. 통합적 실천과 한국적 맥락</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>세 층위</strong> — 미시(개인·가족) / 중시(집단·기관·이웃 네트워크) / 거시(지역사회·정책·제도·구조). 층위를 오가며 판단하는 능력이 전문성.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>층위</th>
@@ -256,25 +323,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>미시</td>
-<td>정서, 생활 리듬, 위기, 강점·자원</td>
-</tr>
-<tr>
-<td>중시</td>
-<td>가족·직장·친구 지지망, 기관 간 협력</td>
-</tr>
-<tr>
-<td>거시</td>
-<td>고용 불안, 주거비, 청년 정책의 빈틈, 낙인</td>
-</tr>
+<tr><td data-label="층위">미시</td><td data-label="예: 26세 1인 가구 청년의 불안·우울">정서, 생활 리듬, 위기, 강점·자원</td></tr>
+<tr><td data-label="층위">중시</td><td data-label="예: 26세 1인 가구 청년의 불안·우울">가족·직장·친구 지지망, 기관 간 협력</td></tr>
+<tr><td data-label="층위">거시</td><td data-label="예: 26세 1인 가구 청년의 불안·우울">고용 불안, 주거비, 청년 정책의 빈틈, 낙인</td></tr>
 </tbody>
 </table></div>
 <ul>
 <li><strong>통합성 ≠ 만능성</strong>: 모든 역할을 직접 하라는 뜻이 아니라 <em>연결 능력</em>.</li>
 </ul>
-<p><span class="mk mt" title="실천기술론 출제: 한국 사회복지실천 역사">🔧</span> <strong>한국 사회복지실천의 형성</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk mt" title="실천기술론 출제: 한국 사회복지실천 역사">🔧</span> <strong>한국 사회복지실천의 형성</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>시기</th>
@@ -282,29 +340,17 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>태동기 1921~1945</td>
-<td>1921 태화여자관(태화기독교사회관), 방면위원제도</td>
-</tr>
-<tr>
-<td>도입기 1947~1960년대</td>
-<td>1947 이화여대 기독교사회사업학과, 외원단체</td>
-</tr>
-<tr>
-<td>제도화기 1970~80년대</td>
-<td>사회복지사업법, 1983 사회복지사 자격제도</td>
-</tr>
-<tr>
-<td>확장기 2003~</td>
-<td>2003 사회복지사 1급 국가시험, 영역별 전문화</td>
-</tr>
+<tr><td data-label="시기">태동기 1921~1945</td><td data-label="주요 사건">1921 태화여자관(태화기독교사회관), 방면위원제도</td></tr>
+<tr><td data-label="시기">도입기 1947~1960년대</td><td data-label="주요 사건">1947 이화여대 기독교사회사업학과, 외원단체</td></tr>
+<tr><td data-label="시기">제도화기 1970~80년대</td><td data-label="주요 사건">사회복지사업법, 1983 사회복지사 자격제도</td></tr>
+<tr><td data-label="시기">확장기 2003~</td><td data-label="주요 사건">2003 사회복지사 1급 국가시험, 영역별 전문화</td></tr>
 </tbody>
 </table></div>
 <ul>
 <li><strong>한국 실천이 미시 중심으로 보이는 이유</strong>: 교과목 분화, 서비스·사례관리·평가지표 중심 행정 구조, 상담자·사례관리자 이미지 강세. → 미시가 잘못이 아니라 연결이 약해질 위험. 미시는 깊이, 중시는 연결, 거시는 넓이.</li>
 </ul>
 <h3>5. 본 강의의 여섯 관점</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c6">
 <thead>
 <tr>
 <th>통합성</th>
@@ -316,14 +362,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>미시·중시·거시 연결</td>
-<td>존엄성·사회정의</td>
-<td>협력적 동반관계</td>
-<td>권력·구조 읽기</td>
-<td>평가·기록·증거</td>
-<td>디지털·위기·지속가능성</td>
-</tr>
+<tr><td data-label="통합성">미시·중시·거시 연결</td><td data-label="가치중심성">존엄성·사회정의</td><td data-label="관계성">협력적 동반관계</td><td data-label="비판성">권력·구조 읽기</td><td data-label="책무성">평가·기록·증거</td><td data-label="미래성">디지털·위기·지속가능성</td></tr>
 </tbody>
 </table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l2"><header class="lh"><span class="no">2강</span><h2>사회복지실천의 이론적 기초</h2></header><div class="ct"><blockquote>
 <p>생태체계 · 강점관점 · 임파워먼트 · 비판사회복지와 반억압실천</p>
@@ -335,7 +374,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>다원적 이론 활용(힐리)</strong>: 상황에 따라 여러 관점을 선택·통합. 단, 각 관점의 명제와 한계를 알아야 함(‘아무거나’가 아님).</li>
 </ul>
 <h3>2. 이론의 층위와 발달사</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>층위</th>
@@ -343,21 +382,12 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>기초이론(이론)</td>
-<td>사회학·심리학·경제학 등에서 차용한 포괄적 설명</td>
-</tr>
-<tr>
-<td>실천관점(관)</td>
-<td>기초이론과 실천모델을 잇는 다리 — 본 강의의 초점</td>
-</tr>
-<tr>
-<td>실천모델(법)</td>
-<td>사례관리·집단·상담·옹호 등 구체적 개입 방법</td>
-</tr>
+<tr><td data-label="층위">기초이론(이론)</td><td data-label="내용">사회학·심리학·경제학 등에서 차용한 포괄적 설명</td></tr>
+<tr><td data-label="층위">실천관점(관)</td><td data-label="내용">기초이론과 실천모델을 잇는 다리 — 본 강의의 초점</td></tr>
+<tr><td data-label="층위">실천모델(법)</td><td data-label="내용">사례관리·집단·상담·옹호 등 구체적 개입 방법</td></tr>
 </tbody>
 </table></div>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>시기</th>
@@ -366,31 +396,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>1910년대</td>
-<td>진단주의(리치몬드·프로이트)</td>
-<td>진단·처방하는 의학적 모델</td>
-</tr>
-<tr>
-<td>1930년대</td>
-<td>기능주의(랭크·스몰리)</td>
-<td>진단보다 관계와 시간</td>
-</tr>
-<tr>
-<td>1950년대</td>
-<td>문제해결(펄만)</td>
-<td>문제해결 과정의 결함</td>
-</tr>
-<tr>
-<td>1970년대</td>
-<td>통합적 관점(핑커스·미나한, 골드스타인)</td>
-<td>미시·중시·거시 통합</td>
-</tr>
-<tr>
-<td>1980년대~</td>
-<td>강점·임파워먼트·비판사회복지·AOP</td>
-<td>분화</td>
-</tr>
+<tr><td data-label="시기">1910년대</td><td data-label="관점">진단주의(리치몬드·프로이트)</td><td data-label="핵심">진단·처방하는 의학적 모델</td></tr>
+<tr><td data-label="시기">1930년대</td><td data-label="관점">기능주의(랭크·스몰리)</td><td data-label="핵심">진단보다 관계와 시간</td></tr>
+<tr><td data-label="시기">1950년대</td><td data-label="관점">문제해결(펄만)</td><td data-label="핵심">문제해결 과정의 결함</td></tr>
+<tr><td data-label="시기">1970년대</td><td data-label="관점">통합적 관점(핑커스·미나한, 골드스타인)</td><td data-label="핵심">미시·중시·거시 통합</td></tr>
+<tr><td data-label="시기">1980년대~</td><td data-label="관점">강점·임파워먼트·비판사회복지·AOP</td><td data-label="핵심">분화</td></tr>
 </tbody>
 </table></div>
 <h3>3. 전통적 관점 — 환경 속의 인간(PIE)</h3>
@@ -401,7 +411,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>생태학적 관점</strong> — 저메인과 기터만(1980, <em>Life Model</em>). 체계이론이 구조(정적)를 본다면 생태학은 <strong>적응·발달·생애주기</strong>(동적). 핵심 개념: 적응, 스트레스, 대처, 자원. 초점은 개인과 환경 사이의 적응적 상호작용.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>브론펜브레너 생태체계(1979)</strong> — 김민서 씨에 적용</p>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>체계</th>
@@ -411,36 +421,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>미시</td>
-<td>직접 상호작용(가족·친구)</td>
-<td>고시원, 끊긴 관계</td>
-<td>어떤 연결을 회복할까?</td>
-</tr>
-<tr>
-<td>중시</td>
-<td>미시체계 간 관계(부모–학교)</td>
-<td>가족·학교·기관이 분리됨</td>
-<td>체계를 어떻게 이을까?</td>
-</tr>
-<tr>
-<td>외부(엑소)</td>
-<td>참여하지 않지만 영향받음(부모 직장, 매체)</td>
-<td>집값·노동시장·청년정책</td>
-<td>어떤 자원을 연계할까?</td>
-</tr>
-<tr>
-<td>거시</td>
-<td>문화·이데올로기·법</td>
-<td>능력주의, '실패한 청년' 프레임</td>
-<td>어떤 가치체계가 둘러싸나?</td>
-</tr>
+<tr><td data-label="체계">미시</td><td data-label="정의">직접 상호작용(가족·친구)</td><td data-label="김민서 씨">고시원, 끊긴 관계</td><td data-label="사회복지사의 질문">어떤 연결을 회복할까?</td></tr>
+<tr><td data-label="체계">중시</td><td data-label="정의">미시체계 간 관계(부모–학교)</td><td data-label="김민서 씨">가족·학교·기관이 분리됨</td><td data-label="사회복지사의 질문">체계를 어떻게 이을까?</td></tr>
+<tr><td data-label="체계">외부(엑소)</td><td data-label="정의">참여하지 않지만 영향받음(부모 직장, 매체)</td><td data-label="김민서 씨">집값·노동시장·청년정책</td><td data-label="사회복지사의 질문">어떤 자원을 연계할까?</td></tr>
+<tr><td data-label="체계">거시</td><td data-label="정의">문화·이데올로기·법</td><td data-label="김민서 씨">능력주의, '실패한 청년' 프레임</td><td data-label="사회복지사의 질문">어떤 가치체계가 둘러싸나?</td></tr>
 </tbody>
 </table></div>
 <h3>4. 강점관점과 임파워먼트</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 강점관점">🔧</span> <strong>강점관점</strong> — 1980년대 후반 살리비(캔자스대). 결함을 보는 시선이 클라이언트를 무력화한다고 비판. '무엇이 잘못됐나' → <em>'무엇을 잘하고 어떤 자원이 있나'</em>. 단순한 낙관주의가 아니라 <strong>진단하는 자가 권력자가 되는 구조에 대한 비판</strong>.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 역량강화(임파워먼트)">🔧</span> <strong>임파워먼트</strong> — 솔로몬(1976, <em>Black Empowerment</em>). 강점관점보다 먼저, 더 정치적. 강점이 발휘되지 못하게 하는 <strong>구조적 조건</strong>까지 물음 → 강점관점과 비판사회복지의 가교.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구티에레즈의 세 차원</th>
@@ -449,21 +439,9 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>개인</td>
-<td>자기효능감·자존감·통제감 회복</td>
-<td>'내 의지 문제가 아니다', 여전히 가치 있는 존재</td>
-</tr>
-<tr>
-<td>대인</td>
-<td>관계에서의 영향력·상호지지</td>
-<td>또래 1인 가구 모임 연계</td>
-</tr>
-<tr>
-<td>정치</td>
-<td>구조적 권력관계 변화, 집단행동</td>
-<td>청년 정책 옹호, 당사자 운동</td>
-</tr>
+<tr><td data-label="구티에레즈의 세 차원">개인</td><td data-label="내용">자기효능감·자존감·통제감 회복</td><td data-label="김민서 씨">'내 의지 문제가 아니다', 여전히 가치 있는 존재</td></tr>
+<tr><td data-label="구티에레즈의 세 차원">대인</td><td data-label="내용">관계에서의 영향력·상호지지</td><td data-label="김민서 씨">또래 1인 가구 모임 연계</td></tr>
+<tr><td data-label="구티에레즈의 세 차원">정치</td><td data-label="내용">구조적 권력관계 변화, 집단행동</td><td data-label="김민서 씨">청년 정책 옹호, 당사자 운동</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -481,7 +459,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>교차성</strong>(크렌쇼, 1989): 인종·계급·젠더·장애·연령이 교차하는 자리. 예: 김민서 = 청년·여성·비수도권·불안정 노동자</li>
 </ul>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 은행저축식/문제제기식 교육">🔧</span> <strong>프레이리 『피억압자의 교육학』(1970)</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -490,28 +468,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>방식</td>
-<td>교사가 일방적으로 지식을 넣음</td>
-<td>교사·학생이 함께 현실을 문제로 제기</td>
-</tr>
-<tr>
-<td>성격</td>
-<td>권위주의, 억압 재생산</td>
-<td>해방적·민주적</td>
-</tr>
-<tr>
-<td>사회복지</td>
-<td>전문가–수혜자 관계</td>
-<td>비판사회복지·임파워먼트</td>
-</tr>
+<tr><td data-label="구분">방식</td><td data-label="은행저축식 교육">교사가 일방적으로 지식을 넣음</td><td data-label="문제제기식 교육">교사·학생이 함께 현실을 문제로 제기</td></tr>
+<tr><td data-label="구분">성격</td><td data-label="은행저축식 교육">권위주의, 억압 재생산</td><td data-label="문제제기식 교육">해방적·민주적</td></tr>
+<tr><td data-label="구분">사회복지</td><td data-label="은행저축식 교육">전문가–수혜자 관계</td><td data-label="문제제기식 교육">비판사회복지·임파워먼트</td></tr>
 </tbody>
 </table></div>
 <ul>
 <li><strong>의식화</strong>: 억압 조건을 비판적으로 인식하고 행동하는 과정(인식+행동 = 프락시스)</li>
 </ul>
 <h3>6. 거시 실천의 이론적 자원</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>이론</th>
@@ -520,26 +486,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>정치경제학</td>
-<td>빈곤·실업은 자본주의 구조의 결과. 한국 1980년대 민주화 운동과 결합, 1990년대 이후 약화</td>
-<td>청년실업·주거빈곤·부채 통계의 한 결과</td>
-</tr>
-<tr>
-<td>공동체 이론</td>
-<td>퇴니스(1887) 게마인샤프트/게젤샤프트, 퍼트넘(2000) 사회자본(신뢰·호혜·참여)</td>
-<td>잃은 것은 직업보다 관계망</td>
-</tr>
-<tr>
-<td>거버넌스</td>
-<td>정부 단독 통치 → 다양한 주체의 협력적 통치(로즈·스토커)</td>
-<td>주민센터·청년단체·당사자 모임의 협력</td>
-</tr>
+<tr><td data-label="이론">정치경제학</td><td data-label="핵심">빈곤·실업은 자본주의 구조의 결과. 한국 1980년대 민주화 운동과 결합, 1990년대 이후 약화</td><td data-label="김민서 씨">청년실업·주거빈곤·부채 통계의 한 결과</td></tr>
+<tr><td data-label="이론">공동체 이론</td><td data-label="핵심">퇴니스(1887) 게마인샤프트/게젤샤프트, 퍼트넘(2000) 사회자본(신뢰·호혜·참여)</td><td data-label="김민서 씨">잃은 것은 직업보다 관계망</td></tr>
+<tr><td data-label="이론">거버넌스</td><td data-label="핵심">정부 단독 통치 → 다양한 주체의 협력적 통치(로즈·스토커)</td><td data-label="김민서 씨">주민센터·청년단체·당사자 모임의 협력</td></tr>
 </tbody>
 </table></div>
 <h3>7. 종합 — 본 강의의 입장</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>다원적 이론 활용 원칙</strong> — 부분성(모든 이론은 부분적 진실) / 도구성(실천에 유용한가) / 비중립성(이론 선택은 정치적 선택) / 성찰성. 두 입장: <strong>통합적 실천</strong>(generalist)과 <strong>비판적 의식</strong>.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>관점</th>
@@ -548,26 +502,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>생태체계</td>
-<td>어떤 체계와 단절됐나?</td>
-<td>체계 연결, 자원 연계</td>
-</tr>
-<tr>
-<td>강점·임파워먼트</td>
-<td>어떤 강점으로 힘을 회복할까?</td>
-<td>동반자, 또래 모임·당사자 운동</td>
-</tr>
-<tr>
-<td>비판·AOP</td>
-<td>어떤 구조가 이렇게 만들었나?</td>
-<td>구조에 도전, 동맹, 낙인 거부</td>
-</tr>
-<tr>
-<td>거시 자원</td>
-<td>어떤 정책·공동체가 필요한가?</td>
-<td>정책 옹호, 공동체 형성, 협력</td>
-</tr>
+<tr><td data-label="관점">생태체계</td><td data-label="핵심 질문">어떤 체계와 단절됐나?</td><td data-label="개입 방향">체계 연결, 자원 연계</td></tr>
+<tr><td data-label="관점">강점·임파워먼트</td><td data-label="핵심 질문">어떤 강점으로 힘을 회복할까?</td><td data-label="개입 방향">동반자, 또래 모임·당사자 운동</td></tr>
+<tr><td data-label="관점">비판·AOP</td><td data-label="핵심 질문">어떤 구조가 이렇게 만들었나?</td><td data-label="개입 방향">구조에 도전, 동맹, 낙인 거부</td></tr>
+<tr><td data-label="관점">거시 자원</td><td data-label="핵심 질문">어떤 정책·공동체가 필요한가?</td><td data-label="개입 방향">정책 옹호, 공동체 형성, 협력</td></tr>
 </tbody>
 </table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l3"><header class="lh"><span class="no">3강</span><h2>사회복지사의 정체성과 역할</h2></header><div class="ct"><blockquote>
 <p>임상가 · 사례관리자 · 옹호자 · 조직가 · 정책기획자의 다중성</p>
@@ -579,7 +517,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 다중 역할의 분류</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>업무 특성에 따른 분류(헵워스 외, 1997)</strong> — 사회복지사는 <em>체계의 전문가</em></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>역할</th>
@@ -587,30 +525,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>직접서비스 제공</td>
-<td>상담·교육·치료·정보 제공</td>
-</tr>
-<tr>
-<td>체계 연결</td>
-<td>중개자·사례관리자·중재자·옹호자로서 자원에 연결</td>
-</tr>
-<tr>
-<td>연구·조사</td>
-<td>효과성 평가, 정책 자료 수집·분석</td>
-</tr>
-<tr>
-<td>체계 유지·강화</td>
-<td>기관·전달체계의 구조·정책·기능 개선</td>
-</tr>
-<tr>
-<td>체계 개발</td>
-<td>새로운 프로그램·정책 설계</td>
-</tr>
+<tr><td data-label="역할">직접서비스 제공</td><td data-label="내용">상담·교육·치료·정보 제공</td></tr>
+<tr><td data-label="역할">체계 연결</td><td data-label="내용">중개자·사례관리자·중재자·옹호자로서 자원에 연결</td></tr>
+<tr><td data-label="역할">연구·조사</td><td data-label="내용">효과성 평가, 정책 자료 수집·분석</td></tr>
+<tr><td data-label="역할">체계 유지·강화</td><td data-label="내용">기관·전달체계의 구조·정책·기능 개선</td></tr>
+<tr><td data-label="역할">체계 개발</td><td data-label="내용">새로운 프로그램·정책 설계</td></tr>
 </tbody>
 </table></div>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>개입 수준에 따른 분류</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>개입 수준에 따른 분류</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>수준</th>
@@ -619,31 +542,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>미시</td>
-<td>조력가, 중개자, 옹호자, 교사</td>
-<td>개인·가족</td>
-</tr>
-<tr>
-<td>중범위</td>
-<td>촉진자, 중재자, 훈련가, 행정가</td>
-<td>집단·조직</td>
-</tr>
-<tr>
-<td>거시</td>
-<td>계획가, 행동가, 사회변화 대행자, 시민 활동가</td>
-<td>지역사회·구조</td>
-</tr>
-<tr>
-<td>전문가</td>
-<td>동료, 촉매자, 평가자, 연구자</td>
-<td>전문직 발전</td>
-</tr>
+<tr><td data-label="수준">미시</td><td data-label="역할">조력가, 중개자, 옹호자, 교사</td><td data-label="대상">개인·가족</td></tr>
+<tr><td data-label="수준">중범위</td><td data-label="역할">촉진자, 중재자, 훈련가, 행정가</td><td data-label="대상">집단·조직</td></tr>
+<tr><td data-label="수준">거시</td><td data-label="역할">계획가, 행동가, 사회변화 대행자, 시민 활동가</td><td data-label="대상">지역사회·구조</td></tr>
+<tr><td data-label="수준">전문가</td><td data-label="역할">동료, 촉매자, 평가자, 연구자</td><td data-label="대상">전문직 발전</td></tr>
 </tbody>
 </table></div>
 <p>두 축의 교차: 체계 연결 × 미시 = 사례관리자 / 체계 개발 × 거시 = 정책기획자</p>
-<p><strong>본 강의의 8대 역할</strong></p>
-<div class="tw"><table>
+<p class="sh"><strong>본 강의의 8대 역할</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>역할</th>
@@ -652,46 +559,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>임상가</td>
-<td>정서·인지·행동·관계 변화(상담, 치료, 심리교육)</td>
-<td>미시</td>
-</tr>
-<tr>
-<td>사례관리자</td>
-<td>다중 욕구 클라이언트의 자원·서비스 연계·조정</td>
-<td>미시</td>
-</tr>
-<tr>
-<td>중개조정자</td>
-<td>욕구와 지역 자원 연결</td>
-<td>미시</td>
-</tr>
-<tr>
-<td>교육자</td>
-<td>생활 지식·기술 교육, 의식화</td>
-<td>미시</td>
-</tr>
-<tr>
-<td>옹호자</td>
-<td>권력 비대칭 상황에서 권익 보호·대변</td>
-<td>거시</td>
-</tr>
-<tr>
-<td>조직가</td>
-<td>주민 조직화, 집단적 의사결정·행동</td>
-<td>거시</td>
-</tr>
-<tr>
-<td>정책기획분석가</td>
-<td>정책 설계·분석·평가 참여</td>
-<td>거시</td>
-</tr>
-<tr>
-<td>평가연구자</td>
-<td>효과성 평가, 실천 지식 생산</td>
-<td>거시</td>
-</tr>
+<tr><td data-label="역할">임상가</td><td data-label="핵심 활동">정서·인지·행동·관계 변화(상담, 치료, 심리교육)</td><td data-label="수준">미시</td></tr>
+<tr><td data-label="역할">사례관리자</td><td data-label="핵심 활동">다중 욕구 클라이언트의 자원·서비스 연계·조정</td><td data-label="수준">미시</td></tr>
+<tr><td data-label="역할">중개조정자</td><td data-label="핵심 활동">욕구와 지역 자원 연결</td><td data-label="수준">미시</td></tr>
+<tr><td data-label="역할">교육자</td><td data-label="핵심 활동">생활 지식·기술 교육, 의식화</td><td data-label="수준">미시</td></tr>
+<tr><td data-label="역할">옹호자</td><td data-label="핵심 활동">권력 비대칭 상황에서 권익 보호·대변</td><td data-label="수준">거시</td></tr>
+<tr><td data-label="역할">조직가</td><td data-label="핵심 활동">주민 조직화, 집단적 의사결정·행동</td><td data-label="수준">거시</td></tr>
+<tr><td data-label="역할">정책기획분석가</td><td data-label="핵심 활동">정책 설계·분석·평가 참여</td><td data-label="수준">거시</td></tr>
+<tr><td data-label="역할">평가연구자</td><td data-label="핵심 활동">효과성 평가, 실천 지식 생산</td><td data-label="수준">거시</td></tr>
 </tbody>
 </table></div>
 <h3>3. 미시 실천가</h3>
@@ -705,7 +580,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>인보관 흐름의 후예. 20세기 후반 주변화 — 리시와 앤드류스 『The Road Not Taken』.</li>
 <li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <span class="mk mt" title="실천기술론 출제: 옹호실천">🔧</span> <strong>옹호의 네 유형</strong> — 사례옹호 → 계급옹호 → 정책옹호로 확장되는 경우가 흔함. 슈나이더와 레스터(2001): <em>옹호는 잊혀진 핵심 활동</em>.</li>
 </ul>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>유형</th>
@@ -714,26 +589,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>사례옹호</td>
-<td>개별 클라이언트 1명</td>
-<td>주민센터의 부당한 서비스 거부에 협상</td>
-</tr>
-<tr>
-<td>계급옹호</td>
-<td>같은 처지 집단 전체</td>
-<td>청년 1인 가구의 집합적 권익</td>
-</tr>
-<tr>
-<td>정책옹호</td>
-<td>정책 수립·개정·시행</td>
-<td>청년 1인 가구 지원법 제안·입법운동</td>
-</tr>
-<tr>
-<td>체계옹호</td>
-<td>전달체계 구조·운영</td>
-<td>발굴 사업 예산·기간 확대 요구</td>
-</tr>
+<tr><td data-label="유형">사례옹호</td><td data-label="대상">개별 클라이언트 1명</td><td data-label="김민서 씨 예">주민센터의 부당한 서비스 거부에 협상</td></tr>
+<tr><td data-label="유형">계급옹호</td><td data-label="대상">같은 처지 집단 전체</td><td data-label="김민서 씨 예">청년 1인 가구의 집합적 권익</td></tr>
+<tr><td data-label="유형">정책옹호</td><td data-label="대상">정책 수립·개정·시행</td><td data-label="김민서 씨 예">청년 1인 가구 지원법 제안·입법운동</td></tr>
+<tr><td data-label="유형">체계옹호</td><td data-label="대상">전달체계 구조·운영</td><td data-label="김민서 씨 예">발굴 사업 예산·기간 확대 요구</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -741,7 +600,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>정책기획분석가 5단계</strong>: 문제 정의·분석 → 대안 설계 → 영향 분석 → 결정·시행 → 평가. <strong>평가연구자</strong>는 EBP의 핵심 자원.</li>
 </ul>
 <h3><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 5. 직무 영역</h3>
-<div class="tw"><table>
+<div class="tw"><table class="long c2">
 <thead>
 <tr>
 <th>영역</th>
@@ -749,26 +608,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 공공</td>
-<td>사회복지전담공무원(시군구·읍면동, 기초생활보장·긴급복지), 공공기관(보사연·사회보장정보원 등), 중앙·지방정부</td>
-</tr>
-<tr>
-<td>민간</td>
-<td>사회복지법인(사회복지사업법), 사회복지재단, NGO(옹호·정책 제안)</td>
-</tr>
-<tr>
-<td><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 시설</td>
-<td><strong>이용시설</strong>: 이용 후 귀가(복지관, 청소년상담복지센터) / <strong>생활시설</strong>: 거주(양로시설, 장애인거주시설, 아동양육시설)</td>
-</tr>
-<tr>
-<td>지역사회</td>
-<td>종합사회복지관(2024년 약 481개소), 주민자치회·마을공동체·평생학습마을</td>
-</tr>
+<tr><td data-label="영역"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 공공</td><td data-label="내용">사회복지전담공무원(시군구·읍면동, 기초생활보장·긴급복지), 공공기관(보사연·사회보장정보원 등), 중앙·지방정부</td></tr>
+<tr><td data-label="영역">민간</td><td data-label="내용">사회복지법인(사회복지사업법), 사회복지재단, NGO(옹호·정책 제안)</td></tr>
+<tr><td data-label="영역"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 시설</td><td data-label="내용"><strong>이용시설</strong>: 이용 후 귀가(복지관, 청소년상담복지센터) / <strong>생활시설</strong>: 거주(양로시설, 장애인거주시설, 아동양육시설)</td></tr>
+<tr><td data-label="영역">지역사회</td><td data-label="내용">종합사회복지관(2024년 약 481개소), 주민자치회·마을공동체·평생학습마을</td></tr>
 </tbody>
 </table></div>
 <h3>6. 거시 실천의 망각과 회복</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>약화된 네 가지 원인</th>
@@ -776,22 +623,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>외원 시대(1950~60년대) 시설·구호 중심</td>
-<td>불평등 심화(IMF 이후)</td>
-</tr>
-<tr>
-<td>권위주의 정치(1960~80년대) — 옹호·조직화가 위험</td>
-<td>다문화 사회 이행</td>
-</tr>
-<tr>
-<td>자격시험(2003~) 출제기준 밖 거시 영역 주변화</td>
-<td>고령화·저출생</td>
-</tr>
-<tr>
-<td>1990년대 이후 임상화</td>
-<td>디지털 전환·AI, 기후 위기</td>
-</tr>
+<tr><td data-label="약화된 네 가지 원인">외원 시대(1950~60년대) 시설·구호 중심</td><td data-label="거시 실천을 요구하는 다섯 도전">불평등 심화(IMF 이후)</td></tr>
+<tr><td data-label="약화된 네 가지 원인">권위주의 정치(1960~80년대) — 옹호·조직화가 위험</td><td data-label="거시 실천을 요구하는 다섯 도전">다문화 사회 이행</td></tr>
+<tr><td data-label="약화된 네 가지 원인">자격시험(2003~) 출제기준 밖 거시 영역 주변화</td><td data-label="거시 실천을 요구하는 다섯 도전">고령화·저출생</td></tr>
+<tr><td data-label="약화된 네 가지 원인">1990년대 이후 임상화</td><td data-label="거시 실천을 요구하는 다섯 도전">디지털 전환·AI, 기후 위기</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -805,7 +640,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 가치 기반</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>가치·윤리·도덕</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -814,26 +649,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>가치</td>
-<td>무엇이 좋고 옳은가에 대한 신념</td>
-<td>존엄성, 자유, 평등, 정의, 연대</td>
-</tr>
-<tr>
-<td>윤리</td>
-<td>가치를 구체적 행동 규범으로 옮긴 것</td>
-<td>윤리강령</td>
-</tr>
-<tr>
-<td>도덕</td>
-<td>가치·윤리의 개인적·내면적 차원</td>
-<td>—</td>
-</tr>
+<tr><td data-label="구분">가치</td><td data-label="의미">무엇이 좋고 옳은가에 대한 신념</td><td data-label="예">존엄성, 자유, 평등, 정의, 연대</td></tr>
+<tr><td data-label="구분">윤리</td><td data-label="의미">가치를 구체적 행동 규범으로 옮긴 것</td><td data-label="예">윤리강령</td></tr>
+<tr><td data-label="구분">도덕</td><td data-label="의미">가치·윤리의 개인적·내면적 차원</td><td data-label="예">—</td></tr>
 </tbody>
 </table></div>
 <p>뱅크스(2012): 좋은 사회복지사는 윤리에 순응하는 자가 아니라 <em>윤리를 자기 도덕으로 내면화한 자</em>.</p>
-<p><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>세 윤리체계의 핵심 가치</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>세 윤리체계의 핵심 가치</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>체계</th>
@@ -842,25 +665,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>NASW(2017)</td>
-<td>서비스, 사회정의, 존엄성과 가치, 인간관계의 중요성, 진실성, 역량 (6가치)</td>
-<td>미국 전문직 표준</td>
-</tr>
-<tr>
-<td>IFSW(2018)</td>
-<td>인권, 사회정의, 집단적 책임, 다양성, 환경정의, 디지털 윤리</td>
-<td>환경·디지털 명시</td>
-</tr>
-<tr>
-<td>한국(2023)</td>
-<td>인간 존엄성, 사회정의, 다양성, 자기결정, 사회적 책임, 전문성</td>
-<td>미국 모델 이식이라는 비판</td>
-</tr>
+<tr><td data-label="체계">NASW(2017)</td><td data-label="핵심 가치">서비스, 사회정의, 존엄성과 가치, 인간관계의 중요성, 진실성, 역량 (6가치)</td><td data-label="특징">미국 전문직 표준</td></tr>
+<tr><td data-label="체계">IFSW(2018)</td><td data-label="핵심 가치">인권, 사회정의, 집단적 책임, 다양성, 환경정의, 디지털 윤리</td><td data-label="특징">환경·디지털 명시</td></tr>
+<tr><td data-label="체계">한국(2023)</td><td data-label="핵심 가치">인간 존엄성, 사회정의, 다양성, 자기결정, 사회적 책임, 전문성</td><td data-label="특징">미국 모델 이식이라는 비판</td></tr>
 </tbody>
 </table></div>
 <h3>3. 핵심 윤리원칙</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>원칙</th>
@@ -869,36 +680,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>인간 존엄성</td>
-<td>모든 인간의 본질적 가치 존중 + 존엄 침해 구조에 도전</td>
-<td>—</td>
-</tr>
-<tr>
-<td>자기결정권</td>
-<td>바이스텍(1957): 클라이언트가 결정의 주체, 사회복지사는 스스로 결정하도록 돕는 자</td>
-<td>자해·위기·판단능력 손상 시 보호와 충돌</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 비밀보장</td>
-<td>동의 없이 정보 공개 안 함, 신뢰의 토대</td>
-<td>예외 5가지: 아동학대·노인학대·가정폭력·자살위험·<strong>타라소프 원칙</strong>(1976, 제3자 위해 시 경고 의무). 사전 고지 필수</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 사회정의</td>
-<td>인접 직업과 구별되는 가치(구조적 불평등에 도전)</td>
-<td>인보관·비판사회복지의 계승</td>
-</tr>
-<tr>
-<td>전문적 경계</td>
-<td>이중관계·성적 접촉·금전거래 금지</td>
-<td>5강 심화</td>
-</tr>
+<tr><td data-label="원칙">인간 존엄성</td><td data-label="핵심">모든 인간의 본질적 가치 존중 + 존엄 침해 구조에 도전</td><td data-label="한계·주의">—</td></tr>
+<tr><td data-label="원칙">자기결정권</td><td data-label="핵심">바이스텍(1957): 클라이언트가 결정의 주체, 사회복지사는 스스로 결정하도록 돕는 자</td><td data-label="한계·주의">자해·위기·판단능력 손상 시 보호와 충돌</td></tr>
+<tr><td data-label="원칙"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 비밀보장</td><td data-label="핵심">동의 없이 정보 공개 안 함, 신뢰의 토대</td><td data-label="한계·주의">예외 5가지: 아동학대·노인학대·가정폭력·자살위험·<strong>타라소프 원칙</strong>(1976, 제3자 위해 시 경고 의무). 사전 고지 필수</td></tr>
+<tr><td data-label="원칙"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 사회정의</td><td data-label="핵심">인접 직업과 구별되는 가치(구조적 불평등에 도전)</td><td data-label="한계·주의">인보관·비판사회복지의 계승</td></tr>
+<tr><td data-label="원칙">전문적 경계</td><td data-label="핵심">이중관계·성적 접촉·금전거래 금지</td><td data-label="한계·주의">5강 심화</td></tr>
 </tbody>
 </table></div>
 <h3>4. 윤리적 딜레마와 해결 원칙</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>리머(2018)의 딜레마 세 유형</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>리머(2018)의 딜레마 세 유형</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>유형</th>
@@ -907,26 +698,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>자기결정 vs 보호</td>
-<td>자살위험, 치료거부</td>
-<td>위해의 심각성·즉각성 평가 / <strong>최소 침해</strong>(강제입원 ≠ 외래치료) / 참여 유지</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 비밀보장 vs 보고 의무</td>
-<td>학대, 가정폭력, 자살위험</td>
-<td><strong>법적 의무 우선</strong>(신고의무자) / 사전 고지 / 최소 정보 공개 — <em>어떻게 보고하느냐</em>가 윤리적 차이</td>
-</tr>
-<tr>
-<td>클라이언트 vs 기관·제3자 충성</td>
-<td>낙태 반대 종교기관에서 원치 않는 임신 여성 지원</td>
-<td>—</td>
-</tr>
+<tr><td data-label="유형">자기결정 vs 보호</td><td data-label="예">자살위험, 치료거부</td><td data-label="해결 원칙">위해의 심각성·즉각성 평가 / <strong>최소 침해</strong>(강제입원 ≠ 외래치료) / 참여 유지</td></tr>
+<tr><td data-label="유형"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 비밀보장 vs 보고 의무</td><td data-label="예">학대, 가정폭력, 자살위험</td><td data-label="해결 원칙"><strong>법적 의무 우선</strong>(신고의무자) / 사전 고지 / 최소 정보 공개 — <em>어떻게 보고하느냐</em>가 윤리적 차이</td></tr>
+<tr><td data-label="유형">클라이언트 vs 기관·제3자 충성</td><td data-label="예">낙태 반대 종교기관에서 원치 않는 임신 여성 지원</td><td data-label="해결 원칙">—</td></tr>
 </tbody>
 </table></div>
 <p>한국적 요건: 가족주의(가족 동의), 위계문화(옹호의 어려움), 종교·이념 다양성.</p>
 <h3><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 5. 윤리적 의사결정 모델</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>모델</th>
@@ -935,31 +714,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 리머 7단계(2018)</td>
-<td>① 충돌하는 가치·의무 명확화 ② 영향받는 사람 파악 ③ 대안과 결과 가설 ④ 대안별 윤리 근거 검토 ⑤ 자문 ⑥ 문서화 ⑦ 평가·모니터링</td>
-<td>체계적·합리적</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> ETHIC(5단계)</td>
-<td><strong>E</strong>xamine 가치 검토 / <strong>T</strong>hink 강령·법 적용 / <strong>H</strong>ypothesize 결과 가설 / <strong>I</strong>dentify 가장 취약한 자 / <strong>C</strong>onsult 자문</td>
-<td>단순, 복잡한 딜레마엔 한계</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 로웬버그·돌고프 우선순위 7원칙</td>
-<td>① 생명보호 ② 평등과 불평등 ③ 자율성과 자유 ④ 최소 위해 ⑤ 삶의 질 ⑥ 사생활·비밀보장 ⑦ 진실성·정보공개</td>
-<td>즉각적 위해 시 1순위가 3순위보다 우선</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 매티슨 관계적·맥락적(2000)</td>
-<td>사실적·윤리적·관계적·자기인식 차원</td>
-<td>'결정에는 사람이 있다'(위치성)</td>
-</tr>
+<tr><td data-label="모델"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 리머 7단계(2018)</td><td data-label="내용">① 충돌하는 가치·의무 명확화 ② 영향받는 사람 파악 ③ 대안과 결과 가설 ④ 대안별 윤리 근거 검토 ⑤ 자문 ⑥ 문서화 ⑦ 평가·모니터링</td><td data-label="특징">체계적·합리적</td></tr>
+<tr><td data-label="모델"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> ETHIC(5단계)</td><td data-label="내용"><strong>E</strong>xamine 가치 검토 / <strong>T</strong>hink 강령·법 적용 / <strong>H</strong>ypothesize 결과 가설 / <strong>I</strong>dentify 가장 취약한 자 / <strong>C</strong>onsult 자문</td><td data-label="특징">단순, 복잡한 딜레마엔 한계</td></tr>
+<tr><td data-label="모델"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 로웬버그·돌고프 우선순위 7원칙</td><td data-label="내용">① 생명보호 ② 평등과 불평등 ③ 자율성과 자유 ④ 최소 위해 ⑤ 삶의 질 ⑥ 사생활·비밀보장 ⑦ 진실성·정보공개</td><td data-label="특징">즉각적 위해 시 1순위가 3순위보다 우선</td></tr>
+<tr><td data-label="모델"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 매티슨 관계적·맥락적(2000)</td><td data-label="내용">사실적·윤리적·관계적·자기인식 차원</td><td data-label="특징">'결정에는 사람이 있다'(위치성)</td></tr>
 </tbody>
 </table></div>
 <p>김민서 씨에 ETHIC 적용 결과: 가장 취약한 사람은 본인 → 강제입원 대신 외래 정신과 연계 + 24시간 상담라인, 단계적 옵션과 참여 약속. 부모 통보는 법적 자동 의무가 아님 → 본인 동의로 부모 참여 방식을 협의(사회복지사는 <em>중재자</em>).</p>
 <h3>6. 윤리강령의 발달</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>강령</th>
@@ -968,25 +731,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>NASW</td>
-<td>1960 채택, 현행 2021년판(서문·목적·원칙·기준 4부)</td>
-<td>윤리기준 6영역 중 '더 넓은 사회에 대한 책임'이 사회정의</td>
-</tr>
-<tr>
-<td>IFSW</td>
-<td>1976 → 2004 → 2018 세계 선언</td>
-<td>141개 회원협회, 환경·디지털 명시</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 한국</td>
-<td>1982 제정, 1988·1992·2001·2021·2023 개정(5회)</td>
-<td>2023: 핵심 가치를 <strong>인간 존엄성·사회정의</strong>로 정리, 사회 변화의 매개자, 디지털·다문화 조항, <strong>환경 조항 신설</strong></td>
-</tr>
+<tr><td data-label="강령">NASW</td><td data-label="연혁">1960 채택, 현행 2021년판(서문·목적·원칙·기준 4부)</td><td data-label="특징">윤리기준 6영역 중 '더 넓은 사회에 대한 책임'이 사회정의</td></tr>
+<tr><td data-label="강령">IFSW</td><td data-label="연혁">1976 → 2004 → 2018 세계 선언</td><td data-label="특징">141개 회원협회, 환경·디지털 명시</td></tr>
+<tr><td data-label="강령"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 한국</td><td data-label="연혁">1982 제정, 1988·1992·2001·2021·2023 개정(5회)</td><td data-label="특징">2023: 핵심 가치를 <strong>인간 존엄성·사회정의</strong>로 정리, 사회 변화의 매개자, 디지털·다문화 조항, <strong>환경 조항 신설</strong></td></tr>
 </tbody>
 </table></div>
 <h3>7. 한국적 윤리 쟁점</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>쟁점</th>
@@ -995,26 +746,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>가족주의 vs 자기결정</td>
-<td>결혼·의료·입원에 가족이 결정권 행사</td>
-<td>자기결정은 양보 불가, 실현은 가족과 협력 속에서</td>
-</tr>
-<tr>
-<td>위계문화와 옹호</td>
-<td>협상이 위계를 거스르는 것으로 보임</td>
-<td>집단적 옹호, 윤리강령 활용, 슈퍼바이저 지원</td>
-</tr>
-<tr>
-<td>다문화</td>
-<td>문화상대주의(인권 후퇴) vs 보편주의(문화식민주의)</td>
-<td>위치성을 인식하는 <strong>문화인지 윤리</strong></td>
-</tr>
-<tr>
-<td>디지털</td>
-<td>정보 비밀보장, 알고리즘 편향(유뱅크스), 행복e음</td>
-<td>새로운 권력관계를 다시 사유(12강)</td>
-</tr>
+<tr><td data-label="쟁점">가족주의 vs 자기결정</td><td data-label="핵심">결혼·의료·입원에 가족이 결정권 행사</td><td data-label="본 강의 입장">자기결정은 양보 불가, 실현은 가족과 협력 속에서</td></tr>
+<tr><td data-label="쟁점">위계문화와 옹호</td><td data-label="핵심">협상이 위계를 거스르는 것으로 보임</td><td data-label="본 강의 입장">집단적 옹호, 윤리강령 활용, 슈퍼바이저 지원</td></tr>
+<tr><td data-label="쟁점">다문화</td><td data-label="핵심">문화상대주의(인권 후퇴) vs 보편주의(문화식민주의)</td><td data-label="본 강의 입장">위치성을 인식하는 <strong>문화인지 윤리</strong></td></tr>
+<tr><td data-label="쟁점">디지털</td><td data-label="핵심">정보 비밀보장, 알고리즘 편향(유뱅크스), 행복e음</td><td data-label="본 강의 입장">새로운 권력관계를 다시 사유(12강)</td></tr>
 </tbody>
 </table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l5"><header class="lh"><span class="no">5강</span><h2>사회복지실천 관계</h2></header><div class="ct"><blockquote>
 <p>관계의 본질 · 바이스텍의 7대 원칙 · 전문적 경계 · 권력 비대칭</p>
@@ -1029,7 +764,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>컴튼과 갤러웨이(1999) 핵심 요소</strong>: 관심, 위임과 의무, 권위와 권력, 진실성·일치성, 공감, 명료한 의사소통, 통제된 정서 관여.</li>
 <li><strong>단방향성</strong>: 클라이언트 욕구 충족을 위한 관계. 사회복지사의 외로움·인정 욕구에 클라이언트를 쓰면 안 됨.</li>
 </ul>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>로저스(1957) 도움 관계 3조건</th>
@@ -1037,26 +772,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>일치성·진실성</td>
-<td>안전한 공간 제공</td>
-</tr>
-<tr>
-<td>무조건적 긍정적 존중</td>
-<td>새로운 관계 경험(학대·배신 경험자에게)</td>
-</tr>
-<tr>
-<td>공감적 이해</td>
-<td>자기인식의 매개</td>
-</tr>
-<tr>
-<td>—</td>
-<td>임파워먼트의 매개</td>
-</tr>
+<tr><td data-label="로저스(1957) 도움 관계 3조건">일치성·진실성</td><td data-label="관계의 네 가지 기능">안전한 공간 제공</td></tr>
+<tr><td data-label="로저스(1957) 도움 관계 3조건">무조건적 긍정적 존중</td><td data-label="관계의 네 가지 기능">새로운 관계 경험(학대·배신 경험자에게)</td></tr>
+<tr><td data-label="로저스(1957) 도움 관계 3조건">공감적 이해</td><td data-label="관계의 네 가지 기능">자기인식의 매개</td></tr>
+<tr><td data-label="로저스(1957) 도움 관계 3조건">—</td><td data-label="관계의 네 가지 기능">임파워먼트의 매개</td></tr>
 </tbody>
 </table></div>
 <h3>3. 바이스텍의 7대 원칙</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>단계</th>
@@ -1066,53 +789,18 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 출발점</td>
-<td>① 개별화</td>
-<td>범주(빈민·우울증 환자)가 아닌 고유한 개인</td>
-<td>'무직 청년'이 아닌 김민서로</td>
-</tr>
-<tr>
-<td></td>
-<td>② 의도적 감정표현</td>
-<td>부정적 감정도 표현하도록 허용·격려</td>
-<td>'살고 싶지 않아요'가 나올 수 있는 공간</td>
-</tr>
-<tr>
-<td></td>
-<td>③ 통제된 정서 관여</td>
-<td>둔감하지도 압도되지도 않게 감정을 의식적으로 다룸</td>
-<td>셀프케어·훈련</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 심화</td>
-<td>④ 수용</td>
-<td>있는 그대로 받아들임(행동에 동의하는 것은 아님)</td>
-<td>입원 거부를 옳다고 하지 않되 사람은 존중</td>
-</tr>
-<tr>
-<td></td>
-<td>⑤ 비심판적 태도</td>
-<td>도덕적 판단을 일방적으로 부과하지 않음</td>
-<td>거부 이유를 판단 없이 들음</td>
-</tr>
-<tr>
-<td></td>
-<td>⑥ 자기결정</td>
-<td>결정의 주체</td>
-<td>한계 안에서 보호를 함께</td>
-</tr>
-<tr>
-<td></td>
-<td>⑦ 비밀보장</td>
-<td>신뢰의 토대</td>
-<td>약속을 행동으로</td>
-</tr>
+<tr><td data-label="단계"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 출발점</td><td data-label="원칙">① 개별화</td><td data-label="핵심">범주(빈민·우울증 환자)가 아닌 고유한 개인</td><td data-label="김민서 씨">'무직 청년'이 아닌 김민서로</td></tr>
+<tr><td data-label="단계"></td><td data-label="원칙">② 의도적 감정표현</td><td data-label="핵심">부정적 감정도 표현하도록 허용·격려</td><td data-label="김민서 씨">'살고 싶지 않아요'가 나올 수 있는 공간</td></tr>
+<tr><td data-label="단계"></td><td data-label="원칙">③ 통제된 정서 관여</td><td data-label="핵심">둔감하지도 압도되지도 않게 감정을 의식적으로 다룸</td><td data-label="김민서 씨">셀프케어·훈련</td></tr>
+<tr><td data-label="단계"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 심화</td><td data-label="원칙">④ 수용</td><td data-label="핵심">있는 그대로 받아들임(행동에 동의하는 것은 아님)</td><td data-label="김민서 씨">입원 거부를 옳다고 하지 않되 사람은 존중</td></tr>
+<tr><td data-label="단계"></td><td data-label="원칙">⑤ 비심판적 태도</td><td data-label="핵심">도덕적 판단을 일방적으로 부과하지 않음</td><td data-label="김민서 씨">거부 이유를 판단 없이 들음</td></tr>
+<tr><td data-label="단계"></td><td data-label="원칙">⑥ 자기결정</td><td data-label="핵심">결정의 주체</td><td data-label="김민서 씨">한계 안에서 보호를 함께</td></tr>
+<tr><td data-label="단계"></td><td data-label="원칙">⑦ 비밀보장</td><td data-label="핵심">신뢰의 토대</td><td data-label="김민서 씨">약속을 행동으로</td></tr>
 </tbody>
 </table></div>
 <p>한국적 쟁점: 행정 분류(수급자·한부모)가 개별화를 침해 / 가족 배제 ≠ 자기결정 / 이혼·미혼모·정신질환 낙인 점검.</p>
 <h3>4. 라포와 신뢰</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -1121,22 +809,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>의미</td>
-<td>정서적 연결·상호 신뢰의 <em>시작점</em></td>
-<td>경험이 쌓여 형성되는 <em>깊이</em></td>
-</tr>
-<tr>
-<td>조건</td>
-<td>따뜻한 환영, 적극적 경청, 공감·비판단, 역할 설명(할 수 있는 것과 없는 것), 클라이언트의 속도 존중</td>
-<td>일관성, 진실성, 유능성(모르면 모른다고), 비밀보장의 실천</td>
-</tr>
+<tr><td data-label="구분">의미</td><td data-label="라포">정서적 연결·상호 신뢰의 <em>시작점</em></td><td data-label="신뢰">경험이 쌓여 형성되는 <em>깊이</em></td></tr>
+<tr><td data-label="구분">조건</td><td data-label="라포">따뜻한 환영, 적극적 경청, 공감·비판단, 역할 설명(할 수 있는 것과 없는 것), 클라이언트의 속도 존중</td><td data-label="신뢰">일관성, 진실성, 유능성(모르면 모른다고), 비밀보장의 실천</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>한국 사회의 신뢰 형성 도전</strong> — 일반화된 불신 사회(퍼트넘). 소득조사·서류 절차가 '가난을 증명해야 한다'는 느낌, 짧은 면담·잦은 담당자 교체. 클라이언트의 경계는 개인이 아니라 맥락의 산물 → 제도·기관 차원에서 함께 다뤄야 함.</p>
 <h3>5. 전이와 역전이</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>개념</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -1145,16 +825,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>전이</td>
-<td>클라이언트가 과거 관계의 감정을 사회복지사에게 옮김</td>
-<td>권위적 부모 → 두려움·반항</td>
-</tr>
-<tr>
-<td>역전이</td>
-<td>사회복지사가 자기 과거 관계의 감정을 클라이언트에게 옮김</td>
-<td>청소년에게서 동생을 보며 과보호</td>
-</tr>
+<tr><td data-label="구분">전이</td><td data-label="의미">클라이언트가 과거 관계의 감정을 사회복지사에게 옮김</td><td data-label="예">권위적 부모 → 두려움·반항</td></tr>
+<tr><td data-label="구분">역전이</td><td data-label="의미">사회복지사가 자기 과거 관계의 감정을 클라이언트에게 옮김</td><td data-label="예">청소년에게서 동생을 보며 과보호</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -1169,7 +841,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>경계 침해 예: 사적 고민 토로, 사적 장소, SNS 친구. 예방: 자기점검, 슈퍼비전, 동료 대화, 기관 정책, 시작 시 소통 방식 합의.</li>
 </ul>
 <h3>7. 권력 비대칭</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>힐리(2014) 네 구조</th>
@@ -1178,26 +850,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>정보 접근</td>
-<td>사회복지사만 기록·평가 권한</td>
-<td>비대칭을 인식(완전 제거 불가)</td>
-</tr>
-<tr>
-<td>자원 통제</td>
-<td>서비스·기관 연결을 사회복지사가 통제</td>
-<td>권한과 한계를 투명하게 설명</td>
-</tr>
-<tr>
-<td>전문 지식</td>
-<td>전문 언어</td>
-<td>일상 언어로 풀어 설명, 모든 단계 참여 확대</td>
-</tr>
-<tr>
-<td>사회적 위치</td>
-<td>계급·교육·문화 차이</td>
-<td>위치성 성찰("40대 기혼 정규직인 나는 그를 어떻게 보는가"), 구조적 옹호</td>
-</tr>
+<tr><td data-label="힐리(2014) 네 구조">정보 접근</td><td data-label="내용">사회복지사만 기록·평가 권한</td><td data-label="완화 방법">비대칭을 인식(완전 제거 불가)</td></tr>
+<tr><td data-label="힐리(2014) 네 구조">자원 통제</td><td data-label="내용">서비스·기관 연결을 사회복지사가 통제</td><td data-label="완화 방법">권한과 한계를 투명하게 설명</td></tr>
+<tr><td data-label="힐리(2014) 네 구조">전문 지식</td><td data-label="내용">전문 언어</td><td data-label="완화 방법">일상 언어로 풀어 설명, 모든 단계 참여 확대</td></tr>
+<tr><td data-label="힐리(2014) 네 구조">사회적 위치</td><td data-label="내용">계급·교육·문화 차이</td><td data-label="완화 방법">위치성 성찰("40대 기혼 정규직인 나는 그를 어떻게 보는가"), 구조적 옹호</td></tr>
 </tbody>
 </table></div>
 <h3>8. 새로운 도전</h3>
@@ -1221,7 +877,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>다층적 기능: 신뢰 형성, 감정 처리, 정보 수집, 합의 형성, 변화 매개.</li>
 </ul>
 <h3><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 3. 면담의 종류와 단계</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>유형</th>
@@ -1229,25 +885,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>정보수집 면담</td>
-<td>클라이언트·환경 정보(접수·사정)</td>
-</tr>
-<tr>
-<td>사정 면담</td>
-<td>정보를 함께 검토하며 의미 파악</td>
-</tr>
-<tr>
-<td>치료적 면담</td>
-<td>상담·문제해결 등 변화 매개</td>
-</tr>
-<tr>
-<td>정책자문 면담</td>
-<td>정책 결정·옹호(거시)</td>
-</tr>
+<tr><td data-label="유형">정보수집 면담</td><td data-label="목적">클라이언트·환경 정보(접수·사정)</td></tr>
+<tr><td data-label="유형">사정 면담</td><td data-label="목적">정보를 함께 검토하며 의미 파악</td></tr>
+<tr><td data-label="유형">치료적 면담</td><td data-label="목적">상담·문제해결 등 변화 매개</td></tr>
+<tr><td data-label="유형">정책자문 면담</td><td data-label="목적">정책 결정·옹호(거시)</td></tr>
 </tbody>
 </table></div>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>단계</th>
@@ -1256,27 +900,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>도입</td>
-<td>환영, 자기소개, 목적·구조·시간 안내, <strong>비밀보장과 그 한계</strong></td>
-<td>5~10분이 성패 결정</td>
-</tr>
-<tr>
-<td>전개</td>
-<td>청취, 정보 수집, 감정 표현 격려, 욕구 사정, 자원 탐색</td>
-<td>경청·공감·질문·반영 통합</td>
-</tr>
-<tr>
-<td>종결</td>
-<td>요약, 다음 단계·만남 합의, 감정 점검</td>
-<td>서둘러 끝내면 감정이 남음</td>
-</tr>
+<tr><td data-label="단계">도입</td><td data-label="주요 활동">환영, 자기소개, 목적·구조·시간 안내, <strong>비밀보장과 그 한계</strong></td><td data-label="유의점">5~10분이 성패 결정</td></tr>
+<tr><td data-label="단계">전개</td><td data-label="주요 활동">청취, 정보 수집, 감정 표현 격려, 욕구 사정, 자원 탐색</td><td data-label="유의점">경청·공감·질문·반영 통합</td></tr>
+<tr><td data-label="단계">종결</td><td data-label="주요 활동">요약, 다음 단계·만남 합의, 감정 점검</td><td data-label="유의점">서둘러 끝내면 감정이 남음</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>면담 환경 준비</strong> — 물리적(사적·조용한 공간, 좌석 배치) / 시간적(보통 50분 내외, 정시 시작·종료) / 정서적(자기 감정 정리, 이전 면담 검토). 한국의 좁은 공간·짧은 시간은 기관 차원의 개선 과제.</p>
 <h3>4. 적극적 경청과 공감</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>적극적 경청</strong>(로저스 1980, 이건 2014): ① 온전한 집중 ② 내용 너머의 의미·감정 파악 ③ 이해한 바를 되돌려 확인</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>동정</th>
@@ -1284,14 +916,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>"당신이 안쓰럽다" — 거리를 두고 평가</td>
-<td>"당신의 관점에서 이해한다" — 함께 있음</td>
-</tr>
+<tr><td data-label="동정">"당신이 안쓰럽다" — 거리를 두고 평가</td><td data-label="공감">"당신의 관점에서 이해한다" — 함께 있음</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>경청을 방해하는 다섯 행동</strong> — 다음 질문 준비 / 자기 경험과 비교 / 성급한 조언·평가 / 침묵을 못 견딤 / 동시 업무</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>Egan(2014) 공감</th>
@@ -1300,22 +929,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>기본적 공감</td>
-<td>표현된 감정·의미를 정확히 반영</td>
-<td>"가족과 갈등이 계속돼 지치셨겠군요."</td>
-</tr>
-<tr>
-<td>심화적 공감</td>
-<td>표현하지 못한 감정을 함께 발견 (라포 형성 후)</td>
-<td>"분노 아래 가족을 잃을지 모른다는 두려움도…"</td>
-</tr>
+<tr><td data-label="Egan(2014) 공감">기본적 공감</td><td data-label="의미">표현된 감정·의미를 정확히 반영</td><td data-label="예">"가족과 갈등이 계속돼 지치셨겠군요."</td></tr>
+<tr><td data-label="Egan(2014) 공감">심화적 공감</td><td data-label="의미">표현하지 못한 감정을 함께 발견 (라포 형성 후)</td><td data-label="예">"분노 아래 가족을 잃을지 모른다는 두려움도…"</td></tr>
 </tbody>
 </table></div>
 <p>김민서 씨의 "괜찮아요" + 시선 회피·한숨 → 비언어를 함께 읽고 망설임을 인정해 줌.</p>
 <h3>5. 질문의 기술</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>개방형 vs 폐쇄형</strong> — 개방형("가장 힘든 지점은?")이 주된 모드. 폐쇄형("가족이 몇 명?")이 과하면 신문이 됨. 헵워스 권장 비율 <strong>3:1~4:1</strong>.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>질문 유형</th>
@@ -1324,35 +945,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>명료화</td>
-<td>의미를 분명히</td>
-<td>"괜찮다는 게 어떤 뜻인지…"</td>
-</tr>
-<tr>
-<td>탐색</td>
-<td>더 깊이</td>
-<td>"그 감정은 언제부터였나요?"</td>
-</tr>
-<tr>
-<td>가설적</td>
-<td>관점·가치</td>
-<td>"해결된다면 삶이 어떻게 달라질까요?"</td>
-</tr>
-<tr>
-<td>평가</td>
-<td>스스로 진전 평가</td>
-<td>"가장 잘 된 일은?"</td>
-</tr>
-<tr>
-<td>강점탐색</td>
-<td>강점 인식</td>
-<td>"이전엔 어떻게 극복하셨나요?"</td>
-</tr>
+<tr><td data-label="질문 유형">명료화</td><td data-label="목적">의미를 분명히</td><td data-label="예">"괜찮다는 게 어떤 뜻인지…"</td></tr>
+<tr><td data-label="질문 유형">탐색</td><td data-label="목적">더 깊이</td><td data-label="예">"그 감정은 언제부터였나요?"</td></tr>
+<tr><td data-label="질문 유형">가설적</td><td data-label="목적">관점·가치</td><td data-label="예">"해결된다면 삶이 어떻게 달라질까요?"</td></tr>
+<tr><td data-label="질문 유형">평가</td><td data-label="목적">스스로 진전 평가</td><td data-label="예">"가장 잘 된 일은?"</td></tr>
+<tr><td data-label="질문 유형">강점탐색</td><td data-label="목적">강점 인식</td><td data-label="예">"이전엔 어떻게 극복하셨나요?"</td></tr>
 </tbody>
 </table></div>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>피해야 할 질문</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>피해야 할 질문</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>유형</th>
@@ -1361,31 +962,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>유도 질문</td>
-<td>"화가 나셨겠죠?" 답을 암시</td>
-<td>"어떤 감정이 드셨나요?"</td>
-</tr>
-<tr>
-<td>다중 질문</td>
-<td>한 번에 여러 개 → 혼란</td>
-<td>하나씩</td>
-</tr>
-<tr>
-<td>'왜' 질문</td>
-<td>비난으로 들림</td>
-<td>"어떻게 그런 결정을…"</td>
-</tr>
-<tr>
-<td>판단적 질문</td>
-<td>평가 함축</td>
-<td>판단 없는 개방형</td>
-</tr>
+<tr><td data-label="유형">유도 질문</td><td data-label="문제점">"화가 나셨겠죠?" 답을 암시</td><td data-label="대안">"어떤 감정이 드셨나요?"</td></tr>
+<tr><td data-label="유형">다중 질문</td><td data-label="문제점">한 번에 여러 개 → 혼란</td><td data-label="대안">하나씩</td></tr>
+<tr><td data-label="유형">'왜' 질문</td><td data-label="문제점">비난으로 들림</td><td data-label="대안">"어떻게 그런 결정을…"</td></tr>
+<tr><td data-label="유형">판단적 질문</td><td data-label="문제점">평가 함축</td><td data-label="대안">판단 없는 개방형</td></tr>
 </tbody>
 </table></div>
 <h3>6. 반응과 반영 기술</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>여섯 가지 핵심 기술</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>여섯 가지 핵심 기술</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>기술</th>
@@ -1394,36 +979,12 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>반영</td>
-<td>감정</td>
-<td>"인정받지 못한다고 느끼시는군요."</td>
-</tr>
-<tr>
-<td>재진술</td>
-<td>내용</td>
-<td>"인간관계 갈등이 가장 큰 어려움이군요."</td>
-</tr>
-<tr>
-<td><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 요약</td>
-<td>핵심 정리</td>
-<td>"가족·직장·건강에서 어려움을…"</td>
-</tr>
-<tr>
-<td>명료화</td>
-<td>모호한 부분</td>
-<td>"어떤 종류의 힘듦인지…"</td>
-</tr>
-<tr>
-<td>직면·도전</td>
-<td>모순·회피 인식</td>
-<td>"변화를 원하면서 지금 패턴을 계속하고 싶은 면도…"</td>
-</tr>
-<tr>
-<td>침묵</td>
-<td>생각·감정 정리 시간</td>
-<td>견디는 것이 성숙도의 지표</td>
-</tr>
+<tr><td data-label="기술">반영</td><td data-label="초점">감정</td><td data-label="예">"인정받지 못한다고 느끼시는군요."</td></tr>
+<tr><td data-label="기술">재진술</td><td data-label="초점">내용</td><td data-label="예">"인간관계 갈등이 가장 큰 어려움이군요."</td></tr>
+<tr><td data-label="기술"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 요약</td><td data-label="초점">핵심 정리</td><td data-label="예">"가족·직장·건강에서 어려움을…"</td></tr>
+<tr><td data-label="기술">명료화</td><td data-label="초점">모호한 부분</td><td data-label="예">"어떤 종류의 힘듦인지…"</td></tr>
+<tr><td data-label="기술">직면·도전</td><td data-label="초점">모순·회피 인식</td><td data-label="예">"변화를 원하면서 지금 패턴을 계속하고 싶은 면도…"</td></tr>
+<tr><td data-label="기술">침묵</td><td data-label="초점">생각·감정 정리 시간</td><td data-label="예">견디는 것이 성숙도의 지표</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -1432,8 +993,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>7. 접수 면담의 윤리</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>접수 면담의 다섯 목적</strong>(보통 30~60분) — 호소 문제·욕구 파악 / 기관 서비스 적합성 평가 / 라포 형성 / 권리·정책·한계 안내 / 향후 활동 합의</p>
-<p><strong>고지된 동의(Informed Consent) 다섯 요소</strong></p>
-<div class="tw"><table>
+<p class="sh"><strong>고지된 동의(Informed Consent) 다섯 요소</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>요소</th>
@@ -1441,26 +1002,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>서비스 성격·목적</td>
-<td>기대할 수 있는 것과 없는 것</td>
-</tr>
-<tr>
-<td>사회복지사 자격·역할</td>
-<td>자격·경력·기관·역할</td>
-</tr>
-<tr>
-<td>비밀보장과 그 한계</td>
-<td>학대 신고의무, 자해·타해 위험</td>
-</tr>
-<tr>
-<td>클라이언트의 권리</td>
-<td>서비스 거부권, 기록 열람권, 의뢰 요청권</td>
-</tr>
-<tr>
-<td>기관 정책</td>
-<td>시간·횟수·비용·취소</td>
-</tr>
+<tr><td data-label="요소">서비스 성격·목적</td><td data-label="내용">기대할 수 있는 것과 없는 것</td></tr>
+<tr><td data-label="요소">사회복지사 자격·역할</td><td data-label="내용">자격·경력·기관·역할</td></tr>
+<tr><td data-label="요소">비밀보장과 그 한계</td><td data-label="내용">학대 신고의무, 자해·타해 위험</td></tr>
+<tr><td data-label="요소">클라이언트의 권리</td><td data-label="내용">서비스 거부권, 기록 열람권, 의뢰 요청권</td></tr>
+<tr><td data-label="요소">기관 정책</td><td data-label="내용">시간·횟수·비용·취소</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 고지된 동의는 서명 절차가 아니라 <em>자율성을 존중하는 의사소통이자 하나의 개입 과정</em>.</p>
@@ -1484,7 +1030,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 사정의 본질</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>사정의 정의(컴튼과 갤러웨이)</strong> — 상황을 이해하고 개입 방향을 정하기 위해 정보를 수집·분석·통합하는 과정. ① 의미 있는 이해 ② 정보의 재구성 ③ 개입 방향 결정. 헵워스의 세 차원: <strong>문제·사람·환경</strong>.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -1493,31 +1039,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>영역</td>
-<td>의학·정신의학·심리학</td>
-<td>사회복지</td>
-</tr>
-<tr>
-<td>활동</td>
-<td>범주·병명·증상으로 분류</td>
-<td>다차원적·맥락적 이해</td>
-</tr>
-<tr>
-<td>살리비</td>
-<td>매뉴얼 범주에 끼워 맞춤</td>
-<td>전체적인 삶을 이해</td>
-</tr>
-<tr>
-<td>예</td>
-<td>DSM-5 우울증 진단</td>
-<td>우울이 생긴 맥락(생리적? 실업?)</td>
-</tr>
-<tr>
-<td>핵심</td>
-<td>분류, 라벨링</td>
-<td>이해, 이야기</td>
-</tr>
+<tr><td data-label="구분">영역</td><td data-label="진단">의학·정신의학·심리학</td><td data-label="사정">사회복지</td></tr>
+<tr><td data-label="구분">활동</td><td data-label="진단">범주·병명·증상으로 분류</td><td data-label="사정">다차원적·맥락적 이해</td></tr>
+<tr><td data-label="구분">살리비</td><td data-label="진단">매뉴얼 범주에 끼워 맞춤</td><td data-label="사정">전체적인 삶을 이해</td></tr>
+<tr><td data-label="구분">예</td><td data-label="진단">DSM-5 우울증 진단</td><td data-label="사정">우울이 생긴 맥락(생리적? 실업?)</td></tr>
+<tr><td data-label="구분">핵심</td><td data-label="진단">분류, 라벨링</td><td data-label="사정">이해, 이야기</td></tr>
 </tbody>
 </table></div>
 <p>윤리적 차원: 정보 수집의 윤리(고지된 동의), 정의의 권력, 클라이언트 참여 — 사정은 클라이언트<em>에 대해</em>가 아니라 <em>함께</em> 하는 활동.</p>
@@ -1527,7 +1053,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 집단체계 사정기술">🔧</span> <strong>가족·집단·지역사회 사정</strong>: 가족은 구조·발달단계·의사소통·권력 구조·가치·자원·갈등(가계도·생태도), 구성원마다 관점이 다르니 통합. 집단은 형성과 역동, 지역사회는 욕구·자원·구조.</li>
 </ul>
 <p><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>사정의 4단계</strong> — ① 정보 수집(면담·관찰·기록·자원) → ② 정보 분석 → ③ 가설 형성 → ④ 합의 형성. <em>선형이 아니라 순환적</em>, 첫 만남부터 종결까지 계속. '사정 끝'을 선언하면 고정된 라벨에 갇힘.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>영역</th>
@@ -1536,35 +1062,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>개인</td>
-<td>생물·심리·사회</td>
-<td>생물심리사회 모델, 사회력</td>
-</tr>
-<tr>
-<td>가족</td>
-<td>구조·관계·역동</td>
-<td>가계도, 가족체계이론</td>
-</tr>
-<tr>
-<td>환경</td>
-<td>외부 체계와의 관계</td>
-<td>생태도, 지지망 분석</td>
-</tr>
-<tr>
-<td>강점</td>
-<td>강점·자원·역량</td>
-<td>코거, 랩의 강점 모델</td>
-</tr>
-<tr>
-<td>지역사회</td>
-<td>욕구·자원·구조</td>
-<td>지역사회 진단, 자산 매핑</td>
-</tr>
+<tr><td data-label="영역">개인</td><td data-label="초점">생물·심리·사회</td><td data-label="주요 도구">생물심리사회 모델, 사회력</td></tr>
+<tr><td data-label="영역">가족</td><td data-label="초점">구조·관계·역동</td><td data-label="주요 도구">가계도, 가족체계이론</td></tr>
+<tr><td data-label="영역">환경</td><td data-label="초점">외부 체계와의 관계</td><td data-label="주요 도구">생태도, 지지망 분석</td></tr>
+<tr><td data-label="영역">강점</td><td data-label="초점">강점·자원·역량</td><td data-label="주요 도구">코거, 랩의 강점 모델</td></tr>
+<tr><td data-label="영역">지역사회</td><td data-label="초점">욕구·자원·구조</td><td data-label="주요 도구">지역사회 진단, 자산 매핑</td></tr>
 </tbody>
 </table></div>
 <h3>4. 주요 사정 도구</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>도구</th>
@@ -1573,31 +1079,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <span class="mk mt" title="실천기술론 출제: 생태도를 활용한 사정">🔧</span> 생태도 (앤 하트만, 1978)</td>
-<td>클라이언트를 중심 원에, 가족·학교·직장·기관을 주변에. <strong>굵은 선=강한 관계, 점선=약한 관계, 사선=갈등</strong></td>
-<td>시각화, 함께 그리면 변화의 매개, 약하거나 없는 관계(자원) 발견</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 가계도 (보웬 개발, 맥골드릭 발전)</td>
-<td><strong>3대 이상</strong> 가족을 표준 기호로</td>
-<td>구조 패턴, 세대 간 관계, 가족력의 세대 전이, 가족의 신화·비밀. 깊은 감정이 드러나니 정서적 동반</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 사회력</td>
-<td>출생~이주까지 생애사를 시간순 서술</td>
-<td>현재를 삶 전체의 흐름에서 이해</td>
-</tr>
-<tr>
-<td><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 강점관점 사정">🔧</span> 강점 사정</td>
-<td>코거(1994): 인지·정서·동기·대인관계·환경 강점 / 랩과 고샤: 정신건강 강점 모델</td>
-<td>행복e음 표준화는 개별화를 제약할 수 있음</td>
-</tr>
+<tr><td data-label="도구"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <span class="mk mt" title="실천기술론 출제: 생태도를 활용한 사정">🔧</span> 생태도 (앤 하트만, 1978)</td><td data-label="방법">클라이언트를 중심 원에, 가족·학교·직장·기관을 주변에. <strong>굵은 선=강한 관계, 점선=약한 관계, 사선=갈등</strong></td><td data-label="특징·주의">시각화, 함께 그리면 변화의 매개, 약하거나 없는 관계(자원) 발견</td></tr>
+<tr><td data-label="도구"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 가계도 (보웬 개발, 맥골드릭 발전)</td><td data-label="방법"><strong>3대 이상</strong> 가족을 표준 기호로</td><td data-label="특징·주의">구조 패턴, 세대 간 관계, 가족력의 세대 전이, 가족의 신화·비밀. 깊은 감정이 드러나니 정서적 동반</td></tr>
+<tr><td data-label="도구"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 사회력</td><td data-label="방법">출생~이주까지 생애사를 시간순 서술</td><td data-label="특징·주의">현재를 삶 전체의 흐름에서 이해</td></tr>
+<tr><td data-label="도구"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 강점관점 사정">🔧</span> 강점 사정</td><td data-label="방법">코거(1994): 인지·정서·동기·대인관계·환경 강점 / 랩과 고샤: 정신건강 강점 모델</td><td data-label="특징·주의">행복e음 표준화는 개별화를 제약할 수 있음</td></tr>
 </tbody>
 </table></div>
 <h3>5. 강점 기반 사정</h3>
 <p>결함 모델의 문제: 자존감·동기 손상, 시야 축소, 권력 비대칭 고착.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>비교</th>
@@ -1606,31 +1096,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>질문</td>
-<td>무엇이 잘못됐나?</td>
-<td>무엇을 잘하나? 어떤 자원이 있나?</td>
-</tr>
-<tr>
-<td>초점</td>
-<td>문제·결함·병리</td>
-<td>자원·강점·회복력</td>
-</tr>
-<tr>
-<td>클라이언트</td>
-<td>결함을 가진 객체</td>
-<td>강점을 가진 주체</td>
-</tr>
-<tr>
-<td>사회복지사</td>
-<td>진단하는 전문가</td>
-<td>발견하는 동반자</td>
-</tr>
-<tr>
-<td>대표 학자</td>
-<td>리치몬드(진단주의)</td>
-<td>살리비, 랩, 코거</td>
-</tr>
+<tr><td data-label="비교">질문</td><td data-label="결함 사정">무엇이 잘못됐나?</td><td data-label="강점 사정">무엇을 잘하나? 어떤 자원이 있나?</td></tr>
+<tr><td data-label="비교">초점</td><td data-label="결함 사정">문제·결함·병리</td><td data-label="강점 사정">자원·강점·회복력</td></tr>
+<tr><td data-label="비교">클라이언트</td><td data-label="결함 사정">결함을 가진 객체</td><td data-label="강점 사정">강점을 가진 주체</td></tr>
+<tr><td data-label="비교">사회복지사</td><td data-label="결함 사정">진단하는 전문가</td><td data-label="강점 사정">발견하는 동반자</td></tr>
+<tr><td data-label="비교">대표 학자</td><td data-label="결함 사정">리치몬드(진단주의)</td><td data-label="강점 사정">살리비, 랩, 코거</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -1647,7 +1117,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>한국 쟁점: 디지털 표준화(입력 정보가 '디지털 그림자'로 따라다님), 1~2회 단시간 사정, 다문화 사정(도구의 문화 적합성).</li>
 <li><strong>알고리즘 사정의 네 약속</strong>: 일관성, 효율성, 예측성, 객관성 — 미국·영국·호주 아동학대·수급 결정, 한국 통합돌봄·사각지대 발굴에 도입 중.</li>
 </ul>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>유뱅크스 『Automating Inequality』(2018)의 세 비판</strong></p>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>유뱅크스 『Automating Inequality』(2018)의 세 비판</strong></p>
 <ol>
 <li>객관적이지 않음 — 학습 데이터가 불평등을 반영해 재생산</li>
 <li>책임 소재 불분명 — '시스템이 결정했다'</li>
@@ -1667,8 +1137,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>정의</strong>: 클라이언트와 환경의 변화를 만들기 위한 의도적 활동. ① 목적은 변화 ② 사정에 근거한 계획적 활동 ③ 클라이언트와 환경 모두가 대상.</li>
 <li><strong>사정–개입–평가의 순환성</strong>: 비선형, 상호작용 속에서 계속 조정. 전문성은 매뉴얼을 따르는 능력이 아니라 <em>조정·판단하는 능력</em>.</li>
 </ul>
-<p><strong>도널드 쇤(1983) – 성찰적 실천가</strong></p>
-<div class="tw"><table>
+<p class="sh"><strong>도널드 쇤(1983) – 성찰적 실천가</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>개념</th>
@@ -1676,27 +1146,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>기술적 합리성 비판</td>
-<td>이론·기법을 매뉴얼처럼 적용하는 것만으로는 부족</td>
-</tr>
-<tr>
-<td>지형 은유</td>
-<td>이론이 통하는 '높고 단단한 땅' vs 정답 없는 '늪지대'(중요한 문제는 늪에)</td>
-</tr>
-<tr>
-<td>행위 중 성찰</td>
-<td>일하면서 상황을 읽고 조정, 끝난 뒤 되짚음(상황과의 대화)</td>
-</tr>
-<tr>
-<td>이중고리 학습(아지리스)</td>
-<td>답만 고치는 단일고리를 넘어 규칙과 전제 자체를 다시 물음</td>
-</tr>
+<tr><td data-label="개념">기술적 합리성 비판</td><td data-label="의미">이론·기법을 매뉴얼처럼 적용하는 것만으로는 부족</td></tr>
+<tr><td data-label="개념">지형 은유</td><td data-label="의미">이론이 통하는 '높고 단단한 땅' vs 정답 없는 '늪지대'(중요한 문제는 늪에)</td></tr>
+<tr><td data-label="개념">행위 중 성찰</td><td data-label="의미">일하면서 상황을 읽고 조정, 끝난 뒤 되짚음(상황과의 대화)</td></tr>
+<tr><td data-label="개념">이중고리 학습(아지리스)</td><td data-label="의미">답만 고치는 단일고리를 넘어 규칙과 전제 자체를 다시 물음</td></tr>
 </tbody>
 </table></div>
 <h3>3. 개입 계획의 수립</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>목표 설정의 SMART 원칙</strong> (예: 3개월 안에 주 3회 30분씩 걷기)</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>원칙</th>
@@ -1705,31 +1163,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>S – Specific</td>
-<td>구체적</td>
-<td>'걷기'라는 행동</td>
-</tr>
-<tr>
-<td>M – Measurable</td>
-<td>측정 가능</td>
-<td>주 3회, 30분</td>
-</tr>
-<tr>
-<td>A – Achievable</td>
-<td>달성 가능</td>
-<td>실행할 수 있는 수준</td>
-</tr>
-<tr>
-<td>R – Relevant</td>
-<td>적합</td>
-<td>'건강해지고 싶다'는 욕구와 연결</td>
-</tr>
-<tr>
-<td>T – Time-bound</td>
-<td>시간 제한</td>
-<td>3개월 안에</td>
-</tr>
+<tr><td data-label="원칙">S – Specific</td><td data-label="의미">구체적</td><td data-label="예">'걷기'라는 행동</td></tr>
+<tr><td data-label="원칙">M – Measurable</td><td data-label="의미">측정 가능</td><td data-label="예">주 3회, 30분</td></tr>
+<tr><td data-label="원칙">A – Achievable</td><td data-label="의미">달성 가능</td><td data-label="예">실행할 수 있는 수준</td></tr>
+<tr><td data-label="원칙">R – Relevant</td><td data-label="의미">적합</td><td data-label="예">'건강해지고 싶다'는 욕구와 연결</td></tr>
+<tr><td data-label="원칙">T – Time-bound</td><td data-label="의미">시간 제한</td><td data-label="예">3개월 안에</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 주의: 원칙에 안 맞는다고 '건강해지고 싶다'는 욕구를 무시하면 안 됨 → 큰 욕구를 분해하되 욕구 자체를 존중.</p>
@@ -1738,7 +1176,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>계약</strong>: 목표·전략·역할·기간·평가 기준·변경 절차를 합의. 클라이언트의 <em>임파워먼트</em>(계약 당사자) + 사회복지사의 <em>책무성</em>(평가의 토대).</li>
 </ul>
 <h3><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 4. 미시 개입 모델</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c5">
 <thead>
 <tr>
 <th>비교</th>
@@ -1749,48 +1187,12 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>학자</td>
-<td>레이드·엡스타인(1972, 시카고대)</td>
-<td>벡(인지치료), 엘리스(합리정서치료)</td>
-<td>밀러·롤닉(알코올 의존 치료)</td>
-<td>드 셰이저·인수 김 버그</td>
-</tr>
-<tr>
-<td>핵심 가정</td>
-<td>어려움은 미완성 과업, 작은 성공이 큰 변화</td>
-<td>감정·행동은 사건에 대한 <em>해석</em>에서 비롯</td>
-<td>양가감정은 자연스러움</td>
-<td>해결책을 이미 가짐</td>
-</tr>
-<tr>
-<td>주요 기법</td>
-<td>표적 문제 확인 → 목표 → 과업 합의 → 수행·점검 → 종결</td>
-<td>자동적 사고 인식, 인지왜곡(흑백사고·재앙화·과잉일반화) 점검, 사고기록, 행동실험</td>
-<td>공감 표현, 불일치 발달, 저항과 함께 구르기, 자기효능감 지지</td>
-<td>기적질문, 척도질문(0~10), 예외 찾기, 대처질문</td>
-</tr>
-<tr>
-<td>기간</td>
-<td>단기 8~12회</td>
-<td>중단기 10~20회</td>
-<td>유연</td>
-<td>단기 3~10회</td>
-</tr>
-<tr>
-<td>강점</td>
-<td>구조적·실용적</td>
-<td>효과성 검증(우울·불안·PTSD)</td>
-<td>자율성 존중, 중독 영역</td>
-<td>강점 기반, 낙관적</td>
-</tr>
-<tr>
-<td>한계</td>
-<td>구조적 어려움 미반영</td>
-<td>임상화, 환경 변화 부족</td>
-<td>구조 분석 부족</td>
-<td>깊은 외상 회피</td>
-</tr>
+<tr><td data-label="비교">학자</td><td data-label="6️⃣ 과업중심">레이드·엡스타인(1972, 시카고대)</td><td data-label="6️⃣ 인지행동(CBT)">벡(인지치료), 엘리스(합리정서치료)</td><td data-label="6️⃣ 동기강화(MI)">밀러·롤닉(알코올 의존 치료)</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">드 셰이저·인수 김 버그</td></tr>
+<tr><td data-label="비교">핵심 가정</td><td data-label="6️⃣ 과업중심">어려움은 미완성 과업, 작은 성공이 큰 변화</td><td data-label="6️⃣ 인지행동(CBT)">감정·행동은 사건에 대한 <em>해석</em>에서 비롯</td><td data-label="6️⃣ 동기강화(MI)">양가감정은 자연스러움</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">해결책을 이미 가짐</td></tr>
+<tr><td data-label="비교">주요 기법</td><td data-label="6️⃣ 과업중심">표적 문제 확인 → 목표 → 과업 합의 → 수행·점검 → 종결</td><td data-label="6️⃣ 인지행동(CBT)">자동적 사고 인식, 인지왜곡(흑백사고·재앙화·과잉일반화) 점검, 사고기록, 행동실험</td><td data-label="6️⃣ 동기강화(MI)">공감 표현, 불일치 발달, 저항과 함께 구르기, 자기효능감 지지</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">기적질문, 척도질문(0~10), 예외 찾기, 대처질문</td></tr>
+<tr><td data-label="비교">기간</td><td data-label="6️⃣ 과업중심">단기 8~12회</td><td data-label="6️⃣ 인지행동(CBT)">중단기 10~20회</td><td data-label="6️⃣ 동기강화(MI)">유연</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">단기 3~10회</td></tr>
+<tr><td data-label="비교">강점</td><td data-label="6️⃣ 과업중심">구조적·실용적</td><td data-label="6️⃣ 인지행동(CBT)">효과성 검증(우울·불안·PTSD)</td><td data-label="6️⃣ 동기강화(MI)">자율성 존중, 중독 영역</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">강점 기반, 낙관적</td></tr>
+<tr><td data-label="비교">한계</td><td data-label="6️⃣ 과업중심">구조적 어려움 미반영</td><td data-label="6️⃣ 인지행동(CBT)">임상화, 환경 변화 부족</td><td data-label="6️⃣ 동기강화(MI)">구조 분석 부족</td><td data-label="6️⃣ 🔧 해결중심(SFBT)">깊은 외상 회피</td></tr>
 </tbody>
 </table></div>
 <h3>5. 중시(메조)·거시(매크로) 개입</h3>
@@ -1800,7 +1202,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>기관·체계 개입</strong>: 정책 변경 요청, 다기관 사례회의, 시스템 개선 — 미시와 거시를 잇는 다리, 사회복지사가 가장 직접 거시에 기여하는 활동.</li>
 <li><strong>거시 개입</strong>: 옹호(협상·정책 제안·입법·미디어·연대), 공동체 조직화(10강), 정책 개입(맥너트·호퍼 5단계: 문제 정의 → 대안 설계 → 영향 평가 → 결정 참여 → 시행 평가).</li>
 </ul>
-<div class="tw"><table>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>구분</th>
@@ -1810,34 +1212,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>대상</td>
-<td>개인·가족·소집단</td>
-<td>집단·기관·이웃</td>
-<td>지역사회·정책·구조</td>
-</tr>
-<tr>
-<td>활동</td>
-<td>상담·치료·사례관리</td>
-<td>가족치료·집단실천·기관 협력</td>
-<td>옹호·조직화·정책개입</td>
-</tr>
-<tr>
-<td>변화 단위</td>
-<td>인지·정서·행동</td>
-<td>체계와 관계</td>
-<td>법·정책·제도·문화</td>
-</tr>
-<tr>
-<td>역할</td>
-<td>임상가, 사례관리자</td>
-<td>촉진자, 중재자</td>
-<td>옹호자, 조직가, 정책기획자</td>
-</tr>
+<tr><td data-label="구분">대상</td><td data-label="미시">개인·가족·소집단</td><td data-label="중시">집단·기관·이웃</td><td data-label="거시">지역사회·정책·구조</td></tr>
+<tr><td data-label="구분">활동</td><td data-label="미시">상담·치료·사례관리</td><td data-label="중시">가족치료·집단실천·기관 협력</td><td data-label="거시">옹호·조직화·정책개입</td></tr>
+<tr><td data-label="구분">변화 단위</td><td data-label="미시">인지·정서·행동</td><td data-label="중시">체계와 관계</td><td data-label="거시">법·정책·제도·문화</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="미시">임상가, 사례관리자</td><td data-label="중시">촉진자, 중재자</td><td data-label="거시">옹호자, 조직가, 정책기획자</td></tr>
 </tbody>
 </table></div>
 <h3>6. 한국적 개입의 쟁점</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>쟁점</th>
@@ -1845,22 +1227,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>단시간 개입(사례 과다·행정 부담)</td>
-<td>단기 모델, 자조 역량 강화, 자원 연계 효율화, 구조적 옹호</td>
-</tr>
-<tr>
-<td>매뉴얼화의 함정(개별화 약화, 매뉴얼 없으면 마비)</td>
-<td>도구로 쓰되 매몰되지 않기</td>
-</tr>
-<tr>
-<td>미시–거시 통합의 구조적 어려움</td>
-<td>다층적 시야, 동료·기관 협력, 협회·연대 활용</td>
-</tr>
+<tr><td data-label="쟁점">단시간 개입(사례 과다·행정 부담)</td><td data-label="대응">단기 모델, 자조 역량 강화, 자원 연계 효율화, 구조적 옹호</td></tr>
+<tr><td data-label="쟁점">매뉴얼화의 함정(개별화 약화, 매뉴얼 없으면 마비)</td><td data-label="대응">도구로 쓰되 매몰되지 않기</td></tr>
+<tr><td data-label="쟁점">미시–거시 통합의 구조적 어려움</td><td data-label="대응">다층적 시야, 동료·기관 협력, 협회·연대 활용</td></tr>
 </tbody>
 </table></div>
 <h3><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 7. 통합적 개입 – 김민서 씨</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>차원</th>
@@ -1868,18 +1241,9 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>미시</td>
-<td>CBT 또는 SFBT, 정신과 의뢰·약물치료, 강점 탐색, 자살위험 평가와 안전계획</td>
-</tr>
-<tr>
-<td>중시</td>
-<td>가족관계 재연결, 청년 우울 자조집단, 복지관·청년센터 자원, 사회기술훈련</td>
-</tr>
-<tr>
-<td>거시</td>
-<td>비정규직 실직 후 안전망 정책 옹호, 청년 정신건강 정책 제안, 기관·시민단체 연대</td>
-</tr>
+<tr><td data-label="차원">미시</td><td data-label="개입">CBT 또는 SFBT, 정신과 의뢰·약물치료, 강점 탐색, 자살위험 평가와 안전계획</td></tr>
+<tr><td data-label="차원">중시</td><td data-label="개입">가족관계 재연결, 청년 우울 자조집단, 복지관·청년센터 자원, 사회기술훈련</td></tr>
+<tr><td data-label="차원">거시</td><td data-label="개입">비정규직 실직 후 안전망 정책 옹호, 청년 정신건강 정책 제안, 기관·시민단체 연대</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -1899,7 +1263,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>네 가지 질문</strong>: ① 목표가 달성됐나 ② 사회복지 활동 때문인가 ③ 자원에 비해 적절한가 ④ 다른 방법이 더 낫지 않았나</li>
 <li>사정의 목표가 평가 기준이 되고, 평가 결과가 사정을 수정함.</li>
 </ul>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>평가 주체</th>
@@ -1907,24 +1271,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>자체 평가(사회복지사)</td>
-<td>책무성 — 공적 자원 사용에 대한 책임</td>
-</tr>
-<tr>
-<td>동료 평가(동료·슈퍼바이저)</td>
-<td>개선 — 다음 활동의 질 향상</td>
-</tr>
-<tr>
-<td>외부 평가(클라이언트·전문가·정부; 한국은 보건복지부·공동모금회)</td>
-<td>지식 생산 / 윤리적 의무(해로운 개입 방지)</td>
-</tr>
+<tr><td data-label="평가 주체">자체 평가(사회복지사)</td><td data-label="평가의 네 가지 목적">책무성 — 공적 자원 사용에 대한 책임</td></tr>
+<tr><td data-label="평가 주체">동료 평가(동료·슈퍼바이저)</td><td data-label="평가의 네 가지 목적">개선 — 다음 활동의 질 향상</td></tr>
+<tr><td data-label="평가 주체">외부 평가(클라이언트·전문가·정부; 한국은 보건복지부·공동모금회)</td><td data-label="평가의 네 가지 목적">지식 생산 / 윤리적 의무(해로운 개입 방지)</td></tr>
 </tbody>
 </table></div>
 <p>책무성 목적의 정량 지표는 개선·지식 생산을 제약할 수 있어 균형 필요. 클라이언트의 목소리가 형식적 만족도 조사를 넘어서야 함.</p>
 <h3>3. 평가의 유형과 방법</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>평가의 유형</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>기준</th>
@@ -1933,31 +1288,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>시점</td>
-<td><strong>형성평가</strong></td>
-<td>진행 중 — 의도대로 되는지 점검해 수정·개선 (매 회기 후)</td>
-</tr>
-<tr>
-<td>시점</td>
-<td><strong>총괄평가</strong></td>
-<td>종결 시 — 전반적 효과·달성도, 지속·확대·종료 결정 근거</td>
-</tr>
-<tr>
-<td>대상</td>
-<td><strong>과정평가</strong></td>
-<td>어떻게 수행했나 (절차·방법·자원)</td>
-</tr>
-<tr>
-<td>대상</td>
-<td><strong>결과평가</strong></td>
-<td>무엇을 이루었나 (결과·효과·영향)</td>
-</tr>
+<tr><td data-label="기준">시점</td><td data-label="유형"><strong>형성평가</strong></td><td data-label="내용">진행 중 — 의도대로 되는지 점검해 수정·개선 (매 회기 후)</td></tr>
+<tr><td data-label="기준">시점</td><td data-label="유형"><strong>총괄평가</strong></td><td data-label="내용">종결 시 — 전반적 효과·달성도, 지속·확대·종료 결정 근거</td></tr>
+<tr><td data-label="기준">대상</td><td data-label="유형"><strong>과정평가</strong></td><td data-label="내용">어떻게 수행했나 (절차·방법·자원)</td></tr>
+<tr><td data-label="기준">대상</td><td data-label="유형"><strong>결과평가</strong></td><td data-label="내용">무엇을 이루었나 (결과·효과·영향)</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> 과정만 보면 변화 여부를 모르고, 결과만 보면 어떻게 변했는지 모름 → 통합.</p>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>평가 방법</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>평가 방법</strong></p>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>방법</th>
@@ -1967,24 +1306,9 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>양적</td>
-<td>표준화 척도, 행동 빈도</td>
-<td>객관성·비교·통계</td>
-<td>관계의 질·의미 배제, 지표 압박</td>
-</tr>
-<tr>
-<td>질적</td>
-<td>면담·관찰·사례연구</td>
-<td>경험·의미의 깊은 이해</td>
-<td>시간 부담, 일반화 어려움</td>
-</tr>
-<tr>
-<td>혼합</td>
-<td>양적으로 변화량, 질적으로 의미</td>
-<td>서로 보완</td>
-<td>표준으로 자리 잡는 중</td>
-</tr>
+<tr><td data-label="방법">양적</td><td data-label="내용">표준화 척도, 행동 빈도</td><td data-label="강점">객관성·비교·통계</td><td data-label="한계">관계의 질·의미 배제, 지표 압박</td></tr>
+<tr><td data-label="방법">질적</td><td data-label="내용">면담·관찰·사례연구</td><td data-label="강점">경험·의미의 깊은 이해</td><td data-label="한계">시간 부담, 일반화 어려움</td></tr>
+<tr><td data-label="방법">혼합</td><td data-label="내용">양적으로 변화량, 질적으로 의미</td><td data-label="강점">서로 보완</td><td data-label="한계">표준으로 자리 잡는 중</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>단일사례설계(SSD)</strong> — 한 클라이언트의 개입 전·중·후를 같은 지표로 반복 측정.</p>
@@ -1998,7 +1322,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>부적절한 종결: 버려진 느낌, 의미 정리 안 됨, 이후 도움 요청 회피. 적절한 종결: 성취감, 학습 정리, 미래에 대한 자신감.</li>
 </ul>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>종결의 유형</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>유형</th>
@@ -2007,27 +1331,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>계획된 종결</td>
-<td>목표 달성·기간 종료(가장 이상적)</td>
-<td>성과 검토, 미래 계획, 정서 작업, 의례, 필요시 의뢰</td>
-</tr>
-<tr>
-<td>조기 종결</td>
-<td>클라이언트 중단, 사회복지사 이동·기관 사정</td>
-<td>의뢰, 사유 문서화, 결정 존중</td>
-</tr>
-<tr>
-<td>강제 종결</td>
-<td>기관 폐쇄·사업 변화·법적 사유</td>
-<td>불가능한 부분 인정, 가능한 만큼 정서적 마무리·연계·사후 안부</td>
-</tr>
+<tr><td data-label="유형">계획된 종결</td><td data-label="상황">목표 달성·기간 종료(가장 이상적)</td><td data-label="사회복지사의 책임">성과 검토, 미래 계획, 정서 작업, 의례, 필요시 의뢰</td></tr>
+<tr><td data-label="유형">조기 종결</td><td data-label="상황">클라이언트 중단, 사회복지사 이동·기관 사정</td><td data-label="사회복지사의 책임">의뢰, 사유 문서화, 결정 존중</td></tr>
+<tr><td data-label="유형">강제 종결</td><td data-label="상황">기관 폐쇄·사업 변화·법적 사유</td><td data-label="사회복지사의 책임">불가능한 부분 인정, 가능한 만큼 정서적 마무리·연계·사후 안부</td></tr>
 </tbody>
 </table></div>
 <p><em>통제 가능성이 줄어들수록 정서적 마무리의 책임은 커짐.</em></p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>종결의 6단계</strong> — ① 종결 예고(2~4회기 전) ② 성과 검토(변화 가시화) ③ 미래 계획 ④ 정서적 작업(상실·자부심·불안) ⑤ 마무리 의례(요약·감사·작별) ⑥ <strong>의뢰와 사후관리</strong>(3개월·6개월 후 안부)</p>
 <h3>5. 종결의 감정</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>클라이언트</th>
@@ -2035,14 +1347,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>양가감정(상실의 슬픔 + 자신감 + 불안), 과거 상실의 재경험</td>
-<td>성취감·아쉬움·회의·자부심 → 슈퍼비전으로 다룸</td>
-</tr>
-<tr>
-<td>행동: 마지막 회기 불참(회피), 문제 재출현(퇴행), 의존 강화, 분노, 부정 → 저항이 아닌 감정 표현으로 이해</td>
-<td>어려워하는 패턴: 종결 미루기, 정서 작업 회피, 비공식 사후 접촉(경계 침해, 금지), 역전이</td>
-</tr>
+<tr><td data-label="클라이언트">양가감정(상실의 슬픔 + 자신감 + 불안), 과거 상실의 재경험</td><td data-label="사회복지사">성취감·아쉬움·회의·자부심 → 슈퍼비전으로 다룸</td></tr>
+<tr><td data-label="클라이언트">행동: 마지막 회기 불참(회피), 문제 재출현(퇴행), 의존 강화, 분노, 부정 → 저항이 아닌 감정 표현으로 이해</td><td data-label="사회복지사">어려워하는 패턴: 종결 미루기, 정서 작업 회피, 비공식 사후 접촉(경계 침해, 금지), 역전이</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -2051,7 +1357,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <h3>6. 기록</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>기록의 다섯 기능</strong> — 책무성 입증 / 연속성 확보 / 평가 자료 / 학습 자원 / 법적·윤리적 보호. 한국은 <em>기록 부실</em>(시간 부족)과 <em>기록 과잉</em>(행복e음 입력 요구)이 함께 존재 → 양이 아니라 질의 문제.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span> <strong>기록의 네 가지 유형</strong></p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>유형</th>
@@ -2060,32 +1366,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>과정 기록</strong></td>
-<td>면담 흐름을 시간순으로 상세히</td>
-<td>실습·학습</td>
-</tr>
-<tr>
-<td>요약 기록</td>
-<td>일정 기간 활동을 요약</td>
-<td>효율적 기록</td>
-</tr>
-<tr>
-<td>문제중심 기록(SOAP)</td>
-<td>S 주관적 정보 · O 객관적 정보 · A 사정 · P 계획</td>
-<td>의료·정신건강</td>
-</tr>
-<tr>
-<td>표준화 양식 기록</td>
-<td>기관·시스템 양식</td>
-<td>행복e음, 통합돌봄</td>
-</tr>
+<tr><td data-label="유형"><strong>과정 기록</strong></td><td data-label="내용">면담 흐름을 시간순으로 상세히</td><td data-label="활용">실습·학습</td></tr>
+<tr><td data-label="유형">요약 기록</td><td data-label="내용">일정 기간 활동을 요약</td><td data-label="활용">효율적 기록</td></tr>
+<tr><td data-label="유형">문제중심 기록(SOAP)</td><td data-label="내용">S 주관적 정보 · O 객관적 정보 · A 사정 · P 계획</td><td data-label="활용">의료·정신건강</td></tr>
+<tr><td data-label="유형">표준화 양식 기록</td><td data-label="내용">기관·시스템 양식</td><td data-label="활용">행복e음, 통합돌봄</td></tr>
 </tbody>
 </table></div>
 <p><strong>작성 원칙</strong> — 정확성(사실과 의견 구분: "우울하다"는 의견, "3주째 잠을 못 잔다고 말했다"는 사실) / 적시성 / 명료성(낙인 표현 피함) / 비밀보장 / 클라이언트 참여.</p>
 <p>윤리적 쟁점: 비밀보장, 객관성, <strong>기록 접근권</strong>(개인정보보호법상 열람·정정·삭제권), 보존과 폐기(잊힐 권리), 기관 간 정보 공유 시 동의.</p>
 <h3>7. 한국의 구조적 쟁점</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>쟁점</th>
@@ -2093,22 +1383,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>평가의 행정화·균질화</td>
-<td>외부 평가 인정 + 일선 자기 점검 문화</td>
-</tr>
-<tr>
-<td>종결의 모호성(드롭아웃 처리)</td>
-<td>종결을 종결로 기록, 종결 의례, 사후 약속, 정서적 연결로서의 의뢰</td>
-</tr>
-<tr>
-<td>디지털 기록</td>
-<td>효율성 활용 + 윤리·정치적 함의 인식</td>
-</tr>
-<tr>
-<td>사후관리 생략</td>
-<td>실천의 질 향상 과제</td>
-</tr>
+<tr><td data-label="쟁점">평가의 행정화·균질화</td><td data-label="실천 방향">외부 평가 인정 + 일선 자기 점검 문화</td></tr>
+<tr><td data-label="쟁점">종결의 모호성(드롭아웃 처리)</td><td data-label="실천 방향">종결을 종결로 기록, 종결 의례, 사후 약속, 정서적 연결로서의 의뢰</td></tr>
+<tr><td data-label="쟁점">디지털 기록</td><td data-label="실천 방향">효율성 활용 + 윤리·정치적 함의 인식</td></tr>
+<tr><td data-label="쟁점">사후관리 생략</td><td data-label="실천 방향">실천의 질 향상 과제</td></tr>
 </tbody>
 </table></div>
 <p><em>마무리도 사회복지실천이다.</em></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l10"><header class="lh"><span class="no">10강</span><h2>공동체 조직화와 거버넌스</h2></header><div class="ct"><blockquote>
@@ -2122,7 +1400,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 공동체 조직화의 본질</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>정의</strong> — 권력 비대칭에 놓인 사람들이 집단적 힘을 형성해 삶과 환경을 바꾸는 활동. 알린스키 『급진주의자를 위한 규칙』: 권력 없는 사람들이 <em>협상할 수 있는 수준의 집단적 힘</em>을 만드는 활동. 핵심: ① 권력 비대칭 인식 ② 집단적 힘 형성 ③ 협상 가능성 창출. 인보관 전통, 20세기 후반 임상화로 주변화.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -2131,31 +1409,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>초점</td>
-<td>한 명에게 서비스 연계</td>
-<td>사람을 연결해 집단 행동의 주체 형성</td>
-</tr>
-<tr>
-<td>부르는 말</td>
-<td>클라이언트, 수혜자</td>
-<td>변화의 주체(constituent), 멤버</td>
-</tr>
-<tr>
-<td>사회복지사</td>
-<td>자원 제공자</td>
-<td>관계를 잇고 집단행동을 동반</td>
-</tr>
-<tr>
-<td>질문</td>
-<td>내가 무엇을 해 줄까?</td>
-<td>사람들이 무엇을 할 수 있도록 도울까?</td>
-</tr>
+<tr><td data-label="구분">초점</td><td data-label="사례관리">한 명에게 서비스 연계</td><td data-label="공동체 조직화">사람을 연결해 집단 행동의 주체 형성</td></tr>
+<tr><td data-label="구분">부르는 말</td><td data-label="사례관리">클라이언트, 수혜자</td><td data-label="공동체 조직화">변화의 주체(constituent), 멤버</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="사례관리">자원 제공자</td><td data-label="공동체 조직화">관계를 잇고 집단행동을 동반</td></tr>
+<tr><td data-label="구분">질문</td><td data-label="사례관리">내가 무엇을 해 줄까?</td><td data-label="공동체 조직화">사람들이 무엇을 할 수 있도록 도울까?</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong><span class="mk mt" title="실천기술론 출제: 알린스키 조직화 원칙">🔧</span> 솔 알린스키(1909~)</strong> — 시카고 빈민가 출신. 1930년대 말 <strong>백오브더야즈</strong>(『정글』의 정육공장지대)에서 민족·교회·노조를 묶어 주민이 협상하게 함 → 미국 조직화의 원형. <strong>산업지역재단(IAF, 1940)</strong> 설립. 철저한 실용주의자. 차베스 농장노동자 운동, 힐러리·오바마에 영향. 한계: 갈등 중심, 카리스마 의존.</p>
 <h3>3. 조직화 모델 — 알린스키에서 간츠로</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -2164,31 +1426,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>시기</td>
-<td>1940~70년대 빈민·노동운동</td>
-<td>1990년대 이후 시민 캠페인(2008 오바마 캠페인 설계, 하버드)</td>
-</tr>
-<tr>
-<td>원칙·활동</td>
-<td>① 사람들의 권력에 대한 신뢰 ② 자기 이해관계 인정 ③ 갈등의 활용 ④ 협상력 형성</td>
-<td>① 공공 이야기 ② 관계 구축(1대1) ③ 구조·전략 설계 ④ 행동의 조직화</td>
-</tr>
-<tr>
-<td>동력</td>
-<td>이해관계와 갈등</td>
-<td>이야기·관계·구조</td>
-</tr>
-<tr>
-<td>조직가</td>
-<td>카리스마 있는 외부 조직가</td>
-<td>리더십을 나누는 동반자</td>
-</tr>
-<tr>
-<td>한국</td>
-<td>1970~80년대 도시빈민운동</td>
-<td>마을공동체, 시민 캠페인</td>
-</tr>
+<tr><td data-label="구분">시기</td><td data-label="알린스키">1940~70년대 빈민·노동운동</td><td data-label="간츠">1990년대 이후 시민 캠페인(2008 오바마 캠페인 설계, 하버드)</td></tr>
+<tr><td data-label="구분">원칙·활동</td><td data-label="알린스키">① 사람들의 권력에 대한 신뢰 ② 자기 이해관계 인정 ③ 갈등의 활용 ④ 협상력 형성</td><td data-label="간츠">① 공공 이야기 ② 관계 구축(1대1) ③ 구조·전략 설계 ④ 행동의 조직화</td></tr>
+<tr><td data-label="구분">동력</td><td data-label="알린스키">이해관계와 갈등</td><td data-label="간츠">이야기·관계·구조</td></tr>
+<tr><td data-label="구분">조직가</td><td data-label="알린스키">카리스마 있는 외부 조직가</td><td data-label="간츠">리더십을 나누는 동반자</td></tr>
+<tr><td data-label="구분">한국</td><td data-label="알린스키">1970~80년대 도시빈민운동</td><td data-label="간츠">마을공동체, 시민 캠페인</td></tr>
 </tbody>
 </table></div>
 <p><strong>공공 이야기의 세 부분</strong> — 나의 이야기(가치가 형성된 순간) / 우리의 이야기(공유된 정체성·역사) / 지금의 이야기(왜 지금 행동해야 하나)</p>
@@ -2198,7 +1440,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>거버넌스</strong>: 정부·시민·NGO·기업·전문가·마을이 함께 공공 문제를 다루는 방식. 한국의 번역어 <em>협치</em>는 정부 주도·시민 동원인 경우가 많다는 비판 → <strong>공치</strong>는 권력의 재배치.</li>
 <li><strong>공치의 다섯 원칙</strong>: ① 동등한 위치 ② 의사결정 권한 공유 ③ 정보·자원 투명 접근 ④ 공동 책임 ⑤ 갈등과 차이 인정</li>
 </ul>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>구분</th>
@@ -2207,31 +1449,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>안건</td>
-<td>시청이 정함</td>
-<td>함께 형성</td>
-</tr>
-<tr>
-<td>진행</td>
-<td>시청 직원</td>
-<td>동등하게</td>
-</tr>
-<tr>
-<td>시민 의견</td>
-<td>참고 자료</td>
-<td>결정에 동등 반영</td>
-</tr>
-<tr>
-<td>결정·책임</td>
-<td>시청</td>
-<td>공동 결정·공동 책임</td>
-</tr>
+<tr><td data-label="구분">안건</td><td data-label="협치 모델">시청이 정함</td><td data-label="공치 모델">함께 형성</td></tr>
+<tr><td data-label="구분">진행</td><td data-label="협치 모델">시청 직원</td><td data-label="공치 모델">동등하게</td></tr>
+<tr><td data-label="구분">시민 의견</td><td data-label="협치 모델">참고 자료</td><td data-label="공치 모델">결정에 동등 반영</td></tr>
+<tr><td data-label="구분">결정·책임</td><td data-label="협치 모델">시청</td><td data-label="공치 모델">공동 결정·공동 책임</td></tr>
 </tbody>
 </table></div>
 <p>작동하는 네 차원: 서비스(당사자 참여) / 기관(운영·예산) / 지역사회(자원 분배) / 정책(형성·시행)</p>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>한국의 자치·공동체·사회적 경제 법체계</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>한국의 자치·공동체·사회적 경제 법체계</strong></p>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>구분</th>
@@ -2241,30 +1467,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>주민자치회</td>
-<td>지방자치법(2021)</td>
-<td>읍·면·동 주민총회, 마을계획</td>
-<td>주민 의제 발굴, 가장 일반적 거버넌스 참여</td>
-</tr>
-<tr>
-<td>마을공동체</td>
-<td>지자체 조례(서울 2012~)</td>
-<td>마을 활동가, 마을기금</td>
-<td>복지관·평생학습관의 마을 거점화</td>
-</tr>
-<tr>
-<td>협동조합</td>
-<td>협동조합 기본법(2012)</td>
-<td>일반·사회적 협동조합, <strong>5인 이상 발기</strong></td>
-<td>돌봄·교육·일자리 협동조합</td>
-</tr>
-<tr>
-<td>사회적 경제</td>
-<td>사회적기업육성법(2007)</td>
-<td>사회적기업, 마을기업, 자활기업</td>
-<td>일자리·서비스 확대</td>
-</tr>
+<tr><td data-label="구분">주민자치회</td><td data-label="근거">지방자치법(2021)</td><td data-label="주요 내용">읍·면·동 주민총회, 마을계획</td><td data-label="사회복지 거시 실천의 자리">주민 의제 발굴, 가장 일반적 거버넌스 참여</td></tr>
+<tr><td data-label="구분">마을공동체</td><td data-label="근거">지자체 조례(서울 2012~)</td><td data-label="주요 내용">마을 활동가, 마을기금</td><td data-label="사회복지 거시 실천의 자리">복지관·평생학습관의 마을 거점화</td></tr>
+<tr><td data-label="구분">협동조합</td><td data-label="근거">협동조합 기본법(2012)</td><td data-label="주요 내용">일반·사회적 협동조합, <strong>5인 이상 발기</strong></td><td data-label="사회복지 거시 실천의 자리">돌봄·교육·일자리 협동조합</td></tr>
+<tr><td data-label="구분">사회적 경제</td><td data-label="근거">사회적기업육성법(2007)</td><td data-label="주요 내용">사회적기업, 마을기업, 자활기업</td><td data-label="사회복지 거시 실천의 자리">일자리·서비스 확대</td></tr>
 </tbody>
 </table></div>
 <h3>5. 커먼즈와 지역사회</h3>
@@ -2275,8 +1481,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>녹슨 미끄럼틀 사례</strong>: 사회복지사 정현이 양육자들을 연결 → 방치된 놀이터를 '품앗이방'으로(공동 관리) → 월 운영회의(집단적 결정) → 밤 소음 갈등을 두레 원탁에서 조정(자치적 해결) → 주민자치회에 '운영을 같이 정하고 책임도 같이 지자'(공치). 사회복지사는 <em>앞이 아니라 곁에</em>.</li>
 </ul>
 <h3>6. 조직가 역할</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>조직가 역량 KSA</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>조직가 역량 KSA</strong></p>
+<div class="tw"><table class="long c2">
 <thead>
 <tr>
 <th>구분</th>
@@ -2284,24 +1490,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>지식(K)</td>
-<td>알린스키·간츠·프레이리·오스트롬, 한국 자치·사회적 경제 제도, 지역의 역사·자원, 권력·정책 분석, 갈등 전환</td>
-</tr>
-<tr>
-<td>기술(S)</td>
-<td>1대1 관계 형성, 공공 이야기, 회의 진행·대화 촉진, 갈등 조정, 자원 발굴, 정책 분석·옹호</td>
-</tr>
-<tr>
-<td>태도(A)</td>
-<td>사람들의 역량에 대한 신뢰, 권력 비대칭 인식, 갈등에 대한 인내, 장기적 시야, 비판적 자기인식</td>
-</tr>
+<tr><td data-label="구분">지식(K)</td><td data-label="내용">알린스키·간츠·프레이리·오스트롬, 한국 자치·사회적 경제 제도, 지역의 역사·자원, 권력·정책 분석, 갈등 전환</td></tr>
+<tr><td data-label="구분">기술(S)</td><td data-label="내용">1대1 관계 형성, 공공 이야기, 회의 진행·대화 촉진, 갈등 조정, 자원 발굴, 정책 분석·옹호</td></tr>
+<tr><td data-label="구분">태도(A)</td><td data-label="내용">사람들의 역량에 대한 신뢰, 권력 비대칭 인식, 갈등에 대한 인내, 장기적 시야, 비판적 자기인식</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>균형</strong>: 지식 없는 기술은 맹목적, 기술 없는 태도는 무력, 태도가 나쁘면 위험.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>한국에서 조직가 역할 회복 조건</strong> — 교육(조직화·거버넌스·커먼즈 비중 확대) / 직무 구조(조직가 직무 명시, 동등한 평가지표) / 정책 통합(행안부·고용부·복지부 칸막이를 마을에서 통합) / 정체성 확장</p>
 <h3>7. 한국 거시 실천의 쟁점</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>쟁점</th>
@@ -2309,26 +1506,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>동원 vs 자생</td>
-<td>정부 정책이 낮 시간 주민을 동원 → 자원은 쓰되 자생을 보호</td>
-</tr>
-<tr>
-<td>행정 주도 vs 주민 주도</td>
-<td>권한·정보·자원의 실질적 재배치 필요</td>
-</tr>
-<tr>
-<td>분절성</td>
-<td>아동·노인·장애 정책은 나뉘었지만 마을엔 모두 함께 삶</td>
-</tr>
-<tr>
-<td>디지털 거버넌스</td>
-<td>진입장벽은 낮추나 디지털 격차·알고리즘 편향</td>
-</tr>
-<tr>
-<td>평가</td>
-<td>빠른 효과 판단이 어려워 장기적·다층적 평가 필요</td>
-</tr>
+<tr><td data-label="쟁점">동원 vs 자생</td><td data-label="내용">정부 정책이 낮 시간 주민을 동원 → 자원은 쓰되 자생을 보호</td></tr>
+<tr><td data-label="쟁점">행정 주도 vs 주민 주도</td><td data-label="내용">권한·정보·자원의 실질적 재배치 필요</td></tr>
+<tr><td data-label="쟁점">분절성</td><td data-label="내용">아동·노인·장애 정책은 나뉘었지만 마을엔 모두 함께 삶</td></tr>
+<tr><td data-label="쟁점">디지털 거버넌스</td><td data-label="내용">진입장벽은 낮추나 디지털 격차·알고리즘 편향</td></tr>
+<tr><td data-label="쟁점">평가</td><td data-label="내용">빠른 효과 판단이 어려워 장기적·다층적 평가 필요</td></tr>
 </tbody>
 </table></div></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l11"><header class="lh"><span class="no">11강</span><h2>갈등 전환과 회복적 정의</h2></header><div class="ct"><blockquote>
 <p>레더락 갈등 전환 · 회복적 정의 · 한국적 갈등 다루기</p>
@@ -2346,8 +1528,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li><strong>정의</strong>: 둘 이상의 주체가 양립할 수 없는 이해·목표·가치·정체성을 표현하는 상황. 차이가 '양립 불가'로 인식될 때 갈등. '누가 옳은가'를 넘어 '누가 누구인가'(정체성)의 차원.</li>
 <li><strong>갈퉁(1996) ABC 삼각형</strong>: A 태도(인식·감정) / B 행동(침묵·이간질·운동) / C 모순(이해·구조의 충돌) — 셋 모두 다뤄야 함.</li>
 </ul>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>갈등의 유형</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>갈등의 유형</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>기준</th>
@@ -2355,22 +1537,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>규모</td>
-<td>개인 간, 집단 내, 집단 간, 구조적</td>
-</tr>
-<tr>
-<td>내용(무어, 1986)</td>
-<td><strong>자원 갈등, 가치 갈등, 관계 갈등, 데이터(사실 인식) 갈등</strong></td>
-</tr>
-<tr>
-<td>발달 단계</td>
-<td>잠재 → 표면화 → 격화 → 정체 → 폭력 (단계별 개입이 다름)</td>
-</tr>
+<tr><td data-label="기준">규모</td><td data-label="유형">개인 간, 집단 내, 집단 간, 구조적</td></tr>
+<tr><td data-label="기준">내용(무어, 1986)</td><td data-label="유형"><strong>자원 갈등, 가치 갈등, 관계 갈등, 데이터(사실 인식) 갈등</strong></td></tr>
+<tr><td data-label="기준">발달 단계</td><td data-label="유형">잠재 → 표면화 → 격화 → 정체 → 폭력 (단계별 개입이 다름)</td></tr>
 </tbody>
 </table></div>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>갈등에 대한 세 접근</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>갈등에 대한 세 접근</strong></p>
+<div class="tw"><table class="c4">
 <thead>
 <tr>
 <th>구분</th>
@@ -2380,43 +1553,18 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>갈등 인식</td>
-<td>다루지 말아야 할 위협</td>
-<td>종결될 문제</td>
-<td>변화의 자원</td>
-</tr>
-<tr>
-<td>주된 활동</td>
-<td>표면화 억제(침묵)</td>
-<td>협상·합의</td>
-<td>관계·구조 변화 매개</td>
-</tr>
-<tr>
-<td>시간</td>
-<td>단기</td>
-<td>합의 시까지</td>
-<td>장기·누적적</td>
-</tr>
-<tr>
-<td>구조</td>
-<td>다루지 않음</td>
-<td>표면적</td>
-<td>필수적으로 다룸</td>
-</tr>
-<tr>
-<td>대표</td>
-<td>한국 위계 문화</td>
-<td>협상학·갈등해결학</td>
-<td>레더락·평화학</td>
-</tr>
+<tr><td data-label="구분">갈등 인식</td><td data-label="회피">다루지 말아야 할 위협</td><td data-label="해결">종결될 문제</td><td data-label="전환">변화의 자원</td></tr>
+<tr><td data-label="구분">주된 활동</td><td data-label="회피">표면화 억제(침묵)</td><td data-label="해결">협상·합의</td><td data-label="전환">관계·구조 변화 매개</td></tr>
+<tr><td data-label="구분">시간</td><td data-label="회피">단기</td><td data-label="해결">합의 시까지</td><td data-label="전환">장기·누적적</td></tr>
+<tr><td data-label="구분">구조</td><td data-label="회피">다루지 않음</td><td data-label="해결">표면적</td><td data-label="전환">필수적으로 다룸</td></tr>
+<tr><td data-label="구분">대표</td><td data-label="회피">한국 위계 문화</td><td data-label="해결">협상학·갈등해결학</td><td data-label="전환">레더락·평화학</td></tr>
 </tbody>
 </table></div>
 <p>회피는 헤게모니를 유지시키고 주로 약자가 회피함. 전환은 시간과 자원이 많이 듦.</p>
 <h3>3. 레더락의 갈등 전환 모델</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>세 가지 핵심</strong> — ① 자연스러운 부분(갈등이 없으면 학습된 무기력) ② 변화의 자원 ③ 장기적 과정(한 번의 합의로 끝나지 않음)</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>네 차원(2003)</strong> — 서로 분리되지 않음</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>차원</th>
@@ -2425,26 +1573,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>인격적</td>
-<td>개인의 정서·인식·태도의 회복과 성장</td>
-<td>상담, 자기돌봄, 외상 회복</td>
-</tr>
-<tr>
-<td>관계적</td>
-<td>손상된 관계 회복 + 새로운 관계 형성</td>
-<td>가족 중재, 집단 치료, 화해</td>
-</tr>
-<tr>
-<td>구조적</td>
-<td>갈등을 낳거나 드러내는 구조의 변화</td>
-<td>옹호, 정책 개입, 제도 개선</td>
-</tr>
-<tr>
-<td>문화적</td>
-<td>갈등을 다루는 새로운 문화 자원</td>
-<td>지역 문화·전통의 존중과 창조</td>
-</tr>
+<tr><td data-label="차원">인격적</td><td data-label="변화 내용">개인의 정서·인식·태도의 회복과 성장</td><td data-label="사회복지 적용">상담, 자기돌봄, 외상 회복</td></tr>
+<tr><td data-label="차원">관계적</td><td data-label="변화 내용">손상된 관계 회복 + 새로운 관계 형성</td><td data-label="사회복지 적용">가족 중재, 집단 치료, 화해</td></tr>
+<tr><td data-label="차원">구조적</td><td data-label="변화 내용">갈등을 낳거나 드러내는 구조의 변화</td><td data-label="사회복지 적용">옹호, 정책 개입, 제도 개선</td></tr>
+<tr><td data-label="차원">문화적</td><td data-label="변화 내용">갈등을 다루는 새로운 문화 자원</td><td data-label="사회복지 적용">지역 문화·전통의 존중과 창조</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -2462,7 +1594,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <p><strong>촉진(Facilitation)</strong> — 더 큰 집단의 의사결정을 돕는 기술. <strong>캐너의 세 단계</strong>: 발산 → <strong>신음의 영역</strong>(혼란·답답함; 많은 집단이 여기서 위계적 결정으로 회귀) → 수렴. 기술: 경청, 동등한 발언, 관점 가시화, 안전한 공간, 점진적 합의.</p>
 <h3>5. 회복적 정의</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>처벌의 정의에서 회복의 정의로</strong> — 하워드 제어(메노나이트 평화학자)가 체계화</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>보복적(응보적) 정의</th>
@@ -2470,14 +1602,8 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>누가 잘못했고 어떤 처벌을 받아야 하나?</td>
-<td>누가 손상을 입었고 어떻게 회복할까?</td>
-</tr>
-<tr>
-<td>전통적 사법</td>
-<td>학교폭력·가정폭력·청소년 비행·마을 갈등으로 확장(한국 2000년대~)</td>
-</tr>
+<tr><td data-label="보복적(응보적) 정의">누가 잘못했고 어떤 처벌을 받아야 하나?</td><td data-label="회복적 정의">누가 손상을 입었고 어떻게 회복할까?</td></tr>
+<tr><td data-label="보복적(응보적) 정의">전통적 사법</td><td data-label="회복적 정의">학교폭력·가정폭력·청소년 비행·마을 갈등으로 확장(한국 2000년대~)</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -2499,7 +1625,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>외부 자원 연결(전문 중재·법적 절차)</li>
 </ol>
 <p>주의: 이중 위치성 인식, 자치 역량 신뢰(해결자가 되면 주민 역량 약화), 장기적 시야.</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>새뜸 갈등</th>
@@ -2508,26 +1634,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>자원: 공간·시간 배분</td>
-<td>덮지 않고 마을 회의로</td>
-<td>관계: 두 그룹의 새 관계</td>
-</tr>
-<tr>
-<td>관계: 창립 vs 신규</td>
-<td>캐너 촉진(발산–신음–수렴)</td>
-<td>구조: 이용 규칙·운영위 개편(오스트롬)</td>
-</tr>
-<tr>
-<td>가치: 놀이 vs 학습</td>
-<td>신규·소수의 목소리 보장</td>
-<td>문화: 차이를 말해도 안전한 두레</td>
-</tr>
-<tr>
-<td>행정: 평가 지표 vs 자율</td>
-<td>회복적 질문</td>
-<td>도덕적 상상력: 새 운영 모델</td>
-</tr>
+<tr><td data-label="새뜸 갈등">자원: 공간·시간 배분</td><td data-label="조정자의 다룸">덮지 않고 마을 회의로</td><td data-label="전환 결과">관계: 두 그룹의 새 관계</td></tr>
+<tr><td data-label="새뜸 갈등">관계: 창립 vs 신규</td><td data-label="조정자의 다룸">캐너 촉진(발산–신음–수렴)</td><td data-label="전환 결과">구조: 이용 규칙·운영위 개편(오스트롬)</td></tr>
+<tr><td data-label="새뜸 갈등">가치: 놀이 vs 학습</td><td data-label="조정자의 다룸">신규·소수의 목소리 보장</td><td data-label="전환 결과">문화: 차이를 말해도 안전한 두레</td></tr>
+<tr><td data-label="새뜸 갈등">행정: 평가 지표 vs 자율</td><td data-label="조정자의 다룸">회복적 질문</td><td data-label="전환 결과">도덕적 상상력: 새 운영 모델</td></tr>
 </tbody>
 </table></div>
 <h3>8. 한국 사회복지의 갈등 쟁점</h3>
@@ -2541,7 +1651,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 디지털 사회복지의 본질</h3>
 <p>종이의 디지털화가 아니라 정보 흐름·의사결정·서비스·공동체·권력관계 전체의 재구조화(Garrett, 2018).</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>영역</th>
@@ -2550,31 +1660,15 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>정보 인프라</td>
-<td>사회보장정보시스템</td>
-<td>행복e음, 통합돌봄, 사각지대 발굴</td>
-</tr>
-<tr>
-<td>알고리즘 결정</td>
-<td>통계 모델·머신러닝</td>
-<td>통합돌봄 욕구 사정, 아동학대 위험 예측</td>
-</tr>
-<tr>
-<td>비대면 서비스</td>
-<td>화상·전화·메신저</td>
-<td>코로나19 이후 비대면 상담·온라인 사례관리</td>
-</tr>
-<tr>
-<td>플랫폼·커뮤니티</td>
-<td>자조·옹호 플랫폼</td>
-<td>온라인 자조집단, 정책 캠페인</td>
-</tr>
+<tr><td data-label="영역">정보 인프라</td><td data-label="기술">사회보장정보시스템</td><td data-label="한국 사례">행복e음, 통합돌봄, 사각지대 발굴</td></tr>
+<tr><td data-label="영역">알고리즘 결정</td><td data-label="기술">통계 모델·머신러닝</td><td data-label="한국 사례">통합돌봄 욕구 사정, 아동학대 위험 예측</td></tr>
+<tr><td data-label="영역">비대면 서비스</td><td data-label="기술">화상·전화·메신저</td><td data-label="한국 사례">코로나19 이후 비대면 상담·온라인 사례관리</td></tr>
+<tr><td data-label="영역">플랫폼·커뮤니티</td><td data-label="기술">자조·옹호 플랫폼</td><td data-label="한국 사례">온라인 자조집단, 정책 캠페인</td></tr>
 </tbody>
 </table></div>
 <p><strong>디지털은 중립적이지 않다</strong>: 어떤 변수를 쓰고 무엇을 자동화할지는 모두 정치적 선택(유뱅크스).</p>
 <h3>3. 사회보장정보시스템(행복e음)</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>의도된 기능(2010 도입)</th>
@@ -2582,34 +1676,22 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>여러 서비스의 통합 관리</td>
-<td>정보 수집의 행정화 — 접수 면담이 입력 작업으로(6강)</td>
-</tr>
-<tr>
-<td>중복·누락 방지</td>
-<td>표준화로 개별화 약화(7강)</td>
-</tr>
-<tr>
-<td>기관 간 정보 공유</td>
-<td>정보의 영구화 — '디지털 그림자', 잊힐 권리(9강)</td>
-</tr>
-<tr>
-<td>정책 통계 축적</td>
-<td>공유 범위·동의의 윤리 기준 필요(4강)</td>
-</tr>
+<tr><td data-label="의도된 기능(2010 도입)">여러 서비스의 통합 관리</td><td data-label="비판적 분석">정보 수집의 행정화 — 접수 면담이 입력 작업으로(6강)</td></tr>
+<tr><td data-label="의도된 기능(2010 도입)">중복·누락 방지</td><td data-label="비판적 분석">표준화로 개별화 약화(7강)</td></tr>
+<tr><td data-label="의도된 기능(2010 도입)">기관 간 정보 공유</td><td data-label="비판적 분석">정보의 영구화 — '디지털 그림자', 잊힐 권리(9강)</td></tr>
+<tr><td data-label="의도된 기능(2010 도입)">정책 통계 축적</td><td data-label="비판적 분석">공유 범위·동의의 윤리 기준 필요(4강)</td></tr>
 </tbody>
 </table></div>
 <p><strong>비판적 활용</strong>: 시스템을 도구로 쓰되 지배당하지 않기, 클라이언트의 알 권리·정정·삭제권 옹호, 비판적 검토자로서 거버넌스 참여.</p>
 <h3>4. 알고리즘 사정과 결정</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>알고리즘은 객관적 도구가 아니라 정치적 도구</strong></p>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>알고리즘은 객관적 도구가 아니라 정치적 도구</strong></p>
 <ul>
 <li><strong>유뱅크스 『자동화된 불평등』(2018)</strong>: 학습 데이터의 편향이 불평등을 자동화·확대, 빈곤이 처벌의 대상으로.</li>
 <li><strong>오닐 『대량살상 수학무기』(2016)</strong> — WMD의 세 조건: ① 불투명성(왜 탈락했는지 모름) ② 규모(오류가 수많은 사람에게 동시 적용) ③ 손상(오류가 누적되어 따라다님). 하버드 수학 박사·헤지펀드 퀀트 출신, <em>"알고리즘은 수학의 옷을 입은 인간의 편향."</em></li>
 <li>한국 적용 영역: 통합돌봄 욕구 사정, 사각지대 발굴(행복e음·건강보험·국세청 데이터 결합), 아동학대 위험 예측, 자살·정신건강 위기.</li>
 </ul>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>유뱅크스의 세 미국 사례</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>유뱅크스의 세 미국 사례</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>사례</th>
@@ -2617,23 +1699,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>인디애나 복지 자동화(2006~09)</td>
-<td>시스템 오류로 수만 명이 '비협조'로 자격 상실</td>
-</tr>
-<tr>
-<td>LA 노숙인 자원 배분</td>
-<td>취약성 점수화가 '더 어려움을 증명하는' 경쟁을 만듦</td>
-</tr>
-<tr>
-<td>앨러게니 AFST</td>
-<td>130여 변수, 빈민·흑인·한부모 가정이 불균형하게 고위험</td>
-</tr>
+<tr><td data-label="사례">인디애나 복지 자동화(2006~09)</td><td data-label="내용">시스템 오류로 수만 명이 '비협조'로 자격 상실</td></tr>
+<tr><td data-label="사례">LA 노숙인 자원 배분</td><td data-label="내용">취약성 점수화가 '더 어려움을 증명하는' 경쟁을 만듦</td></tr>
+<tr><td data-label="사례">앨러게니 AFST</td><td data-label="내용">130여 변수, 빈민·흑인·한부모 가정이 불균형하게 고위험</td></tr>
 </tbody>
 </table></div>
 <p>공통 패턴: 빈곤의 처벌화, '기계가 결정'으로 책임 분산, 효율성이 정의를 대체.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>알고리즘 거버넌스의 다섯 원칙</strong> — <em>'기계가 결정했다'로 책임이 회피되어선 안 된다</em></p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>원칙</th>
@@ -2641,26 +1714,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>투명성</td>
-<td>데이터·변수·가중치 공개('영업 비밀' 블랙박스 금지)</td>
-</tr>
-<tr>
-<td>설명 가능성</td>
-<td>결정 근거를 이해 가능하게 설명</td>
-</tr>
-<tr>
-<td>책무성</td>
-<td>책임이 명확히 귀속</td>
-</tr>
-<tr>
-<td>이의제기 권리</td>
-<td>거부·재심, 행정·법적 구제</td>
-</tr>
-<tr>
-<td>인간의 최종 결정</td>
-<td>알고리즘은 보조, 결정은 인간</td>
-</tr>
+<tr><td data-label="원칙">투명성</td><td data-label="내용">데이터·변수·가중치 공개('영업 비밀' 블랙박스 금지)</td></tr>
+<tr><td data-label="원칙">설명 가능성</td><td data-label="내용">결정 근거를 이해 가능하게 설명</td></tr>
+<tr><td data-label="원칙">책무성</td><td data-label="내용">책임이 명확히 귀속</td></tr>
+<tr><td data-label="원칙">이의제기 권리</td><td data-label="내용">거부·재심, 행정·법적 구제</td></tr>
+<tr><td data-label="원칙">인간의 최종 결정</td><td data-label="내용">알고리즘은 보조, 결정은 인간</td></tr>
 </tbody>
 </table></div>
 <h3>5. 플랫폼 사회복지</h3>
@@ -2671,7 +1729,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>6. 디지털 격차와 비이용</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>디지털 격차의 세 차원(Helsper)</strong> — 접근만의 문제가 아님</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>차원</th>
@@ -2679,25 +1737,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>1차 접근(access)</td>
-<td>기기·인터넷·콘텐츠에 접근할 수 있나</td>
-</tr>
-<tr>
-<td>2차 활용(use)</td>
-<td>효과적으로 쓸 역량이 있나</td>
-</tr>
-<tr>
-<td>3차 결과(outcomes)</td>
-<td>활용이 가져오는 사회·경제·교육적 혜택은 고른가</td>
-</tr>
+<tr><td data-label="차원">1차 접근(access)</td><td data-label="질문">기기·인터넷·콘텐츠에 접근할 수 있나</td></tr>
+<tr><td data-label="차원">2차 활용(use)</td><td data-label="질문">효과적으로 쓸 역량이 있나</td></tr>
+<tr><td data-label="차원">3차 결과(outcomes)</td><td data-label="질문">활용이 가져오는 사회·경제·교육적 혜택은 고른가</td></tr>
 </tbody>
 </table></div>
 <ul>
 <li><strong>디지털 비이용(Selwyn)</strong>: 비자발적(접근·역량 부족: 노인·저소득층·이주민·장애인) / 자발적(사생활·정보 과잉 거부). 포용적 사회복지는 둘 다 다룸.</li>
 </ul>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>집단별 디지털 격차</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>집단별 디지털 격차</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>집단</th>
@@ -2706,26 +1755,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>노인</td>
-<td>가장 빠른 디지털 사회의 역설, OECD 중 격차 큼</td>
-<td>키오스크·모바일 뱅킹·정부24</td>
-</tr>
-<tr>
-<td>이주민</td>
-<td>한국어 기반, 다국어 지원 제한</td>
-<td>언어 장벽, 본국 가족 연결 욕구</td>
-</tr>
-<tr>
-<td>장애인</td>
-<td>접근성 설계 미발달</td>
-<td>시각·청각·인지 장애 친화 설계 부족</td>
-</tr>
+<tr><td data-label="집단">노인</td><td data-label="모습">가장 빠른 디지털 사회의 역설, OECD 중 격차 큼</td><td data-label="어려움">키오스크·모바일 뱅킹·정부24</td></tr>
+<tr><td data-label="집단">이주민</td><td data-label="모습">한국어 기반, 다국어 지원 제한</td><td data-label="어려움">언어 장벽, 본국 가족 연결 욕구</td></tr>
+<tr><td data-label="집단">장애인</td><td data-label="모습">접근성 설계 미발달</td><td data-label="어려움">시각·청각·인지 장애 친화 설계 부족</td></tr>
 </tbody>
 </table></div>
 <h3>7. AI 시대의 사회복지</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>생성형 AI(2022 ChatGPT 이후)</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>생성형 AI(2022 ChatGPT 이후)</strong></p>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>가능성</th>
@@ -2733,22 +1770,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>행정 부담 경감(기록·요약)</td>
-<td>편향과 오류(할루시네이션)</td>
-</tr>
-<tr>
-<td>정보 접근 확대</td>
-<td>클라이언트 정보 입력 시 비밀보장</td>
-</tr>
-<tr>
-<td>교육 도구(사례 시뮬레이션)</td>
-<td>책임 모호화</td>
-</tr>
-<tr>
-<td>다국어 지원</td>
-<td>정서적 동반을 흉내 내며 인간 관계 대체</td>
-</tr>
+<tr><td data-label="가능성">행정 부담 경감(기록·요약)</td><td data-label="위험">편향과 오류(할루시네이션)</td></tr>
+<tr><td data-label="가능성">정보 접근 확대</td><td data-label="위험">클라이언트 정보 입력 시 비밀보장</td></tr>
+<tr><td data-label="가능성">교육 도구(사례 시뮬레이션)</td><td data-label="위험">책임 모호화</td></tr>
+<tr><td data-label="가능성">다국어 지원</td><td data-label="위험">정서적 동반을 흉내 내며 인간 관계 대체</td></tr>
 </tbody>
 </table></div>
 <ul>
@@ -2772,7 +1797,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <h3>2. EBP의 본질</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <span class="mk mt" title="실천기술론 출제: 증거기반실천의 등장 배경">🔧</span> <strong>정의와 발달</strong> — 1990년대 초 캐나다 <strong>맥마스터 의과대학</strong>, <strong>데이비드 사켓(Sackett)</strong>과 동료들. 정의(1996): <em>개별 클라이언트 돌봄의 의사결정에서 현재의 최선의 증거를 양심적·명시적·신중하게 활용하는 활동.</em> 의학 → 1990년대 말~2000년대 초 사회복지 → 한국은 2000년대 중반 도입.</p>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>3대 구성 요소</strong> — 세 요소의 균형이 진정한 EBP</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>요소</th>
@@ -2781,25 +1806,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>연구 증거</td>
-<td>RCT·메타분석·체계적 문헌고찰로 검증된 모델</td>
-<td>증거의 강제, 개별성 무시</td>
-</tr>
-<tr>
-<td>임상적 전문성</td>
-<td>경험·기술·판단력(연구를 이 클라이언트에 적용)</td>
-<td>직관 의존, 책무성 약화</td>
-</tr>
-<tr>
-<td>클라이언트의 가치·선호</td>
-<td>문화·신념·삶의 상황(채식주의자에게 돼지고기 강요 불가)</td>
-<td>효과 미검증</td>
-</tr>
+<tr><td data-label="요소">연구 증거</td><td data-label="내용">RCT·메타분석·체계적 문헌고찰로 검증된 모델</td><td data-label="하나만 의존하면">증거의 강제, 개별성 무시</td></tr>
+<tr><td data-label="요소">임상적 전문성</td><td data-label="내용">경험·기술·판단력(연구를 이 클라이언트에 적용)</td><td data-label="하나만 의존하면">직관 의존, 책무성 약화</td></tr>
+<tr><td data-label="요소">클라이언트의 가치·선호</td><td data-label="내용">문화·신념·삶의 상황(채식주의자에게 돼지고기 강요 불가)</td><td data-label="하나만 의존하면">효과 미검증</td></tr>
 </tbody>
 </table></div>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>EBP의 5단계(5A, Sackett 외 2000)</strong> — 순환적</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>단계</th>
@@ -2807,33 +1820,18 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>① 질문 형성(Asking)</td>
-<td>답할 수 있는 형태의 질문</td>
-</tr>
-<tr>
-<td>② 증거 검색(Acquiring)</td>
-<td>DB에서 연구·사례 검색</td>
-</tr>
-<tr>
-<td>③ 증거 평가(Appraising)</td>
-<td>질·타당성·관련성의 비판적 평가</td>
-</tr>
-<tr>
-<td>④ 증거 적용(Applying)</td>
-<td>전문성·클라이언트 선호와 통합해 적용</td>
-</tr>
-<tr>
-<td>⑤ 결과 평가(Assessing)</td>
-<td>결과를 평가해 다음 적용에 반영</td>
-</tr>
+<tr><td data-label="단계">① 질문 형성(Asking)</td><td data-label="내용">답할 수 있는 형태의 질문</td></tr>
+<tr><td data-label="단계">② 증거 검색(Acquiring)</td><td data-label="내용">DB에서 연구·사례 검색</td></tr>
+<tr><td data-label="단계">③ 증거 평가(Appraising)</td><td data-label="내용">질·타당성·관련성의 비판적 평가</td></tr>
+<tr><td data-label="단계">④ 증거 적용(Applying)</td><td data-label="내용">전문성·클라이언트 선호와 통합해 적용</td></tr>
+<tr><td data-label="단계">⑤ 결과 평가(Assessing)</td><td data-label="내용">결과를 평가해 다음 적용에 반영</td></tr>
 </tbody>
 </table></div>
 <h3>3. EBP의 강점과 실현 조건</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>다섯 가지 강점</strong> — ① 책무성('의도한 효과를 만든다'는 입증) ② 효과성(CBT·MI·SFBT 등 검증 모델 우선, 해로운 개입 회피) ③ 누적적 지식 기반 ④ 윤리적 의무(NASW·한국 윤리강령이 최신 지식 활용 명시) ⑤ 인접 직업과 동등한 전문직성</p>
 <p>실현 조건: 시간·자원·교육·기관 문화. 조건이 없으면(매 사례 검색할 시간 부족, 한국 맥락의 증거 부족) 강점이 한계로 변질.</p>
 <h3><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 4. EBP의 한계와 비판</h3>
-<div class="tw"><table>
+<div class="tw"><table class="long c2">
 <thead>
 <tr>
 <th>비판</th>
@@ -2841,25 +1839,13 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>인식론적</td>
-<td><strong>증거 위계</strong>(메타분석·RCT 최상위, 질적·당사자 지식 하위). 웹(2001): 사회복지는 도덕적·맥락적 판단 활동이라 RCT 가정과 맞지 않음. 플래스(2006·2014): <strong>증거 다원주의</strong></td>
-</tr>
-<tr>
-<td>실천적</td>
-<td>시간·DB·영어 장벽, 한국 증거 부족, 임상 증거는 많고 거시 증거는 적음, 매뉴얼화로 판단력 약화</td>
-</tr>
-<tr>
-<td>정치적</td>
-<td>신자유주의·관리주의의 도구(웹), 측정 가능한 것만 증거가 되어 존엄·정의 배제, 미시 편향(Adams·Dominelli·Payne)</td>
-</tr>
-<tr>
-<td>한국적</td>
-<td>연구의 양·질 부족, 'EBP 적용 여부'가 기관 평가 지표가 되어 형식화</td>
-</tr>
+<tr><td data-label="비판">인식론적</td><td data-label="핵심"><strong>증거 위계</strong>(메타분석·RCT 최상위, 질적·당사자 지식 하위). 웹(2001): 사회복지는 도덕적·맥락적 판단 활동이라 RCT 가정과 맞지 않음. 플래스(2006·2014): <strong>증거 다원주의</strong></td></tr>
+<tr><td data-label="비판">실천적</td><td data-label="핵심">시간·DB·영어 장벽, 한국 증거 부족, 임상 증거는 많고 거시 증거는 적음, 매뉴얼화로 판단력 약화</td></tr>
+<tr><td data-label="비판">정치적</td><td data-label="핵심">신자유주의·관리주의의 도구(웹), 측정 가능한 것만 증거가 되어 존엄·정의 배제, 미시 편향(Adams·Dominelli·Payne)</td></tr>
+<tr><td data-label="비판">한국적</td><td data-label="핵심">연구의 양·질 부족, 'EBP 적용 여부'가 기관 평가 지표가 되어 형식화</td></tr>
 </tbody>
 </table></div>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>EBP의 강점</th>
@@ -2867,31 +1853,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>책무성 강화</td>
-<td>인식론적 한계(RCT ↔ 사회복지 본질)</td>
-</tr>
-<tr>
-<td>효과성 증진</td>
-<td>시간·자원·DB 부족</td>
-</tr>
-<tr>
-<td>지식 기반 발달</td>
-<td>관리주의의 도구화</td>
-</tr>
-<tr>
-<td>윤리적 의무</td>
-<td>한국 연구·거시 증거 부족</td>
-</tr>
-<tr>
-<td>전문직성 강화</td>
-<td>매뉴얼화의 함정</td>
-</tr>
+<tr><td data-label="EBP의 강점">책무성 강화</td><td data-label="EBP의 한계">인식론적 한계(RCT ↔ 사회복지 본질)</td></tr>
+<tr><td data-label="EBP의 강점">효과성 증진</td><td data-label="EBP의 한계">시간·자원·DB 부족</td></tr>
+<tr><td data-label="EBP의 강점">지식 기반 발달</td><td data-label="EBP의 한계">관리주의의 도구화</td></tr>
+<tr><td data-label="EBP의 강점">윤리적 의무</td><td data-label="EBP의 한계">한국 연구·거시 증거 부족</td></tr>
+<tr><td data-label="EBP의 강점">전문직성 강화</td><td data-label="EBP의 한계">매뉴얼화의 함정</td></tr>
 </tbody>
 </table></div>
 <h3>5. 대안적 증거 접근</h3>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>EBP의 대체가 아니라 보완 — 증거의 다원적 이해</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>EBP의 대체가 아니라 보완 — 증거의 다원적 이해</strong></p>
+<div class="tw"><table class="long c2">
 <thead>
 <tr>
 <th>대안 증거</th>
@@ -2899,23 +1870,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>실천 기반 증거</strong></td>
-<td>일선 활동에서 누적된 경험·지식·통찰을 체계화(사례 기록 분석, 동료 공유, 슈퍼비전). 현장 활용성 높으나 편향 검증이 어려워 보조적</td>
-</tr>
-<tr>
-<td><strong>맥락 기반 증거</strong></td>
-<td>특정 사회·문화·제도 맥락의 지식. 미국·영국 모델의 <em>한국 적합성을 별도 검토</em></td>
-</tr>
-<tr>
-<td><strong>당사자 기반 증거</strong></td>
-<td>클라이언트가 경험에서 형성한 증거. 효과를 가장 잘 아는 사람은 당사자(Beresford, 2007)</td>
-</tr>
+<tr><td data-label="대안 증거"><strong>실천 기반 증거</strong></td><td data-label="내용">일선 활동에서 누적된 경험·지식·통찰을 체계화(사례 기록 분석, 동료 공유, 슈퍼비전). 현장 활용성 높으나 편향 검증이 어려워 보조적</td></tr>
+<tr><td data-label="대안 증거"><strong>맥락 기반 증거</strong></td><td data-label="내용">특정 사회·문화·제도 맥락의 지식. 미국·영국 모델의 <em>한국 적합성을 별도 검토</em></td></tr>
+<tr><td data-label="대안 증거"><strong>당사자 기반 증거</strong></td><td data-label="내용">클라이언트가 경험에서 형성한 증거. 효과를 가장 잘 아는 사람은 당사자(Beresford, 2007)</td></tr>
 </tbody>
 </table></div>
 <p>당사자 증거의 도전: 한 당사자가 전체를 대표하지 않음(다양성), 의견 수렴의 형식화, 무보수 경험 제공의 부담 전가 → 실질적 권한·보상·자기결정 보장.</p>
 <h3>6. 사회복지 지식의 다원성</h3>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>지식 원천</th>
@@ -2924,31 +1886,11 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>연구 지식</td>
-<td>정량·질적 연구의 체계적 지식</td>
-<td>EBP의 핵심</td>
-</tr>
-<tr>
-<td>실천 지식</td>
-<td>일선의 경험·기술·통찰</td>
-<td>실천 기반 증거</td>
-</tr>
-<tr>
-<td>당사자 지식</td>
-<td>클라이언트의 경험·삶</td>
-<td>당사자 기반 증거</td>
-</tr>
-<tr>
-<td>관계적 지식</td>
-<td>관계 안에서 함께 형성</td>
-<td>협력적 동반관계(5강)</td>
-</tr>
-<tr>
-<td>가치적 지식</td>
-<td>가치·윤리·정치적 입장</td>
-<td>가치 중심 실천(4강)</td>
-</tr>
+<tr><td data-label="지식 원천">연구 지식</td><td data-label="내용">정량·질적 연구의 체계적 지식</td><td data-label="관련 개념">EBP의 핵심</td></tr>
+<tr><td data-label="지식 원천">실천 지식</td><td data-label="내용">일선의 경험·기술·통찰</td><td data-label="관련 개념">실천 기반 증거</td></tr>
+<tr><td data-label="지식 원천">당사자 지식</td><td data-label="내용">클라이언트의 경험·삶</td><td data-label="관련 개념">당사자 기반 증거</td></tr>
+<tr><td data-label="지식 원천">관계적 지식</td><td data-label="내용">관계 안에서 함께 형성</td><td data-label="관련 개념">협력적 동반관계(5강)</td></tr>
+<tr><td data-label="지식 원천">가치적 지식</td><td data-label="내용">가치·윤리·정치적 입장</td><td data-label="관련 개념">가치 중심 실천(4강)</td></tr>
 </tbody>
 </table></div>
 <p>위계가 아니라 상호 보완. <strong>지식 통합 원칙</strong>: 강점·한계 인식, 상황에 따른 가중치 조정, 지식 간 갈등의 비판적 검토, 통합적 판단력, 지속적 수정. 예: 연구는 CBT를 권하지만 청소년이 거부하고, 실천 경험은 가족 개입을 시사하지만 가족이 갈등의 원천 → 판단의 영역.</p>
@@ -2969,7 +1911,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </ul>
 <h3>2. 직업적 위험</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>소진(Burnout) – 마슬락의 3차원</strong> (UC 버클리, 크리스티나 마슬락)</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>차원</th>
@@ -2977,23 +1919,14 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>① 정서적 고갈</td>
-<td>정서적 자원이 바닥나 일할 에너지·반응할 감정이 없음</td>
-</tr>
-<tr>
-<td>② 인격 해체·냉소</td>
-<td>클라이언트·동료를 '사례'·'문제'로 환원("그 사람이 그렇지")</td>
-</tr>
-<tr>
-<td>③ 성취감 감소</td>
-<td>내 활동이 효과·가치가 있는지 회의</td>
-</tr>
+<tr><td data-label="차원">① 정서적 고갈</td><td data-label="내용">정서적 자원이 바닥나 일할 에너지·반응할 감정이 없음</td></tr>
+<tr><td data-label="차원">② 인격 해체·냉소</td><td data-label="내용">클라이언트·동료를 '사례'·'문제'로 환원("그 사람이 그렇지")</td></tr>
+<tr><td data-label="차원">③ 성취감 감소</td><td data-label="내용">내 활동이 효과·가치가 있는지 회의</td></tr>
 </tbody>
 </table></div>
 <p>며칠 쉬면 회복되는 단기 스트레스와 달리 <em>누적된 만성 증후군</em>. 개인의 약함이 아니라 정서적 노동의 자연스러운 결과(Maslach, 2001).</p>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>외상 클라이언트와의 만남에서 오는 위험</strong></p>
-<div class="tw"><table>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>외상 클라이언트와의 만남에서 오는 위험</strong></p>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>개념</th>
@@ -3002,21 +1935,9 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>이차 외상</td>
-<td>직접 겪지 않았지만 클라이언트의 외상 이야기를 들으며 받는 영향</td>
-<td>—</td>
-</tr>
-<tr>
-<td>대리 외상</td>
-<td>누적된 외상 영역 활동이 세계관·신뢰·안전감·정체성을 변화시킴</td>
-<td>펄먼</td>
-</tr>
-<tr>
-<td>동정 피로</td>
-<td>침투적 사고·과각성·회피·정서적 둔감 등 PTSD 유사 증상</td>
-<td>피글리</td>
-</tr>
+<tr><td data-label="개념">이차 외상</td><td data-label="의미">직접 겪지 않았지만 클라이언트의 외상 이야기를 들으며 받는 영향</td><td data-label="학자">—</td></tr>
+<tr><td data-label="개념">대리 외상</td><td data-label="의미">누적된 외상 영역 활동이 세계관·신뢰·안전감·정체성을 변화시킴</td><td data-label="학자">펄먼</td></tr>
+<tr><td data-label="개념">동정 피로</td><td data-label="의미">침투적 사고·과각성·회피·정서적 둔감 등 PTSD 유사 증상</td><td data-label="학자">피글리</td></tr>
 </tbody>
 </table></div>
 <h3>3. 소진의 측정과 발달</h3>
@@ -3025,7 +1946,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <li>원인: 개인 차원(성격·기대·대처 방식) + <strong>구조적 차원 6가지</strong>: ① 업무량 과다 ② 통제 부족 ③ 보상 부족 ④ 공동체 부재 ⑤ 공정성 부재 ⑥ 가치 갈등 → <em>원인이 구조라면 해결도 구조에서.</em></li>
 <li><strong>소진의 다섯 단계(Edelwich &amp; Brodsky, 1980)</strong>: ① 열정 → ② 정체 → ③ 좌절 → ④ 무관심(학습된 무기력과 유사) → ⑤ 개입 또는 이직. 비선형이라 개입하면 거슬러 회복 가능.</li>
 </ul>
-<p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>한국 사회복지사 소진의 특징</strong></p>
+<p class="sh"><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>한국 사회복지사 소진의 특징</strong></p>
 <ol>
 <li>높은 소진 수준 — 사례 과다, 행정 부담, 낮은 사회적 인정('가난한 사람 돕는 일')</li>
 <li>신입의 빠른 이직 — 상당수가 1~3년 안에 떠남 → 전문성 누적의 구조적 위기</li>
@@ -3037,7 +1958,7 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 <p>한국의 외상 영역: 아동학대·성폭력·가정폭력·자살 위기·재난·중독·노숙, 난민·북한이탈주민, 국가폭력 피해자, 산업재해. 표현할 공간·지지·전문적 도움의 통로가 부족.</p>
 <h3>5. 자기돌봄</h3>
 <p><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> <strong>자기돌봄의 의미</strong> — 일시적 힐링이 아니라 삶의 모든 영역을 의도적·체계적·통합적으로 관리하는 <em>전문직의 실천 전략</em>. 이기적 선택이 아님(내가 클라이언트를 돕는 도구).</p>
-<div class="tw"><table>
+<div class="tw"><table class="c3">
 <thead>
 <tr>
 <th>영역</th>
@@ -3046,36 +1967,16 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>신체적</td>
-<td>다른 차원의 토대</td>
-<td>수면, 식사, 운동, 정기 검진</td>
-</tr>
-<tr>
-<td>정서적</td>
-<td>감정의 인식·표현·처리</td>
-<td>일기, 감정 공유, 명상, 심리상담(약함이 아닌 전문적 활동)</td>
-</tr>
-<tr>
-<td>관계적</td>
-<td>의미 있는 관계</td>
-<td>조건 없이 들어주는 가족·친구·동료, 직업·사적 관계의 균형</td>
-</tr>
-<tr>
-<td>영적·의미적</td>
-<td>삶의 의미·가치</td>
-<td>처음 동기 점검, 자연·예술·문학</td>
-</tr>
-<tr>
-<td>직업적</td>
-<td>정체성·역량·경계</td>
-<td>평생 학습, 슈퍼비전, 건강한 경계, 휴가·연수</td>
-</tr>
+<tr><td data-label="영역">신체적</td><td data-label="초점">다른 차원의 토대</td><td data-label="활동">수면, 식사, 운동, 정기 검진</td></tr>
+<tr><td data-label="영역">정서적</td><td data-label="초점">감정의 인식·표현·처리</td><td data-label="활동">일기, 감정 공유, 명상, 심리상담(약함이 아닌 전문적 활동)</td></tr>
+<tr><td data-label="영역">관계적</td><td data-label="초점">의미 있는 관계</td><td data-label="활동">조건 없이 들어주는 가족·친구·동료, 직업·사적 관계의 균형</td></tr>
+<tr><td data-label="영역">영적·의미적</td><td data-label="초점">삶의 의미·가치</td><td data-label="활동">처음 동기 점검, 자연·예술·문학</td></tr>
+<tr><td data-label="영역">직업적</td><td data-label="초점">정체성·역량·경계</td><td data-label="활동">평생 학습, 슈퍼비전, 건강한 경계, 휴가·연수</td></tr>
 </tbody>
 </table></div>
 <h3>6. 슈퍼비전</h3>
 <p><strong>카두신의 세 기능</strong> — 통합적으로 작동</p>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>기능</th>
@@ -3083,21 +1984,12 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>행정적</td>
-<td>업무 배분·계획·평가 관리</td>
-</tr>
-<tr>
-<td>교육적</td>
-<td>지식·기술·판단력 발달, 사례·윤리 학습</td>
-</tr>
-<tr>
-<td>지지적</td>
-<td>정서·동기의 동반, 자기돌봄 격려("마음은 어떠냐")</td>
-</tr>
+<tr><td data-label="기능">행정적</td><td data-label="내용">업무 배분·계획·평가 관리</td></tr>
+<tr><td data-label="기능">교육적</td><td data-label="내용">지식·기술·판단력 발달, 사례·윤리 학습</td></tr>
+<tr><td data-label="기능">지지적</td><td data-label="내용">정서·동기의 동반, 자기돌봄 격려("마음은 어떠냐")</td></tr>
 </tbody>
 </table></div>
-<div class="tw"><table>
+<div class="tw"><table class="c2">
 <thead>
 <tr>
 <th>한국 슈퍼비전의 네 도전</th>
@@ -3105,22 +1997,10 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>행정화(교육·지지 기능 약화)</td>
-<td>임상적 전문성</td>
-</tr>
-<tr>
-<td>시간·역량 부족</td>
-<td>교육적 역량</td>
-</tr>
-<tr>
-<td>위계 문화(실수·어려움 표현 어려움)</td>
-<td>관계적 역량(약점을 말해도 안전한 관계)</td>
-</tr>
-<tr>
-<td>외상 슈퍼비전 부재</td>
-<td>자기 인식, 윤리적 판단력</td>
-</tr>
+<tr><td data-label="한국 슈퍼비전의 네 도전">행정화(교육·지지 기능 약화)</td><td data-label="슈퍼바이저의 다섯 역량">임상적 전문성</td></tr>
+<tr><td data-label="한국 슈퍼비전의 네 도전">시간·역량 부족</td><td data-label="슈퍼바이저의 다섯 역량">교육적 역량</td></tr>
+<tr><td data-label="한국 슈퍼비전의 네 도전">위계 문화(실수·어려움 표현 어려움)</td><td data-label="슈퍼바이저의 다섯 역량">관계적 역량(약점을 말해도 안전한 관계)</td></tr>
+<tr><td data-label="한국 슈퍼비전의 네 도전">외상 슈퍼비전 부재</td><td data-label="슈퍼바이저의 다섯 역량">자기 인식, 윤리적 판단력</td></tr>
 </tbody>
 </table></div>
 <h3><span class="mk m6" title="2026 기말고사 준비자료에 출제된 부분">6️⃣</span> 7. 기관·구조 차원의 책임</h3>
@@ -3435,6 +2315,36 @@ function mark(){
 }
 let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
 setTimeout(mark,300);
+})();
+</script>
+
+<!-- 문제지 → 강의노트 바로가기: 주소 끝 #n=강id~출제표시~글조각 을 찾아 이동하고 잠깐 강조 -->
+<style>
+.dl-flash{animation:dlflash 2.6s ease-out 1;border-radius:6px}
+@keyframes dlflash{0%,35%{background:#ffe58a;box-shadow:0 0 0 4px #ffe58a}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+:root[data-theme="dark"] .dl-flash{animation-name:dlflashd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dl-flash{animation-name:dlflashd}}
+@keyframes dlflashd{0%,35%{background:#5c4d12;box-shadow:0 0 0 4px #5c4d12}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+</style>
+<script>
+(function(){
+const norm=s=>s.replace(/[0-9]️?⃣/g,'').replace(/[\s​]+/g,'');
+function find(){
+  const h=decodeURIComponent(location.hash||'');
+  const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
+  const sec=document.getElementById(m[1]);if(!sec)return;
+  const want=norm(m[3]);
+  const els=[...sec.querySelectorAll('.ct h3, .ct p, .ct li, .ct tr, .ct .cn-row')];
+  let hit=els.filter(e=>norm(e.textContent).includes(want));
+  if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
+  const el=hit[0]||sec;
+  const bar=document.querySelector('.bar');const off=(bar?bar.getBoundingClientRect().bottom:60)+24;
+  const go=()=>scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-off),behavior:'instant'});
+  go();setTimeout(go,350);setTimeout(go,900);
+  if(el!==sec){el.classList.remove('dl-flash');void el.offsetWidth;el.classList.add('dl-flash');}
+}
+addEventListener('hashchange',find);
+if(document.readyState==='complete')find();else addEventListener('load',find);
 })();
 </script>
 

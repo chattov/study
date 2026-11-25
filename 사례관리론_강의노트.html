@@ -3298,7 +3298,7 @@ function find(){
   const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
   const sec=document.getElementById(m[1]);if(!sec)return;
   const want=norm(m[3]);
-  const els=[...sec.querySelectorAll('.ct h3, .ct p.sh, .ct p.tt, .ct li, .ct tr, .ct .cn-row')];
+  const els=[...sec.querySelectorAll('.ct h3, .ct p, .ct li, .ct tr, .ct .cn-row')];
   let hit=els.filter(e=>norm(e.textContent).includes(want));
   if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
   const el=hit[0]||sec;
