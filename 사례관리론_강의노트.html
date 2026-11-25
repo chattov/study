@@ -3282,5 +3282,35 @@ setTimeout(mark,300);
 })();
 </script>
 
+<!-- 문제지 → 강의노트 바로가기: 주소 끝 #n=강id~출제표시~글조각 을 찾아 이동하고 잠깐 강조 -->
+<style>
+.dl-flash{animation:dlflash 2.6s ease-out 1;border-radius:6px}
+@keyframes dlflash{0%,35%{background:#ffe58a;box-shadow:0 0 0 4px #ffe58a}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+:root[data-theme="dark"] .dl-flash{animation-name:dlflashd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dl-flash{animation-name:dlflashd}}
+@keyframes dlflashd{0%,35%{background:#5c4d12;box-shadow:0 0 0 4px #5c4d12}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+</style>
+<script>
+(function(){
+const norm=s=>s.replace(/[0-9]️?⃣/g,'').replace(/[\s​]+/g,'');
+function find(){
+  const h=decodeURIComponent(location.hash||'');
+  const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
+  const sec=document.getElementById(m[1]);if(!sec)return;
+  const want=norm(m[3]);
+  const els=[...sec.querySelectorAll('.ct h3, .ct p.sh, .ct p.tt, .ct li, .ct tr, .ct .cn-row')];
+  let hit=els.filter(e=>norm(e.textContent).includes(want));
+  if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
+  const el=hit[0]||sec;
+  const bar=document.querySelector('.bar');const off=(bar?bar.getBoundingClientRect().bottom:60)+24;
+  const go=()=>scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-off),behavior:'instant'});
+  go();setTimeout(go,350);setTimeout(go,900);
+  if(el!==sec){el.classList.remove('dl-flash');void el.offsetWidth;el.classList.add('dl-flash');}
+}
+addEventListener('hashchange',find);
+if(document.readyState==='complete')find();else addEventListener('load',find);
+})();
+</script>
+
 </body>
 </html>
