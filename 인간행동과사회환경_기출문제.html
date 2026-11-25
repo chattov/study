@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<script>document.documentElement.setAttribute("data-theme","light")</script>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="keep-scroll.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>인간행동과 사회환경 2018~2019 기출문제</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 레이아웃: 회색 책상 위에 놓인 A4 시험지 한 장. 머리말 표 → 2단 문항 → 끝. 상단에는 얇은 감독 바, 오른쪽에는 OMR 답안지 서랍 */
+:root{
+  --desk:#e6dfcf; --paper:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --rule:#3a3329; --hair:#d6cbb4;
+  --soft:#efe7d5; --mark:#2f2a23; --mark-ink:#f8f3e6;
+  --red:#d0221b; --red-soft:#fdecea; --blue:#1d4fa3; --blue-soft:#e9eff9;
+  --bar:#f3ecdc;
+  --f-q:"Noto Serif KR","Batang","AppleMyungjo",serif;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* 감독 바 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bar)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bar);border-bottom:1px solid var(--hair)}
+.bar-in{max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar label{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.bar select{max-width:min(250px,52vw);border:1px solid var(--hair);background:var(--paper);border-radius:6px;padding:4px 8px;font-size:14px}
+.count{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.count small{font-weight:500;color:var(--sub)}
+.prog{flex:1 1 120px;min-width:80px;height:5px;background:var(--hair);border-radius:9px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s}
+.sp{display:flex;gap:6px;margin-left:auto}
+.b{border:1px solid var(--rule);background:var(--paper);border-radius:6px;padding:5px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.b:hover{background:var(--soft)}
+.b.main{background:var(--ink);color:var(--paper)}
+.b.main:hover{opacity:.88}
+.b.warn{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+.b.ghost{border-color:var(--hair);font-weight:500}
+.fs{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:6px;overflow:hidden;background:var(--paper)}
+.fs button{border:0;background:transparent;padding:4px 9px;white-space:nowrap;font-size:14px;font-weight:700;line-height:1.4}
+.fs button:hover:not(:disabled){background:var(--soft)}
+.fs button:disabled{opacity:.35;cursor:default}
+.fs output{min-width:3.2em;text-align:center;font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;border-inline:1px solid var(--hair);padding:5px 2px;line-height:1.4}
+.sheet{zoom:var(--zoom,1)}
+
+/* 시험지 */
+.desk{padding-block:20px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet{max-width:1000px;margin:0 auto;background:var(--paper);border:1px solid var(--hair);box-shadow:0 2px 0 var(--hair),0 10px 30px rgba(0,0,0,.06);padding:34px 40px 48px}
+.ht{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--sub);border-bottom:1px solid var(--rule);padding-bottom:6px}
+.title{text-align:center;margin:18px 0 6px}
+.title .t1{font-family:var(--f-q);font-size:15px;font-weight:600;letter-spacing:.06em}
+.title h1{font-family:var(--f-q);font-weight:900;font-size:34px;letter-spacing:.18em;margin:2px 0 0;text-wrap:balance}
+.title .t2{font-size:13px;color:var(--sub);margin-top:2px}
+.info{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:14px;table-layout:fixed}
+.info th,.info td{border:1px solid var(--rule);padding:6px 8px;text-align:center}
+.info th{background:var(--soft);font-weight:700;width:12%}
+.info input{width:100%;border:0;background:transparent;text-align:center;padding:2px;min-width:0}
+.info td.num{font-variant-numeric:tabular-nums;font-weight:700}
+.notice{font-size:13px;color:var(--sub);border:1px solid var(--hair);padding:8px 12px;margin:0 0 6px;line-height:1.55}
+.notice b{color:var(--ink)}
+
+/* 성적표 */
+.report{border:2px solid var(--red);margin:14px 0 4px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px 20px;align-items:center}
+.score{font-family:var(--f-q);color:var(--red);text-align:center;line-height:1.1;min-width:120px}
+.score .v{font-size:52px;font-weight:900;font-variant-numeric:tabular-nums}
+.score .u{font-size:16px;font-weight:700}
+.score .s{display:block;font-family:var(--f-ui);font-size:13px;color:var(--sub);margin-top:4px}
+.rep-r{min-width:0}
+.lecs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:4px;margin-bottom:10px}
+.lecs a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--hair);padding:3px 4px;text-align:center;font-size:12px;line-height:1.35;font-variant-numeric:tabular-nums}
+.lecs a b{display:block;font-size:13px}
+.lecs a.bad b{color:var(--red)}
+.rep-btns{display:flex;flex-wrap:wrap;gap:6px}
+
+/* 문항 2단 */
+.qs{column-count:2;column-gap:36px;column-rule:1px solid var(--rule);margin-top:18px}
+.lh{column-span:all;font-family:var(--f-q);font-weight:700;font-size:16px;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:5px 2px;margin:20px 0 14px;display:flex;justify-content:space-between;gap:10px}
+.lh:first-child{margin-top:0}
+.lh span{font-family:var(--f-ui);font-size:12px;font-weight:500;color:var(--sub);white-space:nowrap;align-self:center}
+.q{break-inside:avoid;margin:0 0 22px;position:relative;font-family:var(--f-q);font-size:15.5px;line-height:1.7}
+.qt{margin:0 0 8px;font-weight:600;padding-left:2.1em;text-indent:-2.1em}
+.qt .no{font-weight:900;display:inline-block;min-width:2.1em;text-indent:0}
+.box{border:1px solid var(--rule);padding:14px 12px 8px;margin:4px 0 10px 1.2em;position:relative;white-space:pre-line;font-size:14.5px}
+.box .lb{position:absolute;top:-.8em;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 8px;font-size:13px;font-weight:700;white-space:nowrap}
+.ops{list-style:none;margin:0;padding:0 0 0 1.2em;display:grid;gap:2px}
+.op{width:100%;display:flex;gap:6px;align-items:flex-start;text-align:left;border:0;background:transparent;padding:3px 6px;border-radius:4px;font-family:var(--f-q);font-size:15px;line-height:1.6}
+.op:hover:not(:disabled){background:var(--soft)}
+.op .c{flex:none;width:1.5em;height:1.5em;border:1.5px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--f-ui);font-size:12px;font-weight:700;margin-top:.1em;transition:background .12s,color .12s}
+.op .tx{min-width:0}
+.op.on .c{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.op.on .tx{font-weight:600}
+.op:disabled{cursor:default}
+/* 채점 표시 */
+.graded .op.key .c{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--red)}
+.graded .op.key .tx{color:var(--red);font-weight:700}
+.graded .op.on.wrong .tx{text-decoration:line-through;text-decoration-color:var(--red)}
+.qt .no{position:relative}
+.res-o .qt .no::after,.res-x .qt .no::after{content:"";position:absolute;left:-.35em;top:50%;width:1.9em;height:1.9em;transform:translateY(-50%);pointer-events:none}
+.res-o .qt .no::after{border:2.5px solid var(--red);border-radius:50%;opacity:.85}
+.res-x .qt .no::after{background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--red) calc(50% - 1.5px),var(--red) calc(50% + 1.5px),transparent calc(50% + 1.5px));opacity:.85;height:2.2em}
+.nores{display:inline-block;text-indent:0;font-family:var(--f-ui);font-size:11px;font-weight:700;color:var(--red);border:1px solid var(--red);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;line-height:1.5}
+.exp{margin:8px 0 0 1.2em;border-left:3px solid var(--red);background:var(--red-soft);padding:7px 10px;font-family:var(--f-ui);font-size:13.5px;line-height:1.6}
+.exp b{color:var(--red);margin-right:4px}
+.tolink{display:inline-block;margin:6px 0 0 1.2em;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none;border-bottom:1px dotted currentColor;line-height:1.3}
+.tolink:hover{color:var(--red)}
+.graded .tolink{color:var(--red);border-bottom-style:solid}
+.answers{margin-top:48px;border-top:3px double var(--rule);padding-top:22px}
+.ch-h{text-align:center;margin-bottom:16px}
+.ch-t{display:block;font-family:var(--f-q);font-weight:900;font-size:26px;letter-spacing:.2em}
+.ch-s{font-size:13px;color:var(--sub)}
+.keyw{overflow-x:auto;margin-bottom:20px}
+.keyt{border-collapse:collapse;width:100%;min-width:420px;table-layout:fixed;font-variant-numeric:tabular-nums}
+.keyt th,.keyt td{border:1px solid var(--rule);text-align:center;padding:3px 2px;font-size:13px}
+.keyt th{background:var(--soft);font-weight:700;font-size:12px}
+.keyt th a{color:inherit;text-decoration:none;display:block}
+.keyt td{font-family:var(--f-q);font-weight:700;font-size:15px}
+.keyt td.ng{color:var(--red);background:var(--red-soft)}
+.alist{column-count:2;column-gap:36px;column-rule:1px solid var(--rule)}
+.ai{break-inside:avoid;margin:0 0 14px;font-size:14px;line-height:1.65}
+.ah{margin:0 0 3px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-family:var(--f-q)}
+.ah b{font-weight:900}
+.ah .key{font-weight:900;color:var(--red)}
+.ah .mine{font-family:var(--f-ui);font-size:12px;font-weight:700;color:var(--sub)}
+.ai.ok .mine{color:var(--blue)}
+.ai.ng .mine{color:var(--red)}
+.ah .back{margin-left:auto;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none}
+.ah .back:hover{color:var(--ink);text-decoration:underline}
+.ax{margin:0;padding-left:1.4em;color:var(--ink)}
+.ai.ng{border-left:3px solid var(--red);padding-left:8px;margin-left:-11px}
+.end{text-align:center;font-family:var(--f-q);font-weight:700;letter-spacing:.3em;margin-top:26px;border-top:1px solid var(--rule);padding-top:12px}
+.empty{text-align:center;color:var(--sub);padding:40px 0;font-size:15px}
+
+/* OMR 답안지 */
+.omr{position:fixed;top:0;right:0;bottom:0;width:min(330px,92vw);background:var(--paper);border-left:2px solid var(--blue);z-index:40;
+  transform:translateX(102%);transition:transform .22s;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.omr.open{transform:none;box-shadow:-10px 0 30px rgba(0,0,0,.15)}
+.omr-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--blue);color:#fff}
+.omr-h strong{font-size:15px;letter-spacing:.08em}
+.omr-h button{border:1px solid rgba(255,255,255,.7);background:transparent;color:#fff;border-radius:5px;padding:2px 10px;font-size:13px}
+:root[data-theme="dark"] .omr-h,:root[data-theme="dark"] .omr-h button{color:#0f1420;border-color:#0f1420}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .omr-h,:root:not([data-theme="light"]) .omr-h button{color:#0f1420;border-color:#0f1420}}
+.omr-b{overflow:auto;padding:10px 12px 20px}
+.orow{display:grid;grid-template-columns:2.6em repeat(4,1fr);align-items:center;gap:4px;padding:2px 0;border-bottom:1px dashed var(--hair);font-variant-numeric:tabular-nums}
+.orow:nth-child(5n){border-bottom:1px solid var(--blue)}
+.orow .n{font-size:12px;font-weight:700;color:var(--blue);text-align:right;padding-right:6px;background:none;border:0}
+.bub{width:22px;height:28px;justify-self:center;border:1.5px solid var(--blue);border-radius:11px;background:transparent;font-size:11px;color:var(--blue);padding:0;font-weight:700}
+.bub.on{background:var(--mark);border-color:var(--mark);color:transparent}
+.orow.ok .n{color:var(--blue)}
+.orow.ng .n{color:var(--red);text-decoration:underline}
+.orow .bub.key{box-shadow:0 0 0 2px var(--red)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:39;display:none}
+.scrim.on{display:block}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);
+  padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+.toast.show{opacity:.95}
+
+@media (max-width:820px){
+  .qs,.alist{column-count:1;column-rule:none}
+  .sheet{padding:22px 16px 36px}
+  .title h1{font-size:26px;letter-spacing:.1em}
+  .info th{width:auto}
+}
+@media (max-width:560px){
+  .info{font-size:13px}
+  .info tr{display:grid;grid-template-columns:auto 1fr auto 1fr}
+  .info th,.info td{display:block;padding:5px 6px;margin:-1px 0 0 -1px}
+  .info th{white-space:nowrap}
+  .report{grid-template-columns:1fr}
+  .prog{order:5;flex-basis:100%}
+  .sp{margin-left:0}
+}
+.tolink.nlink{margin-left:12px;color:var(--blue)}
+.back.nlink{margin-left:10px}
+@media (max-width:560px){.sp{flex-wrap:wrap}}
+.title h1{word-break:keep-all}
+</style>
+
+</head>
+<body>
+<div class="bar" role="region" aria-label="시험 진행">
+  <div class="bar-in">
+    <label for="scope">바로가기
+      <select id="scope"></select>
+    </label>
+    <span class="count">답안 <span id="cnt">0/0</span> <small id="cntPct"></small></span>
+    <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+    <div class="sp">
+      <div class="fs" role="group" aria-label="글자 크기">
+        <button id="fsDown" title="글자 작게" aria-label="글자 작게">가<small>−</small></button>
+        <output id="fsVal">100%</output>
+        <button id="fsUp" title="글자 크게" aria-label="글자 크게">가<small>+</small></button>
+      </div>
+      <button class="b ghost" id="omrBtn" aria-controls="omr" aria-expanded="false">OMR 답안지</button>
+      <button class="b ghost" id="themeBtn" title="화면 밝기 전환">다크</button>
+      <button class="b ghost" id="resetBtn" title="표기한 답을 모두 지움">초기화</button>
+      <button class="b" id="retryBtn" hidden>오답만 다시</button>
+      <button class="b main" id="submitBtn">제출·채점</button>
+    </div>
+  </div>
+</div>
+
+<main class="desk">
+  <article class="sheet">
+    <div class="ht"><span>2026학년도 2학기 기말시험 대비</span><span>사회복지학과 일반선택</span></div>
+    <header class="title">
+      <div class="t1">기 출 문 제 ( 2 0 1 8 ~ 2 0 1 9 )</div>
+      <h1>인간행동과 사회환경</h1>
+      <div class="t2" id="scopeLabel">출제범위 1~15강</div>
+    </header>
+    <table class="info">
+      <tr>
+        <th scope="row">문항 수</th><td class="num" id="iTotal">0</td>
+        <th scope="row">배점</th><td class="num">100점</td>
+        <th scope="row">학번</th><td><input id="sid" aria-label="학번" autocomplete="off"></td>
+        <th scope="row">성명</th><td><input id="sname" aria-label="성명" autocomplete="off"></td>
+      </tr>
+    </table>
+    <p class="notice">※ 각 문항에서 답을 하나 골라 번호를 누르세요. 오른쪽 위 <b>OMR 답안지</b>에서도 표기할 수 있습니다.
+      다 풀었으면 <b>제출·채점</b>을 누르세요. 채점 결과는 문항 번호에 ○, ╱로 표시되고, 정답과 해설은 시험지 맨 뒤 <b>정답 및 해설</b>에 모여 있습니다. 위쪽 <b>바로가기</b>에서 강의를 고르면 그 문항으로 이동합니다. 표기한 답은 이 기기의 브라우저에 저장됩니다.</p>
+    <section id="report" class="report" hidden aria-live="polite"></section>
+    <div class="qs" id="qs"></div>
+    <div class="end">― 문제 끝 ―</div>
+    <section class="answers" id="answers" aria-label="정답 및 해설"></section>
+  </article>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="omr" id="omr" aria-label="OMR 답안지">
+  <div class="omr-h"><strong>답 안 지</strong><button id="omrClose">닫기</button></div>
+  <div class="omr-b" id="omrBody"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DATA = [{"n": 1, "t": "인간행동과 인간발달", "qs": [{"text": "인간행동과 관련된 개념 중 ‘동기’가 의미하는 바는?", "passage": null, "plabel": null, "opts": ["인간 행동이 주관적으로 변화되는 과정", "특정 행동을 취하도록 하는 정신적 성향", "사고, 감각, 판단 등의 내면적 활동 일체", "비교적 지속적인 행동성향이 형성되는 과정"], "ans": 1, "exp": "동기는 특정 행동을 취하도록 하는 정신적 성향이다. ③은 마음, ④는 학습에 대한 설명이다.", "no": 1, "note": "#n=l1~1~%EB%8F%99%EA%B8%B0%28Motive%29%ED%8A%B9%EC%A0%95%EB%AA%A9%EC%A0%81"}, {"text": "다음 중 인간발달에 대한 에릭슨의 이론과 거리가 먼 것은?", "passage": null, "plabel": null, "opts": ["동화와 조절", "심리사회학적 접근", "8 단계의 발달 과정", "연령대별 발달과업"], "ans": 0, "exp": "에릭슨은 심리사회적 접근으로 생애를 8단계로 나누고 단계별 발달과업(위기)을 제시했다. 동화와 조절은 피아제의 개념이다.", "no": 2, "note": "#n=l1~1~%EC%97%90%EB%A6%AD%EC%8A%A8%28Erikson%29%EC%8B%AC%EB%A6%AC"}, {"text": "에릭슨이 말하는 건강한 성격의 여덟 가지 특질 중 노년기의 자아통일에 대한 설명은?", "passage": null, "plabel": null, "opts": ["성인으로서의 책임을 다하는 특질", "독립적으로 결정하고 행동하는 경향성", "자기의 유용성과 유능성을 높이기 위해 노력하는 경향", "자신의 삶의 여정을 받아들이고 후세대에 기여하려는 자세"], "ans": 3, "exp": "자아통일(자아통합감)은 노년기에 삶 전체를 받아들이고 후세대에 기여하려는 자세이다. ①은 생산성, ②는 자율성(자주성), ③은 근면성에 가깝다.", "no": 3, "note": "#n=l1~1~%EC%84%B1%EC%9D%B8%EC%A4%91%EA%B8%B0%2840~65%EC%84%B8%29%EC%83%9D%EC%82%B0"}, {"text": "인간들이 개인적인 삶과 집단생활을 하는 과정에서 표출되고 반응하는 말과 행동 일체를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["인간행동", "습관", "무의식", "교환"], "ans": 0, "exp": "인간행동은 개인적 삶과 집단생활에서 표출되고 반응하는 말과 행동 일체로, 사고와 감정 같은 내적 요소도 포함한다.", "no": 4, "note": "#n=l1~1~%EC%9D%B4%EA%B3%BC%EB%AA%A9%EC%97%90%EC%84%9C%EC%9D%98%27%EC%9D%B8%EA%B0%84%ED%96%89%EB%8F%99%27%EA%B0%9C%EB%85%90"}, {"text": "행동에 대한 사회적 기대와 실천행동의 규칙을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["성격", "발달", "규범", "마음"], "ans": 2, "exp": "규범은 행동에 대한 사회적 기대와 실천행동의 규칙이며 문화와 시대에 따라 달라진다.", "no": 5, "note": "#n=l1~1~%EA%B7%9C%EB%B2%94%28Norm%29%ED%96%89%EB%8F%99%EC%97%90%EB%8C%80%ED%95%9C%EC%82%AC"}, {"text": "뉴만 등(B.M.Newman et al., 1991)은 인간발달의 개념을 분석한 후, 네 가지 기본 전제가 포함되어 있다고 주장하였다. 다음 중 그들이 제시한 기본 전제에 포함되지 않는 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["인간의 성장과 발달은 삶의 모든 기간에 일어난다.", "인간의 발달은 시간의 흐름에 따라 지속적으로 변화된다.", "인간의 발달은 신체나 언어, 인지적인 면보다는 사회적이고 정서적인 측면을 더 중요하게 생각해야 한다.", "인간행동은 시간적으로 나타나는 개체적인 변화만이 아니라 관련된 상황과 인간관계의 맥락까지 포함하여 이해해야 한다."], "ans": 2, "exp": "인간발달은 신체, 언어, 인지, 사회, 정서를 함께 보는 전체성을 전제로 한다. 사회정서를 '더 중요하게' 보는 것은 틀린 진술이다.", "no": 6, "note": "#n=l1~1~%EC%97%90%EB%A6%AD%EC%8A%A8%28Erikson%29%EC%8B%AC%EB%A6%AC"}, {"text": "인간의 신체와 신경의 구조, 행동, 그리고 이 행동의 특성이 일정한 방향으로 변화되고 유형화되는 과정을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["동기", "경험", "발달", "도덕성"], "ans": 2, "exp": "발달은 신체와 신경의 구조, 행동이 일정한 방향으로 변화하고 유형화되는 과정이며 노화와 쇠퇴도 포함한다.", "no": 7, "note": "#n=l1~1~%EB%B0%9C%EB%8B%AC%28Development"}, {"text": "민주사회의 구성원들에 요구되는 능력과 태도를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["인간행동", "성격", "시민성", "동기"], "ans": 2, "exp": "시민성은 민주사회 구성원에게 요구되는 능력과 태도(권리와 의무, 타인 존중, 다양성 인정)이다.", "no": 8, "note": "#n=l1~1~%EC%8B%9C%EB%AF%BC%EC%84%B1%28Citizenshi"}, {"text": "뉴만 등(Newman et al., 1991)은 인간발달의 개념을 분석한 후, 네 가지 기본 전제들이 포함되어 있다고 하였다. 다음 중 그들이 제시한 기본 전제에 포함되지 않는 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["인간의 성장과 발달은 삶의 모든 기간에 일어난다.", "인간의 발달은 시간의 흐름에 따라 지속적으로 변화된다.", "인간의 발달은 신체나 언어, 인지적인 면뿐만 아니라 사회적이고 정서적인 측면까지도 포함한다.", "인간행동은 시간적으로 나타나는 개체적인 변화만으로 이해해야 한다."], "ans": 3, "exp": "인간행동은 개체적 변화만이 아니라 상황과 인간관계의 맥락까지 포함해 이해해야 한다(맥락의 전제). '개체적 변화만으로'는 틀린 진술이다.", "no": 9, "note": "#n=l1~1~%EC%9D%B8%EA%B0%84%EC%9D%98%EB%B0%9C%EB%8B%AC%EA%B3%BC%ED%96%89%EB%8F%99%EC%9D%80%EC%83%81%ED%99%A9%EC%9D%B4%EB%82%98%EC%9D%B8"}, {"text": "에릭슨(Erikson)은 인간발달을 심리사회적인 측면에서 연구하였으며, 인생 전체의 과정을 총 8단계로 구분하였다. 다음 중 청소년기의 도전과 위기와 관련된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["기본적 신뢰 대 불신(basic trust vs. mistrust)", "주도성 대 죄의식(initiative vs. guilt)", "정체성 대 역할혼란(identity vs. role confusion)", "자아완성 대 절망(integrity vs. despair)"], "ans": 2, "exp": "청소년기의 심리사회적 위기는 정체성 대 역할혼란(역할 혼미)이다. 신뢰 대 불신은 영아기, 주도성 대 죄의식은 초기 아동기, 자아완성 대 절망은 노년기이다.", "no": 10, "note": "#n=l1~1~%EC%97%90%EB%A6%AD%EC%8A%A8%28Erikson%29%EC%8B%AC%EB%A6%AC"}, {"text": "다음 중 개인이 주어진 상황과 조건을 적응해 나가는 과정에서 비교적 일관성 있게 나타나는 특유의 행동과 사고양식의 총체를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["성격", "학습", "규범", "시민성"], "ans": 0, "exp": "성격은 상황에 적응하며 비교적 일관되게 나타나는 특유의 행동과 사고양식의 총체이다.", "no": 11, "note": "#n=l1~1~%EC%84%B1%EA%B2%A9%28Personality"}, {"text": "에릭슨(Erikson)에 따르면, 아동기(6~12세)가 되면 자신의 유용성과 유능성을 추구하며 완전하게 잘 적응하도록 노력하는 경향이 나타난다. 이와 관련된 성격특질은 무엇인가?", "passage": null, "plabel": null, "opts": ["신뢰감", "자아완성", "생산성", "근면성"], "ans": 3, "exp": "중기 아동기(6~12세)의 과업은 근면성 대 열등감으로, 유용성과 유능성을 추구하며 지식과 기술을 익힌다.", "no": 12, "note": "#n=l1~1~%EC%A4%91%EA%B8%B0%EC%95%84%EB%8F%99%EA%B8%B0%286~11%EC%84%B8%29%EA%B7%BC%EB%A9%B4"}, {"text": "인간이나 동물이 특정한 목적을 향하여 특정한 행동을 취하도록 유도하는 정신적 성향을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["무의식", "역량", "이상행동", "동기"], "ans": 3, "exp": "동기는 특정한 목적을 향해 특정한 행동을 취하도록 유도하는 정신적 성향이다.", "no": 13, "note": "#n=l1~1~%EB%8F%99%EA%B8%B0%28Motive%29%ED%8A%B9%EC%A0%95%EB%AA%A9%EC%A0%81"}, {"text": "뉴만 등(B. M. Newman et al., 1991)은 인간발달의 개념을 분석한 후, 네 가지 기본 전제들이 포함되어 있다고 하였다. 다음 중 그들이 제시한 기본 전제에 포함되지 않는 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["인간의 성장과 발달은 삶의 특정 기간에만 일어난다.", "인간의 발달은 시간의 흐름에 따라 지속적으로 변화된다.", "인간의 발달은 신체나 언어, 인지적인 면뿐만 아니라 사회적이고 정서적인 측면까지도 포함한다.", "인간행동은 시간적으로 나타나는 개체적인 변화만이 아니라 관련된 상황과 인간관계의 맥락까지 포함하여 이해해야 한다."], "ans": 0, "exp": "인간발달은 태내기부터 죽음까지 전 생애에 걸쳐 일어난다. '특정 기간에만'은 틀린 진술이다.", "no": 14, "note": "#n=l1~1~%EC%9D%B8%EA%B0%84%EC%9D%98%EC%84%B1%EC%9E%A5%EA%B3%BC%EB%B0%9C%EB%8B%AC%EC%9D%80%EC%82%B6%EC%9D%98%EB%AA%A8%EB%93%A0%EA%B8%B0"}, {"text": "자아의 형성과정을 연구한 에릭슨(Erikson)에 따르면, ( 이것 )은 출생 후 1년간의 어머니와의 관계에서 형성되며, 타인을 합리적으로 믿고, 자기 자신에 대해서 자신감을 갖는 특질이다. 이것은 무엇인가?", "passage": null, "plabel": null, "opts": ["신뢰감", "자아통일", "자아정체감", "주도성"], "ans": 0, "exp": "영아기(0~2세) 어머니와의 관계에서 형성되는 특질은 기본적 신뢰감이다.", "no": 15, "note": "#n=l1~1~%EC%98%81%EC%95%84%EA%B8%B0%280~2%EC%84%B8%29%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%8B%A0%EB%A2%B0"}, {"text": "일반적으로, 생각하고 느끼며 판단하는 작용을 하는 인간의 내면적 활동 일체를 가리키는 말은 무엇인가?", "passage": null, "plabel": null, "opts": ["마음", "동기", "학습", "발달"], "ans": 0, "exp": "마음은 생각하고 느끼며 판단하는 인간의 내면적 활동 일체이다.", "no": 16, "note": "#n=l1~1~%EB%A7%88%EC%9D%8C%28Mind%29%EC%83%9D%EA%B0%81%ED%95%98%EA%B3%A0%EB%8A%90%EB%81%BC"}, {"text": "자아의 형성과정을 연구한 에릭슨(Erikson)에 따르면, 청소년기 또는 청년기가 되면 타고난 역량, 주어진 기회, 해야 할 소임, 자신의 삶의 방식, 그리고 인간의 기본욕구들을 적절히 통합하는 자아인식이 발달하면서 (이것)이 성장한다고 하였다. 이것은 무엇인가?", "passage": null, "plabel": null, "opts": ["자아정체성", "자아통일", "자주성", "주도성"], "ans": 0, "exp": "청소년기(청년기)에 역량, 기회, 소임, 삶의 방식, 욕구를 통합하는 자아인식이 발달하며 자아정체성이 성장한다.", "no": 17, "note": "#n=l1~1~%EC%B2%AD%EC%86%8C%EB%85%84%EA%B8%B0%2812~20%EC%84%B8%29%EC%A0%95%EC%B2%B4"}]}, {"n": 2, "t": "인간발달과 사회체계", "qs": [{"text": "인간행동을 바라보는 환경론의 입장을 뒷받침 해주는 사례는?", "passage": null, "plabel": null, "opts": ["남성은 염색체의 차이로 인하여 공격성이 강하다.", "자녀에 대한 부모의 애착은 동서고금의 보편적 현상이다.", "일란성 쌍둥이보다 이란성 쌍둥이의 학업성적 차이가 크다.", "인간 지능의 상관성은 2세와 18세보다 12세와 18세 사이에 더 높다."], "ans": 3, "exp": "나이가 가까울수록(12세와 18세) 지능 상관이 높다는 것은 비슷한 환경 경험의 누적 효과로 환경의 영향을 보여 준다. 나머지는 유전의 영향을 뒷받침한다.", "no": 18, "note": "#n=l2~1~%EC%9D%B8%EA%B0%84%ED%96%89%EB%8F%99%EC%9D%80%EB%8B%A4%EC%96%91%ED%95%9C%ED%99%98%EA%B2%BD%EC%B2%B4%EA%B3%84%EC%9D%98%EC%98%81"}, {"text": "다음 중 인간발달에 영향을 미치는 생물학적 요인은 무엇인가?", "passage": null, "plabel": null, "opts": ["호르몬", "기후", "또래집단", "경험과 학습"], "ans": 0, "exp": "호르몬은 생물학적 요인이다. 기후는 자연환경, 또래집단은 사회환경, 경험과 학습은 개인의 경험 요인이다.", "no": 19, "note": "#n=l2~1~%EC%9E%90%EC%97%B0%28%ED%99%98%EA%B2%BD%29%EA%B3%BC%EC%9D%B8%EA%B0%84%EB%B0%9C%EB%8B%AC%E2%80%94%27%EC%9E%90"}, {"text": "날이 갈수록 생태계 파괴의 결과로 추정되는 기상이변, 물 부족 사태, 공기와 토양 오염, 지구온난화, 먹이사슬 파괴와 같은 현상이 늘어나고 있다. 독일의 사회학자 울리히 벡(U. Beck, 1992)은 이러한 상황을 가리켜 무엇이라고 했는가?", "passage": null, "plabel": null, "opts": ["위험사회", "이익사회", "생태중심사회", "불평등사회"], "ans": 0, "exp": "울리히 벡은 인간이 만든 '제조된 위험'(기후변화, 환경오염, 원전사고)이 일상화된 사회를 위험사회라고 했다.", "no": 20, "note": "#n=l2~1~%EC%9C%84%ED%97%98%EC%82%AC%ED%9A%8C%28RiskSocie"}, {"text": "다음 중 인간발달에 영향을 미치는 자연환경 요인은 무엇인가?", "passage": null, "plabel": null, "opts": ["호르몬", "기후", "또래집단", "경험과 학습"], "ans": 1, "exp": "기후는 자연환경 요인이다. 호르몬은 생물학적 요인, 또래집단은 사회환경 요인이다.", "no": 21, "note": "#n=l2~1~%EC%9E%90%EC%97%B0%28%ED%99%98%EA%B2%BD%29%EA%B3%BC%EC%9D%B8%EA%B0%84%EB%B0%9C%EB%8B%AC%E2%80%94%27%EC%9E%90"}]}, {"n": 3, "t": "심리역동적 성격이론", "qs": [{"text": "다음 <보기>의() 에 들어갈 말은?", "passage": "융은 인간의 원형과 본성이 있는 그대로 표현되지는 않는다고 보았다. 그 중 겉으로 드러나고 외부세계로 표출되는 자아를( ) 라 하였다.", "plabel": "보기", "opts": ["페르소나", "아니무스", "거울자아", "적응자아"], "ans": 0, "exp": "겉으로 드러나 외부세계에 표출되는 자아는 페르소나(사회적 가면)이다.", "no": 22, "note": "#n=l3~1~%ED%8E%98%EB%A5%B4%EC%86%8C%EB%82%98%28persona%29%3A"}, {"text": "다음 중 성격구조에 대한 프로이트의 설명으로 틀린 것은?", "passage": null, "plabel": null, "opts": ["초자아는 본능과 충동의 원천이다.", "원초아는 인간의 무의식에 해당한다.", "자아는 집행자 혹은 조절자의 역할을 한다.", "인간의 마음은 원초아, 자아, 초자아로 구성된다."], "ans": 0, "exp": "본능과 충동의 원천은 원초아이다. 초자아는 도덕과 양심의 영역이며, 자아는 집행자, 조절자 역할을 한다.", "no": 23, "note": "#n=l3~1~%EC%9E%90%EC%95%84%28ego%29%EC%99%B8%EB%B6%80%EC%84%B8%EA%B3%84%EC%9D%98%EC%A0%9C%EC%95%BD"}, {"text": "프로이트가 제시한 성격의 발달단계 중 오이디푸스 콤플렉스가 나타나는 단계는?", "passage": null, "plabel": null, "opts": ["잠복기", "구강기", "생식기", "남근기"], "ans": 3, "exp": "오이디푸스 콤플렉스는 남근기(3~6세)에 나타나며 동성 부모와의 동일시로 초자아가 발달한다.", "no": 24, "note": "#n=l3~1~%EB%82%A8%EA%B7%BC%EA%B8%B0%283~6%EC%84%B8%29%EB%A6%AC%EB%B9%84%EB%8F%84%EA%B0%80%EC%84%B1"}, {"text": "인간행동에 대한 아들러의 설명에 해당하는 것은?", "passage": null, "plabel": null, "opts": ["인간의 행동은 리비도가 결정한다.", "인간의 모든 행동에는 목적이 있다.", "인간의 본성은 객관적인 요인에 의하여 결정된다.", "인간의 동물적 본성은 엄격한 훈육을 필요로 한다."], "ans": 1, "exp": "아들러는 인간을 목표지향적 존재로 보아 모든 행동에는 목적이 있다고 했다. 리비도 결정론은 프로이트의 관점이다.", "no": 25, "note": "#n=l3~1~%EB%A6%AC%EB%B9%84%EB%8F%84%28Libido%29%EB%AA%A8%EB%93%A0%ED%98%95"}, {"text": "다음 중 융의 이론과 가장 관계가 깊은 것은?", "passage": null, "plabel": null, "opts": ["매개변인", "관찰학습", "집단무의식", "욕구단계론"], "ans": 2, "exp": "집단무의식은 융의 개념이다. 매개변인과 관찰학습은 사회학습이론, 욕구단계론은 매슬로이다.", "no": 26, "note": "#n=l3~1~%ED%94%84%EB%A1%9C%EC%9D%B4%ED%8A%B8%EC%99%80%EC%9D%98%EC%B0%A8%EC%9D%B4%E2%80%94%ED%94%84%EB%A1%9C%EC%9D%B4%ED%8A%B8%EC%97%90"}, {"text": "프로이트가 말하는 정신적으로 건강한 사람의 정의는?", "passage": null, "plabel": null, "opts": ["선천적 성장욕구를 충족한 사람", "경험을 통해 자아가 완성된 사람", "사고와 감정 그리고 직관이 균형을 이룬 사람", "욕구와 도덕 사이의 갈등을 원활하게 조정하는 사람"], "ans": 3, "exp": "프로이트에서 건강한 사람은 자아가 원초아(욕구)와 초자아(도덕) 사이의 갈등을 잘 조정하는 사람이다. ③은 융의 관점이다.", "no": 27, "note": "#n=l3~1~%EC%9E%90%EC%95%84%EB%A5%BC%EC%9C%84%ED%98%91%ED%95%98%EB%8A%94%EA%B7%BC%EC%9B%90%E2%80%94%EC%99%B8%EB%B6%80%ED%99%98%EA%B2%BD"}, {"text": "건강한 성격의 발달을 위해 융이 강조한 것은?", "passage": null, "plabel": null, "opts": ["‘내면의 나’를 존중하고 배려한다.", "중요한 타자의 무조건적 지지와 수용이 필요하다.", "긍정적 경험을 반복하여 자기효능을 높여야 한다.", "성장단계에 따른 발달과업을 원활히 달성해야 한다."], "ans": 0, "exp": "융은 외면된 무의식(그림자 등)을 억압하지 않고 통합하는 개성화를 강조했다. ②는 로저스, ③은 반두라, ④는 에릭슨의 관점이다.", "no": 28, "note": "#n=l3~1~%EA%B0%9C%EC%9D%B8%EB%AC%B4%EC%9D%98%EC%8B%9D%EC%9D%98%EC%8B%9D%EC%9D%B4%EC%96%B5%EC%95%95%ED%95%98%EA%B3%A0%EB%A7%9D%EA%B0%81"}, {"text": "원하는 목표를 달성할 수 없을 때 다른 목표를 달성함으로써 자아불안을 해소하는 방어기제는?", "passage": null, "plabel": null, "opts": ["전이", "퇴행", "승화", "합리화"], "ans": 2, "exp": "달성 불가능한 목표 대신 사회적으로 바람직한 다른 목표를 추구하는 것은 승화이다.", "no": 29, "note": "#n=l3~1~%EC%8A%B9%ED%99%94%28sublimation"}, {"text": "자신의 내면에 존재하는 용납 받을 수 없는 욕구를 다른 사람에게 전가하여 비난하는 방어기제는?", "passage": null, "plabel": null, "opts": ["투사", "해소", "동일시", "반동형성"], "ans": 0, "exp": "용납할 수 없는 자신의 욕구를 남에게 돌려 비난하는 것은 투사이다.", "no": 30, "note": "#n=l3~1~%ED%88%AC%EC%82%AC%28projection%29"}, {"text": "다음 중 프로이트(Freud)가 말한 원초아(原初我, id)와 관계가 적은 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["성적 욕구와 공격적 본능", "즐거움의 원칙", "겉으로 드러나고 현실 속에서 반응을 보이는 것", "일차반응"], "ans": 2, "exp": "겉으로 드러나 현실 속에서 반응하는 것은 자아의 특성이다. 원초아는 성적, 공격적 본능, 즐거움(쾌락)의 원칙, 일차과정과 관련된다.", "no": 31, "note": "#n=l3~1~%EC%9E%90%EC%95%84%EB%A5%BC%EC%9C%84%ED%98%91%ED%95%98%EB%8A%94%EA%B7%BC%EC%9B%90%E2%80%94%EC%99%B8%EB%B6%80%ED%99%98%EA%B2%BD"}, {"text": "프로이트(Freud)에 따르면, 남근기 아이는 자기와 다른 성을 가진 부모의 사랑을 갈망하고 같은 성을 가진 부모를 싫어하는 경향을 보인다. 이와 관련하여, 남근기에 남자 아이에게 나타나는 콤플렉스를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["오이디푸스 콤플렉스", "엘렉트라 콤플렉스", "신데렐라 콤플렉스", "피터팬 콤플렉스"], "ans": 0, "exp": "남근기 남아가 어머니를 사랑하고 아버지를 경쟁자로 여기는 것은 오이디푸스 콤플렉스이다. 여아는 엘렉트라 콤플렉스이다.", "no": 32, "note": "#n=l3~1~%EB%82%A8%EA%B7%BC%EA%B8%B0%283~6%EC%84%B8%29%EB%A6%AC%EB%B9%84%EB%8F%84%EA%B0%80%EC%84%B1"}, {"text": "다음 중 아들러(Adler)가 제시한 ‘인간의 성격에 영향을 미치는 요인’과 거리가 먼 것은?", "passage": null, "plabel": null, "opts": ["아동의 병약과 허약 체질", "사랑의 과잉", "출생순위", "강화물"], "ans": 3, "exp": "아들러가 제시한 성격 영향 요인은 병약 체질, 사랑의 과잉, 양육태만과 거부, 출생순위 등이다. 강화물은 행동주의 개념이다.", "no": 33, "note": "#n=l3~1~%EC%84%B1%EA%B2%A9%EB%B0%9C%EB%8B%AC%EC%97%90%EC%98%81%ED%96%A5%EC%9D%84%EB%AF%B8%EC%B9%98%EB%8A%94%EC%9A%94%EC%9D%B8"}, {"text": "융(Jung)은 인간에게는 어둡고 사악한 동물적인 측면이 있다고 보았다. 다음 중 융이 제시한 ‘인간의 행동에서 발견되는 공격성, 잔인성, 부도덕성’과 가장 관련이 깊은 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["그림자", "원초아(id)", "자아", "꿈"], "ans": 0, "exp": "공격성, 잔인성, 부도덕성 등 외면된 어두운 측면은 융의 그림자이다. 원초아는 프로이트의 개념이다.", "no": 34, "note": "#n=l3~1~%EA%B7%B8%EB%A6%BC%EC%9E%90%28%E2%86%90%EA%B0%9C%EC%9D%B8%EB%AC%B4%EC%9D%98%EC%8B%9D%29%EC%9D%98%EC%8B%9D%EC%9D%98"}, {"text": "'인간이 자기 자신의 주인이 아니라, 자신이 의식하지 못하는 무의식이라는 비합리적인 힘이 마음의 주인'이라고 주장한 심리학자는 누구인가?", "passage": null, "plabel": null, "opts": ["프로이트(Freud)", "왓슨(Watson)", "스키너(Skinner)", "매슬로(Maslow)"], "ans": 0, "exp": "무의식이라는 비합리적인 힘이 마음의 주인이라고 본 것은 프로이트이다(정신결정론).", "no": 35, "note": "#n=l3~1~%EA%B0%9C%EC%9D%B8%EC%8B%AC%EB%A6%AC%ED%95%99%28Individu"}, {"text": "다음 중 프로이트(Freud)가 제시한 인간의 성격발달단계를 순서대로 나열한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["구강기 - 항문기 - 남근기 - 잠복기 - 생식기", "구강기 - 항문기 - 남근기 - 생식기 - 잠복기", "구강기 - 항문기 - 잠복기 - 남근기 - 생식기", "구강기 - 항문기 - 잠복기 - 생식기 - 남근기"], "ans": 0, "exp": "프로이트의 심리성적 발달단계는 구강기 → 항문기 → 남근기 → 잠복기 → 생식기 순이다.", "no": 36, "note": "#n=l3~1~%EC%8B%AC%EB%A6%AC%EC%84%B1%EC%A0%81%EB%B0%9C%EB%8B%AC%EB%8B%A8%EA%B3%84"}, {"text": "다음 중 아들러(Adler)가 제시한 인간의 행동을 자극하고 추동하는 요인은 무엇인가?", "passage": null, "plabel": null, "opts": ["성적 욕구와 공격적 본능", "우월성 추구", "보상과 처벌", "자아실현"], "ans": 1, "exp": "아들러는 열등감을 보상하려는 우월성 추구를 인간 행동의 기본동기로 보았다.", "no": 37, "note": "#n=l3~1~%EC%9A%B0%EC%9B%94%EC%84%B1%EC%B6%94%EA%B5%AC%EC%9D%B8%EA%B0%84%EC%97%90%EA%B2%8C%EA%B3%B5%ED%86%B5%EB%90%9C%EA%B8%B0%EB%B3%B8"}, {"text": "집단무의식을 설명하기 위해 '융(Jung)'이 도입한 개념으로, '어떤 집단의 구성원들이 공유하고 있는 보편적, 집단적, 선험적 심상'을 가리키는 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["페르소나", "오이디푸스 콤플렉스", "원형", "스키마"], "ans": 2, "exp": "원형은 집단무의식이 이미지와 상징으로 구체화된 보편적, 선험적 심상(어머니, 영웅 등)이다.", "no": 38, "note": "#n=l3~1~%EC%9B%90%ED%98%95%28archetype%29%28"}, {"text": "다음 중 심리검사인 MBTI와 가장 관련이 큰 심리학자는 누구인가?", "passage": null, "plabel": null, "opts": ["스키너(Skinner)", "왓슨(Watson)", "융(Jung)", "매슬로(Maslow)"], "ans": 2, "exp": "MBTI는 융의 심리유형론(태도 2가지 × 기능 4가지)을 바탕으로 판단(J), 인식(P)을 더한 검사이다.", "no": 39, "note": "#n=l3~1~%EC%97%AC%EB%8D%9F%EA%B0%80%EC%A7%80%EC%8B%AC%EB%A6%AC%EC%9C%A0%ED%98%95%E2%80%94%EC%9E%90%EC%95%84%EC%9D%98%ED%83%9C%EB%8F%84"}, {"text": "이숍 이야기 중, 포도닝쿨이 높아 포도를 못 따먹게 된 여우가 실패에 대하여 변명을 늘어놓은 우화에서 유래한 것으로, 자신의 약점을 감추려는 무의식적인 노력으로 의식적인 거짓말과는 다른 일종의 호신책은 무엇인가?", "passage": null, "plabel": null, "opts": ["합리화", "투사", "전위", "억압"], "ans": 0, "exp": "이솝 우화의 여우(신 포도)에서 유래한 방어기제는 합리화이다.", "no": 40, "note": "#n=l3~1~%ED%95%A9%EB%A6%AC%ED%99%94%28rationaliz"}, {"text": "프로이트(Freud)가 말한 자아(自我, ego)의 설명으로 알맞은 것은?", "passage": null, "plabel": null, "opts": ["겉으로 드러나고 현실 속에서 반응을 보이는 것을 말한다.", "처벌과 보상을 통하여 양심의 형태로 성격의 일부를 구성한다.", "효율성보다는 도덕성 쪽으로 나아가도록 한다.", "자극을 받자마자 곧바로 방출되는 속성이 있다."], "ans": 0, "exp": "자아는 겉으로 드러나고 현실 속에서 반응하는 집행자이다. ②, ③은 초자아, ④는 원초아의 속성이다.", "no": 41, "note": "#n=l3~1~%EC%9E%90%EC%95%84%EB%A5%BC%EC%9C%84%ED%98%91%ED%95%98%EB%8A%94%EA%B7%BC%EC%9B%90%E2%80%94%EC%99%B8%EB%B6%80%ED%99%98%EA%B2%BD"}, {"text": "프로이트(Freud)에 따르면, 남근기(phallic stage)에 아이는 자기와 다른 성을 가진 부모의 사랑을 갈망하고 같은 성을 가진 부모를 싫어하는 경향을 보인다. 이와 관련하여, 남근기에 여자 아이에게 나타나는 콤플렉스는 무엇인가?", "passage": null, "plabel": null, "opts": ["오이디푸스 콤플렉스", "엘렉트라 콤플렉스", "신데렐라 콤플렉스", "피터펜 콤플렉스"], "ans": 1, "exp": "남근기 여아가 아버지를 사랑하고 어머니를 경쟁자로 여기는 것은 엘렉트라 콤플렉스이다.", "no": 42, "note": "#n=l3~1~%EB%82%A8%EA%B7%BC%EA%B8%B0%283~6%EC%84%B8%29%EB%A6%AC%EB%B9%84%EB%8F%84%EA%B0%80%EC%84%B1"}, {"text": "다음 중 아들러(Adler)가 제시한 ‘인간의 성격에 영향을 미치는 요인’과 거리가 먼 것은?", "passage": null, "plabel": null, "opts": ["허약한 체질", "사랑의 과잉", "리비도와 성적 욕구", "출생순위"], "ans": 2, "exp": "리비도와 성적 욕구는 프로이트의 개념이다. 허약한 체질, 사랑의 과잉, 출생순위는 아들러가 제시한 성격 영향 요인이다.", "no": 43, "note": "#n=l3~1~%EC%84%B1%EA%B2%A9%EB%B0%9C%EB%8B%AC%EC%97%90%EC%98%81%ED%96%A5%EC%9D%84%EB%AF%B8%EC%B9%98%EB%8A%94%EC%9A%94%EC%9D%B8"}, {"text": "다음 중 성격을 유형별로 파악할 수 있는 심리검사인 MBTI와 가장 관련이 큰 심리학자는 누구인가?", "passage": null, "plabel": null, "opts": ["스키너(Skinner)", "왓슨(Watson)", "융(Jung)", "매슬로(Maslow)"], "ans": 2, "exp": "성격을 유형별로 파악하는 MBTI는 융의 심리유형론과 관련된다.", "no": 44, "note": "#n=l3~1~%EC%8B%AC%EB%A6%AC%EC%A0%81%EC%9C%A0%ED%98%95"}, {"text": "자신의 용납될 수 없는 생각이나 욕구를 남에게 덧씌우거나(throwing out), 책임을 다른 사람의 탓으로 전가하여 초자아의 압력을 피하여 자기열등감, 불안감, 분노에서 탈피하려는 기제는 무엇인가?", "passage": null, "plabel": null, "opts": ["합리화", "투사", "보상", "공상"], "ans": 1, "exp": "자신의 생각이나 욕구를 남에게 덧씌우고 책임을 전가하는 것은 투사이다.", "no": 45, "note": "#n=l3~1~%EB%8F%99%EC%9D%BC%EC%8B%9C%28identifica"}, {"text": "다음 중 프로이트(Freud)가 말한 원초아(原初我, id)와 가장 관련이 깊은 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["즐거움의 원칙", "현실 원칙", "양심과 도덕성", "내면화된 사회의 이상과 가치"], "ans": 0, "exp": "원초아는 즐거움(쾌락)의 원칙을 따른다. 현실 원칙은 자아, 양심과 도덕성, 내면화된 이상은 초자아와 관련된다.", "no": 46, "note": "#n=l3~1~%EC%9E%90%EC%95%84%EB%A5%BC%EC%9C%84%ED%98%91%ED%95%98%EB%8A%94%EA%B7%BC%EC%9B%90%E2%80%94%EC%99%B8%EB%B6%80%ED%99%98%EA%B2%BD"}, {"text": "아들러(Adler)가 제시한 ‘사회적 관심(social interest)’에 대한 설명과 거리가 가장 먼 것은?", "passage": null, "plabel": null, "opts": ["사회에 공헌하려는 본능이다.", "개인적 우월의 목표를 어느 정도 포기하고 사회적 목표로 이동하는 것을 가리킨다.", "개인의 심리적 건강을 측정하는 유용한 도구이다.", "사회적 관심은 선천적이고, 자동으로 발생한다."], "ans": 3, "exp": "사회적 관심은 선천적 잠재력이지만 저절로 생기지 않고 가족, 교육 등 사회적 경험을 통해 발달시켜야 한다.", "no": 47, "note": "#n=l3~1~%EC%82%AC%ED%9A%8C%EC%A0%81%EA%B4%80%EC%8B%AC%EC%9D%B4%EC%83%81%EC%A0%81%EC%9D%B8%EA%B3%B5%EB%8F%99%EC%82%AC%ED%9A%8C%EC%9D%98"}, {"text": "다음 중 아들러(Adler)가 제시한 ‘인간의 성격에 영향을 미치는 요인’과 거리가 가장 먼 것은?", "passage": null, "plabel": null, "opts": ["병약하거나 허약한 체질", "양육 태만과 거부", "초기 기억", "관찰과 모방"], "ans": 3, "exp": "관찰과 모방은 반두라 사회학습이론의 개념이다. 병약 체질, 양육태만과 거부, 초기기억은 아들러의 개념이다.", "no": 48, "note": "#n=l3~1~%EC%84%B1%EA%B2%A9%EB%B0%9C%EB%8B%AC%EC%97%90%EC%98%81%ED%96%A5%EC%9D%84%EB%AF%B8%EC%B9%98%EB%8A%94%EC%9A%94%EC%9D%B8"}, {"text": "다음 중 융(Jung)과 관련된 설명으로 가장 옳은 것은?", "passage": null, "plabel": null, "opts": ["무의식은 의식과 관련 없다고 주장하였다.", "개인 무의식이 존재한다고 최초로 주장하였다.", "인간 행동의 원천인 원초아(id) 대신 자기(self)가 존재의 중심이며, 인간 삶의 방향을 결정한다고 주장하였다.", "현상학과 인본주의 심리학에 영향을 받아서 인간의 자기실현 지향성을 주장하였다."], "ans": 2, "exp": "융은 원초아 대신 의식과 무의식을 포함한 정신 전체인 자기(Self)를 중심으로 보았다. 자기실현 지향성은 인본주의의 주장이다.", "no": 49, "note": "#n=l3~1~%EC%9E%90%EA%B8%B0%28self%29%EC%9D%98%EC%8B%9D%EA%B3%BC%EB%AC%B4%EC%9D%98%EC%8B%9D"}, {"text": "융(Jung)이 제시한 ‘인간의 행동에서 발견되는 공격성, 잔인성, 부도덕성, 통제하기 어려운 정열’과 관련이 깊은 것은 무엇인가?", "passage": "", "plabel": "보기", "opts": ["그림자", "원초아(id)", "자아", "꿈"], "ans": 0, "exp": "공격성, 잔인성, 부도덕성, 통제하기 어려운 정열은 융의 그림자와 관련된다.", "no": 50, "note": "#n=l3~1~%EA%B7%B8%EB%A6%BC%EC%9E%90%28%E2%86%90%EA%B0%9C%EC%9D%B8%EB%AC%B4%EC%9D%98%EC%8B%9D%29%EC%9D%98%EC%8B%9D%EC%9D%98"}, {"text": "다음 중 프로이트(Freud)가 말한 자아(自我, ego)의 설명으로 잘못된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["자아는 초자아로부터 발달한다.", "인간의 성격 가운데 겉으로 드러나고 현실 속에서 반응을 보인다.", "실제적이며 가치를 가지지 않고 오로지 현실을 고려하여 효과적인 것을 찾는다.", "현재뿐만 아니라 미래를 생각하며 장기적으로 추리하면서 반응을 보인다는 점에서 이차 과정에 따른다고 볼 수 있다."], "ans": 0, "exp": "자아는 원초아로부터 발달한다(원초아 → 자아 → 초자아). 자아는 현실원칙과 2차 과정을 따른다.", "no": 51, "note": "#n=l3~1~%EC%9E%90%EC%95%84%28ego%29%EC%99%B8%EB%B6%80%EC%84%B8%EA%B3%84%EC%9D%98%EC%A0%9C%EC%95%BD"}, {"text": "아들러(Adler)에 따르면, 생활양식이 어떻게 발달되었느냐에 따라 인생의 장애물을 극복하고 문제를 해결하여 인생의 목표를 구성하는 방식이 달라진다. 아들러는 이러한 생활양식이 언제쯤 결정된다고 하였는가?", "passage": null, "plabel": null, "opts": ["0~1세", "1~2세", "4~5세", "11~13세"], "ans": 2, "exp": "아들러는 생활양식의 기본구조가 4~5세경 결정된다고 보았다.", "no": 52, "note": "#n=l3~1~%EC%9D%B4%EB%A1%A0%EC%A0%81%EC%A0%84%EC%A0%9C%E2%80%94%EC%9D%B8%EA%B0%84%EC%9D%80%ED%86%B5%EC%9D%BC%EB%90%9C%EC%9C%A0%EA%B8%B0"}, {"text": "융(Jung)은 인간의 원형과 본성이 있는 그대로 표현되지는 않는다고 보았다. 그 중 겉으로 드러나고 외부세계로 표출되는 자아를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["페르소나", "그림자", "원형", "아니마"], "ans": 0, "exp": "겉으로 드러나 외부세계에 표출되는 자아는 페르소나이다.", "no": 53, "note": "#n=l3~1~%ED%8E%98%EB%A5%B4%EC%86%8C%EB%82%98%28persona%29%3A"}, {"text": "합리화의 방어기제 중 '자신의 현 상태를 과대포장하는 것'과 관련된 것은?", "passage": null, "plabel": null, "opts": ["신 포도 기제", "달콤한 레몬 기제", "망상", "투사"], "ans": 1, "exp": "현재 상태를 과대포장하는 것은 달콤한 레몬형, 얻지 못한 것을 깎아내리는 것은 신 포도형 합리화이다.", "no": 54, "note": "#n=l3~1~%EB%B0%A9%EC%96%B4%EA%B8%B0%EC%A0%9C%28Defenseme"}, {"text": "프로이트(Freud)는 인간의 성격을 나타내는 인간의 마음은 의식, 전의식, 무의식의 세 층으로 이루어졌다고 주장하였다. 다음 중 프로이트의 주장이 아닌 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["의식은 현재 느끼거나 알 수 있는 모든 경험과 감각을 뜻한다.", "전의식은 조금 주의를 기울이면 알게 되는 현상이다.", "무의식이 정신 내용의 대부분을 형성하며 인간행동을 결정하는 주된 원인이다.", "무의식의 내용은 서로 상반되는 형태로 동시에 공존하지는 않는다."], "ans": 3, "exp": "무의식에는 서로 모순되고 상반되는 내용이 동시에 공존할 수 있다. ①~③은 지형학적 모형의 맞는 설명이다.", "no": 55, "note": "#n=l3~1~%EC%A7%80%ED%98%95%ED%95%99%EC%A0%81%EB%AA%A8%ED%98%95%28%EC%9D%98%EC%8B%9D%EC%88%98%EC%A4%80%29%E2%80%94%EC%A0%95"}, {"text": "다음 중 프로이트(Freud)가 말한 초자아(超自我, super-ego)의 설명으로 잘못된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["초자아는 자아로부터 발달한다.", "처벌과 보상을 통하여 양심의 형태로 성격의 일부를 구성한다.", "효율성보다는 도덕성 쪽으로 나아가도록 한다.", "자극을 받자마자 곧바로 방출되는 속성이 있다."], "ans": 3, "exp": "자극을 받자마자 곧바로 방출하려는 것은 원초아의 속성이다. 초자아는 자아로부터 발달하며 양심과 도덕을 지향한다.", "no": 56, "note": "#n=l3~1~%EC%B4%88%EC%9E%90%EC%95%84%28super-ego%29"}, {"text": "방어적 적응 중 '다른 사람의 성격, 태도, 가치, 그리고 행동을 무의식적으로 자신의 것으로 채택하는 것'을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["공상(fantasy)", "퇴행(regression)", "거부(denials)", "동일시(identification)"], "ans": 3, "exp": "다른 사람의 성격, 태도, 가치, 행동을 무의식적으로 자신의 것으로 받아들이는 것은 동일시이다.", "no": 57, "note": "#n=l3~1~%EB%8F%99%EC%9D%BC%EC%8B%9C%28identifica"}, {"text": "프로이트(Freud)는 정신의 구성요소로 원초아(id), 자아(ego), 초자아(superego)를 제시하였다. 그가 제시한 정신구조에 대한 설명으로 잘못된 것은?", "passage": null, "plabel": null, "opts": ["원초아에는 성적 및 공격적 본능이 깃들어 있다.", "인간의 성격 가운데 겉으로 드러나고 현실 속에서 반응을 보이는 것이 자아이다.", "원초아로부터 자아가 발달하는 것과 마찬가지로 초자아는 자아로부터 발달한다.", "세 가지 구조는 각각 고정되어 있고, 어느 것이 강해지면 다른 것이 약해지는 관계에 있는 것은 아니다."], "ans": 3, "exp": "세 구조는 고정되어 있지 않고 역동적으로 상호작용하며, 하나가 강해지면 다른 것이 약해지는 관계에 있다.", "no": 58, "note": "#n=l3~1~%EA%B5%AC%EC%A1%B0%EC%A0%81%EB%AA%A8%ED%98%95%28%EC%84%B1%EA%B2%A9%EA%B5%AC%EC%A1%B0%29%E2%80%94%EC%9B%90%EC%B4%88"}, {"text": "프로이트(Freud)가 제시한 성격발달단계 중 잠복기(latent stage)에 대한 설명은?", "passage": null, "plabel": null, "opts": ["자아와 초자아가 강력해지고 원초아는 상대적으로 약해지는 시기이다.", "억제되었던 성적, 공격적 충동이 자아와 자아 방어를 압도할 정도로 강해진다.", "자기와 다른 성을 가진 부모의 사랑을 갈망하고 같은 성을 가진 부모를 싫어한다.", "입을 통하여 성적 만족을 느끼는 시기이다."], "ans": 0, "exp": "잠복기(6~12세)에는 성적 에너지가 잠재되고 자아와 초자아가 강해진다. ②는 생식기, ③은 남근기, ④는 구강기이다.", "no": 59, "note": "#n=l3~1~%EC%9E%A0%EB%B3%B5%EA%B8%B0%286~12%EC%84%B8%29%EC%84%B1%EC%A0%81%EC%97%90%EB%84%88"}, {"text": "아들러(Adler)의 개인심리학 이론의 전제와 기본가정으로 잘못된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["인간은 통일되고 자아일치된 성격구조를 가지고 있다.", "인간은 스스로 자기의 삶을 결정할 수 있다.", "인간은 다른 사람이 그를 어떻게 지각하느냐에 따라 행동하는 존재이다.", "인간은 사회적 관계를 맺을 수 있는 능력을 가지고 있다."], "ans": 2, "exp": "아들러는 인간이 타인의 지각이 아니라 자신이 세계와 자신을 어떻게 지각하고 해석하느냐에 따라 행동한다고 보았다(주관적 해석).", "no": 60, "note": "#n=l3~1~%EC%9D%B4%EB%A1%A0%EC%A0%81%EC%A0%84%EC%A0%9C%E2%80%94%EC%9D%B8%EA%B0%84%EC%9D%80%ED%86%B5%EC%9D%BC%EB%90%9C%EC%9C%A0%EA%B8%B0"}, {"text": "아들러(Adler)가 제시한 '우월성 추구'에 대한 설명으로 가장 적합한 것은?", "passage": "", "plabel": "보기", "opts": ["우월성 추구는 인간이 자신의 약점 또는 약한 상태를 지각하는 것이다.", "우월성 추구의 목표는 긍정적인 경향과 부정적인 경향이 모두 가능하다.", "우월성 추구는 이상적인 공동사회의 목표를 달성하고자 사회에 공헌하려는 본능이다.", "우월성 추구는 성격의 통일성, 개성, 문제해결에 맞서는 방법, 삶에 공헌하려는 소망이다."], "ans": 1, "exp": "우월성 추구는 사회적 관심과 결합하면 긍정적, 개인적 우월만 추구하면 부정적 경향이 된다. ①은 열등감, ③은 사회적 관심, ④는 생활양식이다.", "no": 61, "note": "#n=l3~1~%EC%9A%B0%EC%9B%94%EC%84%B1%EC%B6%94%EA%B5%AC%EC%9D%B8%EA%B0%84%EC%97%90%EA%B2%8C%EA%B3%B5%ED%86%B5%EB%90%9C%EA%B8%B0%EB%B3%B8"}, {"text": "융(Jung)의 이론 중 '여성에게 발견되는 남성적인 면'을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["그림자", "콤플렉스", "아니무스", "페르소나"], "ans": 2, "exp": "여성 속의 남성적 심상은 아니무스, 남성 속의 여성적 심상은 아니마이다.", "no": 62, "note": "#n=l3~1~%EC%95%84%EB%8B%88%EB%A7%88%C2%B7%EC%95%84%EB%8B%88%EB%AC%B4%EC%8A%A4%28%E2%86%90%EC%A7%91%EB%8B%A8%EB%AC%B4%EC%9D%98"}, {"text": "융(Jung)이 제시한 '자아(ego)'와 '자기(self)'에 대한 설명으로 가장 옳은 것은?", "passage": null, "plabel": null, "opts": ["자기는 의식세계의 중심이다.", "자신이 의식하지 못하던 콤플렉스나 원형을 의식하게 되면 자아와 자기가 점점 멀어진다.", "자아가 자기의 신호나 자극을 무시해도 자기에 대한 이해가 가능하다.", "자기는 자아에게 부단히 무의식의 존재를 알리기도 하고 수많은 원형을 성격에 통합시키고자 시도한다."], "ans": 3, "exp": "의식의 중심은 자아(Ego)이고 자기(Self)는 정신 전체의 중심이다. 무의식을 의식할수록 자아와 자기는 가까워진다(개성화).", "no": 63, "note": "#n=l3~1~%EC%9E%90%EA%B8%B0%28self%29%EC%9D%98%EC%8B%9D%EA%B3%BC%EB%AC%B4%EC%9D%98%EC%8B%9D"}, {"text": "신 포도(sour grapes) 기제, 달콤한 레몬 기제, 망상과 관련된 방어기제는 무엇인가?", "passage": null, "plabel": null, "opts": ["투사", "보상", "전위", "합리화"], "ans": 3, "exp": "신 포도, 달콤한 레몬과 관련된 방어기제는 합리화이다.", "no": 64, "note": "#n=l3~1~%EB%B0%A9%EC%96%B4%EA%B8%B0%EC%A0%9C%28Defenseme"}, {"text": "회피형 방어기제 중 불안을 없애기 위해서, 오히려 불안의 원인이 되는 사람과 똑같이 되려는 것을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["공상", "퇴행", "거부", "동일시"], "ans": 3, "exp": "불안의 원인이 되는 사람과 똑같이 되려는 것은 동일시이다.", "no": 65, "note": "#n=l3~1~%EB%B0%A9%EC%96%B4%EA%B8%B0%EC%A0%9C%28Defenseme"}]}, {"n": 4, "t": "행동주의 이론", "qs": [{"text": "다음 중 반두라(Bandura)가 제시한 성격 형성기제로 가장 적합하지 않은 것은?", "passage": null, "plabel": null, "opts": ["관찰학습", "대리강화", "자기조절", "출생순위"], "ans": 3, "exp": "반두라의 성격 형성기제는 관찰학습, 대리강화, 자기조절, 자기효능 등이다. 출생순위는 아들러의 개념이다.", "no": 66, "note": "#n=l4~1~%EC%84%B1%EA%B2%A9%EC%9D%98%EC%82%AC%ED%9A%8C%EC%A0%81%ED%95%99%EC%8A%B5%E2%80%94%EC%84%B1%EA%B2%A9%EB%B0%9C%EB%8B%AC%EC%9D%98"}, {"text": "다음 중 인간행동에 대한 행동주의 이론에 부합하는 진술은?", "passage": null, "plabel": null, "opts": ["인간은 자아실현의 본능을 지니고 있다.", "인간행동은 유전적 조건에 의해 형성된다.", "인간과 동물의 행동 형성 원리는 서로 동일하다.", "인간행동의 기본 특징은 유아기에 완성된다."], "ans": 2, "exp": "행동주의는 동물실험의 원리를 인간에게 적용하므로 인간과 동물의 행동 형성 원리가 같다고 본다. ①은 인본주의, ④는 정신분석의 관점이다.", "no": 67, "note": "#n=l4~1~%EC%A3%BC%EC%9A%94%EC%A0%84%EC%A0%9C%E2%80%94%ED%96%89%EB%8F%99%EC%9D%80%ED%99%98%EA%B2%BD%EC%A0%81%EC%A1%B0%EA%B1%B4%EC%97%90"}, {"text": "다음 중 “파블로프의 실험에서 개가 메트로놈 소리만 들어도 침을 흘리는 상황”을 지칭하는 개념은?", "passage": null, "plabel": null, "opts": ["무조건반응", "조건반응", "매개상황", "반응서열"], "ans": 1, "exp": "메트로놈(조건자극)만으로 침을 흘리는 것은 조건반응이다. 먹이(무조건자극)에 대한 침은 무조건반응이다.", "no": 68, "note": "#n=l4~1~4%28%EC%A1%B0%EA%B1%B4%ED%98%95%EC%84%B1%ED%9B%84%29%EB%A9%94%ED%8A%B8%EB%A1%9C%EB%86%88%28%EC%A1%B0"}, {"text": "다음 중 “가장 약한 조건화부터 순서대로 탈조건화 시키는 것”을 가리키는 행동주의의 개념은?", "passage": null, "plabel": null, "opts": ["소거", "변별", "일반화", "체계적 둔감화"], "ans": 3, "exp": "가장 약한 조건화부터 차례로 탈조건화하는 것은 체계적 둔감화이다(공포증 치료).", "no": 69, "note": "#n=l4~1~%EC%B2%B4%EA%B3%84%EC%A0%81%EB%91%94%EA%B0%90%ED%99%94%28systema"}, {"text": "다음 중 조작적 조건화의 의미는?", "passage": null, "plabel": null, "opts": ["강화를 활용하여 행동을 변경하는 것", "영아기에 억압된 욕구의 의식화", "내적 추동을 통한 자아의 회복", "관찰을 통한 특정 행동의 모방"], "ans": 0, "exp": "조작적 조건화는 행동 뒤의 결과(강화물)를 활용해 행동을 형성하거나 변경하는 것이다(스키너).", "no": 70, "note": "#n=l4~1~%EC%8A%A4%ED%82%A4%EB%84%88%EC%83%81%EC%9E%90%E2%80%94%ED%96%89%EB%8F%99%EC%9C%BC%EB%A1%9C%ED%99%98%EA%B2%BD%EC%97%90%EB%B0%98"}, {"text": "다음 중 행동주의에 대한 비판에 해당하는 것은?", "passage": null, "plabel": null, "opts": ["경험적 증명이 불가능한 개념을 활용하였다.", "인간발달을 청소년기에 한정하여 설명하였다.", "인간행동을 유전적 요인만으로 설명하려 하였다.", "인간을 환경에 순응하는 수동적인 존재로 보았다."], "ans": 3, "exp": "행동주의는 인간을 환경에 순응하는 수동적, 기계적 존재로 보았다는 비판을 받는다.", "no": 71, "note": "#n=l4~1~%EC%A0%84%ED%86%B5%EC%A0%81%ED%96%89%EB%8F%99%EC%A3%BC%EC%9D%98%EC%97%90%EB%8C%80%ED%95%9C%EB%8F%84%EC%A0%84%E2%80%94%EC%A0%95"}, {"text": "반두라의 이론에서 “주어진 행동을 성공적으로 수행할 수 있다는 인간의 신념”을 의미하는 개념은?", "passage": null, "plabel": null, "opts": ["자기조절", "자기효능", "주의과정", "사회인지"], "ans": 1, "exp": "특정 행동을 성공적으로 수행할 수 있다는 신념은 반두라의 자기효능(감)이다.", "no": 72, "note": "#n=l4~1~%EC%9E%90%EA%B8%B0%ED%9A%A8%EB%8A%A5%EA%B0%90%28self-eff"}, {"text": "반두라가 제시한 관찰학습의 과정에서 가장 마지막 단계는?", "passage": null, "plabel": null, "opts": ["주의과정", "재현과정", "동기과정", "파지과정"], "ans": 2, "exp": "관찰학습은 주의 → 파지 → 운동적 재현 → 동기 순이며 마지막은 동기과정이다.", "no": 73, "note": "#n=l4~1~%ED%95%99%EC%8A%B5%EC%9D%98%EA%B0%9C%EB%85%90%ED%99%95%EC%9E%A5%E2%80%94%EA%B0%95%ED%99%94%EC%97%90%EC%9D%98%ED%95%9C%ED%95%99"}, {"text": "다음 중 행동주의의 특징이 아닌 것은?", "passage": null, "plabel": null, "opts": ["관찰가능한 객관적 자극과 조건", "자극과 반응의 과학", "행동의 예측과 통제", "자기분석법"], "ans": 3, "exp": "자기분석법은 정신분석의 방법이다. 행동주의는 관찰 가능한 자극과 반응을 연구해 행동의 예측과 통제를 목표로 한다.", "no": 74, "note": "#n=l4~1~%EC%A3%BC%EC%9A%94%EC%A0%84%EC%A0%9C%E2%80%94%ED%96%89%EB%8F%99%EC%9D%80%ED%99%98%EA%B2%BD%EC%A0%81%EC%A1%B0%EA%B1%B4%EC%97%90"}, {"text": "개에게 먹이를 주면서 동시에 메트로놈 소리내기를 실시한 후, 먹이를 주지 않고 메트로놈 소리만 내어도 침이 흐르는 것을 확인하여 ‘고전적 조건화’를 정립한 사람은 누구인가?", "passage": null, "plabel": null, "opts": ["프로이트", "아들러", "파블로프", "반두라"], "ans": 2, "exp": "개와 메트로놈 실험으로 고전적 조건화를 정립한 학자는 파블로프이다.", "no": 75, "note": "#n=l4~1~%ED%8C%8C%EB%B8%94%EB%A1%9C%ED%94%84%28Pavlov%29%EC%9D%98%EC%A1%B0"}, {"text": "다음 중 행동주의 기본개념 중 유사한 자극에 대해 동일하게 반응하는 것을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["변별", "일반화", "이차신호체계", "무조건반사"], "ans": 1, "exp": "유사한 자극에 동일하게 반응하는 것은 일반화이다(자라 보고 놀란 가슴 솥뚜껑 보고 놀란다).", "no": 76, "note": "#n=l4~1~%EC%9D%BC%EB%B0%98%ED%99%94%28Generaliza"}, {"text": "다음 중 행동주의 기본개념 중 특정 소리나 사물에 대해 불안감을 느끼는 조건화 상태를 완화하기 위해 가장 약한 조건화부터 차례로 탈조건화하여 단계적으로 탈조건화가 달성되는 것을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["일반화", "무조건반사", "체계적 둔감화", "생물학적 준비상태"], "ans": 2, "exp": "불안을 일으키는 조건화를 가장 약한 것부터 단계적으로 탈조건화하는 것은 체계적 둔감화이다.", "no": 77, "note": "#n=l4~1~%EC%B2%B4%EA%B3%84%EC%A0%81%EB%91%94%EA%B0%90%ED%99%94%28systema"}, {"text": "다음 중 반두라(Bandura)가 제시한 모방 경향성에 미치는 요인이 아닌 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["학습모델의 특성", "학습자의 특성", "관찰된 행동에서 정적인 강화의 수준", "학습자의 무의식"], "ans": 3, "exp": "모방 경향성은 학습모델의 특성, 학습자의 특성, 관찰된 행동의 강화 수준에 영향을 받는다. 무의식은 정신분석 개념이다.", "no": 78, "note": "#n=l4~1~%EC%82%BC%EC%9B%90%EC%A0%81%EC%83%81%ED%98%B8%EA%B2%B0%EC%A0%95%EB%A1%A0%EB%AA%A8%EB%8D%B8%28tri"}, {"text": "다음 중 반두라(Bandura)가 제시한 성격형성의 요인이 아닌 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["관찰학습", "대리강화", "자기효능", "페르소나"], "ans": 3, "exp": "페르소나는 융의 개념이다. 관찰학습, 대리강화, 자기효능은 반두라의 성격 형성 요인이다.", "no": 79, "note": "#n=l4~1~%EC%84%B1%EA%B2%A9%EC%9D%98%EC%82%AC%ED%9A%8C%EC%A0%81%ED%95%99%EC%8A%B5%E2%80%94%EC%84%B1%EA%B2%A9%EB%B0%9C%EB%8B%AC%EC%9D%98"}, {"text": "다음 중 행동주의 학자인 스키너(Skinner)의 이론적 관심사와 관련이 가장 큰 것은?", "passage": null, "plabel": null, "opts": ["고착된 욕구의 의식화", "행동의 법칙 발견", "인간 지능의 향상", "유전이 인간발달에 미치는 영향"], "ans": 1, "exp": "스키너의 관심은 행동의 법칙 발견(예측과 통제)이다. 고착된 욕구의 의식화는 정신분석이다.", "no": 80, "note": "#n=l4~1~%EC%8A%A4%ED%82%A4%EB%84%88%28Skinner%29%EC%9D%98%EC%8B%A4"}, {"text": "스키너의 이론에서 “강화가 중단되면 강화를 통해 형성된 조작 행동이 줄어들거나 나타나지 않는 것”을 의미하는 개념은?", "passage": null, "plabel": null, "opts": ["조건적 감퇴", "변별", "방출행동", "소거"], "ans": 3, "exp": "강화가 중단되어 조작행동이 줄거나 사라지는 것은 소거이다.", "no": 81, "note": "#n=l4~1~%EC%84%B1%EA%B2%A9%EC%9D%98%EB%B0%9C%EB%8B%AC%E2%80%94%EA%B0%95%ED%99%94%EB%90%9C%ED%96%89%EB%8F%99%EC%9D%B4%EC%8A%B5%EA%B4%80"}, {"text": "다음 중 반두라(Bandura)가 제시한 자기효능에 영향을 미치는 요인이 아닌 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["성취경험", "대리경험", "언어적 설득", "집단무의식"], "ans": 3, "exp": "자기효능 형성요인은 성취경험, 대리경험, 언어적 설득(격려), 정서적 각성이다. 집단무의식은 융의 개념이다.", "no": 82, "note": "#n=l4~1~%EC%9E%90%EA%B8%B0%ED%9A%A8%EB%8A%A5%EA%B0%90%28self-eff"}, {"text": "행동주의 이론의 개념인 ‘강화’를 가장 잘 설명한 것은?", "passage": null, "plabel": null, "opts": ["한 개인이 외부 정보를 해석하는 인지적 틀이다.", "무의식적 욕구를 통제하기 위한 훈련 프로그램이다.", "어떤 행동의 발생 가능성을 높이는 외적 자극이다.", "한 개인의 감정과 행동을 수용하고 지지해주는 것이다."], "ans": 2, "exp": "강화는 어떤 행동의 발생 가능성을 높이는 외적 자극이다.", "no": 83, "note": "#n=l4~1~%ED%96%89%EB%8F%99%EC%A3%BC%EC%9D%98%EC%9D%B4%EB%A1%A0%EC%9D%98%EA%B8%B0%EB%B3%B8%EA%B4%80%EC%A0%90"}, {"text": "행동주의 기본개념 중 반응이 소거된 뒤, 며칠이 지난 후 다시 종소리를 들려주면 다시 침 분비가 일어날 수 있는데, 이를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["일반화", "변별", "조건반사", "자연회복"], "ans": 3, "exp": "소거 후 시간이 지나 다시 조건반응이 나타나는 것은 자연회복(자발적 회복)이다.", "no": 84, "note": "#n=l4~1~%EC%86%8C%EA%B1%B0%28Extinction%29"}, {"text": "스키너(Skinner)는 유기체의 반응률을 증가시키고 유지시키는 방법으로 강화계획을 제시하였다. 시간과 강도를 다양하게 조정하면서 강화하는 것을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["간헐적 강화방식", "연속적 강화방식", "이차적 강화물", "반응행동"], "ans": 0, "exp": "시간과 강도를 다양하게 조정하며 때때로 강화하는 것은 간헐적 강화이며, 학습된 행동의 유지에 효과적이다.", "no": 85, "note": "#n=l4~1~%EA%B0%84%ED%97%90%EC%A0%81%EA%B0%95%ED%99%94%EA%B0%95%ED%99%94%EB%B0%A9%EC%8B%9D%2C%EC%8B%9C%EA%B0%84%2C%EA%B0%95"}, {"text": "다음 중 고정간격 강화계획의 예는?", "passage": null, "plabel": null, "opts": ["50분 수업 후 10분의 휴식시간을 갖는 것", "주사위를 던져 6이 나올 때 마다 사탕을 주는 것", "100점을 맞으면 용돈을 주는 것", "구매금액 10,000원 마다 100원씩 적립해 주는 것"], "ans": 0, "exp": "고정간격은 일정한 시간마다 강화가 주어진다(50분마다 휴식, 월급). 주사위 6은 가변비율, 1만 원마다 적립은 고정비율이다.", "no": 86, "note": "#n=l4~1~%EA%B3%A0%EC%A0%95%EA%B0%84%EA%B2%A9%EA%B3%84%ED%9A%8D%EC%9D%BC%EC%A0%95%ED%95%9C%EC%8B%9C%EA%B0%84%EA%B0%84%EA%B2%A9%EC%97%90"}, {"text": "다음 중 관찰학습이 이루어질 가능성이 가장 높은 상황은 무엇인가?", "passage": null, "plabel": null, "opts": ["학습모델이 평소 학습자가 선망하던 사람이다.", "학습모델이 낯선 사람이다.", "학습자의 주의 집중력이 저하되어 있다.", "해당 행동을 할 경우 그에 대한 처벌이 예상된다."], "ans": 0, "exp": "모델이 선망하는 사람일수록, 주의를 기울일수록, 보상이 예상될수록 관찰학습이 잘 일어난다.", "no": 87, "note": "#n=l4~1~%EA%B3%84%EC%86%8D%EC%84%B1%EC%9D%98%EC%9B%90%EB%A6%AC%E2%80%94%EC%8B%9C%ED%96%89%ED%9A%9F%EC%88%98%EA%B0%80%EB%B0%98%EB%B3%B5"}, {"text": "반두라의 사회적 학습이론에서 ‘자기효능’의 의미는?", "passage": null, "plabel": null, "opts": ["행동을 성공적으로 수행할 수 있다는 신념", "사회에 도움이 되는 가치 있는 존재라는 확신", "상대가 자신에게 호감을 지니고 있다는 판단", "도덕적으로 옳은 일을 하고 있다는 믿음"], "ans": 0, "exp": "자기효능은 행동을 성공적으로 수행할 수 있다는 신념이다.", "no": 88, "note": "#n=l4~1~%EC%9E%90%EA%B8%B0%ED%9A%A8%EB%8A%A5%EA%B0%90%28self-eff"}, {"text": "관찰학습의 단계가 순서대로 옳게 나열된 것은?", "passage": null, "plabel": null, "opts": ["주의과정 - 파지과정 - 재현과정 - 동기과정", "주의과정 - 재현과정 - 파지과정 - 동기과정", "주의과정 - 동기과정 - 파지과정 - 재현과정", "주의과정 - 파지과정 - 동기과정 - 재현과정"], "ans": 0, "exp": "관찰학습은 주의과정 → 파지과정 → 재현과정 → 동기과정 순이다.", "no": 89, "note": "#l4"}, {"text": "다음 중 행동주의와 관련이 먼 것은?", "passage": null, "plabel": null, "opts": ["인간행동은 환경적 조건에 의해 형성된다는 믿음을 바탕으로 한다.", "자기분석법을 통해서 연구될 수 있다.", "인간행동은 관찰가능한 객관적 자극과 조건을 통해서만 정확히 이해할 수 있다.", "‘행동의 예측과 통제’라는 행동과학의 목표와 관련되어 있다."], "ans": 1, "exp": "자기분석법은 정신분석의 연구방법이다. 행동주의는 환경, 관찰 가능한 자극과 조건, 예측과 통제를 중시한다.", "no": 90, "note": "#n=l4~1~%EC%A3%BC%EC%9A%94%EC%A0%84%EC%A0%9C%E2%80%94%ED%96%89%EB%8F%99%EC%9D%80%ED%99%98%EA%B2%BD%EC%A0%81%EC%A1%B0%EA%B1%B4%EC%97%90"}, {"text": "다음 중 ‘고전적 조건화’와 관련이 있는 학자는?", "passage": null, "plabel": null, "opts": ["파블로프(Pavlov)", "융(Jung)", "로저스(Rogers)", "매슬로(Maslow)"], "ans": 0, "exp": "고전적 조건화는 파블로프의 이론이다.", "no": 91, "note": "#n=l4~1~%ED%8C%8C%EB%B8%94%EB%A1%9C%ED%94%84%28Pavlov%29%EC%9D%98%EC%A1%B0"}, {"text": "다음 중 행동주의의 기본 개념인 ‘강화’를 가장 잘 설명한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["한 개인이 외부 정보를 해석하는 인지적 틀", "한 개인의 감정과 행동을 수용하고 지지해주는 것", "무의식적 욕구를 통제하기 위한 훈련 프로그램", "어떤 행동의 발생 가능성을 높이는 외적 자극"], "ans": 3, "exp": "강화는 어떤 행동의 발생 가능성을 높이는 외적 자극이다. ②는 로저스의 수용, ①은 인지적 도식에 대한 설명이다.", "no": 92, "note": "#n=l4~1~%EC%9E%90%EA%B7%B9%EA%B3%BC%ED%96%89%EB%8F%99%EC%9D%98%EA%B4%80%EA%B3%84%EC%99%B8%EC%A0%81%EC%9E%90%EA%B7%B9%EC%9D%80%ED%96%89"}, {"text": "행동주의 기본개념 중 한정된 범위의 자극에만 또는 훈련 때 사용되었던 자극에만 반응하는 경향성을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["일반화", "변별", "조건반사", "자연회복"], "ans": 1, "exp": "한정된 자극이나 훈련 때 쓰인 자극에만 반응하는 것은 변별이다.", "no": 93, "note": "#n=l4~1~%ED%96%89%EB%8F%99%EC%A3%BC%EC%9D%98%EC%9D%B4%EB%A1%A0%EC%9D%98%EA%B8%B0%EB%B3%B8%EA%B4%80%EC%A0%90"}, {"text": "행동주의는 사회과학 전반에 걸쳐 큰 영향을 미쳤지만, 주요한 의문과 결함도 동시에 지적받는다. 다음 중 행동주의에 대한 비판적 질문으로 타당하지 않은 것은?", "passage": null, "plabel": null, "opts": ["관찰하기 어렵다고 하여 지식화를 포기하거나 외면할 필요가 없지 않을까?", "인간행동에 대한 이해를 동물에 대한 실험결과에 의존하는 것이 얼마나 정확할까?", "인간의 행동이란 아주 다양하고 복잡한 인간관계를 통하여 형성되고 변화된다는 점을 경시하지 않는가?", "인간의 행동은 인간이 의식할 수 없는 정신적인 에너지에 의해 결정된다는 것이 얼마나 타당할까?"], "ans": 3, "exp": "인간 행동이 의식할 수 없는 정신 에너지에 의해 결정된다는 것은 정신분석에 대한 비판이지 행동주의에 대한 비판이 아니다.", "no": 94, "note": "#n=l4~1~%EC%A0%84%ED%86%B5%EC%A0%81%ED%96%89%EB%8F%99%EC%A3%BC%EC%9D%98%EC%97%90%EB%8C%80%ED%95%9C%EB%8F%84%EC%A0%84%E2%80%94%EC%A0%95"}, {"text": "사회적 학습이론의 관점으로 옳지 않은 것은?", "passage": null, "plabel": null, "opts": ["인간은 직접적인 자극에만 반응하는 존재이다.", "외적 자극뿐만 아니라 인간의 내적 특성도 인간행동의 형성과 변화에 영향을 미친다.", "상황에 따라서는 외적 자극도 인간행동의 후속적 결정인자가 될 수 있다.", "외적 자극은 유기체가 직접 경험하지 않아도 행동을 형성하고 변화시킬 수 있다."], "ans": 0, "exp": "사회학습이론은 직접 자극뿐 아니라 관찰과 대리경험으로도 학습한다고 본다. 인간을 직접 자극에만 반응하는 존재로 보지 않는다.", "no": 95, "note": "#n=l4~1~%ED%95%99%EC%8A%B5%EB%B0%A9%EC%8B%9D%EC%A7%81%EC%A0%91%EA%B2%BD%ED%97%98%EC%9D%84%ED%86%B5%ED%95%B4%ED%95%99%EC%8A%B5%EA%B0%84"}, {"text": "반두라(Bandura)의 사회적 학습이론에서 ‘자기효능’의 의미는 무엇인가?", "passage": null, "plabel": null, "opts": ["사회에 도움이 되는 가치 있는 존재라는 확신", "주어진 행동을 성공적으로 수행할 수 있다는 신념", "도덕적으로 옳은 일을 하고 있다는 믿음", "상대가 자신에게 호감을 지니고 있다는 판단"], "ans": 1, "exp": "자기효능은 주어진 행동을 성공적으로 수행할 수 있다는 신념이다.", "no": 96, "note": "#n=l4~1~%EC%9E%90%EA%B8%B0%ED%9A%A8%EB%8A%A5%EA%B0%90%28self-eff"}, {"text": "다음 중 행동주의가 지향하는 학문의 목적으로 가장 관련이 깊은 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["자아와 유기체의 균형 잡힌 상호작용 촉진", "인간행동의 예측과 통제", "정신결정 현상과 무의식 파악", "자신에 대한 신뢰 향상"], "ans": 1, "exp": "행동주의가 지향하는 목적은 인간행동의 예측과 통제이다.", "no": 97, "note": "#n=l4~1~%EC%97%B0%EA%B5%AC%EB%AA%A9%EC%A0%81%E2%80%94%ED%96%89%EB%8F%99%EB%B2%95%EC%B9%99%EB%B0%9C%EA%B2%AC%2C%ED%96%89%EB%8F%99"}, {"text": "스키너의 간헐적 강화계획 중 강화를 주는 시간 간격을 다양하게 하는 것을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["고정간격 계획", "고정비율 계획", "가변간격 계획", "가변비율 계획"], "ans": 2, "exp": "강화를 주는 시간 간격을 다양하게(불규칙하게) 하는 것은 가변간격 계획이다(버스 기다리기).", "no": 98, "note": "#n=l4~1~%EA%B0%80%EB%B3%80%EA%B0%84%EA%B2%A9%EA%B3%84%ED%9A%8D%EA%B0%95%ED%99%94%EC%8B%9C%EA%B0%84%EA%B0%84%EA%B2%A9%EC%97%90%EB%B3%80"}, {"text": "다음 중 반두라(Bandura)가 제시한 모방 경향성에 대한 설명으로 가장 옳은 것은?", "passage": null, "plabel": null, "opts": ["일상생활에서 자신과 매우 유사한 사람의 행동을 모방할 가능성이 높다.", "정서적 유대가 낮은 사람의 행동을 모방할 가능성이 높다.", "자존심이나 자신감이 높은 사람이 그렇지 않은 사람보다 모방의 경향성이 높다.", "더 적은 보상을 받는다고 믿으면 그 행동의 모방 경향성은 높게 나타난다."], "ans": 0, "exp": "자신과 매우 유사한 사람의 행동을 모방할 가능성이 높다. 정서적 유대가 강하고 보상이 클수록, 자신감이 낮을수록 모방 경향이 높다.", "no": 99, "note": "#n=l4~1~%EB%B0%98%EB%91%90%EB%9D%BC%28Bandura%29%EC%9D%98%EB%B3%B4"}, {"text": "다음 <보기>에서 대부분의 행동주의 학자들이 주장하거나 동의하는 진술을 모두 고른 것은?", "passage": "가. 인간행동은 환경적 조건에 의해 형성된다는 믿음을 바탕으로 한다.\n나. 인간행동은 관찰가능한 객관적 자극과 조건을 통해서만 정확하게 이해할 수 있다.\n다. 철저한 실험과 관찰을 통하여 인간행동의 형성 원리를 발견할 수 있다.", "plabel": "보기", "opts": ["가, 나", "가, 다", "나, 다", "가, 나, 다"], "ans": 3, "exp": "가, 나, 다 모두 행동주의의 기본 입장이다(환경 결정, 관찰 가능한 자극, 실험을 통한 원리 발견).", "no": 100, "note": "#n=l4~1~%EC%A3%BC%EC%9A%94%EC%A0%84%EC%A0%9C%E2%80%94%ED%96%89%EB%8F%99%EC%9D%80%ED%99%98%EA%B2%BD%EC%A0%81%EC%A1%B0%EA%B1%B4%EC%97%90"}, {"text": "반두라(Bandura)가 제시한 관찰학습의 단계 중 '모방할 행동을 정확하게 기억하고 그 기억이 유지되는 것과 관련된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["주의과정", "파지과정", "재현과정", "동기과정"], "ans": 1, "exp": "모방할 행동을 정확하게 기억하고 유지하는 단계는 파지과정이다.", "no": 101, "note": "#n=l4~1~%ED%8C%8C%EC%A7%80%28%EB%B3%B4%EC%A1%B4%29%EA%B3%BC%EC%A0%95%28reten"}, {"text": "반두라(Bandura)의 사회적 학습이론에서 '자기조절'의 의미는 무엇인가?", "passage": null, "plabel": null, "opts": ["행동을 성공적으로 수행할 수 있다는 신념", "도덕적으로 옳은 일을 하고 있다는 믿음", "상대가 자신에게 호감을 지니고 있다는 판단", "외적 환경을 자신의 내적 표준에 의거하여 분석하고 판단하며, 적절한 대응방식을 모색하는 능력"], "ans": 3, "exp": "자기조절은 외적 환경을 내적 기준으로 판단하고 행동을 조절하는 능력이다. ①은 자기효능에 대한 설명이다.", "no": 102, "note": "#n=l4~1~%EC%9E%90%EA%B8%B0%EC%A1%B0%EC%A0%88%28self-regu"}, {"text": "행동주의 이론에서 '강화물을 조작하여 어떠한 행동반응을 형성하거나 변경하는 절차'를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["신경증", "일반화", "조작적 조건화", "생물학적 준비상태"], "ans": 2, "exp": "강화물을 조작하여 행동반응을 형성하거나 변경하는 절차는 조작적 조건화이다.", "no": 103, "note": "#n=l4~1~%EC%A1%B0%EC%9E%91%EC%A0%81%EC%A1%B0%EA%B1%B4%ED%99%94%28Operant"}, {"text": "다음 중 사회학습이론의 견해와 가장 거리가 먼 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["외적 자극뿐만 아니라 인간의 내적인 특성도 인간행동의 형성과 변화에 영향을 미치는 주요 인자가 될 수 있다.", "상황에 따라서는 외적 자극도 인간행동의 후속적 결정인자가 될 수 있다.", "외적 자극은 유기체가 직접 경험하지 않아도 행동을 형성하고 변화시킬 수 있다.", "성적, 공격적 충동은 인간의 기본적 심리로 볼 수 있다."], "ans": 3, "exp": "성적, 공격적 충동을 기본 심리로 보는 것은 프로이트 정신분석의 관점이다. 나머지는 사회학습이론의 견해이다.", "no": 104, "note": "#n=l4~1~%EC%9D%B4%EB%A1%A0%EC%9D%98%EA%B8%B0%EB%B3%B8%EA%B4%80%EC%A0%90"}, {"text": "반두라(Bandura)는 관찰학습의 과정을 주의과정, 파지과정, 재현과정, 동기과정의 네 단계로 상세하게 설명하였다. 다음 중 '모방할 행동을 정확하게 기억하고 그 기억이 유지되는 것'을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["주의과정", "파지과정", "동기과정", "재현과정"], "ans": 1, "exp": "모방할 행동을 정확하게 기억하고 유지하는 것은 파지과정이다.", "no": 105, "note": "#n=l4~1~%ED%8C%8C%EC%A7%80%28%EB%B3%B4%EC%A1%B4%29%EA%B3%BC%EC%A0%95%28reten"}, {"text": "행동주의의 주요 전제에 대한 설명으로 잘못된 것은?", "passage": null, "plabel": null, "opts": ["인간행동은 환경적 조건에 의해 형성된다.", "인간행동은 관찰 가능한 객관적 자극과 조건을 통해서만 정확하게 이해할 수 있다.", "인간행동 연구의 목적은 법칙을 발견하는 것이다.", "인간과 동물의 행동 형성 및 반응 원리는 다르다."], "ans": 3, "exp": "행동주의는 인간과 동물의 행동 형성 원리가 같다고 본다. 나머지는 행동주의의 전제이다.", "no": 106, "note": "#n=l4~1~%EC%A3%BC%EC%9A%94%EC%A0%84%EC%A0%9C%E2%80%94%ED%96%89%EB%8F%99%EC%9D%80%ED%99%98%EA%B2%BD%EC%A0%81%EC%A1%B0%EA%B1%B4%EC%97%90"}, {"text": "행동주의의 기본개념 중 '조건화된 반응을 체계적 절차를 이용하여 없애는 것'을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["탈조건화", "생물학적 준비상태", "일반화", "일차 신호체계"], "ans": 0, "exp": "조건화된 반응을 체계적 절차로 없애는 것은 탈조건화이다.", "no": 107, "note": "#n=l4~1~%ED%83%88%EC%A1%B0%EA%B1%B4%ED%99%94%EC%A1%B0%EA%B1%B4%EC%9E%90%EA%B7%B9-%EC%A1%B0%EA%B1%B4%EB%B0%98%EC%9D%91%EC%9D%98"}, {"text": "다음 <보기>에서 성격의 발달과 적응에 대한 스키너(Skinner)의 견해를 모두 고른 것은?", "passage": "가. 환경 자극에 의해 강화된 행동이 습관화되고, 습관화된 행동들이 모여 성격을 형성한다.\n나. 성격은 행동 패턴들의 집합일 뿐이며, 성격에는 구조가 없다.\n다. 부적응행동을 바꾸려면 조건화된 강화를 분석할 필요가 있다.", "plabel": "보기", "opts": ["가, 나", "가, 다", "나, 다", "가, 나, 다"], "ans": 3, "exp": "스키너는 성격을 강화된 행동이 습관화된 행동패턴의 집합으로 보고 구조를 인정하지 않았으며, 부적응행동도 강화 조건을 분석해 바꾼다.", "no": 108, "note": "#n=l4~1~%EC%84%B1%EA%B2%A9%EC%9D%98%EB%B0%9C%EB%8B%AC%E2%80%94%EA%B0%95%ED%99%94%EB%90%9C%ED%96%89%EB%8F%99%EC%9D%B4%EC%8A%B5%EA%B4%80"}, {"text": "스키너(Skinner)의 간헐적 강화계획 중 정해진 시간간격을 두고 강화하는 방식을 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["고정간격 계획", "고정비율 계획", "가변간격 계획", "가변비율 계획"], "ans": 0, "exp": "정해진 시간 간격마다 강화하는 방식은 고정간격 계획이다.", "no": 109, "note": "#n=l4~1~%EA%B3%A0%EC%A0%95%EA%B0%84%EA%B2%A9%EA%B3%84%ED%9A%8D%EC%9D%BC%EC%A0%95%ED%95%9C%EC%8B%9C%EA%B0%84%EA%B0%84%EA%B2%A9%EC%97%90"}, {"text": "다음 중 반두라(Bandura)가 정립한 이론에 대한 설명으로 가장 적합하지 않은 것은?", "passage": null, "plabel": null, "opts": ["인간의 행동은 사회적으로 학습된다.", "인간은 강화와 같은 특별한 학습환경에 접했을 때만 학습한다.", "인간의 사고나 행위는 근본적으로 그 사회의 전통이나 문화로부터 기원한다.", "인간의 학습에서 사회적 기원과 행위주체로서의 인간 자신의 역할을 중요하게 취급하였다."], "ans": 1, "exp": "반두라는 직접 강화가 없어도 관찰과 대리강화로 학습이 일어난다고 보았다.", "no": 110, "note": "#n=l4~1~%EC%9D%B4%EB%A1%A0%EC%97%90%EB%8C%80%ED%95%9C%EA%B3%A0%EC%B0%B0"}, {"text": "다음 중 반두라(Bandura)가 제시한 관찰학습의 단계가 순서대로 나열된 것은?", "passage": "", "plabel": "보기", "opts": ["주의과정 - 파지과정 - 재현과정 - 동기과정", "주의과정 - 재현과정 - 파지과정 - 동기과정", "주의과정 - 동기과정 - 파지과정 - 재현과정", "주의과정 - 파지과정 - 동기과정 - 재현과정"], "ans": 0, "exp": "관찰학습은 주의과정 → 파지과정 → 재현과정 → 동기과정 순이다.", "no": 111, "note": "#n=l4~1~%ED%95%99%EC%8A%B5%EC%9D%98%EA%B0%9C%EB%85%90%ED%99%95%EC%9E%A5%E2%80%94%EA%B0%95%ED%99%94%EC%97%90%EC%9D%98%ED%95%9C%ED%95%99"}, {"text": "행동주의 치료법 중 직접 경험을 통하지 않고도 간접적으로 적응적 행동을 학습하도록 하는 방법은?", "passage": null, "plabel": null, "opts": ["홍수법", "모델링 또는 모방", "체계적 둔감화", "게스탈트 치료기법"], "ans": 1, "exp": "직접 경험 없이 다른 사람을 보며 적응적 행동을 배우게 하는 방법은 모델링(모방)이다. 홍수법과 체계적 둔감화는 직접 노출 기법이다.", "no": 112, "note": "#n=l4~1~%ED%95%99%EC%8A%B5%EB%B0%A9%EC%8B%9D%EC%A7%81%EC%A0%91%EA%B2%BD%ED%97%98%EC%9D%84%ED%86%B5%ED%95%B4%ED%95%99%EC%8A%B5%EA%B0%84"}]}, {"n": 5, "t": "인지이론", "qs": [{"text": "다음 중 피아제가 제시한 인지발달단계와 관련이 없는 것은?", "passage": null, "plabel": null, "opts": ["전조작기", "감각운동기", "추상적 조작기", "형식적 조작기"], "ans": 2, "exp": "피아제의 4단계는 감각운동기, 전조작기, 구체적 조작기, 형식적 조작기이다. 추상적 조작기는 없다.", "no": 113, "note": "#n=l5~1~%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%A1%B0%EC%9E%91%EA%B8%B0%EC%9D%98%EC%98%88"}, {"text": "피아제(Piaget)는 인간의 초기 인지능력 발달 과정을 4 단계로 구분하여 제시하였다. 그 중 추상적. 가설적 개념을 포함시켜 사고하고 문제 해결책을 궁리하며 일반화된 지식체계를 구축할 수 있는 조합적 사고와 연역적 사고를 하는 시기를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["감각운동기", "전조작기", "구체적 조작기", "형식적 조작기"], "ans": 3, "exp": "추상적, 가설적 사고와 조합적, 연역적 사고가 가능한 단계는 형식적 조작기(11세 이후)이다.", "no": 114, "note": "#n=l5~1~%ED%98%95%EC%8B%9D%EC%A0%81%EC%A1%B0%EC%9E%91%EA%B8%B0%2811%EC%84%B8%EC%9D%B4%ED%9B%84%29%ED%98%84"}, {"text": "다음 중 피아제(Piaget)가 제시한 인지적 발달단계를 순서대로 나열한 것은?", "passage": null, "plabel": null, "opts": ["구체적 조작기 - 전조작기 - 감각운동기 - 형식적 조작기", "전조작기 - 감각운동기 - 구체적 조작기 - 형식적 조작기", "감각운동기 - 전조작기 - 구체적 조작기 - 형식적 조작기", "구체적 조작기 - 감각운동기 - 전조작기 - 형식적 조작기"], "ans": 2, "exp": "피아제의 인지발달 단계는 감각운동기 → 전조작기 → 구체적 조작기 → 형식적 조작기 순이다.", "no": 115, "note": "#n=l5~1~%EC%A0%84%EC%A1%B0%EC%9E%91%EA%B8%B0%EC%9D%98%EC%9D%B8%EC%A7%80%EC%A0%81%ED%95%9C%EA%B3%84"}, {"text": "피아제(Piaget)가 제시한 인간의 초기 인지능력 발달 과정을 순서대로 나열한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["감각운동기 - 전조작기 - 형식적 조작기 - 구체적 조작기", "감각운동기 - 형식적 조작기 - 전조작기 - 구체적 조작기", "감각운동기 - 전조작기 - 구체적 조작기 - 형식적 조작기", "감각운동기 - 구체적 조작기 - 전조작기 - 형식적 조작기"], "ans": 2, "exp": "감각운동기 → 전조작기 → 구체적 조작기 → 형식적 조작기 순이다.", "no": 116, "note": "#n=l5~1~%EA%B5%AC%EC%B2%B4%EC%A0%81%EC%A1%B0%EC%9E%91%EA%B8%B0%EC%9D%98%EC%98%88"}]}, {"n": 6, "t": "인본주의 이론", "qs": [{"text": "부적응 행동을 하는 사람을 있는 그대로 수용하고 긍정적으로 존중해 주는 것이 문제 해결에 도움이 된다고 보는 입장은?", "passage": null, "plabel": null, "opts": ["인지적 모형", "정서학습 모형", "행동주의 모형", "인본주의 모형"], "ans": 3, "exp": "부적응을 겪는 사람을 있는 그대로 수용하고 긍정적으로 존중하는 것은 인본주의(로저스) 입장이다.", "no": 117, "note": "#n=l6~1~%EC%9D%B8%EA%B0%84%EC%9D%98%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%EB%8A%A5%EB%A0%A5%2C%EC%A3%BC%EC%B2%B4%EC%84%B1%EC%97%90"}, {"text": "다음 중 모든 인간은 미래를 위해 발전하고 성숙하고자 하는 본능적인 욕구를 지닌다고 주장한 학자는 누구인가?", "passage": null, "plabel": null, "opts": ["파블로프", "왓슨", "매슬로", "프로이트"], "ans": 2, "exp": "인간은 발전하고 성숙하려는 본능적 욕구를 지닌다고 본 학자는 매슬로이다(성장욕구, 자기실현).", "no": 118, "note": "#n=l6~1~%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90%EC%9A%95%EA%B5%AC%EC%9C%84%EA%B3%84%EB%A1%A0%28%EA%B2%B0%ED%95%8D%EC%9A%95%EA%B5%AC"}, {"text": "다음 중 인본주의 이론과 가장 관계가 깊은 개념은?", "passage": null, "plabel": null, "opts": ["자아실현", "방출행동", "강화계획", "대극과 보상"], "ans": 0, "exp": "인본주의 이론의 핵심 개념은 자아실현(자기실현)이다. 대극과 보상은 융, 강화계획은 스키너이다.", "no": 119, "note": "#n=l6~1~%EC%95%9E%EC%84%A0%EC%9D%B4%EB%A1%A0%EA%B3%BC%EC%9D%98%EB%B9%84%EA%B5%90%E2%80%94%EC%A0%95%EC%8B%A0%EB%B6%84%EC%84%9D%EC%9D%80"}, {"text": "매슬로의 욕구단계론에 대한 설명으로 틀린 것은?", "passage": null, "plabel": null, "opts": ["결핍욕구의 좌절은 성격장애를 초래할 수 있다.", "하위 욕구일수록 우선순위가 낮게 나타난다.", "인간의 욕구는 생득적이고 보편적인 것이다.", "가장 고차원의 욕구는 자아실현의 욕구이다."], "ans": 1, "exp": "매슬로는 하위 욕구일수록 우선순위가 높아 먼저 나타난다고 보았다.", "no": 120, "note": "#n=l6~1~%EC%9C%84%EA%B3%84%E2%80%94%EC%9D%B8%EA%B0%84%EC%9D%80%EC%83%9D%EB%A6%AC%EC%A0%81%EC%9A%95%EA%B5%AC%EB%B6%80%ED%84%B0%EC%A3%BC"}, {"text": "로저스가 말하는 인간행동의 결정적 요소는 무엇인가?", "passage": null, "plabel": null, "opts": ["객관적 조건상황", "생리적 발달 수준", "개인의 주관적 인식", "강화와 처벌의 경험"], "ans": 2, "exp": "로저스는 객관적 현실보다 개인의 주관적 인식(현상의 장)이 행동을 결정한다고 보았다.", "no": 121, "note": "#n=l6~1~%EC%A3%BC%EA%B4%80%EC%A0%81%EC%84%B8%EA%B3%84%EA%B0%80%EC%9D%B8%EA%B0%84%ED%96%89%EB%8F%99%EC%9D%84%EA%B2%B0%EC%A0%95%E2%80%94"}, {"text": "로저스가 말하는 “완전히 기능하는 인간”의 특성과 가장 거리가 먼 것은?", "passage": null, "plabel": null, "opts": ["실존적인 삶", "경험에 대한 개방성", "정적인 삶과 전통의 존중", "유기체 자신에 대한 신뢰"], "ans": 2, "exp": "충분히 기능하는 사람은 실존적 삶, 경험에 대한 개방성, 유기체적 신뢰, 자유, 창조성을 갖는다. 정적인 삶과 전통 존중은 해당하지 않는다.", "no": 122, "note": "#n=l6~1~%EC%B6%A9%EB%B6%84%ED%9E%88%EA%B8%B0%EB%8A%A5%ED%95%98%EB%8A%94%EC%82%AC%EB%9E%8C%28Full"}, {"text": "다음 중 인간행동 발달에 대한 인본주의 학자들의 견해와 가장 가까운 설명은 무엇인가?", "passage": "", "plabel": "보기", "opts": ["인간행동은 심층 정신에너지에 의해 결정된다.", "인간행동은 외부자극에 대한 반응이다.", "인간의 긍정적이고 건강한 측면을 이해해야 한다.", "인간의 행동은 법칙성을 갖는다."], "ans": 2, "exp": "인본주의는 인간의 긍정적이고 건강한 측면, 성장 잠재력을 강조한다. ①은 정신분석, ②, ④는 행동주의의 관점이다.", "no": 123, "note": "#n=l6~1~%EC%9D%B8%EA%B0%84%EC%9D%98%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%EB%8A%A5%EB%A0%A5%2C%EC%A3%BC%EC%B2%B4%EC%84%B1%EC%97%90"}, {"text": "다음 중 매슬로(Maslow)의 욕구단계에서 상대적으로 가장 하위에 위치하는 것은?", "passage": null, "plabel": null, "opts": ["안전의 욕구", "자아존중의 욕구", "애정의 욕구", "자아실현의 욕구"], "ans": 0, "exp": "매슬로 욕구위계에서 안전의 욕구는 생리적 욕구 다음으로 낮은 단계이다(보기 중 가장 하위).", "no": 124, "note": "#n=l6~1~2%EC%95%88%EC%A0%84%EC%9D%98%EC%9A%95%EA%B5%AC%28safetyn"}, {"text": "매슬로(Maslow)는 욕구들을 하위의 욕구와 상위의 욕구로 나누고, 결핍욕구와 성장욕구라는 개념으로 풀이하였다. 다음 중 매슬로가 성장욕구로 제시한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["생리적 욕구", "애정의 욕구", "자아실현의 욕구", "안전의 욕구"], "ans": 2, "exp": "매슬로가 성장욕구로 제시한 것은 자아실현의 욕구이다. 생리, 안전, 애정, 자존은 결핍욕구(생존적 경향의 욕구)이다.", "no": 125, "note": "#n=l6~1~%EC%83%9D%EC%A1%B4%EC%A0%81%EA%B2%BD%ED%96%A5%EC%9D%98%EC%9A%95%EA%B5%AC%28%EA%B2%B0%ED%95%8D%EC%9A%95%EA%B5%AC%29"}, {"text": "로저스가 설명하는 부적응 행동의 발생 원인은?", "passage": null, "plabel": null, "opts": ["반사회적 행위를 허용하는 사회적 분위기", "이상적 자아와 실제 자아 사이의 괴리", "뇌기능의 이상", "부모의 반사회적 성향"], "ans": 1, "exp": "로저스는 이상적 자아(자기개념)와 실제 자아(경험)의 불일치를 부적응의 원인으로 보았다.", "no": 126, "note": "#n=l6~1~%EB%B6%80%EC%A0%81%EC%9D%91%ED%96%89%EB%8F%99%EC%9D%98%EC%9B%90%EC%9D%B8%E2%80%94%EC%9E%90%EA%B8%B0%EA%B0%9C%EB%85%90%EA%B3%BC"}, {"text": "로저스의 인간중심 치료에서 상담자의 역할로 가장 바른 것은?", "passage": null, "plabel": null, "opts": ["행동 교정을 위한 강화와 처벌 계획을 처방한다.", "내담자의 경험을 존중하고 공감하는 태도를 취한다.", "내담자가 지닌 논리적 모순을 논박하여 수정한다.", "내담자의 억압된 욕구가 의식화될 수 있도록 전이를 자극한다."], "ans": 1, "exp": "인간중심상담의 상담자는 내담자의 경험을 존중하고 공감한다. 강화와 처벌은 행동주의, 논박은 인지치료, 전이는 정신분석이다.", "no": 127, "note": "#n=l6~1~%EC%9D%B8%EA%B0%84%EC%A4%91%EC%8B%AC%EC%83%81%EB%8B%B4"}, {"text": "다음 중 매슬로(Maslow)가 제시한 욕구 중 가장 상위에 있는 욕구는 무엇인가?", "passage": null, "plabel": null, "opts": ["생리적 욕구", "애정의 욕구", "자아실현의 욕구", "안전의 욕구"], "ans": 2, "exp": "매슬로 욕구위계의 최상위는 자아실현(자기실현)의 욕구이다.", "no": 128, "note": "#n=l6~1~%EB%A7%A4%EC%8A%AC%EB%A1%9C%EC%9D%98%EC%9E%90%EA%B8%B0%EC%8B%A4%ED%98%84%EC%97%90%EB%8C%80%ED%95%9C%EB%B9%84%ED%8C%90"}, {"text": "다음 중 로저스(Rogers)의 인간중심적 접근법과 관련이 가장 큰 것은?", "passage": null, "plabel": null, "opts": ["지시적 상담접근 강조", "허용적이고 수용적인 분위기 조성", "상담자 중심의 치료방법", "행동 교정을 위한 강화"], "ans": 1, "exp": "로저스의 인간중심적 접근은 허용적이고 수용적인 분위기를 조성하는 비지시적 상담이다.", "no": 129, "note": "#n=l6~1~%EC%9D%B8%EA%B0%84%EC%A4%91%EC%8B%AC%EC%83%81%EB%8B%B4"}, {"text": "다음 중 매슬로(Maslow)가 성장욕구로 제시한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["애정의 욕구", "안전의 욕구", "자아실현의 욕구", "생리적 욕구"], "ans": 2, "exp": "성장욕구(실현적 경향의 욕구)는 자아실현의 욕구이다.", "no": 130, "note": "#n=l6~1~%EC%8B%A4%ED%98%84%EC%A0%81%EA%B2%BD%ED%96%A5%EC%9D%98%EC%9A%95%EA%B5%AC%28%EC%84%B1%EC%9E%A5%ED%98%B9%EC%9D%80%EC%A1%B4"}, {"text": "다음 중 로저스(Rogers)의 인간중심적 치료와 관련 없는 것은?", "passage": null, "plabel": null, "opts": ["토론과 반박", "일치 혹은 진솔성", "무조건적, 긍정적 존중", "공감과 이해"], "ans": 0, "exp": "토론과 반박은 인지치료의 기법이다. 일치(진솔성), 무조건적 긍정적 존중, 공감적 이해가 로저스 상담자의 태도이다.", "no": 131, "note": "#n=l6~1~%EC%A0%81%EC%9A%A9%EC%9E%90%EA%B8%B0%EC%8B%A4%ED%98%84%EC%9D%84%ED%86%B5%ED%95%9C%EA%B1%B4%EA%B0%95%ED%95%9C%EC%84%B1%EC%9E%A5"}, {"text": "매슬로(Maslow)가 제시한 다섯 가지 욕구 중 '현재나 미래에 대한 예측성, 확실성, 안정성에 대한 욕구'와 관련된 것은?", "passage": null, "plabel": null, "opts": ["생리적 욕구", "소속감과 사랑에 대한 욕구", "자아실현의 욕구", "안전에 대한 욕구"], "ans": 3, "exp": "예측성, 확실성, 안정성에 대한 욕구는 안전의 욕구이다.", "no": 132, "note": "#n=l6~1~2%EC%95%88%EC%A0%84%EC%9D%98%EC%9A%95%EA%B5%AC%28safetyn"}, {"text": "다음 <보기>에서 로저스(Rogers)의 자아개념(self-concept)에 대한 설명으로 올바른 것을 모두 고른 것은?", "passage": "가. '나'와 관련된 지각이나 거기에 부여된 가치들로 구성된다.\n나. '자아'와 '자아개념'은 전혀 다른 의미로 사용된다.\n다. '자아'는 고정된 실체가 아니라 현상의 변화에 따라 끊임없이 변화하며 형성되는 유동적인 것이다.", "plabel": "보기", "opts": ["가, 나", "가, 다", "나, 다", "가, 나, 다"], "ans": 1, "exp": "자아개념은 '나'에 관한 지각과 가치로 구성되고 경험에 따라 변하는 유동적인 것이다. 로저스는 자아와 자아개념을 거의 같은 뜻으로 썼다.", "no": 133, "note": "#n=l6~1~%EC%9E%90%EA%B8%B0%EA%B0%9C%EB%85%90%28Self-conc"}, {"text": "다음 중 로저스(Rogers)가 부적응 행동의 발생 원인으로 지적한 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["뇌기능의 이상", "부모의 실직", "반사회적 행위를 허용하는 사회적 분위기", "이상적 자아와 실제 자아 사이의 괴리"], "ans": 3, "exp": "로저스는 이상적 자아와 실제 자아 사이의 괴리(불일치)를 부적응의 원인으로 보았다.", "no": 134, "note": "#n=l6~1~%EB%B6%80%EC%A0%81%EC%9D%91%ED%96%89%EB%8F%99%EC%9D%98%EC%9B%90%EC%9D%B8%E2%80%94%EC%9E%90%EA%B8%B0%EA%B0%9C%EB%85%90%EA%B3%BC"}, {"text": "로저스(Rogers)에 따르면, 인간은 불안과 위협에서 벗어나기 위해 특정경험을 회피하거나 그것을 왜곡, 부정하게 되는데, 이를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["유기체", "방어", "실현화경향", "공격"], "ans": 1, "exp": "불안과 위협에서 벗어나려고 경험을 회피, 왜곡, 부정하는 것은 방어이다.", "no": 135, "note": "#n=l6~1~%EB%B6%88%EC%95%88%EA%B3%BC%EB%B0%A9%EC%96%B4%EC%A0%81%ED%96%89%EB%8F%99%E2%80%94%EB%B6%88%EC%9D%BC%EC%B9%98%EA%B2%BD%ED%97%98"}, {"text": "로저스(Rogers)가 제시한 '충분히 기능하는 사람'의 특징이 아닌 것은?", "passage": null, "plabel": null, "opts": ["자신에 대한 신뢰", "과거나 미래에 대한 집착", "자유의식", "창조성"], "ans": 1, "exp": "충분히 기능하는 사람은 지금 여기에 충실한 실존적 삶을 산다. 과거나 미래에 대한 집착은 해당하지 않는다.", "no": 136, "note": "#n=l6~1~%EC%8B%A4%EC%A1%B4%EC%A0%81%EC%9D%B8%EC%82%B6%28existent"}, {"text": "다음 중 로저스(Rogers)의 인간중심적 상담이론과 거리가 먼 것은?", "passage": null, "plabel": null, "opts": ["자아와 체험의 일치 추구", "토론과 논리적 반박", "내담자의 선택 존중", "허용적인 분위기"], "ans": 1, "exp": "토론과 논리적 반박은 인지치료 기법이다. 로저스는 일치, 내담자 선택 존중, 허용적 분위기를 강조한다.", "no": 137, "note": "#n=l6~1~%EC%9D%B8%EA%B0%84%EC%A4%91%EC%8B%AC%EC%83%81%EB%8B%B4"}, {"text": "매슬로(Maslow)의 욕구단계이론에서 '자기 스스로의 능력, 자질과 노력을 통해 남들의 인정과 존경을 받게 될 때 이루어지는 욕구'는 무엇인가?", "passage": null, "plabel": null, "opts": ["자아존중의 욕구", "애정의 욕구", "자아실현의 욕구", "안전의 욕구"], "ans": 0, "exp": "자신의 능력과 노력으로 남들의 인정과 존경을 받을 때 충족되는 욕구는 자아존중(자존)의 욕구이다.", "no": 138, "note": "#n=l6~1~%EC%8B%A4%ED%98%84%EC%A0%81%EA%B2%BD%ED%96%A5%EC%9D%98%EC%9A%95%EA%B5%AC%28%EC%84%B1%EC%9E%A5%ED%98%B9%EC%9D%80%EC%A1%B4"}, {"text": "다음 중 로저스(Rogers)의 인간 중심 치료에 대한 설명으로 잘못된 것은 무엇인가?", "passage": null, "plabel": null, "opts": ["자아와 유기체의 균형 잡힌 상호작용을 목표로 한다.", "자아개념과 체험의 현상적 공간 사이의 일치가 중요하다.", "내담자의 모든 행위를 옳다고 칭찬한다.", "치료자와 내담자의 관계를 중시한다."], "ans": 2, "exp": "무조건적 긍정적 존중은 내담자를 평가 없이 수용하는 태도이지 모든 행위를 옳다고 칭찬하는 것이 아니다.", "no": 139, "note": "#n=l6~1~%EB%AC%B4%EC%A1%B0%EA%B1%B4%EC%A0%81%EC%9D%B8%EA%B8%8D%EC%A0%95%EC%A0%81%EC%A1%B4%EC%A4%91%28unc"}, {"text": "다음 중 로저스(Rogers)가 설명하는 부적응 행동의 발생 원인은 무엇인가?", "passage": null, "plabel": null, "opts": ["뇌기능의 이상", "부모의 반사회적 성향", "반사회적 행위를 허용하는 사회적 분위기", "이상적 자아와 실제 자아 사이의 괴리"], "ans": 3, "exp": "로저스는 이상적 자아와 실제 자아의 괴리를 부적응의 원인으로 보았다.", "no": 140, "note": "#n=l6~1~%EC%9E%90%EA%B8%B0%EA%B0%9C%EB%85%90%28Self-conc"}, {"text": "매슬로(Maslow)의 이론에 대한 설명으로 가장 적합하지 않은 것은?", "passage": null, "plabel": null, "opts": ["인간의 본성의 일부는 보편적이지만, 일부는 개인마다 고유한 특성을 지닌다.", "인간의 본성은 악하거나 중립적이다.", "인간이 타고난 본성대로 살면 정신적으로 건강하고 행복할 수 있다.", "인간의 욕구 중 상당 부분은 타인과 관계를 맺음으로써 충족될 수 있다."], "ans": 1, "exp": "매슬로는 인간의 본성을 선하거나 중립적으로 보았다. '악하다'는 틀린 진술이다.", "no": 141, "note": "#n=l6~1~%EB%B3%B8%EC%84%B1%EC%9D%80%EC%84%A0%ED%95%98%EA%B1%B0%EB%82%98%EC%A4%91%EB%A6%BD%EC%A0%81%E2%80%94%EB%B3%B8%EC%84%B1%EC%9D%84"}, {"text": "로저스(Rogers)는 유기체가 자신을 충족시키고, 보존, 향상시키려는 경향성을 지닌다고 보았는데, 이를 무엇이라고 하는가?", "passage": null, "plabel": null, "opts": ["자아개념", "불안과 방어", "실현화 경향", "가치조건"], "ans": 2, "exp": "유기체가 자신을 유지하고 향상시키려는 경향성은 실현화 경향(자기실현 경향)이다.", "no": 142, "note": "#n=l6~1~%EC%9E%90%EA%B8%B0%EC%8B%A4%ED%98%84%28Self-actu"}, {"text": "로저스(Rogers)가 제시한 '충분히 기능하는 사람'의 특징 중 '지금 여기의 현상적 경험에 충실한 삶'과 관련된 것은?", "passage": null, "plabel": null, "opts": ["자신에 대한 신뢰", "실존적인 삶", "자유의식", "창조성"], "ans": 1, "exp": "지금 여기의 경험에 충실한 삶은 실존적인 삶이다.", "no": 143, "note": "#n=l6~1~%EC%B6%A9%EB%B6%84%ED%9E%88%EA%B8%B0%EB%8A%A5%ED%95%98%EB%8A%94%EC%82%AC%EB%9E%8C%28Full"}]}, {"n": 11, "t": "아동기 발달과 사회환경", "qs": [{"text": "학령기 아동에게서 나타나는 ADHD(attention deficit / hyperactivity disorder)의 증상에 대한 설명 중 잘못된 것은?", "passage": null, "plabel": null, "opts": ["초기 발병단계에서 불규칙적 수면과 나쁜 식사습관이 눈에 띄게 나타난다.", "모든 일에 반항적이고, 행동에 안정성이 결여되어 있다.", "다른 친구나 형제와 어울리지 못한다.", "충동을 통제할 수는 없지만 부모나 교사의 명령에는 순종하는 경향이 있다."], "ans": 3, "exp": "ADHD는 부주의, 충동성, 과잉행동이 특징이며 지시나 명령을 따르기 어려운 경우가 많다. '명령에는 순종한다'는 틀린 설명이다.", "no": 144, "note": "#n=l11~1~ADHD%E2%80%94%EB%B6%80%EC%A3%BC%EC%9D%98%2C%EC%B6%A9%EB%8F%99%EC%84%B1%EB%98%90%EB%8A%94"}]}, {"n": 13, "t": "성인초기의 발달과 사회환경", "qs": [{"text": "청년기의 주요 발달과업은?", "passage": null, "plabel": null, "opts": ["자녀 양육", "공익적 봉사활동", "사회적 은퇴 준비", "자립에 필요한 능력 습득"], "ans": 3, "exp": "청년기(성인초기)의 주요 발달과업은 자립에 필요한 자격과 능력을 습득하는 것이다.", "no": 145, "note": "#n=l13~1~%EC%9D%B8%EC%A7%80%EB%B0%9C%EB%8B%AC%EA%B3%BC%EC%84%B1%EC%9D%B8%EC%82%AC%EA%B3%A0"}, {"text": "장년기에 대한 설명으로 바른 것은?", "passage": null, "plabel": null, "opts": ["남성은 여성성이 증가한다.", "성역할 정체감이 확립되는 시기이다.", "자아정체성 형성이 주요 발달과업이다.", "지적 능력이 생애 중 정점에 달하는 시기이다."], "ans": 3, "exp": "장년기(성인초기)는 신체적, 지적 능력이 생애 중 정점에 달하는 시기이다.", "no": 146, "note": "#l13"}]}, {"n": 14, "t": "성인중기의 발달과 사회환경", "qs": [{"text": "중년기의 일반적 특징을 바르게 설명한 것은?", "passage": "", "plabel": "보기", "opts": ["부부간 역할 구분에 변화가 나타난다.", "신체적 기능이 정점에 달하는 시기이다.", "자녀 양육의 부담이 가장 높은 시기이다.", "진로와 관련하여 선택의 기로에 서게 된다."], "ans": 0, "exp": "중년기(성인중기)에는 성역할 규범과 가족관계가 재조정되면서 부부간 역할 구분에 변화가 나타난다.", "no": 147, "note": "#n=l14~1~%EC%84%B1%EB%B3%84%EC%97%AD%ED%95%A0%EA%B3%BC%EC%82%AC%ED%9A%8C%EB%AC%B8%ED%99%94%EC%A0%81%EB%A7%A5%EB%9D%BD%E2%80%94%EB%A7%8E"}, {"text": "에릭슨의 이론에서 “성인으로서의 사회적 책임을 다하는 것”을 의미하는 중년기 발달과업은?", "passage": null, "plabel": null, "opts": ["근면성", "생산성", "자주성", "주도성"], "ans": 1, "exp": "에릭슨의 성인중기 과업은 생산성 대 침체로, 다음 세대와 사회에 기여하며 성인으로서의 책임을 다하는 것이다.", "no": 148, "note": "#n=l14~1~%EC%97%90%EB%A6%AD%EC%8A%A8%E2%80%94%EC%83%9D%EC%82%B0%EC%84%B1%EB%8C%80%EC%B9%A8%EC%B2%B4%28Gen"}]}];
+const CIRC = ['①','②','③','④'];
+const KEY = 'hbse-past-2026-v1', TKEY = 'hbse-past-theme';
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const all = []; const byNo = {};
+DATA.forEach(L => L.qs.forEach(q => { q.lec = L.n; all.push(q); byNo[q.no] = q; }));
+
+// 상태
+let S = {ans:{}, graded:false, sid:'', name:''};
+try{ const o = JSON.parse(store.get(KEY) || '{}') || {}; S.ans = o.ans || {}; S.graded = !!o.graded; S.sid = o.sid || ''; S.name = o.name || ''; }catch(e){}
+const save = () => store.set(KEY, JSON.stringify(S));
+
+/* 테마 */
+function curTheme(){ return document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+function paintThemeBtn(){ $('#themeBtn').textContent = curTheme() === 'dark' ? '라이트' : '다크'; }
+(function(){ const t = store.get(TKEY); if(t) document.documentElement.setAttribute('data-theme', t); paintThemeBtn(); })();
+$('#themeBtn').onclick = () => { const n = curTheme() === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', n); store.set(TKEY, n); paintThemeBtn(); };
+
+/* 바로가기 */
+const sel = $('#scope');
+sel.innerHTML = `<option value="">강의 선택</option>` +
+  DATA.map(L => `<option value="lec${L.n}">${L.n}강 · ${esc(L.t)} (${L.qs[0].no}~${L.qs[L.qs.length-1].no}번)</option>`).join('') +
+  `<option value="answers">정답 및 해설</option>`;
+sel.onchange = () => { const id = sel.value; if(id){ go(id); } sel.value = ''; };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 10;
+  window.scrollTo({top: Math.max(0, y), behavior: 'auto'});
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1); if(!document.getElementById(id)) return;
+  e.preventDefault(); go(id);
+});
+
+/* 렌더링 (한 번) */
+function build(){
+  $('#iTotal').textContent = all.length;
+  let html = '', last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      html += `<div class="lh" id="lec${L.n}">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    html += `<div class="q" id="q${q.no}">` +
+      `<p class="qt"><span class="no">${q.no}.</span>${esc(q.text)}</p>` +
+      (q.passage ? `<div class="box"><span class="lb">&lt;${q.plabel === '보기' ? '보 기' : q.plabel === '사례' ? '사 례' : '자 료'}&gt;</span>${esc(q.passage)}</div>` : '') +
+      `<ul class="ops">` + q.opts.map((o,i) => `<li><button class="op" data-no="${q.no}" data-i="${i}"><span class="c">${i+1}</span><span class="tx">${esc(o)}</span></button></li>`).join('') + `</ul>` +
+      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="인간행동과사회환경_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : '') +
+      `</div>`;
+  });
+  $('#qs').innerHTML = html;
+
+  // 정답 및 해설 챕터
+  const rows = [];
+  for(let i = 0; i < all.length; i += 10) rows.push(all.slice(i, i + 10));
+  let a = `<div class="ch-h"><span class="ch-t">정답 및 해설</span><span class="ch-s">1~${all.length}번</span></div>` +
+    `<div class="keyw"><table class="keyt" id="keyt"><tbody>` +
+    rows.map(r => `<tr class="kn">${r.map(q => `<th><a href="#a${q.no}">${q.no}</a></th>`).join('')}</tr><tr class="kv">${r.map(q => `<td id="k${q.no}">${CIRC[q.ans]}</td>`).join('')}</tr>`).join('') +
+    `</tbody></table></div><div class="alist">`;
+  last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      a += `<div class="lh">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="인간행동과사회환경_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 ↗</a>` : ''}</p>` +
+      `<p class="ax">${esc(q.exp)}</p></div>`;
+  });
+  a += `</div>`;
+  $('#answers').innerHTML = a;
+
+  $('#omrBody').innerHTML = all.map(q => `<div class="orow" id="o${q.no}"><button class="n" data-jump="${q.no}" title="${q.no}번으로 이동">${q.no}</button>` +
+    [0,1,2,3].map(i => `<button class="bub" data-no="${q.no}" data-i="${i}" aria-label="${q.no}번 ${i+1}번 표기">${i+1}</button>`).join('') + `</div>`).join('');
+}
+
+function paint(){
+  const g = S.graded;
+  all.forEach(q => {
+    const a = S.ans[q.no], card = $('#q' + q.no), row = $('#o' + q.no);
+    card.classList.toggle('graded', g);
+    card.classList.remove('res-o','res-x');
+    card.querySelectorAll('.nores').forEach(e => e.remove());
+    card.querySelectorAll('.op').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.classList.toggle('wrong', g && a === i && i !== q.ans);
+      b.disabled = g;
+      b.setAttribute('aria-pressed', String(a === i));
+    });
+    row.classList.remove('ok','ng');
+    row.querySelectorAll('.bub').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.disabled = g;
+    });
+    const m = $('#m' + q.no), k = $('#k' + q.no), ai = $('#a' + q.no);
+    ai.classList.remove('ok','ng'); k.classList.remove('ng');
+    if(g){
+      if(a === undefined){ card.querySelector('.qt').insertAdjacentHTML('beforeend','<span class="nores">미응답</span>'); card.classList.add('res-x'); row.classList.add('ng'); m.textContent = '내 답 없음'; ai.classList.add('ng'); k.classList.add('ng'); }
+      else if(a === q.ans){ card.classList.add('res-o'); row.classList.add('ok'); m.textContent = `내 답 ${CIRC[a]} ○`; ai.classList.add('ok'); }
+      else { card.classList.add('res-x'); row.classList.add('ng'); m.textContent = `내 답 ${CIRC[a]} ✕`; ai.classList.add('ng'); k.classList.add('ng'); }
+    } else m.textContent = '';
+  });
+  const done = all.filter(q => S.ans[q.no] !== undefined).length;
+  $('#cnt').textContent = `${done}/${all.length}`;
+  $('#cntPct').textContent = Math.round(done / all.length * 100) + '%';
+  $('#progI').style.width = (done / all.length * 100) + '%';
+  disarm();
+  $('#submitBtn').textContent = g ? '채점 결과' : '제출·채점';
+  const wn = g ? wrongList().length : 0, rb = $('#retryBtn');
+  rb.hidden = !wn; rb.textContent = `오답만 다시 (${wn})`;
+  resetDisarm();
+  $('#sid').value = S.sid || ''; $('#sname').value = S.name || '';
+  report();
+}
+
+function wrongList(){ return all.filter(q => S.ans[q.no] !== q.ans); }
+
+function report(){
+  const r = $('#report');
+  if(!S.graded){ r.hidden = true; r.innerHTML = ''; return; }
+  const ok = all.length - wrongList().length;
+  const wrong = wrongList();
+  const sc = Math.round(ok / all.length * 1000) / 10;
+  const lecs = DATA.map(L => {
+    const lo = L.qs.filter(q => S.ans[q.no] === q.ans).length;
+    return `<a href="#lec${L.n}" class="${lo < L.qs.length ? 'bad' : ''}">${L.n}강<b>${lo}/${L.qs.length}</b></a>`;
+  }).join('');
+  r.innerHTML = `<div class="score"><span class="v">${sc}</span><span class="u">점</span><span class="s">${ok}/${all.length}문항 정답</span></div>` +
+    `<div class="rep-r"><div class="lecs">${lecs}</div><div class="rep-btns">` +
+    (wrong.length ? `<button class="b main" id="retryWrong">틀린 ${wrong.length}문항 다시 풀기</button><button class="b" id="goWrong">첫 오답으로 이동</button>` : '<strong>모두 맞혔습니다.</strong>') +
+    `<button class="b ghost" id="goAns">정답 및 해설 보기</button><button class="b ghost" id="again">처음부터 다시</button></div></div>`;
+  r.hidden = false;
+  const rw = $('#retryWrong');
+  if(rw) rw.onclick = retryWrong;
+  const gw = $('#goWrong'); if(gw) gw.onclick = () => go('q' + wrong[0].no);
+  $('#goAns').onclick = () => go('answers');
+  $('#again').onclick = restart;
+}
+
+function retryWrong(){
+  const wrong = wrongList(); if(!S.graded || !wrong.length) return;
+  const first = wrong[0].no;
+  wrong.forEach(q => delete S.ans[q.no]); S.graded = false; save(); paint();
+  toast(`틀린 ${wrong.length}문항의 답만 지웠습니다. 맞힌 답은 그대로 둡니다`); go('q' + first);
+}
+$('#retryBtn').onclick = retryWrong;
+
+/* 초기화 (두 번 눌러 확인) */
+let rsT = null;
+function resetDisarm(){ clearTimeout(rsT); rsT = null; const b = $('#resetBtn'); b.classList.remove('warn'); b.textContent = '초기화'; }
+$('#resetBtn').onclick = () => {
+  const b = $('#resetBtn');
+  if(!Object.keys(S.ans).length && !S.graded){ toast('지울 답안이 없습니다'); return; }
+  if(!b.classList.contains('warn')){
+    b.classList.add('warn'); b.textContent = '한 번 더 누르면 모두 지움';
+    clearTimeout(rsT); rsT = setTimeout(resetDisarm, 4000);
+    return;
+  }
+  restart();
+};
+
+function restart(){ S.ans = {}; S.graded = false; save(); paint(); window.scrollTo({top:0}); toast('답안을 모두 지웠습니다'); }
+
+/* 답 표기 */
+function mark(no, i){
+  if(S.graded) return;
+  no = +no; i = +i;
+  if(S.ans[no] === i) delete S.ans[no]; else S.ans[no] = i;
+  save(); paint();
+}
+$('#qs').addEventListener('click', e => { const b = e.target.closest('.op'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i); });
+$('#omrBody').addEventListener('click', e => {
+  const j = e.target.closest('[data-jump]');
+  if(j){ closeOmr(); go('q' + j.dataset.jump); return; }
+  const b = e.target.closest('.bub'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i);
+});
+
+/* 제출 */
+let armT = null;
+function disarm(){ clearTimeout(armT); armT = null; $('#submitBtn').classList.remove('warn'); }
+$('#submitBtn').onclick = () => {
+  const sb = $('#submitBtn');
+  if(S.graded){ go('report'); return; }
+  const left = all.filter(q => S.ans[q.no] === undefined).length;
+  if(left && !sb.classList.contains('warn')){
+    sb.classList.add('warn'); sb.textContent = `미응답 ${left}문항 · 한 번 더 누르면 제출`;
+    clearTimeout(armT); armT = setTimeout(() => { sb.classList.remove('warn'); sb.textContent = '제출·채점'; }, 4000);
+    return;
+  }
+  disarm(); S.graded = true; save(); closeOmr(); paint(); go('report');
+};
+
+/* 학번·성명 */
+$('#sid').oninput = e => { S.sid = e.target.value; save(); };
+$('#sname').oninput = e => { S.name = e.target.value; save(); };
+
+/* OMR 서랍 */
+function openOmr(){ $('#omr').classList.add('open'); $('#scrim').classList.add('on'); $('#omrBtn').setAttribute('aria-expanded','true'); }
+function closeOmr(){ $('#omr').classList.remove('open'); $('#scrim').classList.remove('on'); $('#omrBtn').setAttribute('aria-expanded','false'); }
+$('#omrBtn').onclick = () => $('#omr').classList.contains('open') ? closeOmr() : openOmr();
+$('#omrClose').onclick = closeOmr; $('#scrim').onclick = closeOmr;
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOmr(); });
+
+/* 글자 크기 */
+const ZKEY = 'hbse-past-zoom', ZL = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45, 1.6];
+let zi = ZL.indexOf(parseFloat(store.get(ZKEY)));
+if(zi < 0) zi = 2;
+function setZoom(){
+  document.documentElement.style.setProperty('--zoom', ZL[zi]);
+  $('#fsVal').textContent = Math.round(ZL[zi] * 100) + '%';
+  $('#fsDown').disabled = zi === 0; $('#fsUp').disabled = zi === ZL.length - 1;
+  store.set(ZKEY, String(ZL[zi]));
+}
+$('#fsDown').onclick = () => { if(zi > 0){ zi--; setZoom(); } };
+$('#fsUp').onclick = () => { if(zi < ZL.length - 1){ zi++; setZoom(); } };
+setZoom();
+
+let tt; function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2200); }
+
+build(); paint();
+</script>
+
+</body>
+</html>
