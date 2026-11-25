@@ -3369,5 +3369,66 @@ render();ui();syncNow();
 })();
 </script>
 
+<!-- 목차 하위: 강의명 아래 소제목(h3)까지 보이고, 강의별로 접고 펼 수 있음 -->
+<style>
+nav.toc li.tl{position:relative}
+nav.toc li.tl>.tg{position:absolute;left:-4px;top:4px;width:20px;height:22px;border:0;background:none;color:var(--sub);cursor:pointer;font-size:11px;line-height:22px;padding:0;border-radius:4px;transition:transform .15s}
+nav.toc li.tl>.tg:hover{background:var(--accent-soft);color:var(--accent)}
+nav.toc li.tl.open>.tg{transform:rotate(90deg)}
+nav.toc li.tl>a{margin-left:14px}
+nav.toc ul.sub{list-style:none;margin:2px 0 6px 36px;padding:0 0 0 8px;border-left:1px solid var(--line);display:none}
+nav.toc li.tl.open>ul.sub{display:block}
+nav.toc ul.sub a{display:block;padding:3px 8px;font-size:12.5px;line-height:1.4;color:var(--sub);margin:0}
+nav.toc ul.sub a:hover{color:var(--ink)}
+nav.toc ul.sub a.on{color:var(--accent);background:var(--accent-soft);font-weight:700}
+nav.toc .tocall{float:right;border:0;background:none;color:var(--accent);font:inherit;font-size:11.5px;letter-spacing:0;cursor:pointer;padding:0 2px}
+</style>
+<script>
+(function(){
+const nav=document.querySelector('nav.toc');if(!nav)return;
+const SK='toc-open-'+location.pathname.split('/').pop();
+const get=()=>{try{return JSON.parse(localStorage.getItem(SK)||'null')}catch(e){return null}};
+const put=v=>{try{localStorage.setItem(SK,JSON.stringify(v))}catch(e){}};
+let open=new Set(get()||[]);
+const subLinks=[];
+nav.querySelectorAll(':scope > ol > li').forEach(li=>{
+  const a=li.querySelector('a');if(!a)return;const id=a.getAttribute('href').slice(1);
+  const sec=document.getElementById(id);if(!sec)return;
+  const hs=[...sec.querySelectorAll('.ct h3')];if(!hs.length)return;
+  li.classList.add('tl');
+  const ul=document.createElement('ul');ul.className='sub';
+  hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
+    const t=h.textContent.replace(/[0-9]️?⃣/g,'').replace(/\s+/g,' ').trim();
+    const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
+    const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
+  li.appendChild(ul);
+  const b=document.createElement('button');b.className='tg';b.type='button';b.textContent='▶';b.setAttribute('aria-label',a.textContent.trim()+' 소제목 펼치기/접기');
+  li.insertBefore(b,a);
+  const set=(on)=>{li.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));};
+  set(open.has(id));
+  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);put([...open]);paintAll();};
+  li._set=set;li._id=id;
+});
+const h2=nav.querySelector('h2');
+const all=document.createElement('button');all.className='tocall';all.type='button';
+const tls=[...nav.querySelectorAll('li.tl')];
+function paintAll(){all.textContent=tls.every(li=>li.classList.contains('open'))?'모두 접기':'모두 펼치기';}
+all.onclick=()=>{const on=!tls.every(li=>li.classList.contains('open'));tls.forEach(li=>{li._set(on);on?open.add(li._id):open.delete(li._id);});put([...open]);paintAll();};
+if(h2)h2.appendChild(all);paintAll();
+// 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
+let last=null;
+function mark(){
+  let cur=null;for(const [a,h] of subLinks){if(h.getBoundingClientRect().top<140)cur=a;else break;}
+  if(cur===last)return;last=cur;
+  subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
+  if(cur){const li=cur.closest('li.tl');if(li&&!li.classList.contains('open')){li._set(true);paintAll();}
+    const r=cur.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top||r.bottom>nr.bottom)cur.scrollIntoView({block:'nearest'});}
+}
+let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
+setTimeout(mark,300);
+})();
+</script>
+
 </body>
 </html>
