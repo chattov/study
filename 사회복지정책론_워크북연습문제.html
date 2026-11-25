@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<script>document.documentElement.setAttribute("data-theme","light")</script>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="keep-scroll.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>사회복지정책론 워크북 연습문제</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 레이아웃: 회색 책상 위에 놓인 A4 시험지 한 장. 머리말 표 → 2단 문항 → 끝. 상단에는 얇은 감독 바, 오른쪽에는 OMR 답안지 서랍 */
+:root{
+  --desk:#e6dfcf; --paper:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --rule:#3a3329; --hair:#d6cbb4;
+  --soft:#efe7d5; --mark:#2f2a23; --mark-ink:#f8f3e6;
+  --red:#d0221b; --red-soft:#fdecea; --blue:#1d4fa3; --blue-soft:#e9eff9;
+  --bar:#f3ecdc;
+  --f-q:"Noto Serif KR","Batang","AppleMyungjo",serif;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* 감독 바 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bar)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bar);border-bottom:1px solid var(--hair)}
+.bar-in{max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar label{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.bar select{max-width:min(250px,52vw);border:1px solid var(--hair);background:var(--paper);border-radius:6px;padding:4px 8px;font-size:14px}
+.count{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.count small{font-weight:500;color:var(--sub)}
+.prog{flex:1 1 120px;min-width:80px;height:5px;background:var(--hair);border-radius:9px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s}
+.sp{display:flex;gap:6px;margin-left:auto}
+.b{border:1px solid var(--rule);background:var(--paper);border-radius:6px;padding:5px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.b:hover{background:var(--soft)}
+.b.main{background:var(--ink);color:var(--paper)}
+.b.main:hover{opacity:.88}
+.b.warn{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+.b.ghost{border-color:var(--hair);font-weight:500}
+.fs{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:6px;overflow:hidden;background:var(--paper)}
+.fs button{border:0;background:transparent;padding:4px 9px;white-space:nowrap;font-size:14px;font-weight:700;line-height:1.4}
+.fs button:hover:not(:disabled){background:var(--soft)}
+.fs button:disabled{opacity:.35;cursor:default}
+.fs output{min-width:3.2em;text-align:center;font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;border-inline:1px solid var(--hair);padding:5px 2px;line-height:1.4}
+.sheet{zoom:var(--zoom,1)}
+
+/* 시험지 */
+.desk{padding-block:20px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet{max-width:1000px;margin:0 auto;background:var(--paper);border:1px solid var(--hair);box-shadow:0 2px 0 var(--hair),0 10px 30px rgba(0,0,0,.06);padding:34px 40px 48px}
+.ht{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--sub);border-bottom:1px solid var(--rule);padding-bottom:6px}
+.title{text-align:center;margin:18px 0 6px}
+.title .t1{font-family:var(--f-q);font-size:15px;font-weight:600;letter-spacing:.06em}
+.title h1{font-family:var(--f-q);font-weight:900;font-size:34px;letter-spacing:.18em;margin:2px 0 0;text-wrap:balance}
+.title .t2{font-size:13px;color:var(--sub);margin-top:2px}
+.info{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:14px;table-layout:fixed}
+.info th,.info td{border:1px solid var(--rule);padding:6px 8px;text-align:center}
+.info th{background:var(--soft);font-weight:700;width:12%}
+.info input{width:100%;border:0;background:transparent;text-align:center;padding:2px;min-width:0}
+.info td.num{font-variant-numeric:tabular-nums;font-weight:700}
+.notice{font-size:13px;color:var(--sub);border:1px solid var(--hair);padding:8px 12px;margin:0 0 6px;line-height:1.55}
+.notice b{color:var(--ink)}
+
+/* 성적표 */
+.report{border:2px solid var(--red);margin:14px 0 4px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px 20px;align-items:center}
+.score{font-family:var(--f-q);color:var(--red);text-align:center;line-height:1.1;min-width:120px}
+.score .v{font-size:52px;font-weight:900;font-variant-numeric:tabular-nums}
+.score .u{font-size:16px;font-weight:700}
+.score .s{display:block;font-family:var(--f-ui);font-size:13px;color:var(--sub);margin-top:4px}
+.rep-r{min-width:0}
+.lecs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:4px;margin-bottom:10px}
+.lecs a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--hair);padding:3px 4px;text-align:center;font-size:12px;line-height:1.35;font-variant-numeric:tabular-nums}
+.lecs a b{display:block;font-size:13px}
+.lecs a.bad b{color:var(--red)}
+.rep-btns{display:flex;flex-wrap:wrap;gap:6px}
+
+/* 문항 2단 */
+.qs{column-count:2;column-gap:36px;column-rule:1px solid var(--rule);margin-top:18px}
+.lh{column-span:all;font-family:var(--f-q);font-weight:700;font-size:16px;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:5px 2px;margin:20px 0 14px;display:flex;justify-content:space-between;gap:10px}
+.lh:first-child{margin-top:0}
+.lh span{font-family:var(--f-ui);font-size:12px;font-weight:500;color:var(--sub);white-space:nowrap;align-self:center}
+.q{break-inside:avoid;margin:0 0 22px;position:relative;font-family:var(--f-q);font-size:15.5px;line-height:1.7}
+.qt{margin:0 0 8px;font-weight:600;padding-left:2.1em;text-indent:-2.1em}
+.qt .no{font-weight:900;display:inline-block;min-width:2.1em;text-indent:0}
+.box{border:1px solid var(--rule);padding:14px 12px 8px;margin:4px 0 10px 1.2em;position:relative;white-space:pre-line;font-size:14.5px}
+.box .lb{position:absolute;top:-.8em;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 8px;font-size:13px;font-weight:700;white-space:nowrap}
+.ops{list-style:none;margin:0;padding:0 0 0 1.2em;display:grid;gap:2px}
+.op{width:100%;display:flex;gap:6px;align-items:flex-start;text-align:left;border:0;background:transparent;padding:3px 6px;border-radius:4px;font-family:var(--f-q);font-size:15px;line-height:1.6}
+.op:hover:not(:disabled){background:var(--soft)}
+.op .c{flex:none;width:1.5em;height:1.5em;border:1.5px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--f-ui);font-size:12px;font-weight:700;margin-top:.1em;transition:background .12s,color .12s}
+.op .tx{min-width:0}
+.op.on .c{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.op.on .tx{font-weight:600}
+.op:disabled{cursor:default}
+/* 채점 표시 */
+.graded .op.key .c{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--red)}
+.graded .op.key .tx{color:var(--red);font-weight:700}
+.graded .op.on.wrong .tx{text-decoration:line-through;text-decoration-color:var(--red)}
+.qt .no{position:relative}
+.res-o .qt .no::after,.res-x .qt .no::after{content:"";position:absolute;left:-.35em;top:50%;width:1.9em;height:1.9em;transform:translateY(-50%);pointer-events:none}
+.res-o .qt .no::after{border:2.5px solid var(--red);border-radius:50%;opacity:.85}
+.res-x .qt .no::after{background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--red) calc(50% - 1.5px),var(--red) calc(50% + 1.5px),transparent calc(50% + 1.5px));opacity:.85;height:2.2em}
+.nores{display:inline-block;text-indent:0;font-family:var(--f-ui);font-size:11px;font-weight:700;color:var(--red);border:1px solid var(--red);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;line-height:1.5}
+.exp{margin:8px 0 0 1.2em;border-left:3px solid var(--red);background:var(--red-soft);padding:7px 10px;font-family:var(--f-ui);font-size:13.5px;line-height:1.6}
+.exp b{color:var(--red);margin-right:4px}
+.tolink{display:inline-block;margin:6px 0 0 1.2em;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none;border-bottom:1px dotted currentColor;line-height:1.3}
+.tolink:hover{color:var(--red)}
+.graded .tolink{color:var(--red);border-bottom-style:solid}
+.answers{margin-top:48px;border-top:3px double var(--rule);padding-top:22px}
+.ch-h{text-align:center;margin-bottom:16px}
+.ch-t{display:block;font-family:var(--f-q);font-weight:900;font-size:26px;letter-spacing:.2em}
+.ch-s{font-size:13px;color:var(--sub)}
+.keyw{overflow-x:auto;margin-bottom:20px}
+.keyt{border-collapse:collapse;width:100%;min-width:420px;table-layout:fixed;font-variant-numeric:tabular-nums}
+.keyt th,.keyt td{border:1px solid var(--rule);text-align:center;padding:3px 2px;font-size:13px}
+.keyt th{background:var(--soft);font-weight:700;font-size:12px}
+.keyt th a{color:inherit;text-decoration:none;display:block}
+.keyt td{font-family:var(--f-q);font-weight:700;font-size:15px}
+.keyt td.ng{color:var(--red);background:var(--red-soft)}
+.alist{column-count:2;column-gap:36px;column-rule:1px solid var(--rule)}
+.ai{break-inside:avoid;margin:0 0 14px;font-size:14px;line-height:1.65}
+.ah{margin:0 0 3px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-family:var(--f-q)}
+.ah b{font-weight:900}
+.ah .key{font-weight:900;color:var(--red)}
+.ah .mine{font-family:var(--f-ui);font-size:12px;font-weight:700;color:var(--sub)}
+.ai.ok .mine{color:var(--blue)}
+.ai.ng .mine{color:var(--red)}
+.ah .back{margin-left:auto;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none}
+.ah .back:hover{color:var(--ink);text-decoration:underline}
+.ax{margin:0;padding-left:1.4em;color:var(--ink)}
+.ai.ng{border-left:3px solid var(--red);padding-left:8px;margin-left:-11px}
+.end{text-align:center;font-family:var(--f-q);font-weight:700;letter-spacing:.3em;margin-top:26px;border-top:1px solid var(--rule);padding-top:12px}
+.empty{text-align:center;color:var(--sub);padding:40px 0;font-size:15px}
+
+/* OMR 답안지 */
+.omr{position:fixed;top:0;right:0;bottom:0;width:min(330px,92vw);background:var(--paper);border-left:2px solid var(--blue);z-index:40;
+  transform:translateX(102%);transition:transform .22s;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.omr.open{transform:none;box-shadow:-10px 0 30px rgba(0,0,0,.15)}
+.omr-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--blue);color:#fff}
+.omr-h strong{font-size:15px;letter-spacing:.08em}
+.omr-h button{border:1px solid rgba(255,255,255,.7);background:transparent;color:#fff;border-radius:5px;padding:2px 10px;font-size:13px}
+:root[data-theme="dark"] .omr-h,:root[data-theme="dark"] .omr-h button{color:#0f1420;border-color:#0f1420}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .omr-h,:root:not([data-theme="light"]) .omr-h button{color:#0f1420;border-color:#0f1420}}
+.omr-b{overflow:auto;padding:10px 12px 20px}
+.orow{display:grid;grid-template-columns:2.6em repeat(4,1fr);align-items:center;gap:4px;padding:2px 0;border-bottom:1px dashed var(--hair);font-variant-numeric:tabular-nums}
+.orow:nth-child(5n){border-bottom:1px solid var(--blue)}
+.orow .n{font-size:12px;font-weight:700;color:var(--blue);text-align:right;padding-right:6px;background:none;border:0}
+.bub{width:22px;height:28px;justify-self:center;border:1.5px solid var(--blue);border-radius:11px;background:transparent;font-size:11px;color:var(--blue);padding:0;font-weight:700}
+.bub.on{background:var(--mark);border-color:var(--mark);color:transparent}
+.orow.ok .n{color:var(--blue)}
+.orow.ng .n{color:var(--red);text-decoration:underline}
+.orow .bub.key{box-shadow:0 0 0 2px var(--red)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:39;display:none}
+.scrim.on{display:block}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);
+  padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+.toast.show{opacity:.95}
+
+@media (max-width:820px){
+  .qs,.alist{column-count:1;column-rule:none}
+  .sheet{padding:22px 16px 36px}
+  .title h1{font-size:26px;letter-spacing:.1em}
+  .info th{width:auto}
+}
+@media (max-width:560px){
+  .info{font-size:13px}
+  .info tr{display:grid;grid-template-columns:auto 1fr auto 1fr}
+  .info th,.info td{display:block;padding:5px 6px;margin:-1px 0 0 -1px}
+  .info th{white-space:nowrap}
+  .report{grid-template-columns:1fr}
+  .prog{order:5;flex-basis:100%}
+  .sp{margin-left:0}
+}
+.tolink.nlink{margin-left:12px;color:var(--blue)}
+.back.nlink{margin-left:10px}
+@media (max-width:560px){.sp{flex-wrap:wrap}}
+.title h1{word-break:keep-all}
+</style>
+
+</head>
+<body>
+<div class="bar" role="region" aria-label="시험 진행">
+  <div class="bar-in">
+    <label for="scope">바로가기
+      <select id="scope"></select>
+    </label>
+    <span class="count">답안 <span id="cnt">0/0</span> <small id="cntPct"></small></span>
+    <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+    <div class="sp">
+      <div class="fs" role="group" aria-label="글자 크기">
+        <button id="fsDown" title="글자 작게" aria-label="글자 작게">가<small>−</small></button>
+        <output id="fsVal">100%</output>
+        <button id="fsUp" title="글자 크게" aria-label="글자 크게">가<small>+</small></button>
+      </div>
+      <button class="b ghost" id="omrBtn" aria-controls="omr" aria-expanded="false">OMR 답안지</button>
+      <button class="b ghost" id="themeBtn" title="화면 밝기 전환">다크</button>
+      <button class="b ghost" id="resetBtn" title="표기한 답을 모두 지움">초기화</button>
+      <button class="b" id="retryBtn" hidden>오답만 다시</button>
+      <button class="b main" id="submitBtn">제출·채점</button>
+    </div>
+  </div>
+</div>
+
+<main class="desk">
+  <article class="sheet">
+    <div class="ht"><span>2026학년도 2학기 기말시험 대비</span><span>사회복지학과 2학년</span></div>
+    <header class="title">
+      <div class="t1">워 크 북 연 습 문 제</div>
+      <h1>사회복지정책론</h1>
+      <div class="t2" id="scopeLabel">출제범위 6~15강</div>
+    </header>
+    <table class="info">
+      <tr>
+        <th scope="row">문항 수</th><td class="num" id="iTotal">0</td>
+        <th scope="row">배점</th><td class="num">100점</td>
+        <th scope="row">학번</th><td><input id="sid" aria-label="학번" autocomplete="off"></td>
+        <th scope="row">성명</th><td><input id="sname" aria-label="성명" autocomplete="off"></td>
+      </tr>
+    </table>
+    <p class="notice">※ 각 문항에서 답을 하나 골라 번호를 누르세요. 오른쪽 위 <b>OMR 답안지</b>에서도 표기할 수 있습니다.
+      다 풀었으면 <b>제출·채점</b>을 누르세요. 채점 결과는 문항 번호에 ○, ╱로 표시되고, 정답과 해설은 시험지 맨 뒤 <b>정답 및 해설</b>에 모여 있습니다. 위쪽 <b>바로가기</b>에서 강의를 고르면 그 문항으로 이동합니다. 표기한 답은 이 기기의 브라우저에 저장됩니다.</p>
+    <section id="report" class="report" hidden aria-live="polite"></section>
+    <div class="qs" id="qs"></div>
+    <div class="end">― 문제 끝 ―</div>
+    <section class="answers" id="answers" aria-label="정답 및 해설"></section>
+  </article>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="omr" id="omr" aria-label="OMR 답안지">
+  <div class="omr-h"><strong>답 안 지</strong><button id="omrClose">닫기</button></div>
+  <div class="omr-b" id="omrBody"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DATA = [{"n": 6, "t": "사회복지정책 의제 및 대안의 형성", "qs": [{"text": "사회복지정책 의제 형성에서 사회문제 이슈화 과정 참여자들과 그 특성에 대한 설명이 적절히 연결되지 못한 것은?", "passage": "", "plabel": "", "opts": ["클라이언트 - 사회복지 문제를 이슈화할 수 있는 최적의 주체이다.", "정책 전문가 - 정책 대안의 분석, 정책 집행 및 결과 분석을 주도한다.", "이해당사자 - 사회복지 문제 해결을 위해 비용을 부담하는 집단이다.", "이슈 기업가 - 이슈 갈등 및 논쟁에 직접 참여하여 영향력을 행사한다."], "ans": 0, "exp": "클라이언트는 사회문제의 당사자이면서 사회문제 해결을 위한 압력을 행사한다. 사회복지 문제를 이슈화할 수 있는 최적의 주체는 사회복지 전문가이다.", "no": 1}, {"text": "사회복지정책 의제 형성 과정을 설명하는 모형과 그 핵심 내용이 올바르게 짝지어지지 않은 것은?", "passage": "", "plabel": "", "opts": ["흐름모형 - 문제·해결책·참여자·기회가 갑자기 결합하여 정책 의제를 형성한다.", "동원모형 - 엘리트(중심)론이며, 강력한 상징 및 대중매체의 활용을 강조한다.", "외부주도모형 - 고도로 분화되고 민주화된 사회를 전제로 한 다원주의적 모형이다.", "내부접근모형 - 권력의 두 얼굴 측면에 기초하여 무의사결정을 강조한다."], "ans": 3, "exp": "내부접근모형에서 의제 형성 과정을 주도하는 내부자들은 이기적이어서 이슈에 대해 원천적으로 무관심하며, 자신의 이익에 반한다고 생각할 때에는 공공의제가 되는 것을 막기도 한다. 권력의 두 얼굴 측면에 기초하여 무의사결정을 강조한 사람은 신엘리트 이론가라고 할 수 있는 바흐라흐와 바라츠(Bachrach & Baratz)이다.", "no": 2}, {"text": "사회복지정책 대안의 탐색 및 미래예측 기법 중 경향성에 의해 미래를 예측하는 것은?", "passage": "", "plabel": "", "opts": ["계량적 분석기법", "집단토의", "점증적 접근방법", "델파이 방법"], "ans": 0, "exp": "② 집단토의는 자유분방한 상태에서 다양한 아이디어와 전략을 제안하는 방법이다. ③ 점증적 접근방법은 기존 정책에서 한정된 범위와 숫자의 대안만 탐색하는 방법이다. ④ 델파이 방법은 소수 전문가에게 대안 개발 및 미래 예측 등의 비정형적 문제에 대해 발언하게 한 후 그 내용을 비공개로 하여 자유로운 직관적 제안을 촉진하는 방법을 말한다.", "no": 3}, {"text": "사회복지정책 대안을 상호 비교·분석하기 위한 기법을 설명한 내용으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["비용편익분석은 비용 및 편익을 모두 화폐적 가치로 환산하여 대안을 비교한다.", "의사결정나무분석은 일부 대상자에게만 시범적 프로그램을 실시하여 윤리적 한계가 발생한다.", "비용-효과분석은 선택 가능한 대안을 나열하고 선택 상황의 모습을 그림처럼 표현한다.", "정책실험은 비용 측면만으로 대안을 비교하여 편익에 대한 계량화 부담을 줄인다."], "ans": 0, "exp": "② 의사결정나무분석은 선택가능한 대안을 나열하고 전체 선택 상황의 모습을 나무 모양의 그림처럼 표현하는 기법이다. ③ 비용-효과분석은 비용 측면만으로 대안을 비교하여 편익의 계량화 부담을 감소시킨다. ④ 정책실험은 일부 대상자에게 시범적으로 프로그램을 실시하기 때문에 윤리적 한계가 있다.", "no": 4}, {"text": "사회복지정책 대안 형성의 일반적 한계에 대해 적절하게 설명한 것은?", "passage": "", "plabel": "", "opts": ["정치적 과정을 거침으로써 공익 및 실현 가능성을 동시에 저하시킨다.", "비사회복지정책과 조화되어 계층제적 장점을 발휘하기 어렵다.", "사회적 가치가 분명하여 공통되고 객관적인 비교 척도가 많다.", "막대한 정보비용 문제, 예측능력 및 시간적 여유의 한계가 존재한다."], "ans": 3, "exp": "① 사회복지정책은 정치적 협의 과정을 통해 절차적 합리성이 확보되면 실현 가능성이 높아진다. 그러나 자주 사회적 논란의 대상이 되기 때문에 정치적 과정을 거침으로써 일련의 협상과정에서 일부 개인·집단의 이익을 보장하기 위해 부득이 공익의 확보가 저하될 가능성이 크다. ② 사회복지정책은 종종 비사회복지 분야 정책과의 갈등으로 말미암아 조직할거주의 및 계층제적 장애에 봉착하게 된다. ③ 사회복지정책 분야는 대개 사회적 가치가 다양하여 공통되고 객관적인 비교 척도가 없다. ④ 사회복지정책은 막대한 정보비용과 예측능력의 한계, 시간적 여유의 한계로 인해 그 효과성을 의심받기도 한다.", "no": 5}]}, {"n": 7, "t": "사회복지정책의 결정, 집행 및 평가", "qs": [{"text": "집단적 사회복지정책 결정모형과 그에 대한 설명이 적절하게 연결된 것은?", "passage": "", "plabel": "", "opts": ["조직 내 갈등 해결을 위한 설득, 흥정, 연합 활동을 강조 - 조직모형", "상호 배타적인 세 모형을 종합적으로 활용하여 상황을 설명 - 회사모형", "조직화된 무정부상태에서의 정책 결정 형태 설명에 적합 - 앨리슨모형", "환경에 대한 적응을 위한 조직의 학습활동을 강조 – 쓰레기통모형"], "ans": 0, "exp": "② 상호 배타적인 세 모형을 종합적으로 활용하여 상황을 설명하는 것은 앨리슨모형이다. ③ 조직화된 무정부상태에서의 정책 결정 형태 설명에 적합한 것은 쓰레기통모형이다. ④ 환경에 대한 적응을 위한 조직의 학습활동을 강조하는 것은 회사모형이다.", "no": 6}, {"text": "사회복지정책의 거시적 결정모형 중 환경의 변화 및 인간의 선택이 정부 정책결정기구에 대해 갖는 영향을 강조하는 것은?", "passage": "", "plabel": "", "opts": ["체계 이론", "엘리트 이론", "신제도 이론", "공공선택 이론"], "ans": 2, "exp": "① 체계 이론은 정책결정기구가 전체 환경 속에서 투입(요구·지지)을 받아 정책을 산출하는 전환기능을 수행함을 강조한다. ② 엘리트 이론은 정책 내용에 엘리트의 가치관·개인적 선호가 반영됨을 강조한다. ④ 공공선택 이론은 경제학적 기본 틀, 즉 자유경쟁시장의 가격결정모형을 정책 결정 과정에 대한 설명에 도입하려는 일련의 이론과 분석경향을 말한다.", "no": 7}, {"text": "사회복지정책 집행 연구의 접근방법에 대한 설명으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["상향식 접근은 일선 집행자에서 출발한 실제 정책 집행의 내용을 분석한다.", "상향식 접근은 전방향적 접근이라고도 하며, 반대자들의 전략에 무관심하다.", "하향식 접근은 정책순응분석을 통해 정책 내용의 수정·보완을 시도한다.", "하향식 접근은 목표의 달성 정도 및 정책 의도와의 일치 여부를 분석한다."], "ans": 1, "exp": "사회복지정책 집행 연구의 접근방법 중 상향식 접근방법은 후방향적 접근으로도 불린다. 정책이 결정된 후 집행 단계로 들어가는 것이 일반적인데, 상향식 접근은 오히려 일선(street-level) 집행자에서 출발하여 실질적인 정책 내용이 결정된다는 점을 강조하기 때문이다. 반대자들의 전략에 무관심한 것은 하향식 접근방법, 즉, 전방향적 접근이다.", "no": 8}, {"text": "사회복지정책 평가의 유형 중 평가 시기에 따른 분류에 해당하는 것은?", "passage": "", "plabel": "", "opts": ["정책영향평가", "과정평가", "형성평가", "메타평가"], "ans": 2, "exp": "사회복지정책 평가의 유형을 평가 시기에 따라 분류하면 총괄평가와 형성평가로 나뉜다. 총괄평가는 정책 집행 이후의 최종적 영향을 평가하는 것이며, 형성평가는 사업의 초기 또는 집행도중에 수정·보완하기 위한 평가를 말한다.", "no": 9}, {"text": "사회복지정책 평가의 타당성 관련 핵심 개념과 그에 대한 설명이 적절히 연결된 것은?", "passage": "", "plabel": "", "opts": ["내적 타당성 - 특정 프로그램의 대상 집단이 보여 주는 실질적인 참여 정도", "바이어스(bias) - 효과와 처리(즉, 사회복지정책) 간의 인과관계 증명", "커버리지(coverage) - 애초에 의도한 대상 집단이 아닌 기타 집단의 참여 정도", "경쟁적 설명 요인 - 평가 타당성을 저해하는 허위변수, 혼란변수 등"], "ans": 3, "exp": "① 내적 타당성이란 효과와 처리(사회복지정책) 간의 인과관계 증명을 말한다. ② 바이어스란 애초에 의도한 대상 집단 아닌 기타 집단의 참여 정도를 말한다. ③ 커버리지는 특정 프로그램의 대상 집단이 보여 주는 실질적인 참여 정도를 의미한다.", "no": 10}]}, {"n": 8, "t": "사회복지정책의 재원 및 경제적 효과", "qs": [{"text": "사회복지정책 수행을 위한 재원의 성격이 나머지 셋과 다른 하나는?", "passage": "", "plabel": "", "opts": ["조세지출", "사회보험료", "사용자 부담", "정부 일반예산"], "ans": 2, "exp": "사회복지 정책 수행을 위한 재원은 크게 공공부문 사회복지정책 재원과 민간부문 사회복지정책 재원으로 나뉜다. 공공부문 사회복지정책 재원에는 정부 일반예산, 사회 보장성 조세(사회보험료), 조세지출이 있고, 민간부문 사회복지정책 재원에는 사용자 부담, 자발적 기여, 기업복지, 비공식부문 복지 재원이 있다.", "no": 11}, {"text": "사회복지정책 재원 중 사용자 부담의 장단점에 대한 설명으로 적절하다고 할 수 없는 것은?", "passage": "", "plabel": "", "opts": ["수혜에 따른 치욕감의 감소 및 자기존중 의식의 향상에 기여한다.", "소득계층에 따라 발생할 수 있는 역진적 부담 방지에 효과적이다.", "사회복지정책을 위한 과대한 정부 부담의 한계 극복에 유용하다.", "불요불급한 사회복지서비스의 남용 방지에 효과적이다."], "ans": 1, "exp": "사용자 부담은 사회복지 재화·서비스 사용료의 일부분을 수급자에게 부담시키는 것이다. 이는 일종의 강요된 부담으로서, 저소득계층에는 역진적일 수 있고 주어진 부담이 가혹할 수도 있다. 따라서 소득계층별 차등부담제를 통해 본인 부담 정도를 조절할 필요가 있다.", "no": 12}, {"text": "민간부문 사회복지 재원의 유형별 특성에 관한 설명으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["자발적 기여는 국가 주도 복지정책 발전 이후부터 중요성이 증가하였다.", "사용자 부담은 도덕적 해이 문제 해결 및 자기존중 의식 제고에 기여한다.", "기업복지는 산업재해 대책과 결부되어 민간 재원의 차원을 넘어 중시된다.", "비공식부분은 사회문화적 측면에서 질 높은 비물질적 서비스 제공을 가능하게 한다."], "ans": 0, "exp": "자발적 기여는 국가 주도의 복지정책이 발전하기 이전 시대에 특히 그 중요성이 컸던 민간부문 사회복지 재원이다. 복지국가 발전 이후에 그 중요성이 다소 감소되었으나 국가복지가 적극적으로 개입하기 어려운 영역에서는 여전히 중요한 재원으로 남아 있다.", "no": 13}, {"text": "사회복지정책이 가진 소득재분배 기능의 유형과 내용 및 사례가 올바르게 짝지어지지 않은 것은?", "passage": "", "plabel": "", "opts": ["수평적 재분배 - 동일 소득계층 내에서 재분배 - 건강보험", "단기적 재분배 - 현재의 재원으로 재분배 - 공공부조", "세대 간 재분배 - 후손 세대에서 앞 세대로 재분배 - 적립방식 국민연금", "장기적 재분배 - 생애(세대)에 걸친 재분배 – 국민연금"], "ans": 2, "exp": "적립방식 연금은 자신이 적립한 금액에 상응한 만큼을 노후에 연금으로 받는 것이므로 동일 세대 내에서 현재와 미래 간 부의 재분배 효과를 가진다. 후손 세대에서 앞 세대로 부의 재분배가 이루어지는 세대 간 재분배 효과는 부과방식 연금에서 나타난다.", "no": 14}, {"text": "사회복지정책의 경제적 효과에 관한 일반적 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["근로장려세제는 모든 소득계층의 근로의욕 감소를 유발할 수 있다.", "적립방식 국민연금의 경우 인플레이션을 촉발시킬 수 있다.", "사회복지정책이 가치재 공급 기능을 하는 대표적인 예는 실업급여제도이다.", "부과방식 국민연금의 경우 개인저축을 증가시킬 수 있다."], "ans": 0, "exp": "이 문제의 함정은 '일반적 설명'이라는 부분이다. ② 적립방식 국민연금은 장기와 단기에 따라 인플레이션 억제 및 촉발 효과가 모두 가능하다. ③ 사회복지정책이 가치재 공급 기능을 하는 대표적인 예는 공공임대주택이다. ④ 부과방식 국민연금도 경우에 따라 개인저축의 증가 및 감소가 모두 가능하다.", "no": 15}]}, {"n": 9, "t": "사회복지정책의 설계: 할당 및 급여", "qs": [{"text": "수혜자 선정의 기본원칙에 대한 설명으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["선택주의(선별주의)를 통해 예방적 치료가 가능하므로 장기적으로 보면 경제적 효과가 크다.", "선택주의(선별주의)는 도움이 절실한 사람에게 집중하여 평등 실현에 기여한다.", "보편주의는 사회적 낙인감을 최소화하며 잔여적 관점과 일치한다.", "보편주의는 자원의 유한성 및 도덕적 해이 문제 해결에 유리하다."], "ans": 1, "exp": "① 예방적 치료가 가능하여 장기적인 경제성 획득이 가능한 것은 보편주의이다. ③ 사회적 낙인감을 최소화하는 것은 보편주의지만, 잔여적 관점과 일치하는 것은 선택주의(선별주의)이다. ④ 자원의 유한성 및 도덕적 해이 문제 해결에 유리한 것은 선택주의(선별주의)이다.", "no": 16}, {"text": "사회복지 수혜의 자격조건 중 주로 사회복지제도가 충분히 발달하지 않은 국가에서 많이 이용하며 객관적 조건에 추가하는 것은?", "passage": "", "plabel": "", "opts": ["전문적·행정적 판단", "소득 및 자산조사", "사회에 대한 기여 여부", "거주 여부·거주기간"], "ans": 0, "exp": "사회복지 수급을 위한 자격조건의 하나인 기여에는 직접적 기여, 즉 보험료 납부 외에 국가와 사회에 대한 사회적·경제적 기여, 즉 헌신과 공적도 포함된다. 거주 여부·거주기간은 복지정책수혜의 자격조건 중 가장 기본적인 것이다.", "no": 17}, {"text": "사회복지 수혜의 자격조건 중 거의 모든 나라의 공공부조에서 개별적 자격판단의 기준으로 사용하는 것은?", "passage": "", "plabel": "", "opts": ["소득 및 자산조사", "전문적·행정적 판단", "인구학적 조건", "거주 여부·거주기간"], "ans": 0, "exp": "소득조사와 자산조사 중에서 복지 선진국들은 경제적 능력 판단에서 자산보다 현재 소득 수준을 더 강조하는 반면, 대부분의 복지 후진국은 자산과 소득 기준을 모두 만족해야 급여를 제공하는 경향이 있다. 인구학적 조건이란 거주요건에 추가된 연령, 성별, 특정 인종 등 인구 구성적요소를 말한다. 65세 이상의 노인에게 연금을 지급하거나, 아동 양육 가구에 아동수당을 지급하는 경우가 이에 해당한다. 인구학적 조건 중 가장 중요한 것은 나이이다.", "no": 18}, {"text": "사회복지 급여 형태와 그 특성에 대한 설명이 적절히 연결된 것은?", "passage": "", "plabel": "", "opts": ["현물급여 - 소비자주권 및 인간존엄성을 유지하는 데 우월하다.", "정책 참여 - 기득권자의 이익 독점 관행 합리화 수단으로 악용 가능하다.", "현금급여 - 수혜자의 소비행위를 통제할 수 있으나 운영경비가 과다 지출될 수 있다.", "증서·상환권-공급자 간 경쟁을 유발시켜 서비스 질 향상이 가능하다."], "ans": 3, "exp": "① 현물급여는 수혜자의 소비행위를 통제할 수 있으나 운영경비가 과다하다는 단점이 있다. ② 정책 참여란 관련 주민들의 의견·이해관계를 정책 결정 과정에 반영할 수 있는 기회를 제공하는 급여 형태이다. ③ 현금급여는 소비자주권 및 인간존엄성을 유지시키는 데 우월한 급여 형태이다.", "no": 19}, {"text": "사회복지 급여의 형태 중 상황에 맞게 응용이 가능하지만 기득권자의 이익 독점 관행을 합리화하기 위한 수단으로 악용될 가능성이 높은 것은?", "passage": "", "plabel": "", "opts": ["증서·상환권", "정책 과정에 대한 참여 및 권력", "현물급여", "사회적 특혜 및 기회"], "ans": 3, "exp": "사회적 특혜 및 기회는 사회의 불이익집단(소수인종·여성·노인·장애인 등)에 진학·취업·진급 등에서 유리한 지위(우선 선발권)를 제공하는 것으로, 정형화된 형태가 없어 명백하게 규정하기 어렵지만 상황에 맞게 응용이 가능하다는 이점이 있다. 증서·상환권은 현금급여와 현물급여의 장단점을 모두 고려한 제3의 급여 형태로서, 일정한 용도 내에서 수급자가 원하는 재화나 서비스를 선택하는 방법이다. 대표적인 예로 미국의 식품증서(SNAP)와 교육증서(School Choice)가있다.", "no": 20}]}, {"n": 10, "t": "사회적 위험과 사회보장", "qs": [{"text": "베버리지(W. Beveridge)의 사회적 위험이 아닌 것은?", "passage": "", "plabel": "", "opts": ["사망", "결핍", "무지", "나태"], "ans": 0, "exp": "베버리지의 다섯 가지 사회적 위험은 궁핍(결핍, 빈곤), 질병, 무지, 불결, 나태이다.", "no": 21}, {"text": "사회적 위험에 대한 사회복지의 대응으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["사회적 위험에 대한 공적인 대응이 사회복지이다.", "위기와 재난에는 누구도 배제되지 않아야 한다.", "관점에 따라 사회적 위험에 대한 대응이 달라진다.", "위험은 사회적이지만 대응은 개인적으로 하는 것이 바람직하다."], "ans": 3, "exp": "사회적 위험에 대한 대응은 공적인 대응, 즉 국가와 사회가 하는 것이 바람직하다.", "no": 22}, {"text": "사회보장에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["사회임금이 높을수록 사회보장의 수준이 높을 가능성이 있다.", "사회복지, 사회정책 등의 사회보장 관련 개념들은 모든 나라에서 동일하게 적용되지 않는다.", "사회보장제도는 국가에서만 운영한다.", "사회보장은 사회적 위험에 대한 대응이고, 그 내용과 방향은 국가마다 차이가 있다."], "ans": 2, "exp": "사회보장제도는 국가가 중심이 되지만 그 외에 민간기관 등이 운영의 주체가 되기도 한다.", "no": 23}, {"text": "복지 재원과 관련된 설명으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["서비스를 전달하기 위해서는 재원이 필요하다.", "재원 확대와 정치는 상관이 없다.", "재원 확대를 위해서는 단계적 전략이 필요하다.", "중앙정부와 지방정부의 재원 역할분담도 고려해야 한다."], "ans": 1, "exp": "재원확대 방안을 마련하고 합의하는 과정은 기본적으로 대화와 타협, 그리고 선택과 결정을 하는 정치적인 과정이다.", "no": 24}]}, {"n": 11, "t": "빈곤과 사회보장", "qs": [{"text": "빈곤을 바라보는 관점에 대한 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["인보관 운동과 자선조직협회는 빈곤에 대한 동일한 관점을 가지고 있다.", "빈곤에 대한 정책은 모든 국가가 동일하다.", "'가난은 나라의 책임이다'라는 관점에서 보면 가난의 원인은 환경과 구조이다.", "빈곤을 운명으로 보는 태도는 사회민주주의에서 나타난다."], "ans": 2, "exp": "① 인보관운동과 자선조직협회는 빈곤에 대한 다른 관점을 가지고 있으므로 다른 실천을하였다. ② 빈곤에 대한 정책은 빈곤을 바라보는 관점에 따라 국가마다 상이하게 나타난다. ④ 빈곤을 운명으로 보는 태도는 자유주의에서 나타난다.", "no": 25}, {"text": "빈곤 개념에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["상대적 빈곤은 비싼 자동차를 타는 사람과 비교하여 값이 싼 자동차를 타는 사람이 위축될 때 사용하는 개념이다.", "절대적 빈곤 개념은 세끼를 먹어야 하는데 한 끼밖에 먹지 못할 때 사용한다.", "일반적으로 빈곤은 생존을 위해 필요한 최소한의 기본적 욕구가 충족되지 않은 상태를 말한다.", "'보릿고개'를 설명할 때는 상대적 빈곤 개념이 적합하다."], "ans": 3, "exp": "절대적 빈곤은 생물학적으로 생존에 위협을 받는 정도의 빈곤을 의미한다면, 상대적 빈곤은 비교에 따른 격차를 의미한다. 한국의 보릿고개는 절대적 빈곤을 상징한다.", "no": 26}, {"text": "공공부조에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["모든 국민의 최저생활을 보장하는 기능을 한다.", "자산조사를 실시한다.", "소득불평등 완화를 위한 소득재분배 기능은 없다.", "사후적인 빈곤 대책의 성격을 가진다."], "ans": 2, "exp": "공공부조는 세금을 통해 소득인정액이 최저 보장 수준 이하인 자에게 급여를 제공하는 제도이므로 소득재분배 기능을 가지고 있다.", "no": 27}, {"text": "국민기초생활보장제도에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["빈곤 대응에 문제점이 없는 제도이다.", "2014년 「국민기초생활 보장법」 개정을 통해 맞춤형 개별급여 체제로 개편되었다.", "사각지대 해소의 이슈가 있다.", "부양의무제가 단계적으로 폐지되고 있다."], "ans": 0, "exp": "국민기초생활보장제도는 빈곤 대응을 위한 국가적인 기능을 하고 있지만, 사각지대 및 낙인감 등의 한계도 가지고 있다.", "no": 28}]}, {"n": 12, "t": "사회보험", "qs": [{"text": "민간보험과 사회보험에 대한 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["민간보험과 사회보험의 공통점은 전혀 없다.", "민간보험은 개인이 보험료를 내는 반면에 사회보험은 정부가 전액 부담한다.", "민간보험 가입은 강제적인 경우가 많지만 사회보험은 능력의 원칙에 따른다.", "민간보험은 영리가 주목적이라면 사회보험은 기본적으로 연대의 정신에 기반을 둔다."], "ans": 3, "exp": "민간보험과 사회보험의 차이는 영리추구 여부, 강제가입 여부, 가입 대상에 있다. 민간보험이 사적인 이익을 추구하는 반면 사회보험은 공적인 이익을 추구한다. 또한 민간보험은 개인이 자발적으로 가입하는 것이지만, 사회보험은 전 국민의 강제적 가입이라는 특징을 가진다.", "no": 29}, {"text": "고용보험에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["고용보험은 실업에 대한 보호적 성격을 가진다.", "실업보험과 고용안정사업을 운영하고 있다.", "고용보험의 사각지대는 존재하지 않는다.", "한국의 「고용보험법」은 1993년 제정되었다."], "ans": 2, "exp": "고용보험은 현재 적용 대상 노동자 범위를 넓혀 가고 있지만 여전히 고용보험 가입 대상이 되지 않는 사각지대가 존재한다.", "no": 30}, {"text": "산업재해와 산재보험에 대한 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["산업재해는 모두 개인의 책임이다.", "산재보험은 사회보험제도 중에서 가장 늦게 도입되었다.", "산재보험 보험료는 근로자와 사업주가 반반 부담한다.", "산업혁명 이후 산업재해가 증가하면서 산업재해가 새로운 사회문제로 등장하였다."], "ans": 3, "exp": "① 모든 책임이 개인에게 있는 것은 아니다. ② 산업재해보상보험은 사회보험제도 중에서 처음으로 도입된 제도이다. ③ 보험료는 사업주가 전액 부담한다.", "no": 31}, {"text": "노인장기요양보험에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["5대 사회보험 중 가장 늦게 도입되었다.", "가족구조의 변화와는 무관하다.", "돌봄의 사회화 경향과 관련이 있다.", "건강보험제도와 별도로 운영한다."], "ans": 1, "exp": "노인장기요양보험제도는 고령화사회 및 여성의 경제활동 참여 확대로 인한 기존 돌봄 체계변화 등 가족구조의 변화와 밀접한 관련이 있다.", "no": 32}]}, {"n": 13, "t": "사회서비스", "qs": [{"text": "사회서비스 대상에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["노인을 돌봄의 대상에서 돌봄의 주체로 보는 인식이 필요하다.", "청소년은 현존하는 시민은 아니므로 소극적 사회서비스 제공이 필요하다.", "장애인복지는 장애인의 존엄과 권리를 위해 노력하는 것이다.", "아동 대상 사회서비스에 대한 관심과 비중이 높은 편이다."], "ans": 1, "exp": "청소년은 현존하는 시민이다. 이에 청소년이 누려야 하는 시민권이 충분히 보장되는 사회서비스 제공이 필요하다.", "no": 33}, {"text": "길버트와 테렐(Gilbert & Terrell)이 제시한 사회서비스 전달체계 원칙으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["지속성", "독립성", "접근성", "책임성"], "ans": 1, "exp": "길버트와 테렐(Gilbert & Terrell)이 제시한 사회서비스 전달체계 원칙은 통합성, 지속성, 접근성, 책임성 등이다.", "no": 34}, {"text": "사회서비스 전달체계에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["토인비 홀은 제도적 복지를 지향했던 사회서비스 전달체계의 모습이다.", "사회복지기관은 사회서비스 전달체계의 하나이다.", "사회서비스는 바우처로만 이용할 수 있다.", "사회서비스가 최종적으로 시민들에게 이르는 구조와 과정을 의미한다."], "ans": 2, "exp": "사회서비스는 현물급여, 현금급여, 바우처 등의 형태로 전달된다.", "no": 35}, {"text": "한국 사회서비스 특성에 대한 설명으로 적절하지 않은 것은?", "passage": "", "plabel": "", "opts": ["대상 중심이다.", "시설 중심, 기관 중심이다.", "예방적 서비스로 구성되어 있다.", "단기적 사업 중심이다."], "ans": 2, "exp": "한국 사회서비스는 예방적 서비스라기보다는 문제가 있고 도움이 필요한 경우에 제공되는 사후 구호적 경향이 더 크다.", "no": 36}]}, {"n": 14, "t": "사회복지정책의 역사, 현황과 쟁점", "qs": [{"text": "한국 사회복지정책 역사에서 나타난 주요한 이념이 아닌 것은?", "passage": "", "plabel": "", "opts": ["발전주의", "반공주의", "사회민주주의", "가족주의"], "ans": 2, "exp": "한국은 사회민주주의 이념을 바탕으로 사회복지정책을 집행하지 않았다.", "no": 37}, {"text": "1998년 이후 한국 사회복지정책 흐름에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["공공복지를 통해 모든 불평등이 사라졌다.", "성장과 일을 통한 복지라는 이념이 지속적으로 기반이 되고 있다.", "사회보장제도의 보편성이 확대되었다.", "공공복지의 양적 지출이 확대되었다."], "ans": 0, "exp": "공공복지가 확장되었으나 소득 등의 불평등은 해소되지 않았다.", "no": 38}, {"text": "한국 복지국가의 특성에 대한 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["한국 복지국가는 북유럽의 복지국가 유형과 유사하다.", "한국은 보편주의 복지를 기조로 삼고 있다.", "한국 복지체제는 사회경제의 변화에 대응하는 복지정책이 제도화되지 못한 한계가 있다.", "한국 복지를 추동한 세력은 노동자이다."], "ans": 2, "exp": "한국 복지국가는 잔여주의 이념을 기반으로 하므로 사회민주주의 이념의 정책을 가진 북유럽 복지국가 유형과는 상이하다. 한국 복지는 노사정의 파트너십보다는 정부 주도로 추진되어 왔다.", "no": 39}, {"text": "민영화에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["민영화는 정부의 역할을 줄이고 민간의 역할을 증대시키려는 것이다.", "민영화가 논의되는 중요한 이유 중 하나는 비용문제 때문이다.", "민영화 반대 의견에는 형평성 또는 공평성의 이념문제가 있다.", "민영화에 대해서는 모든 국민이 동의한다."], "ans": 3, "exp": "민영화논의에 대해서는 재정, 이념 등의 측면에서 찬성론자와 반대론자의 논리가 상충되고 있다.", "no": 40}]}, {"n": 15, "t": "사회복지정책 실천과 사회운동", "qs": [{"text": "한국의 사회복지운동에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["한국에서 사회복지정책 결정은 오랫동안 주로 행정부의 일이었다.", "사회복지운동에 당사자 운동은 없다.", "사회권 확보를 위한 운동을 전개해 왔다.", "2010년 지방선거의 무상급식 논쟁은 사회복지운동에 더 많은 관심을 가지게하는 계기가 되었다."], "ans": 1, "exp": "사회복지운동에는 시민, 노인, 장애인 등 사회복지를 받을 권리를 가진 당사자 운동이 이루어지고 있다.", "no": 41}, {"text": "사회복지정책 실천의 주체로 보기에 가장 거리가 먼 것은?", "passage": "", "plabel": "", "opts": ["노동운동", "시민운동", "세대운동", "환경운동"], "ans": 3, "exp": "사회복지정책 실천의 주체로 노동운동, 시민운동, 세대운동 등을 들 수 있다. 환경운동은 연관은 있으나 직접적인 사회복지정책 실천운동의 주체로는 거리가 멀다.", "no": 42}, {"text": "노동운동에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["노동자들에게 사회복지는 사회적 임금의 확대라고 볼 수 있다.", "서유럽의 복지국가를 형성한 주요 세력은 노동조합이다.", "최근 사회복지사와 사회서비스 노동자가 노동조합으로 조직화 되는 경향이 확대되고 있다.", "한국의 노동운동은 2010년 이후 복지국가 논쟁의 중심에 있었다."], "ans": 3, "exp": "한국의 노동운동이 사회복지에 영향을 미친 부분이 있으나, 2010년 이후 복지국가 논쟁의 주도권이 시민운동 및 당사자운동 등으로 넘어간 경향이 크다.", "no": 43}, {"text": "향후 사회복지정책 실천의 방향성에 대한 설명으로 옳지 않은 것은?", "passage": "", "plabel": "", "opts": ["사회복지운동조직 간 연대가 필요하다.", "정책 평론에서 가장 중요한 것은 특정한 개인의 입장을 고려하는 것이다.", "시민의 능동적 정치참여를 이끌어 낼 일상적 사회복지정책 이슈 제시가 필요하다.", "프락시스(praxis)에 기반한 사회복지사의 실천과 역할이 무엇보다도 중요하다."], "ans": 1, "exp": "정책 평론에서 중요한 것은 어떤 특정한 사람의 입장 또는 이익이 아니라 사회와 공동체 또는 우리의 입장에서 세상을 바라보는 것이다.", "no": 44}]}];
+const CIRC = ['①','②','③','④'];
+const KEY = 'policy-wb-new-2026-v1', TKEY = 'policy-wb-theme';
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const all = []; const byNo = {};
+DATA.forEach(L => L.qs.forEach(q => { q.lec = L.n; all.push(q); byNo[q.no] = q; }));
+
+// 상태
+let S = {ans:{}, graded:false, sid:'', name:''};
+try{ const o = JSON.parse(store.get(KEY) || '{}') || {}; S.ans = o.ans || {}; S.graded = !!o.graded; S.sid = o.sid || ''; S.name = o.name || ''; }catch(e){}
+const save = () => store.set(KEY, JSON.stringify(S));
+
+/* 테마 */
+function curTheme(){ return document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+function paintThemeBtn(){ $('#themeBtn').textContent = curTheme() === 'dark' ? '라이트' : '다크'; }
+(function(){ const t = store.get(TKEY); if(t) document.documentElement.setAttribute('data-theme', t); paintThemeBtn(); })();
+$('#themeBtn').onclick = () => { const n = curTheme() === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', n); store.set(TKEY, n); paintThemeBtn(); };
+
+/* 바로가기 */
+const sel = $('#scope');
+sel.innerHTML = `<option value="">강의 선택</option>` +
+  DATA.map(L => `<option value="lec${L.n}">${L.n}강 · ${esc(L.t)} (${L.qs[0].no}~${L.qs[L.qs.length-1].no}번)</option>`).join('') +
+  `<option value="answers">정답 및 해설</option>`;
+sel.onchange = () => { const id = sel.value; if(id){ go(id); } sel.value = ''; };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 10;
+  window.scrollTo({top: Math.max(0, y), behavior: 'auto'});
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1); if(!document.getElementById(id)) return;
+  e.preventDefault(); go(id);
+});
+
+/* 렌더링 (한 번) */
+function build(){
+  $('#iTotal').textContent = all.length;
+  let html = '', last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      html += `<div class="lh" id="lec${L.n}">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    html += `<div class="q" id="q${q.no}">` +
+      `<p class="qt"><span class="no">${q.no}.</span>${esc(q.text)}</p>` +
+      (q.passage ? `<div class="box"><span class="lb">&lt;${q.plabel === '보기' ? '보 기' : q.plabel === '사례' ? '사 례' : '자 료'}&gt;</span>${esc(q.passage)}</div>` : '') +
+      `<ul class="ops">` + q.opts.map((o,i) => `<li><button class="op" data-no="${q.no}" data-i="${i}"><span class="c">${i+1}</span><span class="tx">${esc(o)}</span></button></li>`).join('') + `</ul>` +
+      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사례관리론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : '') +
+      `</div>`;
+  });
+  $('#qs').innerHTML = html;
+
+  // 정답 및 해설 챕터
+  const rows = [];
+  for(let i = 0; i < all.length; i += 10) rows.push(all.slice(i, i + 10));
+  let a = `<div class="ch-h"><span class="ch-t">정답 및 해설</span><span class="ch-s">1~${all.length}번</span></div>` +
+    `<div class="keyw"><table class="keyt" id="keyt"><tbody>` +
+    rows.map(r => `<tr class="kn">${r.map(q => `<th><a href="#a${q.no}">${q.no}</a></th>`).join('')}</tr><tr class="kv">${r.map(q => `<td id="k${q.no}">${CIRC[q.ans]}</td>`).join('')}</tr>`).join('') +
+    `</tbody></table></div><div class="alist">`;
+  last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      a += `<div class="lh">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사례관리론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 ↗</a>` : ''}</p>` +
+      `<p class="ax">${esc(q.exp)}</p></div>`;
+  });
+  a += `</div>`;
+  $('#answers').innerHTML = a;
+
+  $('#omrBody').innerHTML = all.map(q => `<div class="orow" id="o${q.no}"><button class="n" data-jump="${q.no}" title="${q.no}번으로 이동">${q.no}</button>` +
+    [0,1,2,3].map(i => `<button class="bub" data-no="${q.no}" data-i="${i}" aria-label="${q.no}번 ${i+1}번 표기">${i+1}</button>`).join('') + `</div>`).join('');
+}
+
+function paint(){
+  const g = S.graded;
+  all.forEach(q => {
+    const a = S.ans[q.no], card = $('#q' + q.no), row = $('#o' + q.no);
+    card.classList.toggle('graded', g);
+    card.classList.remove('res-o','res-x');
+    card.querySelectorAll('.nores').forEach(e => e.remove());
+    card.querySelectorAll('.op').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.classList.toggle('wrong', g && a === i && i !== q.ans);
+      b.disabled = g;
+      b.setAttribute('aria-pressed', String(a === i));
+    });
+    row.classList.remove('ok','ng');
+    row.querySelectorAll('.bub').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.disabled = g;
+    });
+    const m = $('#m' + q.no), k = $('#k' + q.no), ai = $('#a' + q.no);
+    ai.classList.remove('ok','ng'); k.classList.remove('ng');
+    if(g){
+      if(a === undefined){ card.querySelector('.qt').insertAdjacentHTML('beforeend','<span class="nores">미응답</span>'); card.classList.add('res-x'); row.classList.add('ng'); m.textContent = '내 답 없음'; ai.classList.add('ng'); k.classList.add('ng'); }
+      else if(a === q.ans){ card.classList.add('res-o'); row.classList.add('ok'); m.textContent = `내 답 ${CIRC[a]} ○`; ai.classList.add('ok'); }
+      else { card.classList.add('res-x'); row.classList.add('ng'); m.textContent = `내 답 ${CIRC[a]} ✕`; ai.classList.add('ng'); k.classList.add('ng'); }
+    } else m.textContent = '';
+  });
+  const done = all.filter(q => S.ans[q.no] !== undefined).length;
+  $('#cnt').textContent = `${done}/${all.length}`;
+  $('#cntPct').textContent = Math.round(done / all.length * 100) + '%';
+  $('#progI').style.width = (done / all.length * 100) + '%';
+  disarm();
+  $('#submitBtn').textContent = g ? '채점 결과' : '제출·채점';
+  const wn = g ? wrongList().length : 0, rb = $('#retryBtn');
+  rb.hidden = !wn; rb.textContent = `오답만 다시 (${wn})`;
+  resetDisarm();
+  $('#sid').value = S.sid || ''; $('#sname').value = S.name || '';
+  report();
+}
+
+function wrongList(){ return all.filter(q => S.ans[q.no] !== q.ans); }
+
+function report(){
+  const r = $('#report');
+  if(!S.graded){ r.hidden = true; r.innerHTML = ''; return; }
+  const ok = all.length - wrongList().length;
+  const wrong = wrongList();
+  const sc = Math.round(ok / all.length * 1000) / 10;
+  const lecs = DATA.map(L => {
+    const lo = L.qs.filter(q => S.ans[q.no] === q.ans).length;
+    return `<a href="#lec${L.n}" class="${lo < L.qs.length ? 'bad' : ''}">${L.n}강<b>${lo}/${L.qs.length}</b></a>`;
+  }).join('');
+  r.innerHTML = `<div class="score"><span class="v">${sc}</span><span class="u">점</span><span class="s">${ok}/${all.length}문항 정답</span></div>` +
+    `<div class="rep-r"><div class="lecs">${lecs}</div><div class="rep-btns">` +
+    (wrong.length ? `<button class="b main" id="retryWrong">틀린 ${wrong.length}문항 다시 풀기</button><button class="b" id="goWrong">첫 오답으로 이동</button>` : '<strong>모두 맞혔습니다.</strong>') +
+    `<button class="b ghost" id="goAns">정답 및 해설 보기</button><button class="b ghost" id="again">처음부터 다시</button></div></div>`;
+  r.hidden = false;
+  const rw = $('#retryWrong');
+  if(rw) rw.onclick = retryWrong;
+  const gw = $('#goWrong'); if(gw) gw.onclick = () => go('q' + wrong[0].no);
+  $('#goAns').onclick = () => go('answers');
+  $('#again').onclick = restart;
+}
+
+function retryWrong(){
+  const wrong = wrongList(); if(!S.graded || !wrong.length) return;
+  const first = wrong[0].no;
+  wrong.forEach(q => delete S.ans[q.no]); S.graded = false; save(); paint();
+  toast(`틀린 ${wrong.length}문항의 답만 지웠습니다. 맞힌 답은 그대로 둡니다`); go('q' + first);
+}
+$('#retryBtn').onclick = retryWrong;
+
+/* 초기화 (두 번 눌러 확인) */
+let rsT = null;
+function resetDisarm(){ clearTimeout(rsT); rsT = null; const b = $('#resetBtn'); b.classList.remove('warn'); b.textContent = '초기화'; }
+$('#resetBtn').onclick = () => {
+  const b = $('#resetBtn');
+  if(!Object.keys(S.ans).length && !S.graded){ toast('지울 답안이 없습니다'); return; }
+  if(!b.classList.contains('warn')){
+    b.classList.add('warn'); b.textContent = '한 번 더 누르면 모두 지움';
+    clearTimeout(rsT); rsT = setTimeout(resetDisarm, 4000);
+    return;
+  }
+  restart();
+};
+
+function restart(){ S.ans = {}; S.graded = false; save(); paint(); window.scrollTo({top:0}); toast('답안을 모두 지웠습니다'); }
+
+/* 답 표기 */
+function mark(no, i){
+  if(S.graded) return;
+  no = +no; i = +i;
+  if(S.ans[no] === i) delete S.ans[no]; else S.ans[no] = i;
+  save(); paint();
+}
+$('#qs').addEventListener('click', e => { const b = e.target.closest('.op'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i); });
+$('#omrBody').addEventListener('click', e => {
+  const j = e.target.closest('[data-jump]');
+  if(j){ closeOmr(); go('q' + j.dataset.jump); return; }
+  const b = e.target.closest('.bub'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i);
+});
+
+/* 제출 */
+let armT = null;
+function disarm(){ clearTimeout(armT); armT = null; $('#submitBtn').classList.remove('warn'); }
+$('#submitBtn').onclick = () => {
+  const sb = $('#submitBtn');
+  if(S.graded){ go('report'); return; }
+  const left = all.filter(q => S.ans[q.no] === undefined).length;
+  if(left && !sb.classList.contains('warn')){
+    sb.classList.add('warn'); sb.textContent = `미응답 ${left}문항 · 한 번 더 누르면 제출`;
+    clearTimeout(armT); armT = setTimeout(() => { sb.classList.remove('warn'); sb.textContent = '제출·채점'; }, 4000);
+    return;
+  }
+  disarm(); S.graded = true; save(); closeOmr(); paint(); go('report');
+};
+
+/* 학번·성명 */
+$('#sid').oninput = e => { S.sid = e.target.value; save(); };
+$('#sname').oninput = e => { S.name = e.target.value; save(); };
+
+/* OMR 서랍 */
+function openOmr(){ $('#omr').classList.add('open'); $('#scrim').classList.add('on'); $('#omrBtn').setAttribute('aria-expanded','true'); }
+function closeOmr(){ $('#omr').classList.remove('open'); $('#scrim').classList.remove('on'); $('#omrBtn').setAttribute('aria-expanded','false'); }
+$('#omrBtn').onclick = () => $('#omr').classList.contains('open') ? closeOmr() : openOmr();
+$('#omrClose').onclick = closeOmr; $('#scrim').onclick = closeOmr;
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOmr(); });
+
+/* 글자 크기 */
+const ZKEY = 'casemgmt-wb-zoom', ZL = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45, 1.6];
+let zi = ZL.indexOf(parseFloat(store.get(ZKEY)));
+if(zi < 0) zi = 2;
+function setZoom(){
+  document.documentElement.style.setProperty('--zoom', ZL[zi]);
+  $('#fsVal').textContent = Math.round(ZL[zi] * 100) + '%';
+  $('#fsDown').disabled = zi === 0; $('#fsUp').disabled = zi === ZL.length - 1;
+  store.set(ZKEY, String(ZL[zi]));
+}
+$('#fsDown').onclick = () => { if(zi > 0){ zi--; setZoom(); } };
+$('#fsUp').onclick = () => { if(zi < ZL.length - 1){ zi++; setZoom(); } };
+setZoom();
+
+let tt; function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2200); }
+
+build(); paint();
+</script>
+
+</body>
+</html>
