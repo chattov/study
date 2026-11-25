@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="keep-scroll.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>사례관리론 워크북 연습문제</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 레이아웃: 회색 책상 위에 놓인 A4 시험지 한 장. 머리말 표 → 2단 문항 → 끝. 상단에는 얇은 감독 바, 오른쪽에는 OMR 답안지 서랍 */
+:root{
+  --desk:#e6dfcf; --paper:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --rule:#3a3329; --hair:#d6cbb4;
+  --soft:#efe7d5; --mark:#2f2a23; --mark-ink:#f8f3e6;
+  --red:#d0221b; --red-soft:#fdecea; --blue:#1d4fa3; --blue-soft:#e9eff9;
+  --bar:#f3ecdc;
+  --f-q:"Noto Serif KR","Batang","AppleMyungjo",serif;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#101216; --paper:#1b1e23; --ink:#e8e9ec; --sub:#a2a7b0; --rule:#cfd2d8; --hair:#3a3f47;
+  --soft:#242830; --mark:#e8e9ec; --mark-ink:#16181c;
+  --red:#ff6b62; --red-soft:#3a1f1e; --blue:#8fb3f5; --blue-soft:#1f2a3d; --bar:#16181c; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* 감독 바 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bar)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bar);border-bottom:1px solid var(--hair)}
+.bar-in{max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar label{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.bar select{max-width:min(250px,52vw);border:1px solid var(--hair);background:var(--paper);border-radius:6px;padding:4px 8px;font-size:14px}
+.count{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.count small{font-weight:500;color:var(--sub)}
+.prog{flex:1 1 120px;min-width:80px;height:5px;background:var(--hair);border-radius:9px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s}
+.sp{display:flex;gap:6px;margin-left:auto}
+.b{border:1px solid var(--rule);background:var(--paper);border-radius:6px;padding:5px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.b:hover{background:var(--soft)}
+.b.main{background:var(--ink);color:var(--paper)}
+.b.main:hover{opacity:.88}
+.b.warn{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+.b.ghost{border-color:var(--hair);font-weight:500}
+.fs{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:6px;overflow:hidden;background:var(--paper)}
+.fs button{border:0;background:transparent;padding:4px 9px;white-space:nowrap;font-size:14px;font-weight:700;line-height:1.4}
+.fs button:hover:not(:disabled){background:var(--soft)}
+.fs button:disabled{opacity:.35;cursor:default}
+.fs output{min-width:3.2em;text-align:center;font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;border-inline:1px solid var(--hair);padding:5px 2px;line-height:1.4}
+.sheet{zoom:var(--zoom,1)}
+
+/* 시험지 */
+.desk{padding-block:20px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet{max-width:1000px;margin:0 auto;background:var(--paper);border:1px solid var(--hair);box-shadow:0 2px 0 var(--hair),0 10px 30px rgba(0,0,0,.06);padding:34px 40px 48px}
+.ht{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--sub);border-bottom:1px solid var(--rule);padding-bottom:6px}
+.title{text-align:center;margin:18px 0 6px}
+.title .t1{font-family:var(--f-q);font-size:15px;font-weight:600;letter-spacing:.06em}
+.title h1{font-family:var(--f-q);font-weight:900;font-size:34px;letter-spacing:.18em;margin:2px 0 0;text-wrap:balance}
+.title .t2{font-size:13px;color:var(--sub);margin-top:2px}
+.info{width:100%;border-collapse:collapse;margin:16px 0 8px;font-size:14px;table-layout:fixed}
+.info th,.info td{border:1px solid var(--rule);padding:6px 8px;text-align:center}
+.info th{background:var(--soft);font-weight:700;width:12%}
+.info input{width:100%;border:0;background:transparent;text-align:center;padding:2px;min-width:0}
+.info td.num{font-variant-numeric:tabular-nums;font-weight:700}
+.notice{font-size:13px;color:var(--sub);border:1px solid var(--hair);padding:8px 12px;margin:0 0 6px;line-height:1.55}
+.notice b{color:var(--ink)}
+
+/* 성적표 */
+.report{border:2px solid var(--red);margin:14px 0 4px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px 20px;align-items:center}
+.score{font-family:var(--f-q);color:var(--red);text-align:center;line-height:1.1;min-width:120px}
+.score .v{font-size:52px;font-weight:900;font-variant-numeric:tabular-nums}
+.score .u{font-size:16px;font-weight:700}
+.score .s{display:block;font-family:var(--f-ui);font-size:13px;color:var(--sub);margin-top:4px}
+.rep-r{min-width:0}
+.lecs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:4px;margin-bottom:10px}
+.lecs a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--hair);padding:3px 4px;text-align:center;font-size:12px;line-height:1.35;font-variant-numeric:tabular-nums}
+.lecs a b{display:block;font-size:13px}
+.lecs a.bad b{color:var(--red)}
+.rep-btns{display:flex;flex-wrap:wrap;gap:6px}
+
+/* 문항 2단 */
+.qs{column-count:2;column-gap:36px;column-rule:1px solid var(--rule);margin-top:18px}
+.lh{column-span:all;font-family:var(--f-q);font-weight:700;font-size:16px;border-top:2px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:5px 2px;margin:20px 0 14px;display:flex;justify-content:space-between;gap:10px}
+.lh:first-child{margin-top:0}
+.lh span{font-family:var(--f-ui);font-size:12px;font-weight:500;color:var(--sub);white-space:nowrap;align-self:center}
+.q{break-inside:avoid;margin:0 0 22px;position:relative;font-family:var(--f-q);font-size:15.5px;line-height:1.7}
+.qt{margin:0 0 8px;font-weight:600;padding-left:2.1em;text-indent:-2.1em}
+.qt .no{font-weight:900;display:inline-block;min-width:2.1em;text-indent:0}
+.box{border:1px solid var(--rule);padding:14px 12px 8px;margin:4px 0 10px 1.2em;position:relative;white-space:pre-line;font-size:14.5px}
+.box .lb{position:absolute;top:-.8em;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 8px;font-size:13px;font-weight:700;white-space:nowrap}
+.ops{list-style:none;margin:0;padding:0 0 0 1.2em;display:grid;gap:2px}
+.op{width:100%;display:flex;gap:6px;align-items:flex-start;text-align:left;border:0;background:transparent;padding:3px 6px;border-radius:4px;font-family:var(--f-q);font-size:15px;line-height:1.6}
+.op:hover:not(:disabled){background:var(--soft)}
+.op .c{flex:none;width:1.5em;height:1.5em;border:1.5px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--f-ui);font-size:12px;font-weight:700;margin-top:.1em;transition:background .12s,color .12s}
+.op .tx{min-width:0}
+.op.on .c{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+.op.on .tx{font-weight:600}
+.op:disabled{cursor:default}
+/* 채점 표시 */
+.graded .op.key .c{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--red)}
+.graded .op.key .tx{color:var(--red);font-weight:700}
+.graded .op.on.wrong .tx{text-decoration:line-through;text-decoration-color:var(--red)}
+.qt .no{position:relative}
+.res-o .qt .no::after,.res-x .qt .no::after{content:"";position:absolute;left:-.35em;top:50%;width:1.9em;height:1.9em;transform:translateY(-50%);pointer-events:none}
+.res-o .qt .no::after{border:2.5px solid var(--red);border-radius:50%;opacity:.85}
+.res-x .qt .no::after{background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--red) calc(50% - 1.5px),var(--red) calc(50% + 1.5px),transparent calc(50% + 1.5px));opacity:.85;height:2.2em}
+.nores{display:inline-block;text-indent:0;font-family:var(--f-ui);font-size:11px;font-weight:700;color:var(--red);border:1px solid var(--red);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;line-height:1.5}
+.exp{margin:8px 0 0 1.2em;border-left:3px solid var(--red);background:var(--red-soft);padding:7px 10px;font-family:var(--f-ui);font-size:13.5px;line-height:1.6}
+.exp b{color:var(--red);margin-right:4px}
+.tolink{display:inline-block;margin:6px 0 0 1.2em;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none;border-bottom:1px dotted currentColor;line-height:1.3}
+.tolink:hover{color:var(--red)}
+.graded .tolink{color:var(--red);border-bottom-style:solid}
+.answers{margin-top:48px;border-top:3px double var(--rule);padding-top:22px}
+.ch-h{text-align:center;margin-bottom:16px}
+.ch-t{display:block;font-family:var(--f-q);font-weight:900;font-size:26px;letter-spacing:.2em}
+.ch-s{font-size:13px;color:var(--sub)}
+.keyw{overflow-x:auto;margin-bottom:20px}
+.keyt{border-collapse:collapse;width:100%;min-width:420px;table-layout:fixed;font-variant-numeric:tabular-nums}
+.keyt th,.keyt td{border:1px solid var(--rule);text-align:center;padding:3px 2px;font-size:13px}
+.keyt th{background:var(--soft);font-weight:700;font-size:12px}
+.keyt th a{color:inherit;text-decoration:none;display:block}
+.keyt td{font-family:var(--f-q);font-weight:700;font-size:15px}
+.keyt td.ng{color:var(--red);background:var(--red-soft)}
+.alist{column-count:2;column-gap:36px;column-rule:1px solid var(--rule)}
+.ai{break-inside:avoid;margin:0 0 14px;font-size:14px;line-height:1.65}
+.ah{margin:0 0 3px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-family:var(--f-q)}
+.ah b{font-weight:900}
+.ah .key{font-weight:900;color:var(--red)}
+.ah .mine{font-family:var(--f-ui);font-size:12px;font-weight:700;color:var(--sub)}
+.ai.ok .mine{color:var(--blue)}
+.ai.ng .mine{color:var(--red)}
+.ah .back{margin-left:auto;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none}
+.ah .back:hover{color:var(--ink);text-decoration:underline}
+.ax{margin:0;padding-left:1.4em;color:var(--ink)}
+.ai.ng{border-left:3px solid var(--red);padding-left:8px;margin-left:-11px}
+.end{text-align:center;font-family:var(--f-q);font-weight:700;letter-spacing:.3em;margin-top:26px;border-top:1px solid var(--rule);padding-top:12px}
+.empty{text-align:center;color:var(--sub);padding:40px 0;font-size:15px}
+
+/* OMR 답안지 */
+.omr{position:fixed;top:0;right:0;bottom:0;width:min(330px,92vw);background:var(--paper);border-left:2px solid var(--blue);z-index:40;
+  transform:translateX(102%);transition:transform .22s;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.omr.open{transform:none;box-shadow:-10px 0 30px rgba(0,0,0,.15)}
+.omr-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--blue);color:#fff}
+.omr-h strong{font-size:15px;letter-spacing:.08em}
+.omr-h button{border:1px solid rgba(255,255,255,.7);background:transparent;color:#fff;border-radius:5px;padding:2px 10px;font-size:13px}
+:root[data-theme="dark"] .omr-h,:root[data-theme="dark"] .omr-h button{color:#0f1420;border-color:#0f1420}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .omr-h,:root:not([data-theme="light"]) .omr-h button{color:#0f1420;border-color:#0f1420}}
+.omr-b{overflow:auto;padding:10px 12px 20px}
+.orow{display:grid;grid-template-columns:2.6em repeat(4,1fr);align-items:center;gap:4px;padding:2px 0;border-bottom:1px dashed var(--hair);font-variant-numeric:tabular-nums}
+.orow:nth-child(5n){border-bottom:1px solid var(--blue)}
+.orow .n{font-size:12px;font-weight:700;color:var(--blue);text-align:right;padding-right:6px;background:none;border:0}
+.bub{width:22px;height:28px;justify-self:center;border:1.5px solid var(--blue);border-radius:11px;background:transparent;font-size:11px;color:var(--blue);padding:0;font-weight:700}
+.bub.on{background:var(--mark);border-color:var(--mark);color:transparent}
+.orow.ok .n{color:var(--blue)}
+.orow.ng .n{color:var(--red);text-decoration:underline}
+.orow .bub.key{box-shadow:0 0 0 2px var(--red)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:39;display:none}
+.scrim.on{display:block}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);
+  padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+.toast.show{opacity:.95}
+
+@media (max-width:820px){
+  .qs,.alist{column-count:1;column-rule:none}
+  .sheet{padding:22px 16px 36px}
+  .title h1{font-size:26px;letter-spacing:.1em}
+  .info th{width:auto}
+}
+@media (max-width:560px){
+  .info{font-size:13px}
+  .info tr{display:grid;grid-template-columns:auto 1fr auto 1fr}
+  .info th,.info td{display:block;padding:5px 6px;margin:-1px 0 0 -1px}
+  .info th{white-space:nowrap}
+  .report{grid-template-columns:1fr}
+  .prog{order:5;flex-basis:100%}
+  .sp{margin-left:0}
+}
+.tolink.nlink{margin-left:12px;color:var(--blue)}
+.back.nlink{margin-left:10px}
+</style>
+
+</head>
+<body>
+<div class="bar" role="region" aria-label="시험 진행">
+  <div class="bar-in">
+    <label for="scope">바로가기
+      <select id="scope"></select>
+    </label>
+    <span class="count">답안 <span id="cnt">0/0</span> <small id="cntPct"></small></span>
+    <div class="prog" aria-hidden="true"><i id="progI"></i></div>
+    <div class="sp">
+      <div class="fs" role="group" aria-label="글자 크기">
+        <button id="fsDown" title="글자 작게" aria-label="글자 작게">가<small>−</small></button>
+        <output id="fsVal">100%</output>
+        <button id="fsUp" title="글자 크게" aria-label="글자 크게">가<small>+</small></button>
+      </div>
+      <button class="b ghost" id="omrBtn" aria-controls="omr" aria-expanded="false">OMR 답안지</button>
+      <button class="b ghost" id="themeBtn" title="화면 밝기 전환">다크</button>
+      <button class="b ghost" id="resetBtn" title="표기한 답을 모두 지움">초기화</button>
+      <button class="b" id="retryBtn" hidden>오답만 다시</button>
+      <button class="b main" id="submitBtn">제출·채점</button>
+    </div>
+  </div>
+</div>
+
+<main class="desk">
+  <article class="sheet">
+    <div class="ht"><span>2026학년도 2학기 기말시험 대비</span><span>사회복지학과 3학년</span></div>
+    <header class="title">
+      <div class="t1">워 크 북 연 습 문 제</div>
+      <h1>사례관리론</h1>
+      <div class="t2" id="scopeLabel">출제범위 1~15강</div>
+    </header>
+    <table class="info">
+      <tr>
+        <th scope="row">문항 수</th><td class="num" id="iTotal">0</td>
+        <th scope="row">배점</th><td class="num">100점</td>
+        <th scope="row">학번</th><td><input id="sid" aria-label="학번" autocomplete="off"></td>
+        <th scope="row">성명</th><td><input id="sname" aria-label="성명" autocomplete="off"></td>
+      </tr>
+    </table>
+    <p class="notice">※ 각 문항에서 답을 하나 골라 번호를 누르세요. 오른쪽 위 <b>OMR 답안지</b>에서도 표기할 수 있습니다.
+      다 풀었으면 <b>제출·채점</b>을 누르세요. 채점 결과는 문항 번호에 ○, ╱로 표시되고, 정답과 해설은 시험지 맨 뒤 <b>정답 및 해설</b>에 모여 있습니다. 위쪽 <b>바로가기</b>에서 강의를 고르면 그 문항으로 이동합니다. 표기한 답은 이 기기의 브라우저에 저장됩니다.</p>
+    <section id="report" class="report" hidden aria-live="polite"></section>
+    <div class="qs" id="qs"></div>
+    <div class="end">― 문제 끝 ―</div>
+    <section class="answers" id="answers" aria-label="정답 및 해설"></section>
+  </article>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="omr" id="omr" aria-label="OMR 답안지">
+  <div class="omr-h"><strong>답 안 지</strong><button id="omrClose">닫기</button></div>
+  <div class="omr-b" id="omrBody"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DATA = [{"n": 1, "t": "사례관리의 관점", "qs": [{"text": "잔여적 사례관리의 특징으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["문제의 원인을 사회구조의 부적절성에서 찾는다.", "권리 회복과 구조 변화를 핵심 목표로 한다.", "개인의 결핍을 보완하고 환경 적응을 돕는 데 초점을 둔다.", "보편적 복지와 시민 조직화를 중심 전략으로 한다."], "ans": 2, "exp": "잔여적 사례관리는 개인의 기능 회복과 환경 적응을 중심으로 하며, 자원 제공과 서비스 연계를 통해 개인의 결핍을 보완하는 데 초점을 둔다.", "no": 1, "note": "#n=l1~0~%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20%E2%80%94%20%EB%AC%B8"}, {"text": "제도적 사례관리의 특징으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["개인의 부적응을 교정하는 데 주된 목적이 있다.", "사회구조의 변화를 통해 개인의 해방과 사회적 변혁을 도모한다.", "자산 조사와 생활 실태 조사만을 통해 문제를 해결한다.", "선별적 급여와 자선 제공을 중심으로 한다."], "ans": 1, "exp": "제도적 사례관리는 문제의 원인을 사회구조에서 찾고, 구조 변화를 통해 개인의 권리 회복과 사회적 변혁을 추구한다.", "no": 2, "note": "#n=l1~0~%EB%AA%A9%ED%91%9C%20%E2%80%94%20%EB%B6%80%EC%A1%B0%EB%A6%AC"}, {"text": "‘금붕어와 어항의 비유’를 통해 설명하고자 한 내용으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["개인 문제는 언제나 개인 내부 요인만으로 설명할 수 있다.", "사례관리는 개별 치료만 이루어지면 충분하다.", "문제의 원인을 개인에게 둘 것인지, 환경 구조에 둘 것인지에 따라 개입 방식이 달라진다.", "사회구조는 변화할 수 없으므로 개인만 변화해야 한다."], "ans": 2, "exp": "금붕어와 어항의 비유는 문제의 원인을 개인과 환경 구조 중 어디에 두느냐에 따라 개입 수준과 방식이 달라진다는 것이다.", "no": 3, "note": "#n=l1~0~%EC%8B%9C%EC%82%AC%EC%A0%90%20%E2%80%94%20%EB%AC%B8%EC%A0%9C"}, {"text": "‘자선조직협회(COS)’에 대한 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["빈곤의 원인을 구조와 제도에서 찾았다.", "주민과 함께 거주하며 공동체 변화를 추구하였다.", "자선의 중복 방지와 구빈자 조사를 주요 목적으로 하였다.", "사회개혁운동으로 발전하여 인보관운동과 동일한 성격을 지녔다."], "ans": 2, "exp": "자선조직협회는 자선의 중복 방지, 구빈자 조사, 자립 지원을 목적으로 하며 개인 중심의 잔여주의적 사례이다.", "no": 4, "note": "#n=l1~0~%EC%A3%BC%EC%9A%94%20%EB%AA%A9%EC%A0%81%20%E2%91%A0%20"}, {"text": "‘인보관운동(Settlement House Movement)’에 대한 설명으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["빈민을 선별하여 자선을 제공하는 것을 핵심으로 하였다.", "지역 주민과 함께 생활하며 교육 문화활동과 사회개혁을 추구하였다.", "문제의 원인을 개인의 도덕성 결핍에서 찾았다.", "기존 자선 기관의 서비스 조정만을 담당하였다."], "ans": 1, "exp": "인보관운동은 지역사회에 직접 들어가 주민과 함께 생활하며 교육 문화 활동과 사회개혁을 추진한 제도주의적 실천의 대표적 사례이다.", "no": 5, "note": "#n=l1~0~%EC%9D%B8%EB%B3%B4%EA%B4%80%20%EC%9A%B4%EB%8F%99%28S"}]}, {"n": 2, "t": "잔여주의적 사례관리", "qs": [{"text": "개별사회사업의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["간접 개입 중심", "자원 네트워크 관리", "심리 내적 변화 중심", "구조 변화 중심"], "ans": 2, "exp": "개별사회사업은 개인의 심리적 변화에 초점을 둔다.", "no": 6, "note": "#n=l2~0~%EA%B0%9C%EB%B3%84%EC%82%AC%ED%9A%8C%EC%82%AC%EC%97%85%EA%B3%BC%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20%E2%80%94"}, {"text": "사례관리자의 주요 역할은?", "passage": "", "plabel": "", "opts": ["치료자", "관리자 및 조정자", "감독자", "정책결정자"], "ans": 1, "exp": "사례관리자는 자원과 서비스를 연결 조정하는 역할을 수행한다.", "no": 7, "note": "#n=l2~0~1.%20%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC"}, {"text": "신자유주의 이후 사례관리의 특징은?", "passage": "", "plabel": "", "opts": ["결과 중심", "과정 중심", "관계 중심", "감정 중심"], "ans": 0, "exp": "신자유주의 이후 사례관리는 성과와 결과를 중시하는 경향이 강화되었다.", "no": 8, "note": "#n=l2~0~%EC%8B%A0%EC%9E%90%EC%9C%A0%EC%A3%BC%EC%9D%98%20%EC%9D%B4%ED%9B%84%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20%E2%80%94%20"}, {"text": "잔여적 사례관리에서 사회적 요인의 이해 방식은?", "passage": "", "plabel": "", "opts": ["구조 중심", "제도 중심", "인접 환경 중심", "국가 중심"], "ans": 2, "exp": "가족 이웃 등 인접 환경 수준에서 이해한다.", "no": 9, "note": "#n=l2~0~4.%20%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC"}, {"text": "잔여적 사례관리의 실천 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["구조 개혁 중심", "정책 변화 중심", "개인 적응 중심", "혁명적 변화 중심"], "ans": 2, "exp": "개인이 환경에 적응하도록 돕는 것이 핵심이다.", "no": 10, "note": "#n=l2~0~6.%20%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC"}]}, {"n": 3, "t": "제도주의적 사례관리", "qs": [{"text": "급진주의(radicalism)의 핵심 의미로 적절한 것은?", "passage": "", "plabel": "", "opts": ["점진적 개혁 강조", "개인 책임 강조", "문제의 근본 원인 분석", "복지 서비스 확대"], "ans": 2, "exp": "급진주의는 라틴어 ‘radix(뿌리)’에서 유래하며 문제의 근본 원인을 분석하는 관점이다.", "no": 11, "note": "#n=l3~0~%EA%B8%89%EC%A7%84%EC%A3%BC%EC%9D%98%28Rad"}, {"text": "푸크(Fook)가 제시한 급진 사회복지 실천의 주제가 아닌 것은?", "passage": "", "plabel": "", "opts": ["구조적 분석", "개인 치료 중심 접근", "사회 통제 기능 분석", "기존 질서 비판"], "ans": 1, "exp": "급진 사회복지 실천은 개인 치료 중심이 아니라 구조 분석 중심이다.", "no": 12, "note": "#n=l3~1~%ED%91%B8%ED%81%AC%28Fook%29"}, {"text": "제도적 사례관리에서 사회적 요인의 역할은?", "passage": "", "plabel": "", "opts": ["개인 성격 분석", "가족 치료", "구조적 원인 규명 및 실천 연결", "개인 상담 강화"], "ans": 2, "exp": "사회적 요인은 구조적 원인 분석을 넘어 구조 변화를 위한 실천으로 연결된다.", "no": 13, "note": "#n=l3~0~%EC%82%AC%ED%9A%8C%EC%A0%81%20%EC%9A%94%EC%9D%B8%EC%9D%98%20%ED%99%9C%EC%9A%A9"}, {"text": "영화 <나, 다니엘 블레이크>에서 드러나는 구조적 문제는?", "passage": "", "plabel": "", "opts": ["복지 제도의 통제 기능", "가족 갈등", "개인 의지 부족", "개인 성격 문제"], "ans": 0, "exp": "복지가 권리 보장이 아닌 통제 장치로 작동하고 있다.", "no": 14, "note": "#n=l3~0~4.%20%EC%A0%9C%EB%8F%84%EC%A0%81%20%EC%82%AC"}, {"text": "제도적 사례관리의 비판으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["구조 분석 부족", "이론 부족", "개인 치료 과잉", "실천 구체성 부족"], "ans": 3, "exp": "실천 적용의 구체성 부족이 주요 비판 내용이다.", "no": 15, "note": "#n=l3~0~6.%20%EC%A0%9C%EB%8F%84%EC%A0%81%20%EC%82%AC"}]}, {"n": 4, "t": "사례관리의 발전과정", "qs": [{"text": "사회복지 실천의 초기 형태로 적절한 것은?", "passage": "", "plabel": "", "opts": ["사회보험", "자선", "사례관리", "사회정책"], "ans": 1, "exp": "고대 및 중세의 사회복지 실천은 종교 기반의 자선 중심으로 이루어졌다.", "no": 16, "note": "#n=l4~0~%EA%B3%A0%EB%8C%80%20%EB%B0%8F%20%EC%A4%91%EC%84%B8%20%EC%A2%85%EA%B5%90"}, {"text": "과학적 박애주의의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["조사와 기록을 통한 체계적 개입", "빈곤을 구조적 문제로만 봄", "국가 중심 복지 확대", "시장 자율성 강조"], "ans": 0, "exp": "COS는 방문조사와 기록을 통해 체계적이고 과학적인 개입을 강조한다.", "no": 17, "note": "#n=l4~0~%EA%B3%BC%ED%95%99%EC%A0%81%20%EB%B0%95%EC%95%A0%EC%A3%BC%EC%9D%98%EC%9D%98%20%EC%B6%9C%ED%98%84%20%28"}, {"text": "미국 사례관리 발전의 결정적 계기는 무엇인가?", "passage": "", "plabel": "", "opts": ["세계대전", "산업화", "탈시설화", "정보화"], "ans": 2, "exp": "정신장애인의 지역사회 이동이 사례관리의 발전을 촉진했다.", "no": 18, "note": "#n=l4~0~%EC%B6%9C%EB%B0%9C%EC%A0%90%20%E2%80%94%20%EB%AF%B8%EA%B5%AD"}, {"text": "영국 사례관리 확립에 영향을 준 보고서는 무엇인가?", "passage": "", "plabel": "", "opts": ["베버리지 보고서", "브레이크 보고서", "베버 보고서", "시봄위원회 보고서"], "ans": 3, "exp": "시봄위원회 보고서는 지방 정부에 사회서비스부를 설치하고 지역 중심 사회 서비스 체계를 구축할 것을 제안하였다.", "no": 19, "note": "#n=l4~0~%ED%99%95%EB%A6%BD%EA%B8%B0%20%E2%91%A0%20%EC%8B%9C%EB%B4%84"}, {"text": "급진 사회복지 실천의 핵심 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["시장 경쟁 강조", "구조적 분석과 사회 변화 지향", "개인 책임 강조", "서비스 효율성 중심"], "ans": 1, "exp": "급진 사회복지는 구조적 불평등 분석과 변화를 강조한다.", "no": 20, "note": "#n=l4~0~3.%20%EC%A0%9C%EB%8F%84%EC%A0%81%20%EC%82%AC"}]}, {"n": 5, "t": "사례관리의 모델", "qs": [{"text": "생태체계이론에서 가장 핵심적으로 강조하는 관점은?", "passage": "", "plabel": "", "opts": ["환경 속의 인간", "개인의 무의식 중심 해석", "사회 통제 기능의 강화", "문제 행동의 의학적 진단"], "ans": 0, "exp": "생태체계이론은 인간을 환경과의 상호작용 속에서 이해하는 관점이 핵심을 이룬다.", "no": 21, "note": "#n=l5~0~%EC%83%9D%ED%83%9C%EC%B2%B4%EA%B3%84%EC%9D%B4%EB%A1%A0%EC%9D%98%20%ED%95%9C%EA%B3%84"}, {"text": "강점관점의 원칙은?", "passage": "", "plabel": "", "opts": ["클라이언트의 결함 중심 분석", "사회복지사의 주도적 개입", "지역사회를 자원의 오아시스로 봄", "병리적 진단 중심 접근"], "ans": 2, "exp": "강점관점은 지역 사회 지원을 중요한 강점으로 본다.", "no": 22, "note": "#n=l5~0~3.%20%EC%A7%80%EC%97%AD%EC%82%AC%ED%9A%8C%EB%8A%94"}, {"text": "임파워먼트 이론에서 ‘권한 강화’란?", "passage": "", "plabel": "", "opts": ["권력이 적은 사람에게 힘을 부여함", "갈등 회피를 돕는 것", "사회복지사가 대신 결정함", "자원활용을 제한함"], "ans": 0, "exp": "사회적 약자의 권력 확대를 의미한다.", "no": 23, "note": "#n=l5~0~%EC%84%B8%EB%A0%A5%ED%99%94/%EA%B6%8C%ED%95%9C%EA%B0%95%ED%99%94"}, {"text": "다음 중 급진 사회복지 실천의 특징은?", "passage": "", "plabel": "", "opts": ["개인 심리 중심 설명", "구조적 불평등 강조", "가치 중립적 접근", "정치적 개입 배제"], "ans": 1, "exp": "사회구조적 억압과 불평등을 핵심 원인으로 본다.", "no": 24, "note": "#n=l5~0~1.%20%EC%83%9D%ED%83%9C%EC%B2%B4%EA%B3%84%EC%9D%B4"}, {"text": "다음 중 반억압이론의 설명으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["차이를 우열로 판단", "권력 관계 고려 불필요", "수평적 관계와 공동 의사결정", "제도 순응 강조"], "ans": 2, "exp": "반억압이론은 권력 관계를 성찰하고 평등한 관계를 지향한다.", "no": 25, "note": "#n=l5~1~%EB%B0%98%EC%96%B5%EC%95%95%EC%A0%81%20%EC%8B%A4%EC%B2%9C%20"}]}, {"n": 6, "t": "사례관리의 비교와 함의", "qs": [{"text": "사례관리자 유형에 따른 모델 중 한 명의 사례관리자가 모든 서비스를 통합적으로 제공하는 모델은?", "passage": "", "plabel": "", "opts": ["전문주의 사례관리자 모델", "일반주의 사례관리자 모델", "치료사 사례관리자 모델", "문화 활동가 사례관리자 모델"], "ans": 1, "exp": "일반주의 사례관리자 모델은 한 명의 사례관리자가 다양한 욕구를 통합적으로 관리하는 모델이다.", "no": 26, "note": "#n=l6~1~%282%29%20%EC%9D%BC%EB%B0%98%EC%A3%BC%EC%9D%98"}, {"text": "사회관리형 사례관리의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["개인 적응 중심", "서비스 연계중심", "구조적 변화와 권리 옹호", "제한적 개입"], "ans": 2, "exp": "사회관리형 사례관리는 사회구조 개선과 권리 옹호를 핵심으로 한다.", "no": 27, "note": "#n=l6~0~3.%20%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC"}, {"text": "다음 중 사례관리의 구성 요소에 해당하지 않는 것은?", "passage": "", "plabel": "", "opts": ["사례관리 대상자", "사례관리자", "사회 자원", "시장 경쟁"], "ans": 3, "exp": "시장 경쟁은 사례관리의 구성 요소에 해당하지 않는다.", "no": 28, "note": "#n=l6~0~4.%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EC%9D%98"}, {"text": "다음 중 사례관리 과정의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["단선적 과정", "순환적 과정", "일회성 과정", "계획 중심 과정"], "ans": 1, "exp": "사례관리는 사정-계획-실행-평가-재사정으로 이어지는 순환적 구조이다.", "no": 29, "note": "#n=l6~0~%EC%88%9C%ED%99%98%EC%A0%81%20%EA%B3%BC%EC%A0%95%20%E2%80%94"}, {"text": "제도적 사례관리에서 사회복지사의 역할로 가장 적절한 것은?", "passage": "", "plabel": "", "opts": ["단순 서비스 제공자", "행정 관리자", "인권 옹호자와 사회변화 촉진자", "상담 전문가"], "ans": 2, "exp": "제도적 사례관리에서는 사회복지사를 인권 옹호자이자 사회변화 실천가로 본다", "no": 30, "note": "#n=l6~0~%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EC%9E%90%20%EC%97%AD%ED%95%A0%20%EC%97%B0"}]}, {"n": 7, "t": "사례관리 실천과정과 기록1 : 초기단계", "qs": [{"text": "사례관리 초기 단계의 핵심 기능으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["서비스 평가", "클라이언트 발굴과 선정", "정책 분석", "조직 운영"], "ans": 1, "exp": "사례관리 초기 단계는 사례 발굴과 적격성 판단을 통해 클라이언트를 확정하는 과정이다.", "no": 31, "note": "#n=l7~1~%EC%B4%88%EA%B8%B0%EB%8B%A8%EA%B3%84%EC%9D%98%20%EC%9D%98%EB%AF%B8"}, {"text": "다음 중 인테이크(intake)의 의미로 옳은 것은?", "passage": "", "plabel": "", "opts": ["서비스 종결 과정", "재사정 단계", "초기 상담 과정", "사례 평가 과정"], "ans": 2, "exp": "인테이크는 초기 면접 및 상담 과정을 의미한다.", "no": 32, "note": "#n=l7~1~%EC%B4%88%EA%B8%B0%EB%8B%A8%EA%B3%84%EC%9D%98%20%EC%9D%98%EB%AF%B8"}, {"text": "다음 중 사례 발굴 방법이 아닌 것은?", "passage": "", "plabel": "", "opts": ["홍보", "의뢰", "아웃리치", "종결 평가"], "ans": 3, "exp": "종결 평가는 사례관리 과정에서 종결 단계에 해당한다.", "no": 33, "note": "#n=l7~0~1.%20%EC%82%AC%EB%A1%80%EB%B0%9C%EA%B5%B4%20"}, {"text": "다음 중 동의 및 계약 단계의 핵심 특징은?", "passage": "", "plabel": "", "opts": ["강제 개입", "자발적 참여", "행정 중심 절차", "평가 중심 운영"], "ans": 1, "exp": "사례관리는 클라이언트의 자발적 참여를 기반으로 이루어진다.", "no": 34, "note": "#n=l7~0~4.%20%EB%8F%99%EC%9D%98%20%EB%B0%8F%20"}, {"text": "초기 단계에서 사회복지사의 기본 태도로 다음 중 가장 적절한 것은?", "passage": "", "plabel": "", "opts": ["통제 중심 접근", "판단 중심 접근", "인권 옹호자 태도", "결과 중심 접근"], "ans": 2, "exp": "사회복지사는 인권 옹호자로서 클라이언트를 권리의 주체로 인식해야 한다.", "no": 35, "note": "#n=l7~0~%EC%82%AC%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%82%AC%EC%9D%98%20%ED%83%9C%EB%8F%84%20%E2%80%94%20%EC%B4%88%EA%B8%B0"}]}, {"n": 8, "t": "사례관리 실천과정과 기록2 : 사정단계", "qs": [{"text": "잔여적 사례관리의 사정 특징으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["사회구조적 원인을 중심으로 분석한다.", "개인과 환경 간 상호작용 문제를 중심으로 분석한다.", "권력 관계와 이데올로기를 중심으로 분석한다.", "사회 경제 구조 변화를 목표로 한다."], "ans": 1, "exp": "잔여적 사례관리는 개인과 환경 간의 부적절한 상호작용을 중심으로 문제를 사정한다.", "no": 36, "note": "#n=l8~0~1.%20%EC%9E%94%EC%97%AC%EC%A0%81%20%EC%82%AC"}, {"text": "다음 중 제도적 사례관리의 사정 관점으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["개인의 성격 문제 중심 분석", "가족 내 갈등 중심 분석", "사회구조와 제도적 원인 분석", "개인의 행동 수정 중심 접근"], "ans": 2, "exp": "제도적 사례관리는 문제의 원인을 사회구조와 제도에서 찾는 접근 방식이다.", "no": 37, "note": "#n=l8~0~3.%20%EC%82%AC%EC%A0%95%20%EA%B8%B0%EB%A1%9D"}, {"text": "사정 단계의 기능으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["욕구와 자원을 분석하고 우선 순위를 정한다.", "문제를 단순 기록한다.", "서비스 실행만 수행한다.", "평가 단계 이후 수행한다."], "ans": 0, "exp": "사정은 욕구, 자원, 장애 요인을 분석하고 우선순위를 설정하는 과정이다.", "no": 38, "note": "#n=l8~0~3.%20%EC%82%AC%EC%A0%95%20%EA%B8%B0%EB%A1%9D"}, {"text": "다음 중 내부 장애 요인에 해당하는 것은?", "passage": "", "plabel": "", "opts": ["사회적 낙인", "자원의 고갈", "제도적 제한", "비관주의적 태도"], "ans": 3, "exp": "비관주의는 개인 내부의 심리적 요인에 해당한다.", "no": 39, "note": "#n=l8~0~%EB%82%B4%EB%B6%80%20%EC%9E%A5%EC%95%A0%EC%9A%94%EC%9D%B8%20"}, {"text": "제도적 사례관리에서 사회복지사의 태도로 적절한 것은?", "passage": "", "plabel": "", "opts": ["전문가 중심 의사결정", "클라이언트 통제", "평등한 대화와 권리 존중", "문제의 개인 책임 강조"], "ans": 2, "exp": "제도적 관점은 클라이언트를 시민으로 보고 평등한 관계를 강조한다.", "no": 40, "note": "#n=l8~0~2.%20%EC%A0%9C%EB%8F%84%EC%A0%81%20%EC%82%AC"}]}, {"n": 9, "t": "사례관리 실천과정과 기록3 : 목표 및 계획수립 단계", "qs": [{"text": "사례관리 목표 설정에서 가장 중요한 원칙은?", "passage": "", "plabel": "", "opts": ["사례관리자의 전문적 판단", "기관의 운영 지침", "클라이언트와의 합의", "서비스 예산 수준"], "ans": 2, "exp": "사례관리 목표는 클라이언트와의 충분한 상담과 논의를 통해 합의되어야 실행 가능성이 높아진다.", "no": 41, "note": "#n=l9~0~%EB%B3%80%ED%99%94%EC%9D%98%20%EB%B0%A9%ED%96%A5%20%E2%80%94"}, {"text": "다음 중 사례관리에서 클라이언트를 바라보는 적절한 관점은?", "passage": "", "plabel": "", "opts": ["보호대상", "수혜자", "통제 대상", "권리를 가진 시민"], "ans": 3, "exp": "제도적 사례관리에서는 클라이언트를 ‘권리를 가진 시민’으로 이해해야 한다.", "no": 42, "note": "#n=l9~0~4.%20%EB%AA%A9%ED%91%9C%EC%99%80%20%EA%B3%84"}, {"text": "다음 중 사례관리에서 바람직한 관계 형성 방식은?", "passage": "", "plabel": "", "opts": ["위계적 관계", "통제 중심 관계", "평등한 관계", "일방적 지식 관계"], "ans": 2, "exp": "사회복지사와 클라이언트는 서로 배우는 평등한 관계이다.", "no": 43, "note": "#n=l9~0~4.%20%EB%AA%A9%ED%91%9C%EC%99%80%20%EA%B3%84"}, {"text": "다음 중 사회복지사가 지양해야 할 태도는?", "passage": "", "plabel": "", "opts": ["공감적 태도", "민주적 태도", "전문성 활용", "권위를 통한 결정 유도"], "ans": 3, "exp": "사회복지사가 전문성을 이용해 클라이언트의 결정을 유도하는 것은 부적절한 태도이다.", "no": 44, "note": "#n=l9~0~4.%20%EB%AA%A9%ED%91%9C%EC%99%80%20%EA%B3%84"}, {"text": "민주적 관점에서 클라이언트의 역할로 다음 중 가장 적절한 것은?", "passage": "", "plabel": "", "opts": ["의사결정 참여 주체", "보호 대상", "수동적 수혜자", "서비스 이용자"], "ans": 0, "exp": "클라이언트는 자신의 삶과 관련된 의사결정에 참여하는 주체임을 인식해야 한다.", "no": 45, "note": "#n=l9~0~%EB%AF%BC%EC%A3%BC%EC%A0%81%20%EC%A1%B4%EC%9E%AC%EB%A1%9C%EC%84%9C"}]}, {"n": 10, "t": "사례관리 실천과정과 기록4: 실행 및 점검단계", "qs": [{"text": "서비스 실행 단계의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["계획 수립 단계", "서비스 제공과 욕구 충족 시작", "종결 단계", "평가 단계"], "ans": 1, "exp": "서비스 실행은 계획이 실제로 수행되는 단계이다.", "no": 46, "note": "#n=l10~0~3.%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20"}, {"text": "다음 중 비판적 자기자각 상담의 핵심은?", "passage": "", "plabel": "", "opts": ["구조 인식", "동기 강화", "기술 훈련", "자원 연계"], "ans": 0, "exp": "제도적 사례관리에서 비판적 자기자각은 구조 인식이 핵심이다.", "no": 47, "note": "#n=l10~1~%EC%A7%81%EC%A0%91%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%E2%91%A0%20%EC%83%81%EB%8B%B4%3A%20%EB%B9%84"}, {"text": "다음 중 사회적 공감의 특징은?", "passage": "", "plabel": "", "opts": ["개인 감정 이해", "사회구조 이해", "기술 훈련", "상담 기법"], "ans": 1, "exp": "사회적 공감은 사회적 맥락의 이해를 의미한다.", "no": 48, "note": "#n=l10~0~1.%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%8B%A4"}, {"text": "다음 중 옹호 활동의 목적은?", "passage": "", "plabel": "", "opts": ["감정 안정", "기록 관리", "기술 향상", "권리 보호"], "ans": 3, "exp": "옹호는 클라이언트의 권리를 보호하는 활동이다.", "no": 49, "note": "#n=l10~0~2.%20%EA%B0%84%EC%A0%91%20%EC%84%9C%EB%B9%84"}, {"text": "다음 중 질적 점검의 특징은?", "passage": "", "plabel": "", "opts": ["수치 중심", "척도 평가", "심층 분석", "기록 정리"], "ans": 2, "exp": "질적 점검은 심층적 이해를 중심으로 한다.", "no": 50, "note": "#n=l10~0~4.%20%EC%A0%90%EA%B2%80%28%EB%AA%A8%EB%8B%88"}]}, {"n": 11, "t": "사례관리 실천과정과 기록5 : 평가 및 종결단계", "qs": [{"text": "사례관리 평가의 협의적 개념에 해당하는 것은?", "passage": "", "plabel": "", "opts": ["기관의 운영체계와 자원 수준을 평가하는 것", "클라이언트가 목표에 맞는 서비스를 받고 변화가 이루어졌는지 확인하는 것", "지역사회 자원의 연계 구조를 평가하는 것", "정책 수준에서 서비스 효과를 분석하는 것"], "ans": 1, "exp": "협의의 평가는 클라이언트의 욕구 충족과 목표 달성 여부를 확인하는 데 초점을 둔다.", "no": 51, "note": "#n=l11~0~3.%20%EC%82%AC%ED%9B%84%EA%B4%80%EB%A6%AC"}, {"text": "사례관리 평가 유형 중 기관의 체계와 실무자 역량을 평가하는 것은?", "passage": "", "plabel": "", "opts": ["결과 평가", "과정 평가", "구조 평가", "자각 평가"], "ans": 2, "exp": "구조 평가는 조직, 인력, 행정체계 등 사례관리 수행 기반을 평가한다.", "no": 52, "note": "#n=l11~0~%EA%B5%AC%EC%A1%B0%ED%8F%89%EA%B0%80%20%E2%80%94%20%EC%82%AC"}, {"text": "다음 중 사례관리 종결의 원칙으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["사례회의를 통해 종결 결정", "클라이언트 동의 없이 종결 가능", "사례관리자가 단독으로 종결 결정", "행정 절차 완료 시 자동 종결"], "ans": 0, "exp": "종결은 사례회의와 합의를 통해 이루어지는 것이 원칙이다.", "no": 53, "note": "#n=l11~0~%EC%A2%85%EA%B2%B0%20%EC%82%AC%EB%A1%80%ED%9A%8C%EC%9D%98%EB%A5%BC"}, {"text": "다음 중 사후관리의 기본 원칙으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["종결 즉시 종료", "최소 1년 이상 의무 실시", "종결 후 약 6개월 관리", "필요 시에만 비공식적으로 실시"], "ans": 2, "exp": "사후관리는 일반적으로 6개월을 기준으로 이루어진다.", "no": 54, "note": "#n=l11~0~%EC%82%AC%ED%9B%84%EA%B4%80%EB%A6%AC%20%EC%A2%85%EA%B2%B0%20"}, {"text": "다음 중 사후 관리의 주요 목적은?", "passage": "", "plabel": "", "opts": ["새로운 서비스 제공", "클라이언트의 안정성 유지 점검", "기관 평가 자료 확보", "비용 절감"], "ans": 1, "exp": "사후관리는 클라이언트의 생활 안정성과 지속성을 확인하는 데 목적이 있다.", "no": 55, "note": "#n=l11~0~3.%20%EC%82%AC%ED%9B%84%EA%B4%80%EB%A6%AC"}]}, {"n": 12, "t": "민간 사례관리 : 종합사회복지관", "qs": [{"text": "사회복지관 사례관리의 핵심 기능으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["사례 발굴", "정책 입법", "시설 관리", "행정 통제"], "ans": 0, "exp": "사례관리의 핵심 기능은 발굴, 개입, 서비스 연계이다.", "no": 56, "note": "#n=l12~0~1.%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20"}, {"text": "사례관리 과정의 특징으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["일회성 개입", "단일 서비스 제공", "행정 중심 절차", "순환적 구조"], "ans": 3, "exp": "사례관리는 재사정을 포함하는 순환적 구조를 가진다.", "no": 57, "note": "#n=l12~0~1.%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20"}, {"text": "다음 중 사례관리자의 역할로 적절한 것은?", "passage": "", "plabel": "", "opts": ["행정 처리자", "서비스 전달자", "변화 촉진자", "단순 연결자"], "ans": 2, "exp": "사례관리자는 변화의 촉진자이자 조정자로서 역할을 수행한다.", "no": 58, "note": "#n=l12~0~1.%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%20"}, {"text": "사례관리 과정에서 재사정이 필요한 경우로 적절한 것은?", "passage": "", "plabel": "", "opts": ["초기 접수 단계", "대상자 변화 없음", "욕구와 환경 변화 발생", "종결 이후"], "ans": 2, "exp": "욕구나 환경 변화 시 재사정이 이루어진다.", "no": 59, "note": "#n=l12~0~%EC%9E%AC%EC%82%AC%EC%A0%95%20%E2%80%94%20%ED%8F%89%EA%B0%80"}, {"text": "다음 중 사례관리에서 사회관리로의 확장을 의미하는 것은?", "passage": "", "plabel": "", "opts": ["서비스 확대", "구조적 문제 개입", "상담 강화", "행정 절차 간소화"], "ans": 1, "exp": "사회관리는 구조적 문제 해결을 지향하는 실천이다.", "no": 60, "note": "#n=l12~0~3.%20%EC%82%AC%EB%A1%80%3A%20%EB%B0%A9"}]}, {"n": 13, "t": "공공 사례관리", "qs": [{"text": "공공 사례관리의 수행 주체로 적절한 것은?", "passage": "", "plabel": "", "opts": ["민간 복지관", "지방자치단체", "기업", "종교기관"], "ans": 1, "exp": "공공 사례관리는 시·군·구 등 지방자치단체에서 수행되는 사례관리이다.", "no": 61, "note": "#n=l13~0~%EC%9D%98%EB%AF%B8%20%E2%80%94%20%EC%82%AC%ED%9A%8C%EB%B3%B5"}, {"text": "다음 중 공공 사례관리의 법적 근거가 되는 법은?", "passage": "", "plabel": "", "opts": ["국민기초생활 보장법", "사회보장 기본법", "사회복지사업법", "지방자치법"], "ans": 2, "exp": "2005년 사회복지사업법 개정을 통해 공공 사례관리 제도가 마련되었다.", "no": 62, "note": "#n=l13~1~%EB%B2%95%EC%A0%81%20%EA%B7%BC%EA%B1%B0%20%E2%80%94%20"}, {"text": "다음 중 희망복지지원단의 역할로 옳은 것은?", "passage": "", "plabel": "", "opts": ["단순 행정 업무 수행", "민원 접수만 수행", "교육기관 운영", "자원 관리 및 통합 사례관리 수행"], "ans": 3, "exp": "희망복지지원단은 통합 사례관리와 자원 관리의 중심 조직이다.", "no": 63, "note": "#n=l13~0~%E2%91%A2%20%EC%9E%90%EC%9B%90%EA%B4%80%EB%A6%AC%20%EB%B0%8F"}, {"text": "다음 중 통합 사례관리의 주요 목적은?", "passage": "", "plabel": "", "opts": ["행정 효율성 증대", "주민 통제", "맞춤형 서비스 제공과 삶의 안정", "비용절감"], "ans": 2, "exp": "통합 사례관리는 다양한 욕구에 맞는 맞춤형 서비스 제공을 통해 삶의 안정을 도모하는 것이 목적이다.", "no": 64, "note": "#n=l13~0~%EB%AA%A9%EC%A0%81%20%E2%80%94%20%EC%A7%80%EC%97%AD%EC%A3%BC"}, {"text": "통합 사례관리의 절차로 옳은 것은?", "passage": "", "plabel": "", "opts": ["접수 - 종결 – 평가", "발굴 – 상담 – 사정 – 회의 – 계획 – 실행 – 점검 – 종결", "계획 – 실행 – 종결", "상담 – 종결"], "ans": 1, "exp": "통합 사례관리는 발굴부터 종결 및 사후관리까지 단계적으로 진행된다.", "no": 65, "note": "#n=l13~0~%EB%8B%A8%EA%B3%84%20%E2%80%94%20%EB%8C%80%EC%83%81%EC%9E%90"}]}, {"n": 14, "t": "대상별 사례관리 : 노인 사례관리", "qs": [{"text": "노인 사례관리의 핵심 관점으로 적절한 것은?", "passage": "", "plabel": "", "opts": ["노인을 보호 대상으로 본다.", "노인을 서비스 수혜자로 본다.", "노인을 동등한 시민으로 본다.", "노인을 경제적 부담의 대상으로 본다."], "ans": 2, "exp": "노인은 ‘나이 든 보통 사람’이며 시민으로 이해해야 한다.", "no": 66, "note": "#n=l14~0~%EB%85%B8%EC%9D%B8%EC%9D%80%20%EB%82%98%EC%9D%B4%20%EB%93%A0"}, {"text": "노인 사례관리에서 통합적 접근이 필요한 이유는?", "passage": "", "plabel": "", "opts": ["단일 문제만 존재하기 때문", "복합적 욕구가 존재하기 때문", "서비스가 제한적이기 때문", "정책이 부족하기 때문"], "ans": 1, "exp": "노인은 신체적, 정신적, 사회적 문제를 동시에 경험하는 존재이다.", "no": 67, "note": "#n=l14~1~%EB%85%B8%EC%9D%B8%20%EC%82%AC%EB%A1%80%EA%B4%80%EB%A6%AC%EA%B0%80"}, {"text": "다음 중 사례관리 과정에 포함되지 않는 것은?", "passage": "", "plabel": "", "opts": ["사정", "실행", "점검", "생산"], "ans": 3, "exp": "사례관리는 생산 과정이 아니라 개입 과정이다.", "no": 68, "note": "#n=l14~0~3.%20%EB%85%B8%EC%9D%B8%EC%A2%85%ED%95%A9%EB%B3%B5"}, {"text": "사례관리에서 사회관리로 전환이 가지는 의미는?", "passage": "", "plabel": "", "opts": ["개인 치료 강화", "서비스 축소", "비용 절감", "구조 변화 지향"], "ans": 3, "exp": "사회관리는 개인을 넘어 구조 변화를 지향하는 것이다.", "no": 69, "note": "#n=l14~0~3.%20%EB%85%B8%EC%9D%B8%EC%A2%85%ED%95%A9%EB%B3%B5"}, {"text": "다음 중 사례관리에서 가장 중요한 요소는?", "passage": "", "plabel": "", "opts": ["기술", "관점과 태도", "매뉴얼", "예산"], "ans": 1, "exp": "관점과 태도가 사례관리의 질을 결정한다.", "no": 70, "note": "#n=l14~0~3.%20%EB%85%B8%EC%9D%B8%EC%A2%85%ED%95%A9%EB%B3%B5"}]}, {"n": 15, "t": "사회관리로서 사례관리1", "qs": [{"text": "다음 중 위험사회의 특징으로 가장 적절한 것은?", "passage": "", "plabel": "", "opts": ["위험은 특정 계층에만 발생한다.", "위험은 개인의 선택 결과이다.", "위험은 보편적이지만 대응은 계급적이다.", "위험은 자연현상에 불과하다."], "ans": 2, "exp": "위험은 모든 사람에게 발생하지만 대응 능력은 계급에 따라 다르게 나타난다.", "no": 71, "note": "#n=l15~0~%EC%9C%84%ED%97%98%EC%9D%80%20%EB%AF%BC%EC%A3%BC%EC%A0%81%EC%9D%B4%EA%B3%A0%20%EA%B3%84%EA%B8%89%EC%A0%81%EC%9D%B4"}, {"text": "다음 중 ‘버스를 타기 어렵다’를 구조적 관점에서 해석한 것은?", "passage": "", "plabel": "", "opts": ["개인의 신체 문제이다.", "개인의 의지 부족이다.", "환경 적응 실패이다.", "버스 탑승 구조가 문제이다."], "ans": 3, "exp": "구조적 관점이란 문제 원인을 개인이 아니라 구조로 확장하여 이해하는 것이다.", "no": 72, "note": "#n=l15~0~2.%20%EC%82%AC%ED%9A%8C%EC%A0%81%20%EC%9C%84"}, {"text": "위험사회의 특징 중 ‘조직화된 무책임성’의 의미는 무엇인가?", "passage": "", "plabel": "", "opts": ["개인 책임 강화이다.", "책임 주체 명확화이다.", "책임이 분산되어 불명확해짐이다.", "국가 책임 증가이다."], "ans": 2, "exp": "조직화된 무책임성이란 위험의 원인을 특정하기 어려워 책임이 분산되는 현상을 의미한다.", "no": 73, "note": "#n=l15~1~%EC%A1%B0%EC%A7%81%ED%99%94%EB%90%9C%20%EB%AC%B4%EC%B1%85%EC%9E%84%EC%84%B1%20%E2%80%94%20"}, {"text": "사회관리로서 사회복지의 목표로 적절한 것은?", "passage": "", "plabel": "", "opts": ["최약자 선별이다.", "문제의 원인을 개인이 치료하는 것이다.", "불쌍한 사람 돕기이다.", "불쌍한 사람이 생기지 않는 사회 만들기이다."], "ans": 3, "exp": "사회 관리적 관점은 구조적 예방과 권리 보장을 목표로 한다.", "no": 74, "note": "#n=l15~0~%EC%A7%80%ED%96%A5%20%EA%B0%9C%EC%9D%B8%EC%9D%98%20%EC%A0%81"}, {"text": "다음 중 시민정치의 특징으로 옳은 것은?", "passage": "", "plabel": "", "opts": ["국가 중심 정치이다.", "일상 속 참여와 실천이다.", "전문가 중심 결정이다.", "선거 중심 활동이다."], "ans": 1, "exp": "시민정치는 일상 속에서 이루어지는 권리의 실천과 참여를 의미한다.", "no": 75, "note": "#n=l15~1~%EC%8B%9C%EB%AF%BC%EC%A0%95%EC%B9%98%EC%9D%98%20%EC%9D%98%EB%AF%B8"}]}];
+const CIRC = ['①','②','③','④'];
+const KEY = 'casemgmt-wb-2026-v1', TKEY = 'casemgmt-wb-theme';
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const all = []; const byNo = {};
+DATA.forEach(L => L.qs.forEach(q => { q.lec = L.n; all.push(q); byNo[q.no] = q; }));
+
+// 상태
+let S = {ans:{}, graded:false, sid:'', name:''};
+try{ const o = JSON.parse(store.get(KEY) || '{}') || {}; S.ans = o.ans || {}; S.graded = !!o.graded; S.sid = o.sid || ''; S.name = o.name || ''; }catch(e){}
+const save = () => store.set(KEY, JSON.stringify(S));
+
+/* 테마 */
+function curTheme(){ return document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+function paintThemeBtn(){ $('#themeBtn').textContent = curTheme() === 'dark' ? '라이트' : '다크'; }
+(function(){ const t = store.get(TKEY); if(t) document.documentElement.setAttribute('data-theme', t); paintThemeBtn(); })();
+$('#themeBtn').onclick = () => { const n = curTheme() === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', n); store.set(TKEY, n); paintThemeBtn(); };
+
+/* 바로가기 */
+const sel = $('#scope');
+sel.innerHTML = `<option value="">강의 선택</option>` +
+  DATA.map(L => `<option value="lec${L.n}">${L.n}강 · ${esc(L.t)} (${L.qs[0].no}~${L.qs[L.qs.length-1].no}번)</option>`).join('') +
+  `<option value="answers">정답 및 해설</option>`;
+sel.onchange = () => { const id = sel.value; if(id){ go(id); } sel.value = ''; };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 10;
+  window.scrollTo({top: Math.max(0, y), behavior: 'auto'});
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1); if(!document.getElementById(id)) return;
+  e.preventDefault(); go(id);
+});
+
+/* 렌더링 (한 번) */
+function build(){
+  $('#iTotal').textContent = all.length;
+  let html = '', last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      html += `<div class="lh" id="lec${L.n}">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    html += `<div class="q" id="q${q.no}">` +
+      `<p class="qt"><span class="no">${q.no}.</span>${esc(q.text)}</p>` +
+      (q.passage ? `<div class="box"><span class="lb">&lt;${q.plabel === '보기' ? '보 기' : q.plabel === '사례' ? '사 례' : '자 료'}&gt;</span>${esc(q.passage)}</div>` : '') +
+      `<ul class="ops">` + q.opts.map((o,i) => `<li><button class="op" data-no="${q.no}" data-i="${i}"><span class="c">${i+1}</span><span class="tx">${esc(o)}</span></button></li>`).join('') + `</ul>` +
+      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사례관리론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : '') +
+      `</div>`;
+  });
+  $('#qs').innerHTML = html;
+
+  // 정답 및 해설 챕터
+  const rows = [];
+  for(let i = 0; i < all.length; i += 10) rows.push(all.slice(i, i + 10));
+  let a = `<div class="ch-h"><span class="ch-t">정답 및 해설</span><span class="ch-s">1~${all.length}번</span></div>` +
+    `<div class="keyw"><table class="keyt" id="keyt"><tbody>` +
+    rows.map(r => `<tr class="kn">${r.map(q => `<th><a href="#a${q.no}">${q.no}</a></th>`).join('')}</tr><tr class="kv">${r.map(q => `<td id="k${q.no}">${CIRC[q.ans]}</td>`).join('')}</tr>`).join('') +
+    `</tbody></table></div><div class="alist">`;
+  last = null;
+  all.forEach(q => {
+    if(q.lec !== last){
+      const L = DATA.find(x => x.n === q.lec);
+      a += `<div class="lh">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
+      last = q.lec;
+    }
+    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사례관리론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 ↗</a>` : ''}</p>` +
+      `<p class="ax">${esc(q.exp)}</p></div>`;
+  });
+  a += `</div>`;
+  $('#answers').innerHTML = a;
+
+  $('#omrBody').innerHTML = all.map(q => `<div class="orow" id="o${q.no}"><button class="n" data-jump="${q.no}" title="${q.no}번으로 이동">${q.no}</button>` +
+    [0,1,2,3].map(i => `<button class="bub" data-no="${q.no}" data-i="${i}" aria-label="${q.no}번 ${i+1}번 표기">${i+1}</button>`).join('') + `</div>`).join('');
+}
+
+function paint(){
+  const g = S.graded;
+  all.forEach(q => {
+    const a = S.ans[q.no], card = $('#q' + q.no), row = $('#o' + q.no);
+    card.classList.toggle('graded', g);
+    card.classList.remove('res-o','res-x');
+    card.querySelectorAll('.nores').forEach(e => e.remove());
+    card.querySelectorAll('.op').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.classList.toggle('wrong', g && a === i && i !== q.ans);
+      b.disabled = g;
+      b.setAttribute('aria-pressed', String(a === i));
+    });
+    row.classList.remove('ok','ng');
+    row.querySelectorAll('.bub').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.toggle('on', a === i);
+      b.classList.toggle('key', g && i === q.ans);
+      b.disabled = g;
+    });
+    const m = $('#m' + q.no), k = $('#k' + q.no), ai = $('#a' + q.no);
+    ai.classList.remove('ok','ng'); k.classList.remove('ng');
+    if(g){
+      if(a === undefined){ card.querySelector('.qt').insertAdjacentHTML('beforeend','<span class="nores">미응답</span>'); card.classList.add('res-x'); row.classList.add('ng'); m.textContent = '내 답 없음'; ai.classList.add('ng'); k.classList.add('ng'); }
+      else if(a === q.ans){ card.classList.add('res-o'); row.classList.add('ok'); m.textContent = `내 답 ${CIRC[a]} ○`; ai.classList.add('ok'); }
+      else { card.classList.add('res-x'); row.classList.add('ng'); m.textContent = `내 답 ${CIRC[a]} ✕`; ai.classList.add('ng'); k.classList.add('ng'); }
+    } else m.textContent = '';
+  });
+  const done = all.filter(q => S.ans[q.no] !== undefined).length;
+  $('#cnt').textContent = `${done}/${all.length}`;
+  $('#cntPct').textContent = Math.round(done / all.length * 100) + '%';
+  $('#progI').style.width = (done / all.length * 100) + '%';
+  disarm();
+  $('#submitBtn').textContent = g ? '채점 결과' : '제출·채점';
+  const wn = g ? wrongList().length : 0, rb = $('#retryBtn');
+  rb.hidden = !wn; rb.textContent = `오답만 다시 (${wn})`;
+  resetDisarm();
+  $('#sid').value = S.sid || ''; $('#sname').value = S.name || '';
+  report();
+}
+
+function wrongList(){ return all.filter(q => S.ans[q.no] !== q.ans); }
+
+function report(){
+  const r = $('#report');
+  if(!S.graded){ r.hidden = true; r.innerHTML = ''; return; }
+  const ok = all.length - wrongList().length;
+  const wrong = wrongList();
+  const sc = Math.round(ok / all.length * 1000) / 10;
+  const lecs = DATA.map(L => {
+    const lo = L.qs.filter(q => S.ans[q.no] === q.ans).length;
+    return `<a href="#lec${L.n}" class="${lo < L.qs.length ? 'bad' : ''}">${L.n}강<b>${lo}/${L.qs.length}</b></a>`;
+  }).join('');
+  r.innerHTML = `<div class="score"><span class="v">${sc}</span><span class="u">점</span><span class="s">${ok}/${all.length}문항 정답</span></div>` +
+    `<div class="rep-r"><div class="lecs">${lecs}</div><div class="rep-btns">` +
+    (wrong.length ? `<button class="b main" id="retryWrong">틀린 ${wrong.length}문항 다시 풀기</button><button class="b" id="goWrong">첫 오답으로 이동</button>` : '<strong>모두 맞혔습니다.</strong>') +
+    `<button class="b ghost" id="goAns">정답 및 해설 보기</button><button class="b ghost" id="again">처음부터 다시</button></div></div>`;
+  r.hidden = false;
+  const rw = $('#retryWrong');
+  if(rw) rw.onclick = retryWrong;
+  const gw = $('#goWrong'); if(gw) gw.onclick = () => go('q' + wrong[0].no);
+  $('#goAns').onclick = () => go('answers');
+  $('#again').onclick = restart;
+}
+
+function retryWrong(){
+  const wrong = wrongList(); if(!S.graded || !wrong.length) return;
+  const first = wrong[0].no;
+  wrong.forEach(q => delete S.ans[q.no]); S.graded = false; save(); paint();
+  toast(`틀린 ${wrong.length}문항의 답만 지웠습니다. 맞힌 답은 그대로 둡니다`); go('q' + first);
+}
+$('#retryBtn').onclick = retryWrong;
+
+/* 초기화 (두 번 눌러 확인) */
+let rsT = null;
+function resetDisarm(){ clearTimeout(rsT); rsT = null; const b = $('#resetBtn'); b.classList.remove('warn'); b.textContent = '초기화'; }
+$('#resetBtn').onclick = () => {
+  const b = $('#resetBtn');
+  if(!Object.keys(S.ans).length && !S.graded){ toast('지울 답안이 없습니다'); return; }
+  if(!b.classList.contains('warn')){
+    b.classList.add('warn'); b.textContent = '한 번 더 누르면 모두 지움';
+    clearTimeout(rsT); rsT = setTimeout(resetDisarm, 4000);
+    return;
+  }
+  restart();
+};
+
+function restart(){ S.ans = {}; S.graded = false; save(); paint(); window.scrollTo({top:0}); toast('답안을 모두 지웠습니다'); }
+
+/* 답 표기 */
+function mark(no, i){
+  if(S.graded) return;
+  no = +no; i = +i;
+  if(S.ans[no] === i) delete S.ans[no]; else S.ans[no] = i;
+  save(); paint();
+}
+$('#qs').addEventListener('click', e => { const b = e.target.closest('.op'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i); });
+$('#omrBody').addEventListener('click', e => {
+  const j = e.target.closest('[data-jump]');
+  if(j){ closeOmr(); go('q' + j.dataset.jump); return; }
+  const b = e.target.closest('.bub'); if(b && !b.disabled) mark(b.dataset.no, b.dataset.i);
+});
+
+/* 제출 */
+let armT = null;
+function disarm(){ clearTimeout(armT); armT = null; $('#submitBtn').classList.remove('warn'); }
+$('#submitBtn').onclick = () => {
+  const sb = $('#submitBtn');
+  if(S.graded){ go('report'); return; }
+  const left = all.filter(q => S.ans[q.no] === undefined).length;
+  if(left && !sb.classList.contains('warn')){
+    sb.classList.add('warn'); sb.textContent = `미응답 ${left}문항 · 한 번 더 누르면 제출`;
+    clearTimeout(armT); armT = setTimeout(() => { sb.classList.remove('warn'); sb.textContent = '제출·채점'; }, 4000);
+    return;
+  }
+  disarm(); S.graded = true; save(); closeOmr(); paint(); go('report');
+};
+
+/* 학번·성명 */
+$('#sid').oninput = e => { S.sid = e.target.value; save(); };
+$('#sname').oninput = e => { S.name = e.target.value; save(); };
+
+/* OMR 서랍 */
+function openOmr(){ $('#omr').classList.add('open'); $('#scrim').classList.add('on'); $('#omrBtn').setAttribute('aria-expanded','true'); }
+function closeOmr(){ $('#omr').classList.remove('open'); $('#scrim').classList.remove('on'); $('#omrBtn').setAttribute('aria-expanded','false'); }
+$('#omrBtn').onclick = () => $('#omr').classList.contains('open') ? closeOmr() : openOmr();
+$('#omrClose').onclick = closeOmr; $('#scrim').onclick = closeOmr;
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOmr(); });
+
+/* 글자 크기 */
+const ZKEY = 'casemgmt-wb-zoom', ZL = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45, 1.6];
+let zi = ZL.indexOf(parseFloat(store.get(ZKEY)));
+if(zi < 0) zi = 2;
+function setZoom(){
+  document.documentElement.style.setProperty('--zoom', ZL[zi]);
+  $('#fsVal').textContent = Math.round(ZL[zi] * 100) + '%';
+  $('#fsDown').disabled = zi === 0; $('#fsUp').disabled = zi === ZL.length - 1;
+  store.set(ZKEY, String(ZL[zi]));
+}
+$('#fsDown').onclick = () => { if(zi > 0){ zi--; setZoom(); } };
+$('#fsUp').onclick = () => { if(zi < ZL.length - 1){ zi++; setZoom(); } };
+setZoom();
+
+let tt; function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2200); }
+
+build(); paint();
+</script>
+
+</body>
+</html>
