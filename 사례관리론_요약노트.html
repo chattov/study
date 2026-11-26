@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<script>document.documentElement.setAttribute("data-theme","light")</script>
+<meta charset="utf-8"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<script defer="" src="keep-scroll.js"></script>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>사례관리론 요약노트</title>
+<meta content="cover" name="claude:viewport-fit-sides"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Noto+Serif+KR:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+/* 레이아웃: 공부방과 같은 색·글꼴. 위에 얇은 도구 막대, 넓은 화면에선 왼쪽에 강의 목차, 오른쪽에 강의별 카드 */
+:root{
+  --bg:#e6dfcf; --card:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --line:#dcd2bd; --soft:#f0e9d8;
+  --accent:#2a5bd7; --accent-soft:#e8e0ca; --note:#1f7a55; --note-soft:#e4f4ec;
+  --m6:#b4471c; --m6-soft:#fcebe3; --m5:#7a4fc2; --m5-soft:#efe8fb; --th:#efe6d1;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --f-head:"Noto Serif KR","Batang",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 도구 막대 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--card)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--card);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar .home{font-size:13px;font-weight:700;text-decoration:none;color:var(--accent);white-space:nowrap}
+.bar .ttl{font-family:var(--f-head);font-weight:900;font-size:16px;white-space:nowrap}
+.bar select{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 8px;max-width:min(260px,60vw)}
+.sp{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--m6-soft);border-color:var(--m6);color:var(--m6)}
+
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;padding-block:22px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto}
+nav.toc h2{font-size:12px;letter-spacing:.12em;color:var(--sub);margin:0 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.toc a{display:flex;gap:8px;align-items:baseline;text-decoration:none;padding:5px 8px;border-radius:8px;font-size:13.5px;line-height:1.4}
+nav.toc a b{flex:none;min-width:1.6em;color:var(--accent);font-variant-numeric:tabular-nums}
+nav.toc a:hover,nav.toc a.on{background:var(--accent-soft)}
+
+.intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.intro h1{font-family:var(--f-head);font-weight:900;font-size:28px;margin:0 0 4px;text-wrap:balance}
+.intro p{margin:4px 0;color:var(--sub);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.lec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px 18px;margin-bottom:18px;scroll-margin-top:70px;min-width:0}
+.lh{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding:14px 0 8px;margin-bottom:6px}
+.lh .no{font-weight:900;color:var(--accent);font-size:15px;white-space:nowrap}
+.lh h2{margin:0;font-family:var(--f-head);font-weight:900;font-size:22px;text-wrap:balance}
+.ct > blockquote{margin:4px 0 12px;padding:0;color:var(--sub);font-size:13.5px;border:0}
+.ct > blockquote p{margin:0}
+.ct h3{font-size:17px;margin:22px 0 8px;padding-left:10px;border-left:4px solid var(--accent);line-height:1.4}
+.ct p{margin:8px 0}
+.ct ul,.ct ol{margin:6px 0;padding-left:1.3em}
+.ct li{margin:3px 0}
+.ct strong{font-weight:700}
+.ct em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.tw{overflow-x:auto;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.mk{display:inline-block;font-size:14px;line-height:1;margin-right:3px;vertical-align:-1px;cursor:help}
+.totop{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--sub);text-decoration:none}
+.totop:hover{color:var(--accent)}
+footer{font-size:12.5px;color:var(--sub);margin-top:8px}
+
+/* 출제 표시만 강조 */
+body.focus .ct p:not(:has(.mk)), body.focus .ct li:not(:has(.mk)),
+body.focus .ct .tw:not(:has(.mk)), body.focus .ct tr:not(:has(.mk)), body.focus .ct > blockquote{opacity:.28}
+body.focus .ct h3:has(.mk) ~ .tw, body.focus .ct h3:has(.mk) + p, body.focus .ct h3:has(.mk) + ul, body.focus .ct h3:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw, body.focus .ct p:has(.mk) + ul, body.focus .ct p:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focus .ct p:has(.mk) + ol li{opacity:1}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav.toc{display:none}
+  .lec{padding:4px 14px 14px}
+  .intro{padding:16px}
+  .intro h1{font-size:23px}
+  .lh h2{font-size:19px}
+  table{font-size:13.5px}
+  th{white-space:normal}
+}
+
+.ct p.sh{font-size:15.5px;margin:22px 0 6px;padding:4px 10px;background:var(--accent-soft);border-radius:6px;line-height:1.5}
+.ct h3 + p.sh{margin-top:10px}
+.ct h3{font-size:18px;margin-top:30px}
+.ct p.tt{margin:16px 0 6px;color:var(--accent)}
+.ct li.sub{list-style:circle;margin-left:18px}
+main{min-width:0}
+.ct{overflow-wrap:anywhere}
+
+/* 표: 남색 머리행, 첫 열 강조, 세로 구분선, 줄무늬 */
+:root{--thd:#e2d4b2;--thd-ink:#2f2a23;--c1:#efe6d1;--zebra:rgba(120,100,60,.06);--cell:#fffdf7}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}}
+:root[data-theme="dark"]{--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}
+.ct .tw{border:1px solid var(--line);border-radius:8px;background:var(--cell);-webkit-overflow-scrolling:touch}
+.ct table{font-size:14px;line-height:1.55}
+.ct th,.ct td{padding:8px 11px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.ct th:last-child,.ct td:last-child{border-right:0}
+.ct thead th{background:var(--thd);color:var(--thd-ink);text-align:center;font-weight:700;border-bottom:1px solid var(--line)}
+.ct tbody tr:nth-child(even) td{background:var(--zebra)}
+.ct tbody td:first-child{background:var(--c1);font-weight:700;white-space:nowrap;width:1%}
+.ct p.tt{margin:20px 0 6px}
+@media (max-width:640px){
+  .ct table{font-size:13.5px}
+  .ct th,.ct td{padding:7px 9px;min-width:7.5em}
+  .ct tbody td:first-child{white-space:normal;min-width:5.5em}
+}
+
+/* 글 많은 표: 행마다 카드 — 첫 칸은 머리띠, 나머지는 열 이름을 붙여 나란히(좁은 화면은 위아래) */
+.ct .tw:has(table.long){overflow:visible;border:0;background:none;border-radius:0}
+.ct table.long, .ct table.long tbody{display:block;width:100%}
+.ct table.long thead{display:none}
+.ct table.long tr{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));margin:0 0 12px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+.ct table.long.c2{--cols:1}.ct table.long.c3{--cols:2}.ct table.long.c4{--cols:3}
+.ct table.long td{display:block;border:0;border-right:1px solid var(--line);padding:10px 14px;line-height:1.75;font-size:14.5px;background:none!important;white-space:normal;width:auto}
+.ct table.long td:last-child{border-right:0}
+.ct table.long td:first-child{grid-column:1/-1;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 14px;border-right:0;line-height:1.5}
+.ct table.long td:first-child .mk{filter:none}
+.ct table.long:not(.c2) td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;letter-spacing:.01em}
+@media (max-width:640px){
+  .ct table.long tr{grid-template-columns:1fr}
+  .ct table.long td{border-right:0;border-top:1px solid var(--line);min-width:0}
+  .ct table.long td:first-child{border-top:0}
+}
+
+/* 가로 스크롤 없음 */
+.ct .tw{overflow:visible}
+.ct th,.ct td{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{min-width:6.5em}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{white-space:normal;width:auto}
+.ct table.c5,.ct table.c6{font-size:13px}
+@media (max-width:640px){
+  .ct .tw{border:0;background:none;border-radius:0}
+  .ct .tw table, .ct .tw tbody{display:block;width:100%}
+  .ct .tw thead{display:none}
+  .ct .tw tr{display:block;margin:0 0 10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+  .ct .tw td{display:block;border:0;border-top:1px solid var(--line);padding:8px 12px;background:none!important;min-width:0;width:auto;white-space:normal}
+  .ct .tw td:first-child{border-top:0;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 12px}
+  .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .ct .tw table.c2 td:not(:first-child)::before{content:none}
+}
+
+/* 색 정리: 머리행은 옅은 청회색, 첫 열은 더 옅은 청회색, 본문은 흰색. 비교표는 열(세로) 단위로 구분 */
+:root{--thd2:#cfd9e8;--tbd:#c9d3e1;--thd:#dbe3ef;--thd-ink:#1f3864;--c1:#eef2f8;--cell:#fffefb;--colt:#f3f6fa;--zebra:transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}}
+:root[data-theme="dark"]{--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}
+.ct .tw{border-color:var(--tbd)}
+.ct tbody tr:nth-child(even) td{background:none}
+.ct tbody td:first-child{background:var(--c1);color:var(--thd-ink)}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--colt)}
+.ct table.c3 thead th:nth-child(3),.ct table.c4 thead th:nth-child(3),.ct table.c5 thead th:nth-child(3),.ct table.c5 thead th:nth-child(5),.ct table.c6 thead th:nth-child(3),.ct table.c6 thead th:nth-child(5){background:var(--thd2)}
+.ct table.long tr{border-color:var(--tbd)}
+.ct table.long td:nth-child(3){background:var(--colt)!important}
+.ct table.long td:first-child{color:var(--thd-ink)}
+@media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
+
+/* 최종 표 디자인: 제목줄은 진회색 바탕+흰 글씨(B안), 비교 열은 하나 건너 옅게(C안), 나머지는 흰 바탕+가는 가로줄 */
+:root{--tb-head:#4a5568;--tb-head-ink:#ffffff;--tb-bg:#fffdf8;--tb-line:#e4dccb;--tb-col:#f3efe6;--tb-ink:#2f2a23}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}}
+:root[data-theme="dark"]{--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}
+.ct .tw{border:0!important;border-radius:6px;overflow:hidden;background:var(--tb-bg)!important}
+.ct .tw:has(table.long){background:none!important;border-radius:0;overflow:visible}
+.ct th,.ct td{border-right:0!important;border-bottom:1px solid var(--tb-line)!important;background:none!important;color:var(--tb-ink)}
+.ct thead th{background:var(--tb-head)!important;color:var(--tb-head-ink)!important;text-align:left!important;border-bottom:0!important}
+.ct tbody td:first-child{background:none!important;color:var(--tb-ink)!important;font-weight:700}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--tb-col)!important}
+.ct table.long tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+.ct table.long td{border-bottom:0!important;border-right:0!important}
+.ct table.long td:first-child{background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+.ct table.long td:nth-child(3){background:var(--tb-col)!important}
+@media (max-width:640px){
+  .ct .tw{background:none!important;border-radius:0;overflow:visible}
+  .ct .tw tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+  .ct .tw td{border-bottom:0!important;border-top:1px solid var(--tb-line)!important;background:none!important}
+  .ct .tw td:first-child{border-top:0!important;background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+  .ct .tw table tbody td{width:auto!important;white-space:normal!important}
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+}
+
+/* 카드 뉴스: 사정·목표를 별도 카드로 */
+.cn{display:grid;gap:14px;margin:10px 0 14px}
+.cn-card{background:var(--tb-bg);border:1px solid var(--tb-line);border-radius:10px;overflow:hidden}
+.cn-top{background:var(--tb-head);color:var(--tb-head-ink);padding:10px 16px}
+.cn-tag{font-size:18px;font-weight:800;letter-spacing:.08em}
+.cn-cols,.cn-row{display:grid;grid-template-columns:1fr 1fr}
+.cn-h{padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--tb-line)}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:var(--tb-col)}
+.cn-row>div{padding:9px 16px;line-height:1.65;font-size:14.5px;border-bottom:1px solid var(--tb-line);word-break:keep-all;overflow-wrap:anywhere}
+.cn-row:last-child>div{border-bottom:0}
+.cn-lead>div{font-weight:700;font-size:15.5px}
+.cn-end>div{font-weight:700;color:var(--accent);border-top:2px solid var(--tb-line)}
+@media (max-width:640px){
+  .cn-cols{display:none}
+  .cn-row{grid-template-columns:1fr}
+  .cn-row>div:nth-child(2){border-bottom:2px solid var(--tb-line)}
+  .cn-row>div::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .cn-end>div{border-top:0}
+}
+
+/* 세로 구분 순서: 첫 번째 내용 열부터 옅은 색(2·4·6번째 열) */
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:none!important}
+.ct table.c3 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(4),.ct table.c5 tbody td:nth-child(2),.ct table.c5 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(2),.ct table.c6 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(6){background:var(--tb-col)!important}
+.ct table.long td:nth-child(3){background:none!important}
+.ct table.long.c3 td:nth-child(2),.ct table.long.c4 td:nth-child(2),.ct table.long.c4 td:nth-child(4){background:var(--tb-col)!important}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:none}
+.cn-h:nth-child(1),.cn-row>div:nth-child(1){background:var(--tb-col)}
+@media (max-width:640px){
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+  .cn-row>div:nth-child(1){background:none}
+}
+
+/* 강의 끝 핵심 정리 제목 바: 녹색 바탕 + 흰 글씨 */
+:root{--sum-bg:#2f7a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sum-bg:#2d6a4f}}
+:root[data-theme="dark"]{--sum-bg:#2d6a4f}
+.ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
+.ct p.sh.sum strong{color:#fff}
+
+/* 현재 위치 줄·진행 막대 (모든 화면) */
+.where{display:none;max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px));font-size:13px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.where b{color:var(--accent);font-weight:800}
+.prog{height:3px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s linear}
+.tocbtn{display:none}
+.scrim{display:none}
+/* 세로 태블릿·휴대폰: 본문은 넓게, 목차는 꺼내 보기 */
+@media (max-width:860px){
+  .where{display:block}
+  .tocbtn{display:inline-flex}
+  nav.toc{display:block;position:fixed;top:0;bottom:0;left:0;z-index:40;width:min(320px,82vw);max-height:none;
+    background:var(--card);border-right:1px solid var(--line);padding:calc(16px + env(safe-area-inset-top,0px)) 12px 24px;
+    transform:translateX(-105%);transition:transform .2s ease;box-shadow:0 0 30px rgba(0,0,0,.18)}
+  body.tocopen nav.toc{transform:none}
+  html body nav.toc{top:0;bottom:auto;height:100vh;height:100dvh;max-height:none;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .scrim{position:fixed;inset:0;z-index:39;background:rgba(0,0,0,.28)}
+  body.tocopen .scrim{display:block}
+  nav.toc a{font-size:15px;padding:8px 10px}
+  }
+@media (prefers-reduced-motion:reduce){nav.toc{transition:none}.prog i{transition:none}}
+.ct p.more{margin:14px 0 0;text-align:right;font-size:.92em}
+.ct p.more a{color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor}
+</style>
+</head>
+<body id="top">
+<div class="bar">
+<div class="bar-in">
+<a class="home" href="./">← 공부방</a>
+<button aria-controls="toc" aria-expanded="false" class="btn tocbtn" id="tocBtn">목차</button>
+<span class="ttl">사례관리론 요약노트</span>
+<label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
+<select id="jump"><option value="">강의 바로가기</option><option value="l1">1강 · 사례관리의 관점</option><option value="l2">2강 · 잔여적 사례관리</option><option value="l3">3강 · 제도적 사례관리</option><option value="l4">4강 · 사례관리의 발달과정</option><option value="l5">5강 · 사례관리의 이론</option><option value="l6">6강 · 사례관리의 비교와 함의</option><option value="l7">7강 · 사례관리 실천과정과 기록 (1) 초기단계</option><option value="l8">8강 · 사례관리 실천과정과 기록 (2) 사정단계</option><option value="l9">9강 · 사례관리 실천과정과 기록 (3) 목표 및 계획 수립 단계</option><option value="l10">10강 · 사례관리 실천과정과 기록 (4) 실행 및 점검 단계</option><option value="l11">11강 · 사례관리 실천과정과 기록 (5) 평가 및 종결 단계</option><option value="l12">12강 · 민간 사례관리: 종합사회복지관</option><option value="l13">13강 · 공공 사례관리</option><option value="l14">14강 · 대상별 사례관리: 노인 사례관리</option><option value="l15">15강 · 사회관리로서 사례관리</option></select>
+<div class="sp">
+<button aria-pressed="false" class="btn" id="focusBtn" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
+<button aria-label="글자 작게" class="btn" id="fsDown" title="글자 작게">가−</button>
+<button aria-label="글자 크게" class="btn" id="fsUp" title="글자 크게">가+</button>
+<button class="btn" id="themeBtn">다크</button>
+</div>
+</div>
+<div aria-live="polite" class="where"><span id="whereTxt"></span></div>
+<div aria-hidden="true" class="prog"><i id="progI"></i></div>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<nav aria-label="강의 목차" class="toc" id="toc"><h2>목차</h2><ol><li><a href="#l1"><b>1</b><span>사례관리의 관점</span></a></li><li><a href="#l2"><b>2</b><span>잔여적 사례관리</span></a></li><li><a href="#l3"><b>3</b><span>제도적 사례관리</span></a></li><li><a href="#l4"><b>4</b><span>사례관리의 발달과정</span></a></li><li><a href="#l5"><b>5</b><span>사례관리의 이론</span></a></li><li><a href="#l6"><b>6</b><span>사례관리의 비교와 함의</span></a></li><li><a href="#l7"><b>7</b><span>사례관리 실천과정과 기록 (1) 초기단계</span></a></li><li><a href="#l8"><b>8</b><span>사례관리 실천과정과 기록 (2) 사정단계</span></a></li><li><a href="#l9"><b>9</b><span>사례관리 실천과정과 기록 (3) 목표 및 계획 수립 단계</span></a></li><li><a href="#l10"><b>10</b><span>사례관리 실천과정과 기록 (4) 실행 및 점검 단계</span></a></li><li><a href="#l11"><b>11</b><span>사례관리 실천과정과 기록 (5) 평가 및 종결 단계</span></a></li><li><a href="#l12"><b>12</b><span>민간 사례관리: 종합사회복지관</span></a></li><li><a href="#l13"><b>13</b><span>공공 사례관리</span></a></li><li><a href="#l14"><b>14</b><span>대상별 사례관리: 노인 사례관리</span></a></li><li><a href="#l15"><b>15</b><span>사회관리로서 사례관리</span></a></li></ol></nav>
+<main>
+<section class="intro">
+<h1>사례관리론 요약노트 1~15강</h1>
+<p>강의노트를 절반 분량으로 줄인 요약본입니다. 출제 표시(📘·5️⃣·4️⃣)가 붙은 부분은 강의노트 그대로 두었고, 나머지는 핵심만 남겼습니다. 영화·사례 적용 표처럼 긴 설명은 뺐으니, 자세한 내용은 각 강 끝의 링크로 강의노트를 보세요.</p>
+<div class="legend">
+<span><span class="mk">📘</span>2025 기말 연습문제 (수정)에 출제된 부분</span><span><span class="mk">5️⃣</span>2025 기말시험 후기에 나온 부분</span><span><span class="mk">4️⃣</span>2024 기말시험 후기에 나온 부분</span>
+<span><mark class="hl hl-y" style="cursor:default;white-space:nowrap;flex:none;align-self:flex-start">형광펜</mark> 글을 드래그(휴대폰은 길게 눌러 선택)하면 색을 고를 수 있습니다. 칠한 곳을 누르면 색 변경·지우기. 아래 「PC·휴대폰 연동」을 켜면 기기끼리 맞춰집니다.</span>
+</div>
+</section>
+<section class="lec" id="l1"><header class="lh"><span class="no">1강</span><h2>사례관리의 관점</h2></header><div class="ct">
+<h3>1. 사례관리란 무엇인가</h3>
+<p class="sh"><strong>사례관리를 배우는 이유</strong></p>
+<ul>
+<li><strong>복지관의 3대 기능</strong> — 서비스 제공, 지역사회 조직화, 사례관리 기능이며, 사례관리는 기관·시설의 기본 서비스임.</li>
+<li><strong>사례관리의 흐름</strong> — 초기면담 → 문제 사정 → 서비스 계획 → 조정 → 성과 달성.</li>
+
+
+</ul>
+<p class="sh"><strong>사례관리(Case Management)의 어원</strong></p>
+<ul>
+<li><strong>Case</strong> — 라틴어 "cadere"(떨어지다, 넘어지다)에서 온 말로, 문제가 생긴 상황(경우·사건·사례)을 뜻함.</li>
+<li><strong>Management</strong> — 능숙하게 다루고 통제하는 능력으로, 전문적 사회복지사의 영역임.</li>
+</ul>
+<p class="sh"><strong>용어의 변화: Social Casework → Case Management</strong></p>
+<ul>
+<li><strong>기원</strong> — COS 우애방문원 메리 리치몬드가 『사회진단』(1917)을 저술하면서 우애방문원이 소셜 케이스워커로 불리게 됨.</li>
+
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>Case management</strong> — 복잡하고 파편화된 현대사회에서 클라이언트가 필요한 다양한 자원들을 효율적으로 찾아 연결하고 관리하는 서비스 조정자 및 통합자의 역할이 강조된 개념임.</li>
+<li><strong>변화의 계기</strong> — 1960년대 정신장애인의 탈시설화로 지역사회 적응을 돕는 사례관리가 확산됨.</li>
+</ul>
+<p class="tt"><strong>Social casework와 Case management 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>Social casework</th><th>Case management</th></tr></thead><tbody>
+<tr><td data-label="구분">초점</td><td data-label="Social casework">클라이언트의 내면적 변화, 직접적 관계를 통한 문제 해결</td><td data-label="Case management">다양한 욕구 해결을 위한 자원의 연결·관리·조정</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="Social casework">인성 개발과 환경에 대한 적응</td><td data-label="Case management">문제 해결, 효율적인 서비스 전달</td></tr>
+<tr><td data-label="구분">주요 활동</td><td data-label="Social casework">직접적인 치료, 상담, 생활관리</td><td data-label="Case management">자원 연결, 서비스 조정과 통합</td></tr>
+<tr><td data-label="구분">클라이언트와의 관계</td><td data-label="Social casework">상대적으로 권위주의적</td><td data-label="Case management">상대적으로 평등한 관계</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>잔여적 사례관리에 대한 비판: 희생자 비난</strong></p>
+<ul>
+
+<li><strong>비판의 내용</strong> — 문제의 근본 원인은 부조리한 사회구조인데, 잔여적 사례관리는 구조의 희생자인 개인을 비난함.</li>
+
+</ul>
+<p class="sh"><strong>제도적 사례관리의 목표와 개념</strong></p>
+<ul>
+<li><strong>목표</strong> — 부조리한 사회구조에 억압받는 개인의 해방과 사회변화.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>개념</strong> — 사례관리란 사회적 위험에 노출된 시민의 사회적 억압 해체, 시민권 회복, 권리 옹호를 위한 정치적 실천임.</li>
+<li><strong>잔여적 사례관리와의 차이</strong> — 자원 원조·전달에 그치지 않고 구조 변화를 위한 정치적 실천까지 포함함.</li>
+</ul>
+<p class="tt"><strong>케이스 발생 원인에 따른 두 관점</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">바라보는 대상</td><td data-label="잔여적 사례관리">개인, 인접환경</td><td data-label="제도적 사례관리">사회구조</td></tr>
+<tr><td data-label="구분">케이스의 원인</td><td data-label="잔여적 사례관리">적응하지 못하는 개인, 기능하지 못하는 인접환경</td><td data-label="제도적 사례관리">사회적 위험에 빠진 시민, 부조리한 사회구조</td></tr>
+<tr><td data-label="구분">해결 방향</td><td data-label="잔여적 사례관리">개인의 적응 지원, 역기능적 인접환경을 순기능으로 전환</td><td data-label="제도적 사례관리">사회구조를 변화시키지 않는 한 문제는 지속되므로 구조 변화 추구</td></tr>
+</tbody></table></div>
+<h3>2. 상이한 사회복지실천과 사례관리</h3>
+<p class="sh"><strong>어항 속 금붕어의 비유</strong></p>
+<ul>
+<li><strong>비유</strong> — 병든 금붕어를 치료해 돌려보내도 어항이 문제면 병이 반복됨.</li>
+<li><strong>잔여적 관점</strong> — 물(인접환경)까지 바꿔야 한다고 봄.</li>
+<li><strong>제도적 관점</strong> — 어항(사회구조) 자체를 바꾸지 않으면 문제가 지속된다고 봄.</li>
+
+</ul>
+<p class="sh"><strong>잔여주의</strong></p>
+<ul>
+<li><strong>기반 철학</strong> — 자유주의(시장자유주의), 인간도 노동상품으로 봄.</li>
+<li><strong>태도</strong> — 자립의지, 자선, 선별주의.</li>
+<li><strong>정책</strong> — 선별된 잉여 인간에 대한 최소한의 급여정책.</li>
+<li><strong>실천론</strong> — 정신역동모델, 강점이론, 생태체계론 등.</li>
+<li><strong>실천기술론</strong> — 개인관리, 전통사회복지실천.</li>
+</ul>
+<p class="sh"><strong>제도주의</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>기반 철학</strong> — 사회민주주의로, 자본주의는 불평등의 온상이므로 시장을 조절해야 인간이 사회적 위험으로부터 보호받을 수 있다고 봄.</li>
+<li><strong>태도</strong> — 권력/구조, 연대, 보편주의.</li>
+<li><strong>정책</strong> — 보편적인 시민에 대한 기본적인 급여제공.</li>
+<li><strong>실천론</strong> — 푸코의 권력론, 프레이리의 교육론, 알린스키의 조직론 등.</li>
+<li><strong>실천기술론</strong> — 사회관리, 급진적 사회복지실천.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>잔여주의와 제도주의 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span>구분</th><th>잔여주의</th><th>제도주의</th></tr></thead><tbody>
+<tr><td data-label="구분">기반 철학</td><td data-label="잔여주의">자유주의</td><td data-label="제도주의">사회민주주의</td></tr>
+<tr><td data-label="구분">태도</td><td data-label="잔여주의">자립의지, 자선, 선별주의</td><td data-label="제도주의">권력/구조, 연대, 보편주의</td></tr>
+<tr><td data-label="구분">정책</td><td data-label="잔여주의">선별된 잉여 인간에 대한 최소한의 급여정책</td><td data-label="제도주의">보편적인 시민에 대한 기본적인 급여제공의 정책</td></tr>
+<tr><td data-label="구분">실천론</td><td data-label="잔여주의">정신역동모델, 강점이론, 생태체계론 등</td><td data-label="제도주의">푸코의 권력론, 프레이리의 교육론, 알린스키의 조직론 등</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="잔여주의">잔여적 사례관리</td><td data-label="제도주의">제도적 사례관리</td></tr>
+<tr><td data-label="구분">기술론</td><td data-label="잔여주의">개인관리, 전통사회복지실천</td><td data-label="제도주의">사회관리, 급진적 사회복지실천</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>자선조직협회(COS, Charity Organization Society)</strong></p>
+<ul>
+<li><strong>결성</strong> — 1869년 결성, 1870년 자선조직협회로 개칭.</li>
+
+<li><strong>주요 목적</strong> — ① 자선의 중복방지 ② 구빈자의 판정(우애방문원의 조사) ③ 구걸 방지를 통한 자립.</li>
+
+
+<li><strong>실천 방식</strong> — 우애방문원이 보호 대상을 구분해 클라이언트를 위한(for client) 자선을 연결함.</li>
+</ul>
+<p class="sh"><strong>인보관 운동(Settlement House Movement)</strong></p>
+<ul>
+<li><strong>시작</strong> — 1884년 사무엘 바네트 목사가 자선만으로는 빈곤이 해결되지 않는다고 보고 시작함.</li>
+<li><strong>실천 방식</strong> — 빈곤 지역에 인보관을 짓고 권리를 가진 시민과 함께(with citizen with right) 운동함.</li>
+<li><strong>토인비홀</strong> — 런던에 세워진 최초의 인보관.</li>
+<li><strong>설립취지</strong> — "무슨 일을 우리가 할 수 있을까?"</li>
+
+<li><strong>활동가</strong> — 대학생 자원봉사자(volunteer)가 주민과 함께 거주하며 교육·문화활동, 조사, 사회입법 변화까지 이끎.</li>
+</ul>
+<p class="sh"><strong>케어센터(Care Center)와 커뮤니티센터(Community Center)</strong></p>
+<ul>
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>자선조직협회</strong> — 돌봄을 제공하거나 자원을 연결하는 케어센터 역할을 함.</li>
+<li><strong>인보관</strong> — 주민이 함께 토론·학습하는 커뮤니티센터 역할을 함.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>자선조직협회와 인보관 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>자선조직협회</th><th>인보관</th></tr></thead><tbody>
+<tr><td data-label="구분">문제의 원인</td><td data-label="자선조직협회">개인</td><td data-label="인보관">지역, 환경과 구조</td></tr>
+<tr><td data-label="구분">참여자</td><td data-label="자선조직협회">주로 상류층의 우애방문원</td><td data-label="인보관">교육받은 중류층과 지역주민</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="자선조직협회">자선을 통한 빈민구제, 빈곤자 조사, 빈민개조</td><td data-label="인보관">기존 제도와 질서 비판, 사회개혁, 협동과 연대를 통한 문제해결</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="자선조직협회">기존 기관들의 서비스 조정</td><td data-label="인보관">주민교육, 주민의 문제대처 능력 향상, 주민 상호관계 향상 노력</td></tr>
+<tr><td data-label="구분">영향</td><td data-label="자선조직협회">사회복지협의회, 공동모금으로 발전</td><td data-label="인보관">사회개혁, 사회운동으로 발전</td></tr>
+<tr><td data-label="구분">출현시기</td><td data-label="자선조직협회">영국: 1869 런던 COS / 미국: 1877 버팔로 COS</td><td data-label="인보관">영국: 1884 런던 토인비홀 / 미국: 1886 뉴욕, 1888 시카고 헐 하우스</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>이 교과목에서의 호명</strong></p>
+<ul>
+<li><strong>잔여적 사례관리</strong> — 자선조직협회의 흐름, '사례관리'로 부름.</li>
+<li><strong>제도적 사례관리</strong> — 인보관 운동의 흐름, '사회관리'로 부름.</li>
+</ul>
+<h3>3. 사례관리의 두 관점과 실제 적용</h3>
+<p class="sh"><strong>관계 속의 개인과 구조</strong></p>
+<ul>
+<li><strong>관계 속의 존재</strong> — 개인은 관계 속에서 존재함.</li>
+<li><strong>구조·제도의 형성</strong> — 관계가 패턴화되면 구조와 제도가 되고, 이는 다시 개인의 관계에 영향을 줌.</li>
+
+
+</ul>
+<p class="sh"><strong>인접환경과 구조</strong></p>
+<ul>
+<li><strong>잔여적 사례관리(인접환경 강조)</strong> — 가족·친구, 직장·학교, 지역사회 등 인접환경을 사정하고 자원을 연결함.</li>
+<li><strong>제도적 사례관리(구조 강조)</strong> — 사회·국가·지구촌 관점에서 근본 원인을 찾음.</li>
+<li><strong>유의점</strong> — 제도적 사례관리는 인접환경을 무시하지 않고 그것을 넘어선 실천임.</li>
+</ul>
+<p class="tt"><strong>잔여적-환경 강조와 제도적-구조 강조의 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>요소</th><th>잔여적-환경 강조</th><th>제도적-구조 강조</th></tr></thead><tbody>
+<tr><td data-label="요소">사회적 요인</td><td data-label="잔여적-환경 강조">사회환경은 배경정보로서 관계가 있으며, 분석을 위해 사용</td><td data-label="제도적-구조 강조">사회구조는 문제를 설명하는 주된 요인이며 분석과 실천에 사용</td></tr>
+<tr><td data-label="요소">개인과 환경</td><td data-label="잔여적-환경 강조">개인은 환경에 적응하며 순응</td><td data-label="제도적-구조 강조">개인과 환경 사이에 변화를 추구</td></tr>
+<tr><td data-label="요소">심리적 요인과 사회적 요인</td><td data-label="잔여적-환경 강조">실천할 때 사용되고 탐색됨</td><td data-label="제도적-구조 강조">양자 간을 연결시키고자 함</td></tr>
+<tr><td data-label="요소">개인</td><td data-label="잔여적-환경 강조">개인을 비난하거나 희생시킴</td><td data-label="제도적-구조 강조">개인 원조에 초점, 개인을 존중하고 사회구조를 비난</td></tr>
+<tr><td data-label="요소">사회복지실천의 사회통제 기능</td><td data-label="잔여적-환경 강조">이를 수용</td><td data-label="제도적-구조 강조">비판적 분석으로, 이러한 기능수행을 경계</td></tr>
+<tr><td data-label="요소">사회에 대한 시각</td><td data-label="잔여적-환경 강조">있는 그대로 또는 약간의 개량 수용</td><td data-label="제도적-구조 강조">사회에 대해 비판적 분석</td></tr>
+<tr><td data-label="요소">자율성과 권리</td><td data-label="잔여적-환경 강조">체계 내에서 보호</td><td data-label="제도적-구조 강조">체계에 대항해서 방어</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>비교 항목의 보충 설명</strong></p>
+<ul>
+
+
+
+<li><strong>급진적 사회복지실천과의 연결</strong> — 체계에 대항해서 방어한다는 점에서 맞닿아 있음.</li>
+</ul>
+<p class="tt"><strong>두 사례관리 관점의 요약</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>관점</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="관점">문제의 원인</td><td data-label="잔여적 사례관리">환경에 대처하지 못하는 개인</td><td data-label="제도적 사례관리">부적절한 사회경제구조</td></tr>
+<tr><td data-label="관점">사회적 요인</td><td data-label="잔여적 사례관리">인접환경 강조</td><td data-label="제도적 사례관리">사회경제구조 강조</td></tr>
+<tr><td data-label="관점">해결방법</td><td data-label="잔여적 사례관리">인접환경에 적응하는 개인</td><td data-label="제도적 사례관리">부적절하게 설계된 사회구조 변화</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>송파 세 모녀 사건 개요</strong></p>
+<ul>
+<li><strong>사건</strong> — 2014년 2월 송파구 반지하에서 어머니와 두 딸이 생활고로 생을 마감함.</li>
+<li><strong>가족 상황</strong> — 어머니는 낙상으로 실직, 큰딸은 만성질환으로 노동 불가, 작은딸은 신용불량 상태였음.</li>
+
+<li><strong>복지제도 신청</strong> — 부양의무자 조건 등으로 국민기초생활보장제도에서 제외됨.</li>
+</ul>
+<p class="sh"><strong>송파 세 모녀 사건의 관점별 분석</strong></p>
+<ul>
+
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>제도적 사례관리의 원인 해석</strong> — 근로빈곤, 복지제도의 문턱, 부양의무자 기준, 의료·주거 접근성 제한 등 사회구조와 정책 실패가 만든 복합적 구조적 빈곤의 결과로 해석함.</li>
+
+
+
+
+
+
+</ul>
+<p class="tt"><strong>송파 세 모녀 사건의 관점별 사례관리</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">문제의 원인</td><td data-label="잔여적 사례관리">어머니의 부상과 실직, 큰딸의 만성질환, 작은딸의 신용불량 등 개별 가족 구성원의 문제 누적</td><td data-label="제도적 사례관리">근로빈곤, 복지제도의 문턱, 부양의무자 기준, 의료·주거 접근성 제한 등 사회구조와 정책 실패</td></tr>
+<tr><td data-label="구분">사례관리 이해</td><td data-label="잔여적 사례관리">위기에 신속히 개입하고 서비스로 연계하는 기술적·행정적 실천</td><td data-label="제도적 사례관리">사회적 억압과 배제를 해체하고 권리와 정의 실현을 위한 구조 개입, 클라이언트는 변화의 주체</td></tr>
+<tr><td data-label="구분">사회적 요인</td><td data-label="잔여적 사례관리">친척, 이웃, 직장, 마을, 지역사회 등 인접환경의 역기능</td><td data-label="제도적 사례관리">사회복지제도와 사회구조의 부적절한 설계</td></tr>
+<tr><td data-label="구분">해결방법</td><td data-label="잔여적 사례관리">경제적 지원, 긴급지원제도 안내, 기초생활보장 신청 등 단기적 개입, 자기개발을 통한 적응과 자립</td><td data-label="제도적 사례관리">시민교육, 시민 조직화, 부양의무자 기준 철폐, 정책 감시, 제도개혁, 당사자 조직화 등 장기적·정치적 전략</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사건 이후의 대응과 평가</strong></p>
+<ul>
+<li><strong>찾아가는 동주민센터(찾동)</strong> — 정보 접근성 문제로 보고 사례 발굴을 강화한 대응으로, 잔여적 방향임.</li>
+<li><strong>제도적 관점의 평가</strong> — 세 모녀는 동주민센터에 갔지만 부양의무자 조건으로 지원받지 못했으며, 의료가 시민의 권리였다면 예방할 수 있었다고 봄.</li>
+</ul>
+
+<p class="more"><a href="사례관리론_강의노트.html#l1">1강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l2"><header class="lh"><span class="no">2강</span><h2>잔여적 사례관리</h2></header><div class="ct">
+<h3>1. 잔여적 사례관리의 정의</h3>
+
+
+<p class="sh"><strong>협회와 학회의 정의</strong></p>
+<ul>
+
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>영국사례관리자협회(2025)</strong> — 개인의 건강, 사회보호, 교육과 고용 욕구를 충족시키기 위해 요구되는 옵션과 서비스들을 사정, 계획, 실행, 조정, 점검, 평가하는 협력적 과정이며, 의사소통과 가용할 수 있는 자원들을 사용하여 비용 효과적인 성과의 질을 증진시키는 것. 과거보다 산출, 자원, 비용효과에 더 초점을 맞춤.</li>
+<li><strong>한국사례관리학회(2016)</strong> — 클라이언트와 가족의 사회적 기능 회복을 돕는 통합적 실천방법으로, 강점관점 사정을 강조함(잔여적 관점의 정의).</li>
+</ul>
+<p class="sh"><strong>잔여적 사례관리의 종합적 정의</strong></p>
+<ul>
+<li><strong>정의</strong> — 복합적 욕구를 가진 클라이언트에게 서비스를 통합적으로 연계·조정하고 자원을 효율적으로 관리·제공하여 기능 회복과 생활 안정을 달성하려는 실천 전략.</li>
+
+
+</ul>
+<p class="tt"><strong>잔여적 사례관리 정의의 강조점</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>정의</th><th>핵심 내용</th><th>강조점</th></tr></thead><tbody>
+<tr><td data-label="정의">목슬레이(1989)</td><td data-label="핵심 내용">공식적·비공식적 지원 네트워크의 조직·조정·유지</td><td data-label="강조점">생활기술 증진, 서비스 제공자 능력 발전, 효율성·효과성</td></tr>
+<tr><td data-label="정의">무어(1990)</td><td data-label="핵심 내용">비공식·공식 보호체계 활동의 통합</td><td data-label="강조점">잠재력 발휘, 사회환경 내 효과적 상호작용</td></tr>
+<tr><td data-label="정의">베이커와 인타글리아타(1992)</td><td data-label="핵심 내용">옹호, 서비스 조정, 자원 통제, 서비스 구입</td><td data-label="강조점">기관이 클라이언트를 책임지는 활동</td></tr>
+<tr><td data-label="정의">블러키스(1992)</td><td data-label="핵심 내용">서비스 연계망 안에서의 상호작용 과정</td><td data-label="강조점">지지적·효과적·효율적·비용효과적 제공</td></tr>
+<tr><td data-label="정의">우드사이드와 맥클램(2006)</td><td data-label="핵심 내용">다양한 서비스를 효과적으로 전달</td><td data-label="강조점">실천전략</td></tr>
+<tr><td data-label="정의">미국사회복지사협회(2013)</td><td data-label="핵심 내용">서비스의 계획·실행·모니터링</td><td data-label="강조점">전문가팀 활동을 통한 서비스 제공과 조정</td></tr>
+<tr><td data-label="정의">영국사례관리자협회(2025)</td><td data-label="핵심 내용">사정·계획·실행·조정·점검·평가하는 협력적 과정</td><td data-label="강조점">비용 효과적인 성과의 질</td></tr>
+<tr><td data-label="정의">한국사례관리학회(2016)</td><td data-label="핵심 내용">클라이언트와 가족의 사회적 기능 회복을 돕는 통합적 실천방법</td><td data-label="강조점">운영체계 확립, 강점관점 사정, 내적·지역사회 자원 활용</td></tr>
+</tbody></table></div>
+<h3>2. 잔여적 사례관리의 관점</h3>
+<p class="sh"><strong>개별사회사업과 사례관리의 구분</strong></p>
+<ul>
+<li><strong>명칭의 변화</strong> — 개별사회사업(Social Casework)이 1960년대 탈시설화를 계기로 사례관리(Case Management)로 불리기 시작함.</li>
+
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>주요 개입</strong> — 개별사회사업은 상담·치료·교육 등 직접적 개입을 하고, 사례관리는 지역사회 자원 발굴·연계·조정·옹호 등 간접적 개입을 강조하며 필요시 직접 서비스도 제공함.</li>
+
+
+
+
+</ul>
+<p class="tt"><strong>개별사회사업과 사례관리 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>개별사회사업(Social Casework)</th><th>사례관리(Case Management)</th></tr></thead><tbody>
+<tr><td data-label="구분">초점</td><td data-label="개별사회사업(Social Casework)">개인의 심리내적 변화, 인격 발달, 환경 적응</td><td data-label="사례관리(Case Management)">개인의 기능 향상 및 삶의 질 증진, 자원 연계 및 서비스 조정</td></tr>
+<tr><td data-label="구분">주요 개입</td><td data-label="개별사회사업(Social Casework)">직접적 개입: 상담, 치료, 교육 등, 사회복지사와 클라이언트 간의 일대일 관계 기반</td><td data-label="사례관리(Case Management)">간접적 개입 강조: 지역사회 자원 발굴, 연계, 조정, 옹호, 필요시 직접 서비스도 제공</td></tr>
+<tr><td data-label="구분">관계 강조</td><td data-label="개별사회사업(Social Casework)">사회복지사와 클라이언트 간의 치료적 관계</td><td data-label="사례관리(Case Management)">클라이언트와 자원 체계(서비스 네트워크) 전반의 관계 관리 및 조정</td></tr>
+<tr><td data-label="구분">서비스 범위</td><td data-label="개별사회사업(Social Casework)">특정 기관 내에서 제공되는 개별적 서비스 경향</td><td data-label="사례관리(Case Management)">지역사회 내 다양한 공식/비공식 자원과 서비스를 활용하는 포괄적이고 통합적인 접근</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="개별사회사업(Social Casework)">개인의 문제 해결 능력 향상 및 자아실현</td><td data-label="사례관리(Case Management)">복합적 욕구 해결, 보호의 연속성 보장, 서비스의 효과성과 효율성 증진</td></tr>
+<tr><td data-label="구분">주요 배경</td><td data-label="개별사회사업(Social Casework)">자선조직협회 운동, 정신분석학 등의 영향(개인 심리적 측면 강조)</td><td data-label="사례관리(Case Management)">탈시설화 운동, 서비스 전달 체계의 파편화, 복합 욕구 증가(사회 환경적 측면 강조)</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>영화 『나, 다니엘 블레이크』 개요</strong></p>
+<ul>
+<li><strong>줄거리</strong> — 심장병으로 일을 쉬어야 하는 목수 다니엘이 근로 적합 판정, 온라인 신청 장벽, 수당 제재를 겪다 항고심사 직전 사망함.</li>
+
+
+
+<li><strong>핵심 대사</strong> — "나는 클라이언트도, 고객도, 서비스 이용자도 아니다. 나는 개가 아니라 사람이며 시민이다."</li>
+</ul>
+
+
+<p class="sh"><strong>전통적인 사회복지실천 관점과 신자유주의 이후 사례관리</strong></p>
+
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>전통적인 사회복지실천 관점과 신자유주의 이후 사례관리 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>전통적인 사회복지실천 관점</th><th>신자유주의 이후 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">대상의 초점</td><td data-label="전통적인 사회복지실천 관점">문제를 가진 개인(Individual With a Problem)</td><td data-label="신자유주의 이후 사례관리">개인이 가진 문제(Problems of Individuals)</td></tr>
+<tr><td data-label="구분">대상의 명칭</td><td data-label="전통적인 사회복지실천 관점">클라이언트(Client)</td><td data-label="신자유주의 이후 사례관리">소비자/고객(Consumer/Customer)</td></tr>
+<tr><td data-label="구분">인간관</td><td data-label="전통적인 사회복지실천 관점">환경 속 인간(Person-in-Environment)</td><td data-label="신자유주의 이후 사례관리">돌봄 환경 속 인간(Person-in-care-Environment)</td></tr>
+<tr><td data-label="구분">돌봄체계</td><td data-label="전통적인 사회복지실천 관점">분절된 돌봄체계(Care System)</td><td data-label="신자유주의 이후 사례관리">지역중심의 통합적 돌봄의 체계(System of Care)</td></tr>
+<tr><td data-label="구분">개입의 방향</td><td data-label="전통적인 사회복지실천 관점">인간을 변화시키기(People Changing)</td><td data-label="신자유주의 이후 사례관리">서비스 대상 유형화(People Processing)와 생활 유지(People Sustaining)</td></tr>
+<tr><td data-label="구분">의사결정</td><td data-label="전통적인 사회복지실천 관점">프로그램화된 의사결정(Programmed Decision Making)</td><td data-label="신자유주의 이후 사례관리">의사결정의 공유(Shared Decision Making)</td></tr>
+<tr><td data-label="구분">지향</td><td data-label="전통적인 사회복지실천 관점">산출 지향(Output Driven)</td><td data-label="신자유주의 이후 사례관리">시간 제약, 산출, 성과 지향(Time-Framed, Output, Outcome Driven)</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="전통적인 사회복지실천 관점">역할 구분(Role Delineation)</td><td data-label="신자유주의 이후 사례관리">중복적 역할(Role Blurring)</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="전통적인 사회복지실천 관점">일반주의 실천(Generalist Practice)</td><td data-label="신자유주의 이후 사례관리">심화된 일반주의자 실천(Advanced Generalist Practice)</td></tr>
+<tr><td data-label="구분">체계</td><td data-label="전통적인 사회복지실천 관점">관료주의(Bureaucracy)</td><td data-label="신자유주의 이후 사례관리">기술적 관료주의(Technological Bureaucracy)</td></tr>
+</tbody></table></div>
+<h3>3. 잔여적 사례관리의 목적</h3>
+<p class="sh"><strong>궁극적 목적</strong></p>
+<ul>
+<li><strong>궁극적 목적</strong> — 복합적 욕구를 가진 클라이언트의 기능과 복지를 최대화함.</li>
+</ul>
+<p class="sh"><strong>여섯 가지 세부 목적</strong></p>
+<ul>
+<li><strong>클라이언트의 역량 강화</strong> — 자기결정능력, 정보 접근, 디지털 이해력 등을 향상시킴.</li>
+<li><strong>보호의 연속성</strong> — 횡적·종단적으로 단절 없는 보호체계와 중장기적 안전망을 유지함.</li>
+<li><strong>서비스의 통합성 증진</strong> — 복합적 욕구를 하나의 연계된 체계 안에서 대응함.</li>
+<li><strong>서비스 접근성 향상</strong> — 정보 제공과 네트워크로 손쉽게, 자율적으로 서비스를 이용하게 함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사회적 책임성</strong> — 개별 사회복지사가 독단적으로 해결하지 않고, 통합사례관리 등 다학제적 협력과 공동 책임을 강조함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>성과와 평가의 중요성</strong> — 성과 중심 접근이 클라이언트 복지 향상에 기여해야 함. 과정평가는 자원 연결과 진행 과정을, 성과평가는 만족도와 문제 해결 여부를 평가함.</li>
+</ul>
+
+
+<h3>4. 잔여적 사례관리의 사회적 요인</h3>
+<p class="sh"><strong>사회적 요인의 이해</strong></p>
+<ul>
+<li><strong>기본 입장</strong> — 개인에 초점을 두며, 사회적 요인을 인접환경으로 한정하고 배경으로만 사용함.</li>
+</ul>
+
+
+
+
+<h3>5. 잔여적 사례관리의 실제</h3>
+<p class="sh"><strong>개념과 사회적 요인, 사정, 목표</strong></p>
+<ul>
+<li><strong>개념과 사회적 요인</strong> — '인접환경'을 강조함(다니엘의 직업·가족 등 인접환경에서 문제가 발생).</li>
+<li><strong>사정</strong> — 근접한 사회환경에 대한 개인의 대처능력 결여(디지털 기기 미숙 등)로 문제가 발생했다고 봄.</li>
+<li><strong>목표</strong> — 근접한 사회환경에 적응하고 대처하도록 개인을 원조함(이력서 쓰기 코스 참여 등).</li>
+</ul>
+<p class="sh"><strong>잔여적 관점에서 본 인접환경의 역기능</strong></p>
+<ul>
+
+
+
+<li><strong>관점</strong> — 인접환경의 의사소통 패턴, 역할기대, 집단·가족 규범이 역기능적이므로 순기능화해야 한다고 봄.</li>
+</ul>
+<p class="tt"><strong>환경에 대처하지 못하는 개인의 사정과 목표</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>사정: 환경에 대처하지 못하는 개인</th><th>목표: 사회상황에 적응하고 대처할 수 있도록 원조</th></tr></thead><tbody>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">부적절하고 비효과적인 상호작용</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">개인 간 상호작용 개선</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">역할기대로 인한 스트레스</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">스트레스 경감</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">역할수행능력 부족, 비현실적 역할기대</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">기대의 수정</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">집단 혹은 가족 규범 간의 갈등</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">개인 간 갈등 해소</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">과거 경험을 통한 부정적 학습</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">부정적인 학습에 대한 수정, 현재와 과거의 경험 분리</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">대인관계 문제</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">대인관계 개선</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">사회적 지지 부족, 사회적 고립</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">사회적 지지 증진</td></tr>
+<tr><td data-label="사정: 환경에 대처하지 못하는 개인">물리적 자원의 결여</td><td data-label="목표: 사회상황에 적응하고 대처할 수 있도록 원조">물리적 자원 제공</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사정과 목표의 관계</strong></p>
+
+
+
+<p class="sh"><strong>실제 적용의 한계</strong></p>
+<ul>
+<li><strong>한계</strong> — 역할 기대를 수정해도 구조적 문제 안에 있으므로 실제로 해결되지 않음.</li>
+
+</ul>
+<h3>6. 잔여적 사례관리의 비판</h3>
+<p class="sh"><strong>네 가지 비판</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>첫째, 문제의 원인을 개인 내부로 환원</strong> — 클라이언트의 문제를 개인의 결함, 능력 부족, 생활기술 미비로 해석하고, 실업·빈곤·질병 등 구조적 문제를 개인의 선택과 책임 문제로 전환시킴. 사회구조의 모순은 가려지고 클라이언트는 실패한 존재로 낙인찍힘 (희생자 비난).</li>
+<li><strong>둘째, 제도 순응 중심의 현상 유지적 실천</strong> — 기존 제도 안의 효율적 관리에 집중하며, 규칙에 순응하지 못한 클라이언트는 배제됨.</li>
+<li><strong>셋째, 사회구조적 요인 분석의 부재</strong> — 제도의 불공정성을 다루지 않고 문제의 원인을 개인에게 전가해 구조를 정당화함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>넷째, 복지의 통제 기능 강화</strong> — 사례관리는 사회 질서 유지와 비용 통제를 핵심 목표로 삼으며, 클라이언트는 자율적 주체가 아닌 관리 대상으로 다뤄짐. 이로 인해 복지는 통제의 수단이 되며 문제 해결보다는 억제와 통합에 치우침.</li>
+</ul>
+
+
+<p class="sh sum"><strong>2강 핵심 정리</strong></p>
+<ul>
+
+
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>신자유주의 이후 사례관리</strong> — 소비자·고객 개념, 돌봄 환경 속 인간, 지역 중심 통합적 돌봄체계, 의사결정의 공유, 성과 지향, 중복적 역할, 기술적 관료주의로 변화함.</li>
+
+
+</ul><p class="more"><a href="사례관리론_강의노트.html#l2">2강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l3"><header class="lh"><span class="no">3강</span><h2>제도적 사례관리</h2></header><div class="ct">
+<h3>1. 제도적 사례관리의 정의</h3>
+<p class="sh"><strong>급진주의(Radicalism)</strong></p>
+<ul>
+<li><strong>정의</strong> — 문제의 근본 원인을 뿌리까지(radix) 파악하고 근본적으로 변화시키려는 사상과 태도.</li>
+
+</ul>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>급진사회복지실천</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>정의(Fook, 1993)</strong> — 개인 문제의 원인이 구조에 있다는 점을 주목하면서 개인해방과 사회변화를 달성하려는 것.</li>
+<li><strong>참치캔의 예</strong> — 참치캔을 따다 손을 베었을 때 잔여적 관점은 개인의 실수나 부주의로 보지만, 원인의 원인을 들여다보면 위험하게 디자인된 참치캔과 이를 유통하도록 허용한 정부의 법과 제도의 문제가 드러남.</li>
+</ul>
+<p class="sh"><strong>급진사회복지사의 역할</strong></p>
+<ul>
+<li><strong>맥락의 인식</strong> — 사회·정치·경제적 맥락이 일상의 실천에 미치는 영향을 인식함.</li>
+<li><strong>매개 역할</strong> — 개인과 사회를 매개함.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>푸크(Fook)가 제시한 급진사회복지실천의 주요 주제 5가지</strong></p>
+<ul>
+<li><strong>1. 구조적 분석</strong> — 개인 문제의 원인을 사회의 사회적·경제적 구조 속에서 찾음. 개인을 비난하지 않고 구조의 희생자로 봄.</li>
+<li><strong>2. 사회통제 기능 주목</strong> — 사회사업과 복지 서비스가 수행하는 사회통제 기능을 분석함.</li>
+<li><strong>3. 기존 질서 비판</strong> — 사회적·경제적·정치적 구조 속 기존 질서를 비판함.</li>
+<li><strong>4. 개인을 억압에서 보호</strong> — 경제 구조, 법·제도 구조, 기관과의 관계 등 다양한 층위의 억압으로부터 개인을 보호하는 것을 사회사업의 주요 역할로 봄.</li>
+<li><strong>5. 개인의 해방과 사회변화 추구</strong> — 개인을 자유롭게 하고 사회변화를 이루는 것을 목표로 함.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리(사회관리)의 개념</strong></p>
+<ul>
+<li><strong>개념</strong> — 개인을 사회적 위험에 노출된 사회구성원으로 보고, 근본원인인 사회구조를 변화시켜 개인의 해방과 사회변화를 동시에 추구함(사회관리).</li>
+<li><strong>정치적 실천</strong> — 사회적 억압 해체, 시민권 회복, 권리 옹호를 위한 정치적 실천.</li>
+<li><strong>실천 방법</strong> — 서비스 연계뿐 아니라 권리옹호, 집단행동, 정책 변화로 구조적 불평등 해소와 사회정의를 실현함.</li>
+
+</ul>
+<p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 운영 흐름</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">복합적 욕구·문제를 가진 클라이언트</td><td data-label="제도적 사례관리">사회적 위험에 노출된 사회구성원</td></tr>
+<tr><td data-label="구분">과정</td><td data-label="잔여적 사례관리">사례관리 과정</td><td data-label="제도적 사례관리">사회관리 과정</td></tr>
+<tr><td data-label="구분">결과</td><td data-label="잔여적 사례관리">욕구·문제 해결된 클라이언트</td><td data-label="제도적 사례관리">부조리하고 부적절한 사회구조 변혁</td></tr>
+<tr><td data-label="구분">궁극적 목표</td><td data-label="잔여적 사례관리">클라이언트의 기능과 복지 향상</td><td data-label="제도적 사례관리">개인의 해방과 사회변화</td></tr>
+</tbody></table></div>
+<h3>2. 제도적 사례관리의 관점</h3>
+<p class="sh"><strong>잔여적 사례관리에서 말하는 환경</strong></p>
+<ul>
+<li><strong>메리 리치몬드(1922)</strong> — 사회환경 간 의식적인 적응노력으로 인성을 개발하는 과정.</li>
+<li><strong>바우어스(1949)</strong> — 개인 역량과 지역사회 자원으로 클라이언트와 환경 간 더 나은 조정을 도모하는 예술.</li>
+<li><strong>펄만(1957)</strong> — 사회적 기능수행에서 나타난 문제에 더 효과적으로 대처하도록 돕는 과정.</li>
+<li><strong>공통점</strong> — 여기서의 환경은 사회구조가 빠진 인접환경이며, 개인을 비난할 수 있음(희생자 비난).</li>
+</ul>
+<p class="sh"><strong>잔여적 사례관리와 제도적 사례관리의 흐름</strong></p>
+<ul>
+<li><strong>잔여적 사례관리</strong> — 개인 간 상호작용 → 희생자 비난 → 의사소통·가족규범의 순기능화 → 기능향상과 사회적응.</li>
+<li><strong>제도적 사례관리</strong> — 사회구조에서 소외된 사람 → 구조적 역할 기대와 정책의 영향으로 초점 확대 → 실천에 활용 → 개인해방과 사회변화.</li>
+<li><strong>관계</strong> — 잔여적 개입을 하지 말라는 것이 아니라 구조적 환경까지 보자는 관점임.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리의 출발점</strong></p>
+<ul>
+<li><strong>1. 초점 확대하기</strong> — 인접환경을 넘어 사회구조, 국가, 지구촌까지 확대함.</li>
+<li>2. 확대된 초점을 실천에 활용하는 능력 획득하기.</li>
+</ul>
+<p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 관점 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">문제가 있는 개인, 개인의 문제</td><td data-label="제도적 사례관리">사회적 위험에 노출된 사회구성원</td></tr>
+<tr><td data-label="구분">문제 원인</td><td data-label="잔여적 사례관리">개인, 가족, 인접환경</td><td data-label="제도적 사례관리">계급, 권력이해, 이데올로기 신념과 같은 사회구조</td></tr>
+<tr><td data-label="구분">사례관리의 목표</td><td data-label="잔여적 사례관리">대인관계 원조</td><td data-label="제도적 사례관리">사회구조 변화</td></tr>
+</tbody></table></div>
+<h3>3. 제도적 사례관리의 목적</h3>
+<p class="sh"><strong>목적의 구조</strong></p>
+<ul>
+<li><strong>궁극적 목적</strong> — 부적절하게 설계된 사회경제구조 변화.</li>
+<li><strong>세부 목적</strong> — 사회적 역량강화, 이데올로기의 제약 완화, 사회적 낙인효과의 완화, 억압과 착취의 완화.</li>
+</ul>
+
+
+<h3>4. 제도적 사례관리의 사회적 요인</h3>
+<p class="sh"><strong>사회적 요인에 대한 제도적 관점</strong></p>
+<ul>
+<li><strong>기본 입장</strong> — 사회구조와 제도가 개인의 삶과 문제에 미치는 영향을 분석과 실천 모두에 활용함.</li>
+<li><strong>워크페어(workfare)</strong> — 구직활동·교육을 해야 수당을 주는 제3의 길 구조가 개인의 삶에 영향을 미침.</li>
+<li><strong>낙인의 원리</strong> — 잔여주의 복지는 불유쾌한 감정을 느끼게 해 복지로 돌아오지 않게 함.</li>
+</ul>
+<p class="tt"><strong>제도적 사례관리의 사회적 요인과 『나, 다니엘 블레이크』 적용</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>개념</th><th>영화 적용 사례</th></tr></thead><tbody>
+<tr><td data-label="구분">사회적 요인의 개념</td><td data-label="개념">사회구조와 제도가 개인 삶과 문제 형성에 미치는 영향 설명</td><td data-label="영화 적용 사례">'큰 사회론' 기조 하 복지 예산 삭감 → 복지가 보호 기능을 상실하고 오히려 통제·억압 수단으로 변질</td></tr>
+<tr><td data-label="구분"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> 사회적 요인의 역할</td><td data-label="개념">문제 원인을 사회적·구조적 요인에서 찾고, 실천에 활용</td><td data-label="영화 적용 사례">다니엘의 곤경은 개인 능력 부족이 아니라 복지 축소·조건 강화라는 구조적 정책의 결과 (온라인 신청을 어렵게 만든 접근성 구조)</td></tr>
+<tr><td data-label="구분">사회적 요인의 활용</td><td data-label="개념">분석·실천에 모두 적용</td><td data-label="영화 적용 사례">분석 단계에서 구조적 원인을 규명 → 실천 단계에서 제도 개선 운동, 권리옹호, 캠페인 등으로 연결하는 정책 옹호형 실천(advocacy practice)으로 확장 가능</td></tr>
+<tr><td data-label="구분">개인-환경 관계</td><td data-label="개념">개인과 환경의 상호작용 강조</td><td data-label="영화 적용 사례">다니엘·케이티의 고통은 '개인적 실패'가 아니라 신자유주의적 복지 축소라는 환경과의 부정적 상호작용의 산물임을 이해하고, 개인 문제를 사회, 경제, 정책 환경과 연계하여 통합적으로 이해</td></tr>
+<tr><td data-label="구분">심리-사회 요인의 연결</td><td data-label="개념">심리적 요인을 사회구조와 연결</td><td data-label="영화 적용 사례">비인간적 행정·기계적 절차 → 다니엘의 절망, 케이티의 수치심과 존엄 상실. 선별적 복지는 경제적 결핍만이 아니라 심리사회적 손상을 유발함</td></tr>
+<tr><td data-label="구분">문제의 원인 인식</td><td data-label="개념">문제를 사회구조 산물로 이해</td><td data-label="영화 적용 사례">다니엘의 죽음은 카메론 정부의 복지 축소로 인한 제도적 모순 (벽에 글을 쓰는 장면에서 행인이 복지 축소를 비판함)</td></tr>
+<tr><td data-label="구분">사회복지실천의 사회적 기능 인식</td><td data-label="개념">복지제도의 통제 기능 성찰</td><td data-label="영화 적용 사례">'큰 사회론' 하 복지는 엄격한 자격 심사와 기술관료주의로 운영되어 기존 복지제도에 순응하도록 사회통제 역할을 함. 사회복지사도 그 안에서 억압하는 존재로 남게 됨</td></tr>
+<tr><td data-label="구분">현상 유지에 대한 입장</td><td data-label="개념">문제를 비판하며 변화 모색</td><td data-label="영화 적용 사례">신자유주의 복지 현실 비판 → 변화를 요구. 현상유지=불평등의 재생산이라는 인식을 전제로 사회복지실천 목표를 '구조변혁적 개입'에 둠</td></tr>
+<tr><td data-label="구분">개인의 권리와 자율성</td><td data-label="개념">권리·자율성 보장 강조</td><td data-label="영화 적용 사례">다니엘은 정당한 급여·자율적 삶을 보장받지 못함. 복지는 시혜가 아니라 사회권이며 이를 보장하는 것이 국가의 법적, 윤리적 의무임을 인식</td></tr>
+<tr><td data-label="구분">사회적 변화에 대한 태도</td><td data-label="개념">변화를 지향</td><td data-label="영화 적용 사례">복지 축소와 차별적 인식 개선 촉구</td></tr>
+<tr><td data-label="구분">실천 형식</td><td data-label="개념">구조변화 연계 통합적 실천</td><td data-label="영화 적용 사례">개인 사례 → 정책 비판·개혁 운동으로 확장</td></tr>
+</tbody></table></div>
+<h3>5. 제도적 사례관리의 실제</h3>
+
+
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사회요인 ① 사회적 권력의 불균형, 불평등</strong></p>
+<ul>
+<li><strong>다니엘의 위치</strong> — 정보 접근성, 디지털 기술 활용 능력, 행정·법률 절차에 대한 지식 등에서 매우 불리한 위치에 있음.</li>
+<li><strong>국가와 복지 시스템</strong> — 제도 전반을 설계·운영하며 심사권·판단권·통제권 등 막강한 사회적 권력을 독점함.</li>
+<li><strong>결과</strong> — 복지 행정 과정에서 개인과 제도 사이에 뚜렷한 권력 불균형이 발생하며, 이로 인해 실질적으로 '사회적 약자'는 불이익과 소외를 경험하게 됨.</li>
+</ul>
+<p class="sh"><strong>사회요인 ② 지배 이데올로기의 실천</strong></p>
+<ul>
+<li><strong>정책의 방향</strong> — '큰 사회론' 등 신자유주의 정책은 효율성과 재정 절감을 위해 수당을 최대한 줄임.</li>
+
+</ul>
+<p class="sh"><strong>사회요인 ③ 지배 이데올로기의 신념</strong></p>
+<ul>
+<li><strong>잔여적 복지관</strong> — 복지는 잔여적 제도이며 국가 개입은 최소화되어야 한다는 신념.</li>
+<li><strong>수급 조건</strong> — 일할 수 없음이 명확한 소수에게만 제공하고, 수급자는 재취업 노력을 해야 한다는 관념.</li>
+<li><strong>부정적 이미지</strong> — 수급자는 게으르거나 국가를 속일 수 있다는 전제("나는 게으름뱅이도, 사기꾼도 아니다").</li>
+
+</ul>
+<p class="tt"><strong>부적절한 사회경제구조의 사정과 목표</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>사정: 부적절한 사회경제구조</th><th>목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</th></tr></thead><tbody>
+<tr><td data-label="사정: 부적절한 사회경제구조">권력의 결여</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">피착취자의 권력 증진</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">이데올로기로 인한 역할 제한: 지배적인 사회 풍습과 신념에 따른 제한</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">이데올로기의 제약(행동과 신념 모두) 완화</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">이익집단 간의 갈등: 집단 규범이 수행하는 은폐된 사회적 기능</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">지배이익집단의 착취 경감, 집단규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">변화능력의 부재 혹은 사회 변화에 대한 대처 능력의 부재</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">삶에 대한 변화와 통제 능력 향상, 보다 넓은 역사적/사회적 변화의 영향 인식</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">사회적 낙인 과정의 영향</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">사회적 낙인으로 인한 영향의 거부</td></tr>
+<tr><td data-label="사정: 부적절한 사회경제구조">사회경제구조적 제한</td><td data-label="목표: 사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조">구조적 제한을 변화시켜 물질적 자원 제공</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>『나, 다니엘 블레이크』의 사정과 목표 적용</strong></p>
+<div class="tw"><table class="long c3">
+<thead><tr><th>사정</th><th>영화 적용 사례</th><th>목표</th></tr></thead><tbody>
+<tr><td data-label="사정">권력의 결여</td><td data-label="영화 적용 사례">다니엘과 케이티는 복지 시스템 앞에서 철저히 수동적이며 결정권이 없는 존재임. 다니엘이 행정 절차를 스스로 해결하지 못해 주변 사람들의 도움을 받는 장면, 케이티가 생계를 위해 푸드뱅크에 의존하는 장면. 권력이 부족할 때 공동체 연대가 생존과 존엄 유지의 중요한 자원이 됨</td><td data-label="목표">피착취자의 권력 증진: 취약계층의 자기결정권 및 제도 대응 역량 강화 (시민교육, 시민단체의 옹호활동)</td></tr>
+<tr><td data-label="사정">이데올로기로 인한 역할 제한</td><td data-label="영화 적용 사례">'복지 수급자는 게으르다'는 지배적 신념이 다니엘이 겪는 억압의 핵심임. 심장병으로 일을 할 수 없음에도 구직 활동을 강요받는 장면은 이러한 신념이 얼마나 비인간적인지 폭로함</td><td data-label="목표">이데올로기의 제약(행동과 신념 모두) 완화: 이를 자각하는 세상읽기</td></tr>
+<tr><td data-label="사정">이익집단 간의 갈등</td><td data-label="영화 적용 사례">'큰 사회론'을 신봉하는 정부(지배 이익집단)는 복지 예산 삭감과 같은 정책으로 개인에게 희생을 강요하고, '자립'이라는 명목 하에 수급자를 통제·억압하는 은폐 기능이 작동함</td><td data-label="목표">지배 이익집단의 착취 경감, 집단 규범의 은폐된 기능 폭로, 권력의 불균형 제거</td></tr>
+<tr><td data-label="사정">변화능력의 부재 혹은 사회 변화에 대한 대처 능력의 부재</td><td data-label="영화 적용 사례">다니엘은 심장병으로 일을 할 수 없지만 근로능력 판정에서 탈락하여 경직된 규칙에 따라 무의미한 구직 활동을 강요받음. 개인의 힘으로 사회 구조적 문제에 대처할 수 없는 무력한 상황을 보여줌</td><td data-label="목표">삶에 대한 변화와 통제 능력 향상, 보다 넓은 역사적·사회적 변화의 영향 인식</td></tr>
+<tr><td data-label="사정"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> 사회적 낙인 과정의 영향</td><td data-label="영화 적용 사례">복지 수급자는 '게으르다'거나 '시스템을 속인다'는 낙인에 시달리며 자존감을 잃음. 특히 케이티가 식량을 구하지 못해 절망하는 장면은 낙인의 부정적 영향을 극명하게 보여줌</td><td data-label="목표">사회적 낙인으로 인한 영향의 거부: 인권과 존엄을 중심으로 복지를 재구성하고, 복지는 사회적 권리임을 인식</td></tr>
+<tr><td data-label="사정">사회경제구조적 제한</td><td data-label="영화 적용 사례">예산 삭감과 같은 사회경제구조적 제한으로 충분한 물질적 지원을 제공하지 못하고, 오히려 불필요한 행정 절차를 강요하여 시간과 노력을 낭비하게 함</td><td data-label="목표">구조적 제한을 변화시켜 물질적 자원 제공: 컴퓨터 활용 능력이 없어도 신청할 수 있는 제도 변화, 보편적 복지로 기본 생계 보장</td></tr>
+</tbody></table></div>
+<h3>6. 제도적 사례관리의 비판, 한계 및 대안</h3>
+<p class="sh"><strong>제도적 사례관리에 대한 비판</strong></p>
+<ul>
+<li><strong>첫째, 구체성 결여</strong> — 새로운 영역에서의 적용과 실천이 모호함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>둘째, 지나친 포괄성</strong> — 이론과 지침이 너무 포괄적이어서 실천에 옮기기 어렵다는 한계가 지적됨.</li>
+<li><strong>셋째, 개인적 욕구와 정서적 문제를 소홀히 함</strong> — 집합적 행동 의식 제고에 치중함.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리의 한계</strong></p>
+<ul>
+<li><strong>첫째, 권력관계</strong> — 평등 관계를 전제하나 실제로는 사회복지사의 영향력이 큼.</li>
+<li><strong>둘째, 자기 주도성 발휘 어려움</strong> — 법적·경제적·정치적 제약을 받음.</li>
+<li><strong>셋째, 자기 결정의 한계</strong> — 욕구 인식이나 의사결정 경험·기술 부족으로 선택에 제약을 받음.</li>
+<li><strong>넷째, 의견 불일치</strong> — 클라이언트가 변화나 급진적 해석에 동의하지 않을 수 있어 전통적·급진적 접근을 병행함.</li>
+</ul>
+
+
+<p class="sh"><strong>대안 ① 클라이언트가 처한 바로 현재의 상황에서 시작해라</strong></p>
+<ul>
+<li><strong>출발점</strong> — 사람들이 현재 처한 위치와 가장 절실한 문제에서 시작함.</li>
+<li><strong>급박한 문제의 원조</strong> — 급박한 문제는 반드시 처리하도록 원조함(Galper, 1980).</li>
+
+</ul>
+<p class="sh"><strong>대안 ② 개인의 해방과 변화를 저해하는 한계의 본질을 함께 모색해라</strong></p>
+<ul>
+<li><strong>동료로서의 관계</strong> — 전문가적 권위 없이 주민과 함께 변화를 모색하는 동료가 됨.</li>
+<li><strong>한계의 최소화</strong> — 한계를 그대로 받아들이지 말고 최소화함.</li>
+<li><strong>개인적 해방의 본질</strong> — 사회적으로 결정된 한계가 꼭 개인적 한계는 아님을 인정함(『할배의 탄생』 맞춤양복점 사례).</li>
+<li><strong>한계 내 선택의 극대화</strong> — 한계가 불가피하면 그 안에서 선택을 극대화함.</li>
+<li><strong>원칙과 실천</strong> — 원칙은 엄격하게, 실천은 유연하게.</li>
+</ul>
+
+<p class="more"><a href="사례관리론_강의노트.html#l3">3강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l4"><header class="lh"><span class="no">4강</span><h2>사례관리의 발달과정</h2></header><div class="ct">
+<h3>1. 사회복지실천의 역사</h3>
+
+
+<p class="sh"><strong>고대 및 중세의 자선과 엘리자베스 빈민법</strong></p>
+<ul>
+
+<li><strong>1601년 엘리자베스 빈민법</strong> — 빈민을 가치 있는 빈민과 가치 없는 빈민으로 구분, 구조적이지만 징벌적인 방식.</li>
+</ul>
+<p class="sh"><strong>과학적 박애주의의 출현 (19세기 말~20세기 초)</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>자선조직협회(COS)</strong> — 영국(1869), 미국(1877)에 설립됨. 빈곤 원인을 개인 도덕성 문제로 보았으며, 과학적 자선과 중복·누락 방지를 추구함. 우애방문단이 가정방문·상담·기록·사례연구 활동을 함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>인보관운동</strong> — 빈민지역에 거주하며 환경개선과 사회개혁을 추진함. 빈곤을 사회구조적 문제로 인식하고 아동노동 금지·사회보험 도입을 추진했으며, 집단사회사업과 지역사회조직의 기원이 됨.</li>
+</ul>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>인보관 운동 보충 자료</strong></p>
+<ul>
+<li><strong>배경</strong> — 19세기 후반 산업화와 도시화로 빈곤, 열악한 주거환경, 노동착취, 교육 부족 등의 사회 문제가 나타나자, 중산층 지식인들이 빈곤층·노동계급 거주 지역에 함께 거주하며 삶의 질을 향상시키고자 한 사회개혁 운동임.</li>
+<li><strong>목적</strong> — 저소득층 주민에게 교육·보건·문화적 지원을 제공하여 빈곤을 경감하고, 계층 간 교류와 연대를 통해 사회적 통합을 이루며, 주민들이 스스로 권리를 인식하고 자립하도록 도움.</li>
+<li><strong>토인비홀(1884)</strong> — 빈민의 대부로 불린 바네트 목사가 일찍 세상을 떠난 토인비를 기리며 런던에 설립한 세계 최초의 지역사회복지관으로, 대학생과 학자들이 교육·상담, 예술·음악·토론 클럽, 생활환경 개선, 정책 변화 촉구 등의 역할을 함.</li>
+<li><strong>헐하우스(1889)</strong> — 제인 애덤스와 엘렌 게이츠 스타가 시카고 이민자 밀집 지역에 설립하여 유아교육, 성인문해교육, 보건위생서비스, 노동권 보호, 여성권리 등의 프로그램을 운영함. 미국 사회복지학과 여성운동에 큰 영향을 미침.</li>
+<li><strong>의의와 한계</strong> — 자선과 구호에서 벗어나 지역사회와 주민참여를 기반으로 한 현대적 사회복지의 기틀을 마련했으나, 자발적 기부와 개인의 헌신에 의존하여 재정적으로 불안정했고 도시·특정 지역에 국한됨.</li>
+</ul>
+<p class="sh"><strong>사회복지 전문직의 출발 (1910년대)</strong></p>
+<ul>
+<li><strong>메리 리치몬드</strong> — 『사회진단』(1917)으로 개별사회사업을 체계화하고 '환경 속의 인간'(인접환경)을 강조함.</li>
+
+</ul>
+<p class="sh"><strong>전문적 분화기 (1920년 후~1950년 전후)</strong></p>
+<ul>
+<li><strong>3대 방법론 분화</strong> — 개별사회사업, 집단사회사업, 지역사회조직.</li>
+
+<li><strong>진단주의 학파</strong> — 정신분석과 결합한 심리사회적 모델.</li>
+<li><strong>기능주의 학파</strong> — 자아 통합력 강조, 문제해결·상호작용·시스템이론.</li>
+
+</ul>
+<p class="sh"><strong>통합기 (1970~1990년대)</strong></p>
+<ul>
+
+<li><strong>대표 이론</strong> — 4체계모델(핀커스·미나한), 문제해결과정모델(콤튼·갤러웨이), 단일화모델(골드스테인), 생활모델(저메인·기터만).</li>
+</ul>
+<p class="sh"><strong>사례관리의 발전 (1990년 이후)</strong></p>
+
+<p class="tt"><strong>사회복지실천의 역사적 흐름</strong></p>
+<div class="tw"><table class="long c2">
+<thead><tr><th>시기</th><th>주요 내용</th></tr></thead><tbody>
+<tr><td data-label="시기">고대 및 중세</td><td data-label="주요 내용">종교 기관, 자선을 통한 구호</td></tr>
+<tr><td data-label="시기">1601년</td><td data-label="주요 내용">엘리자베스 빈민법: 가치 있는 빈민과 가치 없는 빈민 구분, 구조적이지만 징벌적인 빈곤 해결 방식</td></tr>
+<tr><td data-label="시기">19세기 말~20세기 초</td><td data-label="주요 내용">과학적 박애주의: 자선조직협회(빈곤의 개인 도덕성 원인, 과학적 자선), 인보관운동(빈곤의 사회구조적 원인, 사회개혁)</td></tr>
+<tr><td data-label="시기">1910년대</td><td data-label="주요 내용">사회복지 전문직의 출발: 메리 리치몬드 『사회진단』(1917), 유급 사회복지사 등장</td></tr>
+<tr><td data-label="시기">1920년 후~1950년 전후</td><td data-label="주요 내용">전문적 분화기: 개별·집단·지역사회조직 분화, 대공황, 진단주의 학파와 기능주의 학파</td></tr>
+<tr><td data-label="시기">1970~1990년대</td><td data-label="주요 내용">통합기: 통합방법론, 4체계모델, 문제해결과정모델, 단일화모델, 생활모델</td></tr>
+<tr><td data-label="시기">1990년 이후</td><td data-label="주요 내용">사례관리의 발전: 1984년 지침 제정, 1992년 공식화, 미시·거시 원조 통합</td></tr>
+</tbody></table></div>
+<h3>2. 잔여적 사례관리의 역사</h3>
+<p class="sh"><strong>미국의 사례관리 발달과정</strong></p>
+<ul>
+
+<li><strong>도입기 ① 메사추세츠 청소년정신장애인시설(1848)</strong> — 개별화된 치료와 퇴소 후 가정방문서비스가 사례관리서비스와 기록의 시초임.</li>
+<li><strong>도입기 ② 헐하우스(1889)</strong> — 제인 아담스가 설립, 사회복지관 사례관리의 최초 사례로 인적 사항 조사·기록, 옹호활동을 함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>도입기 ③ 메리 리치몬드의 『사회진단』</strong> — 개인은 독특한 인간으로서 성격, 가족관계, 환경적 여건 등이 중요함을 강조하고, 클라이언트 개인과 문제에 초점을 맞춘 사례기록양식을 개발하여 사례관리의 과정과 기록을 체계화함.</li>
+<li><strong>확립기 ① 법제화</strong> — 1932년 사회보장법, 1963년 지역사회정신보건법, 1965년 노인복지법.</li>
+<li><strong>확립기 ② 서비스 통합</strong> — 1971년 '사회서비스의 통합' 강조, 1975년 장애아동복지 및 교육법은 클라이언트 참여를 규정함.</li>
+<li><strong>확립기 ③ 의무화</strong> — 1988년 가족지원법으로 AFDC 수혜자 사례관리 의무화, 1996년 개인 책임 및 근로기회법으로 대체됨.</li>
+<li><strong>확립기 ④ 기준 마련</strong> — 「NASW 사회복지 사례관리 기준」(1984, 2013).</li>
+
+</ul>
+<p class="sh"><strong>영국의 사례관리 발달과정</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>출발점</strong> — 영국은 정신질환자 및 요보호자의 대규모 수용시설의 탈시설화와 지역사회보호에서 사례관리가 시작됨.</li>
+<li><strong>도입기 ① 개정구빈법(1834)</strong> — 시설보호의 문제점 논쟁이 탈시설화와 사례관리의 토양이 됨.</li>
+<li><strong>도입기 ② 정신질환자 애프터케어협회(1879)</strong> — 퇴원환자 소규모주거보호와 일상생활 지도서비스가 사례관리의 출발임.</li>
+
+<li><strong>확립기 ① 시봄위원회 보고서(1971)</strong> — 지방정부에 사회서비스부를 설치해 사례관리의 기틀을 마련함.</li>
+<li><strong>확립기 ② 그리피스 보고서(1988)</strong> — '복지의 혼합경제'를 강조하며 사례관리를 도입함.</li>
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>확립기 ③ NHS and Community Care Act(1990)</strong> — 무상의료인 NHS와 자산조사 기반의 지역사회보호(커뮤니티 케어)가 분리 운영되는 문제를 연계하기 위해 케어매니저를 둠. 지침서는 Care Management and Assessment(SSI, 1991)이며, 1990년대 민간기관이 지역사회보호 서비스의 주 공급자가 되고 사회복지부의 사례관리자들은 사회복지서비스의 계획·조직 및 구매 역할을 담당함.</li>
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>탈시설화의 이면</strong> — 신자유주의 정부가 NHS 재정을 줄이기 위해 병상을 차지한 노인들을 지역사회 요양원으로 옮긴 것으로, "침대만 바뀌었을 뿐"이라는 비판을 받음.</li>
+
+</ul>
+<p class="sh"><strong>한국의 사례관리 발달과정</strong></p>
+<ul>
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>도입기 ① 법적 기반</strong> — 1990년대 분야별 사회복지 관련법의 제·개정으로 사례관리실천의 기반이 마련됨. 1995년 12월 정신보건법 제정으로 사례관리를 지역사회 정신보건사업의 필수사업 중 하나로 포함함. 1997년 개정 노인복지법, 1999년 개정 장애인복지법, 2000년 개정 아동복지법 등은 기능별로 시설종류를 다양화하고 지역사회보호를 강조하여, 탈시설화·소규모화·다양화·전문화 방향으로 사례관리실천의 기반을 제공함.</li>
+<li><strong>도입기 ② 한국의 특징</strong> — 탈시설화의 결과라기보다 재가복지 대상자를 위한 새로운 실천방법으로 도입됨.</li>
+<li><strong>확립기 ① 공공사례관리 도입</strong> — IMF 이후 도입, 2006년 드림스타트, 2010년 희망복지지원단사업.</li>
+<li><strong>확립기 ② 사회복지관</strong> — 2012년 시행규칙 개정으로 사례관리·서비스제공·지역조직화의 3대 기능 정립.</li>
+<li><strong>확립기 ③ 학계</strong> — 2009년 한국사례관리학회 설립.</li>
+
+</ul>
+<p class="tt"><strong>미국, 영국, 한국의 사례관리 발달과정 비교</strong></p>
+<div class="tw"><table class="long c4">
+<thead><tr><th>구분</th><th>미국</th><th>영국</th><th>한국</th></tr></thead><tbody>
+<tr><td data-label="구분">출발점</td><td data-label="미국">정신장애인의 탈시설화와 지역사회 관리</td><td data-label="영국">정신질환자 및 요보호자의 대규모 수용시설 탈시설화와 지역사회보호</td><td data-label="한국">지역사회 재가복지 대상자를 위한 새로운 실천방법, 시설의 다양화·전문화</td></tr>
+<tr><td data-label="구분">도입기</td><td data-label="미국">1848년 메사추세츠 청소년정신장애인시설, 1889년 헐하우스, 메리 리치몬드 『사회진단』</td><td data-label="영국">1834년 개정구빈법, 1879년 정신질환자 애프터케어협회, 18~19세기 민간가정방문협회</td><td data-label="한국">1995년 정신보건법, 1997년 노인복지법·1999년 장애인복지법·2000년 아동복지법 개정</td></tr>
+<tr><td data-label="구분">확립기</td><td data-label="미국">1932년 사회보장법, 1963년 지역사회정신보건법, 1965년 노인복지법, 1971년 사회서비스 통합, 1975년 장애아동복지 및 교육법, 1988년 가족지원법, 1996년 개인 책임 및 근로기회법, NASW 기준(1984, 2013)</td><td data-label="영국">1971년 시봄위원회 보고서, 1988년 그리피스 보고서, 1989년 정부 백서, 1990년 NHS and Community Care Act</td><td data-label="한국">IMF 이후 공공사례관리, 2003년 교육복지투자우선지역사업, 2006년 드림스타트, 2010년 희망복지지원단, 2012년 사회복지관 3대 기능, 2009년 한국사례관리학회</td></tr>
+<tr><td data-label="구분">등장 배경</td><td data-label="미국">탈시설화와 지역사회보호, 복합적 욕구에 따른 서비스 통합, 재정 축소 및 지방화와 책임성, 사회적 지원체계와 통합적 실천</td><td data-label="영국">탈시설화와 지역사회보호, 보건·복지서비스 통합, 케어의 혼합경제, 공공복지 의존 감소와 비공식적 보호 강조, 지방정부의 책임 확대</td><td data-label="한국">지역사회보호 확산, 탈시설화와 시설의 소규모·다양화, 자립생활 지원, 서비스 통합 및 전문화, 사회복지관 기능 개편, 민관 협력</td></tr>
+</tbody></table></div>
+<h3>3. 제도적 사례관리의 역사 (급진적 사회복지실천의 역사)</h3>
+<p class="sh"><strong>급진적 사회복지실천의 배경과 역사</strong></p>
+<ul>
+<li><strong>뿌리</strong> — 여성참정권 운동 등 20세기 초 사회운동.</li>
+
+
+<li><strong>등장 배경</strong> — 전통 사회복지가 개인 중심으로 구조적 불평등을 간과한다는 비판에서 출발함.</li>
+</ul>
+<p class="sh"><strong>시기별 전개</strong></p>
+
+<p class="tt"><strong>급진적 사회복지실천의 시기별 전개</strong></p>
+<div class="tw"><table class="long c2">
+<thead><tr><th>시기</th><th>주요 내용</th></tr></thead><tbody>
+<tr><td data-label="시기">20세기 초</td><td data-label="주요 내용">여성참정권 운동 등 초기 사회운동, 인보관 운동(제인 애덤스, 엘렌 게이츠 스타)</td></tr>
+<tr><td data-label="시기">1930~1950년대</td><td data-label="주요 내용">대공황으로 구조 개혁 주장, 매카시즘 시기 탄압(FBI 조사, 블랙리스트), 버사 레이놀즈의 구조적·계급적 분석</td></tr>
+<tr><td data-label="시기">1960~1970년대</td><td data-label="주요 내용">민권운동·페미니즘·반전운동·노동운동 속에서 부활, 1975년 『Radical Social Work』, Social Welfare Action Alliance 결성</td></tr>
+<tr><td data-label="시기">1980년대~현재</td><td data-label="주요 내용">신자유주의 비판, 피터 레너드의 의식화, 반억압적 실천·역량 강화·인권·사회정의, SWAN·BLM 등 사회운동 참여</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>주요 특징</strong></p>
+<ul>
+<li><strong>구조적 분석 강조</strong> — 사회문제를 자본주의, 가부장제, 인종차별적 사회구조의 결과로 봄.</li>
+<li><strong>사회적 역량 강화</strong> — 대상자가 집단적 행동의 주체가 되도록 함.</li>
+<li><strong>옹호, 행동주의</strong> — 사회복지사가 사회운동가·정책 옹호자 역할을 함.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리와 급진적 실천의 결합</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>결합의 내용</strong> — 사례관리는 개인 욕구를 파악하여 자원을 연계하고 지원하는 방식이며, 급진적 사회복지는 사례관리 내에서도 구조적 문제 해체를 위한 비판적 접근을 주장함. 즉, 단순한 개인 적응 지원을 넘어서 사례관리 과정에서 구조적 억압과 제도적 문제를 인식하고 클라이언트 역량 강화를 통해 사회변화를 추구함.</li>
+<li><strong>이론적 통합</strong> — 프레이리의 '의식화', 그람시의 '헤게모니'.</li>
+
+</ul>
+<p class="sh"><strong>주요 인물</strong></p>
+<ul>
+<li><strong>제인 애덤스</strong> — '가난에 대한 연민'과 '불의에 대한 증오'를 구분함.</li>
+<li><strong>버사 레이놀즈</strong> — 정신분석적 접근 비판, 노동계급과의 연대.</li>
+<li><strong>피터 레너드</strong> — 프레이리의 비판교육학을 접목한 '의식화'.</li>
+</ul>
+<p class="sh"><strong>영향과 유산</strong></p>
+<ul>
+
+
+<li><strong>영향</strong> — 반억압적 실천, 역량 강화, 비판적 자기성찰 등 현대 사회복지 주류 개념 형성에 영향을 미침.</li>
+
+<li><strong>본질의 재정의</strong> — 사회복지 본질을 개인 지원 + 사회 구조 변혁으로 재정의함.</li>
+</ul>
+<p class="tt"><strong>잔여적 사례관리와 제도적 사례관리의 역사 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">역사적 뿌리</td><td data-label="잔여적 사례관리">자선조직협회, 메리 리치몬드의 개별사회사업</td><td data-label="제도적 사례관리">인보관 운동, 여성참정권 운동 등 사회운동</td></tr>
+<tr><td data-label="구분">발전 계기</td><td data-label="잔여적 사례관리">탈시설화와 지역사회보호, 복지재정 축소 속 효율적 관리 요구(신자유주의)</td><td data-label="제도적 사례관리">1930년대 대공황으로 빈곤을 구조적 문제로 인식, 1960년대 사회운동</td></tr>
+<tr><td data-label="구분">핵심 관심</td><td data-label="잔여적 사례관리">서비스의 통합, 연계, 조정과 효율성</td><td data-label="제도적 사례관리">구조적 억압 인식, 역량 강화, 사회변화</td></tr>
+<tr><td data-label="구분">대표 인물·문헌</td><td data-label="잔여적 사례관리">메리 리치몬드, NASW 사례관리 기준, 그리피스 보고서</td><td data-label="제도적 사례관리">제인 애덤스, 버사 레이놀즈, 피터 레너드, 『Radical Social Work』</td></tr>
+</tbody></table></div>
+
+<p class="more"><a href="사례관리론_강의노트.html#l4">4강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l5"><header class="lh"><span class="no">5강</span><h2>사례관리의 이론</h2></header><div class="ct">
+<h3>1. 생태체계이론</h3>
+<p class="sh"><strong>생태체계이론의 개념과 배경</strong></p>
+<ul>
+<li><strong>사례관리와의 관계</strong> — 여러 사회체계가 교류하는 속에서 복합적 어려움을 겪는 사람이 자원을 이용해 스스로 살아가도록 돕는 틀을 제공하며, '환경 속 인간'을 강조함.</li>
+<li><strong>등장 배경</strong> — 1970년대 브론펜브렌너가 인간과 환경의 관계를 다층적·체계적으로 이해하는 모델을 제시함.</li>
+</ul>
+<p class="sh"><strong>생태체계도 (아동의 예)</strong></p>
+<ul>
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>미시체계</strong> — 아동과 직접 접촉하는 체계로 가족, 학교, 유아원, 교회, 병원, 또래 등.</li>
+<li><strong>중간체계</strong> — 미시체계 구성원들과 관련을 맺는 체계(가족의 친구, 부모의 직장 등).</li>
+<li><strong>외체계</strong> — 확대 가족, 이웃, 대중매체, 사회복지기관, 법률서비스 등.</li>
+<li><strong>거시체계</strong> — 문화적 가치, 법, 관습 등 거대한 가치체계.</li>
+<li><strong>시간체계</strong> — 일생 동안의 개인과 환경의 변화.</li>
+</ul>
+<p class="sh"><strong>생태체계이론의 주요 개념</strong></p>
+<ul>
+<li><strong>항상성과 경계</strong> — 체계는 균형을 유지하려는 항상성과 다른 체계와의 경계를 가짐.</li>
+<li><strong>개방성과 폐쇄성</strong> — 외부와 에너지·정보를 교류하는 방식과 정도가 다름.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>적합성과 적응</strong> — 사람은 환경과 상호 관련성을 통해 가장 잘 이해될 수 있고, 사람과 환경 간의 '적합성' 혹은 '적응'을 위해 노력해야 함. 적합성은 개인의 욕구와 사회환경 간 균형과 조화 정도를 의미하며, 적합성이 높아지면 개인은 환경에 잘 적응한 것임. 적응은 개인과 환경 간 상호작용의 결과로 발생함 (예: 취학 아동이 학교에 잘 적응하는지 살핌).</li>
+<li><strong>생활 모델(저메인과 지터맨, 1980)</strong> — 스트레스는 적합성이 흔들릴 때 발생한다고 봄.</li>
+</ul>
+<p class="sh"><strong>사례관리에서의 유용성</strong></p>
+<ul>
+<li><strong>첫째, 다차원적 사정</strong> — 여러 체계의 상호작용을 종합 분석함.</li>
+<li><strong>둘째, 환경 속의 개인 관점</strong> — 관계 속에서 이해하고 강점과 환경의 자원을 파악함.</li>
+<li><strong>셋째, 체계적 개입</strong> — 개인과 환경 요인에 함께 개입함.</li>
+
+</ul>
+<p class="sh"><strong>생태체계이론의 한계</strong></p>
+<ul>
+<li><strong>한계</strong> — 사회 구조적 문제, 권력 관계, 불평등을 충분히 분석하지 못함.</li>
+
+
+
+</ul>
+<h3>2. 강점관점 이론</h3>
+<p class="sh"><strong>역사적 배경</strong></p>
+<ul>
+<li><strong>진단주의 비판</strong> — 1970년대부터 병리 중심 의료모델에서 강점 중심으로 전환됨.</li>
+<li><strong>이론화</strong> — 1980년대 후반 Saleebey 등 캔자스 대학에서 이론화함.</li>
+</ul>
+<p class="sh"><strong>강점관점의 개념</strong></p>
+<ul>
+<li><strong>정의</strong> — 병리보다 강점에 초점을 두고 사정·개입하여 클라이언트 스스로 문제를 해결하도록 도움.</li>
+
+</ul>
+<p class="sh"><strong>강점 관점의 6가지 원칙</strong></p>
+<ul>
+<li>1. 강점을 지닌 '소비자'로서 클라이언트는 스스로의 삶을 회복, 개선, 변화할 수 있다(레질리언스).</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>2. 결점보다는 개인의 강점에 초점을 둔다</strong> — 나쁜 습관을 지적하기보다 좋은 습관을 칭찬하여 나쁜 습관이 사라지게 하는 원리와 같음.</li>
+<li><strong>3. 지역사회는 자원의 오아시스이다</strong> — 개인의 강점은 환경의 강점을 수반함.</li>
+<li><strong>4. 클라이언트는 실천과정의 지도자이다</strong> — 자기결정권을 강조하며 클라이언트가 과정을 이끄는 리더십을 가짐.</li>
+<li>5. 사례관리자와 클라이언트 관계는 가장 우선적이며 본질적이다.</li>
+<li>6. 강점관점 실천의 첫 번째 장은 지역사회이다.</li>
+</ul>
+<p class="sh"><strong>강점관점 적용 시 고려할 5가지 기능 요소</strong></p>
+<ul>
+<li><strong>1. 면접과 계약</strong> — 협력적 파트너십에서 시작함.</li>
+<li><strong>2. 정보 수집과 사정</strong> — 클라이언트와 환경의 강점을 사정함.</li>
+<li><strong>3. 목표와 계획 수립</strong> — 개별화된 장단기 목표에 합의함.</li>
+<li><strong>4. 자원 활용</strong> — 목표 성취에 필요한 환경 자원을 획득하고 권리를 지킴.</li>
+<li><strong>5. 협력과 자유</strong> — 지속적으로 협력하되 클라이언트의 자율성을 보장함.</li>
+</ul>
+<p class="sh"><strong>강점 사정 질문과 강점의 영역</strong></p>
+<ul>
+<li><strong>적용 질문</strong> — "힘든 역경 속에서도 지금까지 어떻게 버티어 올 수 있었나요?"</li>
+
+</ul>
+<p class="tt"><strong>강점의 영역</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="영역">개인적 특성</td><td data-label="내용">자아개념, 동기, 용모, 대처능력, 호기심, 인내심, 생활력, 영성 또는 믿음, 창의력, 유머, 신뢰, 관용 등</td></tr>
+<tr><td data-label="영역">재능</td><td data-label="내용">잘하는 것, 좋아하는 것, 만들기, 그리기, 노래부르기 등</td></tr>
+<tr><td data-label="영역">능력</td><td data-label="내용">이전 삶의 성공요소, 현재 삶의 성공, 교육적 성공, 직장에서의 성공, 재정적/정서적 지능, 레질리언스 등</td></tr>
+<tr><td data-label="영역">사회적 관계</td><td data-label="내용">유의미한 타인과의 관계, 친밀함, 지지체계, 사회활동, 커뮤니티 등</td></tr>
+<tr><td data-label="영역">기술</td><td data-label="내용">대인관계기술, 문제해결기술, 대화기술, 의사결정기술 등</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>강점관점의 한계</strong></p>
+<ul>
+<li><strong>한계</strong> — 구조적 문제 간과, 클라이언트에게 책임 전가, 체제 순응적 성격, 권력 관계 무시, 개인 변화에 국한.</li>
+
+
+
+
+
+</ul>
+<h3>3. 임파워먼트 이론</h3>
+<p class="sh"><strong>역사적 배경과 정의</strong></p>
+<ul>
+<li><strong>배경</strong> — 20세기 소수 인종, 여성, 장애인 등의 인권·사회권 운동 속에서 발달함.</li>
+<li><strong>핀더휴그스(1983)</strong> — 자신의 삶에 영향을 미치는 파워와 능력.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>바바와 솔로몬(1976)</strong> — 자기 삶의 조건들에 대한 통제감을 더 많이 획득하기 위해 개인적, 대인 간, 정치적, 경제적 수준에서 파워를 증대시키는 과정.</li>
+</ul>
+<p class="sh"><strong>임파워먼트의 두 가지 방향</strong></p>
+<ul>
+<li><strong>세력화/권한강화</strong> — 힘을 적게 가진 자에게 더 많이 주는 것(사회적 관점).</li>
+<li><strong>역량강화</strong> — 개인의 능력을 끌어올리는 것(개인적 관점).</li>
+</ul>
+<p class="sh"><strong>사례로 본 두 방향 (휠체어를 탄 청년 A씨)</strong></p>
+<ul>
+<li><strong>사례(휠체어 탄 A씨)</strong> — 개인적 시각은 재활 훈련, 사회적 시각은 저상버스 제도화와 연대를 생각함.</li>
+
+
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>자기 임파워먼트와 사회적 임파워먼트 비교</strong></p>
+<div class="tw"><table class="long c3">
+<thead><tr><th>구분</th><th>자기 임파워먼트(Self-Empowerment)</th><th>사회적 임파워먼트(Social Empowerment)</th></tr></thead><tbody>
+<tr><td data-label="구분">개념</td><td data-label="자기 임파워먼트(Self-Empowerment)">클라이언트 개인이 스스로의 삶을 통제하고 문제를 해결할 수 있는 내적 역량과 심리적 힘을 키우는 과정</td><td data-label="사회적 임파워먼트(Social Empowerment)">클라이언트가 겪는 문제를 사회 구조적 불평등의 결과로 보고, 집단적 행동을 통해 권력을 획득하고 사회적 변화를 이끌어내는 과정</td></tr>
+<tr><td data-label="구분">초점</td><td data-label="자기 임파워먼트(Self-Empowerment)">개인의 심리적, 인지적, 기술적 역량 향상</td><td data-label="사회적 임파워먼트(Social Empowerment)">권력, 자원, 기회에 대한 접근성 향상, 불평등한 사회 구조 개선</td></tr>
+<tr><td data-label="구분">주요 목표</td><td data-label="자기 임파워먼트(Self-Empowerment)">자기효능감, 자존감, 자신감, 자율성, 선택권 보장, 자기 책임 강조, 문제 해결 능력 증진</td><td data-label="사회적 임파워먼트(Social Empowerment)">사회적 의식화, 집단적 권력 형성, 사회 정의와 평등 실현</td></tr>
+<tr><td data-label="구분">예시</td><td data-label="자기 임파워먼트(Self-Empowerment)">상담을 통해 스스로의 가치를 깨닫고 자신감을 회복하는 것, 직업 훈련을 통해 새로운 기술을 배우는 것</td><td data-label="사회적 임파워먼트(Social Empowerment)">장애인들이 모여 차별적인 법률 개정을 요구하는 운동을 벌이는 것, 지역 주민들이 조직화하여 공동체의 문제를 해결하는 것</td></tr>
+<tr><td data-label="구분">적용 질문</td><td data-label="자기 임파워먼트(Self-Empowerment)">"여러 가지 어려움 중 우선적으로 도움이 필요한 것은 무엇입니까?"(클라이언트의 선택권 보장), "이웃 또는 지역 주민의 도움을 계속 받기 위해서는 당신이 할 수 있는 것은 무엇일까요?"(자기 책임 강조)</td><td data-label="사회적 임파워먼트(Social Empowerment)">"당신의 상황이 개인적 노력 부족 때문이라고 생각하시나요, 아니면 사회적인 문제와 관련이 있다고 보시나요?", "당신의 목소리를 낼 수 있는 방법은 무엇이라고 생각하시나요?", "당신과 비슷한 어려움을 겪는 사람들이 함께 모여 이야기를 나눈다면, 어떤 힘을 얻을 수 있을까요?"</td></tr>
+</tbody></table></div>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>임파워먼트 이론의 한계</strong></p>
+<ul>
+<li><strong>한국 사례관리의 적용</strong> — 한국사례관리의 임파워먼트 적용은 개인적 관점으로 발전해 옴.</li>
+<li><strong>초점</strong> — 클라이언트로 하여금 당면문제를 해결하고 환경체계를 활용할 수 있는 능력을 함양하도록 하는 데 초점을 둠.</li>
+<li><strong>한계</strong> — 사회 구조적 변혁 요구에는 한계를 지니며, 역량 강화가 제대로 되지 않아 문제가 발생했다고 볼 위험이 있음. 사회적 임파워먼트를 활용하면 이러한 한계를 극복할 수 있음.</li>
+</ul>
+<h3>4. 네트워크 이론</h3>
+<p class="sh"><strong>개념과 역사적 배경</strong></p>
+<ul>
+<li><strong>개념</strong> — 사회관계망, 조직 간 관계, 서비스 연계망, 기관 간 협력 등으로 사용됨.</li>
+
+<li><strong>1970년대 중반 이후</strong> — 국가복지 위기 속에서 비공식적 지지망과 지역사회 자원이 강조됨(이면에는 신자유주의).</li>
+</ul>
+<p class="sh"><strong>사례관리에서 네트워크의 필요성</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>핵심 기반</strong> — 사례관리에서 네트워크는 클라이언트 욕구 충족을 위한 자원 동원·연계·조정의 핵심 기반임.</li>
+<li><strong>다기관 협력</strong> — 복합적 욕구에는 다기관 협력과 지역사회 조직화가 필수임.</li>
+
+</ul>
+<p class="sh"><strong>네트워킹 추구의 근본적 이유</strong></p>
+<ul>
+<li><strong>네트워킹 이유</strong> — 자원 보완, 조직 영역 확장, 경쟁력 강화, 변화 적응, 규모의 경제와 비용절감.</li>
+
+
+
+
+</ul>
+
+
+<p class="sh"><strong>네트워크 이론의 성공 조건</strong></p>
+<ul>
+
+<li><strong>성공 조건</strong> — 신뢰와 안정성에 기반해야 효과적임.</li>
+
+</ul>
+<p class="sh"><strong>네트워크 이론의 한계</strong></p>
+<ul>
+<li><strong>한계</strong> — 자원 불균형, 관계 유지의 어려움, 성과 측정의 어려움, 책임소재 불분명, 행정적 부담, 구조적 문제 간과.</li>
+
+
+
+
+
+</ul>
+<h3>5. 급진적 사회복지실천이론</h3>
+<p class="sh"><strong>급진사회복지실천의 핵심</strong></p>
+<ul>
+<li><strong>핵심</strong> — 개인의 생애사가 아니라 구조를 봄.</li>
+
+
+<li><strong>사례관리 적용</strong> — 문제를 구조적 불평등의 산물로 보고 권리옹호·정책변화·집단적 실천을 결합함.</li>
+</ul>
+<p class="tt"><strong>급진적 사회복지실천이론의 흐름</strong></p>
+<div class="tw"><table class="long c4">
+<thead><tr><th>이론</th><th>역사</th><th>특징</th><th>사례관리 적용</th></tr></thead><tbody>
+<tr><td data-label="이론">마르크스주의</td><td data-label="역사">19세기 마르크스의 자본주의 비판에서 출발, 1960~70년대 복지국가 위기와 빈곤 지속 속에서 사회복지 비판적 분석의 기반</td><td data-label="특징">사회문제는 개인적 결함이 아니라 계급 착취와 자본주의 구조의 산물, 복지는 체제 유지 장치로 기능할 위험</td><td data-label="사례관리 적용">개인 문제를 사회구조적 모순과 연결해 해석, 사회복지가 사회 통제 수단이 될 수 있음 인식, 정치적 투쟁·지역사회 조직화·옹호활동으로 구조적 변화 추구, 사회복지사는 도움 제공자(helper)를 넘어 행동가(activist)</td></tr>
+<tr><td data-label="이론">페미니즘</td><td data-label="역사">1960~70년대 여성해방운동과 제2물결 페미니즘에 기반, 가정폭력·성폭력·돌봄노동 문제를 공적 의제로 제기</td><td data-label="특징">억압은 계급뿐 아니라 성별·가부장제 구조에서 비롯됨, 복지정책이 여성의 무급 돌봄노동을 강화할 수 있음</td><td data-label="사례관리 적용">여성 클라이언트의 경험(빈곤·폭력·돌봄 부담)을 구조적으로 파악, 성인지적 사례관리, 여성쉼터, 돌봄노동 보상체계 연계</td></tr>
+<tr><td data-label="이론">비판이론</td><td data-label="역사">1920년대 독일 프랑크푸르트 학파에서 시작, 1960년대 이후 사회복지 제도 비판에 적용</td><td data-label="특징">복지는 중립적 서비스가 아니라 권력과 지배 이데올로기의 일부, 복지정책이 통제·감시 기능을 할 수 있음</td><td data-label="사례관리 적용">행정 중심·통제 중심 사례관리를 비판하고, 클라이언트의 참여와 민주적 권리를 보장하는 실천 지향</td></tr>
+<tr><td data-label="이론">구조적 사회복지실천</td><td data-label="역사">1970~80년대 캐나다에서 Maurice Moreau 등에 의해 발전</td><td data-label="특징">사회문제는 자본주의·가부장제·인종차별 같은 구조적 불평등의 결과, 사회복지는 정치적 실천이어야 함</td><td data-label="사례관리 적용">개별 클라이언트 문제 해결과 함께 제도 개선·정책 옹호 활동 결합 (예: 주거권 캠페인, 사회보험 확대 운동)</td></tr>
+<tr><td data-label="이론"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> 반억압적 실천</td><td data-label="역사">1980~90년대 영국·캐나다 사회복지에서 발전, 인종·젠더·장애 등 다차원적 억압을 통합적으로 다룸</td><td data-label="특징">모든 실천은 권력관계 속에서 이루어짐, 클라이언트는 억압받을 수 있으며 실천가는 이를 재생산할 수도 있음</td><td data-label="사례관리 적용">서비스 과정에서 수평적 관계 강조, 클라이언트와 공동 의사결정, 제도적 차별을 인식하고 정책 개선 노력</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>마르크스주의와 페미니즘 보충</strong></p>
+<ul>
+<li><strong>마르크스주의</strong> — 사회복지가 자본주의를 유지시키는 통제 수단이 될 수 있음을 비판함.</li>
+<li><strong>페미니즘</strong> — 사회적 성(Gender)과 가부장제 억압 구조에 주목함.</li>
+</ul>
+<p class="sh"><strong>비판이론, 구조적 사회복지, 반억압, 포스트모더니즘 보충</strong></p>
+<ul>
+<li><strong>비판이론</strong> — 권력과 지식은 공모 관계("달리는 기차 위에 중립은 없다").</li>
+<li><strong>구조적 사회복지실천</strong> — 억압은 중첩되므로 구조변화를 통한 해방을 추구함.</li>
+<li><strong>반억압과 반차별</strong> — 차이가 차별이 되지 않아야 함.</li>
+<li><strong>포스트모더니즘과 담화이론</strong> — 담화 이면의 권력과 이데올로기를 드러냄("복지병" 등).</li>
+</ul>
+<p class="tt"><strong>급진적 사회복지실천의 주요 사상가</strong></p>
+<div class="tw"><table class="long c3">
+<thead><tr><th>사상가</th><th>핵심 내용</th><th>사례관리 적용</th></tr></thead><tbody>
+<tr><td data-label="사상가"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span>파울로 프레이리</td><td data-label="핵심 내용">『피억압자의 교육학』(1970)에서 제시, 남미 빈곤층 교육운동에서 출발. 의식화(conscientization): 피억압자가 구조적 문제를 깨닫고 집단적 행동에 나서야 함, 대화적 교육, 성찰+행동(praxis) 결합</td><td data-label="사례관리 적용">클라이언트를 해방의 주체로 세우고, 집단 토론·자조모임을 통해 구조적 문제 인식과 권리옹호 촉진</td></tr>
+<tr><td data-label="사상가">안토니오 그람시</td><td data-label="핵심 내용">『옥중수고』(1929~35)에서 파시즘과 자본주의 지배를 분석. 헤게모니=지배계급이 문화·상식을 통해 동의를 얻어 지배 유지, 대항 헤게모니 필요</td><td data-label="사례관리 적용">빈곤은 개인 책임이라는 지배 담론을 비판, 권리 담론 확산, 클라이언트와 함께 대항 헤게모니 형성·정책 옹호 활동 전개</td></tr>
+<tr><td data-label="사상가">미셸 푸코</td><td data-label="핵심 내용">미시권력, 권력-지식의 상호작용, 규율권력, 판옵티콘 구조, 주체의 구성</td><td data-label="사례관리 적용">일상적 제도와 지식이 사람을 규정하고 통제하는 방식을 인식</td></tr>
+<tr><td data-label="사상가">사울 알린스키</td><td data-label="핵심 내용">사회 변화를 이끄는 원동력은 권력, 권력 획득, 현실주의, 적의 설정, 갈등의 활용</td><td data-label="사례관리 적용">주민 스스로 조직하여 집단적 행동으로 새로운 권력 블록 형성</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>그람시의 헤게모니</strong></p>
+<ul>
+
+<li><strong>헤게모니(그람시)</strong> — 지배계급의 지적·도덕적 리더십.</li>
+<li><strong>대항 헤게모니</strong> — '도덕적 해이' 담론에 맞서 '복지는 권리이다'를 만들어야 함.</li>
+</ul>
+<p class="sh"><strong>푸코의 권력 이론</strong></p>
+<ul>
+<li><strong>미시권력(푸코)</strong> — 권력은 학교, 병원 등 일상 제도를 통해 개인을 규율함.</li>
+<li><strong>권력-지식</strong> — 권력은 지식을 생산하고 지식은 권력을 정당화함.</li>
+<li><strong>규율권력</strong> — 규칙과 감시로 자율적 복종을 유도함.</li>
+<li><strong>판옵티콘</strong> — 감시가 내면화되어 스스로를 통제하게 함.</li>
+
+</ul>
+<p class="sh"><strong>알린스키의 조직론</strong></p>
+<ul>
+<li><strong>권력(알린스키)</strong> — 사회 변화의 원동력은 조직된 집단적 힘임.</li>
+
+<li><strong>현실주의</strong> — 실행 가능한 전략과 전술을 우선시함.</li>
+<li><strong>적의 설정과 갈등의 활용</strong> — 명확한 적을 규정하고 갈등을 변화의 촉매로 활용함.</li>
+
+
+</ul>
+<p class="tt"><strong>사례관리 이론의 비교와 한계</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>이론</th><th>핵심 내용</th><th>한계</th></tr></thead><tbody>
+<tr><td data-label="이론">생태체계이론</td><td data-label="핵심 내용">환경 속 인간, 체계 간 균형, 적합성과 적응, 다차원적 사정과 체계적 개입</td><td data-label="한계">구조적 불평등과 권력관계 분석 부족, 근본적 사회 변화에 부응하기 어려움</td></tr>
+<tr><td data-label="이론">강점관점 이론</td><td data-label="핵심 내용">결점보다 강점에 초점, 클라이언트는 실천과정의 지도자, 지역사회는 자원의 오아시스</td><td data-label="한계">구조적 문제 간과, 책임 전가, 체제 순응적 성격, 권력 관계 무시, 개인 변화에 국한</td></tr>
+<tr><td data-label="이론">임파워먼트 이론</td><td data-label="핵심 내용">자기 임파워먼트(내적 역량)와 사회적 임파워먼트(집단적 권력 형성)</td><td data-label="한계">한국은 개인적 관점에 치중되어 사회구조적 변혁 요구에 한계</td></tr>
+<tr><td data-label="이론">네트워크 이론</td><td data-label="핵심 내용">공식·비공식 자원의 동원·연계·조정, 다기관 협력, 신뢰와 안정성</td><td data-label="한계">자원 불균형, 관계 유지·성과 측정의 어려움, 책임소재 불분명, 행정적 부담, 구조적 문제 간과</td></tr>
+<tr><td data-label="이론">급진적 사회복지실천이론</td><td data-label="핵심 내용">마르크스주의, 페미니즘, 비판이론, 구조적 사회복지, 반억압, 포스트모더니즘, 프레이리, 그람시, 푸코, 알린스키</td><td data-label="한계">개인적 지원을 넘어 권리 옹호와 사회정의 실현을 지향하며, 사례관리를 사회관리로 연결함</td></tr>
+</tbody></table></div>
+
+<p class="more"><a href="사례관리론_강의노트.html#l5">5강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l6"><header class="lh"><span class="no">6강</span><h2>사례관리의 비교와 함의</h2></header><div class="ct">
+<h3>1. 사례관리의 모델</h3>
+<p class="sh"><strong>사례관리 모델의 분류</strong></p>
+<ul>
+<li><strong>사례관리자 유형에 따른 모델</strong> — 일차적 보호 사례관리자, 일반주의 사례관리자, 전문주의 사례관리자, 전문-일반주의 사례관리자, 치료사-사례관리자, 문화 활동가(매개자)-사례관리자.</li>
+<li><strong>서비스 수준에 따른 모델</strong> — 단순형, 기본형, 종합형, 전문관리형, 사회관리형.</li>
+<li><strong>서비스 전달 기반에 따른 사례관리(Woodside와 McClam, 2003)</strong> — 역할기반, 조직기반, 책임기반.</li>
+<li><strong>사례관리 특성에 따른 모델</strong> — Pole A, Pole B, PACT, MC, ICM.</li>
+</ul>
+<p class="sh"><strong>사례관리자 유형에 따른 모델</strong></p>
+<ul>
+<li><strong>(1) 일차적 보호 사례관리자 모델</strong> — 의료적 서비스와 건강 유지를 지원하는 치료적 관계, 가장 기본적인 모델.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>(2) 일반주의 사례관리자(Generalist Case Manager) 모델</strong> — 한 사례관리자가 한 명의 클라이언트의 필요 서비스를 모두 제공함.</li>
+<li><strong>(3) 전문주의 사례관리자 모델</strong> — 여러 전문가 사례관리자가 배정되어 전문 서비스를 제공함.</li>
+<li><strong>(4) 전문주의-일반주의 사례관리자 모델</strong> — 두 훈련을 모두 받아 양쪽 역할을 수행함.</li>
+<li><strong>(5) 치료사-사례관리자 모델</strong> — 치료사가 사례관리자 기능을 함께 수행함.</li>
+<li><strong>(6) 문화 활동가(매개자)-사례관리자 모델</strong> — 시민의 '세상 읽기'와 '세상 만들기'를 매개해 사회구조 변화를 이끎.</li>
+</ul>
+<p class="tt"><strong>서비스 수준에 따른 모델 (1) 단순형·기본형·종합형</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>단순형</th><th>기본형</th><th>종합형</th></tr></thead><tbody>
+<tr><td data-label="구분">목적</td><td data-label="단순형">간접서비스</td><td data-label="기본형">간접서비스, 기초상담, 조언</td><td data-label="종합형">간접서비스, 심층상담·치료</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="단순형">욕구인식·사정, 사례계획과 서비스 연계·점검</td><td data-label="기본형">사례발굴, 사정, 사례계획 및 서비스 연계, 상담, 서비스 점검</td><td data-label="종합형">Rothman의 15가지 기능 수행</td></tr>
+<tr><td data-label="구분">사례관리자 역할</td><td data-label="단순형">자원과 서비스 중개자</td><td data-label="기본형">중개자, 상담자, 교육자, 지지자, 서비스점검자</td><td data-label="종합형">자원·서비스중개자, 상담가, 치료자, 교육자, 옹호자</td></tr>
+<tr><td data-label="구분">교육 및 전문성</td><td data-label="단순형">준전문가·비전문가, 훈련된 자원봉사자</td><td data-label="기본형">준전문가, 전문가</td><td data-label="종합형">전문가</td></tr>
+<tr><td data-label="구분">위치와 수퍼비전</td><td data-label="단순형">기존 조직과 업무수행부서에서 수행, 전문가에 의한 엄격한 수퍼비전</td><td data-label="기본형">기존의 조직 내에서 수행, 전문 수퍼비전이 필요</td><td data-label="종합형">독립된 사례관리부서, 최소한의 수퍼비전</td></tr>
+<tr><td data-label="구분">사례량</td><td data-label="단순형">비교적 많음(100사례 정도)</td><td data-label="기본형">적절한 사례(30사례 내외)</td><td data-label="종합형">비교적 적은 사례(10~20사례)</td></tr>
+<tr><td data-label="구분">개별/팀접근</td><td data-label="단순형">팀 접근 가능, 주로 개별적 접근</td><td data-label="기본형">개별적 접근</td><td data-label="종합형">개별적 접근</td></tr>
+<tr><td data-label="구분">업무 자율성 및 권위정도</td><td data-label="단순형">자율적 결정권 없음, 전문가와 협의 요망</td><td data-label="기본형">어느 정도 자율성이 보장</td><td data-label="종합형">자율적인 의사결정이 보장</td></tr>
+</tbody></table></div>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>서비스 수준에 따른 모델 (2) 전문관리형·사회관리형</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>전문관리형</th><th>사회관리형</th></tr></thead><tbody>
+<tr><td data-label="구분">목적</td><td data-label="전문관리형">직접·간접서비스 제공, 관리자 역할</td><td data-label="사회관리형">직접·간접서비스 제공, 사회구조개선, 권리옹호, 정책변화</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="전문관리형">기본적인 사례관리기능과 자원배분, 통솔, 의사결정기능 포함</td><td data-label="사회관리형">기본적 사례관리기능 수행, 사회적 위험을 구조적 문제로 재규정, 제도개선·정책제안·권리옹호활동 포함</td></tr>
+<tr><td data-label="구분">사례관리자 역할</td><td data-label="전문관리형">연계자, 상담자, 치료자, 교육자, 관리자</td><td data-label="사회관리형">매개자, 문화활동가, 권리옹호자, 조직가, 사회변화 촉진자</td></tr>
+<tr><td data-label="구분">교육 및 전문성</td><td data-label="전문관리형">특수 분야별 전문가</td><td data-label="사회관리형">사회복지의 관점과 실천에 관한 교육 필요, 전문가주의를 넘어 함께 활동하는 동등한 시민으로서의 역할</td></tr>
+<tr><td data-label="구분">위치와 수퍼비전</td><td data-label="전문관리형">독립된 팀 형성, 수퍼비전이 필요 없음</td><td data-label="사회관리형">커뮤니티 센터로 기능하는 조직 안에서, 세상읽기를 기반으로 한 문제제기식 수퍼비전 실시</td></tr>
+<tr><td data-label="구분">사례량</td><td data-label="전문관리형">최소한의 사례(10사례 미만)</td><td data-label="사회관리형">사례 수보다는 깊이 있는 개입과 구조적 대응 인식</td></tr>
+<tr><td data-label="구분">개별/팀접근</td><td data-label="전문관리형">팀 접근</td><td data-label="사회관리형">팀 접근 중심, 사회복지사·시민·지역사회·시민단체 등이 함께 협력</td></tr>
+<tr><td data-label="구분">업무 자율성 및 권위정도</td><td data-label="전문관리형">자율성 보장, 공동결정 요망</td><td data-label="사회관리형">높은 자율성 보장, 집단적 의사결정과 공동책임의 원칙</td></tr>
+</tbody></table></div>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>서비스 전달 기반에 따른 사례관리: Woodside와 McClam(2003)</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>역할 기반 사례관리</th><th>조직 기반 사례관리</th><th>책임성 기반 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">목적</td><td data-label="역할 기반 사례관리">서비스 연결, 치료적 케어 제공, 서비스 효과성·질 모니터링</td><td data-label="조직 기반 사례관리">단일 장소에서 클라이언트의 복합적 욕구 충족을 위한 통합적 서비스 제공</td><td data-label="책임성 기반 사례관리">사례관리자의 단기·장기 참여, 서비스의 조정, 자원봉사자의 도움, 클라이언트의 임파워먼트 강조</td></tr>
+<tr><td data-label="구분">책임성</td><td data-label="역할 기반 사례관리">사례관리의 전 과정</td><td data-label="조직 기반 사례관리">통합사례관리로서 전 과정 및 전문가팀 운영 책임</td><td data-label="책임성 기반 사례관리">주로 서비스 조정, 연계에 책임</td></tr>
+<tr><td data-label="구분">주요역할</td><td data-label="역할 기반 사례관리">중개자, 조정자, 상담자, 평가자, 계획자, 문제해결자, 기록보관자</td><td data-label="조직 기반 사례관리">옹호자, 중개자, 조정자, 계획가, 문제해결자, 기록보관자</td><td data-label="책임성 기반 사례관리">중개자, 조정자, 계획가, 문제해결자, 기록보관자</td></tr>
+<tr><td data-label="구분">개입기간</td><td data-label="역할 기반 사례관리">클라이언트 욕구의 복잡성, 서비스 전달 장소 제한에 따라 다양</td><td data-label="조직 기반 사례관리">다양하며 단기, 장기 모두 가능</td><td data-label="책임성 기반 사례관리">단기: 위기상황, 문제가 확정 시 / 장기: 질병 및 장애, 노화문제</td></tr>
+<tr><td data-label="구분">장점</td><td data-label="역할 기반 사례관리">사례관리자로서 다양한 역할 수행, 서비스의 제공자와 조정자로서 클라이언트와 강력한 관계 형성</td><td data-label="조직 기반 사례관리">입원, 외래 또는 시설에서 제공, 사정은 통합적 접근이며 서비스 계획은 개별화되어 점검 쉬움, 팀 체제 사례관리자</td><td data-label="책임성 기반 사례관리">일반인에 의해 사례관리 수행, 서비스 접근이 어려운 클라이언트에게 용이, 비용 효과적이며 지역사회가 관여, 클라이언트의 자립 강조</td></tr>
+<tr><td data-label="구분">단점</td><td data-label="역할 기반 사례관리">사례관리자의 과중한 사례량과 기관의 서비스 제공 제한에 따른 불충분한 서비스 제공</td><td data-label="조직 기반 사례관리">필요서비스가 센터에 없을 때 서비스 제공에 문제, 서비스가 조직구조와 위계질서에 의존하며 클라이언트 가족 참여 적음</td><td data-label="책임성 기반 사례관리">클라이언트 이해 및 지식과 기술 부족, 교육·훈련·수퍼비전 비용이 고비용, 적절한 서비스 접근의 어려움</td></tr>
+<tr><td data-label="구분">세부모델</td><td data-label="역할 기반 사례관리">일반주의 사례관리자 모델, 일차적 치료자 모델, 중개자 모델</td><td data-label="조직 기반 사례관리">포괄적 서비스센터 모델, 심리사회재활센터 모델, 다학제팀 모델</td><td data-label="책임성 기반 사례관리">가족 모델, 지지적 보호 모델, 사례관리자로 기능하는 클라이언트 모델, 자원봉사자 모델</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사례관리 특성에 따른 모델</strong></p>
+
+
+
+<p class="sh"><strong>제도적 사례관리 모델</strong></p>
+<ul>
+<li><strong>지향</strong> — 불평등을 인식하고 '차이의 광장'에서 자기 목소리로 공동체에 참여하게 함.</li>
+
+<li><strong>People First</strong> — 시민권, 인권(지구촌 시민), 생명권(지구촌 거주인)을 보장함.</li>
+<li><strong>배고프지 않는 소크라테스의 사회</strong> — 사회권이 보장되어 누구나 자기 목소리로 공동체에 참여하는 사회.</li>
+<li><strong>인간의 조건 빵 + 장미</strong> — 위험이 와도 보통의 삶을 유지할 수 있도록 함.</li>
+<li><strong>세상 읽기</strong> — 제도와 담론에 숨은 부당한 질서를 읽고 세상 만들기로 변화시킴.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리 모델 ① 인식</strong></p>
+<ul>
+<li><strong>사회복지사의 정체성</strong> — "나는 인권옹호자!", "당신은 시민이고 시민권을 가졌어!"</li>
+
+<li><strong>사회복지의 역할</strong> — 사회적 위험에 함께 맞서고 근본원인을 제거하려 노력함.</li>
+</ul>
+<p class="tt"><strong>사회복지사의 정체성 변화</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>기존</th><th>변화</th></tr></thead><tbody>
+<tr><td data-label="구분">역할</td><td data-label="기존">서비스를 전달하는</td><td data-label="변화">새로운 의미를 묻는</td></tr>
+<tr><td data-label="구분">가치</td><td data-label="기존">원조 기술을 사용하는</td><td data-label="변화">대화와 토론을 바탕으로</td></tr>
+<tr><td data-label="구분">시민</td><td data-label="기존">클라이언트를 위해서</td><td data-label="변화">시민과 함께하는</td></tr>
+<tr><td data-label="구분">교육 변화</td><td data-label="기존">통(사회)에 적응하는</td><td data-label="변화">통(사회)을 변화시키는</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>시민과 사회관리</strong></p>
+<ul>
+<li><strong>시민</strong> — 권리(자유권·사회권), 권력(참정권·주체적 권한), 연대(세력화)를 가진 존재.</li>
+
+</ul>
+<p class="sh"><strong>제도적 사례관리 모델 ② 태도</strong></p>
+<ul>
+<li><strong>기본 태도</strong> — 편견 없는 인정, 근본 원인에 대한 공감, 평등한 대화.</li>
+
+
+
+<li><strong>문화활동가의 역할</strong> — 사랑의 대화와 세상 읽기로 사람을 넘어 의식을 조직화함.</li>
+</ul>
+<p class="sh"><strong>제도적 사례관리 모델 ③ 행동</strong></p>
+<ul>
+<li><strong>공동체 참여와 통합적 접근</strong> — 주민이 의사결정에 주체로 참여하도록 매개함.</li>
+<li><strong>행동의 과정</strong> — 위험과 자각 → 학습과 공감 → 실천과 조직화 → 대안.</li>
+
+
+</ul>
+<p class="sh"><strong>제도적 사례관리 모델 ④ 역할</strong></p>
+<ul>
+<li><strong>케어센터에서 커뮤니티센터로</strong> — 기관은 시민이 모여 지역문제를 논의하는 광장이 되어야 함.</li>
+<li><strong>기관의 기능</strong> — 시민교육과 시민조직화.</li>
+
+</ul>
+<p class="tt"><strong>케어센터와 커뮤니티센터 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>케어센터(Care center)</th><th>커뮤니티센터(Community center)</th></tr></thead><tbody>
+<tr><td data-label="구분">대상</td><td data-label="케어센터(Care center)">취약계층</td><td data-label="커뮤니티센터(Community center)">시민</td></tr>
+<tr><td data-label="구분">기능</td><td data-label="케어센터(Care center)">돌봄</td><td data-label="커뮤니티센터(Community center)">자각과 실천</td></tr>
+<tr><td data-label="구분">사회복지사</td><td data-label="케어센터(Care center)">돌봄 제공자(Carer)</td><td data-label="커뮤니티센터(Community center)">매개자(Mediator)</td></tr>
+</tbody></table></div>
+<h3>2. 사례관리의 구성요소 및 운영체계</h3>
+<p class="sh"><strong>사례관리의 구성요소</strong></p>
+<ul>
+<li><strong>다섯 가지 요소</strong> — 사례관리 대상자, 사례관리자, 사회자원, 사례관리과정, 사례관리 운영체계.</li>
+</ul>
+<p class="sh"><strong>1) 사례관리 대상자</strong></p>
+<ul>
+<li><strong>정의</strong> — 생계, 주거, 의료, 교육, 고용 등 복합적 욕구가 있어 사례관리가 필요한 개인 혹은 가족.</li>
+<li><strong>① 위기(긴급) 사례관리 대상자</strong> — 긴급복지지원법 대상자.</li>
+<li><strong>② 집중 사례관리 대상자</strong> — 중증정신질환 등 집중 개입 필요.</li>
+<li><strong>③ 일반 사례관리 대상자</strong> — 복합적 욕구가 있는 대상자.</li>
+<li><strong>관점에 따른 차이</strong> — 잔여적은 불쌍한 사람, 제도적은 위험에 노출된 시민·지역주민으로 봄.</li>
+</ul>
+<p class="sh"><strong>2) 사례관리자</strong></p>
+<ul>
+<li><strong>미국사회복지사협회의 정의</strong> — 욕구를 사정하고 서비스를 계획·실행·조정·점검·평가하며 옹호하는 전문가(NASW, 2010).</li>
+
+<li><strong>관점에 따른 차이</strong> — 잔여적은 전문사회복지사(보듬이), 제도적은 문화활동가(사회적 위험에 맞서는 용사).</li>
+</ul>
+<p class="sh"><strong>3) 사회자원</strong></p>
+<ul>
+<li><strong>(1) 개인내적 자원</strong> — 클라이언트의 강점 및 능력.</li>
+<li><strong>(2) 사회자원</strong> — 비공식적 자원(가족, 친척, 이웃)과 공식적 자원(공공기관, 복지관 등).</li>
+
+</ul>
+
+
+<p class="sh"><strong>4) 사례관리과정</strong></p>
+<ul>
+
+<li><strong>순환적 과정</strong> — 접수 → 사정 → 서비스 계획 수립 → 실행 → 점검 → 평가·종결 → 재사정.</li>
+</ul>
+
+
+<p class="sh"><strong>5) 사례관리 운영체계</strong></p>
+<ul>
+<li><strong>정의</strong> — 사례관리실천을 지원하는 체계로, 내부·외부 운영체계로 나뉨.</li>
+<li><strong>내부 운영체계</strong> — 사례관리자, 사례관리팀, 전문 수퍼바이저.</li>
+<li><strong>외부 운영체계</strong> — 통합사례관리협의회, 통합사례관리지원단(솔루션위원회를 둘 수 있음).</li>
+
+</ul>
+<h3>3. 잔여적 사례관리와 제도적 사례관리의 비교</h3>
+
+
+<p class="tt"><strong>잔여적 관점과 제도적 관점의 실천방법</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
+<tr><td data-label="구분">전략</td><td data-label="잔여적 관점">개인의 적응과 대처를 가능하게 하는 전략</td><td data-label="제도적 관점">변화와 통제를 가능하게 하는 전략</td></tr>
+<tr><td data-label="구분">교육·원조</td><td data-label="잔여적 관점">기술, 훈련, 직접적 원조</td><td data-label="제도적 관점">사회교육</td></tr>
+<tr><td data-label="구분">자원 활용</td><td data-label="잔여적 관점">수동적 자원 활용</td><td data-label="제도적 관점">적극적 자원 활용</td></tr>
+<tr><td data-label="구분">공감</td><td data-label="잔여적 관점">정서적 공감</td><td data-label="제도적 관점">사회적 공감(개인의 불행이 아닌 사회적 문제임에 공감)</td></tr>
+<tr><td data-label="구분">지지</td><td data-label="잔여적 관점">정서적 지지</td><td data-label="제도적 관점">사회적 지지</td></tr>
+<tr><td data-label="구분">자각</td><td data-label="잔여적 관점">자기자각 상담</td><td data-label="제도적 관점">비판적 자각, 역량강화</td></tr>
+<tr><td data-label="구분">개입</td><td data-label="잔여적 관점">가족치료, 관계작업</td><td data-label="제도적 관점">옹호</td></tr>
+</tbody></table></div>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사례관리와 사회관리의 요약 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여주의(사례관리)</th><th>제도주의(사회관리)</th></tr></thead><tbody>
+<tr><td data-label="구분">문제 사정</td><td data-label="잔여주의(사례관리)">적응 못하는 개인</td><td data-label="제도주의(사회관리)">부당한 관계와 구조</td></tr>
+<tr><td data-label="구분">목표</td><td data-label="잔여주의(사례관리)">개인의 적응능력 향상</td><td data-label="제도주의(사회관리)">구조변화와 시민력 향상</td></tr>
+<tr><td data-label="구분">실천 개입 기술</td><td data-label="잔여주의(사례관리)">정서적 지지, 상담, 가족치료</td><td data-label="제도주의(사회관리)">사회적 지지, 시민교육, 주민조직화</td></tr>
+<tr><td data-label="구분">사례관리</td><td data-label="잔여주의(사례관리)">불쌍한 사람 도움주기</td><td data-label="제도주의(사회관리)">불쌍한 사람이 생기지 않는 공동체</td></tr>
+<tr><td data-label="구분">태도</td><td data-label="잔여주의(사례관리)">동정과 시혜</td><td data-label="제도주의(사회관리)">권리와 연대</td></tr>
+<tr><td data-label="구분">문제설정</td><td data-label="잔여주의(사례관리)">어떻게 상처를 치료하고 자신의 환경에 적응할 것인가?</td><td data-label="제도주의(사회관리)">어떻게 권리를 알고 권력을 갖게 할 것인가?</td></tr>
+<tr><td data-label="구분">명칭</td><td data-label="잔여주의(사례관리)">잔여적 사례관리</td><td data-label="제도주의(사회관리)">제도적 사례관리</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여주의(사례관리)">불쌍한 사람</td><td data-label="제도주의(사회관리)">시민</td></tr>
+<tr><td data-label="구분">변화</td><td data-label="잔여주의(사례관리)">노력하는 의지적 개인</td><td data-label="제도주의(사회관리)">배고프지 않는 연대의 공동체</td></tr>
+<tr><td data-label="구분">실천</td><td data-label="잔여주의(사례관리)">사례관리</td><td data-label="제도주의(사회관리)">사회관리</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>노숙인 사례로 본 두 관점</strong></p>
+<ul>
+<li><strong>잔여적 사례관리(노숙인)</strong> — 개인의 적응 실패로 보고 무료급식, 상담, 기술 교육을 제공함.</li>
+<li><strong>제도적 사례관리(노숙인)</strong> — 경제 구조적 모순으로 보고 시민교육과 연대로 구조 개선을 추구함.</li>
+</ul>
+<h3>4. 사례관리의 비판, 유사점 및 실천적 함의</h3>
+
+
+<p class="sh"><strong>잔여적 관점과 제도적 관점의 유사성</strong></p>
+
+<p class="tt"><strong>잔여적 관점과 제도적 관점의 상호비판과 유사성</strong></p>
+<div class="tw"><table class="long c2">
+<thead><tr><th>구분</th><th>내용</th></tr></thead><tbody>
+<tr><td data-label="구분">잔여적 관점 비판</td><td data-label="내용">사회문제를 개인의 심리적 문제로 축소, 희생자 비난, 구조적 문제를 사적인 문제로 취급, 착취와 억압의 영속화, 자본주의라는 억압적 사회질서 강화</td></tr>
+<tr><td data-label="구분">제도적 관점 비판</td><td data-label="내용">개인의 자기결정권에 대한 관념이 모호, 구조변화의 현실적 어려움, 구조결정론</td></tr>
+<tr><td data-label="구분">유사성</td><td data-label="내용">사회와 개인의 연관성 인식, 사회가 개인의 문제를 유발하는 데 동의, 클라이언트의 자율성 추구, 통찰 중시</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>잔여적 관점과 제도적 관점의 실천과 현실</strong></p>
+<ul>
+<li><strong>차이의 본질</strong> — 구조와 개인의 우선성 문제이므로 구분은 절대적이지 않음.</li>
+
+<li><strong>시사점</strong> — 내 실천이 잔여적인지 제도적인지 끊임없이 성찰해야 함.</li>
+</ul>
+<p class="sh"><strong>실천적 함의 ① 사르트르의 실존주의</strong></p>
+<ul>
+
+<li><strong>"존재가 본질에 앞선다"(사르트르)</strong> — 인간은 스스로 만든 것이 되며 모든 인류에 대한 책임이 있음.</li>
+
+<li><strong>사례관리에의 적용</strong> — 현실의 공동체를 이상의 공동체로 만들어 가는 사례관리를 해야 함.</li>
+</ul>
+<p class="sh"><strong>실천적 함의 ② 이상의 공동체와 시민정치</strong></p>
+<ul>
+
+<li><strong>세상 읽기와 세상 만들기</strong> — 시민교육과 권리 자각, 시민 조직화(최소 단위는 학습동아리).</li>
+<li><strong>시민정치</strong> — 권리를 알고 관철하기 위한 일상의 Praxis.</li>
+
+
+
+</ul>
+<p class="sh"><strong>사회관리의 실천 사례</strong></p>
+<ul>
+<li><strong>스웨덴 PRO</strong> — "엘리베이터는 자유다", 접근성을 권리의 문제로 봄.</li>
+
+
+</ul>
+
+<p class="more"><a href="사례관리론_강의노트.html#l6">6강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l7"><header class="lh"><span class="no">7강</span><h2>사례관리 실천과정과 기록 (1) 초기단계</h2></header><div class="ct">
+<h3>1. 사례발굴 및 접수</h3>
+<p class="sh"><strong>사례관리 실천과정의 흐름</strong></p>
+<ul>
+<li><strong>전체 과정</strong> — 사례발굴 및 접수면접 → 사정 → 서비스 지원계획 수립 → 서비스 지원 → 점검 및 재사정 → 평가 및 종결.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>초기단계의 의미</strong> — 사례관리가 필요한 클라이언트를 발견하고 적격성 여부를 거쳐 클라이언트로 확정하는 첫 단계로, 사례발굴과 인테이크(초기상담)를 통해 클라이언트를 선정함.</li>
+<li><strong>사회복지사의 태도</strong> — "나는 인권옹호자다"라는 태도로 권리의 부재나 결핍을 살핌.</li>
+</ul>
+<p class="sh"><strong>사례발굴의 개념과 필요성</strong></p>
+<ul>
+<li><strong>사례발굴의 정의</strong> — 도움이 필요한 잠재적 대상자를 찾아내기 위한 구조적 장치나 실제 활동.</li>
+
+<li><strong>잠재적 대상자의 특성</strong> — 정보 부족, 도움 요청 기술 미숙, 접근 장벽으로 도움을 제때 받지 못함.</li>
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사례발굴의 방법</strong></p>
+<ul>
+<li><strong>기관 홍보</strong> — 안내, 설명회, 캠페인 등으로 도움을 요청할 수 있음을 알림 (예: 노인보호기관의 노인인권 설명회·캠페인).</li>
+<li><strong>네트워크 구축</strong> — 지역사회 관계기관과 협력하여 학대 등 사건 발생 시 기관으로 연락이 오도록 함.</li>
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>아웃리치(outreach)</strong> — 잠재적 클라이언트에게 직접 접근하는 활동.</li>
+<li><strong>의뢰 구조 마련</strong> — 서비스 제공자들이 대상자를 의뢰할 수 있는 구조를 마련함.</li>
+</ul>
+<p class="sh"><strong>사례접수의 세 가지 경로</strong></p>
+<ul>
+<li><strong>클라이언트 직접요청</strong> — 서비스 욕구가 강해 개입이 용이함.</li>
+<li><strong>의뢰받기(추천받기)</strong> — 가장 빈번한 방법이며, 의뢰자 목적과 클라이언트 욕구의 차이 파악, 의뢰서 수령과 동의가 필수임.</li>
+<li><strong>아웃리치</strong> — 사회복지사가 직접 접근하며, 방어적인 대상자가 많아 정기적으로 해야 함.</li>
+</ul>
+<p class="sh"><strong>사례발굴 및 접수의 핵심과업</strong></p>
+<ul>
+
+<li><strong>적격성 여부 판단</strong> — 긴급 욕구나 위기 여부에 따라 우선순위를 부여함.</li>
+<li><strong>인테이크(초기면접)</strong> — 서비스 필요 수준, 강도, 긴급성을 평가해 제공 여부와 시기를 결정함.</li>
+<li><strong>서비스 연결 및 연계</strong> — 의료·주거·안전 문제는 우선 개입함.</li>
+<li><strong>정보 수집 및 기록</strong> — 사정 단계의 기초 자료를 확보함.</li>
+</ul>
+
+
+<h3>2. 초기상담(인테이크)</h3>
+<p class="sh"><strong>초기상담의 개념과 목적</strong></p>
+<ul>
+<li><strong>사회복지사의 태도</strong> — "당신은 시민이고 시민권을 가진 존재다"라는 인식으로 동등하게 대화함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>인테이크의 정의</strong> — 잠재적 사례관리 대상에 대한 방문·내방 상담을 통해 클라이언트가 처한 어려움과 상황을 자세히 살펴보고, 사례관리 대상으로 적정한지 평가하는 과정임.</li>
+<li><strong>목적</strong> — 사례관리 대상자로서 적합한지 판정함.</li>
+</ul>
+<p class="sh"><strong>적격성 여부 판단 기준</strong></p>
+<ul>
+<li><strong>기관 기준의 적합성</strong> — 기관의 서비스 역량과 자격 기준에 맞는가.</li>
+<li><strong>동의와 동기</strong> — 동의나 욕구 해결 동기가 없으면 사례관리에 들어갈 수 없음.</li>
+<li><strong>유연성</strong> — 제한된 정보임을 인정하고 확고한 판단에 매몰되지 않음.</li>
+</ul>
+
+
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>면접의 기술</strong></p>
+<ul>
+<li><strong>소개 기술</strong> — 사례관리자 자신과 기관을 소개하고, 기관의 목적과 제공 가능한 서비스, 자신의 역할을 설명하며 클라이언트가 무엇을 기대하는지 확인함.</li>
+<li><strong>분위기 조성 기술</strong> — 심리적으로 편안한 분위기를 만드는 기술로 공감(수용과 관심 전달), 진심(믿을 만한 사람임을 전달), 온화함(친밀하고자 하는 욕구 전달), 긍정적 고려가 필요함. 자기소개 후 날씨·교통 등 가벼운 대화로 숨 돌릴 여유를 주고, "어떻게 오셨습니까?"로 문제에 초점을 맞추며 면접 소요 시간을 미리 알려줌.</li>
+<li><strong>관찰 기술</strong> — 표정, 손놀림, 눈맞춤, 얼굴 붉힘 등을 살피고 언어적·비언어적 표현의 일치 여부를 확인하며, 언제 어떤 이야기 도중에 침묵하는지 파악함 (침묵은 위협적이거나 말하기 어려운 주제에서 나타남).</li>
+<li><strong>피드백 기술</strong> — "제가 들은 이야기가 이것을 의미하는 것인가요?"처럼 내용을 확인하고, 클라이언트가 자신과 문제를 이야기하도록 격려함.</li>
+<li><strong>초점 기술</strong> — 제한된 시간에 최대 효과를 내도록 이야기가 어긋날 때 중심 문제로 되돌림 (예: 학업 부진으로 왔으나 유해환경만 장황하게 말할 때 학교생활 이야기로 돌아오게 함).</li>
+<li><strong>경청 기술</strong> — 주의 깊게 듣고 인정하여 상호 신뢰할 수 있는 면접을 이끎.</li>
+<li><strong>요약 기술</strong> — 클라이언트가 펼쳐놓은 문제들을 명료화하기 위해 항목별로 요약함.</li>
+<li><strong>부정적 감정을 다루는 기술</strong> — 자기 노출의 부담, 노출 정도에 대한 혼란, 사례관리자 역량에 대한 의심 등 저항과 부정적 감정을 그대로 인정하고 격려함.</li>
+<li><strong>통합적 지식과 편견 배제</strong> — 복합적인 신체·정신·사회적 문제를 다루기 위해 보건·의료·복지·심리사회적 지식이 필요하며, 개인의 가치로 클라이언트를 판단하지 않도록 자기 편견을 미리 분석함. 만남 전 질문사항을 정리하고 면접의 초점을 찾음.</li>
+</ul>
+<p class="sh"><strong>비스텍의 관계 원리 (클라이언트의 욕구와 대응 원리)</strong></p>
+<ul>
+<li><strong>개별화</strong> — 독특한 한 인간으로 취급되기를 바라는 욕구.</li>
+<li><strong>의도적 감정표현</strong> — 감정을 자유롭게 표현하고자 하는 욕구.</li>
+<li><strong>통제된 정서적 관여</strong> — 동정적 이해와 반응을 구하는 욕구.</li>
+<li><strong>수용</strong> — 존엄성을 가진 인간으로 인정받고자 하는 욕구.</li>
+<li><strong>비심판적 태도</strong> — 판단을 받고 싶지 않은 욕구.</li>
+<li><strong>클라이언트의 자기결정</strong> — 스스로 선택·결정하고 싶은 욕구.</li>
+<li><strong>비밀보장</strong> — 비밀이 알려지지 않기를 바라는 욕구.</li>
+</ul>
+
+
+<h3>3. 클라이언트의 선정</h3>
+<p class="sh"><strong>선정의 원칙과 스크리닝</strong></p>
+<ul>
+
+<li><strong>사례관리가 필요한 사람</strong> — 복합적 문제를 경험하고 도움 없이는 서비스를 효과적으로 이용할 수 없는 사람.</li>
+<li><strong>선정 절차</strong> — 사례관리회의 등 공식적 절차로 선정함.</li>
+<li><strong>스크리닝</strong> — 정해진 기준에 따라 서비스 지원·연계·정보 제공·제외 여부를 결정하는 적격성 판단 절차.</li>
+</ul>
+<p class="sh"><strong>스크리닝 기준에 따른 구분</strong></p>
+<ul>
+<li><strong>인테이크 대상자</strong> — 다양한 위기에 처하고 문제 해결 의지가 있는 자, 타 기관에서 해결되지 못한 자 등.</li>
+<li><strong>리퍼(refer) 대상자</strong> — 문제가 기관 자원 범위를 벗어나 타 기관 연계가 필요한 경우.</li>
+<li><strong>정보제공 대상자</strong> — 정보 제공만으로 해결 가능한 경우.</li>
+<li><strong>서비스 제외 대상자</strong> — 서비스를 거부하거나 적합하지 않은 경우.</li>
+</ul>
+<p class="sh"><strong>발굴된 클라이언트의 유형</strong></p>
+<ul>
+
+
+
+
+
+<li><strong>위험도와 자율성</strong> — 위험도가 높을수록 서비스 선택의 자율성은 낮아짐.</li>
+</ul>
+<p class="sh"><strong>초기단계의 핵심과업</strong></p>
+<ul>
+
+<li><strong>전략적 대상자 선택</strong> — 다인 가구는 가족 구조와 기능을 평가해 누구를 파트너로 삼을지 검토함.</li>
+<li><strong>비자발적 클라이언트 대응</strong> — 동의가 없으면 진행하지 않되 관계 형성과 모니터링은 계속함.</li>
+</ul>
+<p class="tt"><strong>클라이언트 유형별 특성 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>유형</th><th>대상 특성</th><th>주요 개입 방법</th></tr></thead><tbody>
+<tr><td data-label="유형">정보 이용자</td><td data-label="대상 특성">정보 부족으로 문제 해결에 어려움</td><td data-label="주요 개입 방법">일회성 상담, 정형화된 정보 제공</td></tr>
+<tr><td data-label="유형">서비스 이용자</td><td data-label="대상 특성">특정 영역 기능 향상을 위해 단위 서비스 필요</td><td data-label="주요 개입 방법">서비스별 이용 기준에 따른 정형화된 서비스</td></tr>
+<tr><td data-label="유형">잠재적 사례관리 클라이언트</td><td data-label="대상 특성">포괄적·만성적 욕구 미충족</td><td data-label="주요 개입 방법">지속적 모니터링, 욕구평가에 따른 서비스 조합</td></tr>
+<tr><td data-label="유형">사례관리 클라이언트</td><td data-label="대상 특성">선정 기준 부합, 절차에 동의하고 계약</td><td data-label="주요 개입 방법">사례관리 유형에 따른 개입, 동의와 계약 필수</td></tr>
+<tr><td data-label="유형">위기지원 클라이언트</td><td data-label="대상 특성">긴급 지원 없이는 안전 확보가 어려움</td><td data-label="주요 개입 방법">3일 이내 직접 서비스, 개입기간 1개월 이내</td></tr>
+</tbody></table></div>
+<h3>4. 동의 및 계약</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>동의 및 계약의 의미</strong></p>
+<ul>
+<li><strong>개념</strong> — 사례관리 대상자로 선정된 이후 서비스 제공의 시작을 알리고 동참을 권유하는 단계임.</li>
+<li><strong>필요성</strong> — 문제 해결이 장기적·반복적이어서 대상자의 자발적 참여와 변화 동기가 없으면 서비스 효과가 낮아지므로, 사례관리의 의미·과정·목표를 설명하고 협력적 관계를 만들어야 함.</li>
+</ul>
+<p class="sh"><strong>동의 및 계약의 핵심과업</strong></p>
+<ul>
+
+<li><strong>주체로서의 대상자</strong> — 수동적 수혜자가 아니라 문제 해결의 주체이자 권리를 가진 존재임.</li>
+
+</ul>
+<p class="sh"><strong>동의서 작성</strong></p>
+<ul>
+<li><strong>사례관리 이용동의서</strong> — 쉬운 말로 설명 후 2부에 서명하여 각각 보관함.</li>
+<li><strong>개인정보 활용 동의서</strong> — 별도로 반드시 작성함.</li>
+</ul>
+<h3>5. 초기단계의 기록</h3>
+<p class="sh"><strong>기록의 절차</strong></p>
+<ul>
+<li><strong>진행 순서</strong> — 초기면접지 작성 → 초기면접 실시 및 기록 → 이용동의서 작성 → 사례관리팀 회의로 등록 결정.</li>
+</ul>
+<p class="sh"><strong>사례관리 기록의 목적</strong></p>
+<ul>
+<li><strong>기록의 목적</strong> — 실천 활동의 문서화, 서비스 평가, 사례의 지속성 유지, 전문가 간 의사소통, 클라이언트와 정보 공유, 행정적 자료.</li>
+
+
+
+
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>기록의 지침</strong></p>
+<ul>
+<li><strong>언어와 용어</strong> — 명료하고 구체적으로 작성하고 비난적 표현을 피하며, 전문가의 특수용어·속어·축약어 사용을 금지함. 클라이언트의 표현은 가능한 한 말 그대로 적고, 작성 후 맞춤법·띄어쓰기·문법을 점검함.</li>
+<li><strong>진실성 담보</strong> — 행위의 적절성 논란 시 증거 자료가 되므로 빠짐없이 정확하게, 개입 후 24시간 이내에 작성하며, 사실이 아닌 추측성 기록은 금지함.</li>
+<li><strong>접근성</strong> — 비밀보장 원칙에 따라 문서 공개와 보안을 관리하고, 컴퓨터 사용 시 보안 규정을 지키며 안전한 장소에 보관함. 정보 공개 시 반드시 클라이언트의 동의가 필요함.</li>
+<li><strong>준거 지침</strong> — 사회복지사 윤리강령과 사회복지 사례관리 표준실천지침을 기본 지침으로 활용함.</li>
+</ul>
+<p class="sh"><strong>초기면접 기록의 원칙</strong></p>
+<ul>
+<li><strong>진술 그대로 기록</strong> — 클라이언트와 가족의 진술을 해석 없이 원형 그대로 기록함.</li>
+<li><strong>객관적 정보 수집</strong> — 질병, 가족 구조, 서비스 이력 등 사실 정보를 수집함.</li>
+<li><strong>의뢰 경로와 정보 출처</strong> — 누가 무엇 때문에 의뢰했는지, 정보 출처를 기록함.</li>
+
+
+</ul>
+
+<p class="more"><a href="사례관리론_강의노트.html#l7">7강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l8"><header class="lh"><span class="no">8강</span><h2>사례관리 실천과정과 기록 (2) 사정단계</h2></header><div class="ct">
+<h3>1. 잔여적 사례관리의 사정</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>진단과 사정의 차이</strong></p>
+<ul>
+<li><strong>진단(diagnosis)</strong> — 의료계 용어로, 의사가 치료에 앞서 병리적 현상에 초점을 맞추어 어디가 얼마나 아픈지를 파악하는 과정이며 환자의 생각, 가족, 장점 등은 파악하지 않음.</li>
+<li><strong>사정(assessment)</strong> — 문제뿐 아니라 문제에 대한 클라이언트의 생각, 개인적 장점, 찾아온 동기, 문제를 갖기까지의 과정, 문제를 야기한 주변 환경과 관계, 극복 의지, 도움이 되는 사회적 자원 등 클라이언트의 역량에도 관심을 가짐.</li>
+<li><strong>평가 대상의 확장</strong> — 문제 해결, 성장 증진, 기능 향상, 잠재력 실현, 새로운 자원 개발에 활용될 강점, 자원, 건강한 기능 등 긍정적 요인도 평가해야 함.</li>
+</ul>
+<p class="sh"><strong>잔여적 사례관리 사정의 특성</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>정의</strong> — 사례관리자와 클라이언트가 함께 욕구, 자원, 장애물에 관한 정보를 수집·분석하고 우선순위화·종합화하는 과정으로, 사정 후 서비스 계획 단계로 넘어감.</li>
+<li><strong>초점</strong> — 욕구와 문제를 심층 파악하며 특히 강점과 자원 분석에 초점을 두고, 구조화된 사정도구를 사용함.</li>
+<li><strong>지속성</strong> — 사정은 반복 수행되며 새 욕구나 긴급 상황 시 재사정함.</li>
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>잔여적 사례관리자의 태도</strong></p>
+<ul>
+<li><strong>비심판적이고 수용적인 태도</strong> — 가치 기준으로 옳고 그름을 따지지 않고 클라이언트를 수용함.</li>
+<li><strong>사정 내용의 합의와 공유</strong> — 사정 결과를 클라이언트와 공유할 뿐 아니라 합의해야 함.</li>
+<li><strong>클라이언트의 언어 사용</strong> — 클라이언트가 표현한 언어를 사용하여 경험과 관점을 왜곡하지 않음.</li>
+<li><strong>강점과 자원의 적극적 사정</strong> — 문제 중심이 아니라 가능성과 잠재력 중심으로 사정함.</li>
+</ul>
+<p class="sh"><strong>사정 영역 ① 욕구 사정</strong></p>
+<ul>
+<li><strong>욕구의 의미</strong> — '필요', 즉 지금 없다는 결핍을 뜻함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>욕구 사정의 정의</strong> — 서비스나 지원 형태의 개입을 통해 변화를 도모해야 할 클라이언트 상황에 대한 가설을 수립하는 과정임.</li>
+<li><strong>문제·욕구·요구의 구분</strong> — 문제 "학업 부진", 욕구 "수업을 잘 따라가면 좋겠다", 요구 "학습지 지원이 필요하다".</li>
+<li><strong>욕구 사정의 방향</strong> — 원하는 서비스를 그대로 주는 것이 아니라 합의한 목표 달성 수단으로 자원을 제공함.</li>
+
+</ul>
+<p class="sh"><strong>사정 영역 ② 자원 및 강점 사정</strong></p>
+<ul>
+<li><strong>자원 및 강점 사정</strong> — 투입 가능한 노력을 확보하는 절차로, 내적 자원과 외부 자원으로 구분됨.</li>
+
+
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>비공식 자원 질문</strong> — 가족, 친구, 이웃, 자조집단, 종교기관, 직장 동료로부터 받은 도움.</li>
+<li><strong>공식 자원</strong> — 동주민센터, 종합사회복지관, 학교, 시민단체 등.</li>
+<li><strong>공식 자원의 분류</strong> — 공공자원(조세), 민간자원(민간 재원), 지역발굴자원(제공자와 수혜자가 직접 연결).</li>
+<li><strong>서비스 유형별 자원</strong> — 현금, 현물, 바우처, 프로그램, 자원봉사, 시설 이용·입소, 대여·감면.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사정 영역 ③ 장애요인 사정</strong></p>
+<ul>
+<li><strong>의미</strong> — 사례관리 목표를 위한 노력을 저해하거나 걸림돌이 되는 특성이나 조건을 살펴보는 것임.</li>
+<li><strong>내부 장애요인</strong> — 클라이언트의 성격이나 심리정서적 특성으로, 비관주의, 냉소주의, 운명주의, 충동적이고 무질서한 생활 태도 등이 있음.</li>
+<li><strong>외부 장애요인</strong> — 클라이언트가 처한 삶의 상황이나 환경적 특성으로, 부적절한 자원(자원이 실제로 활용되지 못함), 자원 이용에 대한 무능력(자원이 있어도 활용하지 못함), 고갈된 자원(자원 자체가 없음), 이차적으로 필요한 자원(욕구 해결을 위해 추가로 필요한 자원)이 있음.</li>
+</ul>
+
+
+<h3>2. 제도적 사례관리의 사정</h3>
+<p class="sh"><strong>제도적 사례관리 사정의 관점</strong></p>
+<ul>
+<li><strong>근본 원인의 위치</strong> — 제도적 사례관리는 문제의 근본 원인을 사회구조에 둠.</li>
+<li><strong>골드버그(1974)</strong> — 문제를 정의하는 방식이 해결안의 범위를 결정함.</li>
+<li><strong>사정의 정의</strong> — 문제의 유형과 원인에 대한 전문적 판단·해석으로, 개인의 상황이 문제를 어떻게 야기하는지 구체화함.</li>
+<li><strong>이론적 특성</strong> — 사회복지사의 지식에 따라 사정 범위가 달라지며, 양성 교육이 잔여주의 중심이라 구조적 분석이 약함.</li>
+
+</ul>
+<p class="sh"><strong>제도적 사례관리자의 태도</strong></p>
+<ul>
+<li><strong>기본 방향</strong> — 동등한 시민으로 평등하게 대화하고, 근본 원인을 사정하며 합의·공유함.</li>
+<li><strong>인정</strong> — 배경과 신념·가치를 인정하고 품위와 권리를 지킴.</li>
+<li><strong>공감</strong> — 당사자 입장에서 삶의 맥락을 고려함.</li>
+<li><strong>대화</strong> — 낙인감을 주지 않는 익숙한 언어로 안전하게 이야기하게 함.</li>
+</ul>
+
+
+<p class="sh"><strong>구조적 요소가 개인 문제에 미치는 영향</strong></p>
+<ul>
+<li><strong>첫째, 간접적 악화</strong> — 구조적 요소는 개인 문제를 악화시키거나 복잡하게 만듦(장애의 사회적 처우).</li>
+<li><strong>둘째, 구조적 조건의 증상</strong> — 개인 문제는 구조적 조건의 증상이거나 반발임(청년 실업).</li>
+<li><strong>셋째, 인식과 선택의 사회화</strong> — 연령차별적 인식을 스스로 받아들이는 경우 등.</li>
+<li><strong>넷째, 정상성과 일탈의 결정</strong> — 사회적으로 문제라고 정의되었기 때문에 존재할 수 있음(마서스 비니어드 섬).</li>
+<li><strong>다섯째, 물적 조건의 결정</strong> — 가장 직접적인 원인이 될 수 있음(여성노인의 빈곤).</li>
+</ul>
+<p class="sh"><strong>제도적 사정의 분석 관점 ① 이데올로기의 제약</strong></p>
+<ul>
+<li><strong>행동의 제약</strong> — 정형화된 역할, 역할갈등, 학습된 무기력, 여성·노인 등의 역할 규정.</li>
+<li><strong>신념의 제약</strong> — 잘못된 신념("장애인이라 못한다"), 신념 간 갈등, 자기 부정과 자기비난.</li>
+<li><strong>제도적 장치의 제약</strong> — 자원 부족과 부적절한 할당, 권력·기회의 결여, 이익집단 간의 갈등.</li>
+</ul>
+<p class="sh"><strong>제도적 사정의 분석 관점 ② 사회통제과정</strong></p>
+<ul>
+<li><strong>법제화된 통제</strong> — 법제화된 규제체계가 권력 불균형을 유지함.</li>
+<li><strong>빈곤의 유지</strong> — 빈민은 그들의 이익에 역행하는 정책 때문에 계속 빈곤함(Piven &amp; Cloward, 1971).</li>
+<li><strong>비성문화된 가정</strong> — "가난한 사람은 게으르다" 같은 가정이 처벌과 낙인을 줌.</li>
+</ul>
+<p class="sh"><strong>제도적 사정의 분석 관점 ③ 사회적 낙인, 대처능력의 부재</strong></p>
+<ul>
+<li><strong>사회적 낙인과정의 영향</strong> — 같은 행동도 성별에 따라 다르게 낙인찍힘.</li>
+<li><strong>사회변화에 대한 대처능력 부재</strong> — 키오스크를 못 쓰는 노인처럼 소외감을 유발함.</li>
+</ul>
+<p class="sh"><strong>사회적 자각 연습</strong></p>
+<ul>
+<li><strong>사회적 자각 연습</strong> — 삶의 선택에 영향을 준 사회구조 목록을 쓰고, 개인적 선택이 구조의 영향이었는지 확인함.</li>
+
+
+
+</ul>
+<p class="tt"><strong>잔여적 관점 vs 제도적 관점의 사정</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 관점</th><th>제도적 관점</th></tr></thead><tbody>
+<tr><td data-label="구분">문제의 소재</td><td data-label="잔여적 관점">환경에 대처하지 못하는 개인</td><td data-label="제도적 관점">부적절한 사회경제구조</td></tr>
+<tr><td data-label="구분">상호작용·권력</td><td data-label="잔여적 관점">부적절하고 비효과적인 상호작용</td><td data-label="제도적 관점">권력의 결여</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="잔여적 관점">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td data-label="제도적 관점">이데올로기로 인한 역할 제한, 지배적 사회풍습과 신념에 따른 제한</td></tr>
+<tr><td data-label="구분">규범</td><td data-label="잔여적 관점">집단 혹은 가족규범 간의 갈등</td><td data-label="제도적 관점">집단규범이 수행하는 은폐된 사회적 기능</td></tr>
+<tr><td data-label="구분">학습·대처</td><td data-label="잔여적 관점">과거 경험을 통한 부정적 학습</td><td data-label="제도적 관점">변화능력의 부재 혹은 사회변화에 대한 대처능력 부재</td></tr>
+<tr><td data-label="구분">관계</td><td data-label="잔여적 관점">대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td data-label="제도적 관점">사회적 낙인과정의 영향</td></tr>
+<tr><td data-label="구분">자원</td><td data-label="잔여적 관점">물질적 자원의 결여</td><td data-label="제도적 관점">사회·경제 구조적 제한</td></tr>
+<tr><td data-label="구분">원조 방향</td><td data-label="잔여적 관점">사회상황에 적응하고 대처할 수 있도록 원조</td><td data-label="제도적 관점">사회상황의 구조적 측면을 변화시키고 통제할 수 있도록 원조</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>제도적 사례관리 사정의 방향</strong></p>
+<ul>
+<li><strong>공동체 지향</strong> — 어려운 이웃이 생기지 않는 공동체를 만드는 일을 해야 함.</li>
+<li><strong>시민으로서의 지역주민</strong> — 동등한 시민이자 자기결정권을 가진 존재로 인식함.</li>
+
+<li><strong>잔여적 사정과의 관계</strong> — 잔여적 사정을 무시하지 않고 그것을 넘어 분석함.</li>
+</ul>
+<p class="sh"><strong>개인적 요소와 구조적 요소의 관계</strong></p>
+<ul>
+<li><strong>상호작용</strong> — 개인적 문제에는 항상 구조적 요소가 존재하며 개인 요소와 상호작용함.</li>
+
+</ul>
+<h3>3. 사정 기록지 작성</h3>
+<p class="sh"><strong>사정 기록의 내용과 원칙</strong></p>
+<ul>
+<li><strong>기록 항목</strong> — 개인정보, 주거·가족 상황, 서비스 이력, 욕구와 우선순위, 강점과 장애요소, 개인력·가족력, 검토의견.</li>
+<li><strong>제도적 관점의 기록</strong> — 사정 단계에서 구조적 측면까지 분석하여 기록함.</li>
+<li><strong>정보 수집</strong> — 여러 정보원에게서 포괄적으로 수집하고 표준화된 도구를 사용함.</li>
+<li><strong>면담 관련 동의</strong> — 녹음과 가정방문은 사전 동의를 받음.</li>
+</ul>
+<p class="sh"><strong>사례관리 사정결과표의 구성</strong></p>
+<ul>
+
+
+
+
+
+
+
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>가계도와 생태도</strong> — 가계도로 가족 안의 역동성을, 생태도로 자원과 강점을 발견할 수 있어 사정 단계에서 그려 보아야 함.</li>
+</ul>
+<p class="tt"><strong>사례관리 사정결과표 항목 정리</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>항목</th><th>기록 내용</th><th>유의점</th></tr></thead><tbody>
+<tr><td data-label="항목">제시된 요구</td><td data-label="기록 내용">클라이언트·가족·의미 있는 타인의 진술</td><td data-label="유의점">원형 그대로, 누가 제시한 요구인지 명시</td></tr>
+<tr><td data-label="항목">문제 상황</td><td data-label="기록 내용">요구를 뒷받침하는 다방면의 정보</td><td data-label="유의점">진술과 실제 문제가 다를 수 있음을 확인</td></tr>
+<tr><td data-label="항목">욕구</td><td data-label="기록 내용">기대 기준과 현재 상태의 차이로 나타난 결핍</td><td data-label="유의점">클라이언트와 함께 다차원적으로 분석</td></tr>
+<tr><td data-label="항목">강점 및 자원</td><td data-label="기록 내용">내적 강점, 공식·비공식 자원, 향후 이용 가능 자원</td><td data-label="유의점">기관명 외에 자원의 속성과 내용을 구체적으로</td></tr>
+<tr><td data-label="항목">장애요인</td><td data-label="기록 내용">내부·외부 장애요인</td><td data-label="유의점">신체·정신 문제는 객관적 근거 명시</td></tr>
+<tr><td data-label="항목"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span>척도</td><td data-label="기록 내용">생태도, 가계도, 표준화된 척도 결과</td><td data-label="유의점">소견 요약, 검사지는 별도 첨부</td></tr>
+<tr><td data-label="항목">종합의견</td><td data-label="기록 내용">사정 결과 요약, 전문적 설명, 사례관리 필요 여부</td><td data-label="유의점">실행 방법이나 자원은 기록하지 않음</td></tr>
+</tbody></table></div><p class="more"><a href="사례관리론_강의노트.html#l8">8강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l9"><header class="lh"><span class="no">9강</span><h2>사례관리 실천과정과 기록 (3) 목표 및 계획 수립 단계</h2></header><div class="ct">
+<h3>1. 목표 설정</h3>
+<p class="sh"><strong>목적과 목표의 구분</strong></p>
+<ul>
+<li><strong>목적</strong> — 추상적·가치지향적인 것(화살이 가야 할 방향).</li>
+<li><strong>목표</strong> — 구체적이고 측정·평가 가능한 것(화살의 목표점), 상위목표를 구체화한 것이 하위목표임.</li>
+
+</ul>
+<p class="sh"><strong>상이한 사정과 목표</strong></p>
+<ul>
+<li><strong>사정에 따른 목표의 차이</strong> — 원인을 개인에서 찾으면 잔여적 목표, 구조에서 찾으면 제도적 목표가 됨.</li>
+
+
+</ul>
+<p class="tt"><strong>잔여적 사례관리의 사정과 목표</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>사정</th><th>목표</th></tr></thead><tbody>
+<tr><td data-label="사정">부적절하고 비효과적인 상호작용</td><td data-label="목표">개인 간 상호작용 개선</td></tr>
+<tr><td data-label="사정">역할 기대로 인한 스트레스, 역할수행능력 부재, 비현실적 역할 기대</td><td data-label="목표">스트레스 경감과 기대 수정</td></tr>
+<tr><td data-label="사정">집단 혹은 가족규범 간의 갈등</td><td data-label="목표">개인 간 갈등 해소</td></tr>
+<tr><td data-label="사정">과거 경험을 통한 부정적 학습</td><td data-label="목표">부정적 학습의 수정, 현재와 과거 경험의 분리</td></tr>
+<tr><td data-label="사정">대인관계 문제, 사회적 지지 부족, 사회적 고립</td><td data-label="목표">대인관계 개선, 사회적 지지 증가</td></tr>
+<tr><td data-label="사정">물질적 자원의 결여</td><td data-label="목표">물질적 자원 제공</td></tr>
+</tbody></table></div>
+<p class="tt"><strong>제도적 사례관리의 사정과 목표</strong></p>
+<div class="tw"><table class="c2">
+<thead><tr><th>사정</th><th>목표</th></tr></thead><tbody>
+<tr><td data-label="사정">권력의 결여</td><td data-label="목표">피착취자의 권력 증진</td></tr>
+<tr><td data-label="사정">이데올로기로 인한 역할 제한</td><td data-label="목표">이데올로기적 역할 제한의 완화</td></tr>
+<tr><td data-label="사정">이익집단 간의 갈등</td><td data-label="목표">지배집단의 착취 경감과 그 기능의 폭로, 권력 불균형 제거</td></tr>
+<tr><td data-label="사정">변화능력의 부재</td><td data-label="목표">삶에 대한 변화와 통제능력 향상, 더 넓은 사회적 영향에 대한 자각</td></tr>
+<tr><td data-label="사정">사회적 낙인과정의 영향</td><td data-label="목표">사회적 낙인을 거부하여 낙인으로부터 자유로워짐</td></tr>
+<tr><td data-label="사정">사회·경제 구조적 제한</td><td data-label="목표">물질적 자원 제공과 구조적 제한의 변화</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사례 적용: 카프카의 『변신』</strong></p>
+<ul>
+<li><strong>『변신』 줄거리</strong> — 생계를 책임지던 그레고르가 벌레로 변해 일을 못 하게 되자 가족에게 배척당하다 홀로 죽음.</li>
+<li><strong>작품의 의미</strong> — 유용성을 잃은 개인이 무가치한 존재로 전락하는 비극, 자본주의적 가치관 비판.</li>
+</ul>
+
+
+
+
+
+
+<p class="sh"><strong>제도적 관점의 목표 (그레고르)</strong></p>
+
+<p class="tt"><strong>『변신』에 대한 잔여적·제도적 접근 비교</strong></p>
+<div class="tw"><table class="long c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">문제 규정</td><td data-label="잔여적 사례관리">그레고르의 역할수행능력 상실, 가족 내 경제적 의존 기반 붕괴로 갈등 심화, 관계 단절과 고립으로 스트레스 증가</td><td data-label="제도적 사례관리">개인 문제가 아닌 자본주의 착취구조와 가부장제 역할 강요의 산물, 경제적 불평등과 권력관계가 가족을 억압, 이데올로기적 규범이 개인을 소외시킴</td></tr>
+<tr><td data-label="구분">원조 방향</td><td data-label="잔여적 사례관리">가족 갈등 완화와 관계 회복, 스트레스 경감과 기대 조정, 생계 보장을 위한 물질적 지원, 사회 적응 훈련</td><td data-label="제도적 사례관리">피착취자의 권리 보장과 권력 균형 회복, 가부장적 자본주의 구조의 불평등 제거, 사회적 약자의 존엄성 회복, 구조 변화를 통한 사회적 지지 확장</td></tr>
+</tbody></table></div>
+<h3>2. 개입/실행계획 수립</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>계획수립 단계의 정의</strong></p>
+<ul>
+<li><strong>Holt</strong> — 사례관리의 목적을 발전시키고 이를 달성하기 위한 서비스 내용을 구체화하는 과정임.</li>
+<li><strong>Summers</strong> — 클라이언트의 문제 해결을 위해 목표를 설정하고 구체화하는 작업임.</li>
+<li><strong>전혜성 외</strong> — 사정을 통해 작성된 욕구목록을 실행으로 옮기기 위한 전략을 설정하는 단계임.</li>
+<li><strong>최선희 외</strong> — 구체적 목표를 수립하고, 과업을 설정하며, 사례관리자의 역할과 실행전략을 수립하는 과정임.</li>
+<li><strong>종합</strong> — 사정으로 도출한 추진방안 중 욕구의 우선순위를 고려하여 합의된 목표를 도출하고 시간계획을 세워 개별화된 서비스 제공계획을 수립하는 단계로, 욕구의 우선순위 확인 → 목표 수립 → 실천서비스 계획 순으로 진행됨.</li>
+</ul>
+
+
+<p class="sh"><strong>두 관점의 관계</strong></p>
+<ul>
+<li><strong>함께 가는 실천</strong> — 긴급한 개인·가족 지원(잔여적)을 하면서 구조 개선(제도적)도 함께 해야 함.</li>
+</ul>
+<p class="sh"><strong>서비스 계획의 구성 (독거노인 사례)</strong></p>
+<ul>
+<li><strong>구성 요소</strong> — 문제점·욕구 → 목표와 결과 → 케어계획 → 서비스 공급자 → 횟수·시간 → 당사자 승낙.</li>
+
+
+</ul>
+<p class="sh"><strong>서비스계획 수립의 의미</strong></p>
+<ul>
+<li><strong>서비스계획 수립의 의미</strong> — 역할 명확화, 참여 메커니즘, 책임 명확화, 사례관리자의 안내자 역할, 효과 측정.</li>
+
+
+
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>서비스계획 작성의 기본원칙</strong></p>
+<ul>
+<li><strong>사정 기반</strong> — 서비스계획은 전 단계의 사정(욕구와 자원)에 바탕을 둠.</li>
+<li><strong>참여</strong> — 클라이언트 또는 가족 구성원 등 대리인이 참여하여 함께 작성함.</li>
+<li><strong>목표 지향</strong> — 미리 결정된 사례 목표를 지향해야 하며, 목표를 먼저 설정하고 계획을 세움.</li>
+<li><strong>한시성</strong> — 영속적인 것이 아니라 특정 기간의 계획이므로 재사정을 통해 수정될 수 있음.</li>
+<li><strong>포괄성</strong> — 공식적 서비스와 비공식적 지원을 모두 포함함.</li>
+<li><strong>부담 고려</strong> — 클라이언트나 가족의 부담액을 고려하여 작성함(관리보호모델).</li>
+<li><strong>문서화</strong> — 정형화된 계획 용지로 문서화함.</li>
+</ul>
+<p class="sh"><strong>서비스계획 작성 순서</strong></p>
+<ul>
+<li><strong>작성 순서</strong> — 문제·욕구 정리 → 목표와 우선순위 → 필요한 원조(본인 역할 포함) → 제공 주체 → 시간·횟수 → 자기 부담 계산 → 클라이언트·가족 동의.</li>
+
+
+
+
+
+
+</ul>
+<h3>3. 계획수립 과정의 기록</h3>
+<p class="sh"><strong>기록의 기준</strong></p>
+<ul>
+<li><strong>표준실천지침</strong> — 사정 결과에 근거한 개별화된 목표를 세우고 제공자·방법·시간계획을 제시해 클라이언트와 합의함.</li>
+<li><strong>우선순위</strong> — 욕구 우선순위 상위 3순위부터 단계적으로 계획함.</li>
+<li><strong>목표의 표현</strong> — 긍정적이고 행동적이며 생산적인 용어를 씀.</li>
+<li><strong>동의와 계약</strong> — 계획 및 평가표를 설명하고 동의를 얻어 계약서를 작성함.</li>
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>SMART한 목표 세우기</strong></p>
+<ul>
+<li><strong>S 구체적(Specific)</strong> — "엄마에게 짜증을 내지 않는다"보다 "엄마에게 웃으면서 인사를 한다", "엄마를 '어머니'라고 부른다".</li>
+<li><strong>M 측정가능(Measurable)</strong> — "주 1회 가족이 외식을 한다", "주 2회 방청소를 한다".</li>
+<li><strong>A 달성가능(Attainable)</strong> — "술을 끊는다"보다 "딸과 주 1회 문구점에 간다", "담배를 끊는다"보다 "담배는 집 밖에서 피운다".</li>
+<li><strong>R 결과지향(Result-oriented)</strong> — "조리학원을 다닌다"보다 "조리자격증을 취득한다", "자신의 건강에 대해 설명할 수 있다".</li>
+<li><strong>T 시간제한(Time-bounded)</strong> — 시작과 종결 일시를 설정함.</li>
+</ul>
+<p class="sh"><strong>사례관리 계획 및 평가표의 항목</strong></p>
+<ul>
+<li><strong>목적</strong> — 전체 실행기간 동안 궁극적으로 기대하는 변화 상황.</li>
+
+<li><strong>장기목표</strong> — 종결 시점 클라이언트의 현실적 변화 상태, 6개월~1년 이내 달성 가능.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>단기목표</strong> — 장기목표를 단계적으로 수행하는 세부 목표로, 목적-장기목표-단기목표의 연관성을 염두에 두고 1~3개월 이내 달성 가능하게 설정함.</li>
+<li><strong>실행방법</strong> — 내용, 장소, 담당자, 기간을 구체적으로 쓰고 클라이언트의 역할도 명시함.</li>
+<li><strong>담당</strong> — 실행할 사람(기관), 클라이언트나 가족도 포함.</li>
+<li><strong>개입기간</strong> — 재사정 주기(예: 3개월)를 넘지 않게 설정함.</li>
+<li><strong>평가</strong> — 목표 달성 여부를 평가하고, 달성 시 클라이언트가 10점 척도로 평가함.</li>
+
+</ul>
+<p class="sh"><strong>계획수립의 점검사항</strong></p>
+<ul>
+<li><strong>점검사항</strong> — 욕구사정과 목표의 연결성, 긍정적·생산적 표현, 제공자 목표가 아닌 대상자의 변화목표인지, 대상자 중심인지.</li>
+
+
+
+</ul>
+<p class="tt"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>장기목표 vs 단기목표</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>장기목표</th><th>단기목표</th></tr></thead><tbody>
+<tr><td data-label="구분">의미</td><td data-label="장기목표">종결 시점에 클라이언트와 가족의 삶에 이루어질 현실적인 변화 상태</td><td data-label="단기목표">장기목표를 단계적으로 수행해 나가는 세부적인 목표</td></tr>
+<tr><td data-label="구분">기간</td><td data-label="장기목표">6개월~1년 이내 달성 가능</td><td data-label="단기목표">1~3개월 이내 달성 가능</td></tr>
+<tr><td data-label="구분">기술 방식</td><td data-label="장기목표">제공자의 업무가 아닌 클라이언트·가족의 기대되는 변화</td><td data-label="단기목표">목적-장기목표-단기목표의 연관성을 고려하여 구체적으로</td></tr>
+</tbody></table></div>
+<h3>4. 목표와 계획 설정 시 사회복지사의 태도</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>합의를 통한 목표 수립</strong></p>
+<ul>
+<li><strong>변화의 방향</strong> — 변화의 목표는 변화의 방향성에 따라 다르며, 관리자의 일방적 작업이 아니라 클라이언트와 충분한 상담을 통해 합의되어야 함.</li>
+<li><strong>자율성과 참여</strong> — 클라이언트의 자율성과 참여가 충분히 보장되어야 실질적으로 실행 가능함.</li>
+<li><strong>평등한 관계</strong> — 전문가로서 더 많이 안다는 태도가 아니라, 서로 가르치고 배울 수 있는 평등한 관계에서 대화와 의사소통이 이루어져야 함.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>공동의 의사결정과 통합적 접근</strong></p>
+<ul>
+<li><strong>민주적 존재로서의 지역주민</strong> — 지역주민은 생각과 결정, 행동의 주체로서 일상의 민주주의를 살아가는 존재이며, 의사결정 과정에서 자기 목소리를 내는 주체로 참여함.</li>
+<li><strong>의사결정 태도</strong> — 지역주민의 의견을 복지사업에 반영하고, 질문·불만·고충이 자유롭게 표현되도록 하며, 나의 지위와 지식으로 주민의 결정을 유도하지 않음 (계획 설정 시 사회복지사가 결정을 유도할 수 있는 권력관계에 있음을 인식).</li>
+<li><strong>총체적 관점</strong> — 주민이 당면한 문제가 상황 속에서 생겨나고 서로 연결되어 있다고 보며, 다른 해결 가능성을 검토하고, 주민과 함께 지역사회 참여를 모색함.</li>
+<li><strong>지역사회 참여</strong> — 주민이 스스로 시민권을 자각·학습·실천하도록 연계하고, 자기 목소리로 지역사회의 주체가 되도록 하며, 사회적 지위와 기능 향상을 위해 사회제도 개선에 참여함. 잔여적 사례관리가 개인적 문제 해결로 끝난다면, 제도적 사례관리는 지역사회 참여 행동으로 나아감.</li>
+</ul><p class="more"><a href="사례관리론_강의노트.html#l9">9강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l10"><header class="lh"><span class="no">10강</span><h2>사례관리 실천과정과 기록 (4) 실행 및 점검 단계</h2></header><div class="ct">
+<h3>1. 서비스 실행</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>서비스 실행의 의미</strong></p>
+<ul>
+<li><strong>정의</strong> — 서비스 계획에 명시된 서비스 제공기관들과 함께 클라이언트에게 서비스를 제공하는 단계로, 이전 단계의 서비스 계획에 따라 직·간접 서비스를 제공하고 이행하는 것임.</li>
+<li><strong>클라이언트 측면</strong> — 욕구가 충족되기 시작하고, 삶의 질이 개선되며 임파워먼트를 위한 기제가 작동하는 단계임.</li>
+</ul>
+<p class="tt"><strong>잔여적·제도적 사례관리의 실행 전략</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">전략의 성격</td><td data-label="잔여적 사례관리">개인의 적응과 대처를 가능하게 하는 전략</td><td data-label="제도적 사례관리">변화와 통제를 가능하게 하는 전략</td></tr>
+<tr><td data-label="구분">교육</td><td data-label="잔여적 사례관리">기술, 훈련 등 직접적 원조</td><td data-label="제도적 사례관리">사회교육</td></tr>
+<tr><td data-label="구분">자원 활용</td><td data-label="잔여적 사례관리">수동적 자원 활용</td><td data-label="제도적 사례관리">적극적 자원 활용</td></tr>
+<tr><td data-label="구분">공감</td><td data-label="잔여적 사례관리">정서적 공감</td><td data-label="제도적 사례관리">사회적 공감</td></tr>
+<tr><td data-label="구분">지지</td><td data-label="잔여적 사례관리">정서적 지지</td><td data-label="제도적 사례관리">사회적 지지</td></tr>
+<tr><td data-label="구분">상담</td><td data-label="잔여적 사례관리">자기자각 상담</td><td data-label="제도적 사례관리">비판적 자각역량 강화</td></tr>
+<tr><td data-label="구분">관계</td><td data-label="잔여적 사례관리">가족치료, 관계작업</td><td data-label="제도적 사례관리">사회적 옹호</td></tr>
+</tbody></table></div>
+
+<p class="sh"><strong>직접 서비스 ① 상담: 자기자각 상담</strong></p>
+<ul>
+<li><strong>자기자각 상담(잔여적)</strong> — '동기 강화 상담'에 집중함.</li>
+
+<li><strong>구성</strong> — 강점을 활용해 자원 접근 장애에 대처하는 상담과 실행 점검 상담.</li>
+
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>직접 서비스 ① 상담: 비판적 자기자각 상담</strong></p>
+<ul>
+<li><strong>원칙</strong> — 클라이언트의 자율성을 평등과 공유의 원칙에 따라 다루며, 비판적 자각을 통해 상황을 객관적으로 바라보고 원인과 해결 방법을 스스로 파악하도록 함.</li>
+<li><strong>외적 측면과 내적 측면의 분리</strong> — 개인적 선택과 사회적 압력을 구분함. 그 상황에서 누가 이익을 얻는지 목록을 작성하고, 개인 선택과 사회적 기대를 비교하며, 이상적인 상황을 떠올려 숨겨진 개인적 욕구를 파악함 (예: 아이 돌봄 때문에 직장을 그만두려 할 때 본인의 생각인지 주변의 기대인지 구분하도록 질문함).</li>
+<li><strong>잘못된 통념과 제한된 역할에 대한 도전</strong> — 통념으로 받아들여진 신념이나 원치 않는 고정관념에 따른 행동을 살펴봄 ("여성이니까 돌봄에 더 적합하다"). 주관적 인식은 존중하되 문제의 원인이 되는 신념과 행동은 수정되어야 하며, 어떤 행동이 낙인감을 가져오고 역할을 고착시키는지 보여 주면 변화에 도움이 됨. 자각하게 되면 역할 선택의 폭이 확장됨.</li>
+<li><strong>대안 창출</strong> — 상황을 비판적으로 검토하고 변화가 가져올 결과를 상상하게 하여, 현재와 미래의 변화된 상황을 비교하면서 행동 방법을 구체화함.</li>
+<li><strong>창조적 해결 모색</strong> — 비슷한 문제를 가진 집단 성원들이 브레인스토밍으로 문제를 일으키는 조건을 찾고, 그 조건이 없는 사회를 상상하며 새로운 대안을 토론함. 상상 활동은 새로운 시도를 방해하는 태도나 정신적 걸림돌을 제거하고, 이후 다른 문제에도 응용되어 삶의 주체적 역할을 하도록 도움.</li>
+</ul>
+<p class="sh"><strong>직접 서비스 ② 교육: 기술·훈련 vs 사회교육</strong></p>
+<ul>
+<li><strong>기술과 훈련(잔여적)</strong> — 일상생활·독립적 삶의 기술을 모델링, 코칭, 역할 바꾸기, 강화물 등으로 교육함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사회교육(제도적)</strong> — 현상에 대한 비판적 성찰을 바탕으로 하며, 핵심은 자각과 행동이 항상 함께 이루어지는 프락시스(실천)임. 클라이언트가 사회적 세계를 인식하고 이를 향해 행동하도록 하는 데 목적이 있으며, 새로운 자각을 얻을 때마다 앞으로 취할 행동을 논의하는 성찰의 장을 만들어 줌.</li>
+</ul>
+<p class="sh"><strong>직접 서비스 ③ 공감: 정서적 공감 vs 사회적 공감</strong></p>
+<ul>
+<li><strong>정서적 공감(잔여적)</strong> — 감정을 그대로 받아들이고 신뢰를 구축함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사회적 공감(제도적)</strong> — 사회복지사가 클라이언트의 경험에 융합되고 판단 전에 이를 성찰하며 자신의 불안을 완화하고 그 내용을 공유하는 능력으로, 클라이언트가 경험한 사회적 내용에 공감하는 것임. 개인적 공감이 개인적 근심에 초점을 둔다면, 사회적 공감은 그 근심이 사회적 신념과 연결되어 있음을 짚어 냄 (예: 이혼한 여성에 대한 사회적 낙인을 함께 짚어 주어, 사회에 대한 신념이 자신에 대한 신념까지 채색함을 자각하고 낙인에서 스스로 해방되도록 함).</li>
+</ul>
+<p class="sh"><strong>직접 서비스 ④ 지지: 정서적 지지 vs 사회적 지지</strong></p>
+<ul>
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>정서적 지지(잔여적)</strong> — 클라이언트의 심리적 안정을 북돋는 것에 국한됨.</li>
+<li><strong>사회적 지지(제도적)</strong> — 사회적 환경 속에서 행동하려는 노력을 지지하고 대안적 지지망을 연결함.</li>
+<li><strong>사회적 역할 가치화(울펜스버거)</strong> — 가치 있는 사회적 역할을 창출해 지원·옹호함("시각장애인이 할 수 없는 직업이 무엇입니까?").</li>
+<li><strong>저항에 대한 원조</strong> — 새로운 시도를 가치 절하하는 시각에 대항함.</li>
+</ul>
+
+
+
+<p class="sh"><strong>연계(linkage)</strong></p>
+<ul>
+<li><strong>연계</strong> — 최선의 기관·자원을 선택하도록 자원망을 조직하고 클라이언트의 선택을 지원함.</li>
+<li><strong>과정</strong> — 자료 분석·정리 → 자원목록 작성과 선택 지원 → 연계기관 연결과 서비스 조직화.</li>
+
+<li><strong>제도적 관점의 연계</strong> — 연계 과정 자체가 권리를 요구하는 방법을 배우는 사회교육이 됨.</li>
+</ul>
+<p class="sh"><strong>조정(coordination)</strong></p>
+<ul>
+<li><strong>조정</strong> — 서비스 중복이나 자원 간 갈등 시 기관 역량에 맞는 역할분담에 관여함.</li>
+<li><strong>유의사항</strong> — 클라이언트의 욕구에 초점을 맞춰 조정함("중복이니 하나만 써라"가 아님).</li>
+
+</ul>
+<p class="sh"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>옹호(advocacy)</strong></p>
+<ul>
+<li><strong>정의</strong> — 사례관리자가 힘이 약한 클라이언트의 입장을 대신 말하여 기관의 서비스 제공 의지를 높이고, 자원의 접근성과 활용성을 증진시키는 활동임.</li>
+<li><strong>과업과 수준</strong> — 클라이언트 욕구에 부응하지 않으려는 자원의 경향을 조정하는 것이며, 대부분 개인 옹호이지만 사안에 따라 지역사회, 기관, 정책을 대상으로 옹호 활동을 전개하기도 함.</li>
+<li><strong>사례(아르바이트 임금체불 D군)</strong> — 고등학교 2학년 D군(17세)이 인력공급업체 사이트를 통해 웨딩홀에서 일했으나, 근로계약 없이 식사·휴게시간도 없이 하루 13시간 이상 일하다 3주 만에 그만두자 한 달 계약을 지키지 않았다며 임금을 한 푼도 받지 못함. 업체와 웨딩홀은 서로 사용자가 아니라며 책임을 회피함.</li>
+<li><strong>기존의 옹호활동</strong> — 부당노동행위와 체불임금 내용을 확인하고 증거자료를 확보함 → D군이 인터넷이나 관할 노동청에 진정서를 제출하도록 지원함 → 출두 명령을 받으면 함께 근로감독관을 면접하며, 조사 전에 할 말과 자료를 준비함 → 사건이 원만히 합의되면 진정을 취하함.</li>
+<li><strong>제도적 옹호활동</strong> — "임금을 받는 것은 너의 정당한 권리"임을 알려 주는 것이 가장 큰 옹호임. 복지를 시혜가 아닌 권리로 인식시키듯, 클라이언트의 문제가 개인 문제가 아니라 권리 보호의 문제임을 인식하게 하고, "계약서를 안 쓰고 한 달을 못 채운 네 책임"이라며 희생자를 비난하지 않음.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>제도적 옹호의 방법</strong> — 자격 조건과 이를 어디서 어떻게 얻는지 충분한 정보를 제공하고, 관료주의 원칙의 허점을 발견하여 원칙이나 상황을 클라이언트에게 맞게 유연하게 활용함. 기관의 공식·비공식 규칙과 절차를 숙지해 그 불일치의 허점을 파악하며, 노동청이나 근로감독관과의 관계 형성 등 대인관계 기술을 구사함.</li>
+</ul>
+
+
+<h3>2. 사례관리 과정기록지 작성</h3>
+<p class="sh"><strong>과정기록지의 구성</strong></p>
+<ul>
+
+<li><strong>과정기록지</strong> — 일시, 서비스명, 서비스 구분(직접/간접), 접촉 방법·대상, 제공 내용을 기록함.</li>
+
+</ul>
+<h3>3. 점검(모니터링)</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>점검의 개념과 내용</strong></p>
+<ul>
+<li><strong>정의</strong> — 서비스 계획 단계에서 계획된 서비스와 자원이 잘 전달되고 있는지 확인하는 단계로, 3개월·6개월 경과 시점 등에 실시하는 중간 검토 활동임.</li>
+<li><strong>목적</strong> — 클라이언트와 서비스 제공자의 노력과 적절성을 파악하고, 목표 달성에 영향을 미치는 장애요인과 새로운 욕구를 발견하여 재사정의 필요성을 제기함.</li>
+<li><strong>계획 이행도 점검</strong> — 계획된 과업이나 활동의 책임을 다하고 있는지, 서비스 계획에 따라 적절한 서비스가 이행되는지 검토함.</li>
+<li><strong>목표 성취 점검</strong> — 서비스 실행 과정에서 단기목표가 성취되어 가는지 확인함.</li>
+<li><strong>새로운 욕구 점검</strong> — 실행 과정에서 새로운 욕구가 발견되면 재사정하고 다시 서비스 계획을 세움.</li>
+</ul>
+<p class="sh"><strong>점검의 영역</strong></p>
+<ul>
+<li><strong>대상자 점검</strong> — 스스로의 노력, 강점 활용, 목표 달성 노력, 담당자와의 상호작용(제도적: 비판적 자기자각).</li>
+<li><strong>서비스 점검</strong> — 외부 서비스의 계획 이행, 담당자의 노력, 서비스의 질, 상호작용.</li>
+</ul>
+<p class="sh"><strong>점검의 방법</strong></p>
+<ul>
+<li><strong>질적 점검</strong> — 관찰, 가정방문, 대면·전화로 심층 파악함.</li>
+<li><strong>양적 점검</strong> — 척도와 기록지 등 양적 자료로 파악함.</li>
+<li><strong>상호보완</strong> — 질적·양적 방법을 함께 사용함.</li>
+<li><strong>사례관리 점검표</strong> — 단기목표와 서비스, 실행 점검, 점검 의견, 참여 점검(10점 척도), 욕구·환경 변화, 향후 진행(재사정·유지·종결).</li>
+</ul>
+<p class="sh"><strong>점검의 진행 과정</strong></p>
+<ul>
+<li><strong>진행 과정</strong> — 점검 계획 논의 → 자료 준비 → 실행 내용 점검 → 계획 실효성 점검 → 욕구·환경 변화 확인 → 결정.</li>
+
+
+
+
+<li><strong>결정</strong> — 잘 진행되면 유지, 잘되지 않으면 재사정, 충분히 이루어졌으면 종결 준비.</li>
+</ul>
+<p class="sh"><strong>점검 사례 (알코올 문제가 있는 81세 독거노인)</strong></p>
+
+
+<p class="more"><a href="사례관리론_강의노트.html#l10">10강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l11"><header class="lh"><span class="no">11강</span><h2>사례관리 실천과정과 기록 (5) 평가 및 종결 단계</h2></header><div class="ct">
+<h3>1. 평가</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>1. 평가의 개념</strong></p>
+<ul>
+<li><strong>정의</strong> — 서비스 대상자가 욕구와 변화 목표에 부합하는 서비스를 적절히 제공받고 원하는 변화를 성취하였는지를 확인하는 과정임.</li>
+<li><strong>협의의 평가</strong> — 사례관리 과정에 참여한 대상자가 욕구와 변화 목표에 부합하는 서비스를 적절히 받고, 이를 통해 원하는 변화를 성취했는지 확인하는 과정임.</li>
+<li><strong>광의의 평가</strong> — 사례관리의 다양한 구성요소에서 계획된 서비스가 변화 목표에 부합하고 실천 원칙을 잘 반영하여 제공되었는지, 실천 내용이 다양한 수준에서 기대되는 변화와 성과에 기여하는지를 통합적으로 확인하는 활동임.</li>
+<li><strong>시점</strong> — 사례관리 계약기간 만료 전 또는 종결 전에 클라이언트와 함께 사례관리의 성과를 분석하는 과정임.</li>
+</ul>
+<p class="sh"><strong>2. 사례관리의 효과성에 대한 평가</strong></p>
+<ul>
+<li><strong>효과성 평가</strong> — 가치, 결과 목적의 달성, 생활의 변화, 만족도를 봄.</li>
+
+
+
+</ul>
+<p class="sh"><strong>3. 사례관리 평가내용 및 기준</strong></p>
+<ul>
+<li><strong>서비스 만족도</strong> — 만족도 조사표와 개방형 질문으로 확인함.</li>
+<li><strong>목표 달성 정도</strong> — 사례관리 계획 및 평가표로 확인함.</li>
+<li><strong>욕구 수준의 변화</strong> — 접수 시와 점검·종결 시를 비교함.</li>
+<li><strong>개입 영역의 변화</strong> — 척도의 사전·사후 검사로 확인함.</li>
+<li>사례관리자의 업무만족도와 직무능력감.</li>
+<li>지역사회 자원의 만족도와 연계 역량.</li>
+</ul>
+<p class="sh"><strong>4. 평가 요소</strong></p>
+<ul>
+<li><strong>클라이언트 만족도</strong> — 5점 척도 설문으로 조사함.</li>
+<li><strong>목표 달성도</strong> — 장·단기 목표 달성 경과를 클라이언트와 합의해 측정함.</li>
+<li><strong>부가적인 클라이언트 성과</strong> — 목표 외에 추가로 얻은 자원, 확장된 관계, 향상된 역량.</li>
+<li><strong>욕구 충족 지속 가능성</strong> — 자원 연계의 지속성과 자립 역량 향상을 평가함.</li>
+<li><strong>평가의 흐름</strong> — 성과가 단발적이면 재사정, 스스로 지속 가능하면 종결로 이어짐.</li>
+</ul>
+<p class="sh"><strong>5. 평가의 기본유형</strong></p>
+<ul>
+<li><strong>결과평가(총괄·성과평가)</strong> — 종결 시 서비스의 효과성과 전체적 수준을 평가함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>과정평가(형성평가)</strong> — 사례관리가 어떻게 이루어지고 있는가에 대한 평가로, 클라이언트가 사례관리 매뉴얼이나 표준화된 과정에 따라 서비스를 적절히 받고 있는지 평가함.</li>
+<li><strong>구조평가</strong> — 기관의 신뢰도와 역량, 사례 수, 행정 지원 등 구조의 질을 평가함.</li>
+<li><strong>자각평가</strong> — 변화 대처 능력, 지역사회 자원 파악과 활용 방법, 잠재적 지지체계 보유를 평가함(제도적 사례관리에서 중시).</li>
+</ul>
+
+
+<p class="sh"><strong>6. 사례관리 성과의 예시</strong></p>
+<ul>
+<li><strong>성과 영역</strong> — 건강 및 일상생활 유지, 경제·고용·주거·교육, 비공식 지지망, 지역사회 통합.</li>
+
+
+
+<li><strong>성과지표의 단위</strong> — 기간과 함께 측정 가능하게 설정(변화량, 빈도, 수·비율, 유무).</li>
+
+</ul>
+<p class="sh"><strong>7. 과정평가</strong></p>
+<ul>
+<li><strong>실천과정 평가</strong> — 초기부터 종결까지 잘 진행되고 기록되었는지 평가하며, 하나만 한다면 주로 이에 초점을 맞춤.</li>
+<li><strong>서비스 및 자원 평가</strong> — 연계 내역, 협력 수준, 신뢰 수준, 협력 만족도로 평가함.</li>
+<li><strong>운영체계 평가</strong> — 목표 공유, 의사소통, 협력, 역할 수행을 검토함.</li>
+
+</ul>
+<p class="tt"><strong>과정평가: 실천과정에 대한 평가</strong></p>
+<ul>
+<li><strong>분석 내용</strong> — 정보 수집과 기록, 목표 합의, 계획의 적절성, 점검 주기 준수 등.</li>
+
+</ul>
+<p class="tt"><strong>과정평가: 운영체계와 실천환경에 대한 평가</strong></p>
+<ul>
+<li><strong>기관 내부 운영체계</strong> — 사례관리팀과 사례관리회의가 기능적으로 운영되는가.</li>
+<li><strong>외부 운영체계</strong> — 통합사례회의나 협력팀이 도움이 되도록 운영되는가.</li>
+
+<li><strong>슈퍼비전 체계</strong> — 슈퍼비전이 정기적·지속적으로 이루어지는가.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>8. 평가 시 고려사항</strong></p>
+<ul>
+<li><strong>종단성</strong> — 치료와 보호가 지속적으로 제공되므로 언제, 얼마나 자주 평가할지를 고려해야 함.</li>
+<li><strong>개별성</strong> — 클라이언트와 가족의 고유한 특성을 반영한 계획이 필요하므로 일반화된 평가가 어려움.</li>
+<li><strong>종합성</strong> — 가능한 모든 서비스를 제공하므로 예상치 못한 결과가 생겼을 때 어떤 서비스가 원인인지 확인하기 어려움.</li>
+<li><strong>융통성</strong> — 클라이언트의 상황에 따라 서비스의 양과 질이 변화함.</li>
+<li><strong>관계성</strong> — 클라이언트와 사례관리자 간의 관계가 중요한 변수이므로 그 관계를 어떻게 평가할지 고려해야 함.</li>
+<li><strong>접근성</strong> — 클라이언트의 서비스 접근성 향상을 평가 기준으로 삼음.</li>
+<li><strong>구심성</strong> — 사례관리자가 서비스의 중심적(구심적) 역할을 수행하므로 누가 사례관리자를 평가할 것인가가 중요한 쟁점이 됨.</li>
+</ul>
+<p class="sh"><strong>9. 사례관리 평가의 제한점</strong></p>
+<ul>
+<li><strong>제한점</strong> — 다중 과제, 객관적 지표를 찾기 어려움, 결과보다 과정을 중시함(질적·과정평가로 보완).</li>
+
+
+</ul>
+<h3>2. 종결</h3>
+<p class="sh"><strong>1. 종결의 개념</strong></p>
+<ul>
+<li><strong>정의</strong> — 모든 사례관리 활동을 마무리하고 관계를 마무리하는 과정.</li>
+
+<li><strong>동의의 문제</strong> — 종결에도 동의가 필요하지만 실제로는 기관 입장에서 종결하는 경우가 많음.</li>
+</ul>
+<p class="sh"><strong>2. 사례관리 종결사유</strong></p>
+<ul>
+<li><strong>목표와 욕구 관련</strong> — 목표 달성, 욕구 충족, 클라이언트 스스로 종결을 원하는 경우.</li>
+<li><strong>상황 변화</strong> — 다른 제공자가 책임을 맡거나 시설 입소, 사망, 이주한 경우.</li>
+<li><strong>외부 결정</strong> — 법원의 결정이나 기관의 정책적 이유.</li>
+<li><strong>비협조와 안전</strong> — 서비스 거부, 심한 비협조, 다른 클라이언트의 안전을 위해 철회가 필요한 경우.</li>
+<li><strong>범주</strong> — ① 긍정적 종결 ② 비자발적 종결 ③ 강제 종결.</li>
+</ul>
+
+
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>3. 종결의 원칙</strong></p>
+<ul>
+<li><strong>합의</strong> — 종결은 클라이언트와 사례관리자의 합의로 결정하며, 최종 결정은 사례관리자 단독이 아니라 사례회의를 통해 함.</li>
+<li><strong>역량 인식</strong> — 목표가 달성된 종결은 클라이언트의 역량이 향상되었음을 먼저 인식하고, 획득한 변화를 계속 유지하도록 지원하며 종결을 준비함.</li>
+<li><strong>열린 관계</strong> — 종결 후에도 언제든 연락하고 기관 서비스를 이용할 수 있음을 알리고, 클라이언트와 함께 사후관리 계획을 세움.</li>
+</ul>
+<p class="sh"><strong>4. 종결 과정에서 사례관리자의 과업</strong></p>
+<ul>
+<li><strong>종결 시기 결정</strong> — 목표 달성과 자립 가능성을 종합해 판단함.</li>
+<li><strong>클라이언트 상태 사정</strong> — 종료 후에도 안정적으로 생활할 수 있는지 평가함.</li>
+<li><strong>사례관리회의를 통한 결정</strong> — 향후 계획과 사후관리 방안을 함께 논의함.</li>
+<li><strong>타 기관 의뢰</strong> — 추가 지원이 필요하면 연계·의뢰함.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>5. 종결에 대한 클라이언트의 반응</strong></p>
+<ul>
+<li><strong>부정적 감정 반응</strong> — 불안, 부정, 분노, 슬픔, 비탄 등을 보임.</li>
+<li><strong>행동 반응</strong> — 종결 자체를 부정하거나 사례관리자에게 분노를 표현하고 매달림. 침묵하거나 소극적으로 참여하고, 과거 문제가 재발했다고 말하거나 실제로 퇴행이 나타나기도 함.</li>
+<li><strong>새로운 문제 제시</strong> — 비밀스러운 새로운 정보를 갑자기 이야기하거나 새로운 문제를 제시하고, 새로운 관리자나 의존할 사람을 찾으며, 분노의 간접적 표현으로 회피 행동을 보임.</li>
+</ul>
+<p class="tt"><strong>사례: 종결을 앞둔 현경 씨의 반응</strong></p>
+<ul>
+
+
+<li><strong>대안적 접근</strong> — 1·3·6개월 후 다시 만날 수 있음을 알려 정서적 안정감을 줌.</li>
+</ul>
+<p class="sh"><strong>6. 종결에 대한 클라이언트의 정서적 반응 접근</strong></p>
+<ul>
+<li><strong>접근 방향</strong> — 부정적 감정 관리 → 성과 미달 시 원인 탐색과 감정 정리 → 성과 달성 시 긍정적 정서 강화.</li>
+
+
+
+</ul>
+<p class="sh"><strong>7. 사례관리자 및 사례관리기관의 유의사항</strong></p>
+<ul>
+<li><strong>직접 대면</strong> — 편지·전화 대신 직접 대면하여 종결을 논의함.</li>
+<li><strong>속도 조절</strong> — 사람마다 적응 속도가 달라 개별화된 접근이 필요함.</li>
+<li><strong>행정적 마무리</strong> — 서류 정리와 제공자 통보까지 포함함.</li>
+<li><strong>관계 유지</strong> — 종결 후 1·3·6개월, 1년 단위로 모니터링함.</li>
+</ul>
+<p class="sh"><strong>8. 사례관리 종결보고서</strong></p>
+<ul>
+<li><strong>구성</strong> — 종결 사유, 클라이언트의 변화, 사후관리 계획, 사례관리자 의견, 종결 심사의견.</li>
+</ul>
+<h3>3. 사후관리</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>1. 사후관리의 개념</strong></p>
+<ul>
+<li><strong>개념</strong> — 종결 이후 일정 기간 동안 변화 상황의 안정성 여부를 모니터링하고 재개입 필요성을 조기에 판단하기 위해 수행함. 사례관리자는 지지적 상담과 정보 제공으로 심리적 안정과 지역사회 적응을 지원함.</li>
+<li><strong>중요성</strong> — 사례관리의 영향을 평가하고 종결 후 변화의 안정 여부와 재개입의 적절성을 판단하므로 매우 중요함. 상대적으로 전문적 기술과 시간이 많이 요구되지는 않음.</li>
+<li><strong>기간</strong> — 종결 후 6개월의 사후관리를 원칙으로 하되 개별 사례에 따라 조절 가능함 (예: 1개월, 3개월, 6개월 시점 점검, 6개월을 마지노선으로 함).</li>
+<li><strong>동의</strong> — 사후관리의 방법과 기간에 대해 종결 단계에서 클라이언트 또는 후견인의 동의를 받음.</li>
+<li><strong>기록</strong> — 종결 기록 이후의 사후관리 과정은 사후관리 양식이나 과정기록지에 추가로 기록하며, 사후관리가 종료되면 사례관리 서비스 전체가 종료됨.</li>
+</ul>
+<p class="sh"><strong>2. 사후관리의 기록</strong></p>
+<ul>
+<li><strong>기록 양식</strong> — '[서식 제10호] 사례관리 사후관리보고서'.</li>
+
+<li><strong>기록 항목</strong> — 날짜, 접촉방법(전화·내방·가정방문·기타), 접촉대상.</li>
+
+
+<li><strong>현 상황요약</strong> — 가장 중요한 부분으로, 변화의 안정화 상황을 평가함.</li>
+<li><strong>사례관리자 의견</strong> — 실무자의 전문적 판단과 의견을 종합함.</li>
+<li><strong>추후계획</strong> — 최종 종결, 타기관 의뢰, 재개입, 기타.</li>
+</ul>
+<p class="sh"><strong>정리: 평가·종결 단계의 의의</strong></p>
+
+
+<p class="more"><a href="사례관리론_강의노트.html#l11">11강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l12"><header class="lh"><span class="no">12강</span><h2>민간 사례관리: 종합사회복지관</h2></header><div class="ct">
+<h3>1. 사례관리 실천현장으로서 사회복지관의 이해</h3>
+<p class="sh"><strong>1. 사회복지관의 사례관리실천의 추진배경</strong></p>
+<ul>
+<li><strong>도입과 시작</strong> — 1980년대 후반 가정봉사원 파견사업, 1992년 재가복지봉사센터 설치로 본격화됨.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>2006년</strong> — 서울시 사회복지관 평가에 사례관리 항목이 포함됨.</li>
+<li><strong>2009년</strong> — 전국 사회복지관 평가지표에 사례관리 항목 추가.</li>
+<li><strong>2012년</strong> — 시행규칙 개정으로 3대 기능에 명시, 희망복지지원단·맞춤형 복지전담팀 신설.</li>
+
+</ul>
+<p class="tt"><strong>실천 현장의 변화 · 지역밀착형 전환 및 대상 확대</strong></p>
+<ul>
+<li><strong>조직 개편</strong> — 3대 기능에 맞게 개편하고 전담 부서·사례관리자를 배치함.</li>
+
+<li><strong>지역밀착형 전환</strong> — 담당 지역(동) 중심 사례관리, 1인가구·고립가구 지원 증가.</li>
+<li><strong>대상 확대</strong> — 다양한 가족, 중장년층, 청년층으로 확대됨.</li>
+</ul>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>2. 종합사회복지관의 사례관리기능</strong></p>
+<ul>
+<li><strong>사례발굴</strong> — 지역 내 보호가 필요한 대상자 및 위기 개입대상자를 발굴하여 개입계획을 수립함.</li>
+<li><strong>사례개입</strong> — 대상자의 문제와 욕구에 대한 맞춤형 서비스가 제공될 수 있도록 개입함.</li>
+<li><strong>서비스 연계</strong> — 사례개입에 필요한 지역 내 민간·공공 가용자원과 서비스에 대한 정보 제공 및 연계·의뢰를 함.</li>
+<li><strong>법적 측면</strong> — 사례발굴 및 서비스계획 수립, 직접서비스 제공, 간접서비스 제공 등 실천적 측면이 강조됨.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>1) 종합사회복지관의 사례관리기능: 2024년 사회복지관 평가의 4개 지표</strong></p>
+<ul>
+<li><strong>① 사례관리 실행체계</strong> — 업무지침·매뉴얼에 따른 실행, 2~3명 이상의 전담팀과 업무분장, 월 평균 2회 이상 사례회의, 통합사례회의·솔루션위원회를 통한 서비스 조정·연계·사례판정·평가, 계획·실행·조정·평가·자원개발·외부협력의 정기 보고.</li>
+<li><strong>② 사례관리인력의 전문성</strong> — 사례관리 전문가교육 포함 연 16시간 이상 이수, 내부·외부 슈퍼바이저를 통한 정기 슈퍼비전, 연 1회 이상 사례 공개 발표 또는 우수사례집 발간, 클라이언트의 생명과 인권 존중·자기결정권·비밀보장의 가치 반영.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>③ 사례관리 수행의 전문성</strong> — 체계적인 사정(assessment), 사례관리 기록 및 관리, 욕구에 기반한 자원 개발·발굴, 대상자별 종결 후 사후관리.</li>
+<li><strong>④ 사례관리 협력 연계</strong> — 사례판정·목표수립·목표실행 시 민·관 네트워크 기관의 활발한 참여, 점검·평가 시 이용자 만족도 조사, 공식·비공식 지지체계와 자원의 조직 및 연계.</li>
+<li><strong>의미</strong> — 사례관리 실천뿐 아니라 운영체계, 사례관리 인력, 사례관리 과정의 전문성까지 강조함.</li>
+</ul>
+<p class="tt"><strong>2) 종합사회복지관의 사례관리 과업</strong></p>
+<ul>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>운영체계 과업</strong> — 업무지침(운영지침) 또는 실천 매뉴얼을 마련하고, 팀장을 포함해 2명 이상의 사례관리자를 두며, 사례회의를 월 2회 이상 진행하고 지역사회 통합사례회의와 솔루션위원회 회의에 참석하며, 내·외부 슈퍼바이저를 위촉해 정기 슈퍼비전을 받음.</li>
+<li><strong>수행의 전문성 과업</strong> — 체계적 과정 진행과 기록 관리, 자원 목록 활용·업데이트, 직접·간접서비스 수행.</li>
+</ul>
+<p class="sh"><strong>3. 종합사회복지관의 사례관리사업의 특성</strong></p>
+<p class="tt"><strong>1) 종합사회복지관의 사례관리사업의 특성</strong></p>
+<ul>
+<li><strong>지원 체계</strong> — 한국사회복지관협회가 매뉴얼과 지침을 작성해 지원함.</li>
+<li><strong>전산 관리</strong> — 사회보장정보시스템(행복e음)에 등록함.</li>
+<li><strong>희망복지지원단과의 관계</strong> — 복지관과 희망복지지원단은 서로에게 외부 자원임.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>2) 종합사회복지관의 사례관리대상자: 복합적 욕구를 가진 자</strong></p>
+<ul>
+<li><strong>위기 상황</strong> — 복합적 문제로 포괄적 지원이 필요한 대상자, 경제적·사회적·정서적 위기에 처한 대상자, 외부 지원 없이 기본 생계가 곤란한 대상자.</li>
+<li><strong>가족 기능</strong> — 질병 및 외적 요인으로 가족 구성원의 역할 상실이 진행되고 있는 대상자, 자녀 양육과 보호가 제대로 이루어지지 않는 대상자.</li>
+<li><strong>참여와 의뢰</strong> — 문제해결을 위해 적극적으로 노력하고 참여하는 대상자, 외부 기관·단체에서 의뢰되어 서비스를 원하는 대상자, 기관 내 서비스 이용자 중 사례관리를 요청한 대상자.</li>
+<li><strong>사각지대</strong> — 지역사회 내 사각지대에 놓여 있으며 사례관리 접근방법으로 도움이 필요한 대상자.</li>
+</ul>
+
+
+<h3>2. 종합사회복지관의 사례관리 과정</h3>
+<p class="sh"><strong>사례관리 흐름도</strong></p>
+<ul>
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>흐름</strong> — 접수 → (적합 여부 판단: 미선정이면 서비스 제공·타기관 의뢰·종결, 위기면 위기개입) → 실천관계 수립·사정 → 계획수립 → 계약 → 실행 → 모니터링 → 평가(성과, 산출) → 종결 → 사후 모니터링.</li>
+<li><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>재사정</strong> — 평가 과정에서 욕구나 환경이 변화하거나 추가 욕구가 있으면 재사정을 통해 다시 계획을 수립하고 실행함.</li>
+</ul>
+<p class="sh"><strong>사례관리 과정별 주요 내용</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>단계</th><th>핵심과업</th><th>필요서류 및 양식</th></tr></thead><tbody>
+<tr><td data-label="단계">접수와 선정</td><td data-label="핵심과업">발굴과 의뢰 등으로 접수, 초기 면접 진행, 선정회의를 통한 선정</td><td data-label="필요서류 및 양식">접수대장, 개인정보 동의서, 인테이크 기록지</td></tr>
+<tr><td data-label="단계">실천관계 수립·사정</td><td data-label="핵심과업">전문적 관계 수립, 강점·지원·장애물 등 사정, 클라이언트와 욕구 합의</td><td data-label="필요서류 및 양식">사정 기록지</td></tr>
+<tr><td data-label="단계">계획수립과 계약</td><td data-label="핵심과업">합의한 욕구에 따른 실행계획 수립, 실행계획에 따른 계약</td><td data-label="필요서류 및 양식">실행계획표, 계약서</td></tr>
+<tr><td data-label="단계">실행과 모니터링</td><td data-label="핵심과업">계획에 따른 실천, 자원과 서비스 모니터링</td><td data-label="필요서류 및 양식">과정기록지, 슈퍼비전기록지, 사례회의록</td></tr>
+<tr><td data-label="단계">평가</td><td data-label="핵심과업">변화 목표에 따른 서비스 제공·성과 확인, 긍정적 변화 확인으로 성공 경험 인식</td><td data-label="필요서류 및 양식">사례관리 평가서, 사례관리 만족도조사지</td></tr>
+<tr><td data-label="단계">종결과 사후모니터링</td><td data-label="핵심과업">목표달성·거주지 이전 등 계약 시 제시한 종결 사유에 맞게 종결, 사후모니터링 계획 수립과 진행</td><td data-label="필요서류 및 양식">종결기록지, 사후모니터링기록지</td></tr>
+</tbody></table></div>
+<h3>3. 방화6종합사회복지관의 사례</h3>
+<p class="sh"><strong>방화6종합사회복지관은?</strong></p>
+<ul>
+<li><strong>위치와 성격</strong> — 서울 강서구 방화3동 임대단지 내 종합사회복지관.</li>
+
+</ul>
+<p class="sh"><strong>사례관리 실행 체계</strong></p>
+<ul>
+<li><strong>조직구성</strong> — 통합사례팀 5명(정신건강 사회복지사 1명 포함).</li>
+
+<li><strong>사례회의</strong> — 내부사례회의(월 2회), 통합사례회의(월 1회), 방청회의(월 1회).</li>
+<li><strong>사례관리 구분</strong> — 사례관리(집중·일반), 정신건강사례관리, 관찰사례.</li>
+
+</ul>
+<p class="sh"><strong>방화6종합사회복지관 사례 소개 (50대 남성 당사자)</strong></p>
+<ul>
+<li><strong>상황</strong> — 조기퇴직 후 사업 실패와 사기로 거리 생활을 하고 건강이 악화된 50대 남성.</li>
+
+
+<li><strong>1차 실행계획</strong> — 주민등록 갱신·기초생활수급 신청, 긴급 입원과 돌봄SOS, 영양식 연계.</li>
+
+
+
+<li><strong>재사정 후 2차 실행계획</strong> — 장애등록 절차, 병원동행서비스로 진료, 영양식 지원, 아들과의 갈등 완화.</li>
+<li><strong>성과</strong> — 금주, 보행기로 외출 가능, 경제활동 준비 등 스스로 변화하려는 의지가 높아짐.</li>
+</ul>
+
+
+<p class="tt"><strong>사례관리를 진행하면서 사회복지사의 태도와 주요역할</strong></p>
+<ul>
+<li><strong>사회복지사의 태도와 역할</strong> — 맥락적 이해와 신뢰, 편견 없는 태도, 연민을 넘어선 공감, 평등한 대화로 자기결정권을 확장함.</li>
+<li><strong>당사자의 변화</strong> — '도움받는 사람'에서 '스스로 선택하고 계획하는 사람'으로 인식이 전환됨.</li>
+</ul>
+<p class="tt"><strong>부당한 질서에 대한 구조적 사회원인 파악</strong></p>
+<ul>
+<li><strong>부양의무자 기준</strong> — 어머니는 큰형의 소득·자산 때문에 수급 신청이 불가함.</li>
+<li><strong>빈곤의 대물림</strong> — 자녀가 진학을 포기하고 생계를 책임지게 됨.</li>
+<li><strong>장애등록신청의 어려움</strong> — 본인이 직접 입증하는 복잡한 과정에서 낙인감을 경험함.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사례관리를 넘어 사회관리로</strong></p>
+<ul>
+<li><strong>부양의무자 기준 폐지 운동</strong> — '세상을 바꾸는 사회복지사' 모임 등에서 폐지 운동을 지속했으며, 많이 완화되었으나 자산 평가 등이 남아 있어 완전히 폐지되었다고 보기는 어려움.</li>
+<li><strong>빈곤 인식의 전환</strong> — 빈곤은 개인의 문제가 아닌 사회의 문제로 인식되어야 하며, 대학 무상교육, 근로장학제도 확대, 기본소득 등이 필요함.</li>
+<li><strong>장애등록제 개선</strong> — 신청주의 대신 행정연계형 등록제나 자동등록제 형태를 제안하는 정책활동이 필요함.</li>
+<li><strong>인권옹호자로서의 사회복지사</strong> — 개인과 인접 환경에 대한 개입은 당사자의 변화를 이끌 수 있지만 구조적 원인의 변화는 이끌지 못하므로, 사회복지사가 인권옹호자로서 동료와 함께 학습하며 주민과 함께 인권옹호 활동을 확대해야 함 ("사례관리를 넘어 사회관리로 가기 위해서는 사회복지사는 인권옹호자가 되어야 합니다").</li>
+</ul>
+
+<p class="more"><a href="사례관리론_강의노트.html#l12">12강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l13"><header class="lh"><span class="no">13강</span><h2>공공 사례관리</h2></header><div class="ct">
+<h3>1. 공공 사례관리</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>공공 사례관리의 의미와 근거</strong></p>
+<ul>
+<li><strong>의미</strong> — 사회복지관 같은 민간기관이 아니라 지방자치단체(시·군·구) 등 공공영역에서 수행하는 사례관리를 말함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>법적 근거</strong> — 2005년 개정된 사회복지사업법 제33조의5에 따라 시장·군수·구청장이 보호대상자별 보호계획을 작성하고 변경할 수 있게 되어, 공무원이 법적으로 사례관리를 담당할 수 있게 됨.</li>
+<li><strong>시행 배경</strong> — 2006년부터 지방자치단체의 주요 업무로 포함되면서 사회복지전담공무원의 역할이 '신청주의'에서 '수요자 중심'으로 바뀜.</li>
+</ul>
+<p class="sh"><strong>공공 사례관리의 주요 특징</strong></p>
+<ul>
+<li><strong>찾아가는 지원</strong> — 공무원이 먼저 주민의 욕구를 파악하고 지원함.</li>
+<li><strong>통합적 해결</strong> — 여러 기관이 협력하여 통합적으로 해결함.</li>
+
+</ul>
+<p class="sh"><strong>공공사례관리: 희망복지지원단</strong></p>
+<ul>
+<li><strong>개념</strong> — 통합사례관리와 지역 자원·방문형 서비스를 총괄·관리하는 전담조직.</li>
+
+<li><strong>목표</strong> — 민관 협력으로 지역 단위 통합 서비스 체계를 구축하며, 빈곤층의 탈빈곤과 빈곤예방에 중점을 둠.</li>
+</ul>
+<p class="sh"><strong>희망복지지원단 업무 수행체계</strong></p>
+<ul>
+<li><strong>① 대상자 발굴</strong> — 복지위기 가구를 발굴하고 읍·면·동에서 초기상담을 함.</li>
+<li><strong>② 통합사례관리 실시</strong> — 여러 기관이 연계·협력해 찾아가는 통합서비스를 제공함.</li>
+<li><strong>③ 자원관리 및 협력</strong> — 자원 발굴·관리와 협력체계를 구축·운영함.</li>
+</ul>
+<p class="sh"><strong>희망복지지원단: 사례관리의 구성 및 수행과정</strong></p>
+<ul>
+<li><strong>복지담당공무원</strong> — 7~8급, 5년 이상 경력의 사회복지직 공무원이 통합사례관리를 전담함.</li>
+<li><strong>통합사례관리사</strong> — 전문인력으로 시·군·구마다 최소 1인 이상 배치, 행정보조업무는 금지됨.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>통합사례관리사의 역할</strong> — 고난도 사례관리 수행, 읍·면·동 사례관리 교육·슈퍼비전·역량강화 지원, 시·군·구 단위 자원 발굴과 읍·면·동 간 자원 불균형 조정, 찾아가는 보건·복지서비스의 모니터링 및 컨설팅 기획 참여.</li>
+<li><strong>운영 추진체계</strong> — 보건복지부 총괄, 사회보장정보원 정책 지원, 시·도 지도감독, 시·군·구와 읍·면·동 직접 수행.</li>
+</ul>
+
+
+<h3>2. 통합사례관리</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>통합사례관리 개념 및 목표</strong></p>
+<ul>
+<li><strong>의미</strong> — 지역 내 공공·민간자원에 대한 체계적인 관리·지원체계를 토대로, 복합적이고 다양한 욕구를 가진 대상자에게 복지·보건·고용·주거·교육·신용·법률 등 필요한 서비스를 통합적으로 연계·제공하고 지속적으로 상담·모니터링해 나가는 사업임.</li>
+<li><strong>목적</strong> — 지역주민의 다양한 욕구에 맞춤형 서비스를 연계·제공하여 지역주민의 삶을 안정적으로 지원·지지하고, 복지제도의 효과성·효율성을 향상시킴.</li>
+<li><strong>중점 목표</strong> — 일반적으로 지역주민을 대상으로 하나, 복지욕구와 경제적 여건을 고려하여 빈곤 계층의 탈빈곤·빈곤예방을 중점 목표로 하며 고용-복지 연계에 중점을 둠.</li>
+</ul>
+<p class="sh"><strong>통합사례관리 절차</strong></p>
+<ul>
+<li><strong>단계</strong> — 발굴 → 초기상담 → 접수 → 욕구 및 위기도 조사 → 사례회의 → 대상자 구분·선정 → 서비스제공계획 수립 → 제공 및 점검 → 종결 → 사후관리.</li>
+
+<li><strong>처리기한</strong> — 접수일로부터 30일 이내에 서비스제공계획을 수립함.</li>
+</ul>
+<p class="sh"><strong>대상자 구분 및 관리기준 (1~6)</strong></p>
+<p class="tt"><strong>1. 대상자 구분 기준</strong></p>
+<ul>
+<li><strong>사례관리 가구</strong> — 1개월 이상 중장기 개입, 다양한 서비스를 집중 제공하며 사례회의 절차를 모두 적용함.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>서비스 연계 가구</strong> — 단기(1개월 미만) 개입 또는 단순서비스 연계로 문제 해결이 가능한 가구로, 사례회의 절차를 간소화하여 적용함.</li>
+<li><strong>분류 원칙</strong> — 기간과 관계없이 서비스가 복합적이면 사례관리 가구, 단순 연계면 서비스 연계 가구.</li>
+</ul>
+<p class="tt"><strong>2. 관리 기준</strong></p>
+<ul>
+<li><strong>담당 가구 수</strong> — 1인당 15가구 내외.</li>
+
+</ul>
+<p class="tt"><strong>4. 대상자 접수</strong></p>
+<ul>
+<li><strong>접수</strong> — 읍·면·동 초기상담을 거쳐 의뢰된 가구를 접수함.</li>
+<li><strong>권역형 읍·면·동</strong> — 2~3개 동을 묶어 중심 동이 통합사례관리를 주도하고, 일반 동은 발굴·초기상담·사후관리를 함.</li>
+<li><strong>고난도 사례</strong> — 희망복지지원단에 요청할 수 있음.</li>
+</ul>
+<p class="tt"><strong>5. 욕구 및 위기조사</strong></p>
+<ul>
+<li><strong>욕구조사</strong> — 사례관리 가구와 서비스 연계 가구로 구분하기 위한 심층조사.</li>
+<li><strong>위기도 조사</strong> — 위기 정도를 파악해 선정과 종결 판단에 활용함.</li>
+<li><strong>조사 방법</strong> — 주사례관리자가 2인 1조로 동행 방문함.</li>
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>6. 사례회의의 개최</strong></p>
+<ul>
+<li><strong>원칙</strong> — 대상자 선정과 종결 시 필수로 진행하며(최소 2회), 진행 중에도 욕구 변화·문제 해결 정도·서비스 제공 등을 협의하기 위해 수시로 실시함.</li>
+<li><strong>주요안건</strong> — 대상자 구분 및 선정(필수), 서비스 제공계획 수립, 사례관리자의 개입방법, 점검에 따른 조정 내용과 방법, 종결 여부 및 사후관리 방향(필수).</li>
+<li><strong>운영</strong> — 맞춤형복지팀장이 주재하고, 대상자 선정의 경우 욕구조사 결과 등록 완료일로부터 5일 내외에 개최하며 수시로도 개최할 수 있음. 정보공유의 범위와 내용에 각별한 주의가 필요함.</li>
+</ul>
+<p class="sh"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span><strong>사례회의 운영요령</strong></p>
+<div class="tw"><table class="c4">
+<thead><tr><th>구분</th><th>내부사례회의</th><th>통합사례회의</th><th>솔루션회의(시·군·구)</th></tr></thead><tbody>
+<tr><td data-label="구분">목적</td><td data-label="내부사례회의">사례관리가구 선정, 서비스제공계획 수립, 점검, 종결 등 협의</td><td data-label="통합사례회의">주요 서비스기관과 서비스 내용을 협의하여 연계방식 등 조정</td><td data-label="솔루션회의(시·군·구)">통합사례회의를 1회 이상 했으나 더 큰 범위의 자원과 전문가 개입이 필요한 경우</td></tr>
+<tr><td data-label="구분">시기</td><td data-label="내부사례회의">수시</td><td data-label="통합사례회의">사례별 개최, 정기적 실시 권고</td><td data-label="솔루션회의(시·군·구)">읍·면·동 의뢰 시 사례별·이슈별 개최(솔루션위원회 사전 구성)</td></tr>
+<tr><td data-label="구분">참석자</td><td data-label="내부사례회의">맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 필요시 대상자와 보호자</td><td data-label="통합사례회의">서비스 연계기관 담당자, 맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 해당 분야 전문가</td><td data-label="솔루션회의(시·군·구)">맞춤형복지팀, 읍면동 사례관리담당자, 복지행정팀, 희망복지지원단, 솔루션위원</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사례회의 진행요령</strong></p>
+<ul>
+<li><strong>사전준비</strong> — 참석 여부 확인과 회의자료 준비.</li>
+<li><strong>회의 진행</strong> — 참석자 소개 → 정보공유 → 동료 슈퍼비전 → 연계자원 선택 → 역할분담.</li>
+<li><strong>주사례관리기관 선정기준</strong> — 초기상담 기관 또는 신뢰관계가 가장 잘된 기관, 주호소문제를 해결할 수 있는 기관, 대상자가 선택한 기관.</li>
+</ul>
+<p class="sh"><strong>사례회의시 사례관리자의 과업</strong></p>
+<ul>
+<li><strong>가져갈 자료</strong> — 서비스계획 안, 자원목록, 욕구사정 참고자료.</li>
+
+<li><strong>사례보고(3~5분)</strong> — 상정 이유와 현재 문제, 면접 상황, 클라이언트의 목표, 사례관리자의 의견.</li>
+</ul>
+<p class="sh"><strong>대상자 구분 및 관리기준 (7~12)</strong></p>
+<p class="tt"><strong>7. 담당자가 고려할 사항</strong></p>
+<ul>
+<li><strong>담당자가 고려할 사항</strong> — 주요 강점, 사례회의로 해결할 과제, 결정할 서비스, 지역 자원 활용 방법.</li>
+</ul>
+<p class="tt"><strong>8. 통합사례관리 사업</strong></p>
+<ul>
+<li><strong>경로의 차이</strong> — 사례관리 가구는 계획 수립 → 제공·점검 → 종결 → 사후관리, 서비스 연계 가구는 연계 → 점검 → 사후관리.</li>
+</ul>
+<p class="tt"><strong>9. 서비스 제공계획 수립</strong></p>
+<ul>
+<li><strong>서비스 제공계획 수립</strong> — 가구 결정 후 15일 이내, 단기목표 3~6개월, 장기목표 6개월 이상.</li>
+<li><strong>동의서</strong> — 서비스 제공 동의서, 서비스 이용 동의서, 개인정보활용 동의서.</li>
+</ul>
+<p class="tt"><strong>10. 서비스 제공 및 점검</strong></p>
+<ul>
+<li><strong>서비스 제공 및 점검</strong> — 이행 상황과 환경·욕구 변화를 주기적으로 점검함.</li>
+</ul>
+<p class="tt"><strong>11. 점검 방법</strong></p>
+<ul>
+<li><strong>점검 방법</strong> — 상담, 서비스 이용 동행, 제공자와의 연락, 기록지 검토.</li>
+</ul>
+<p class="tt"><strong>12. 종결 및 사후관리</strong></p>
+<ul>
+<li><strong>종결</strong> — 사례회의로 결정하며, 위기도 조사 → 종결사례 평가 → 사례회의 → 종결심사서 작성.</li>
+<li><strong>사후관리</strong> — 종결 후 일정 기간 변화를 모니터링함.</li>
+</ul>
+정리: 사례관리 가구 vs 서비스 연계 가구
+
+<h3>3. 공공 사례관리의 실제</h3>
+<p class="sh"><strong>기관소개: 인천광역시 남동구청</strong></p>
+<ul>
+<li><strong>지역 특성</strong> — 외국인 노동자·다문화 가구와 북한이탈주민이 많은 지역.</li>
+
+</ul>
+<p class="sh"><strong>주요한 사례관리 내용</strong></p>
+<ul>
+<li><strong>구(區) 희망복지지원단</strong> — 고난도 사례관리, 동 간 자원배분·조정, 솔루션회의와 슈퍼비전.</li>
+<li><strong>동(洞) 행정복지센터</strong> — 발굴, 초기상담, 사례회의, 통합사례관리와 서비스 연계.</li>
+<li><strong>민간기관</strong> — 중독관리통합지원센터, 정신건강복지센터, 가족센터 등으로 연계.</li>
+
+</ul>
+<p class="sh"><strong>공공사례관리 사례(예시): 정○○, 66년생 남성, 미혼 청장년 1인가구</strong></p>
+<ul>
+<li><strong>사례 개요</strong> — 형제복지원 피해 경험이 있는 일용직 1인가구로 경제, 건강, 주거, 취업, 법률 등 복합적 어려움을 겪음.</li>
+
+
+
+</ul>
+
+
+<p class="tt"><strong>사례관리 종결과 사후관리</strong></p>
+<ul>
+<li><strong>종결</strong> — 개입 없이도 서비스가 지속 가능하고 스스로 살아갈 수 있어 장기목표 달성으로 종결함.</li>
+<li><strong>사후관리</strong> — 종결 후 3개월, 9개월 이내 2회 모니터링.</li>
+</ul>
+<p class="sh"><strong>공공사례관리시 고려할 점</strong></p>
+<ul>
+<li><strong>2인 1조 방문</strong> — 안전을 위해 방문상담은 2인 1조로 함.</li>
+<li><strong>개인정보 동의</strong> — 반드시 구해야 함.</li>
+<li><strong>비밀유지</strong> — 직무상 알게 된 비밀을 누설하거나 목적 외로 이용하면 안 됨.</li>
+</ul>
+<p class="sh"><strong>공공사례관리시 대상별 대처</strong></p>
+<ul>
+<li><strong>요구·불만이 많은 대상자</strong> — 도울 수 있는 것과 없는 것의 기준을 명확히 하고 목표를 공유함.</li>
+<li><strong>거부에 대한 이해</strong> — 서비스 거부이지 방문 거부가 아님, IoT기기·문자·메모·비공식 체계를 활용함.</li>
+<li><strong>호전되지 않는 대상자</strong> — 삶의 질 치료 기법으로 현실을 인식하고 목표와 우선순위를 조정함.</li>
+<li><strong>모든 것을 거부하는 고립가구</strong> — 생명이 위태로우면 자기결정권보다 생명존중을 우선함.</li>
+<li><strong>사례관리자의 역할</strong> — 삶의 의미와 선택의 힘, 관계성 회복을 조력함.</li>
+</ul><p class="more"><a href="사례관리론_강의노트.html#l13">13강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l14"><header class="lh"><span class="no">14강</span><h2>대상별 사례관리: 노인 사례관리</h2></header><div class="ct">
+<h3>1. 노인 사례관리의 이슈</h3>
+<p class="sh"><strong>배경</strong></p>
+<ul>
+<li><strong>초고령사회</strong> — 노인 인구가 빠르게 증가하고 노인 빈곤율이 43.4%로 OECD 국가 중 매우 높음.</li>
+</ul>
+<p class="sh"><strong>노인 사례관리의 6가지 이슈</strong></p>
+<ul>
+<li><strong>① 자아통합의 지향</strong> — 지향과 현실이 분리되면 우울감·자존감 저하가 나타남.</li>
+<li><strong>② 일상생활 수행능력 사정</strong> — ADL, IADL, 인지장애 평가.</li>
+<li>③ 독거노인의 사회적 안전망 확충.</li>
+<li>④ 고독사 예방.</li>
+<li>⑤ 취약한 노인을 위한 지원.</li>
+<li><strong>⑥ 노인의 권익 보호</strong> — 학대·방임의 징후를 살핌.</li>
+</ul>
+<h3>2. 노인 사례관리의 필요성</h3>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>노인 사례관리의 개념과 목적</strong></p>
+<ul>
+<li><strong>개념</strong> — 노인의 복합적 욕구를 충족시키기 위해 지역사회의 다양한 서비스 자원을 연결하고 조정하는 사회복지실천 방법으로, 기존의 서비스 중심 접근을 넘어 노인의 욕구에 맞춘 맞춤형 서비스 패키지 제공이 핵심임.</li>
+<li><strong>Johnson &amp; Rubin(1983)</strong> — 노인의 사회생활상의 어려움을 극복하고 적절한 서비스를 제공받게 책임지는 것이 사례관리의 본질임.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>목적</strong> — 노인의 삶의 질 개선(Quality of life), 서비스 조정의 개선, 효과적인 자원의 분배.</li>
+</ul>
+<p class="sh"><strong>노인의 특성</strong></p>
+<ul>
+<li><strong>신체</strong> — 신체 기능 저하, 질병률 증가.</li>
+<li><strong>정신</strong> — 정신기능 저하, 높은 치매 발병률.</li>
+<li><strong>심리</strong> — 삶의 수용과 죽음에 대한 준비.</li>
+<li><strong>사회</strong> — 역할 상실과 관계망 축소.</li>
+<li><strong>경제</strong> — 소득원 상실로 빈곤 가능성.</li>
+<li><strong>위기</strong> — 노인학대와 노인자살.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>노인 사례관리의 필요성</strong></p>
+<ul>
+<li><strong>첫째</strong> — 노인의 만성질환(퇴행성 질환) 관리를 위해 사례관리 적용이 필요함.</li>
+<li><strong>둘째</strong> — 치매노인과 치매노인 부양가족(수발자의 스트레스와 자원 문제)을 위한 사례관리가 요구됨.</li>
+<li><strong>셋째</strong> — 신체·정신의 쇠퇴와 사회적 고립·역할 상실로 인한 상실감에 대응하여 심리적 안정과 정신건강 증진을 위한 사례관리가 필요함.</li>
+<li><strong>넷째</strong> — 가족 교류가 끊기고 가족으로부터 적절한 보호를 받지 못하는 노인을 위해 사례관리가 필수적임.</li>
+<li><strong>다섯째</strong> — 경제적 위기와 빈곤에 처한 노인은 사례관리자의 주요 서비스 대상임.</li>
+<li><strong>여섯째</strong> — 사례관리자는 노인학대·노인자살 같은 위기 상황의 초기 발견, 조치, 예방의 모든 영역에서 주요 역할을 함.</li>
+</ul>
+
+
+<h3>3. 노인종합복지관: 중원노인종합복지관</h3>
+<p class="sh"><strong>중원노인종합복지관은?</strong></p>
+<ul>
+<li><strong>개요</strong> — 경기도 성남 소재, 회원 약 2만 2천 명.</li>
+<li><strong>미션</strong> — "선배시민과 함께 디자인하는 행복한 지역공동체".</li>
+</ul>
+<p class="sh"><strong>노인사례관리의 경우</strong></p>
+<ul>
+<li><strong>대상</strong> — 만성적·복합적 어려움을 가진 만 60세 이상, 저소득·독거·돌봄 부족 어르신 등.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>노인사례관리 실행 체계</strong></p>
+<ul>
+<li><strong>과정</strong> — 의뢰·발굴 → 초기상담 → 사정 → 사례회의 → 실행계획 수립 → 실행 → 점검 → 평가 및 종결 → 사후관리(종결 후 6개월 이내 1회 이상).</li>
+<li><strong>미선정</strong> — 초기상담 후 단순 정보제공 당사자, 서비스 제외 당사자, 타 서비스 연계 대상자, 잠재적 사례관리 당사자는 사례관리로 선정하지 않음.</li>
+<li><strong>현장의 특징</strong> — 점검 후 종결보다 재사정으로 다시 과정을 밟는 경우가 대부분이며, 종결은 주로 타 지역 이주나 사망의 경우에 이루어짐.</li>
+</ul>
+
+
+<p class="sh"><strong>노인사례관리 사례(예시): "선배시민은 나를 좋은 사람으로 살게 해요" (윤○○ 선배시민)</strong></p>
+<ul>
+
+<li><strong>초기면접</strong> — 알코올 중독, 가족 단절, 수급비와 기초연금으로 생활하는 독거 남성 어르신.</li>
+<li><strong>주요욕구</strong> — 후원물품 등 경제적 지원.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>사정</strong> — 장기간 가족과 단절된 남성 독거어르신으로, 알코올 중독으로 보건소 클리닉 상담을 받고 있고, 음주 전후 정서가 달라 정서지원 욕구가 높으며, 다리 통증으로 경제활동이 어려워 경제적 지원 욕구가 높음. 경제적 지원, 식생활지원, 전문상담 연계, 지속적인 상담(모니터링)이 필요하다고 판단함. 체크리스트 점수에 따라 단순대상자(50점 이상~80점 미만)로 판정함.</li>
+<li><strong>1차 서비스 계획</strong> — 식생활지원과 일상생활지원.</li>
+<li><strong>점검</strong> — 음주 후 우울감과 폭언이 반복되어 타기관 연계를 강화함(통합 사례로 전환).</li>
+<li><strong>재사정</strong> — 선배시민 활동과 결합한 사례관리 계획을 새로 세움.</li>
+</ul>
+
+
+<p class="tt"><strong>사례의 변화와 의미</strong></p>
+<ul>
+<li><strong>받는 사람에서 나누는 사람으로</strong> — 텃밭 자조모임 '중원농부'에서 수확물을 지역아동센터에 나눔.</li>
+
+
+<li><strong>의미</strong> — 수혜의 대상을 나눔의 주체로 바꾸어 지역사회에 통합되도록 함.</li>
+</ul>
+<p class="sh"><strong>노인사례관리시 고려할 점</strong></p>
+<ul>
+<li><strong>노인은 나이 든 보통사람이다</strong> — 수혜자가 아니라 동등한 시민.</li>
+<li><strong>노인은 수만큼 다양하다</strong> — '노인들'로 묶지 않음.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>노인은 돌봄의 대상이 아니라 상호 돌보는 주체이다</strong> — 돌봄의 대상으로만 국한하면 당당하게 살지 못하며, 서로 돌보는 주체가 될 때 삶의 주체로 적극 나설 수 있음.</li>
+<li>생존과 노동을 넘어 실존과 행위로.</li>
+</ul>
+<p class="sh"><strong>사례관리에서 사회관리로</strong></p>
+<ul>
+<li><strong>의미 있고 싶어 하는 인간으로서의 욕구</strong> — 겉으로는 경제적 어려움과 외로움이지만 근본적으로 의미 있고 싶어 함.</li>
+<li><strong>총체성의 관점</strong> — 시대적 맥락과 구조 속에서 개인의 문제가 아님을 이해함.</li>
+<li>동료들과 함께 학습하고 토론하는 과정.</li>
+<li>자조모임, 조직화 과정과의 연계.</li>
+<li><strong>마을에서의 실천</strong> — 사례관리가 사무실을 넘어 마을로 가야 함.</li>
+</ul>
+<p class="tt"><strong>노인을 바라보는 관점의 비교</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>기존 관점</th><th>중원노인종합복지관의 관점</th></tr></thead><tbody>
+<tr><td data-label="구분">노인에 대한 인식</td><td data-label="기존 관점">돌봄이 필요한 대상, 서비스 수혜자</td><td data-label="중원노인종합복지관의 관점">나이 든 보통사람, 동등한 시민</td></tr>
+<tr><td data-label="구분">개별성</td><td data-label="기존 관점">'노인들'이라는 하나의 집단</td><td data-label="중원노인종합복지관의 관점">수만큼 다양한 존재</td></tr>
+<tr><td data-label="구분">역할</td><td data-label="기존 관점">돌봄을 받는 대상</td><td data-label="중원노인종합복지관의 관점">상호 돌보는 주체, 나눔의 주체</td></tr>
+<tr><td data-label="구분">개입 방식</td><td data-label="기존 관점">서비스 프로그램 중심, 개인의 문제로 이해</td><td data-label="중원노인종합복지관의 관점">총체성의 관점, 자조모임 조직화, 마을에서의 실천</td></tr>
+</tbody></table></div><p class="more"><a href="사례관리론_강의노트.html#l14">14강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l15"><header class="lh"><span class="no">15강</span><h2>사회관리로서 사례관리</h2></header><div class="ct">
+<h3>1. 사회적 위험과 사회관리</h3>
+<p class="sh"><strong>메두사의 뗏목: 두 존재, 뗏목과 구명정</strong></p>
+<ul>
+<li><strong>그림</strong> — 제리코의 「메두사호의 뗏목」(1816), 메두사호 난파 사건을 기록함.</li>
+<li><strong>사건</strong> — 부유한 사람은 구명정에, 나머지는 뗏목에 태웠고, 구명정 사람들이 줄을 끊음.</li>
+<li><strong>의미</strong> — 위험은 모두에게 닥쳤지만 대응은 계급에 따라 갈렸음.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>위험사회 (울리히 벡)</strong></p>
+<ul>
+<li><strong>위험사회</strong> — "위험은 민주적이지만 대응은 계급적이다." 현대사회의 위험(예: 미세먼지)은 모두에게 노출되지만, 어떤 사람은 공기청정기로 대응하고 어떤 사람은 종일 밖에서 일할 수밖에 없음.</li>
+<li><strong>외눈박이 거인의 질주</strong> — 오디세우스 이야기 속 외눈박이 거인처럼 근대사회는 경제성장이라는 하나의 가치만 보고 질주해 왔으며, "외눈박이 거인의 눈은 생산성 향상만을 본다."</li>
+<li><strong>호모 이코노미쿠스</strong> — 근대사회는 "최소 비용으로 최대 효과"를 합리성, 즉 (도구적) 이성으로 보았고, 이를 위해 자연, 환경, 인권을 무시함.</li>
+<li><strong>잠재적 부수효과</strong> — 돌진적 근대화의 부수효과가 다양한 위험을 낳았으며 그 결과가 위험사회임 (예: 산업재해 예방은 비용이 들기 때문에 무시됨, 최소 비용으로 대량 수확하기 위한 GMO 식품 개발).</li>
+</ul>
+<p class="sh"><strong>위험사회의 특징</strong></p>
+<ul>
+
+<li><strong>가해자와 피해자의 불일치</strong> — 위험의 원인을 특정할 수 없고 누가 피해자가 될지 모름(GMO).</li>
+<li><strong>위험에 대한 인지불가능성</strong> — 언제 어떻게 나타날지 알 수 없음.</li>
+<li><strong>입증되지 않는 연관성</strong> — 질병의 원인을 입증하기 어려움.</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>조직화된 무책임성</strong> — 그 결과 아무도 책임지지 않는 구조가 됨.</li>
+</ul>
+<p class="sh"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>재난과 불평등의 악순환</strong></p>
+<ul>
+<li><strong>재난 불평등</strong> — 기후위기로 국지성 폭우 등 재난이 늘고 있으나 대응은 불평등함 (예: 폭우로 반지하에 물이 차 일가족 3명이 숨진 사건, 영화 「기생충」에서 비가 누군가에게는 낭만이지만 누군가에게는 주거 상실이 되는 장면).</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>재난과 불평등의 악순환</strong> — ① 재난의 단기적 영향은 빈곤가구의 복지에 더 큰 영향을 미쳐 복지 격차가 커짐 → ② 장기적 회복 과정에서 빈곤가구는 인적 자본과 자산이 소진되어 회복이 지연되고 격차가 더 커짐 → ③ 다음 위기와 재난에서 빈곤가구는 더 취약한 상태로 재난을 맞음.</li>
+<li><strong>건강 불평등</strong> — 최고소득층과 최저소득층의 건강수명(기대수명에서 질병·장애 기간을 뺀 수명)이 최대 9년 차이 남 ("부자 노인, 최대 9년은 더 건강하게 산다").</li>
+<li><strong>김종진 외 『숨을 참다』</strong> — 재난은 모두에게 고르게 영향을 미치는 것처럼 보이지만 실제로는 특정 사람들에게는 돈벌이와 자기과시의 기회, 다른 사람들에게는 회복할 수 없는 재앙이 된다는 점에서 당파적이고 계급적임. "코로나라는 재난이 새로운 취약함을 만들어낸 것이 아니다. '가장 취약한 곳에서 재난이 재생산'된 것일 뿐이다."</li>
+</ul>
+<p class="sh"><strong>재난과 사회복지는 약자만 쫓아다닌다 (유범상, 2023)</strong></p>
+<ul>
+<li><strong>내용</strong> — 사회복지는 최약자를 선별하며, 자산 결핍과 부양가족 없음을 증명하게 해 약자를 더 약하게 만듦.</li>
+
+<li><strong>의미</strong> — 본래 사회복지는 모든 시민이 권리로서 당당하게 살도록 지원하는 것임.</li>
+</ul>
+
+
+<h3>2. 사회적 위험과 맞서 싸우는 용사들</h3>
+<p class="sh"><strong>원인의 원인을 생각하다</strong></p>
+<ul>
+<li><strong>원인의 원인</strong> — "당신 신체의 어떤 결함이…" 대신 "물건의 어떤 디자인상 결함이…"처럼 원인을 구조에 두는 질문을 함.</li>
+
+
+
+<li><strong>의미</strong> — 버스 설계가 바뀌면 누구나 탈 수 있듯, 원인의 원인을 찾을 때 사회적 위험이 사라짐.</li>
+</ul>
+<p class="sh"><strong>문제를 가진 개인 · 인접환경 · 지구촌</strong></p>
+<ul>
+<li><strong>기존 사례관리</strong> — 문제를 가진 개인에 초점을 두고 인접환경에서 자원을 찾음.</li>
+<li><strong>사회관리</strong> — 사회, 국가, 지구촌의 구조 안에서 개인과 인접환경을 다시 봄.</li>
+<li><strong>유범상(2023)</strong> — "불쌍한 사람이 생기지 않는 공동체에서는 모두가 그냥 사람이다."</li>
+
+</ul>
+<p class="tt"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>잔여적 사례관리 vs 제도적 사례관리</strong></p>
+<div class="tw"><table class="c3">
+<thead><tr><th>구분</th><th>잔여적 사례관리</th><th>제도적 사례관리</th></tr></thead><tbody>
+<tr><td data-label="구분">태도</td><td data-label="잔여적 사례관리">자선</td><td data-label="제도적 사례관리">연대</td></tr>
+<tr><td data-label="구분">대상</td><td data-label="잔여적 사례관리">불쌍한 사람</td><td data-label="제도적 사례관리">시민</td></tr>
+<tr><td data-label="구분">변화</td><td data-label="잔여적 사례관리">노력하는 의지적 개인</td><td data-label="제도적 사례관리">배고프지 않은 연대의 공동체</td></tr>
+<tr><td data-label="구분">명칭</td><td data-label="잔여적 사례관리">사례관리</td><td data-label="제도적 사례관리">사회관리</td></tr>
+</tbody></table></div>
+<p class="sh"><strong>사회관리: 제도적 사례관리 모델</strong></p>
+<ul>
+<li><strong>보통사람의 삶</strong> — 인간의 조건(빵 + 장미)이 권리로 갖춰지면 위험이 닥쳐도 보통의 삶을 유지함.</li>
+
+<li><strong>사회복지사의 인식</strong> — "나는 인권옹호자!", "당신은 시민이고, 시민권을 가졌어!"</li>
+<li><strong>사회복지사의 태도</strong> — 평등한 대화, 근본 원인에 대한 공감, 편견 없는 인정.</li>
+<li><strong>사회복지실천</strong> — 당사자가 공동체에 참여해 공동의 의사결정과 통합적 접근으로 이어지게 함.</li>
+</ul>
+<p class="sh"><strong>기관과 사회복지사의 역할 변화</strong></p>
+<ul>
+<li><strong>사회복지관</strong> — 케어센터에서 커뮤니티센터로, big society에서 strong society로.</li>
+<li><strong>사회복지사</strong> — 사례관리자(보듬이)에서 사회관리자, 문화활동가, 사회적 위험에 맞서는 용사로.</li>
+</ul>
+
+
+<h3>3. 사회복지와 시민정치</h3>
+<p class="sh"><strong>이상의 인간과 이상의 공동체</strong></p>
+<ul>
+<li><strong>잠재성</strong> — 인간은 잠재성이 발현될 때 이상의 공동체에서 행복한 존재가 됨.</li>
+<li><strong>시민력 형성</strong> — 시민교육으로 세상읽기, 시민 조직화로 세상만들기.</li>
+</ul>
+<p class="sh"><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>시민정치란</strong></p>
+<ul>
+<li><strong>정의</strong> — 시민정치란 시민·인간이 권리를 알고, 그 권리를 관철하기 위한 일상의 프락시스(Praxis)임.</li>
+<li><strong>구성 요소</strong> — 인권과 시민권이 자신의 권리라는 철학, 학습·토론·세상읽기를 하는 교육, 최소한의 단위인 학습 동아리를 매개로 자기 공간(마을)에서 의미 있는 실천을 하는 것이며, 이를 시민 조직가와 리더가 이끔.</li>
+<li><strong>역사적 예</strong> — 인보관 운동은 시민들이 인보관에 모여 세상읽기와 세상만들기를 하며 공동체를 바꾸려 한 것으로, 사회복지와 시민정치의 연관성을 보여 줌.</li>
+<li><strong>사회복지의 위치</strong> — 사회복지는 자선을 베풀고 서비스를 제공하는 데서 끝나지 않으며, 시민정치의 운동이자 결과임.</li>
+</ul>
+<p class="sh"><strong>세상읽기 대화와 공동체</strong></p>
+<ul>
+
+
+<li><strong>배고프지 않은 소크라테스의 사회</strong> — 빵과 장미가 권리로 주어지는 사회.</li>
+<li><strong>권리의 확장</strong> — 시민권, 인권, 생명권으로 넓혀 감(People First).</li>
+</ul>
+<p class="sh"><strong>시민정치로서의 사회복지 (유범상, 2023)</strong></p>
+<ul>
+<li><strong>재난불평등의 현장으로</strong> — 시민을 치료하는 데 그치지 않고 재난불평등의 본질을 함께 토론해야 함.</li>
+<li><strong>부수효과의 정치화</strong> — 부수효과가 재난으로 인식되면 정치적인 것이 됨(울리히 벡).</li>
+<li><span class="mk m6" title="2025 기말 연습문제 (수정)에 출제된 부분">📘</span> <strong>퓨즈의 정치</strong> — 전기회로에 과부하가 걸리면 가장 먼저 퓨즈가 끊어지듯 재난의 퓨즈는 최약자와 평범한 시민들이며, 퓨즈가 끊어지면 회로 전체가 멈추기 때문에 사회복지는 계급감수성을 가지고 시민들의 토론과 조직을 만들어 내야 함. 재난 현장에 있는 사회복지는 퓨즈의 정치를 실현할 적임자임.</li>
+<li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>일상의 전문가</strong> — 울리히 벡에 따르면 재난전문가는 따로 없으며, 일상의 거주 공간에서 위험을 느끼는 사람들이 전문가임. 과학자의 판단을 기다리는 사이 재난불평등은 시민의 삶을 위협하므로, 사회복지는 권리가 결핍된 시민들을 조직하여 일상의 전문가이자 실천가가 되게 해야 함.</li>
+<li><strong>결론</strong> — 사회복지는 시민정치의 일선에 서야 함.</li>
+</ul>
+
+
+<p class="sh"><strong>마지막 당부</strong></p>
+<ul>
+<li><strong>핵심 문장</strong> — "사례관리는 개인관리를 넘어 사회관리가 되어야 합니다."</li>
+</ul><p class="more"><a href="사례관리론_강의노트.html#l15">15강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section>
+<footer>원본: 사례관리론_01-15강_강의노트 구글 문서 · 강의록과 녹취록 기준</footer>
+</main>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const sget = k => { try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const sset = (k,v) => { try{ localStorage.setItem(k,v); }catch(e){} };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 8;
+  window.scrollTo({top: Math.max(0,y), behavior:'instant'});
+}
+$('#jump').onchange = e => { if(e.target.value) go(e.target.value); e.target.value=''; };
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1);
+  if(id === 'top'){ e.preventDefault(); window.scrollTo({top:0}); return; }
+  if(document.getElementById(id)){ e.preventDefault(); go(id); }
+});
+/* 목차 현재 위치 */
+const links = [...document.querySelectorAll('nav.toc a')];
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if(en.isIntersecting){ links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#'+en.target.id)); }
+}), {rootMargin:'-80px 0px -70% 0px'});
+/* 강 강조는 아래 '현재 위치' 코드가 맡음 */
+
+/* ── 현재 위치 줄 · 진행 막대 · 목차 서랍 ── */
+{
+const lecs=[...document.querySelectorAll('section.lec')];
+const bar=document.querySelector('.bar'), wt=document.getElementById('whereTxt'), pi=document.getElementById('progI');
+window.__barY=()=>bar.getBoundingClientRect().bottom+32;
+let last='';
+function where(){
+  const y=window.__barY();
+  let sec=null; for(const s of lecs){ if(s.getBoundingClientRect().top<=y) sec=s; else break; }
+  let h=null; if(sec){ for(const x of sec.querySelectorAll('.ct h3')){ if(x.getBoundingClientRect().top<=y) h=x; else break; } }
+  const max=document.documentElement.scrollHeight-innerHeight;
+  pi.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%';
+  const key=(sec?sec.id:'')+'|'+(h?h.id:''); if(key===last) return; last=key;
+  wt.textContent='';
+  if(sec){
+    const b=document.createElement('b'); b.textContent=sec.querySelector('.lh .no').textContent; wt.appendChild(b);
+    const t=h?h.textContent:sec.querySelector('.lh h2').textContent;
+    wt.appendChild(document.createTextNode(' '+t.replace(/[0-9]\uFE0F?\u20E3/g,'').replace(/\s+/g,' ').trim()));
+  } else wt.textContent='처음 · 목차 버튼으로 강을 고르세요';
+  document.querySelectorAll('nav.toc > ol > li > a').forEach(x=>x.classList.toggle('on',!!sec && x.getAttribute('href')==='#'+sec.id));
+}
+let tk=false; addEventListener('scroll',()=>{ if(!tk){ tk=true; requestAnimationFrame(()=>{ tk=false; where(); }); } },{passive:true});
+addEventListener('resize',where); where(); setTimeout(where,600);
+const nav=document.getElementById('toc'), tb=document.getElementById('tocBtn');
+function openToc(on){
+  document.body.classList.toggle('tocopen',on); tb.setAttribute('aria-expanded',String(on));
+  if(on){ const c=nav.querySelector('ul.sub a.on')||nav.querySelector(':scope > ol > li > a.on');
+    if(c){ const r=c.getBoundingClientRect(), nr=nav.getBoundingClientRect(); nav.scrollTop+=r.top-nr.top-nr.height/3; } }
+}
+tb.onclick=()=>openToc(!document.body.classList.contains('tocopen'));
+document.getElementById('scrim').onclick=()=>openToc(false);
+nav.addEventListener('click',e=>{ if(e.target.closest('a')) openToc(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') openToc(false); });
+}
+/* 출제 부분만 */
+const FK='cm-note-focus';
+function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
+$('#focusBtn').onclick = () => setFocus(!document.body.classList.contains('focus'));
+setFocus(sget(FK) === '1');
+/* 글자 크기 */
+const ZK='cm-note-fs', ZL=[13,14,15,16.5,18,20]; let zi = ZL.indexOf(parseFloat(sget(ZK))); if(zi<0) zi=2;
+function setFs(){ document.body.style.fontSize = ZL[zi]+'px'; $('#fsDown').disabled = zi===0; $('#fsUp').disabled = zi===ZL.length-1; sset(ZK, String(ZL[zi])); }
+$('#fsDown').onclick = () => { if(zi>0){ zi--; setFs(); } };
+$('#fsUp').onclick = () => { if(zi<ZL.length-1){ zi++; setFs(); } };
+setFs();
+/* 테마 */
+const TK='cm-note-theme';
+const cur = () => document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const paint = () => { $('#themeBtn').textContent = cur()==='dark' ? '라이트' : '다크'; };
+(() => { const t = sget(TK); if(t) document.documentElement.setAttribute('data-theme', t); paint(); })();
+$('#themeBtn').onclick = () => { const n = cur()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme', n); sset(TK, n); paint(); };
+</script>
+<!-- 형광펜: 글을 드래그(휴대폰은 길게 눌러 선택)하면 색 버튼이 뜸. 이 기기 브라우저에 저장 + (선택) 깃허브 Gist로 기기 간 연동 -->
+<style>
+mark.hl{color:inherit;border-radius:2px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-y{background:#fde68a}
+mark.hl-g{background:#bbf7d0}
+mark.hl-p{background:#fbcfe8}
+mark.hl-b{background:#bfdbfe}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}}
+:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}
+.hlbar{position:fixed;z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.hlbar[hidden]{display:none}
+.hlbar button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.12);padding:0;cursor:pointer}
+.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}
+.hlbar button.x{width:auto;height:30px;border-radius:8px;padding:0 10px;background:var(--soft);color:var(--ink);font:inherit;font-size:13px;border:1px solid var(--line)}
+@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:36px;height:36px}.hlbar button.x{height:36px}}
+.hlsync{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;line-height:1.6}
+.hlsync summary{cursor:pointer;font-weight:700}
+.hlsync .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hlsync input{flex:1 1 220px;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.hlsync .st{color:var(--sub);margin-top:6px}
+.hlsync .st.ok{color:var(--note)}.hlsync .st.err{color:var(--m6)}
+.hlsync [hidden]{display:none!important}
+.hltools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+</style>
+<div aria-label="형광펜" class="hlbar" hidden="" id="hlbar" role="toolbar">
+<button aria-label="노랑 형광펜" class="y" data-c="y" title="노랑"></button>
+<button aria-label="연두 형광펜" class="g" data-c="g" title="연두"></button>
+<button aria-label="분홍 형광펜" class="p" data-c="p" title="분홍"></button>
+<button aria-label="하늘 형광펜" class="b" data-c="b" title="하늘"></button>
+<button class="x" hidden="" id="hlDel">지우기</button>
+</div>
+<script>
+(function(){
+const PAGE='사례관리론_요약노트';
+const KEY='cm-short-hl-v1', TOK='study-gist-token', GID='study-gist-id', GDESC='study 공부방 형광펜 (자동 저장)';
+const FILE=PAGE+'.json';
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+// H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
+let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
+H.forEach(h=>{if(!h.u)h.u=1;});
+const live=()=>H.filter(h=>!h.d);
+const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
+let curRange=null, curId=null;
+const box=sec=>sec.querySelector('.ct');
+function texts(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=w.nextNode())a.push(n);return a;}
+function offsetOf(root,node,off){let s=0;for(const t of texts(root)){if(t===node)return s+off;s+=t.length;}const r=document.createRange();r.setStart(root,0);r.setEnd(node,off);return r.toString().length;}
+function wrap(root,start,end,c,id){
+  let pos=0;
+  for(const t of texts(root)){
+    const a=pos,b=pos+t.length;pos=b;
+    if(b<=start||a>=end)continue;
+    let node=t;const s=Math.max(start,a)-a,e=Math.min(end,b)-a;
+    if(!node.data.slice(s,e).trim())continue;
+    if(e<node.length)node.splitText(e);
+    if(s>0)node=node.splitText(s);
+    const m=document.createElement('mark');m.className='hl hl-'+c;m.dataset.id=id;
+    node.parentNode.insertBefore(m,node);m.appendChild(node);
+  }
+}
+function unwrap(id){document.querySelectorAll('mark.hl[data-id="'+id+'"]').forEach(m=>{const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize();});}
+function render(){
+  document.querySelectorAll('.ct mark.hl').forEach(m=>unwrap(m.dataset.id));
+  live().forEach(h=>{const sec=document.getElementById(h.lec);if(!sec)return;const root=box(sec);
+    const txt=texts(root).map(t=>t.data).join('');
+    let s=h.s,e=h.e;
+    if(txt.slice(s,e)!==h.t){let best=-1,i=txt.indexOf(h.t);while(i>=0){if(best<0||Math.abs(i-h.s)<Math.abs(best-h.s))best=i;i=txt.indexOf(h.t,i+1);}if(best<0||!h.t)return;s=best;e=best+h.t.length;}
+    wrap(root,s,e,h.c,h.id);});
+  paint();
+}
+function commit(){ls.set(KEY,JSON.stringify(H));paint();queuePush();}
+function hide(){bar.hidden=true;curRange=null;curId=null;del.hidden=true;}
+function place(rect){
+  bar.hidden=false;
+  const w=bar.offsetWidth,h=bar.offsetHeight;
+  let x=rect.left+rect.width/2-w/2, y=rect.top-h-8;
+  if(y<70)y=rect.bottom+8;
+  x=Math.max(8,Math.min(x,innerWidth-w-8));
+  y=Math.max(64,Math.min(y,innerHeight-h-8));
+  bar.style.left=x+'px';bar.style.top=y+'px';
+}
+function check(){
+  const sel=getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount){ return; }
+  const r=sel.getRangeAt(0);
+  const el=r.commonAncestorContainer.nodeType===1?r.commonAncestorContainer:r.commonAncestorContainer.parentElement;
+  const sec=el.closest('section.lec');
+  if(!sec||!box(sec).contains(r.startContainer)||!box(sec).contains(r.endContainer)){hide();return;}
+  if(!r.toString().trim()){hide();return;}
+  curRange=r;curId=null;del.hidden=true;place(r.getBoundingClientRect());
+}
+let tm;
+document.addEventListener('selectionchange',()=>{clearTimeout(tm);tm=setTimeout(check,250);});
+document.addEventListener('mouseup',()=>setTimeout(check,10));
+document.addEventListener('click',e=>{
+  if(bar.contains(e.target))return;
+  const m=e.target.closest('mark.hl');
+  const sel=getSelection();
+  if(m&&(!sel||sel.isCollapsed)){curId=m.dataset.id;curRange=null;del.hidden=false;place(m.getClientRects()[0]||m.getBoundingClientRect());return;}
+  if(!sel||sel.isCollapsed)hide();
+});
+bar.addEventListener('mousedown',e=>e.preventDefault());
+bar.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const now=Date.now();
+  if(b===del){if(curId){unwrap(curId);const h=H.find(h=>h.id===curId);if(h){h.d=1;h.u=now;}commit();}hide();return;}
+  const c=b.dataset.c;
+  if(curId){
+    document.querySelectorAll('mark.hl[data-id="'+curId+'"]').forEach(m=>m.className='hl hl-'+c);
+    const h=H.find(h=>h.id===curId);if(h){h.c=c;h.u=now;}commit();hide();return;}
+  if(!curRange)return;
+  const r=curRange;const sec=(r.startContainer.nodeType===1?r.startContainer:r.startContainer.parentElement).closest('section.lec');const root=box(sec);
+  let s=offsetOf(root,r.startContainer,r.startOffset), e2=offsetOf(root,r.endContainer,r.endOffset);
+  if(e2<=s){hide();return;}
+  const txt=texts(root).map(t=>t.data).join('');
+  live().filter(h=>h.lec===sec.id&&h.s<e2&&h.e>s).forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});
+  const id=now.toString(36)+Math.random().toString(36).slice(2,6);
+  wrap(root,s,e2,c,id);
+  H.push({id,lec:sec.id,s,e:e2,c,t:txt.slice(s,e2),u:now});commit();
+  getSelection().removeAllRanges();hide();
+});
+addEventListener('scroll',()=>{if(!bar.hidden&&innerWidth>640)hide();},{passive:true});
+
+/* ---- 소개 칸: 모두 지우기 + 기기 간 연동 ---- */
+const intro=document.querySelector('section.intro');
+const tools=document.createElement('div');tools.className='hltools';
+const cb=document.createElement('button');cb.className='btn';cb.title='형광펜을 모두 지움(연동 중이면 다른 기기에서도 지워짐)';
+tools.appendChild(cb);
+const sync=document.createElement('details');sync.className='hlsync';
+sync.innerHTML='<summary>형광펜 PC·휴대폰 연동</summary>'+
+ '<div class="st" id="hlSt"></div>'+
+ '<div id="hlSetup"><div>깃허브에서 만든 <b>Gist 전용 토큰</b>을 붙여넣고 연결을 누르세요. 토큰은 이 기기 브라우저에만 보관됩니다.</div>'+
+ '<div class="row"><input id="hlTok" type="password" autocomplete="off" placeholder="ghp_ 로 시작하는 토큰"><button class="btn" id="hlConn">연결</button></div></div>'+
+ '<div class="row" id="hlOn" hidden><button class="btn" id="hlNow">지금 맞추기</button><button class="btn" id="hlOff">이 기기 연결 끊기</button></div>';
+intro.appendChild(tools);intro.appendChild(sync);
+const $=s=>sync.querySelector(s);
+let armed=false;
+function paint(){if(armed)return;const n=live().length;cb.textContent='형광펜 '+n+'개 지우기';cb.style.display=n?'':'none';}
+cb.onclick=()=>{if(!armed){armed=true;cb.textContent='한 번 더 누르면 모두 지움';setTimeout(()=>{armed=false;paint();},3000);return;}
+  const now=Date.now();live().forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});armed=false;commit();};
+
+function status(msg,cls){const st=$('#hlSt');st.textContent=msg;st.className='st'+(cls?' '+cls:'');}
+function ui(){const on=!!ls.get(TOK);$('#hlSetup').hidden=on;$('#hlOn').hidden=!on;if(!on)status('연결 안 됨 — 형광펜은 이 기기에만 저장됩니다.');}
+const API='https://api.github.com';
+async function gh(path,opt={}){
+  const r=await fetch(API+path,{...opt,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+ls.get(TOK),'X-GitHub-Api-Version':'2022-11-28',...(opt.body?{'Content-Type':'application/json'}:{})}});
+  if(!r.ok){const e=new Error('HTTP '+r.status);e.status=r.status;throw e;}
+  return r.status===204?null:r.json();
+}
+function merge(remote){
+  const m=new Map();[...remote,...H].forEach(h=>{const o=m.get(h.id);if(!o||(h.u||0)>=(o.u||0))m.set(h.id,h);});
+  const month=30*864e5, now=Date.now();
+  H=[...m.values()].filter(h=>!(h.d&&now-h.u>month)); // 지운 표시는 30일 뒤 정리
+}
+async function findGist(){
+  let id=ls.get(GID);
+  if(id){try{return await gh('/gists/'+id);}catch(e){if(e.status!==404)throw e;}}
+  for(let page=1;page<=10;page++){
+    const list=await gh('/gists?per_page=100&page='+page);
+    const g=list.find(g=>g.description===GDESC);
+    if(g){ls.set(GID,g.id);return await gh('/gists/'+g.id);}
+    if(list.length<100)break;
+  }
+  const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:GDESC,public:false,files:{[FILE]:{content:'[]'}}})});
+  ls.set(GID,g.id);return g;
+}
+async function readRemote(g){
+  const f=g.files&&g.files[FILE];if(!f)return [];
+  let txt=f.content;
+  if(f.truncated){txt=await (await fetch(f.raw_url)).text();}
+  try{return JSON.parse(txt)||[]}catch(e){return []}
+}
+let busy=false, again=false;
+async function syncNow(){
+  if(!ls.get(TOK))return;
+  if(busy){again=true;return;}busy=true;
+  try{
+    status('맞추는 중…');
+    const g=await findGist();
+    merge(await readRemote(g));
+    ls.set(KEY,JSON.stringify(H));render();
+    await gh('/gists/'+g.id,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(H)}}})});
+    const d=new Date();status('연동됨 · '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' 저장','ok');
+  }catch(e){
+    if(e.status===401||e.status===403)status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');
+    else status('연동하지 못했습니다(인터넷 연결 확인). 형광펜은 이 기기에는 저장되어 있습니다.','err');
+  }finally{busy=false;if(again){again=false;syncNow();}}
+}
+let pt;function queuePush(){if(!ls.get(TOK))return;clearTimeout(pt);pt=setTimeout(syncNow,1500);}
+$('#hlConn').onclick=async()=>{const v=$('#hlTok').value.trim();if(!v){status('토큰을 붙여넣어 주세요.','err');return;}
+  ls.set(TOK,v);$('#hlTok').value='';ls.del(GID);ui();await syncNow();if(/토큰이 맞지/.test($('#hlSt').textContent)){ls.del(TOK);ui();status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');}};
+$('#hlNow').onclick=()=>syncNow();
+$('#hlOff').onclick=()=>{ls.del(TOK);ls.del(GID);ui();};
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncNow();});
+render();ui();syncNow();
+})();
+</script>
+<!-- 목차 하위: 강의명 아래 소제목(h3)까지 보이고, 강의별로 접고 펼 수 있음 -->
+<style>
+nav.toc li.tl{position:relative}
+nav.toc li.tl>.tg{position:absolute;left:-4px;top:4px;width:20px;height:22px;border:0;background:none;color:var(--sub);cursor:pointer;font-size:11px;line-height:22px;padding:0;border-radius:4px;transition:transform .15s}
+nav.toc li.tl>.tg:hover{background:var(--accent-soft);color:var(--accent)}
+nav.toc li.tl.open>.tg{transform:rotate(90deg)}
+nav.toc li.tl>a{margin-left:14px}
+nav.toc ul.sub{list-style:none;margin:2px 0 6px 36px;padding:0 0 0 8px;border-left:1px solid var(--line);display:none}
+nav.toc li.tl.open>ul.sub{display:block}
+nav.toc ul.sub a{display:block;padding:3px 8px;font-size:12.5px;line-height:1.4;color:var(--sub);margin:0}
+nav.toc ul.sub a:hover{color:var(--ink)}
+nav.toc ul.sub a.on{color:var(--accent);background:var(--accent-soft);font-weight:700}
+nav.toc .tocall{float:right;border:0;background:none;color:var(--accent);font:inherit;font-size:11.5px;letter-spacing:0;cursor:pointer;padding:0 2px}
+</style>
+<script>
+(function(){
+const nav=document.querySelector('nav.toc');if(!nav)return;
+const SK='toc-open-'+location.pathname.split('/').pop();
+const get=()=>{try{return JSON.parse(localStorage.getItem(SK)||'null')}catch(e){return null}};
+const put=v=>{try{localStorage.setItem(SK,JSON.stringify(v))}catch(e){}};
+let open=new Set(get()||[]);
+const subLinks=[];
+nav.querySelectorAll(':scope > ol > li').forEach(li=>{
+  const a=li.querySelector('a');if(!a)return;const id=a.getAttribute('href').slice(1);
+  const sec=document.getElementById(id);if(!sec)return;
+  const hs=[...sec.querySelectorAll('.ct h3')];if(!hs.length)return;
+  li.classList.add('tl');
+  const ul=document.createElement('ul');ul.className='sub';
+  hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
+    const t=h.textContent.replace(/[0-9]️?⃣|📘|📙|📕|📗|📝/g,'').replace(/\s+/g,' ').trim();
+    const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
+    const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
+  li.appendChild(ul);
+  const b=document.createElement('button');b.className='tg';b.type='button';b.textContent='▶';b.setAttribute('aria-label',a.textContent.trim()+' 소제목 펼치기/접기');
+  li.insertBefore(b,a);
+  const set=(on)=>{li.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));};
+  set(open.has(id));
+  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);if(autoLi===li)autoLi=null;put([...open]);paintAll();};
+  li._set=set;li._id=id;
+});
+const h2=nav.querySelector('h2');
+const all=document.createElement('button');all.className='tocall';all.type='button';
+const tls=[...nav.querySelectorAll('li.tl')];
+function paintAll(){all.textContent=tls.every(li=>li.classList.contains('open'))?'모두 접기':'모두 펼치기';}
+all.onclick=()=>{const on=!tls.every(li=>li.classList.contains('open'));tls.forEach(li=>{li._set(on);on?open.add(li._id):open.delete(li._id);});put([...open]);paintAll();};
+if(h2)h2.appendChild(all);paintAll();
+// 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
+let last=null,autoLi=null;
+function mark(){
+  // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
+  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<(window.__barY?window.__barY():140))sec=s;});
+  let cur=null;
+  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<(window.__barY?window.__barY():140))cur=a;else break;}
+  const key=(sec?sec.id:'')+'|'+(cur?cur.getAttribute('href'):'');
+  if(key===last)return;last=key;
+  subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
+  const li=sec?nav.querySelector('li.tl > a[href="#'+sec.id+'"]')?.parentElement:null;
+  // 스크롤로 자동으로 펼친 강의는 지나가면 다시 접음(직접 펼친 강의는 그대로 둠)
+  if(autoLi&&autoLi!==li&&!open.has(autoLi._id)){autoLi._set(false);autoLi=null;paintAll();}
+  if(li&&!li.classList.contains('open')){li._set(true);autoLi=li;paintAll();}
+  const tgt=cur||(li&&li.querySelector('a'));
+  if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top||r.bottom>nr.bottom)nav.scrollTop+=r.top-nr.top-nr.height/3;}
+}
+let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
+setTimeout(mark,300);
+})();
+</script>
+<!-- 문제지 → 강의노트 바로가기: 주소 끝 #n=강id~출제표시~글조각 을 찾아 이동하고 잠깐 강조 -->
+<style>
+.dl-flash{animation:dlflash 2.6s ease-out 1;border-radius:6px}
+@keyframes dlflash{0%,35%{background:#ffe58a;box-shadow:0 0 0 4px #ffe58a}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+:root[data-theme="dark"] .dl-flash{animation-name:dlflashd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dl-flash{animation-name:dlflashd}}
+@keyframes dlflashd{0%,35%{background:#5c4d12;box-shadow:0 0 0 4px #5c4d12}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+</style>
+<script>
+(function(){
+const norm=s=>s.replace(/[0-9]️?⃣|📘|📙|📕|📗|📝/g,'').replace(/[\s​]+/g,'');
+function find(){
+  const h=decodeURIComponent(location.hash||'');
+  const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
+  const sec=document.getElementById(m[1]);if(!sec)return;
+  const want=norm(m[3]);
+  const els=[...sec.querySelectorAll('.ct h3, .ct p, .ct li, .ct tr, .ct .cn-row')];
+  let hit=els.filter(e=>norm(e.textContent).includes(want));
+  if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
+  const el=hit[0]||sec;
+  const bar=document.querySelector('.bar');const off=(bar?bar.getBoundingClientRect().bottom:60)+24;
+  const go=()=>scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-off),behavior:'instant'});
+  go();setTimeout(go,350);setTimeout(go,900);
+  if(el!==sec){el.classList.remove('dl-flash');void el.offsetWidth;el.classList.add('dl-flash');}
+}
+addEventListener('hashchange',find);
+if(document.readyState==='complete')find();else addEventListener('load',find);
+})();
+</script>
+</body>
+</html>
