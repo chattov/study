@@ -315,7 +315,7 @@ function build(){
       `<p class="qt"><span class="no">${q.no}.</span>${esc(q.text)}</p>` +
       (q.passage ? `<div class="box"><span class="lb">&lt;${q.plabel === '보기' ? '보 기' : q.plabel === '사례' ? '사 례' : '자 료'}&gt;</span>${esc(q.passage)}</div>` : '') +
       `<ul class="ops">` + q.opts.map((o,i) => `<li><button class="op" data-no="${q.no}" data-i="${i}"><span class="c">${i+1}</span><span class="tx">${esc(o)}</span></button></li>`).join('') + `</ul>` +
-      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사회복지정책론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : '') +
+      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사회복지정책론_강의노트.html${q.note}" target="knou-note">강의노트 보기 ↗</a>` : '') +
       `</div>`;
   });
   $('#qs').innerHTML = html;
@@ -334,7 +334,7 @@ function build(){
       a += `<div class="lh">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
       last = q.lec;
     }
-    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사회복지정책론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 ↗</a>` : ''}</p>` +
+    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사회복지정책론_강의노트.html${q.note}" target="knou-note">강의노트 ↗</a>` : ''}</p>` +
       `<p class="ax">${esc(q.exp)}</p></div>`;
   });
   a += `</div>`;
