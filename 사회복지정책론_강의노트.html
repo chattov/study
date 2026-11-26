@@ -273,7 +273,7 @@ main{min-width:0}
     <label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
     <select id="jump"><option value="">강의 바로가기</option><option value="l6">6강 · 사회복지정책 의제 및 대안의 형성</option><option value="l7">7강 · 사회복지정책의 결정, 집행 및 평가</option><option value="l8">8강 · 사회복지정책의 재원 및 경제적 효과</option><option value="l9">9강 · 사회복지정책의 설계: 할당 및 급여</option><option value="l10">10강 · 사회적 위험과 사회보장</option><option value="l11">11강 · 빈곤과 사회보장</option><option value="l12">12강 · 사회보험</option><option value="l13">13강 · 사회서비스</option><option value="l14">14강 · 한국 사회복지정책의 역사, 현황과 쟁점</option><option value="l15">15강 · 사회복지정책 실천과 사회운동</option></select>
     <div class="sp">
-      <button class="btn" id="focusBtn" style="display:none" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
+      <button class="btn" id="focusBtn" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
       <button class="btn" id="fsDown" title="글자 작게" aria-label="글자 작게">가−</button>
       <button class="btn" id="fsUp" title="글자 크게" aria-label="글자 크게">가+</button>
       <button class="btn" id="themeBtn">다크</button>
@@ -2180,7 +2180,7 @@ nav.addEventListener('click',e=>{ if(e.target.closest('a')) openToc(false); });
 addEventListener('keydown',e=>{ if(e.key==='Escape') openToc(false); });
 }
 /* 출제 부분만 */
-const FK='cm-note-focus';
+const FK='policy-note-focus';
 function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
 $('#focusBtn').onclick = () => setFocus(!document.body.classList.contains('focus'));
 setFocus(sget(FK) === '1');

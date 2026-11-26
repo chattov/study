@@ -273,7 +273,7 @@ main{min-width:0}
     <label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
     <select id="jump"><option value="">강의 바로가기</option><option value="l1">1강 · 노인에 대한 이해</option><option value="l2">2강 · 노화 관련 이론</option><option value="l3">3강 · 노인과 가족</option><option value="l4">4강 · 노인 문제 (치매, 학대, 빈곤)</option><option value="l5">5강 · 노년기 여가활동, 자원봉사 및 노인교육</option><option value="l6">6강 · 노인복지정책의 이해</option><option value="l7">7강 · 노인소득보장정책</option><option value="l8">8강 · 노인의료보장정책</option><option value="l9">9강 · 노인장기요양보험제도</option><option value="l10">10강 · 노인주거보장정책</option><option value="l11">11강 · 노인복지서비스</option><option value="l12">12강 · 노인복지실천</option><option value="l13">13강 · 노인상담</option><option value="l14">14강 · 고령친화산업</option><option value="l15">15강 · 베이비붐 세대와 새로운 대응</option></select>
     <div class="sp">
-      <button class="btn" id="focusBtn" style="display:none" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
+      <button class="btn" id="focusBtn" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
       <button class="btn" id="fsDown" title="글자 작게" aria-label="글자 작게">가−</button>
       <button class="btn" id="fsUp" title="글자 크게" aria-label="글자 크게">가+</button>
       <button class="btn" id="themeBtn">다크</button>
@@ -2714,7 +2714,7 @@ nav.addEventListener('click',e=>{ if(e.target.closest('a')) openToc(false); });
 addEventListener('keydown',e=>{ if(e.key==='Escape') openToc(false); });
 }
 /* 출제 부분만 */
-const FK='cm-note-focus';
+const FK='elder-note-focus';
 function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
 $('#focusBtn').onclick = () => setFocus(!document.body.classList.contains('focus'));
 setFocus(sget(FK) === '1');
