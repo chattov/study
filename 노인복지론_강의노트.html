@@ -2958,7 +2958,7 @@ nav.querySelectorAll(':scope > ol > li').forEach(li=>{
   li.classList.add('tl');
   const ul=document.createElement('ul');ul.className='sub';
   hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
-    const t=h.textContent.replace(/[0-9]️?⃣/g,'').replace(/\s+/g,' ').trim();
+    const t=h.textContent.replace(/[0-9]️?⃣|📘|📙|📕|📗|📝/g,'').replace(/\s+/g,' ').trim();
     const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
     const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
   li.appendChild(ul);
