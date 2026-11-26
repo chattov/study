@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<script>document.documentElement.setAttribute("data-theme","light")</script>
+<meta charset="utf-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="keep-scroll.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>지역사회복지론 핵심정리</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+/* 레이아웃: 공부방과 같은 색·글꼴. 위에 얇은 도구 막대, 넓은 화면에선 왼쪽에 강의 목차, 오른쪽에 강의별 카드 */
+:root{
+  --bg:#e6dfcf; --card:#f8f3e6; --ink:#2f2a23; --sub:#6b6457; --line:#dcd2bd; --soft:#f0e9d8;
+  --accent:#2a5bd7; --accent-soft:#e8e0ca; --note:#1f7a55; --note-soft:#e4f4ec;
+  --m6:#b4471c; --m6-soft:#fcebe3; --m5:#7a4fc2; --m5-soft:#efe8fb; --th:#efe6d1;
+  --f-ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  --f-head:"Noto Serif KR","Batang",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111418; --card:#1a1f25; --ink:#e6e9ed; --sub:#9ba5b1; --line:#2c343d; --soft:#20262d;
+  --accent:#86a8f5; --accent-soft:#1f2a40; --note:#6fd3a4; --note-soft:#16302a;
+  --m6:#f0a07c; --m6-soft:#3a2219; --m5:#c3a6f5; --m5-soft:#2a2140; --th:#212833; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.65;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 도구 막대 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--card)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--card);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar .home{font-size:13px;font-weight:700;text-decoration:none;color:var(--accent);white-space:nowrap}
+.bar .ttl{font-family:var(--f-head);font-weight:900;font-size:16px;white-space:nowrap}
+.bar select{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 8px;max-width:min(260px,60vw)}
+.sp{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--m6-soft);border-color:var(--m6);color:var(--m6)}
+
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;padding-block:22px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto}
+nav.toc h2{font-size:12px;letter-spacing:.12em;color:var(--sub);margin:0 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+nav.toc a{display:flex;gap:8px;align-items:baseline;text-decoration:none;padding:5px 8px;border-radius:8px;font-size:13.5px;line-height:1.4}
+nav.toc a b{flex:none;min-width:1.6em;color:var(--accent);font-variant-numeric:tabular-nums}
+nav.toc a:hover,nav.toc a.on{background:var(--accent-soft)}
+
+.intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.intro h1{font-family:var(--f-head);font-weight:900;font-size:28px;margin:0 0 4px;text-wrap:balance}
+.intro p{margin:4px 0;color:var(--sub);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:10px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+.lec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px 18px;margin-bottom:18px;scroll-margin-top:70px;min-width:0}
+.lh{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding:14px 0 8px;margin-bottom:6px}
+.lh .no{font-weight:900;color:var(--accent);font-size:15px;white-space:nowrap}
+.lh h2{margin:0;font-family:var(--f-head);font-weight:900;font-size:22px;text-wrap:balance}
+.ct > blockquote{margin:4px 0 12px;padding:0;color:var(--sub);font-size:13.5px;border:0}
+.ct > blockquote p{margin:0}
+.ct h3{font-size:17px;margin:22px 0 8px;padding-left:10px;border-left:4px solid var(--accent);line-height:1.4}
+.ct p{margin:8px 0}
+.ct ul,.ct ol{margin:6px 0;padding-left:1.3em}
+.ct li{margin:3px 0}
+.ct strong{font-weight:700}
+.ct em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.tw{overflow-x:auto;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.mk{display:inline-block;font-size:14px;line-height:1;margin-right:3px;vertical-align:-1px;cursor:help}
+.totop{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--sub);text-decoration:none}
+.totop:hover{color:var(--accent)}
+footer{font-size:12.5px;color:var(--sub);margin-top:8px}
+
+/* 출제 표시만 강조 */
+body.focus .ct p:not(:has(.mk)), body.focus .ct li:not(:has(.mk)),
+body.focus .ct .tw:not(:has(.mk)), body.focus .ct tr:not(:has(.mk)), body.focus .ct > blockquote{opacity:.28}
+body.focus .ct h3:has(.mk) ~ .tw, body.focus .ct h3:has(.mk) + p, body.focus .ct h3:has(.mk) + ul, body.focus .ct h3:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw, body.focus .ct p:has(.mk) + ul, body.focus .ct p:has(.mk) + ol{opacity:1}
+body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focus .ct p:has(.mk) + ol li{opacity:1}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav.toc{display:none}
+  .lec{padding:4px 14px 14px}
+  .intro{padding:16px}
+  .intro h1{font-size:23px}
+  .lh h2{font-size:19px}
+  table{font-size:13.5px}
+  th{white-space:normal}
+}
+
+.ct p.sh{font-size:15.5px;margin:22px 0 6px;padding:4px 10px;background:var(--accent-soft);border-radius:6px;line-height:1.5}
+.ct h3 + p.sh{margin-top:10px}
+.ct h3{font-size:18px;margin-top:30px}
+.ct p.tt{margin:16px 0 6px;color:var(--accent)}
+.ct li.sub{list-style:circle;margin-left:18px}
+main{min-width:0}
+.ct{overflow-wrap:anywhere}
+
+/* 표: 남색 머리행, 첫 열 강조, 세로 구분선, 줄무늬 */
+:root{--thd:#e2d4b2;--thd-ink:#2f2a23;--c1:#efe6d1;--zebra:rgba(120,100,60,.06);--cell:#fffdf7}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}}
+:root[data-theme="dark"]{--thd:#2c3542;--thd-ink:#e6e9ed;--c1:#222a35;--zebra:rgba(255,255,255,.035);--cell:#1d2229}
+.ct .tw{border:1px solid var(--line);border-radius:8px;background:var(--cell);-webkit-overflow-scrolling:touch}
+.ct table{font-size:14px;line-height:1.55}
+.ct th,.ct td{padding:8px 11px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.ct th:last-child,.ct td:last-child{border-right:0}
+.ct thead th{background:var(--thd);color:var(--thd-ink);text-align:center;font-weight:700;border-bottom:1px solid var(--line)}
+.ct tbody tr:nth-child(even) td{background:var(--zebra)}
+.ct tbody td:first-child{background:var(--c1);font-weight:700;white-space:nowrap;width:1%}
+.ct p.tt{margin:20px 0 6px}
+@media (max-width:640px){
+  .ct table{font-size:13.5px}
+  .ct th,.ct td{padding:7px 9px;min-width:7.5em}
+  .ct tbody td:first-child{white-space:normal;min-width:5.5em}
+}
+
+/* 글 많은 표: 행마다 카드 — 첫 칸은 머리띠, 나머지는 열 이름을 붙여 나란히(좁은 화면은 위아래) */
+.ct .tw:has(table.long){overflow:visible;border:0;background:none;border-radius:0}
+.ct table.long, .ct table.long tbody{display:block;width:100%}
+.ct table.long thead{display:none}
+.ct table.long tr{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));margin:0 0 12px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+.ct table.long.c2{--cols:1}.ct table.long.c3{--cols:2}.ct table.long.c4{--cols:3}
+.ct table.long td{display:block;border:0;border-right:1px solid var(--line);padding:10px 14px;line-height:1.75;font-size:14.5px;background:none!important;white-space:normal;width:auto}
+.ct table.long td:last-child{border-right:0}
+.ct table.long td:first-child{grid-column:1/-1;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 14px;border-right:0;line-height:1.5}
+.ct table.long td:first-child .mk{filter:none}
+.ct table.long:not(.c2) td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;letter-spacing:.01em}
+@media (max-width:640px){
+  .ct table.long tr{grid-template-columns:1fr}
+  .ct table.long td{border-right:0;border-top:1px solid var(--line);min-width:0}
+  .ct table.long td:first-child{border-top:0}
+}
+
+/* 가로 스크롤 없음 */
+.ct .tw{overflow:visible}
+.ct th,.ct td{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{min-width:6.5em}
+.ct table.c5 tbody td:first-child,.ct table.c6 tbody td:first-child{white-space:normal;width:auto}
+.ct table.c5,.ct table.c6{font-size:13px}
+@media (max-width:640px){
+  .ct .tw{border:0;background:none;border-radius:0}
+  .ct .tw table, .ct .tw tbody{display:block;width:100%}
+  .ct .tw thead{display:none}
+  .ct .tw tr{display:block;margin:0 0 10px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--cell)}
+  .ct .tw td{display:block;border:0;border-top:1px solid var(--line);padding:8px 12px;background:none!important;min-width:0;width:auto;white-space:normal}
+  .ct .tw td:first-child{border-top:0;background:var(--thd)!important;color:var(--thd-ink);font-weight:700;padding:7px 12px}
+  .ct .tw td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .ct .tw table.c2 td:not(:first-child)::before{content:none}
+}
+
+/* 색 정리: 머리행은 옅은 청회색, 첫 열은 더 옅은 청회색, 본문은 흰색. 비교표는 열(세로) 단위로 구분 */
+:root{--thd2:#cfd9e8;--tbd:#c9d3e1;--thd:#dbe3ef;--thd-ink:#1f3864;--c1:#eef2f8;--cell:#fffefb;--colt:#f3f6fa;--zebra:transparent}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}}
+:root[data-theme="dark"]{--thd2:#313d50;--tbd:#2c343d;--thd:#2a3546;--thd-ink:#dfe7f5;--c1:#222a35;--cell:#1d2229;--colt:#232a33;--zebra:transparent}
+.ct .tw{border-color:var(--tbd)}
+.ct tbody tr:nth-child(even) td{background:none}
+.ct tbody td:first-child{background:var(--c1);color:var(--thd-ink)}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--colt)}
+.ct table.c3 thead th:nth-child(3),.ct table.c4 thead th:nth-child(3),.ct table.c5 thead th:nth-child(3),.ct table.c5 thead th:nth-child(5),.ct table.c6 thead th:nth-child(3),.ct table.c6 thead th:nth-child(5){background:var(--thd2)}
+.ct table.long tr{border-color:var(--tbd)}
+.ct table.long td:nth-child(3){background:var(--colt)!important}
+.ct table.long td:first-child{color:var(--thd-ink)}
+@media (max-width:640px){ .ct .tw td:nth-child(3){background:none!important} .ct .tw tr{border-color:var(--tbd)} }
+
+/* 최종 표 디자인: 제목줄은 진회색 바탕+흰 글씨(B안), 비교 열은 하나 건너 옅게(C안), 나머지는 흰 바탕+가는 가로줄 */
+:root{--tb-head:#4a5568;--tb-head-ink:#ffffff;--tb-bg:#fffdf8;--tb-line:#e4dccb;--tb-col:#f3efe6;--tb-ink:#2f2a23}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}}
+:root[data-theme="dark"]{--tb-head:#3a4352;--tb-head-ink:#eef1f5;--tb-bg:#1d2229;--tb-line:#2f3741;--tb-col:#232a32;--tb-ink:#e6e9ed}
+.ct .tw{border:0!important;border-radius:6px;overflow:hidden;background:var(--tb-bg)!important}
+.ct .tw:has(table.long){background:none!important;border-radius:0;overflow:visible}
+.ct th,.ct td{border-right:0!important;border-bottom:1px solid var(--tb-line)!important;background:none!important;color:var(--tb-ink)}
+.ct thead th{background:var(--tb-head)!important;color:var(--tb-head-ink)!important;text-align:left!important;border-bottom:0!important}
+.ct tbody td:first-child{background:none!important;color:var(--tb-ink)!important;font-weight:700}
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:var(--tb-col)!important}
+.ct table.long tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+.ct table.long td{border-bottom:0!important;border-right:0!important}
+.ct table.long td:first-child{background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+.ct table.long td:nth-child(3){background:var(--tb-col)!important}
+@media (max-width:640px){
+  .ct .tw{background:none!important;border-radius:0;overflow:visible}
+  .ct .tw tr{background:var(--tb-bg)!important;border:1px solid var(--tb-line)!important;border-radius:6px}
+  .ct .tw td{border-bottom:0!important;border-top:1px solid var(--tb-line)!important;background:none!important}
+  .ct .tw td:first-child{border-top:0!important;background:var(--tb-head)!important;color:var(--tb-head-ink)!important}
+  .ct .tw table tbody td{width:auto!important;white-space:normal!important}
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+}
+
+/* 카드 뉴스: 사정·목표를 별도 카드로 */
+.cn{display:grid;gap:14px;margin:10px 0 14px}
+.cn-card{background:var(--tb-bg);border:1px solid var(--tb-line);border-radius:10px;overflow:hidden}
+.cn-top{background:var(--tb-head);color:var(--tb-head-ink);padding:10px 16px}
+.cn-tag{font-size:18px;font-weight:800;letter-spacing:.08em}
+.cn-cols,.cn-row{display:grid;grid-template-columns:1fr 1fr}
+.cn-h{padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--tb-line)}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:var(--tb-col)}
+.cn-row>div{padding:9px 16px;line-height:1.65;font-size:14.5px;border-bottom:1px solid var(--tb-line);word-break:keep-all;overflow-wrap:anywhere}
+.cn-row:last-child>div{border-bottom:0}
+.cn-lead>div{font-weight:700;font-size:15.5px}
+.cn-end>div{font-weight:700;color:var(--accent);border-top:2px solid var(--tb-line)}
+@media (max-width:640px){
+  .cn-cols{display:none}
+  .cn-row{grid-template-columns:1fr}
+  .cn-row>div:nth-child(2){border-bottom:2px solid var(--tb-line)}
+  .cn-row>div::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .cn-end>div{border-top:0}
+}
+
+/* 세로 구분 순서: 첫 번째 내용 열부터 옅은 색(2·4·6번째 열) */
+.ct table.c3 tbody td:nth-child(3),.ct table.c4 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(3),.ct table.c5 tbody td:nth-child(5),.ct table.c6 tbody td:nth-child(3),.ct table.c6 tbody td:nth-child(5){background:none!important}
+.ct table.c3 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(2),.ct table.c4 tbody td:nth-child(4),.ct table.c5 tbody td:nth-child(2),.ct table.c5 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(2),.ct table.c6 tbody td:nth-child(4),.ct table.c6 tbody td:nth-child(6){background:var(--tb-col)!important}
+.ct table.long td:nth-child(3){background:none!important}
+.ct table.long.c3 td:nth-child(2),.ct table.long.c4 td:nth-child(2),.ct table.long.c4 td:nth-child(4){background:var(--tb-col)!important}
+.cn-h:nth-child(2),.cn-row>div:nth-child(2){background:none}
+.cn-h:nth-child(1),.cn-row>div:nth-child(1){background:var(--tb-col)}
+@media (max-width:640px){
+  .ct .tw table tbody td:not(:first-child){background:none!important}
+  .cn-row>div:nth-child(1){background:none}
+}
+
+/* 강의 끝 핵심 정리 제목 바: 녹색 바탕 + 흰 글씨 */
+:root{--sum-bg:#2f7a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sum-bg:#2d6a4f}}
+:root[data-theme="dark"]{--sum-bg:#2d6a4f}
+.ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
+.ct p.sh.sum strong{color:#fff}
+#focusBtn{display:none}
+.ct p.more{margin:14px 0 0;text-align:right;font-size:.92em}
+.ct p.more a{color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor}
+</style>
+</head>
+<body id="top">
+<div class="bar">
+  <div class="bar-in">
+    <a class="home" href="./">← 공부방</a>
+    <span class="ttl">지역사회복지론 핵심정리</span>
+    <label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
+    <select id="jump"><option value="">강의 바로가기</option><option value="l1">1강 · 사고하는 인간</option><option value="l2">2강 · 개인과 지역사회</option><option value="l3">3강 · 지역사회 이슈</option><option value="l4">4강 · 사회적 배제 vs 권력 집중</option><option value="l5">5강 · 불평등 vs 평등</option><option value="l6">6강 · 억압 vs 참여</option><option value="l7">7강 · 소외 vs 연대</option><option value="l8">8강 · 사익 vs 공공성</option><option value="l9">9강 · 갈등 vs 토론</option><option value="l10">10강 · 교육조직화 1. 주민 이해와 교육조직화의 준비</option><option value="l11">11강 · 교육조직화 2. 주민교육과 학습공동체 조직</option><option value="l12">12강 · 교육조직화 3. 지역사회 활동과 사회행동</option><option value="l13">13강 · 실천조직화 1. 주민운동과 지역사회 변화</option><option value="l14">14강 · 실천조직화 2. 주민참여예산과 재정민주주의</option></select>
+    <div class="sp">
+      <button class="btn" id="focusBtn" aria-pressed="false" title="출제 표시가 있는 부분만 진하게">출제 부분만 보기</button>
+      <button class="btn" id="fsDown" title="글자 작게" aria-label="글자 작게">가−</button>
+      <button class="btn" id="fsUp" title="글자 크게" aria-label="글자 크게">가+</button>
+      <button class="btn" id="themeBtn">다크</button>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <nav class="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l1"><b>1</b><span>사고하는 인간</span></a></li><li><a href="#l2"><b>2</b><span>개인과 지역사회</span></a></li><li><a href="#l3"><b>3</b><span>지역사회 이슈</span></a></li><li><a href="#l4"><b>4</b><span>사회적 배제 vs 권력 집중</span></a></li><li><a href="#l5"><b>5</b><span>불평등 vs 평등</span></a></li><li><a href="#l6"><b>6</b><span>억압 vs 참여</span></a></li><li><a href="#l7"><b>7</b><span>소외 vs 연대</span></a></li><li><a href="#l8"><b>8</b><span>사익 vs 공공성</span></a></li><li><a href="#l9"><b>9</b><span>갈등 vs 토론</span></a></li><li><a href="#l10"><b>10</b><span>교육조직화 1. 주민 이해와 교육조직화의 준비</span></a></li><li><a href="#l11"><b>11</b><span>교육조직화 2. 주민교육과 학습공동체 조직</span></a></li><li><a href="#l12"><b>12</b><span>교육조직화 3. 지역사회 활동과 사회행동</span></a></li><li><a href="#l13"><b>13</b><span>실천조직화 1. 주민운동과 지역사회 변화</span></a></li><li><a href="#l14"><b>14</b><span>실천조직화 2. 주민참여예산과 재정민주주의</span></a></li></ol></nav>
+  <main>
+    <section class="intro">
+      <h1>지역사회복지론 핵심정리 1~14강</h1>
+      <p>웹교안의 「강의개요」「학습목표」「정리하기」를 시험범위(1~14강)만 모아 주제별로 나눈 페이지입니다. <span class="mk">📘</span>는 웹교안 연습문제의 근거가 되는 문장입니다(마우스를 올리면 문제 번호가 보입니다). 각 강 맨 아래 링크로 강의노트 해당 강으로 갈 수 있습니다.</p>
+    </section>
+    <section class="lec" id="l1"><header class="lh"><span class="no">1강</span><h2>사고하는 인간</h2></header><div class="ct">
+<h3>강의개요</h3><p>사고하는 인간이 지향하는 삶의 궁극적 목표는 행복이다. 인간은 공동체적 존재로 자신의 행복은 물론 가족과 공동체의 행복을 끊임없이 지향하며 노력한다. 각자의 생각에 따라 각자의 행복을 추구하는 개인의 서사는 공동체적으로 모여 역사를 만든다. 개인의 서사와 공동체의 서사는 인간 사고의 축적과 실천의 과정이며 이는 교육과 학습을 통해 전달된다. 교육과 학습의 근원은 생각이며 생각은 세상을 바꾸는 힘이고 실천으로 나타난다. 사회복지사는 현상과 상황으로서의 문제보다 본질을 파악해야 하고, 이는 곧 인간에 닥친 문제에 집중하기보다 지역사회에 존재하는 개인의 삶의 맥락을 보도록 한다. 지역사회복지의 목표는 주민이 자신의 삶과 지역사회에 대해 발언할 수 있고, 지역사회 의사결정에 참여하며, 함께 변화를 만들어 가는 힘을 갖도록 하는 것이다.</p>
+<h3>학습목표</h3><ol><li>사고하는 존재로서의 인간에 대해 이해한다.</li><li>사고체계 궁극의 목적에 대해 파악한다.</li><li>인간 사고의 축적과 실천의 과정에 대해 이해한다.</li><li>실천력 향상의 두 가지 방법에 대해 파악한다.</li><li>지역사회를 변화시키는 사고의 힘에 대해 이해한다.</li></ol>
+<h3>사고하는 인간</h3><ul><li><span class="mk" title="웹교안 연습문제 1번">📘</span>인간은 자신이 목격하는 <b>현상(객관적)</b>, 자신에게 닥친 <b>상황(주관적)</b> 모두에서 원인을 파악하고 분석한 후 행위하는 <b>사고체계</b>가 가동됨</li><li>현상과 상황에 동물은 결과만을 위해 반응하지만(<b>즉자적 존재</b>), 인간은 원인을 분석하여 대응함(<b>대자적 존재</b>)</li><li><span class="mk" title="웹교안 연습문제 2번">📘</span>사고하는 인간이 지향하는 삶의 목표는 <b>행복</b></li><li>인간은 공동체적 존재로 가족과 공동체의 행복을 끊임없이 지향함 : 개인의 행복을 위한 절대적 필요조건</li></ul>
+<h3>사고의 축적과 실천</h3><ul><li>인간의 사고체계는 세대를 이어가며 넓고 깊게 축적됨</li><li>세대를 이어가며 축적되고 발전된 지식과 지혜는 전달되는 과정을 거침 : <b>교육과 학습</b></li><li>교육과 학습의 목표는 개인, 가족, 공동체의 행복 추구 및 달성</li><li>상황과 현상의 본질을 탐구하기 위한 <b>성찰과 토론</b>의 학습 필요(장기적). 공동체 모든 구성원이 실천의 주체</li><li><span class="mk" title="웹교안 연습문제 3번">📘</span>각자의 인식에 기반한 토론을 통해 문제의 원인을 분석함 : 구조적 본질에 다가감</li></ul>
+<h3>사회복지사와 지역사회복지의 목표</h3><ul><li>사회복지사는 제도를 수행하는 사람인 동시에 제도가 실제 사람들의 삶에 어떤 영향을 미치는지 질문하는 사람이다.</li><li>사회복지사의 관점은 지역사회문제를 규정하고, 실천 대상과 실천 방법을 결정하는 데 영향을 미친다.</li><li>사회복지사는 “무엇이 부족한가”와 함께 “어떤 삶의 과정을 지나왔는가”, “어떤 관계 안에서 지지받거나 배제되었는가”, “어떤 선택이 실제로 가능했는가”를 물어야 한다.</li><li><b>지역사회복지 목표</b> : 주민이 자신의 삶과 지역사회에 대해 발언할 수 있고, 지역사회 의사결정 과정에 참여하며, 함께 변화를 만들어 가는 힘을 갖도록 하는 것</li><li>지역사회복지는 필연적으로 <b>민주주의</b>와 연결된다.</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l1">1강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l2"><header class="lh"><span class="no">2강</span><h2>개인과 지역사회</h2></header><div class="ct">
+<h3>강의개요</h3><p>지역사회는 양면성을 지닌다. 공존의 공동체이면서도 동시에 권력과 차별, 낙인이 작동하는 공간이기도 하다. 지역사회는 모든 사람에게 같은 기회를 제공하지 않기도 한다. 대표적 사례가 지역소멸로 나타난다. 지역사회는 주어지는 것이 아니라 만들어지는 것으로, 공동체는 주민들이 서로를 인식하고 관계를 맺고 갈등을 조정하며 공동의 문제를 함께 해결하는 과정에서 형성된다. 이러한 모든 현상과 상황에는 관계적 존재로서의 개인이 있기 때문이다. 인간은 독립적 존재이면서 관계 속에서 살아간다. 개인과 지역사회 사이의 관계에 대한 의미를 바탕으로 지역사회복지를 이해한다.</p>
+<h3>학습목표</h3><ol><li>관계적 존재로서의 인간에 대해 이해한다.</li><li>지역사회복지에서 개인에 대한 이해의 핵심을 파악할 수 있다.</li><li>사회복지사의 생각은 지역사회에 어떤 영향을 미치는지 이해한다.</li><li>지역사회가 개인의 삶을 어떻게 구성하는지 파악할 수 있다.</li></ol>
+<h3>관계적 존재로서의 인간</h3><ul><li><span class="mk" title="웹교안 연습문제 5번">📘</span>인간은 독립적인 존재이지만 동시에 <b>관계</b> 속에서 살아가는 존재</li><li>개인의 역량은 개인 내부의 능력만으로 결정되지 않으며, 사회적 조건(교육, 건강, 이동, 안전, 사회참여, 존중받는 관계)이 뒷받침되어야 함</li><li>사람은 타인과의 관계 속에서 자신을 이해</li></ul>
+<h3>개인을 ‘문제’로 보지 않기</h3><ul><li><span class="mk" title="웹교안 연습문제 6번">📘</span>사회복지사는 개인을 ‘문제’로 보지 않아야 함</li><li>빈곤, 고립, 실업, 질병 등의 표현이 그 사람 전체를 설명하지는 않음 — <b>사람은 문제보다 큰 존재</b></li><li>지역사회복지의 핵심은 개인의 어려움을 개인의 문제로 남겨두지 않는 것</li><li>개인의 사례를 통해 지역사회의 구조를 읽어야 함</li><li>사례관리는 개별 지원에서 끝나지 않고 지역사회 변화로 연결되어야 함</li></ul>
+<h3>개인의 성장과 지역사회의 성장</h3><ul><li>개인의 성장은 관계 속에서 이루어짐</li><li>지역사회 안에서 목소리를 내고 다른 사람과 관계 맺으며 공동의 문제 해결에 참여하는 과정에서 개인은 <b>수혜자가 아니라 참여자</b>로 변화</li><li>지역사회의 성장은 개인의 참여로 이루어짐</li><li>주민은 지역사회 문제를 경험하는 사람이면서 동시에 그 문제를 해결할 수 있는 지식과 힘을 가진 사람</li></ul>
+<h3>지역사회의 양면성</h3><ul><li>지역사회는 모든 사람에게 같은 기회를 제공하지 않음 : 학교, 병원, 일자리, 교통, 문화시설, 돌봄자원의 격차</li><li><b>지역소멸</b>은 자원 불균형의 문제를 압축적으로 드러냄</li><li><span class="mk" title="웹교안 연습문제 4번">📘</span>사회복지사는 지역사회의 <b>양면성</b>을 보아야 한다. 지역사회는 공존의 공동체일 수도 있지만, 동시에 권력과 차별, 낙인이 작동하는 공간일 수도 있다. 그러므로 지역사회복지 실천은 공존의 공동체를 만드는 동시에 배제의 구조를 바꾸는 일이다.</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l2">2강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l3"><header class="lh"><span class="no">3강</span><h2>지역사회 이슈</h2></header><div class="ct">
+<h3>강의개요</h3><p>지역사회복지는 주민의 삶을 변화시키는 사회적 이슈를 다루는 실천이다. 지역사회 이슈를 개인, 가족, 사회와 동떨어진 것으로 이해하거나 접근하는 것은 사회복지적으로 오류에 빠지게 된다. 지역사회 이슈는 단순한 개인의 어려움이 아니라 공동체 구성원이 함께 해결해야 할 사회적 과제로, 사회복지에서 이슈는 지역사회의 구조와 권력관계를 이해하는 출발점이다. 지역사회 이슈를 다루는 과정에서 주민이 성장하고 공동체가 발전하는 과정에 대해 알아보자.</p>
+<h3>학습목표</h3><ol><li>지역사회 이슈에 대한 개념을 이해한다.</li><li>지역사회 이슈를 발견하는 과정에 대해 파악할 수 있다.</li><li>지역사회 이슈와 주민 참여, 사회행동의 관계를 파악할 수 있다.</li><li>다양한 사례를 통해 지역사회 이슈를 실제적으로 이해한다.</li><li>사회복지사가 지역사회 이슈를 어떻게 다루어야 하는지를 파악할 수 있다.</li></ol>
+<h3>지역사회 이슈란</h3><ul><li>이슈는 사회구성원의 관점에 따라 생각과 입장의 차이가 드러나고 사회정치적 문제로 부각</li><li>지역사회 이슈는 단순한 개인의 어려움이 아니라 공동체 구성원이 함께 해결해야 할 사회적 과제</li><li><span class="mk" title="웹교안 연습문제 7번">📘</span>사회복지에서 이슈는 지역사회의 <b>구조와 권력관계</b>를 이해하는 출발점</li><li>사람들은 살아온 경험과 가치관이 다르기 때문에 같은 문제도 다르게 해석</li><li>지역사회 이슈는 정답을 찾는 과정이 아니라 다양한 의견을 <b>민주적으로 논의</b>하는 과정</li></ul>
+<h3>사회복지사의 역할</h3><ul><li>사회복지는 서비스를 제공하는 것만으로 지역사회의 문제를 해결하기 어려움</li><li><span class="mk" title="웹교안 연습문제 9번">📘</span>사회복지사는 지역사회의 중요한 이슈를 발견하고 주민과 함께 해결하는 역할을 수행해야 함</li><li><span class="mk" title="웹교안 연습문제 8번">📘</span>사회복지사는 문제보다 <b>구조</b>를 먼저 읽어야 함</li><li><b>‘희생자 비난’의 금지</b> : 개인 간 상호작용으로 이슈를 한정시킬 경우 발생하는 오류</li><li>사회복지사는 주민이 자신의 경험과 생각을 자유롭게 이야기할 수 있는 <b>대화의 장</b>을 마련해야 함</li></ul>
+<h3>주민교육과 촉진자</h3><ul><li>주민교육은 주민이 지역사회의 문제를 이해하고 함께 해결할 수 있는 힘을 기르는 과정임</li><li>주민은 지역사회 의사결정 과정에 참여하는 민주적 시민으로 성장하며, 지역사회 역시 주민의 참여를 통해 변화함</li><li>주민이 지역사회의 문제, <b>헤게모니</b>를 이해하고 함께 해결할 수 있도록 교육하고, 주민조직과 다양한 참여 활동을 촉진함</li><li>사회복지사는 지역사회 이슈를 주민의 참여와 실천으로 연결하는 <b>촉진자</b></li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l3">3강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l4"><header class="lh"><span class="no">4강</span><h2>사회적 배제 vs 권력 집중</h2></header><div class="ct">
+<h3>강의개요</h3><p>사회적 배제는 공동체 구성원으로서 인간다운 권리를 누리며 살아갈 기회와 절차, 조건이 축소되는 과정이다. 사회적 배제는 물질적 자원의 결핍뿐만 아니라 사회관계와 제도적 참여의 단절까지 포함되며 여러 영역에서 점차 누적된다. 지역사회에서 배제가 발생하는 것은 권력이 집중되어 있기 때문이며, 이러한 과정에서 특정 집단들은 지속적으로 배제의 경험을 갖게 된다. 지역복지활동은 사회적 배제와 권력의 집중에서 발생하는 문제를 파악하여 주민의 삶과 권리가 재분배될 수 있도록 해야 한다.</p>
+<h3>학습목표</h3><ol><li>사회적 배제의 개념에 대해 이해한다.</li><li>사회적 배제를 발생시키는 권력이 지역사회에 어떻게 작동하는지 파악할 수 있다.</li><li>사회적 배제와 권력이 집중되는 관계에 대해 이해한다.</li><li>지역사회에서 발생하는 배제와 권력의 집중에 대해 파악할 수 있다.</li><li>배제와 권력 집중에 대한 지역사회복지의 대응에 대해 알아볼 수 있다.</li></ol>
+<h3>사회적 배제</h3><ul><li>사회적 배제는 소득이 부족한 상태만을 의미하지 않음</li><li><span class="mk" title="웹교안 연습문제 10번">📘</span>개인이나 집단이 사회 구성원으로서 누려야 할 <b>자원, 권리, 관계, 기회, 참여</b>로부터 밀려나는 과정</li><li>사회적 배제는 물질적 자원의 결핍뿐만 아니라 사회관계와 제도적 참여의 단절까지 포함</li><li>배제는 여러 영역에서 점차 <b>누적</b>되는 과정</li><li>사회적 배제는 사회 구성원으로 온전히 권리를 누리며 살아갈 가능성이 축소되는 과정임</li><li><span class="mk" title="웹교안 연습문제 12번">📘</span>사회적 배제는 하나의 원인으로 설명되지 않으며, 여러 불리한 조건이 서로 결합하며 심화됨</li></ul>
+<h3>참여하지 않는 주민을 보는 눈</h3><ul><li>회의에 참석하지 않는 주민을 관심 없는 사람으로 판단하기 쉬움</li><li>복지서비스를 신청하지 않는 주민을 욕구가 없는 사람으로 해석할 수 있음</li><li>사회복지사는 “왜 참여하지 않는가”보다 <b>“참여할 수 없는 조건은 무엇인가”</b>를 먼저 물어야 함</li></ul>
+<h3>권력</h3><ul><li>권력은 다른 사람을 억압하거나 지배하는 힘만을 의미하지 않음</li><li><span class="mk" title="웹교안 연습문제 11번">📘</span>무엇을 문제로 볼 것인지, 어떤 사업에 예산을 배분할 것인지, 누구의 의견을 공식적인 주민 의견으로 인정할 것인지, 지역사회의 규칙과 우선순위를 결정하는 힘</li><li><b>푸코</b>는 권력을 특정 사람이 소유하는 물건이 아니라 사회적 관계 속에서 작동하는 힘으로 설명</li><li>권력은 법, 행정절차, 전문지식, 규칙, 통계, 언어를 통해 작동</li><li>겉으로는 중립적인 절차도 특정 집단에게 유리하게 작용할 수 있음</li><li>권력이 집중될수록 배제가 심화되고, 배제된 사람은 다시 권력으로부터 멀어지는 <b>악순환</b>이 발생함</li></ul>
+<h3>사회복지사의 대응</h3><ul><li>사회복지사는 주민의 어려움을 발견하는 사람인 동시에, 그 경험을 지역사회 의제로 만드는 사람임</li><li>사회복지사는 지역사회 문제를 결정하는 과정과 권력관계도 함께 보아야 함</li><li>사회복지사는 완전한 중립에 머물 수 없음 : <b>인간의 존엄, 인권, 사회정의</b>의 가치를 기준으로 판단</li><li>권력이 분산될 때 지역사회는 민주적으로 변화</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l4">4강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l5"><header class="lh"><span class="no">5강</span><h2>불평등 vs 평등</h2></header><div class="ct">
+<h3>강의개요</h3><p>인간은 연령, 성별, 장애, 건강, 가족 형태, 교육, 직업, 소득, 문화적 배경 등에서 서로 다르다. 차이가 발생하는 것은 자연스러운 다양성이며 공동체 발전의 원동력이다. 그럼에도 불구하고 개인의 차이가 차별로 이어지는 상황은 발생한다. 자원, 권리, 기회와 사회적 인정의 차등으로 이어질 때 불평등은 발생한다. 지역사회복지는 이렇게 발생하는 불평등을 해소하기 위해 기회와 결과의 평등을 고려한 실천을 해야 한다. 이에 대한 내용을 세부적으로 살펴보자.</p>
+<h3>학습목표</h3><ol><li>불평등과 평등의 개념에 대해 이해한다.</li><li>불평등과 평등이 발현되는 사회적 현상에 대해 파악한다.</li><li>지역사회에서 나타나는 불평등에 대해 구체적 내용을 파악한다.</li><li>지역사회복지실천의 영역에서 평등을 실현하는 방안을 파악해 보자.</li></ol>
+<h3>차이와 불평등</h3><ul><li>차이와 불평등은 다름</li><li>차이는 자연스러운 다양성을 의미함. 차이가 <b>차등</b>으로 이어질 때 불평등이 발생함</li><li>불평등은 개인의 차이가 삶의 기회와 권리의 격차로 전환되는 현상</li><li><span class="mk" title="웹교안 연습문제 14번">📘</span>불평등은 자원을 불균등하게 배분하게 됨</li><li>동일한 인간적 조건이어도 사는 지역과 사회적 여건에 따라 실제 삶은 달라질 수 있음</li><li>한 시기의 불리한 조건은 생의 다음 단계에 기회를 제한하게 됨</li></ul>
+<h3>평등과 형평</h3><ul><li>평등을 모든 사람에게 같은 대우나 자원을 제공하는 것으로 이해하기 쉬우나 <b>형식적 평등</b>이 항상 실제적인 평등을 보장하지 않음</li><li><b>기회의 평등</b>과 <b>결과의 평등</b>이 다르게 나타남. 출발점이 다르면 같은 기회가 실제적으로는 동일한 조건이 아닐 수 있음</li><li>지역사회복지는 기회의 문을 여는 것과 함께, 주민이 실제로 기회를 이용할 수 있는 조건도 마련해야 함</li><li><span class="mk" title="웹교안 연습문제 13번">📘</span><b>형평</b>은 실질적 평등을 위한 방안임</li><li>형평은 차이를 인정하고 필요한 지원을 다르게 제공하여 실질적 평등에 도달하려는 원리임</li></ul>
+<h3>지역사회의 불평등과 실천</h3><ul><li>지역사회에서 나타나는 불평등은 거주지역에 따라 접근성의 격차가 벌어지는 <b>공간의 불평등</b>, <b>돌봄의 불평등</b> 등이 있음</li><li>인구집단으로는 빈곤이 집중된 노인, 사회진출에 제한이 가해지는 청년 세대 등이 불평등의 대표적 집단임</li><li><span class="mk" title="웹교안 연습문제 15번">📘</span>지역사회복지 실천에서 <b>보이지 않는 불평등을 드러내야</b> 함</li><li>자원을 형평적으로 배분하는 구조적 노력이 필요하고 주민의 권리와 참여를 보장하는 사회적 여건이 마련되도록 노력해야 함</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l5">5강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l6"><header class="lh"><span class="no">6강</span><h2>억압 vs 참여</h2></header><div class="ct">
+<h3>강의개요</h3><p>억압은 개인이나 집단이 자신의 삶을 스스로 결정하고, 권리를 행사하며, 사회적 관계에 참여할 가능성을 제한받는 상태로 폭력과 차별처럼 명백하게 나타나기도 하지만, 보호·관리·효율·질서라는 이름으로 나타나기도 한다. 억압은 특정 개인의 악의만으로 발생하지 않으며, 제도와 문화, 일상적 관계 속에서 반복될 수 있기에, 지역사회복지 실천에서 억압이 나타나지 않도록 하기 위한 실천은 민주주의 철학에 기반한 참여의 구조화이다. 이러한 과정에 대해 학습해 보자.</p>
+<h3>학습목표</h3><ol><li>억압의 개념에 대해 이해한다.</li><li>지역사회에서 나타나는 억압에 대해 파악한다.</li><li>참여의 의미와 민주주의를 이해한다.</li><li>지역사회 이슈를 통해 억압과 참여의 사례를 이해한다.</li><li>지역사회복지 실천의 측면에서 참여를 이해한다.</li></ol>
+<h3>억압</h3><ul><li>억압은 개인이나 집단이 자신의 삶을 스스로 결정하고, 권리를 행사하며, 사회적 관계에 참여할 가능성을 제한받는 상태임</li><li>억압은 폭력과 차별처럼 명백하게 나타나기도 하지만, <b>보호·관리·효율·질서</b>라는 이름으로 나타나기도 함</li><li>억압은 특정 개인의 악의만으로 발생하지 않으며, 제도와 문화, 일상적 관계 속에서 반복될 수 있음</li><li>억압을 구조의 문제로 볼 때 실천도 개인의 변화가 아닌 환경 변화, 권리보장, 참여 확대로 나아갈 수 있다.</li></ul>
+<h3>침묵</h3><ul><li>억압받는 사람은 자신의 경험을 말하지 못하거나, 말해도 받아들여지지 않는 경험을 반복함</li><li>반복적으로 무시당한 사람은 더 이상 의견을 표현하지 않을 수 있음</li><li><span class="mk" title="웹교안 연습문제 16번">📘</span><b>침묵</b>은 관심이나 욕구가 없다는 의미가 아니라, 말할 조건이 부족하거나 말해도 달라지지 않았던 경험의 결과일 수 있음</li></ul>
+<h3>보호가 통제로 바뀔 때</h3><ul><li>전문가의 지식이 주민의 생활 경험을 압도하면 주민은 수동적인 대상이 될 수 있음</li><li>보호가 당사자의 의사와 권리를 충분히 고려하지 않을 경우 <b>통제</b>로 변할 수 있음</li><li>안전을 이유로 외출, 관계, 거주지, 서비스 선택을 제한할 수 있음(노인, 장애인 등)</li></ul>
+<h3>참여와 역량강화</h3><ul><li><span class="mk" title="웹교안 연습문제 17번">📘</span>참여의 핵심은 주민이 <b>문제 정의, 대안 마련, 결정, 실행, 평가</b>에 어느 정도 영향력을 행사하는가에 있음</li><li>참여를 위해서는 교육, 정보, 관계 형성, 조직 경험이 필요함</li><li><b>역량강화</b>는 개인과 집단이 자신의 삶에 영향을 미치는 조건을 이해하고 변화시키는 힘을 갖는 과정임</li><li>참여 역량을 높이는 실천 : 주민교육, 자조모임, 당사자 모임, 주민조직화, 소규모 학습모임, 의제 발굴 워크숍, 회의와 정책에 대한 사전교육</li><li><span class="mk" title="웹교안 연습문제 18번">📘</span>참여는 주민에게 지역사회가 함께 지원해야 할 학습과 성장의 과정으로 인식되어야 함</li></ul>
+<h3>참여 과정의 권력 살피기</h3><ul><li>주민이 자신의 경험을 안전하게 말할 수 있는 공간과 관계를 조성함</li><li>목소리가 큰 주민만 말하지 않도록 발언 구조를 조정하고 조용한 주민, 소수 집단, 당사자의 경험도 존중받도록 지원해야 함</li><li>사회복지사는 참여 과정 안에서 작동하는 권력의 차이를 살펴야 함 : 누가 말하고 있는가?, 누가 침묵하고 있는가?, 누가 정보를 가지고 있는가?, 누가 결정권을 가지고 있는가?, 누가 결정의 결과를 부담하는가?, 누구의 경험이 전문지식으로 인정되는가?</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l6">6강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l7"><header class="lh"><span class="no">7강</span><h2>소외 vs 연대</h2></header><div class="ct">
+<h3>강의개요</h3><p>소외된 사람은 자신의 경험을 말하지 못하거나, 말해도 받아들여지지 않는 상황을 반복적으로 경험하게 된다. 말할 기회가 없거나, 말하더라도 감정적 호소나 민원으로 축소될 수 있기에 지역사회복지실천에서 소외 현상을 파악하는 핵심은 주민의 말이 지역사회에서 실제로 들리고 반영되었는가를 보는 것이다. 지역사회에서 발생하는 소외의 현상에 대해 파악하고 공동체를 위한 연대의 실천에 대해 알아보자.</p>
+<h3>학습목표</h3><ol><li>소외의 개념과 과정에 대해 이해한다.</li><li>지역사회에서 발생하는 소외에 대해 파악한다.</li><li>인간의 말할 권리로서의 표현을 이해한다.</li><li>연대의 개념에 대해 이해한다.</li><li>지역사회 이슈로 보는 소외와 연대에 대해 파악한다.</li><li>지역사회복지실천의 측면에서 연대를 이해한다.</li></ol>
+<h3>소외</h3><ul><li>소외는 개인이 자신의 삶을 스스로 해석하고 선택하며 통제할 수 있는 힘에서 멀어지는 상태임</li><li>지역사회 안에 살고 있지만, 지역의 관계·의사결정·자원 이용에서 배제될 수 있음</li><li>반복되는 빈곤, 실업, 차별, 장애, 낙인, 관계 단절은 개인에게 무력감과 통제력 상실을 경험하게 함. 공동체를 위한 활동(노동)과 그 결과, 타인, 자기 자신으로부터 멀어지는 현상으로 설명될 수 있음</li><li>소외는 자기 삶과 지역사회에 영향을 미칠 수 있는 힘을 잃는 경험임</li></ul>
+<h3>낙인</h3><ul><li>지역사회는 종종 ‘정상적인 주민’의 모습을 암묵적으로 정해 놓으며, 이러한 기준에서 벗어난 사람은 낙인찍혀 지역사회 구성원으로 충분히 인정받지 못하거나 참여 기회를 잃기 쉬움</li><li>장애인, 정신질환 경험자, 노숙인, 이주민, 1인 가구 노인, 은둔청년 등은 ‘예외적인 사람’으로 이해되면서 공동체의 중심에서 멀어지게 함</li><li><b>낙인</b>은 사람을 지역사회 참여와 관계에서 밀어내는 소외의 구조임</li></ul>
+<h3>말할 권리</h3><ul><li>모든 사람은 자신의 생각과 의견을 표현할 권리가 있음</li><li>인간은 표현의 자유를 지니고 있으며 표현의 자유는 정보를 구하고, 받고, 전달할 권리를 포함</li><li><span class="mk" title="웹교안 연습문제 20번">📘</span>지역사회 주민은 서비스의 대상이기 전에 자신의 삶에 대해 <b>말할 권리</b>를 가진 시민임</li><li>정책과 서비스에 대해 비판하거나 개선을 요구하는 것도 정당한 권리임</li><li>지역사회에서 말할 권리 : 복지서비스의 불편을 말할 권리, 시설 운영에 대해 문제 제기할 권리, 지역개발 계획에 반대할 권리, 돌봄과 주거, 이동 문제를 공적 의제로 제기할 권리, 정책 결정 과정에 참여할 권리 등</li></ul>
+<h3>연대</h3><ul><li>연대는 자신의 경험이 사회적 구조와 연결되어 있음을 이해하면서 시작</li><li><b>프레이리</b>는 억압받는 사람들이 자신의 현실을 함께 인식하고 행동하는 과정을 해방의 출발점으로 봄</li><li><span class="mk" title="웹교안 연습문제 21번">📘</span>연대는 서로 다른 위치와 경험을 인정하면서도 공동의 가치와 문제를 중심으로 <b>연결</b>되는 과정</li><li>연대는 동정의 언어가 아니라 <b>권리와 공동 책임</b>의 언어에서 출발함</li><li><span class="mk" title="웹교안 연습문제 19번">📘</span>연대는 누구도 소외되지 않도록 주민이 함께 말하고 행동할 수 있는 질서와 구조를 만드는 실천임</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l7">7강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l8"><header class="lh"><span class="no">8강</span><h2>사익 vs 공공성</h2></header><div class="ct">
+<h3>강의개요</h3><p>사익은 인간다운 삶을 추구하기 위한 자연스러운 요구이며 공공성의 출발선이다. 개인의 욕구는 지역사회의 변화와 발전을 이끌기도 하기 때문이다. 그런 면에서 공공성은 모든 주민이 기본적인 서비스를 이용할 수 있도록 하는 데서 출발한다. 사익은 다른 사람의 권리와 충돌하는 경우가 발생하기도 한다. 이때 지역사회복지는 어떠한 방식으로 지역사회 실천을 이어 나가야 하는지 파악해 보자.</p>
+<h3>학습목표</h3><ol><li>사익은 무엇인가, 개인과 사익, 지역사회와 사익의 관계를 파악한다.</li><li>공공성의 개념에 대해 이해한다.</li><li>사익과 공공성의 갈등에 대해 파악한다.</li><li>지역사회 이슈를 통해 공공성의 사례를 파악한다.</li><li>지역사회복지에서 공공성의 실천에 대해 파악한다.</li></ol>
+<h3>사익</h3><ul><li>사람은 누구나 자신의 삶과 가족을 보호하고 더 나은 생활을 추구함</li><li>안전한 주거, 안정적인 소득, 재산 보호, 좋은 교육환경을 원하는 것은 자연스러운 욕구임</li><li>사익 자체는 부정적인 것이 아니라 인간의 기본적인 삶을 유지하기 위한 동기임</li><li>지역사회 역시 개인의 다양한 욕구와 이해관계 위에서 형성됨</li><li>사익은 공동의 문제로 연결될 때 지역사회 발전의 힘이 될 수 있음</li><li>사익은 존중되어야 하지만, 다른 사람의 기본권을 침해해서는 안 됨</li></ul>
+<h3>공공성</h3><ul><li><span class="mk" title="웹교안 연습문제 22번">📘</span>공공성은 지역사회 구성원이 함께 누려야 하는 <b>공동의 가치와 책임</b></li><li>공공성은 공동의 삶을 지향하면서 개인의 이익을 공동체 안에서 조화롭게 실현하는 원리</li><li>공공성이 필요한 영역 : 의료, 돌봄, 주거, 교육, 교통, 환경, 안전 등</li><li>공공성은 일부 주민의 불편보다 모든 아동이 차별 없이 교육받을 권리를 우선적으로 보장해야 한다는 원칙을 제시하고 있음</li><li><span class="mk" title="웹교안 연습문제 23번">📘</span>공공성은 모든 주민의 <b>기본권</b>과 공동의 삶을 함께 보장하기 위한 사회적 기준이다.</li><li><span class="mk" title="웹교안 연습문제 24번">📘</span>공공성은 모든 주민이 기본적인 서비스를 이용할 수 있도록 하는 데서 출발함(<b>보편적</b> 접근성)</li></ul>
+<h3>공공성과 시민 참여</h3><ul><li>공공성은 정부가 일방적으로 정책을 결정하고 서비스를 제공하는 것만으로 실현되지 않으며, 시민이 정책의 <b>기획·집행·평가</b> 과정에 참여할 때 더욱 강화됨</li><li>주민은 공공서비스의 수혜자이면서도 지역사회의 문제를 함께 해결하는 주체임</li><li>사회복지사는 주민의 경험과 의견이 정책과 서비스에 반영될 수 있도록 지원해야 함</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l8">8강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l9"><header class="lh"><span class="no">9강</span><h2>갈등 vs 토론</h2></header><div class="ct">
+<h3>강의개요</h3><p>지역사회는 서로 다른 가치, 이해관계, 생활방식을 가진 사람들이 함께 살아가는 공간으로, 주민마다 각자 원하는 정책과 서비스, 자원 배분의 우선순위가 다르다. 이로 인해 개인, 가족, 집단 간 갈등은 자연스럽게 발생한다. 다양한 경험과 가치가 공존하는 지역사회에서 갈등이 발생하면 토론을 통해 공통의 해결방안을 모색해야 한다. 토론은 승패를 가리는 과정이 아니라 더 나은 결정을 위한 숙의 과정이다. 이러한 갈등과 토론의 과정을 통해 지역사회 실천을 이해해 보자.</p>
+<h3>학습목표</h3><ol><li>지역사회에서 갈등이 발생하는 원인에 대해 파악한다.</li><li>지역사회에서 토론이 필요한 이유를 이해한다.</li><li>지역사회 이슈가 갈등으로 나타난 사례에 대해 파악한다.</li><li>지역사회 갈등 해결의 방법에 대해 파악한다.</li></ol>
+<h3>갈등</h3><ul><li><span class="mk" title="웹교안 연습문제 26번">📘</span>갈등은 <b>자연스러운 사회현상</b>으로 서로 다른 가치, 이해관계, 생활 방식이 존재하기 때문에 나타남</li><li><span class="mk" title="웹교안 연습문제 25번">📘</span>갈등은 공동체의 실패가 아니라 다양한 이해관계가 존재한다는 것을 보여주는 현상임</li><li>지역사회에서는 주민, 지방정부, 사회복지기관, 기업, 시민단체 등 다양한 주체가 서로 다른 입장을 가짐</li><li>자원은 한정되어 있기 때문에 정책과 예산을 둘러싼 갈등이 발생함</li><li>사회복지사는 다양한 이해관계를 조정하고 공공의 이익을 모색하는 역할을 수행해야 함</li></ul>
+<h3>토론</h3><ul><li>토론은 자신의 의견을 주장하는 것만이 아니라 다른 사람의 의견을 듣고 함께 해결책을 찾는 과정임</li><li>다양한 경험과 가치가 공존하는 지역사회에서는 토론을 통해 공통의 해결방안을 모색해야 함</li><li><span class="mk" title="웹교안 연습문제 27번">📘</span>토론은 승패를 가리는 과정이 아니라 더 나은 결정을 위한 <b>숙의</b> 과정임</li><li>서로의 입장을 이해하면서 공동의 목표를 찾는 것이 중요함</li></ul>
+<h3>사회복지사의 기준</h3><ul><li>사회복지사는 <b>인권, 사회정의, 공공성</b>이라는 기준을 중심으로 대안을 모색해야 함</li><li>모든 갈등이 완전히 해결되는 것은 아님</li><li>중요한 것은 다양한 의견을 존중하면서 <b>공정한 절차</b>를 통해 합의를 만들어 가는 것</li><li>사회복지사는 인권과 사회정의를 기준으로 공동체가 지속 가능한 대안을 찾도록 지원해야 함</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l9">9강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l10"><header class="lh"><span class="no">10강</span><h2>교육조직화 1. 주민 이해와 교육조직화의 준비</h2></header><div class="ct">
+<h3>강의개요</h3><p>주민교육은 무엇을 가르칠 것인가보다 주민이 어떤 삶을 살아가고 있는지를 이해하는 것에서 시작된다. 주민의 경험과 생활세계는 교육의 가장 중요한 내용이자 출발점으로, 사회복지사는 주민의 삶을 충분히 이해할 때 주민에게 필요한 교육 의제를 함께 만들어 갈 수 있다. 주민을 이해하는 과정 자체가 이후 신뢰 형성과 주민참여의 기반이 되므로 주민 리더를 발견하고, 교육 의제를 만들고 참여할 수 있는 환경을 조성하는 지역사회복지 실천에 대해 파악해 보자.</p>
+<h3>학습목표</h3><ol><li>주민 이해에서 시작하는 교육조직화에 대해 파악한다.</li><li>주민을 이해하는 방식과 실천에 대해 파악한다.</li><li>지역사회복지 실천에서 관계 형성을 이해한다.</li><li>지역사회 실천으로 보는 주민조직화의 준비를 이해한다.</li></ol>
+<h3>교육조직화</h3><ul><li><span class="mk" title="웹교안 연습문제 28번">📘</span><b>교육조직화</b>는 주민을 대상으로 교육 프로그램을 운영하는 것이 아닌, 주민과 함께 지역사회의 문제를 이해하고 성장하는 학습의 실천임</li><li>주민교육, 소모임, 주민활동은 각각 독립된 사업이 아니라 하나의 연속된 과정임</li><li>사회복지사는 주민과 함께 배우고 성장하는 <b>동료</b>의 역할을 수행해야 함</li></ul>
+<h3>주민 이해에서 시작하는 교육</h3><ul><li><span class="mk" title="웹교안 연습문제 29번">📘</span>주민교육은 무엇을 가르칠 것인가보다 주민이 어떤 삶을 살아가고 있는지를 <b>이해</b>하는 것에서 시작함</li><li>주민의 경험과 생활세계는 교육의 가장 중요한 내용이자 출발점임</li><li>사회복지사는 주민의 삶을 충분히 이해할 때 주민에게 필요한 교육 의제를 함께 만들어 갈 수 있음</li></ul>
+<h3>구조와 연결하는 질문</h3><ul><li>교육조직화에서는 ‘무엇이 문제인가?’보다 <b>‘왜 이러한 문제가 반복되는가?’</b>를 함께 질문해야 함</li><li>주민이 자신의 경험을 사회구조와 연결하여 이해할 때 문제 해결의 방향도 달라질 수 있음</li><li>교육조직화는 개인의 문제를 지역사회와 사회구조의 문제로 이해하는 것에서 시작됨</li></ul>
+<h3>참여 구조 설계</h3><ul><li>누구나 참여할 수 있는 <b>열린 구조</b>를 마련해야 함</li><li>작은 역할부터 참여하도록 지원해야 함</li><li>교육 이후 소모임과 주민활동으로 자연스럽게 연결함</li><li>주민이 지속적으로 성장할 수 있는 참여 구조를 설계해야 함</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l10">10강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l11"><header class="lh"><span class="no">11강</span><h2>교육조직화 2. 주민교육과 학습공동체 조직</h2></header><div class="ct">
+<h3>강의개요</h3><p>교육은 교사가 말하고 학생이 듣는 관계가 아니라 함께 배우기 위해 서로 대화하는 과정이다. 이를 위해 사회복지사는 주민에게 정답을 전달하는 사람이 아니라 질문을 함께 만들어 가는 촉진자로서의 역할을 수행해야 한다. 교육의 과정에서 주민은 서로의 경험을 들으며 새로운 관점을 형성하고 공동의 문제를 이해하며 성장하게 된다. 즉 교육조직화에서 대화는 관계 형성과 학습이 동시에 이루어지는 과정이다. 주민들은 비슷한 경험을 공유하면서 서로를 배우게 되며, 전문가의 설명보다 다른 주민의 경험이 더 큰 공감과 학습을 만들어 내는 경우가 많다. 이에 사회복지사는 상호학습이 이루어질 수 있는 환경을 조성해야 한다. 이러한 주민교육과 학습공동체 조직의 과정에 대해 학습해 보자.</p>
+<h3>학습목표</h3><ol><li>대화식 문제제기교육에 의한 주민교육에 대해 이해한다.</li><li>학습공동체의 구성 과정에 대해 파악한다.</li><li>지역사회 실천 사례를 통해 학습공동체를 이해한다.</li><li>사회복지사가 교육을 통해 어떻게 조직화해야 하는지에 대해 파악한다.</li></ol>
+<h3>대화로 이루어지는 교육</h3><ul><li><span class="mk" title="웹교안 연습문제 30번">📘</span>교육은 교사가 말하고 학생이 듣는 관계가 아닌 함께 배우는 <b>대화</b>로 이루어짐</li><li>사회복지사는 주민에게 정답을 전달하는 사람이 아니라 질문을 함께 만들어 가는 <b>촉진자</b>임</li><li>주민은 서로의 경험을 들으며 새로운 관점을 형성하고 공동의 문제를 이해하게 됨</li><li>교육조직화에서 대화는 관계 형성과 학습이 동시에 이루어지는 과정임</li></ul>
+<h3>질문을 만드는 교육(문제제기식 교육)</h3><ul><li><span class="mk" title="웹교안 연습문제 32번">📘</span>교육조직화는 정보를 전달하는 것이 아니라 주민과 함께 <b>질문</b>을 만드는 과정임</li><li>“왜 우리 마을에는 돌봄서비스가 부족한가?”, “왜 청년은 지역을 떠나는가?”, “왜 어떤 주민은 의사결정에 참여하지 못하는가?”와 같은 질문을 함께 탐색하면서 성장함</li><li>질문은 주민이 자신의 현실을 비판적으로 이해하고 행동하도록 만드는 출발점임</li></ul>
+<h3>학습공동체에서 주민조직으로</h3><ul><li>공동의 학습은 공동의 실천으로 발전함</li><li>주민은 역할을 맡고 의사결정에 참여하면서 주민조직을 형성함</li><li>사회복지사는 점차 주민에게 권한을 이양하고 주민 스스로 공동체를 운영하도록 지원하는 역할을 수행함</li><li><span class="mk" title="웹교안 연습문제 31번">📘</span><b>학습공동체</b>는 주민조직의 출발점임</li></ul>
+<h3>참여형 교육 기법과 퍼실리테이터</h3><ul><li>강의 중심의 일방적인 교육보다 소그룹 토론, 사례 나누기, 마을지도 그리기, 지역 걷기, 문제지도(Problem Mapping), 사진 이야기(Photo Voice), 역할극 등 <b>참여형 교육 기법</b>을 적극 활용해야 함</li><li>사회복지사는 주민 모두가 자신의 의견을 말할 수 있도록 질문을 하고, 다양한 의견이 존중되는 학습 환경을 조성해야 함</li><li><span class="mk" title="웹교안 연습문제 33번">📘</span>주민들은 서로의 경험을 듣고 토론하는 과정에서 공동의 문제를 발견하고, 신뢰와 공동체 의식을 형성하게 됨</li><li>사회복지사는 주민의 대화를 촉진하는 <b>퍼실리테이터</b>임</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l11">11강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l12"><header class="lh"><span class="no">12강</span><h2>교육조직화 3. 지역사회 활동과 사회행동</h2></header><div class="ct">
+<h3>강의개요</h3><p>주민조직은 공동의 의제를 중심으로 형성되며, 주민이 함께 해결하고자 하는 공동의 문제를 중심으로 조직화가 이루어진다. 교육과 대화를 통해 주민들은 자신의 경험 속에서 공통의 관심사와 지역사회의 의제를 발견하게 된다. 의제는 돌봄, 주거, 이동권, 빈곤, 환경 등 주민의 삶과 직접 연결된 문제에서 출발하며, 공동의 목표 형성의 기반이 된다. 주민이 의제를 스스로 설정하고 해결방안을 논의하는 과정은 교육조직화의 핵심이자 이후 지역사회 활동과 정책 참여로 이어지는 출발점이다. 주민조직은 사람보다 공동의 의제를 중심으로 만들어야 한다. 이러한 주민교육조직화 과정에 대해 이해한다.</p>
+<h3>학습목표</h3><ol><li>주민교육이 주민행동으로 조직화되는 과정에 대해 이해한다.</li><li>주민조직이 사회행동으로 발전하는 과정에 대해 이해한다.</li><li>사회행동이 사회복지운동으로 발전하는 과정에 대해 이해한다.</li><li>교육조직화와 사회행동의 사례를 파악해 본다.</li><li>주민조직화와 사회행동을 촉진하는 사회복지사의 역할에 대해 이해한다.</li></ol>
+<h3>공동의 의제</h3><ul><li><span class="mk" title="웹교안 연습문제 34번">📘</span>주민조직은 주민이 함께 해결하고자 하는 공동의 문제를 중심으로 형성됨</li><li><span class="mk" title="웹교안 연습문제 36번">📘</span>교육과 대화를 통해 주민들은 자신의 <b>경험</b> 속에서 공통의 관심사와 지역사회의 의제를 발견함</li><li>의제는 돌봄, 주거, 이동권, 빈곤, 환경 등 주민의 삶과 직접 연결된 문제에서 출발하며, 공동의 목표 형성의 기반이 됨</li><li>주민이 의제를 스스로 설정하고 해결방안을 논의하는 과정은 교육조직화의 핵심이자 이후 지역사회 활동과 정책 참여로 이어지는 출발점임</li><li>주민조직은 사람보다 <b>공동의 의제</b>를 중심으로 만들어야 함</li></ul>
+<h3>조직화</h3><ul><li>주민교육과 학습공동체를 통해 형성된 신뢰와 관계는 조직화를 통해 공동의 행동으로 발전함</li><li>주민은 역할을 분담하고, 목표를 공유하며, 함께 의사결정을 경험하면서 집단의 힘을 형성함</li><li>사회복지사는 주민이 주도적으로 활동할 수 있도록 조정하고 연결하는 역할을 수행해야 함</li><li>조직화는 주민을 단순한 참여자가 아니라 지역사회의 문제를 해결하는 <b>실천 주체</b>로 성장시키는 과정임</li><li><span class="mk" title="웹교안 연습문제 35번">📘</span>조직화는 관계를 공동의 실천(<b>행동</b>)으로 연결하는 과정임</li></ul>
+<h3>사회행동과 사회복지운동</h3><ul><li><b>사회행동</b>은 봉사활동을 넘어 주민의 권리를 실현하기 위한 집단적 실천임</li><li>주민들은 토론과 학습을 통해 공동의 요구를 정리하고, 이를 지역사회와 지방정부에 제안하거나 정책 개선을 요구하게 됨</li><li>주민이 정책의 대상에서 정책을 만들어 가는 시민으로 성장하는 경험이 요구됨</li><li>사회행동의 목적은 개별 문제 해결에 그치지 않고, 문제를 반복적으로 발생시키는 제도와 사회구조를 변화시키는 데 있음</li><li>지역사회 활동을 통해 공동의 요구를 형성하고 지방정부와 국가에 제안하며 정책 개선을 요구하게 됨</li><li>복지서비스를 확대하거나 새로운 제도를 만드는 계기가 될 수 있으며, 사회복지정책의 발전에도 중요한 영향을 주게 됨</li><li><b>사회복지운동</b>은 보다 많은 시민의 권리를 보장하기 위한 사회적 실천임</li><li>사회행동은 개인의 문제를 사회의 문제로 전환하여 정책과 제도를 변화시키는 과정임</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l12">12강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l13"><header class="lh"><span class="no">13강</span><h2>실천조직화 1. 주민운동과 지역사회 변화</h2></header><div class="ct">
+<h3>강의개요</h3><p>주민운동은 개인의 문제가 공동의 문제로 전환되는 계기를 마련한다. 지역사회에서 발생하는 문제는 개인의 노력만으로 해결하기 어려운 경우가 많기 때문이다. 주민들은 서로의 경험을 공유하면서 개인의 어려움이 공동의 문제임을 인식하게 된다. 주민운동은 이러한 문제를 지역사회의 의제로 만들고 공동의 해결을 모색하는 과정이다. 사회복지운동 역시 개인을 돕는 데 머무르지 않고 지역사회의 구조를 변화시키는 실천을 지향하게 된다. 주민운동은 개인의 어려움을 공동의 과제로 전환하는 집단적 실천이다. 이러한 실천조직화 과정에 대해 파악해 보자.</p>
+<h3>학습목표</h3><ol><li>주민운동의 필요성에 대해 파악한다.</li><li>알린스키의 주민운동 개념에 대해 이해한다.</li><li>주민운동의 사례를 파악해 본다.</li></ol>
+<h3>주민운동</h3><ul><li>주민운동은 개인의 문제를 공동의 문제로 전환시키게 됨</li><li>지역사회에서 발생하는 문제는 개인의 노력만으로 해결하기 어려운 경우가 많으며, 주민들은 서로의 경험을 공유하면서 개인의 어려움이 공동의 문제임을 인식하게 됨</li><li>주민운동은 공동의 문제를 지역사회의 의제로 만들고 공동의 해결을 모색하는 과정을 갖게 됨</li><li>사회복지운동 역시 개인을 돕는 데 머무르지 않고 지역사회의 구조를 변화시키는 실천을 지향함</li><li>주민운동은 개인의 어려움을 공동의 과제로 전환하는 <b>집단적 실천</b>임</li></ul>
+<h3>주민운동과 권력관계</h3><ul><li><span class="mk" title="웹교안 연습문제 38번">📘</span>주민운동은 <b>권력관계</b>를 변화시키는 과정임</li><li>지역사회에는 예산, 정책, 자원 배분을 결정하는 다양한 권력구조가 존재함</li><li>주민운동은 기존의 권력구조를 이해하고, 주민의 요구가 정책에 반영될 수 있도록 영향력을 형성하는 과정임</li><li>주민운동은 갈등을 회피하기보다 민주적인 방식으로 공론을 형성하고 변화를 만들어 가는 과정임</li><li><span class="mk" title="웹교안 연습문제 37번">📘</span>주민운동은 지역사회의 권력관계를 <b>민주적</b>으로 변화시키는 과정임</li></ul>
+<h3>알린스키 — 조직된 힘</h3><ul><li><b>알린스키</b>는 권력은 조직된 사람에게서 나온다고 제시함</li><li>지역사회의 문제를 해결하기 위해서는 선의보다 <b>조직된 힘</b>이 중요</li><li>주민의 요구가 정책에 반영되기 위해서는 주민 스스로 조직되고 지속적으로 행동해야 함</li><li>조직되지 않은 주민은 영향력을 행사하기 어렵지만, 조직된 주민은 지역사회의 중요한 <b>협상 주체</b>가 될 수 있음</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l13">13강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section><section class="lec" id="l14"><header class="lh"><span class="no">14강</span><h2>실천조직화 2. 주민참여예산과 재정민주주의</h2></header><div class="ct">
+<h3>강의개요</h3><p>예산은 주민의 삶을 결정한다. 예산은 숫자가 아니라 주민의 삶의 우선순위를 결정하는 정책이기 때문이다. 그 예로 복지, 교육, 돌봄, 공원, 교통, 문화는 모두 예산을 통해 결정한다. 어떤 사업에 예산을 배정하느냐에 따라 지역사회는 달라지게 된다. 그러므로 예산의 결정 과정은 지역사회의 가치를 선택하는 과정이다. 이러한 의미에서 재정민주주의는 세금을 내는 주민이 예산 결정에도 참여할 권리가 있다는 민주주의 원리로, 주민참여예산제도는 대표적인 재정민주주의 제도이다. 주민참여예산제도에 주민이 참여할 수 있도록 실천의 조직화를 이루는 과정에 대해 파악해 보자.</p>
+<h3>학습목표</h3><ol><li>주민이 참여하는 재정민주주의에 대해 이해한다.</li><li>주민참여예산제도에 대해 이해한다.</li><li>주민의 주민참여예산제도 참여과정에 대해 이해한다.</li><li>주민참여예산제도에 대한 사회복지적 실천에 대해 이해한다.</li></ol>
+<h3>예산과 재정민주주의</h3><ul><li><span class="mk" title="웹교안 연습문제 40번">📘</span>예산은 숫자가 아니라 주민의 <b>삶의 우선순위</b>를 결정하는 정책 (강의개요)</li><li><span class="mk" title="웹교안 연습문제 42번">📘</span><b>재정민주주의</b>는 세금을 내는 주민이 예산 결정에도 참여할 권리가 있다는 민주주의 원리 (강의개요)</li></ul>
+<h3>포르투알레그리의 주민참여예산</h3><ul><li><span class="mk" title="웹교안 연습문제 41번">📘</span>주민참여예산제는 <b>1989년 브라질 포르투알레그리(Porto Alegre)</b>에서 처음 도입됨</li><li>도입 당시 브라질은 민주화 추진 과정에 있었지만, 지방정부의 예산은 일부 정치인과 행정기관 중심으로 운영됨</li><li>포르투알레그리시는 주민이 직접 지역의 우선순위를 결정하고 예산 편성에 참여하는 제도를 도입함</li><li>주민들은 지역총회와 분야별 회의에 참여하여 생활 속 문제를 논의하고, 필요한 사업의 우선순위를 직접 결정함</li><li>경제협력개발기구(OECD)와 UN-Habitat 등 국제기구도 주민참여예산을 지방정부의 투명성과 책임성을 높이는 대표적인 <b>참여민주주의</b> 제도로 평가함</li><li>주민참여예산은 주민이 세금을 내는 시민을 넘어 예산을 함께 결정하는 민주적 주체가 될 수 있음을 보여준 제도임</li></ul>
+<h3>한국의 주민참여예산</h3><ul><li>한국의 주민참여예산제는 주민제안사업, 주민총회, 주민참여예산위원회, 온라인 주민투표 등 다양한 방식으로 운영됨</li><li>복지, 환경, 교통, 문화, 안전 등 <b>생활밀착형 사업</b>을 중심으로 주민이 직접 참여함</li><li>청소년참여예산, 아동참여예산, 주민자치회 연계 사업 등으로 확대되면서 참여의 폭이 확대되고 있음</li><li>한국의 주민참여예산은 주민운동이 제도화되어 정책 결정 과정에 주민참여를 보장하는 대표적인 참여민주주의 제도임</li></ul>
+<p class="more"><a href="지역사회복지론_강의노트.html#l14">14강 강의노트 전체 보기 →</a></p></div><a class="totop" href="#top">↑ 맨 위로</a></section>
+  </main>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const sget = k => { try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const sset = (k,v) => { try{ localStorage.setItem(k,v); }catch(e){} };
+function go(id){
+  const el = document.getElementById(id); if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - $('.bar').getBoundingClientRect().bottom - 8;
+  window.scrollTo({top: Math.max(0,y), behavior:'instant'});
+}
+$('#jump').onchange = e => { if(e.target.value) go(e.target.value); e.target.value=''; };
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute('href').slice(1);
+  if(id === 'top'){ e.preventDefault(); window.scrollTo({top:0}); return; }
+  if(document.getElementById(id)){ e.preventDefault(); go(id); }
+});
+/* 목차 현재 위치 */
+const links = [...document.querySelectorAll('nav.toc a')];
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if(en.isIntersecting){ links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#'+en.target.id)); }
+}), {rootMargin:'-80px 0px -70% 0px'});
+document.querySelectorAll('.lec').forEach(s => io.observe(s));
+/* 출제 부분만 */
+const FK='cw-sum-focus';
+function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
+$('#focusBtn').onclick = () => setFocus(!document.body.classList.contains('focus'));
+setFocus(sget(FK) === '1');
+/* 글자 크기 */
+const ZK='cm-note-fs', ZL=[13,14,15,16.5,18,20]; let zi = ZL.indexOf(parseFloat(sget(ZK))); if(zi<0) zi=2;
+function setFs(){ document.body.style.fontSize = ZL[zi]+'px'; $('#fsDown').disabled = zi===0; $('#fsUp').disabled = zi===ZL.length-1; sset(ZK, String(ZL[zi])); }
+$('#fsDown').onclick = () => { if(zi>0){ zi--; setFs(); } };
+$('#fsUp').onclick = () => { if(zi<ZL.length-1){ zi++; setFs(); } };
+setFs();
+/* 테마 */
+const TK='cm-note-theme';
+const cur = () => document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const paint = () => { $('#themeBtn').textContent = cur()==='dark' ? '라이트' : '다크'; };
+(() => { const t = sget(TK); if(t) document.documentElement.setAttribute('data-theme', t); paint(); })();
+$('#themeBtn').onclick = () => { const n = cur()==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme', n); sset(TK, n); paint(); };
+</script>
+<!-- 형광펜: 글을 드래그(휴대폰은 길게 눌러 선택)하면 색 버튼이 뜸. 이 기기 브라우저에 저장 + (선택) 깃허브 Gist로 기기 간 연동 -->
+<style>
+mark.hl{color:inherit;border-radius:2px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-y{background:#fde68a}
+mark.hl-g{background:#bbf7d0}
+mark.hl-p{background:#fbcfe8}
+mark.hl-b{background:#bfdbfe}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}}
+:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}
+.hlbar{position:fixed;z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.hlbar[hidden]{display:none}
+.hlbar button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.12);padding:0;cursor:pointer}
+.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}
+.hlbar button.x{width:auto;height:30px;border-radius:8px;padding:0 10px;background:var(--soft);color:var(--ink);font:inherit;font-size:13px;border:1px solid var(--line)}
+@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:36px;height:36px}.hlbar button.x{height:36px}}
+.hlsync{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;line-height:1.6}
+.hlsync summary{cursor:pointer;font-weight:700}
+.hlsync .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hlsync input{flex:1 1 220px;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.hlsync .st{color:var(--sub);margin-top:6px}
+.hlsync .st.ok{color:var(--note)}.hlsync .st.err{color:var(--m6)}
+.hlsync [hidden]{display:none!important}
+.hltools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+</style>
+<div class="hlbar" id="hlbar" hidden role="toolbar" aria-label="형광펜">
+  <button class="y" data-c="y" title="노랑" aria-label="노랑 형광펜"></button>
+  <button class="g" data-c="g" title="연두" aria-label="연두 형광펜"></button>
+  <button class="p" data-c="p" title="분홍" aria-label="분홍 형광펜"></button>
+  <button class="b" data-c="b" title="하늘" aria-label="하늘 형광펜"></button>
+  <button class="x" id="hlDel" hidden>지우기</button>
+</div>
+<script>
+(function(){
+const PAGE='지역사회복지론_핵심정리';
+const KEY='cw-sum-hl-v1', TOK='study-gist-token', GID='study-gist-id', GDESC='study 공부방 형광펜 (자동 저장)';
+const FILE=PAGE+'.json';
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+// H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
+let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
+H.forEach(h=>{if(!h.u)h.u=1;});
+const live=()=>H.filter(h=>!h.d);
+const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
+let curRange=null, curId=null;
+const box=sec=>sec.querySelector('.ct');
+function texts(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];let n;while(n=w.nextNode())a.push(n);return a;}
+function offsetOf(root,node,off){let s=0;for(const t of texts(root)){if(t===node)return s+off;s+=t.length;}const r=document.createRange();r.setStart(root,0);r.setEnd(node,off);return r.toString().length;}
+function wrap(root,start,end,c,id){
+  let pos=0;
+  for(const t of texts(root)){
+    const a=pos,b=pos+t.length;pos=b;
+    if(b<=start||a>=end)continue;
+    let node=t;const s=Math.max(start,a)-a,e=Math.min(end,b)-a;
+    if(!node.data.slice(s,e).trim())continue;
+    if(e<node.length)node.splitText(e);
+    if(s>0)node=node.splitText(s);
+    const m=document.createElement('mark');m.className='hl hl-'+c;m.dataset.id=id;
+    node.parentNode.insertBefore(m,node);m.appendChild(node);
+  }
+}
+function unwrap(id){document.querySelectorAll('mark.hl[data-id="'+id+'"]').forEach(m=>{const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m);p.normalize();});}
+function render(){
+  document.querySelectorAll('.ct mark.hl').forEach(m=>unwrap(m.dataset.id));
+  live().forEach(h=>{const sec=document.getElementById(h.lec);if(!sec)return;const root=box(sec);
+    const txt=texts(root).map(t=>t.data).join('');
+    if(txt.slice(h.s,h.e)!==h.t)return; wrap(root,h.s,h.e,h.c,h.id);});
+  paint();
+}
+function commit(){ls.set(KEY,JSON.stringify(H));paint();queuePush();}
+function hide(){bar.hidden=true;curRange=null;curId=null;del.hidden=true;}
+function place(rect){
+  bar.hidden=false;
+  const w=bar.offsetWidth,h=bar.offsetHeight;
+  let x=rect.left+rect.width/2-w/2, y=rect.top-h-8;
+  if(y<70)y=rect.bottom+8;
+  x=Math.max(8,Math.min(x,innerWidth-w-8));
+  y=Math.max(64,Math.min(y,innerHeight-h-8));
+  bar.style.left=x+'px';bar.style.top=y+'px';
+}
+function check(){
+  const sel=getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount){ return; }
+  const r=sel.getRangeAt(0);
+  const el=r.commonAncestorContainer.nodeType===1?r.commonAncestorContainer:r.commonAncestorContainer.parentElement;
+  const sec=el.closest('section.lec');
+  if(!sec||!box(sec).contains(r.startContainer)||!box(sec).contains(r.endContainer)){hide();return;}
+  if(!r.toString().trim()){hide();return;}
+  curRange=r;curId=null;del.hidden=true;place(r.getBoundingClientRect());
+}
+let tm;
+document.addEventListener('selectionchange',()=>{clearTimeout(tm);tm=setTimeout(check,250);});
+document.addEventListener('mouseup',()=>setTimeout(check,10));
+document.addEventListener('click',e=>{
+  if(bar.contains(e.target))return;
+  const m=e.target.closest('mark.hl');
+  const sel=getSelection();
+  if(m&&(!sel||sel.isCollapsed)){curId=m.dataset.id;curRange=null;del.hidden=false;place(m.getClientRects()[0]||m.getBoundingClientRect());return;}
+  if(!sel||sel.isCollapsed)hide();
+});
+bar.addEventListener('mousedown',e=>e.preventDefault());
+bar.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const now=Date.now();
+  if(b===del){if(curId){unwrap(curId);const h=H.find(h=>h.id===curId);if(h){h.d=1;h.u=now;}commit();}hide();return;}
+  const c=b.dataset.c;
+  if(curId){
+    document.querySelectorAll('mark.hl[data-id="'+curId+'"]').forEach(m=>m.className='hl hl-'+c);
+    const h=H.find(h=>h.id===curId);if(h){h.c=c;h.u=now;}commit();hide();return;}
+  if(!curRange)return;
+  const r=curRange;const sec=(r.startContainer.nodeType===1?r.startContainer:r.startContainer.parentElement).closest('section.lec');const root=box(sec);
+  let s=offsetOf(root,r.startContainer,r.startOffset), e2=offsetOf(root,r.endContainer,r.endOffset);
+  if(e2<=s){hide();return;}
+  const txt=texts(root).map(t=>t.data).join('');
+  live().filter(h=>h.lec===sec.id&&h.s<e2&&h.e>s).forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});
+  const id=now.toString(36)+Math.random().toString(36).slice(2,6);
+  wrap(root,s,e2,c,id);
+  H.push({id,lec:sec.id,s,e:e2,c,t:txt.slice(s,e2),u:now});commit();
+  getSelection().removeAllRanges();hide();
+});
+addEventListener('scroll',()=>{if(!bar.hidden&&innerWidth>640)hide();},{passive:true});
+
+/* ---- 소개 칸: 모두 지우기 + 기기 간 연동 ---- */
+const intro=document.querySelector('section.intro');
+const tools=document.createElement('div');tools.className='hltools';
+const cb=document.createElement('button');cb.className='btn';cb.title='형광펜을 모두 지움(연동 중이면 다른 기기에서도 지워짐)';
+tools.appendChild(cb);
+const sync=document.createElement('details');sync.className='hlsync';
+sync.innerHTML='<summary>형광펜 PC·휴대폰 연동</summary>'+
+ '<div class="st" id="hlSt"></div>'+
+ '<div id="hlSetup"><div>깃허브에서 만든 <b>Gist 전용 토큰</b>을 붙여넣고 연결을 누르세요. 토큰은 이 기기 브라우저에만 보관됩니다.</div>'+
+ '<div class="row"><input id="hlTok" type="password" autocomplete="off" placeholder="ghp_ 로 시작하는 토큰"><button class="btn" id="hlConn">연결</button></div></div>'+
+ '<div class="row" id="hlOn" hidden><button class="btn" id="hlNow">지금 맞추기</button><button class="btn" id="hlOff">이 기기 연결 끊기</button></div>';
+intro.appendChild(tools);intro.appendChild(sync);
+const $=s=>sync.querySelector(s);
+let armed=false;
+function paint(){if(armed)return;const n=live().length;cb.textContent='형광펜 '+n+'개 지우기';cb.style.display=n?'':'none';}
+cb.onclick=()=>{if(!armed){armed=true;cb.textContent='한 번 더 누르면 모두 지움';setTimeout(()=>{armed=false;paint();},3000);return;}
+  const now=Date.now();live().forEach(h=>{unwrap(h.id);h.d=1;h.u=now;});armed=false;commit();};
+
+function status(msg,cls){const st=$('#hlSt');st.textContent=msg;st.className='st'+(cls?' '+cls:'');}
+function ui(){const on=!!ls.get(TOK);$('#hlSetup').hidden=on;$('#hlOn').hidden=!on;if(!on)status('연결 안 됨 — 형광펜은 이 기기에만 저장됩니다.');}
+const API='https://api.github.com';
+async function gh(path,opt={}){
+  const r=await fetch(API+path,{...opt,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+ls.get(TOK),'X-GitHub-Api-Version':'2022-11-28',...(opt.body?{'Content-Type':'application/json'}:{})}});
+  if(!r.ok){const e=new Error('HTTP '+r.status);e.status=r.status;throw e;}
+  return r.status===204?null:r.json();
+}
+function merge(remote){
+  const m=new Map();[...remote,...H].forEach(h=>{const o=m.get(h.id);if(!o||(h.u||0)>=(o.u||0))m.set(h.id,h);});
+  const month=30*864e5, now=Date.now();
+  H=[...m.values()].filter(h=>!(h.d&&now-h.u>month)); // 지운 표시는 30일 뒤 정리
+}
+async function findGist(){
+  let id=ls.get(GID);
+  if(id){try{return await gh('/gists/'+id);}catch(e){if(e.status!==404)throw e;}}
+  for(let page=1;page<=10;page++){
+    const list=await gh('/gists?per_page=100&page='+page);
+    const g=list.find(g=>g.description===GDESC);
+    if(g){ls.set(GID,g.id);return await gh('/gists/'+g.id);}
+    if(list.length<100)break;
+  }
+  const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:GDESC,public:false,files:{[FILE]:{content:'[]'}}})});
+  ls.set(GID,g.id);return g;
+}
+async function readRemote(g){
+  const f=g.files&&g.files[FILE];if(!f)return [];
+  let txt=f.content;
+  if(f.truncated){txt=await (await fetch(f.raw_url)).text();}
+  try{return JSON.parse(txt)||[]}catch(e){return []}
+}
+let busy=false, again=false;
+async function syncNow(){
+  if(!ls.get(TOK))return;
+  if(busy){again=true;return;}busy=true;
+  try{
+    status('맞추는 중…');
+    const g=await findGist();
+    merge(await readRemote(g));
+    ls.set(KEY,JSON.stringify(H));render();
+    await gh('/gists/'+g.id,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(H)}}})});
+    const d=new Date();status('연동됨 · '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' 저장','ok');
+  }catch(e){
+    if(e.status===401||e.status===403)status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');
+    else status('연동하지 못했습니다(인터넷 연결 확인). 형광펜은 이 기기에는 저장되어 있습니다.','err');
+  }finally{busy=false;if(again){again=false;syncNow();}}
+}
+let pt;function queuePush(){if(!ls.get(TOK))return;clearTimeout(pt);pt=setTimeout(syncNow,1500);}
+$('#hlConn').onclick=async()=>{const v=$('#hlTok').value.trim();if(!v){status('토큰을 붙여넣어 주세요.','err');return;}
+  ls.set(TOK,v);$('#hlTok').value='';ls.del(GID);ui();await syncNow();if(/토큰이 맞지/.test($('#hlSt').textContent)){ls.del(TOK);ui();status('토큰이 맞지 않거나 Gist 권한이 없습니다. 토큰을 확인해 주세요.','err');}};
+$('#hlNow').onclick=()=>syncNow();
+$('#hlOff').onclick=()=>{ls.del(TOK);ls.del(GID);ui();};
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncNow();});
+render();ui();syncNow();
+})();
+</script>
+
+<!-- 목차 하위: 강의명 아래 소제목(h3)까지 보이고, 강의별로 접고 펼 수 있음 -->
+<style>
+nav.toc li.tl{position:relative}
+nav.toc li.tl>.tg{position:absolute;left:-4px;top:4px;width:20px;height:22px;border:0;background:none;color:var(--sub);cursor:pointer;font-size:11px;line-height:22px;padding:0;border-radius:4px;transition:transform .15s}
+nav.toc li.tl>.tg:hover{background:var(--accent-soft);color:var(--accent)}
+nav.toc li.tl.open>.tg{transform:rotate(90deg)}
+nav.toc li.tl>a{margin-left:14px}
+nav.toc ul.sub{list-style:none;margin:2px 0 6px 36px;padding:0 0 0 8px;border-left:1px solid var(--line);display:none}
+nav.toc li.tl.open>ul.sub{display:block}
+nav.toc ul.sub a{display:block;padding:3px 8px;font-size:12.5px;line-height:1.4;color:var(--sub);margin:0}
+nav.toc ul.sub a:hover{color:var(--ink)}
+nav.toc ul.sub a.on{color:var(--accent);background:var(--accent-soft);font-weight:700}
+nav.toc .tocall{float:right;border:0;background:none;color:var(--accent);font:inherit;font-size:11.5px;letter-spacing:0;cursor:pointer;padding:0 2px}
+</style>
+<script>
+(function(){
+const nav=document.querySelector('nav.toc');if(!nav)return;
+const SK='toc-open-'+location.pathname.split('/').pop();
+const get=()=>{try{return JSON.parse(localStorage.getItem(SK)||'null')}catch(e){return null}};
+const put=v=>{try{localStorage.setItem(SK,JSON.stringify(v))}catch(e){}};
+let open=new Set(get()||[]);
+const subLinks=[];
+nav.querySelectorAll(':scope > ol > li').forEach(li=>{
+  const a=li.querySelector('a');if(!a)return;const id=a.getAttribute('href').slice(1);
+  const sec=document.getElementById(id);if(!sec)return;
+  const hs=[...sec.querySelectorAll('.ct h3')];if(!hs.length)return;
+  li.classList.add('tl');
+  const ul=document.createElement('ul');ul.className='sub';
+  hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
+    const t=h.textContent.replace(/[0-9]️?⃣/g,'').replace(/\s+/g,' ').trim();
+    const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
+    const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
+  li.appendChild(ul);
+  const b=document.createElement('button');b.className='tg';b.type='button';b.textContent='▶';b.setAttribute('aria-label',a.textContent.trim()+' 소제목 펼치기/접기');
+  li.insertBefore(b,a);
+  const set=(on)=>{li.classList.toggle('open',on);b.setAttribute('aria-expanded',String(on));};
+  set(open.has(id));
+  b.onclick=()=>{const on=!li.classList.contains('open');set(on);on?open.add(id):open.delete(id);if(autoLi===li)autoLi=null;put([...open]);paintAll();};
+  li._set=set;li._id=id;
+});
+const h2=nav.querySelector('h2');
+const all=document.createElement('button');all.className='tocall';all.type='button';
+const tls=[...nav.querySelectorAll('li.tl')];
+function paintAll(){all.textContent=tls.every(li=>li.classList.contains('open'))?'모두 접기':'모두 펼치기';}
+all.onclick=()=>{const on=!tls.every(li=>li.classList.contains('open'));tls.forEach(li=>{li._set(on);on?open.add(li._id):open.delete(li._id);});put([...open]);paintAll();};
+if(h2)h2.appendChild(all);paintAll();
+// 현재 보고 있는 소제목 표시 + 그 강의는 자동으로 펼침
+let last=null,autoLi=null;
+function mark(){
+  // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
+  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<140)sec=s;});
+  let cur=null;
+  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<140)cur=a;else break;}
+  const key=(sec?sec.id:'')+'|'+(cur?cur.getAttribute('href'):'');
+  if(key===last)return;last=key;
+  subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
+  const li=sec?nav.querySelector('li.tl > a[href="#'+sec.id+'"]')?.parentElement:null;
+  // 스크롤로 자동으로 펼친 강의는 지나가면 다시 접음(직접 펼친 강의는 그대로 둠)
+  if(autoLi&&autoLi!==li&&!open.has(autoLi._id)){autoLi._set(false);autoLi=null;paintAll();}
+  if(li&&!li.classList.contains('open')){li._set(true);autoLi=li;paintAll();}
+  const tgt=cur||(li&&li.querySelector('a'));
+  if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top||r.bottom>nr.bottom)tgt.scrollIntoView({block:'nearest'});}
+}
+let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
+setTimeout(mark,300);
+})();
+</script>
+
+<!-- 문제지 → 강의노트 바로가기: 주소 끝 #n=강id~출제표시~글조각 을 찾아 이동하고 잠깐 강조 -->
+<style>
+.dl-flash{animation:dlflash 2.6s ease-out 1;border-radius:6px}
+@keyframes dlflash{0%,35%{background:#ffe58a;box-shadow:0 0 0 4px #ffe58a}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+:root[data-theme="dark"] .dl-flash{animation-name:dlflashd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dl-flash{animation-name:dlflashd}}
+@keyframes dlflashd{0%,35%{background:#5c4d12;box-shadow:0 0 0 4px #5c4d12}100%{background:transparent;box-shadow:0 0 0 4px transparent}}
+</style>
+<script>
+(function(){
+const norm=s=>s.replace(/[0-9]️?⃣/g,'').replace(/[\s​]+/g,'');
+function find(){
+  const h=decodeURIComponent(location.hash||'');
+  const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
+  const sec=document.getElementById(m[1]);if(!sec)return;
+  const want=norm(m[3]);
+  const els=[...sec.querySelectorAll('.ct h3, .ct p, .ct li, .ct tr, .ct .cn-row')];
+  let hit=els.filter(e=>norm(e.textContent).includes(want));
+  if(m[2]==='1'){const mk=hit.filter(e=>e.querySelector('.mk'));if(mk.length)hit=mk;}
+  const el=hit[0]||sec;
+  const bar=document.querySelector('.bar');const off=(bar?bar.getBoundingClientRect().bottom:60)+24;
+  const go=()=>scrollTo({top:Math.max(0,el.getBoundingClientRect().top+scrollY-off),behavior:'instant'});
+  go();setTimeout(go,350);setTimeout(go,900);
+  if(el!==sec){el.classList.remove('dl-flash');void el.offsetWidth;el.classList.add('dl-flash');}
+}
+addEventListener('hashchange',find);
+if(document.readyState==='complete')find();else addEventListener('load',find);
+})();
+</script>
+
+
+<!-- 핵심정리 전용 올리브 테마 -->
+<style>
+:root{--bg:#e4e2cf;--card:#f7f6ea;--ink:#2b2a1c;--sub:#66644c;--line:#d6d3b5;--soft:#eeecd9;--accent:#66762a;--accent-soft:#e3e5c4;--th:#eceacf;--thd:#dcdcb4;--thd-ink:#3a3f14;--c1:#eeedd6;--cell:#fdfcf4;--colt:#f3f2e2;--thd2:#cfd0a2;--tbd:#d3d1ae;--zebra:transparent;--tb-head:#5f6b2b;--tb-head-ink:#ffffff;--tb-bg:#fdfcf5;--tb-line:#dedbbf;--tb-col:#f1efdd;--tb-ink:#2b2a1c;--sum-bg:#66742c}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14150e;--card:#1d1e15;--ink:#ebeadb;--sub:#aaa88c;--line:#34352a;--soft:#24251a;--accent:#c3cf7a;--accent-soft:#33361e;--th:#26281b;--thd:#33361f;--thd-ink:#eef0d6;--c1:#25271a;--cell:#1e1f16;--colt:#24261a;--thd2:#3d4126;--tbd:#36382a;--zebra:transparent;--tb-head:#4b5426;--tb-head-ink:#f3f4e6;--tb-bg:#1e1f16;--tb-line:#36382a;--tb-col:#25271a;--tb-ink:#ebeadb;--sum-bg:#59642a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14150e;--card:#1d1e15;--ink:#ebeadb;--sub:#aaa88c;--line:#34352a;--soft:#24251a;--accent:#c3cf7a;--accent-soft:#33361e;--th:#26281b;--thd:#33361f;--thd-ink:#eef0d6;--c1:#25271a;--cell:#1e1f16;--colt:#24261a;--thd2:#3d4126;--tbd:#36382a;--zebra:transparent;--tb-head:#4b5426;--tb-head-ink:#f3f4e6;--tb-bg:#1e1f16;--tb-line:#36382a;--tb-col:#25271a;--tb-ink:#ebeadb;--sum-bg:#59642a;color-scheme:dark}
+</style>
+</body>
+</html>
