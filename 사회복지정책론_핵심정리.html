@@ -262,7 +262,11 @@ main{min-width:0}
   nav.toc a{font-size:15px;padding:8px 10px}
   }
 @media (prefers-reduced-motion:reduce){nav.toc{transition:none}.prog i{transition:none}}
-.ct ol.ks{margin:12px 0 4px;padding-left:1.6em}.ct ol.ks li{margin:0 0 10px;line-height:1.85;padding-left:.2em}.ct ol.ks li::marker{font-weight:700;color:var(--accent)}.ct p.tonote{margin:6px 0 0;text-align:right;font-size:13.5px}.ct p.tonote a{color:var(--accent);text-decoration:none;font-weight:700}
+
+/* 첫 열 반복 항목 셀 합치기: 넓은 화면에서만 합치고, 휴대폰 카드 보기에서는 항목마다 다시 보여 줌 */
+@media (min-width:641px){.ct td.dup{display:none}.ct td.grp{vertical-align:middle}}
+@media (max-width:640px){.ct td.grp{}}
+.ct ol.ks{margin:12px 0 4px;padding-left:1.6em}.ct ol.ks li{margin:0 0 10px;line-height:1.85;padding-left:.2em}.ct ol.ks li::marker{font-weight:700;color:var(--accent)}.ct ol.ks ul.kb{margin:4px 0 2px;padding-left:1.2em;list-style:disc}.ct ol.ks ul.kb li{margin:2px 0;line-height:1.75}.ct p.tonote{margin:6px 0 0;text-align:right;font-size:13.5px}.ct p.tonote a{color:var(--accent);text-decoration:none;font-weight:700}
 </style>
 </head>
 <body id="top">
@@ -285,7 +289,7 @@ main{min-width:0}
 </div>
 <div class="scrim" id="scrim"></div>
 <div class="wrap">
-  <nav class="toc" id="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l6"><b>6</b><span>사회복지정책 의제 및 대안의 형성</span></a></li><li><a href="#l7"><b>7</b><span>사회복지정책의 결정, 집행 및 평가</span></a></li><li><a href="#l8"><b>8</b><span>사회복지정책의 재원 및 경제적 효과</span></a></li></ol></nav>
+  <nav class="toc" id="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l6"><b>6</b><span>사회복지정책 의제 및 대안의 형성</span></a></li><li><a href="#l7"><b>7</b><span>사회복지정책의 결정, 집행 및 평가</span></a></li><li><a href="#l8"><b>8</b><span>사회복지정책의 재원 및 경제적 효과</span></a></li><li><a href="#l9"><b>9</b><span>사회복지정책의 설계: 할당 및 급여</span></a></li></ol></nav>
   <main>
     <section class="intro">
       <h1>사회복지정책론 핵심정리</h1>
@@ -332,6 +336,19 @@ main{min-width:0}
 <li>사회복지정책은 국가가 민간부문을 보완하여 제공하는 일종의 가치재라고 할 수 있다. 사회복지정책은 도덕적 해이에 의해 빈곤함정과 실업함정에 빠지기 쉽지만 도덕적 해이를 줄이기 위해 보험을 민영화하는 것은 위험하다. 공적 사회복지체계는 관료를 중심으로 한 독점적 관리기구를 당연시함으로써 X-비능률성이 발생하기 쉽다는 점을 강조하였다.</li>
 </ol>
 <p class="tonote"><a href="사회복지정책론_강의노트.html#l8" target="_blank" rel="noopener">강의노트 8강 보기 ↗</a></p>
+</div><a class="totop" href="#top">↑ 맨 위로</a></section>
+    <section class="lec" id="l9"><header class="lh"><span class="no">9강</span><h2>사회복지정책의 설계: 할당 및 급여</h2></header><div class="ct">
+<ol class="ks">
+<li><strong>수혜자 선정원칙: 보편주의 vs 선택주의(선별주의)</strong><ul class="kb"><li>보편주의: 사회복지정책의 혜택은 모든 시민이 사회권으로서 누릴 권리가 있음</li><li>선택주의(선별주의): 자산조사로 사회적 도움이 필요하다고 입증된 사람에게만 선별적으로 혜택을 줌</li></ul></li>
+<li><strong>강조하는 효과성</strong><ul class="kb"><li>보편주의: 사회적 효과성 강조 — 수혜자를 국민의 일부로 한정하면 수혜자가 낙인감·차별을 받을 수 있음을 우려</li><li>선택주의(선별주의): 경제적 효과성 강조 — 한정된 자원으로 만든 서비스는 무절제하게 쓰지 말고 가장 도움이 필요한 사람에게만 지급</li></ul></li>
+<li><strong>자격조건 6가지</strong><ul class="kb"><li>① 거주 여부·거주기간·시민권</li><li>② 인구학적 조건</li><li>③ 기여</li><li>④ 근로능력</li><li>⑤ 소득·자산조사</li><li>⑥ 전문적 혹은 행정적 판단</li></ul></li>
+<li><strong>급여 형태 5가지 (형태별 장·단점 비교)</strong><ul class="kb"><li>① 현금 ② 현물 ③ 증서 ④ 사회적 특혜·기회 ⑤ 참여·권력</li></ul></li>
+<li><strong>현금급여</strong><ul class="kb"><li>장점: 소비의 효용을 높임, 인간적 존엄성을 지킴, 운영비용이 저렴함</li><li>단점: 시장이 불완전하거나 수혜자의 능력이 제한되면 현물급여보다 수혜자의 이익 보호에 취약함</li></ul></li>
+<li><strong>현물급여 (물질적 재화나 서비스)</strong><ul class="kb"><li>장점: 수혜자의 소비행위를 쉽게 통제함, 현금급여보다 더 경제적임</li><li>단점: 관료주의나 수혜자의 개성에 대한 요구에 취약함</li></ul></li>
+<li><strong>증서·사회적 특혜·기회·참여</strong><ul class="kb"><li>증서: 현물급여와 현금급여의 중간적 성격</li><li>사회적 특혜·기회: 사회의 불이익집단에게 유리한 기회를 제공함</li><li>참여·권력: 사회복지정책 과정에 시민이 참여하고 영향력을 행사할 기회를 제공하는 것도 급여형태의 하나</li></ul></li>
+<li><strong>결론</strong><ul class="kb"><li>사회복지 프로그램의 목표와 상황에 맞는 급여형태를 종합적으로 판단하여 선택해야 함</li></ul></li>
+</ol>
+<p class="tonote"><a href="사회복지정책론_강의노트.html#l9" target="_blank" rel="noopener">강의노트 9강 보기 ↗</a></p>
 </div><a class="totop" href="#top">↑ 맨 위로</a></section>
     <footer>출처: 사회복지정책론 강의별 핵심정리</footer>
   </main>
