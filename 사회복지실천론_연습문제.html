@@ -147,7 +147,7 @@ button{font:inherit;cursor:pointer}
     </div>
     <div class="stats">
       <div class="stat"><div class="k">진행률</div><div class="v"><span id="stProg">0/0</span><small id="stProgPct">0%</small></div><div class="bar"><i id="bar"></i></div></div>
-      <div class="stat"><div class="k">점수 (100점 환산)</div><div class="v"><span id="stScore">0</span><small>점</small></div></div>
+      <div class="stat"><div class="k">점수 (푼 문제 기준)</div><div class="v"><span id="stScore">0</span><small>점</small></div></div>
       <div class="stat"><div class="k">정답률 (푼 문제 기준)</div><div class="v"><span id="stRate">-</span></div></div>
       <div class="stat"><div class="k">첫 선택 정답 / 오답</div><div class="v"><span id="stOk" style="color:var(--ok)">0</span> / <span id="stBad" style="color:var(--bad)">0</span></div></div>
     </div>
@@ -236,7 +236,7 @@ DATA.forEach(L => {
       `<ul class="opts">` + q.opts.map((o,i) =>
         `<li><button class="opt" data-q="${q.id}" data-i="${i}"><span class="n">${CIRC[i]}</span><span>${esc(o)}</span></button></li>`).join('') + `</ul>` +
       `<p class="fb" id="fb${q.id}"></p>` +
-      `<div class="exp hidden" id="exp${q.id}"><b>해설</b> ${esc(q.exp)}${q.note ? `<a class="nlink" href="사회복지실천론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : ''}</div>`;
+      `<div class="exp hidden" id="exp${q.id}"><b>해설</b> ${esc(q.exp)}${q.note ? `<a class="nlink" href="사회복지실천론_강의노트.html${q.note}" target="knou-note">강의노트 보기 ↗</a>` : ''}</div>`;
     sec.appendChild(d);
   });
   lecBox.appendChild(sec);
@@ -275,9 +275,10 @@ function update(){
   const pct = total ? Math.round(tried / total * 100) : 0;
   $('#stProg').textContent = tried + '/' + total;
   $('#stProgPct').textContent = pct + '%';
-  $('#mini').textContent = `${tried}/${total} · ${Math.round(ok / total * 1000) / 10}점`;
+  const sc = tried ? Math.round(ok / tried * 1000) / 10 : 0;
+  $('#mini').textContent = `${tried}/${total} · ${sc}점`;
   $('#bar').style.width = pct + '%';
-  $('#stScore').textContent = (Math.round(ok / total * 1000) / 10).toString();
+  $('#stScore').textContent = String(sc);
   $('#stRate').textContent = tried ? Math.round(ok / tried * 100) + '%' : '-';
   $('#stOk').textContent = ok; $('#stBad').textContent = bad;
   $('#retryWrong').disabled = bad === 0;

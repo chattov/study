@@ -122,7 +122,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .res-o .qt .no::after,.res-x .qt .no::after{content:"";position:absolute;left:-.35em;top:50%;width:1.9em;height:1.9em;transform:translateY(-50%);pointer-events:none}
 .res-o .qt .no::after{border:2.5px solid var(--red);border-radius:50%;opacity:.85}
 .res-x .qt .no::after{background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--red) calc(50% - 1.5px),var(--red) calc(50% + 1.5px),transparent calc(50% + 1.5px));opacity:.85;height:2.2em}
-.nores{display:inline-block;text-indent:0;font-family:var(--f-ui);font-size:11px;font-weight:700;color:var(--red);border:1px solid var(--red);border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;line-height:1.5}
+.nores{display:inline-block;text-indent:0;font-family:var(--f-ui);font-size:11px;font-weight:700;color:var(--mute,#888);border:1px solid currentColor;border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;line-height:1.5}
 .exp{margin:8px 0 0 1.2em;border-left:3px solid var(--red);background:var(--red-soft);padding:7px 10px;font-family:var(--f-ui);font-size:13.5px;line-height:1.6}
 .exp b{color:var(--red);margin-right:4px}
 .tolink{display:inline-block;margin:6px 0 0 1.2em;font-family:var(--f-ui);font-size:12px;color:var(--sub);text-decoration:none;border-bottom:1px dotted currentColor;line-height:1.3}
@@ -171,6 +171,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bub{width:22px;height:28px;justify-self:center;border:1.5px solid var(--blue);border-radius:11px;background:transparent;font-size:11px;color:var(--blue);padding:0;font-weight:700}
 .bub.on{background:var(--mark);border-color:var(--mark);color:transparent}
 .orow.ok .n{color:var(--blue)}
+.lecs a.skip{opacity:.5}
 .orow.ng .n{color:var(--red);text-decoration:underline}
 .orow .bub.key{box-shadow:0 0 0 2px var(--red)}
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:39;display:none}
@@ -218,6 +219,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <button class="b ghost" id="themeBtn" title="화면 밝기 전환">다크</button>
       <button class="b ghost" id="resetBtn" title="표기한 답을 모두 지움">초기화</button>
       <button class="b" id="retryBtn" hidden>오답만 다시</button>
+      <button class="b ghost" id="ungradeBtn" hidden title="표기한 답은 그대로 두고 채점 전 상태로 돌아갑니다">채점 전으로</button>
       <button class="b main" id="submitBtn">제출·채점</button>
     </div>
   </div>
@@ -311,7 +313,7 @@ function build(){
       `<p class="qt"><span class="no">${q.no}.</span>${esc(q.text)}</p>` +
       (q.passage ? `<div class="box"><span class="lb">&lt;${q.plabel === '보기' ? '보 기' : q.plabel === '사례' ? '사 례' : '자 료'}&gt;</span>${esc(q.passage)}</div>` : '') +
       `<ul class="ops">` + q.opts.map((o,i) => `<li><button class="op" data-no="${q.no}" data-i="${i}"><span class="c">${i+1}</span><span class="tx">${esc(o)}</span></button></li>`).join('') + `</ul>` +
-      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사회복지조사론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 보기 ↗</a>` : '') +
+      `<a class="tolink" href="#a${q.no}">${q.no}번 정답·해설 ↓</a>` + (q.note ? `<a class="tolink nlink" href="사회복지조사론_강의노트.html${q.note}" target="knou-note">강의노트 보기 ↗</a>` : '') +
       `</div>`;
   });
   $('#qs').innerHTML = html;
@@ -330,7 +332,7 @@ function build(){
       a += `<div class="lh">【${L.n}강】 ${esc(L.t)}<span>${L.qs[0].no}~${L.qs[L.qs.length-1].no}번</span></div>`;
       last = q.lec;
     }
-    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사회복지조사론_강의노트.html${q.note}" target="_blank" rel="noopener">강의노트 ↗</a>` : ''}</p>` +
+    a += `<div class="ai" id="a${q.no}"><p class="ah"><b>${q.no}.</b> 정답 <span class="key">${CIRC[q.ans]}</span><span class="mine" id="m${q.no}"></span><a class="back" href="#q${q.no}">↑ 문제</a>${q.note ? `<a class="back nlink" href="사회복지조사론_강의노트.html${q.note}" target="knou-note">강의노트 ↗</a>` : ''}</p>` +
       `<p class="ax">${esc(q.exp)}</p></div>`;
   });
   a += `</div>`;
@@ -350,7 +352,7 @@ function paint(){
     card.querySelectorAll('.op').forEach(b => {
       const i = +b.dataset.i;
       b.classList.toggle('on', a === i);
-      b.classList.toggle('key', g && i === q.ans);
+      b.classList.toggle('key', g && a !== undefined && i === q.ans);
       b.classList.toggle('wrong', g && a === i && i !== q.ans);
       b.disabled = g;
       b.setAttribute('aria-pressed', String(a === i));
@@ -359,13 +361,13 @@ function paint(){
     row.querySelectorAll('.bub').forEach(b => {
       const i = +b.dataset.i;
       b.classList.toggle('on', a === i);
-      b.classList.toggle('key', g && i === q.ans);
+      b.classList.toggle('key', g && a !== undefined && i === q.ans);
       b.disabled = g;
     });
     const m = $('#m' + q.no), k = $('#k' + q.no), ai = $('#a' + q.no);
     ai.classList.remove('ok','ng'); k.classList.remove('ng');
     if(g){
-      if(a === undefined){ card.querySelector('.qt').insertAdjacentHTML('beforeend','<span class="nores">미응답</span>'); card.classList.add('res-x'); row.classList.add('ng'); m.textContent = '내 답 없음'; ai.classList.add('ng'); k.classList.add('ng'); }
+      if(a === undefined){ card.querySelector('.qt').insertAdjacentHTML('beforeend','<span class="nores">미응답 · 채점 제외</span>'); m.textContent = '내 답 없음 (채점 제외)'; }
       else if(a === q.ans){ card.classList.add('res-o'); row.classList.add('ok'); m.textContent = `내 답 ${CIRC[a]} ○`; ai.classList.add('ok'); }
       else { card.classList.add('res-x'); row.classList.add('ng'); m.textContent = `내 답 ${CIRC[a]} ✕`; ai.classList.add('ng'); k.classList.add('ng'); }
     } else m.textContent = '';
@@ -378,26 +380,30 @@ function paint(){
   $('#submitBtn').textContent = g ? '채점 결과' : '제출·채점';
   const wn = g ? wrongList().length : 0, rb = $('#retryBtn');
   rb.hidden = !wn; rb.textContent = `오답만 다시 (${wn})`;
+  $('#ungradeBtn').hidden = !g;
   resetDisarm();
   $('#sid').value = S.sid || ''; $('#sname').value = S.name || '';
   report();
 }
 
-function wrongList(){ return all.filter(q => S.ans[q.no] !== q.ans); }
+function answered(){ return all.filter(q => S.ans[q.no] !== undefined); }
+function wrongList(){ return all.filter(q => S.ans[q.no] !== undefined && S.ans[q.no] !== q.ans); }
 
 function report(){
   const r = $('#report');
   if(!S.graded){ r.hidden = true; r.innerHTML = ''; return; }
-  const ok = all.length - wrongList().length;
-  const wrong = wrongList();
-  const sc = Math.round(ok / all.length * 1000) / 10;
+  const wrong = wrongList(), an = answered().length, skip = all.length - an;
+  const ok = an - wrong.length;
+  const sc = an ? Math.round(ok / an * 1000) / 10 : 0;
   const lecs = DATA.map(L => {
-    const lo = L.qs.filter(q => S.ans[q.no] === q.ans).length;
-    return `<a href="#lec${L.n}" class="${lo < L.qs.length ? 'bad' : ''}">${L.n}강<b>${lo}/${L.qs.length}</b></a>`;
+    const la = L.qs.filter(q => S.ans[q.no] !== undefined).length, lo = L.qs.filter(q => S.ans[q.no] === q.ans).length;
+    if(!la) return `<a href="#lec${L.n}" class="skip" title="푼 문항 없음">${L.n}강<b>–</b></a>`;
+    return `<a href="#lec${L.n}" class="${lo < la ? 'bad' : ''}">${L.n}강<b>${lo}/${la}</b></a>`;
   }).join('');
-  r.innerHTML = `<div class="score"><span class="v">${sc}</span><span class="u">점</span><span class="s">${ok}/${all.length}문항 정답</span></div>` +
+  r.innerHTML = `<div class="score"><span class="v">${sc}</span><span class="u">점</span><span class="s">${ok}/${an}문항 정답${skip ? ` · 미응답 ${skip}문항 제외` : ''}</span></div>` +
     `<div class="rep-r"><div class="lecs">${lecs}</div><div class="rep-btns">` +
-    (wrong.length ? `<button class="b main" id="retryWrong">틀린 ${wrong.length}문항 다시 풀기</button><button class="b" id="goWrong">첫 오답으로 이동</button>` : '<strong>모두 맞혔습니다.</strong>') +
+    (wrong.length ? `<button class="b main" id="retryWrong">틀린 ${wrong.length}문항 다시 풀기</button><button class="b" id="goWrong">첫 오답으로 이동</button>` : `<strong>푼 문항은 모두 맞혔습니다.</strong>`) +
+    `<button class="b" id="ungrade">채점 전으로 (답 유지)</button>` +
     `<button class="b ghost" id="goAns">정답 및 해설 보기</button><button class="b ghost" id="again">처음부터 다시</button></div></div>`;
   r.hidden = false;
   const rw = $('#retryWrong');
@@ -405,7 +411,11 @@ function report(){
   const gw = $('#goWrong'); if(gw) gw.onclick = () => go('q' + wrong[0].no);
   $('#goAns').onclick = () => go('answers');
   $('#again').onclick = restart;
+  $('#ungrade').onclick = ungrade;
 }
+
+function ungrade(){ if(!S.graded) return; S.graded = false; save(); paint(); toast('채점 전 상태로 돌아왔습니다. 표기한 답은 그대로입니다'); }
+$('#ungradeBtn').onclick = ungrade;
 
 function retryWrong(){
   const wrong = wrongList(); if(!S.graded || !wrong.length) return;
@@ -452,8 +462,9 @@ $('#submitBtn').onclick = () => {
   const sb = $('#submitBtn');
   if(S.graded){ go('report'); return; }
   const left = all.filter(q => S.ans[q.no] === undefined).length;
+  if(left === all.length){ toast('표기한 답이 없습니다'); return; }
   if(left && !sb.classList.contains('warn')){
-    sb.classList.add('warn'); sb.textContent = `미응답 ${left}문항 · 한 번 더 누르면 제출`;
+    sb.classList.add('warn'); sb.textContent = `미응답 ${left}문항은 빼고 채점 · 한 번 더 누르면 제출`;
     clearTimeout(armT); armT = setTimeout(() => { sb.classList.remove('warn'); sb.textContent = '제출·채점'; }, 4000);
     return;
   }
