@@ -262,6 +262,10 @@ main{min-width:0}
   nav.toc a{font-size:15px;padding:8px 10px}
   }
 @media (prefers-reduced-motion:reduce){nav.toc{transition:none}.prog i{transition:none}}
+
+/* 첫 열 반복 항목 셀 합치기: 넓은 화면에서만 합치고, 휴대폰 카드 보기에서는 항목마다 다시 보여 줌 */
+@media (min-width:641px){.ct td.dup{display:none}.ct td.grp{vertical-align:middle}}
+@media (max-width:640px){.ct td.grp{}}
 </style>
 </head>
 <body id="top">
@@ -673,17 +677,17 @@ main{min-width:0}
 <p class="tt"><strong>사회복지정책 평가의 유형</strong></p>
 <div class="tw"><table class="c3">
 <thead><tr><th>분류 기준</th><th>유형</th><th>내용</th></tr></thead><tbody>
-<tr><td data-label="분류 기준">평가 대상</td><td data-label="유형">총괄평가</td><td data-label="내용">정책 결과의 목적 달성 여부에 대한 분석</td></tr>
-<tr><td data-label="분류 기준">평가 대상</td><td data-label="유형">과정평가</td><td data-label="내용">정책집행 절차 및 활동에 대한 분석, 점검의 목적</td></tr>
-<tr><td data-label="분류 기준"><span class="mk mw" title="워크북 연습문제 9번에 출제된 부분">📘</span>평가 시기</td><td data-label="유형">총괄평가</td><td data-label="내용">정책집행 종료 이후에 실시, 정책의 최종적 영향을 평가</td></tr>
-<tr><td data-label="분류 기준">평가 시기</td><td data-label="유형">형성평가</td><td data-label="내용">사업의 초기 또는 집행 도중에 실시, 정책의 수정·보완을 위한 평가</td></tr>
-<tr><td data-label="분류 기준"><span class="mk mo" title="워크북 연습문제(구) 9번에 출제된 부분">📙</span>정책 결과</td><td data-label="유형">정책 산출 평가(outputs)</td><td data-label="내용">직접적 처리 건수, 클라이언트 수</td></tr>
-<tr><td data-label="분류 기준">정책 결과</td><td data-label="유형">정책 성과 평가(outcomes)</td><td data-label="내용">영양 상태 개선, 가정폭력 감소</td></tr>
-<tr><td data-label="분류 기준">정책 결과</td><td data-label="유형">정책 영향 평가(impacts)</td><td data-label="내용">차세대 육성, 건전 가정문화 조성</td></tr>
-<tr><td data-label="분류 기준">평가 주체</td><td data-label="유형">내부 평가</td><td data-label="내용">정책결정 및 집행기관에 의한 평가</td></tr>
-<tr><td data-label="분류 기준">평가 주체</td><td data-label="유형">외부 평가</td><td data-label="내용">정책 주관 기관과 무관한 외부인사가 주도하는 평가</td></tr>
-<tr><td data-label="분류 기준">평가 횟수</td><td data-label="유형">1회의 종합평가</td><td data-label="내용">주로 총괄평가 방식으로 진행, 평가 요약을 산출</td></tr>
-<tr><td data-label="분류 기준">평가 횟수</td><td data-label="유형">수시 평가·주기적 평가</td><td data-label="내용">주로 과정 평가·형성 평가로서 평가 결과를 환류</td></tr>
+<tr><td rowspan="2" class="grp" data-label="분류 기준">평가 대상</td><td data-label="유형">총괄평가</td><td data-label="내용">정책 결과의 목적 달성 여부에 대한 분석</td></tr>
+<tr><td class="dup" data-label="분류 기준">평가 대상</td><td data-label="유형">과정평가</td><td data-label="내용">정책집행 절차 및 활동에 대한 분석, 점검의 목적</td></tr>
+<tr><td rowspan="2" class="grp" data-label="분류 기준">평가 시기</td><td data-label="유형"><span class="mk mw" title="워크북 연습문제 9번에 출제된 부분">📘</span>총괄평가</td><td data-label="내용">정책집행 종료 이후에 실시, 정책의 최종적 영향을 평가</td></tr>
+<tr><td class="dup" data-label="분류 기준">평가 시기</td><td data-label="유형">형성평가</td><td data-label="내용">사업의 초기 또는 집행 도중에 실시, 정책의 수정·보완을 위한 평가</td></tr>
+<tr><td rowspan="3" class="grp" data-label="분류 기준">정책 결과</td><td data-label="유형"><span class="mk mo" title="워크북 연습문제(구) 9번에 출제된 부분">📙</span>정책 산출 평가(outputs)</td><td data-label="내용">직접적 처리 건수, 클라이언트 수</td></tr>
+<tr><td class="dup" data-label="분류 기준">정책 결과</td><td data-label="유형">정책 성과 평가(outcomes)</td><td data-label="내용">영양 상태 개선, 가정폭력 감소</td></tr>
+<tr><td class="dup" data-label="분류 기준">정책 결과</td><td data-label="유형">정책 영향 평가(impacts)</td><td data-label="내용">차세대 육성, 건전 가정문화 조성</td></tr>
+<tr><td rowspan="2" class="grp" data-label="분류 기준">평가 주체</td><td data-label="유형">내부 평가</td><td data-label="내용">정책결정 및 집행기관에 의한 평가</td></tr>
+<tr><td class="dup" data-label="분류 기준">평가 주체</td><td data-label="유형">외부 평가</td><td data-label="내용">정책 주관 기관과 무관한 외부인사가 주도하는 평가</td></tr>
+<tr><td rowspan="2" class="grp" data-label="분류 기준">평가 횟수</td><td data-label="유형">1회의 종합평가</td><td data-label="내용">주로 총괄평가 방식으로 진행, 평가 요약을 산출</td></tr>
+<tr><td class="dup" data-label="분류 기준">평가 횟수</td><td data-label="유형">수시 평가·주기적 평가</td><td data-label="내용">주로 과정 평가·형성 평가로서 평가 결과를 환류</td></tr>
 </tbody></table></div>
 <ul>
 <li><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>형성평가</strong> — 집행 도중에 정책을 수정·보완하므로 사실상 정책의 형성이 이루어진다는 의미에서 붙은 이름임.</li>
@@ -882,12 +886,12 @@ main{min-width:0}
 <p class="tt"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><strong>소득재분배의 유형</strong></p>
 <div class="tw"><table class="c3">
 <thead><tr><th>구분 기준</th><th>재분배 유형</th><th>내용 및 사례</th></tr></thead><tbody>
-<tr><td data-label="구분 기준"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span>시간</td><td data-label="재분배 유형">단기적 재분배</td><td data-label="내용 및 사례">현재의 자원으로 재분배 (예) 공공부조</td></tr>
-<tr><td data-label="구분 기준">시간</td><td data-label="재분배 유형">장기적 재분배</td><td data-label="내용 및 사례">생애(세대)에 걸친 재분배 (예) 국민연금</td></tr>
-<tr><td data-label="구분 기준">계층 구조</td><td data-label="재분배 유형">수직적 재분배</td><td data-label="내용 및 사례">고소득층 ⇒ 저소득층 (예) 누진소득세</td></tr>
-<tr><td data-label="구분 기준"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><span class="mk mo" title="워크북 연습문제(구) 22번에 출제된 부분">📙</span>계층 구조</td><td data-label="재분배 유형">수평적 재분배</td><td data-label="내용 및 사례">동일 소득계층 내 재분배 (예) 건강보험</td></tr>
-<tr><td data-label="구분 기준">세대</td><td data-label="재분배 유형">세대 내 재분배</td><td data-label="내용 및 사례">동일 세대 내 재분배 (예) 적립방식 국민연금</td></tr>
-<tr><td data-label="구분 기준"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span>세대</td><td data-label="재분배 유형">세대 간 재분배</td><td data-label="내용 및 사례">후손 세대 ⇒ 앞 세대 (예) 부과방식 국민연금</td></tr>
+<tr><td rowspan="2" class="grp" data-label="구분 기준">시간</td><td data-label="재분배 유형"><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span>단기적 재분배</td><td data-label="내용 및 사례">현재의 자원으로 재분배 (예) 공공부조</td></tr>
+<tr><td class="dup" data-label="구분 기준">시간</td><td data-label="재분배 유형">장기적 재분배</td><td data-label="내용 및 사례">생애(세대)에 걸친 재분배 (예) 국민연금</td></tr>
+<tr><td rowspan="2" class="grp" data-label="구분 기준">계층 구조</td><td data-label="재분배 유형">수직적 재분배</td><td data-label="내용 및 사례">고소득층 ⇒ 저소득층 (예) 누진소득세</td></tr>
+<tr><td class="dup" data-label="구분 기준">계층 구조</td><td data-label="재분배 유형"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><span class="mk mo" title="워크북 연습문제(구) 22번에 출제된 부분">📙</span>수평적 재분배</td><td data-label="내용 및 사례">동일 소득계층 내 재분배 (예) 건강보험</td></tr>
+<tr><td rowspan="2" class="grp" data-label="구분 기준">세대</td><td data-label="재분배 유형">세대 내 재분배</td><td data-label="내용 및 사례">동일 세대 내 재분배 (예) 적립방식 국민연금</td></tr>
+<tr><td class="dup" data-label="구분 기준">세대</td><td data-label="재분배 유형"><span class="mk m5" title="2025 기말시험 후기에 나온 부분">5️⃣</span><span class="mk m4" title="2024 기말시험 후기에 나온 부분">4️⃣</span>세대 간 재분배</td><td data-label="내용 및 사례">후손 세대 ⇒ 앞 세대 (예) 부과방식 국민연금</td></tr>
 </tbody></table></div>
 <ul>
 <li><strong>경제에 미치는 영향의 불분명성</strong> — 사회복지정책의 재분배기능이 경제성장·안정에 어떻게 영향을 미치는지는 불분명함. 교수님은 그 영향이 깊이 분석해야 드러나므로, 이를 무시하고 정책을 밀어붙이면 사회복지정책에 대한 저항이 커진다고 설명함.</li>
@@ -925,10 +929,10 @@ main{min-width:0}
 <p class="tt"><strong>사회복지정책의 경제성장 촉진기능에 대한 평가</strong></p>
 <div class="tw"><table class="c3">
 <thead><tr><th>평가</th><th>입장</th><th>내용</th></tr></thead><tbody>
-<tr><td data-label="평가">긍정적 평가</td><td data-label="입장">인적 자본론</td><td data-label="내용">보건의료사업 및 공교육 체계는 경제성장에 필요한 양질의 노동력 확대 재생산에 기여</td></tr>
-<tr><td data-label="평가">긍정적 평가</td><td data-label="입장">케인즈 경제학</td><td data-label="내용">사회적 약자 및 실업자에 대한 급여는 유효수요를 창출하여 구매력을 보강하고 추가적인 투자·성장을 유도</td></tr>
-<tr><td data-label="평가">부정적 평가</td><td data-label="입장">신자유주의</td><td data-label="내용">막대한 복지지출에 의한 통화량 팽창(인플레이션)은 장기화된 오일쇼크 등 자원 위기에 따른 취업률 저하를 더욱 악화시켜 스태그플레이션을 유발</td></tr>
-<tr><td data-label="평가">부정적 평가</td><td data-label="입장">World Bank</td><td data-label="내용">부과방식 국민연금은 노동생산성(취업률)을 악화하고, 조기 퇴직을 유발해 경제 활력을 저하</td></tr>
+<tr><td rowspan="2" class="grp" data-label="평가">긍정적 평가</td><td data-label="입장">인적 자본론</td><td data-label="내용">보건의료사업 및 공교육 체계는 경제성장에 필요한 양질의 노동력 확대 재생산에 기여</td></tr>
+<tr><td class="dup" data-label="평가">긍정적 평가</td><td data-label="입장">케인즈 경제학</td><td data-label="내용">사회적 약자 및 실업자에 대한 급여는 유효수요를 창출하여 구매력을 보강하고 추가적인 투자·성장을 유도</td></tr>
+<tr><td rowspan="2" class="grp" data-label="평가">부정적 평가</td><td data-label="입장">신자유주의</td><td data-label="내용">막대한 복지지출에 의한 통화량 팽창(인플레이션)은 장기화된 오일쇼크 등 자원 위기에 따른 취업률 저하를 더욱 악화시켜 스태그플레이션을 유발</td></tr>
+<tr><td class="dup" data-label="평가">부정적 평가</td><td data-label="입장">World Bank</td><td data-label="내용">부과방식 국민연금은 노동생산성(취업률)을 악화하고, 조기 퇴직을 유발해 경제 활력을 저하</td></tr>
 </tbody></table></div>
 <p class="sh"><strong>사회복지정책의 경제안정화 기능</strong></p>
 <ul>
