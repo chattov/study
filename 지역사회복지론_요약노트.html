@@ -2072,6 +2072,28 @@ function render(){
   paint();
 }
 function commit(){ls.set(KEY,JSON.stringify(H));paint();queuePush();}
+/* 강의노트의 형광펜을 요약노트에도 표시 (같은 글이 요약에 남아 있는 것만) */
+const NKEY='com-note-hl-v1', NFILE='지역사회복지론_강의노트.json';
+function importNote(src){
+  if(!Array.isArray(src)||!src.length)return false;
+  let ch=false;
+  src.forEach(n=>{
+    if(!n||!n.id||!n.t)return;
+    const id='n-'+n.id, mine=H.find(h=>h.id===id);
+    if(mine&&(mine.u||0)>=(n.u||0))return;
+    if(n.d){if(mine&&!mine.d){mine.d=1;mine.u=n.u;ch=true;}return;}
+    const sec=document.getElementById(n.lec);if(!sec)return;
+    const txt=texts(box(sec)).map(t=>t.data).join('');
+    let best=-1,i=txt.indexOf(n.t);while(i>=0){if(best<0||Math.abs(i-n.s)<Math.abs(best-n.s))best=i;i=txt.indexOf(n.t,i+1);}
+    if(best<0)return;
+    const h={id,lec:n.lec,s:best,e:best+n.t.length,c:n.c,t:n.t,u:n.u||1};
+    if(mine)Object.assign(mine,h,{d:undefined});else H.push(h);
+    ch=true;
+  });
+  if(ch)ls.set(KEY,JSON.stringify(H));
+  return ch;
+}
+try{importNote(JSON.parse(ls.get(NKEY)||'[]'));}catch(e){}
 function hide(){bar.hidden=true;curRange=null;curId=null;del.hidden=true;}
 function place(rect){
   bar.hidden=false;
@@ -2181,6 +2203,7 @@ async function syncNow(){
     status('맞추는 중…');
     const g=await findGist();
     merge(await readRemote(g));
+    try{const nf=g.files&&g.files[NFILE];if(nf){const t=nf.truncated?await (await fetch(nf.raw_url)).text():nf.content;importNote(JSON.parse(t)||[]);}}catch(e){}
     ls.set(KEY,JSON.stringify(H));render();
     await gh('/gists/'+g.id,{method:'PATCH',body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(H)}}})});
     const d=new Date();status('연동됨 · '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' 저장','ok');
