@@ -135,8 +135,9 @@ document.getElementById('grid').innerHTML = GRS.map(g => `<h3 class="grp">${esc(
   <section class="subj" id="${s.id}">
     <div class="subj-h"><h2>${esc(s.name)}<span class="yr${s.yr === 'NEW' || s.yr === '2026' ? ' now' : ''}" title="${esc(s.yt)}">${esc(s.yr)}</span></h2><span class="st">${esc(s.gr)}</span></div>
     <p class="rng"><b>출제범위</b> ${esc(s.rng)}</p>
-    <div class="row"><span class="tag n">강의노트</span><div class="links">${s.notes.length ? s.notes.map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
-    <div class="row"><span class="tag q">문제·정리</span><div class="links">${s.quiz.length ? s.quiz.map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
+    <div class="row"><span class="tag n">강의노트</span><div class="links">${s.notes.filter(x => x.k !== '문서').length ? s.notes.filter(x => x.k !== '문서').map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
+    <div class="row"><span class="tag q">문제·정리</span><div class="links">${s.quiz.filter(x => x.k !== '문서').length ? s.quiz.filter(x => x.k !== '문서').map(lk).join('') : '<span class="none">아직 없음</span>'}</div></div>
+    ${[...s.notes, ...s.quiz].some(x => x.k === '문서') ? `<div class="row"><span class="tag f">구글 문서</span><div class="links">${[...s.notes, ...s.quiz].filter(x => x.k === '문서').map(lk).join('')}</div></div>` : ''}
     <div class="row"><span class="tag f">폴더</span><div class="links">${lk({t:'과목 폴더 열기', k:'폴더', u:s.folder})}</div></div>
     ${s.memo ? `<p class="memo">${esc(s.memo)}</p>` : ''}
   </section>`).join('')).join('');
