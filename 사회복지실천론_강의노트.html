@@ -2094,6 +2094,9 @@ const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k
 // H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
 let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
 H.forEach(h=>{if(!h.u)h.u=1;});
+// 구글 문서 강의노트에서 표시한 형광펜(한 번만 넣음, 지우면 다시 생기지 않음)
+const SEED=[{"id": "gdoc1", "lec": "l9", "s": 179, "e": 189, "c": "y", "t": "책무성 있는 마무리", "u": 1}, {"id": "gdoc2", "lec": "l9", "s": 1040, "e": 1045, "c": "y", "t": "AB 설계", "u": 1}, {"id": "gdoc3", "lec": "l9", "s": 1068, "e": 1074, "c": "y", "t": "ABA 설계", "u": 1}, {"id": "gdoc4", "lec": "l11", "s": 1728, "e": 1748, "c": "y", "t": "중립성, 비밀보장, 자발성, 자기결정", "u": 1}, {"id": "gdoc5", "lec": "l11", "s": 1997, "e": 2003, "c": "y", "t": "하워드 제어", "u": 1}, {"id": "gdoc6", "lec": "l12", "s": 2558, "e": 2562, "c": "y", "t": "오스트롬", "u": 1}, {"id": "gdoc7", "lec": "l13", "s": 82, "e": 93, "c": "y", "t": "효과의 증거를 보여라", "u": 1}];
+if(!ls.get(KEY+'-gdoc')){SEED.forEach(x=>{if(!H.some(h=>h.id===x.id))H.push(x)});ls.set(KEY,JSON.stringify(H));ls.set(KEY+'-gdoc','1');}
 const live=()=>H.filter(h=>!h.d);
 const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
 let curRange=null, curId=null;

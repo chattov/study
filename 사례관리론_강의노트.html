@@ -3150,6 +3150,9 @@ const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k
 // H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
 let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
 H.forEach(h=>{if(!h.u)h.u=1;});
+// 구글 문서 강의노트에서 표시한 형광펜(한 번만 넣음, 지우면 다시 생기지 않음)
+const SEED=[{"id": "gdoc1", "lec": "l6", "s": 2087, "e": 2129, "c": "g", "t": "서비스 전달 기반에 따른 사례관리: Woodside와 McClam(2003)", "u": 1}];
+if(!ls.get(KEY+'-gdoc')){SEED.forEach(x=>{if(!H.some(h=>h.id===x.id))H.push(x)});ls.set(KEY,JSON.stringify(H));ls.set(KEY+'-gdoc','1');}
 const live=()=>H.filter(h=>!h.d);
 const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
 let curRange=null, curId=null;
