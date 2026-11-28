@@ -107,10 +107,6 @@ body.focus .ct p:has(.mk) + .tw tr, body.focus .ct p:has(.mk) + ul li, body.focu
 
 .ct p.sh{font-size:15.5px;margin:22px 0 6px;padding:4px 10px;background:var(--accent-soft);border-radius:6px;line-height:1.5}
 .ct h3 + p.sh{margin-top:10px}
-.ct p.sh2{margin:22px 0 8px;font-size:16px;color:var(--accent);padding-bottom:3px;border-bottom:1px dashed var(--line)}
-.ct p.sh2 + p.sh{margin-top:8px}
-.ct p.sh2 .bx{display:inline-block;min-width:1.45em;margin-right:7px;padding:0 5px;border-radius:4px;background:var(--accent);color:#fff;font-size:13px;line-height:1.6;text-align:center;vertical-align:1px}
-
 .ct h3{font-size:18px;margin-top:30px}
 .ct p.tt{margin:16px 0 6px;color:var(--accent)}
 .ct li.sub{list-style:circle;margin-left:18px}
@@ -244,6 +240,31 @@ main{min-width:0}
 :root[data-theme="dark"]{--sum-bg:#2d6a4f}
 .ct p.sh.sum{background:var(--sum-bg);color:#fff;border-left:0;margin-top:28px}
 .ct p.sh.sum strong{color:#fff}
+
+/* 현재 위치 줄·진행 막대 (모든 화면) */
+.where{display:none;max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px));font-size:13px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.where b{color:var(--accent);font-weight:800}
+.prog{height:3px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s linear}
+.tocbtn{display:none}
+.scrim{display:none}
+/* 세로 태블릿·휴대폰: 본문은 넓게, 목차는 꺼내 보기 */
+@media (max-width:860px){
+  .where{display:block}
+  .tocbtn{display:inline-flex}
+  nav.toc{display:block;position:fixed;top:0;bottom:0;left:0;z-index:40;width:min(320px,82vw);max-height:none;
+    background:var(--card);border-right:1px solid var(--line);padding:calc(16px + env(safe-area-inset-top,0px)) 12px 24px;
+    transform:translateX(-105%);transition:transform .2s ease;box-shadow:0 0 30px rgba(0,0,0,.18)}
+  body.tocopen nav.toc{transform:none}
+  html body nav.toc{top:0;bottom:auto;height:100vh;height:100dvh;max-height:none;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .scrim{position:fixed;inset:0;z-index:39;background:rgba(0,0,0,.28)}
+  body.tocopen .scrim{display:block}
+  nav.toc a{font-size:15px;padding:8px 10px}
+  }
+@media (prefers-reduced-motion:reduce){nav.toc{transition:none}.prog i{transition:none}}
+.ct p.sh2{margin:22px 0 8px;font-size:16px;color:var(--accent);padding-bottom:3px;border-bottom:1px dashed var(--line)}
+.ct p.sh2 + p.sh{margin-top:8px}
+.ct p.sh2 .bx{display:inline-block;min-width:1.45em;margin-right:7px;padding:0 5px;border-radius:4px;background:var(--accent);color:#fff;font-size:13px;line-height:1.6;text-align:center;vertical-align:1px}
 .ct ul.s2{margin:3px 0 4px;padding-left:1.2em;list-style:none}
 .ct ul.s2>li{position:relative;padding-left:1.1em;font-size:.96em;color:var(--ink)}
 .ct ul.s2>li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
@@ -253,6 +274,7 @@ main{min-width:0}
 <div class="bar">
   <div class="bar-in">
     <a class="home" href="./">← 공부방</a>
+    <button class="btn tocbtn" id="tocBtn" aria-controls="toc" aria-expanded="false">목차</button>
     <span class="ttl">인간행동과 사회환경 강의노트</span>
     <label for="jump" style="position:absolute;left:-9999px">강의 바로가기</label>
     <select id="jump"><option value="">강의 바로가기</option><option value="l1">1강 · 인간행동과 인간발달</option><option value="l2">2강 · 인간발달과 사회체계</option><option value="l3">3강 · 심리역동적 성격이론</option><option value="l4">4강 · 행동주의 이론</option><option value="l5">5강 · 인지이론</option><option value="l6">6강 · 인본주의 이론</option><option value="l7">7강 · 가족과 친밀한 관계</option><option value="l8">8강 · 집단</option><option value="l9">9강 · 조직</option><option value="l10">10강 · 지역사회</option><option value="l11">11강 · 아동기 발달과 사회환경</option><option value="l12">12강 · 청소년기 발달과 사회환경</option><option value="l13">13강 · 성인 초기 발달과 사회환경</option><option value="l14">14강 · 성인 중기 발달과 사회환경</option><option value="l15">15강 · 성인 후기 발달과 사회환경</option></select>
@@ -263,9 +285,12 @@ main{min-width:0}
       <button class="btn" id="themeBtn">다크</button>
     </div>
   </div>
+  <div class="where" aria-live="polite"><span id="whereTxt"></span></div>
+  <div class="prog" aria-hidden="true"><i id="progI"></i></div>
 </div>
+<div class="scrim" id="scrim"></div>
 <div class="wrap">
-  <nav class="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l1"><b>1</b><span>인간행동과 인간발달</span></a></li><li><a href="#l2"><b>2</b><span>인간발달과 사회체계</span></a></li><li><a href="#l3"><b>3</b><span>심리역동적 성격이론</span></a></li><li><a href="#l4"><b>4</b><span>행동주의 이론</span></a></li><li><a href="#l5"><b>5</b><span>인지이론</span></a></li><li><a href="#l6"><b>6</b><span>인본주의 이론</span></a></li><li><a href="#l7"><b>7</b><span>가족과 친밀한 관계</span></a></li><li><a href="#l8"><b>8</b><span>집단</span></a></li><li><a href="#l9"><b>9</b><span>조직</span></a></li><li><a href="#l10"><b>10</b><span>지역사회</span></a></li><li><a href="#l11"><b>11</b><span>아동기 발달과 사회환경</span></a></li><li><a href="#l12"><b>12</b><span>청소년기 발달과 사회환경</span></a></li><li><a href="#l13"><b>13</b><span>성인 초기 발달과 사회환경</span></a></li><li><a href="#l14"><b>14</b><span>성인 중기 발달과 사회환경</span></a></li><li><a href="#l15"><b>15</b><span>성인 후기 발달과 사회환경</span></a></li></ol></nav>
+  <nav class="toc" id="toc" aria-label="강의 목차"><h2>목차</h2><ol><li><a href="#l1"><b>1</b><span>인간행동과 인간발달</span></a></li><li><a href="#l2"><b>2</b><span>인간발달과 사회체계</span></a></li><li><a href="#l3"><b>3</b><span>심리역동적 성격이론</span></a></li><li><a href="#l4"><b>4</b><span>행동주의 이론</span></a></li><li><a href="#l5"><b>5</b><span>인지이론</span></a></li><li><a href="#l6"><b>6</b><span>인본주의 이론</span></a></li><li><a href="#l7"><b>7</b><span>가족과 친밀한 관계</span></a></li><li><a href="#l8"><b>8</b><span>집단</span></a></li><li><a href="#l9"><b>9</b><span>조직</span></a></li><li><a href="#l10"><b>10</b><span>지역사회</span></a></li><li><a href="#l11"><b>11</b><span>아동기 발달과 사회환경</span></a></li><li><a href="#l12"><b>12</b><span>청소년기 발달과 사회환경</span></a></li><li><a href="#l13"><b>13</b><span>성인 초기 발달과 사회환경</span></a></li><li><a href="#l14"><b>14</b><span>성인 중기 발달과 사회환경</span></a></li><li><a href="#l15"><b>15</b><span>성인 후기 발달과 사회환경</span></a></li></ol></nav>
   <main>
     <section class="intro">
       <h1>인간행동과 사회환경 강의노트 1~15강</h1>
@@ -3523,7 +3548,42 @@ const links = [...document.querySelectorAll('nav.toc a')];
 const io = new IntersectionObserver(es => es.forEach(en => {
   if(en.isIntersecting){ links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#'+en.target.id)); }
 }), {rootMargin:'-80px 0px -70% 0px'});
-document.querySelectorAll('.lec').forEach(s => io.observe(s));
+/* 강 강조는 아래 '현재 위치' 코드가 맡음 */
+
+/* ── 현재 위치 줄 · 진행 막대 · 목차 서랍 ── */
+{
+const lecs=[...document.querySelectorAll('section.lec')];
+const bar=document.querySelector('.bar'), wt=document.getElementById('whereTxt'), pi=document.getElementById('progI');
+window.__barY=()=>bar.getBoundingClientRect().bottom+32;
+let last='';
+function where(){
+  const y=window.__barY();
+  let sec=null; for(const s of lecs){ if(s.getBoundingClientRect().top<=y) sec=s; else break; }
+  let h=null; if(sec){ for(const x of sec.querySelectorAll('.ct h3')){ if(x.getBoundingClientRect().top<=y) h=x; else break; } }
+  const max=document.documentElement.scrollHeight-innerHeight;
+  pi.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%';
+  const key=(sec?sec.id:'')+'|'+(h?h.id:''); if(key===last) return; last=key;
+  wt.textContent='';
+  if(sec){
+    const b=document.createElement('b'); b.textContent=sec.querySelector('.lh .no').textContent; wt.appendChild(b);
+    const t=h?h.textContent:sec.querySelector('.lh h2').textContent;
+    wt.appendChild(document.createTextNode(' '+t.replace(/[0-9]\uFE0F?\u20E3/g,'').replace(/\s+/g,' ').trim()));
+  } else wt.textContent='처음 · 목차 버튼으로 강을 고르세요';
+  document.querySelectorAll('nav.toc > ol > li > a').forEach(x=>x.classList.toggle('on',!!sec && x.getAttribute('href')==='#'+sec.id));
+}
+let tk=false; addEventListener('scroll',()=>{ if(!tk){ tk=true; requestAnimationFrame(()=>{ tk=false; where(); }); } },{passive:true});
+addEventListener('resize',where); where(); setTimeout(where,600);
+const nav=document.getElementById('toc'), tb=document.getElementById('tocBtn');
+function openToc(on){
+  document.body.classList.toggle('tocopen',on); tb.setAttribute('aria-expanded',String(on));
+  if(on){ const c=nav.querySelector('ul.sub a.on')||nav.querySelector(':scope > ol > li > a.on');
+    if(c){ const r=c.getBoundingClientRect(), nr=nav.getBoundingClientRect(); nav.scrollTop+=r.top-nr.top-nr.height/3; } }
+}
+tb.onclick=()=>openToc(!document.body.classList.contains('tocopen'));
+document.getElementById('scrim').onclick=()=>openToc(false);
+nav.addEventListener('click',e=>{ if(e.target.closest('a')) openToc(false); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') openToc(false); });
+}
 /* 출제 부분만 */
 const FK='hb-note-focus';
 function setFocus(on){ document.body.classList.toggle('focus', on); $('#focusBtn').setAttribute('aria-pressed', String(on)); sset(FK, on?'1':'0'); }
@@ -3590,6 +3650,9 @@ const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k
 // H: [{id,lec,s,e,c,t,u(수정시각),d(지움 표시)}]
 let H=[];try{H=JSON.parse(ls.get(KEY)||'[]')||[]}catch(e){H=[]}
 H.forEach(h=>{if(!h.u)h.u=1;});
+// 구글 문서 강의노트에서 표시한 형광펜(한 번만 넣음, 지우면 다시 생기지 않음)
+const SEED=[];
+if(!ls.get(KEY+'-gdoc')){SEED.forEach(x=>{if(!H.some(h=>h.id===x.id))H.push(x)});ls.set(KEY,JSON.stringify(H));ls.set(KEY+'-gdoc','1');}
 const live=()=>H.filter(h=>!h.d);
 const bar=document.getElementById('hlbar'), del=document.getElementById('hlDel');
 let curRange=null, curId=null;
@@ -3776,7 +3839,7 @@ nav.querySelectorAll(':scope > ol > li').forEach(li=>{
   li.classList.add('tl');
   const ul=document.createElement('ul');ul.className='sub';
   hs.forEach((h,i)=>{if(!h.id)h.id=id+'-h'+(i+1);
-    const t=h.textContent.replace(/[0-9]️?⃣|📕|📙|📝|📗|📝/g,'').replace(/\s+/g,' ').trim();
+    const t=h.textContent.replace(/[0-9]️?⃣|📘|📙|📕|📗|📝/g,'').replace(/\s+/g,' ').trim();
     const sa=document.createElement('a');sa.href='#'+h.id;sa.textContent=t;sa.title=t;
     const sli=document.createElement('li');sli.appendChild(sa);ul.appendChild(sli);subLinks.push([sa,h]);});
   li.appendChild(ul);
@@ -3797,9 +3860,9 @@ if(h2)h2.appendChild(all);paintAll();
 let last=null,autoLi=null;
 function mark(){
   // 지금 보고 있는 강의(섹션)를 먼저 정하고, 그 강의 안에서만 소제목을 찾음
-  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<140)sec=s;});
+  let sec=null;document.querySelectorAll('section.lec').forEach(s=>{if(s.getBoundingClientRect().top<(window.__barY?window.__barY():140))sec=s;});
   let cur=null;
-  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<140)cur=a;else break;}
+  if(sec)for(const [a,h] of subLinks){if(!sec.contains(h))continue;if(h.getBoundingClientRect().top<(window.__barY?window.__barY():140))cur=a;else break;}
   const key=(sec?sec.id:'')+'|'+(cur?cur.getAttribute('href'):'');
   if(key===last)return;last=key;
   subLinks.forEach(([a])=>a.classList.toggle('on',a===cur));
@@ -3809,7 +3872,7 @@ function mark(){
   if(li&&!li.classList.contains('open')){li._set(true);autoLi=li;paintAll();}
   const tgt=cur||(li&&li.querySelector('a'));
   if(tgt){const r=tgt.getBoundingClientRect(),nr=nav.getBoundingClientRect();
-    if(r.top<nr.top||r.bottom>nr.bottom)tgt.scrollIntoView({block:'nearest'});}
+    if(r.top<nr.top||r.bottom>nr.bottom)nav.scrollTop+=r.top-nr.top-nr.height/3;}
 }
 let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;mark();});}},{passive:true});
 setTimeout(mark,300);
@@ -3826,7 +3889,7 @@ setTimeout(mark,300);
 </style>
 <script>
 (function(){
-const norm=s=>s.replace(/[0-9]️?⃣|📕|📙|📝|📗|📝/g,'').replace(/[\s​]+/g,'');
+const norm=s=>s.replace(/[0-9]️?⃣|📘|📙|📕|📗|📝/g,'').replace(/[\s​]+/g,'');
 function find(){
   const h=decodeURIComponent(location.hash||'');
   const m=h.match(/^#n=([^~]+)~([01])~(.+)$/);if(!m)return;
