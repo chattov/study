@@ -98,7 +98,7 @@ footer b{color:var(--ink)}
       <div class="eyebrow">방송통신대 사회복지학과 · 2026학년도 2학기</div>
       <h1>기말고사 공부방</h1>
       <p class="lead">과목별 강의노트와 문제를 한 곳에 모았습니다.</p>
-      <p class="exinfo"><b>시험</b> 서울지역대학(서부학습센터) · 5차시 17:30~18:45, 6차시 19:30~20:45 · <span class="warn">시작 20분 전부터 입실, 시작 후 입실 불가</span></p>
+      <p class="exinfo"><b>시험</b> 서울지역대학(서부학습센터) · 5차시 17:30 시작, 6차시 19:30 시작(1과목 25분, 끝나는 시각은 과목 수에 따라 다름) · <span class="warn">시작 20분 전부터 입실, 시작 후 입실 불가</span></p>
     </div>
     <div class="tools">
       <a class="btn primary" href="https://drive.google.com/drive/folders/1qzLI6rcch5Cji5fq7qGszupHu-ZfcKry" target="_blank" rel="noopener">기말고사 폴더 열기</a>
@@ -130,7 +130,7 @@ const lk = x => `<a class="lk${x.main?' main':''}${x.web?' web':''}" href="${x.u
 document.getElementById('jump').innerHTML = [...new Set(SUBJ.map(s => s.ex))].map(g => `<li class="jg">${esc(g)}</li>` + SUBJ.filter(s => s.ex === g).map(s => `<li><a href="#${s.id}">${esc(s.name)}</a></li>`).join('')).join('');
 const GRS = [...new Set(SUBJ.map(s => s.ex))];
 const EXD = {'12/6(일) 5차시':'2026-12-06','12/6(일) 6차시':'2026-12-06','12/11(금) 6차시':'2026-12-11'};
-const EXT = {'12/6(일) 5차시':'17:30~18:45 · 17:10부터 입실','12/6(일) 6차시':'19:30~20:45 · 19:10부터 입실','12/11(금) 6차시':'19:30~20:45 · 19:10부터 입실'};
+const EXT = {'12/6(일) 5차시':'17:30~18:20 (2과목) · 17:10부터 입실','12/6(일) 6차시':'19:30~20:20 (2과목) · 19:10부터 입실','12/11(금) 6차시':'19:30~20:45 (3과목) · 19:10부터 입실'};
 const dday = g => { const d=EXD[g]; if(!d) return ''; const t=new Date(); t.setHours(0,0,0,0); const n=Math.round((new Date(d+'T00:00:00')-t)/864e5); return n>0?'D-'+n:n===0?'D-day':'시험 끝'; };
 document.getElementById('grid').innerHTML = GRS.map(g => `<h3 class="grp">${esc(g)}<span class="gt">${EXT[g]||''}</span>${dday(g) ? `<span class="dd${dday(g)==='시험 끝' ? ' done' : ''}">${dday(g)}</span>` : ''}</h3>` + SUBJ.filter(s => s.ex === g).map(s => `
   <section class="subj" id="${s.id}">
