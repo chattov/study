@@ -2347,14 +2347,18 @@ mark.hl-y{background:#fde68a}
 mark.hl-g{background:#bbf7d0}
 mark.hl-p{background:#fbcfe8}
 mark.hl-b{background:#bfdbfe}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}}
-:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}
-.hlbar{position:fixed;z-index:60;display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+mark.hl-o{background:#fed7aa}
+mark.hl-r{background:#fecaca}
+mark.hl-v{background:#ddd6fe}
+mark.hl-t{background:#99f6e4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) mark.hl-y{background:#6b5a14}:root:not([data-theme="light"]) mark.hl-g{background:#1f5135}:root:not([data-theme="light"]) mark.hl-p{background:#6a2a4c}:root:not([data-theme="light"]) mark.hl-b{background:#23416e}:root:not([data-theme="light"]) mark.hl-o{background:#7a4416}:root:not([data-theme="light"]) mark.hl-r{background:#7a2626}:root:not([data-theme="light"]) mark.hl-v{background:#43306f}:root:not([data-theme="light"]) mark.hl-t{background:#155e57}}
+:root[data-theme="dark"] mark.hl-y{background:#6b5a14}:root[data-theme="dark"] mark.hl-g{background:#1f5135}:root[data-theme="dark"] mark.hl-p{background:#6a2a4c}:root[data-theme="dark"] mark.hl-b{background:#23416e}:root[data-theme="dark"] mark.hl-o{background:#7a4416}:root[data-theme="dark"] mark.hl-r{background:#7a2626}:root[data-theme="dark"] mark.hl-v{background:#43306f}:root[data-theme="dark"] mark.hl-t{background:#155e57}
+.hlbar{position:fixed;z-index:60;display:flex;flex-wrap:wrap;max-width:calc(100vw - 20px);align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 .hlbar[hidden]{display:none}
 .hlbar button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.12);padding:0;cursor:pointer}
-.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}
+.hlbar button.y{background:#fde68a}.hlbar button.g{background:#bbf7d0}.hlbar button.p{background:#fbcfe8}.hlbar button.b{background:#bfdbfe}.hlbar button.o{background:#fed7aa}.hlbar button.r{background:#fecaca}.hlbar button.v{background:#ddd6fe}.hlbar button.t{background:#99f6e4}
 .hlbar button.x{width:auto;height:30px;border-radius:8px;padding:0 10px;background:var(--soft);color:var(--ink);font:inherit;font-size:13px;border:1px solid var(--line)}
-@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:36px;height:36px}.hlbar button.x{height:36px}}
+@media (max-width:640px){.hlbar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.hlbar button{width:34px;height:34px}.hlbar button.x{height:36px}}
 .hlsync{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;line-height:1.6}
 .hlsync summary{cursor:pointer;font-weight:700}
 .hlsync .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -2369,6 +2373,10 @@ mark.hl-b{background:#bfdbfe}
   <button class="g" data-c="g" title="연두" aria-label="연두 형광펜"></button>
   <button class="p" data-c="p" title="분홍" aria-label="분홍 형광펜"></button>
   <button class="b" data-c="b" title="하늘" aria-label="하늘 형광펜"></button>
+  <button class="o" data-c="o" title="주황" aria-label="주황 형광펜"></button>
+  <button class="r" data-c="r" title="빨강" aria-label="빨강 형광펜"></button>
+  <button class="v" data-c="v" title="보라" aria-label="보라 형광펜"></button>
+  <button class="t" data-c="t" title="민트" aria-label="민트 형광펜"></button>
   <button class="x" id="hlDel" hidden>지우기</button>
 </div>
 <script>
